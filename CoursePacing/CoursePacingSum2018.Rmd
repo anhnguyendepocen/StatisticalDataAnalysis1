@@ -1,0 +1,106 @@
+---
+title: "STT 3850 Statistical Data Analysis 1 --- Course Schedule"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+    css: "../css/style.css"
+---
+
+<hr>
+
+```{block, note-text, type='rmdnote'}
+* The textbook is available via the rental system.
+* Please bring a notebook and pencil to every class.
+* Be prepared to actively participate and collaborate.
+* Access all of the [DataCamp](https://datacamp.com) assignments via [AsULearn](https://AsULearnappstate.edu)
+* We meet TUE/THU 12:30 to 01:45pm and WED 01:00-1:50pm.
+* **This schedule is a work in progress. Check often for updates!**
+* **Assignments are due @11:00pm on the Friday of the week they are assigned, unless otherwise indicated.**
+```
+
+Class time in this course will be a mix of lecture and hands-on activities. STT 3850 is an introductory course with no statistics prerequisite and is required for students from several majors, who come into the course with a broad mix of mathematics, statistics, and programming skills. This means that the most effective mode of instruction is a flipped classroom approach where traditional lecture occurs outside the classroom while class time is spent in collaborative work where students can give and receive individualized help from peers and the instructor. Do not treat this instructional style as an invitation to skip class. You classmates are one of your greatest resources.
+
+
+## Day 01 (May 29)
+
+
+## Day 02 (May 30)
+
+
+## Day 03 (May 31)
+
+
+## Day 04 (Jun 01)
+
+
+## Day 05 (Jun 04)
+
+
+## Day 06 (Jun 05)
+
+
+## Day 07 (Jun 06)
+
+
+## Day 08 (Jun 07)
+
+
+## Day 09 (Jun 08)
+
+
+## Day 10 (Jun 11)
+ 
+
+## Day 11 (Jun 12)
+
+
+## Day 12 (Jun 13)
+
+
+## Day 13 (Jun 14)
+
+
+## Day 14 (Jun 15)
+
+
+## Day 15 (Jun 18)
+ 
+
+## Day 16 (Jun 19)
+
+
+## Day 17 (Jun 20)
+
+
+## Day 18 (Jun 21)
+
+
+## Day 19 (Jun 22)
+
+
+## Day 20 (Jun 25)
+
+
+## Day 21 (Jun 26)
+
+
+## Day 22 (Jun 27)
+
+
+## Day 23 (Jun 28)
+
+
+## Day 24 (Jun 29)
+
+
+
+effective class engagement
+active class engagement
+
+
+```{block, FINAL, type='rmdnote'}
+*  SOME TEXT HERE
+```

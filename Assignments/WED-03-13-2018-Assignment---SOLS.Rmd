@@ -1,0 +1,107 @@
+---
+title: "WED 03/14/2018 Assignment"
+author: "YOUR NAME HERE"
+date: "Updated `r Sys.Date()`"
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+# Additional packages
+library(car)
+library(dplyr)
+library(ggplot2)
+library(moments)
+
+TESTDATA <- read.csv(file=url("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/TESTDATA.csv"))
+```
+
+<hr>
+
+#### THE PROBLEM
+
+The TESTDATA dataset contains eight variables. Two of the variables are samples from a Normal or approximately Normal distribution. One is a sample from a Uniform distribution. One is a sample from an Exponential distribution with a constant subtracted from each value. The other four are distributions we have not worked with. Complete the descriptive analysis described below to help you identify which distribution is which. Go to DISTRIBUTION IDENTIFICATION on AsULearn to input your identification for each of the eight distributions.
+
+#### YOUR ANALYSES
+
+Summarize the mean, standard deviation, skewness, and kurtosis for all variables in the TESTDATA dataset using `dplyr` piping and functions. The output should be a single tibble containing all the summary statistics. The `summarize_all()` and `fun()` functions  ([see example](http://dplyr.tidyverse.org/reference/summarise_all.html)) will be helpful in completing this portion.
+
+Create five plots for all variables in the TESTDATA dataset. Put each set in the appropriate section below.
+
+* a histogram and a boxplot using `ggplot2` 
+
+* a density plot and an ECDF plot using base code or `ggplot2` 
+
+* a normal quantile-quantile plot using the `qqPlot` function from the `car` package 
+
+The qqPlot function is similar to using `qqnorm` with `qqline`, but it also includes guidelines to assist in determining whether the points are close enough to the straight line representing theoretically normal data. 
+
+##### Variable 1
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V1), sd=sd(V1), skew=skewness(V1), kurt=kurtosis(V1)) 
+ggplot(TESTDATA, aes(x=V1)) + geom_histogram(bins=10)
+ggplot(TESTDATA, aes(x=1, y=V1)) + geom_boxplot()
+ggplot(TESTDATA, aes(x=V1)) + geom_density()
+ggplot(TESTDATA, aes(x=V1)) + stat_ecdf()
+qqPlot(TESTDATA$V1)
+```
+
+##### Variable 2
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V2), sd=sd(V2), skew=skewness(V3), kurt=kurtosis(V4)) 
+ggplot(TESTDATA, aes(x=V2)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V2)
+```
+
+##### Variable 3
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V3), sd=sd(V3), skew=skewness(V3), kurt=kurtosis(V3)) 
+ggplot(TESTDATA, aes(x=V3)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V3)
+```
+
+##### Variable 4
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V4), sd=sd(V4), skew=skewness(V4), kurt=kurtosis(V4)) 
+ggplot(TESTDATA, aes(x=V4)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V4)
+```
+
+##### Variable 5
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V5), sd=sd(V5), skew=skewness(V5), kurt=kurtosis(V5)) 
+ggplot(TESTDATA, aes(x=V5)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V5)
+```
+
+##### Variable 6
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V6), sd=sd(V6), skew=skewness(V6), kurt=kurtosis(V6)) 
+ggplot(TESTDATA, aes(x=V6)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V6)
+```
+
+##### Variable 7
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V7), sd=sd(V7), skew=skewness(V7), kurt=kurtosis(V7)) 
+ggplot(TESTDATA, aes(x=V7)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V7)
+```
+
+##### Variable 8
+
+```{r}
+TESTDATA %>% summarize(mean=mean(V8), sd=sd(V8), skew=skewness(V8), kurt=kurtosis(V8)) 
+ggplot(TESTDATA, aes(x=V8)) + geom_histogram(bins=10)
+qqPlot(TESTDATA$V8)
+```
+
+<hr>
+
+DONE!!!

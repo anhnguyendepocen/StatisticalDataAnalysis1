@@ -1,0 +1,24 @@
+---
+title: "Welcome!"
+---
+
+* * *
+
+* The course syllabus can be found in the [`Syllabus`](./Syllabus/SyllabusS2018.html) directory of the Statistical Data Analysis 1 repository.
+
+* The weekly course schedule can be found in the [`CoursePacing`](./CoursePacing/CoursePacingS2018.html) directory of the Statistical Data Analysis 1 repository.
+
+* Your course grades and all [DataCamp](https://www.datacamp.com/home) assignments should be accessed via [AsULearn](https://asulearn.appstate.edu/).
+
+* [ASU RStudio Server](https://mathr.math.appstate.edu) (you must be registered in the course to access the server)
+
+* [Class Data Files](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/DataFilesList.html)
+
+<br>
+
+<figure><img src="./images/DataCamp125px.png" alt="DataCamp" align="left"></figure><br>
+
+_This class is supported by DataCamp, an intuitive learning platform for data science. Learn R, Python, and SQL the way many people learn best, through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization, or machine learning and learn faster through immediate and personalised feedback on every exercise._
+
+
+* * *

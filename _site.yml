@@ -1,0 +1,23 @@
+
+name: "my-website"
+output_dir: "."
+navbar:
+  title: "Statistical Data Analysis 1"
+  left:
+    - text: "Dr. Thomley's Schedule"
+      href: https://jillthomley.github.io/schedule.html
+    - text: "Dr. Arnholt's Computing Resources"
+      href: https://alanarnholt.github.io/resources.html
+    
+  right:
+    - text: "Jill E. Thomley"
+      href: https://jillthomley.github.io   
+    - icon: fa-github fa-lg
+      href: https://github.com/STAT-JET-ASU/StatisticalDataAnalysis1/         
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: alans.css  
