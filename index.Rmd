@@ -6,7 +6,7 @@ title: "Welcome!"
 
 * The course syllabus can be found in the [`Syllabus`](./Syllabus/SyllabusS2018.html) directory of the Statistical Data Analysis 1 repository.
 
-* The weekly course schedule can be found in the [`CoursePacing`](./CoursePacing/CoursePacingS2018.html) directory of the Statistical Data Analysis 1 repository.
+* The weekly course schedule can be found in the [`Schedule`](./Schedule/ScheduleS2018.html) directory of the Statistical Data Analysis 1 repository.
 
 * Your course grades and all [DataCamp](https://www.datacamp.com/home) assignments should be accessed via [AsULearn](https://asulearn.appstate.edu/).
 
