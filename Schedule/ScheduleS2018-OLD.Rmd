@@ -1,0 +1,162 @@
+---
+title: "STT 3850 Statistical Data Analysis 1 --- Course Schedule"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+    css: "../css/style.css"
+---
+
+<hr>
+
+```{block, note-text, type='rmdnote'}
+* The textbook is available via the rental system.
+* Please bring a notebook and pencil to every class.
+* Be prepared to actively participate and collaborate.
+* Access all of the [DataCamp](https://datacamp.com) assignments via [AsULearn](https://AsULearnappstate.edu)
+* We meet TUE/THU 12:30 to 01:45pm and WED 01:00-1:50pm.
+* **This schedule is a work in progress. Check often for updates!**
+* **Assignments are due @11:00pm on the Friday of the week they are assigned, unless otherwise indicated.**
+```
+
+Class time in this course will be a mix of lecture and hands-on activities. STT 3850 is an introductory course with no statistics prerequisite and is required for students from several majors, who come into the course with a broad mix of mathematics, statistics, and programming skills. This means that the most effective mode of instruction is a flipped classroom approach where traditional lecture occurs outside the classroom while class time is spent in collaborative work where students can give and receive individualized help from peers and the instructor. Do not treat this instructional style as an invitation to skip class. You classmates are one of your greatest resources.
+
+
+## Week 01 (Jan 15) {-}
+
+* Introduction to STT3850 Statistical Data Analysis 1
+* Watch the video [The History of S and R](https://youtu.be/jk9S3RTAl38) (~10 minutes)
+* Watch the video [Introduction to the R Language](https://youtu.be/APm4SxJx0eg) (~30 minutes)
+* Complete _Introduction to R_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* Optionally complete _Working with R Studio IDE, Part 1_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* In Class: Introduction to R Studio
+
+ 
+## Week 02 (Jan 22) {-}
+
+* Watch [An Introduction to the Binomial Distribution](https://youtu.be/qIzC1-9PwQo)
+* Watch [An Introduction to the Geometric Distribution](https://youtu.be/zq9Oz82iHf0)
+* Watch [Overview of Some Discrete Probability Distributions](https://youtu.be/UrOXRvG9oYE)
+* Watch [An Introduction to the Normal Distribution](https://youtu.be/iYiOVISWXS4)
+* Watch [The Normal Approximation to the Binomial Distribution](https://youtu.be/CCqWkJ_pqNU)
+* Complete _Foundations of Probability in R_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* Complete _Reporting with R Markdown_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* In Class: Creating and Manipulating Vectors
+
+
+## Week 03 (Jan 29) {-}
+
+* Watch [Creating a Histogram](https://www.khanacademy.org/math/probability/data-distributions-a1/displays-of-distributions/v/histograms-intro)
+* Watch [Interpreting a Histogram](https://www.khanacademy.org/math/probability/data-distributions-a1/displays-of-distributions/v/interpreting-histograms)
+* Watch [Variance of a Population](https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/measuring-spread-quantitative/v/variance-of-a-population)
+* Watch [Population Standard Deviation](https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/measuring-spread-quantitative/v/population-standard-deviation)
+* Watch [Sample Variance](https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/measuring-spread-quantitative/v/sample-variance)
+* Watch [Sample Standard Deviation](https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/measuring-spread-quantitative/v/sample-standard-deviation-and-bias)
+* Watch [Percentiles](https://youtu.be/mDJvDRvvDXo)
+* Watch [Comparing with Z-Scores](https://www.khanacademy.org/math/ap-statistics/density-curves-normal-distribution-ap/measuring-position/v/comparing-with-z-scores)
+* Complete _Intro to Stats with R: Introduction_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* Complete _Introduction to Data_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu) 
+* In Class: Zener Card Modeling and Test
+
+
+## Week 04 (Feb 05) {-}
+
+* Read Chiahara & Hesterberg Chapter 01
+* Watch [An Introduction to the Student's t Distribution](https://youtu.be/iYiOVISWXS4)
+* Watch [t Tests for One Mean: Introduction](https://youtu.be/T9nI6vhTU1Y)
+* Watch [Inference for Two Means: Introduction](https://youtu.be/86ss6qOTfts)
+* Watch [R Basics: Finding Percentiles and Areas for the t Distribution](https://youtu.be/ZnIFX4PTAOo)
+* Complete _Intro to Stats with R: Student’s T-test_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* Complete _Defeating the Plagiarism Goblins_ via [AsULearn](https://AsULearnappstate.edu) 
+* In Class: Loading and Summarizing Datasets
+
+
+## Week 05 (Feb 12) {-}
+
+* Read Chiahara & Hesterberg Chapter 02
+* Read [Introduction to `dplyr` Vignette](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) 
+* Complete _Data Manipulation in R with `dplyr`_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)  
+* Optionally work through examples in [dplyr functions for a single dataset](http://stat545.com/block010_dplyr-end-single-table.html)
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 06 (Feb 19) {-}
+
+* Complete _Data Visualization with `ggplot2` (Part 1)_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 07 (Feb 26) {-}
+
+* Complete _Exploratory Data Analysis_ on [DataCamp](https://datacamp.com) via [AsULearn](https://AsULearnappstate.edu)
+* Complete _Human Subject Research Ethics_ via [AsULearn](https://AsULearnappstate.edu)
+* In Class: TBA
+* Additional material TBA
+
+
+## Spring Break (Mar 05; No Classes) {-}
+
+* There are no assignments due this week. Time to get caught up if you're behind!
+* Additional material TBA
+
+
+## Week 08 (Mar 12) {-}
+
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 09 (Mar 19) {-}
+
+* EXAM 1 (tentative schedule)
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 10 (Mar 26) {-}
+
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 11 (April 02; No Classes April 02/03) {-}
+
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 12 (Apr 09) {-}
+
+* In Class: TBA
+* Additional material TBA 
+
+
+## Week 13 (Apr 16) {-}
+
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 14 (Apr 23) {-}
+
+* EXAM 2
+* In Class: TBA
+* Additional material TBA
+
+
+## Week 15 (April 30; May 03 is Reading Day) {-}
+
+* EXAM 2 Revisions
+* In Class: TBA
+* Additional material TBA
+
+
+### Final Exam {-}
+
+```{block, FINAL, type='rmdnote'}
+*  Our [final exam time](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_spring_2018_exam_schedule.pdf) is Thursday, May 10 @ 11:00am.
+```
