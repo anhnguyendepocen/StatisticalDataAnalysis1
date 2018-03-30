@@ -66,14 +66,16 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
   Before Next Wednesday's Class
   
-  * Read Chihara Sections 3.7 and 3.8
+  * Read Chihara Sections 3.4, 3.5, 3.6
 
 
 ## Week 11 (April 02; No Classes April 02/03) {-}
 
   In Class Wednesday:
   
-  * Test of goodness-of-fit
+  * Permutation test for independence
+  * Chi-square test of independence
+  * Test of homogeneity
   
   Before Thursday's Class:
   
@@ -87,7 +89,9 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
   
   * Read Chihara Section 4.1
   * Watch [Sampling Distributions: Introduction to the Concept](https://youtu.be/Zbw-YvELsaM)
-  * Watch 
+  * Watch [The Expected Value and Variance of Discrete Random Variables](https://youtu.be/Vyk8HQOckIE)
+  * Watch [Deriving the Mean and Variance of a Continuous Probability Distribution](https://youtu.be/Ro7dayHU5DQ)
+  * Optional: [Khan Academy Sampling Distributions Library](https://www.khanacademy.org/math/statistics-probability/sampling-distributions-library) 
 
 
 ## Week 12 (Apr 09) {-}
@@ -109,6 +113,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
   * Read Chihara Section 4.3
   * Watch [Introduction to the Central Limit Theorem](https://youtu.be/Pujol1yC1_A)
   * Watch [Deriving the Mean and Variance of the Sample Mean](https://youtu.be/7mYDHbrLEQo)
+  * Watch [The Normal Approximation to the Binomial Distribution](https://youtu.be/CCqWkJ_pqNU) 
   
   In Class Thursday:
   
@@ -118,6 +123,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
   Before Next Tuesday's Class
   
   * Read Chihara Section 5.1
+  * Watch [Bootstrap Confidence Intervals using Percentiles](https://youtu.be/GbptZEBuOj4)
 
 
 ## Week 13 (Apr 16) {-}
@@ -144,7 +150,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
   Before Next Wednesday's Class
   
-  * Review Chihara Chapters 4 and 5
+  * Review Chihara Chapter 4
 
 
 ## Week 14 (Apr 23) {-}
@@ -155,7 +161,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
   Before Wednesday's Class:
   
-  * Read Chihara Section 5.2
+  * Review Chihara Chapter 5
   
   In Class Wednesday:
   
@@ -163,7 +169,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
   
   Before Thursday's Class:
   
-  * Read Chihara Section 5.3
+  * Review Chihara Chapters 3, 4, and 5
   
   In Class Thursday:
   
