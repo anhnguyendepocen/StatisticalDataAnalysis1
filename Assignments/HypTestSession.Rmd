@@ -1,0 +1,56 @@
+---
+title: "Hypothesis Testing Problem Session"
+author: "Jill Thomley"
+date: "04/04/2018"
+output: html_document
+---
+
+Note: before conducting any kind of hypothesis test, it is a good idea to perform exploratory data analyses (as in Chapter 2) to become familiar with the distributions of your variables and any anomalies the data may contain. 
+
+**Problem 1**
+
+Consider the Flight Delays Case Study in Chapter 1 of the textbook. For each test, specify your null and alternative hypotheses, and if you reject Ho, discuss the results in the context of the problem.
+
+```{r}
+FD <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Chihara/FlightDelays.csv")
+```
+
+A) The data contains flight delays for two airlines, American Airlines (AA) and United Airlines (UA). Are the mean delay times different for the two airlines? Conduct both a permutation test and a traditional test. Are the results consistent? What assumptions must be met in order for each test to be valid?
+
+```{r}
+
+```
+
+B) Consider the proportion of times that each carrier's flight were delayed more than 20 minutes. Is the difference in proportions statistically significant? Conduct a permutation test.
+
+```{r}
+
+```
+
+C) Is the variance in delay times for United Airlines greater than the variance in delay times for American Airlines? Conduct a permutation test. Use variance_AA / variance_UA as your test statistic.
+
+```{r}
+
+```
+
+D) Is being delayed more than 30 minutes dependent on destination? Conduct both a traditional hypothesis test and a permutation test.
+
+```{r}
+
+```
+
+
+**Problem 2**
+
+Consider the GSS 2002 case study in Chapter 1 of the textbook. Conduct both a traditional hypothesis and a permutation test for each question below. In each case, specify your null and alternative hypotheses, and if you reject Ho, discuss the results in the context of the problem.
+
+```{r}
+GSS <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Chihara/GSS2002.csv")
+```
+
+A) Are support for gun laws (GunLaw) and views on government spending on the military (SpendMilitary) independent?
+
+B) Are support for gun laws and political party (PolParty) independent?
+
+B) Are support for gun laws and gender independent?
+
