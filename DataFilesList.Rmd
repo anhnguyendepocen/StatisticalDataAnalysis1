@@ -24,6 +24,7 @@ title: "Data Files List"
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/nccounties20112016.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/oscarages.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/personalitySTT1810.csv
+* https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/personalitySTT3850.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/popular.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballA.csv 
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballB.csv
