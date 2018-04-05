@@ -4,15 +4,15 @@ title: "Welcome!"
 
 * * *
 
-* The course syllabus can be found in the [`Syllabus`](./Syllabus/SyllabusS2018.html) directory of the Statistical Data Analysis 1 repository.
+* [Course Syllabus](./Syllabus/SyllabusS2018.html)
 
-* The weekly course schedule can be found in the [`Schedule`](./Schedule/ScheduleS2018.html) directory of the Statistical Data Analysis 1 repository.
+* [Course Schedule](./Schedule/ScheduleS2018.html)
 
-* Your course grades and all [DataCamp](https://www.datacamp.com/home) assignments should be accessed via [AsULearn](https://asulearn.appstate.edu/).
-
-* [ASU RStudio Server](https://mathr.math.appstate.edu) (you must be registered in the course to access the server)
+* [ASU RStudio Server](https://mathr.math.appstate.edu)
 
 * [Class Data Files](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/DataFilesList.html)
+
+* Your course grades and all [DataCamp](https://www.datacamp.com/home) assignments should be accessed via [AsULearn](https://asulearn.appstate.edu/).
 
 <br>
 

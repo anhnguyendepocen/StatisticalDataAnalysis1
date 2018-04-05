@@ -1,7 +1,5 @@
 ---
-title: "STT 3850 Statistical Data Analysis 1 --- Syllabus"
-author: ''
-date: "Spring 2018"
+title: "STT 3850 Statistical Data Analysis 1<br>Course Syllabus for Spring 2018"
 output: 
   html_document: 
     theme: cosmo

@@ -4,7 +4,7 @@ output_dir: "."
 navbar:
   title: "Statistical Data Analysis 1"
   left:
-    - text: "Dr. Thomley's Schedule"
+    - text: "My Schedule"
       href: https://jillthomley.github.io/schedule.html
     - text: "Dr. Arnholt's Computing Resources"
       href: https://alanarnholt.github.io/resources.html

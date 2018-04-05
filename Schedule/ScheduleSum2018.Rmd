@@ -1,9 +1,12 @@
 ---
-title: "STT 3850 Statistical Data Analysis 1 --- Course Schedule"
+title: "STT 3850 Statistical Data Analysis 1<br>Summer 2018 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: 
   html_document: 
+    toc: true
+    toc_depth: 3
+    toc_float: true
     highlight: textmate
     theme: cosmo
     css: "../css/style.css"
@@ -15,87 +18,318 @@ output:
 * The textbook is available via the rental system.
 * Please bring a notebook and pencil to every class.
 * Be prepared to actively participate and collaborate.
-* Access all of the [DataCamp](https://datacamp.com) assignments via [AsULearn](https://AsULearnappstate.edu)
-* We meet TUE/THU 12:30 to 01:45pm and WED 01:00-1:50pm.
+* Access all of the **DataCamp** assignments via **[AsULearn](https://AsULearnappstate.edu)**
+* We meet Monday through Friday 10:20am to 12:30pm in WA XXX.
 * **This schedule is a work in progress. Check often for updates!**
-* **Assignments are due @11:00pm on the Friday of the week they are assigned, unless otherwise indicated.**
+* **Assignments are due ... **
 ```
 
-Class time in this course will be a mix of lecture and hands-on activities. STT 3850 is an introductory course with no statistics prerequisite and is required for students from several majors, who come into the course with a broad mix of mathematics, statistics, and programming skills. This means that the most effective mode of instruction is a flipped classroom approach where traditional lecture occurs outside the classroom while class time is spent in collaborative work where students can give and receive individualized help from peers and the instructor. Do not treat this instructional style as an invitation to skip class. You classmates are one of your greatest resources.
+Class time in this course will be a mix of lecture and hands-on activities. STT 3850 is an introductory course with no statistics prerequisite and is required for students from several majors. Students come into the course with a broad mix of mathematics, statistics, and programming skills. This means that the most effective mode of instruction tends to be a semi-flipped classroom approach where some traditional lecture occurs outside the classroom, which frees class time to spent on collaborative work where students can give and receive individualized help from peers and the instructor. Do not treat this instructional style as an invitation to skip class. You classmates are one of your greatest resources.
 
 
-## Day 01 (May 29)
+## Day 01 (TUE May 29)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * Read
+   * Watch
+   * Complete DataCamp *Introduction to R*
+   * Complete DataCamp *Working with the R Studio IDE* (optional)
+
+## Day 02 (WED May 30)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Foundations of Probability in R*
+
+## Day 03 (THU May 31)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * Complete AsULearn *Binomial Distribution Quiz*
 
 
-## Day 02 (May 30)
+## Day 04 (FRI Jun 01)
 
+   In Class:
+   
+   * 
+   * 
 
-## Day 03 (May 31)
+   Before Next Class: 
+   
+   * 
+   * Complete AsULearn *Normal Distribution Quiz*
+   * Complete DataCamp *Reporting with R Markdown*
 
+## Day 05 (MON Jun 04)
 
-## Day 04 (Jun 01)
+   In Class:
+   
+   * 
+   * 
 
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Introduction to Data*
 
-## Day 05 (Jun 04)
+## Day 06 (TUE Jun 05)
 
+   In Class:
+   
+   * 
+   * 
 
-## Day 06 (Jun 05)
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Introduction to the Tidyverse*
 
+## Day 07 (WED Jun 06)
 
-## Day 07 (Jun 06)
+   In Class:
+   
+   * 
+   * 
 
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Data Manipulation in R with `dplyr`*
 
-## Day 08 (Jun 07)
+## Day 08 (THU Jun 07)
 
+   In Class:
+   
+   * 
+   * 
 
-## Day 09 (Jun 08)
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Data Visualization with ggplot2, Part 1*
 
+## Day 09 (FRI Jun 08)
 
-## Day 10 (Jun 11)
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Exploratory Data Analysis*
+
+## Day 10 (MON Jun 11)
+ 
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * Complete DataCamp *Intro to Stats with R: Student's t-Test*
+
+## Day 11 (TUE Jun 12)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 12 (WED Jun 13)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 13 (THU Jun 14)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 14 (FRI Jun 15)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 15 (MON Jun 18)
+ 
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 16 (TUE Jun 19)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 17 (WED Jun 20)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 18 (THU Jun 21)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 19 (FRI Jun 22)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 20 (MON Jun 25)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 21 (TUE Jun 26)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 22 (WED Jun 27)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 23 (THU Jun 28)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+## Day 24 (FRI Jun 29)
+
+   In Class:
+   
+   * 
+   * 
+
+   Before Next Class: 
+   
+   * 
+   * 
+
+ 
  
 
-## Day 11 (Jun 12)
-
-
-## Day 12 (Jun 13)
-
-
-## Day 13 (Jun 14)
-
-
-## Day 14 (Jun 15)
-
-
-## Day 15 (Jun 18)
  
-
-## Day 16 (Jun 19)
-
-
-## Day 17 (Jun 20)
-
-
-## Day 18 (Jun 21)
-
-
-## Day 19 (Jun 22)
-
-
-## Day 20 (Jun 25)
-
-
-## Day 21 (Jun 26)
-
-
-## Day 22 (Jun 27)
-
-
-## Day 23 (Jun 28)
-
-
-## Day 24 (Jun 29)
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 effective class engagement
 active class engagement

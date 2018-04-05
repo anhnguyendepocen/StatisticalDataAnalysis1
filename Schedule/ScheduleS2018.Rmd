@@ -1,5 +1,5 @@
 ---
-title: "STT 3850 Statistical Data Analysis 1 --- Course Schedule"
+title: "STT 3850 Statistical Data Analysis 1<br>Course Schedule for Spring 2018"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: 
