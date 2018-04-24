@@ -4,7 +4,7 @@ title: "Data Files List"
 
 * * *
 
-## Instructor
+### Instructor
 
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/anthropometric.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/balance.csv
@@ -26,8 +26,7 @@ title: "Data Files List"
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/personalitySTT1810.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/personalitySTT3850.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/popular.csv
-* https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballA.csv 
-* https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballB.csv
+* https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballnumbers.csv 
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballjackpot.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/shipsanitation.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/sunspots.csv
@@ -43,7 +42,7 @@ title: "Data Files List"
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/wcsweatherdays.csv
 
 
-## Chihara & Hesterberg
+### Chihara & Hesterberg
 
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Chihara/Alelager.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Chihara/Bangladesh.csv
