@@ -6,6 +6,7 @@ title: "Data Files List"
 
 ### Instructor
 
+* https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/annualinflation.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/anthropometric.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/balance.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/batterylife.csv
@@ -28,6 +29,7 @@ title: "Data Files List"
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/popular.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballnumbers.csv 
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballjackpot.csv
+* https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/powerballsets.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/shipsanitation.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/sunspots.csv
 * https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/titanicCLSE.csv
