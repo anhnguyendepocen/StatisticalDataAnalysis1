@@ -1,0 +1,48 @@
+---
+title: "Exam 01 Summary with Corrections"
+author: "Instructor: Dr. Jill E. Thomley"
+date: "Updated: `r Sys.time()`"
+output:
+  html_document:
+    theme: cosmo
+---
+
+<hr>
+
+```{r, echo=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+gradesraw <- read.csv("exam01scoresC.csv")
+grades    <- stack(gradesraw)
+grades    <- grades %>% rename(exam = ind, score = values)
+```
+
+
+```{r, echo=FALSE}
+ggplot(grades, aes(x=exam, y=score, fill=exam)) + 
+  geom_boxplot() +
+  coord_flip() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()) +
+  ggtitle("Scores on Exam 1") +
+  xlab("") +
+  ylab("Total Score") +
+  scale_y_continuous(limits = c(0, 100)) +
+  scale_fill_manual(values = c("plum", "lightblue")) +
+  theme(legend.title=element_blank())
+
+summaries <- grades %>% group_by(exam) %>% 
+                        summarize(n = n(),
+                                  Mean  = round(mean(score),1),
+                                  StDev = round(sd(score),1),
+                                  Min   = round(fivenum(score)[1],1),
+                                  Q1    = round(fivenum(score)[2],1),
+                                  Med   = round(fivenum(score)[3],1),
+                                  Q3    = round(fivenum(score)[4],1),
+                                  Max   = round(fivenum(score)[5],1),
+                                  IQR   = round(IQR(score), 2),
+                                  Range = round(diff(range(score))))
+print.data.frame(summaries)
+```
+
