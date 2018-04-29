@@ -19,7 +19,7 @@ OSCAR <- read.csv(file=url("https://raw.githubusercontent.com/STAT-JET-ASU/Dataf
 CO2 <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/maunaloaCO2.csv")
 
 # Anthropometric data
-ANT <- read.csv(file=url("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/oscarages.csv"))
+ANT <- read.csv(file=url("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/anthropometric.csv"))
 ```
 
 **NOTE: Descriptive statistics should be computed using the `summarize()` function. All plots should have appropriate titles and axis labels. If you need to use a calculated numerical answer in a subsequent analysis, you should store it and call it back when needed, not type the value by hand. If you store a calculated answer, be sure to print it as well so I can see it.**
