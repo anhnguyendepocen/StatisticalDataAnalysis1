@@ -200,5 +200,5 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 ## More TBA!
 
 ```{block, FINAL, type='rmdnote'}
-*  I will add to this schedule as we progress through the course. Future topics include hypothesis testing (Chapter 3), sampling distributions (Chapter 4), and bootstrapping (Chapter 5). 
+*  I will add to this schedule as we progress through the course. Future topics include hypothesis testing (Chapter 3), sampling distributions (Chapter 4), and bootstrapping (Chapter 5).
 ```
