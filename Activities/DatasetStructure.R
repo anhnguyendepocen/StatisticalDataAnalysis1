@@ -42,13 +42,16 @@ dim(datasetname)[2]
 names(datasetname)
 attributes(datasetname)[1]
 
-# Class of each variable
-# Output is a list vector
+# Find the class of each variable
+# Function output is a list vector
 lapply(datasetname, class)
 
-# Class of each variable
-# Output character vector
+# Find the class of each variable
+# Function output is a character vector
 sapply(datasetname, class)
+
+# You can find the class of an individual
+# using class(datasetname$variablename)
 
 # Find the number of rows that do not contain NA values (missing data)
 sum(complete.cases(datasetname))
@@ -66,4 +69,5 @@ tail(datasetname, 5)
 print(datasetname)
 
 # Offers different options for printing datasets than just using print
+# Use ?print.data.frame
 print.data.frame(datasetname)

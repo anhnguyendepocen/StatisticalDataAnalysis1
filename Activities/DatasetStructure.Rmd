@@ -15,8 +15,8 @@ Read in each dataset using the `read.csv` function and use the following functio
 * `str`
 * `glimpse`
 * `summary`
-* `head`
-
+* `head` to show three rows of the datset
+* `sum` and `complete.cases` to find the number of rows that contain NA's
 
 ```{r, message=FALSE, warning=FALSE}
 require(dplyr)
