@@ -16,7 +16,7 @@ In December 1969, the U.S. Selective Service System conducted a lottery to a det
 
 ![Representative Alexander Pirnie (R-NY) drawing the first draft number. Image is public domain.](https://stat-jet-asu.github.io/Moodlepics/draftlottery1968.jpg)
 
-```{r, warning=FALSE, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(dplyr)
 library(ggplot2)
 
@@ -26,6 +26,7 @@ draftdata <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/m
 
 ```{r}
 str(draftdata)
+glimpse(draftdata)
 summary(draftdata)
 ```
 

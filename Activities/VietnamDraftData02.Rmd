@@ -10,7 +10,7 @@ output:
 
 <hr>
 
-```{r, warning=FALSE, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(dplyr)
 library(ggplot2)
 
@@ -29,6 +29,7 @@ draftnumbers <- 1:366
 draftdata$ourdraft <- sample(draftnumbers)
 
 str(draftdata)
+glimpse(draftdata)
 summary(draftdata)
 ```
 
@@ -91,3 +92,4 @@ ggplot(draftdata, aes(x = 1:366, y = ourdraft)) +
   xlab("order by birthday") +
   ylab("draft number")
 ```
+
