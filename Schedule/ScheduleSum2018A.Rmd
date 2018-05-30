@@ -48,8 +48,8 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    * Reading in `csv` files
    * Structure of datasets
    * Addressing variables
-   * `filter` and `group_by`
-   * `table` and `summarize`
+   * <strike>`filter` and `group_by`</strike>
+   * <strike>`table` and `summarize`</strike>
    * Dataset structure activity
 
    Before Next Class: 
@@ -66,6 +66,9 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    In Class:
    
+   * From yesterday
+      + `filter` and `group_by`
+      + `table` and `summarize`
    * EDA
       + shape
       + center

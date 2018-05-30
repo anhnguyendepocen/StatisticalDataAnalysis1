@@ -41,7 +41,7 @@ Chihara, L. and Hesterberg, T. (2011). _Mathematical Statistics with Resampling 
 
 **Course Assessment & Grading**
 
-The only way to learn statistics is to **DO** statistics, which includes statistical software. Reading the textbook, learning the language, and practicing exercises using real data are critical to your learning and success. Class activities and assessments have been structured with these principles in mind. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must "speak the language" (statistics and R) to effectively demonstrate your knowledge.  
+The only way to learn statistics is to **DO** statistics, which includes statistical software. Reading the textbook, learning the language, and practicing exercises using real data are critical to your learning and success. Class activities and assessments have been structured with these principles in mind. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must "speak the language" (statistics and R) to effectively demonstrate your knowledge.
 
 * DataCamp/Feedback: 20%
 * Class Activities: 10%
@@ -73,7 +73,7 @@ knitr::include_graphics("RStudioLogIn.jpg", dpi = 128)
 
 **Expectations**  
 
-Be proactive in your learning! If you have not read/watched assigned materials and attempted assigned problems before coming to class or office hours, you will likely be confused, feel lost, and have a terrible experience in this course. I DO NOT WANT THAT TO HAPPEN! Appalachian students are expected to make intensive engagement with courses their first priority. Practically speaking, this means students should spend about 1-3 hours on course work outside class for every hour they spend in class. If you are not comfortable or have not done well in quantitative courses in the past, you may need to spend more time completing work for this course. I realize that many students work during the school year to finance their educations; however, that does not change the requirements of this (or any) course. Budget your time accordingly and pace yourself so that you can keep up and complete all your work on time. I am here to help you with this material and I want to see you succeed. 
+Be proactive in your learning! If you have not read/watched assigned materials and attempted assigned problems before coming to class or office hours, you will likely be confused, feel lost, and have a terrible experience in this course. I DO NOT WANT THAT TO HAPPEN! Appalachian students are expected to make intensive engagement with courses their first priority. Practically speaking, this means students should spend about 1-3 hours on course work outside class for every hour they spend in class. If you are not comfortable or have not done well in quantitative courses in the past, you may need to spend more time completing work for this course. I realize that many students work during the school year to finance their educations; however, that does not change the requirements of this (or any) course. Budget your time accordingly and pace yourself so that you can keep up and complete all your work on time. I am here to help you with this material and I want to see you succeed.
 
 
 **How To Get Unstuck**
@@ -96,6 +96,6 @@ Some additional rules for this class:
 * Do not check email, surf the web, or do other coursework during class. I may ask you to leave.
 * You are not allowed to use tobacco (including dip) or e-cigarettes in class. I _will_ ask you to leave.
 
-Any conduct that disrupts instruction is disrespectful and disruptive both to other students and the instructor. First offenses will be dealt with by the instructor. Subsequent behavior issues will be referred to the [Office of Student Conduct](https://studentconduct.appstate.edu/). 
+Any conduct that disrupts instruction is disrespectful and disruptive both to other students and the instructor. First offenses will be dealt with by the instructor. Subsequent behavior issues will be referred to the [Office of Student Conduct](https://studentconduct.appstate.edu/).
 
 
