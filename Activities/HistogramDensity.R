@@ -30,21 +30,21 @@ ggplot(ML, aes(x = co2raw)) +
 # using a grouping variable to make comparisons
 
 # the groups are stacked in this version
-ggplot(CO2, aes(x = co2raw, fill = decade)) +
+ggplot(ML, aes(x = co2raw, fill = decade)) +
   geom_histogram(bins = numberofbins)
 
 # groups are overlaid and semi-transparent
-ggplot(CO2, aes(x = co2raw, fill = decade)) +
+ggplot(ML, aes(x = co2raw, fill = decade)) +
   geom_histogram(bins = numberofbins, 
                  position = "identity", # makes the bars unstack
                  alpha = 0.5) # sets fill color transparency 0-1
 
 # groups are split into separate plots
-ggplot(CO2, aes(x = co2raw)) +
+ggplot(ML, aes(x = co2raw)) +
   geom_histogram(bins = numberofbins) +
   facet_wrap( ~ decade)
 
-ggplot(CO2, aes(x = co2raw)) +
+ggplot(ML, aes(x = co2raw)) +
   geom_histogram(bins = numberofbins) +
   facet_grid(decade ~ .)
 
@@ -67,12 +67,14 @@ ggplot(ML, aes(x = co2raw)) + geom_density(bw = 20)
 # add some features or use grouping in plots
 ggplot(ML, aes(x = co2raw)) + geom_density(fill = "lightblue")
 
-ggplot(CO2, aes(x = co2raw, fill = decade)) +
+# density plots do not use bins...what happens?
+# can you update this to the proper code?
+ggplot(ML, aes(x = co2raw, fill = decade)) +
   geom_density(bins = numberofbins, 
                position = "identity", # makes bars unstack
                alpha = 0.5) # sets fill color transparency 
 
-ggplot(CO2, aes(x = co2raw)) +
+ggplot(ML, aes(x = co2raw)) +
   geom_density(fill = "lightblue") +
   facet_grid(decade ~ .)
 
