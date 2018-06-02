@@ -66,11 +66,10 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    In Class:
 
-   From yesterday
-   * <strike>`filter` and `group_by`</strike>
-   * `table` <strike>and `summarize`</strike>
-   
-   * Variables types
+   * From yesterday
+      + <strike>`filter` and `group_by`</strike>
+      + `table` <strike>and `summarize`</strike>
+      * Variables types
       + categorical
       + numerical
    * Exploratory Data Analysis (EDA)
@@ -97,13 +96,12 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    * From earlier
       + `filter` and `group_by`
       + `table` and `summarize`
-
    * Data visualization
-      + barplots
+      + <strike>barplots</strike>
       + histograms
       + density plots
-      + scatterplots
-      + time series plots
+      + <strike>scatterplots</strike>
+      + <strike>time series plots</strike>
    * Data summaries
       + tables
       + statistics
@@ -121,9 +119,13 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    In Class:
    
+   * From Friday
+      + barplot
+      + scatterplots
+      + time series plots
    * Data Summaries
-      + tables
-      + statistics
+      + <strike>tables</strike>
+      + <strike>statistics</strike>
    * Boxplots
    * Outliers
       

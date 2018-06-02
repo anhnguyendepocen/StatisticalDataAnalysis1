@@ -48,13 +48,13 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    * Reading in `csv` files
    * Structure of datasets
    * Addressing variables
-   * `filter` and `group_by`
-   * `table` and `summarize`
+   * <strike>`filter` and `group_by`</strike>
+   * <strike>`table` and `summarize`</strike>
    * Dataset structure activity
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Chapter 1
+   * Read Chihara and Hesterberg Chapter 1
    * Complete DataCamp *Introduction to Data* 
    * Complete DataCamp *Reporting with R Markdown* 
 
@@ -65,41 +65,50 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 ## Day 03 (THU May 31)
 
    In Class:
-   
-   * EDA
+
+   * From yesterday
+      + <strike>`filter` and `group_by`</strike>
+      + `table` <strike>and `summarize`</strike>
+      * Variables types
+      + categorical
+      + numerical
+   * Exploratory Data Analysis (EDA)
       + shape
       + center
       + spread
       + outliers
    * Data visualization
-      + barplots
+      + <strike>barplots</strike>
       + histograms
-      + density plots
-      + scatterplots
-      + time series plots
+      + <strike>density plots</strike>
+      + <strike>scatterplots</strike>
+      + <strike>time series plots</strike>
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Sections 2.1, 2.2, and 2.6
+   * Read Chihara and Hesterberg Sections 2.1, 2.2, and 2.6
    * Complete DataCamp *Introduction to Statistics with R: Introduction* 
 
 ## Day 04 (FRI Jun 01)
 
    In Class:
-   
+
+   * From earlier
+      + `filter` and `group_by`
+      + `table` and `summarize`
    * Data visualization
-      + barplots
+      + <strike>barplots</strike>
       + histograms
       + density plots
-      + scatterplots
-      + time series plots
+      + <strike>scatterplots</strike>
+      + <strike>time series plots</strike>
    * Data summaries
       + tables
       + statistics
       
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Section 2.3
+   * Read Chihara and Hesterberg Section 2.3
    * Complete DataCamp *Data Manipulation with R in `dplyr`*
    
 ```{block, day04-note, type='rmdnote'}
@@ -110,9 +119,13 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    In Class:
    
+   * From Friday
+      + barplot
+      + scatterplots
+      + time series plots
    * Data Summaries
-      + tables
-      + statistics
+      + <strike>tables</strike>
+      + <strike>statistics</strike>
    * Boxplots
    * Outliers
       
@@ -141,7 +154,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Sections 2.4, 2.5, and 2.7
+   * Read Chihara and Hesterberg Sections 2.4, 2.5, and 2.7
    * Complete AsULearn Lesson *Normal Distribution*
    
 ## Day 08 (THU Jun 07)
@@ -157,7 +170,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Section 2.7
+   * Read Chihara and Hesterberg Section 2.7
    * Complete DataCamp *Exploratory Data Analysis*
 
 ## Day 09 (FRI Jun 08)
@@ -194,7 +207,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Sections 3.1 -- 3.3
+   * Read Chihara and Hesterberg Sections 3.1 -- 3.3
    * Complete AsULearn Lesson *Theory and Concepts of Hypothesis Testing*
 
 ## Day 12 (WED Jun 13)
@@ -209,7 +222,7 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read *Chihara and Hesterberg* Sections 3.4 -- 3.8
-   * Complete
+   * Complete DataCamp *Intro to Statistics with R: Student's T-test*
 
 ## Day 13 (THU Jun 14)
 
@@ -224,7 +237,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 14 (FRI Jun 15)
@@ -237,7 +249,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 15 (MON Jun 18)
@@ -259,7 +270,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 17 (WED Jun 20)
@@ -274,7 +284,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 18 (THU Jun 21)
@@ -289,7 +298,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 19 (FRI Jun 22)
@@ -301,7 +309,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 20 (MON Jun 25)
@@ -315,7 +322,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 21 (TUE Jun 26)
@@ -328,7 +334,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 22 (WED Jun 27)
@@ -341,7 +346,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    Before Next Class: 
    
    * Read
-   * Watch
    * Complete
 
 ## Day 23 (THU Jun 28)
