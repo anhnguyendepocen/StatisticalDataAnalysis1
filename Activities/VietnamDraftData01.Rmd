@@ -33,7 +33,7 @@ summary(draftdata)
 
 ### Overall Distribution of Draft Numbers
 
-```{r}
+```{r, chunkname}
 summaryA <- draftdata %>% summarize(observations = n(),
                                     average      = mean(num1970),
                                     standarddev  = sd(num1970),
@@ -77,7 +77,7 @@ ggplot(draftdata, aes(x = num1970, fill = halfyear)) +
 ### Distribution of Draft Numbers by Month
 
 ```{r}
-draftdata$month = factor(draftdata$month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+draftdata$month <- factor(draftdata$month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
 
 summaryM <- draftdata %>% 
   group_by(month) %>%
