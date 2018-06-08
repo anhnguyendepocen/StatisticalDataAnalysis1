@@ -1,5 +1,5 @@
 ---
-title: "WED 03/14/2018 Assignment"
+title: "Distribution Identification Assignment"
 author: "YOUR NAME HERE"
 date: "Updated `r Sys.Date()`"
 output: html_document
