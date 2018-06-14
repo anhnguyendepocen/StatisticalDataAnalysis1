@@ -56,7 +56,7 @@ print(testStatistic)
 
 draftnumbers   <- DRAFT$num1970
 n_all          <- length(draftnumbers)
-n_first        <- as.numeric(filter(DRAFT, halfyear == "First") %>% 
+n_second       <- as.numeric(filter(DRAFT, halfyear == "Second") %>% 
                                summarize(length(num1970)))
 
 # Uncomment the seed command below to get reproducible results.
@@ -70,8 +70,8 @@ n_first        <- as.numeric(filter(DRAFT, halfyear == "First") %>%
 #     for test statistic XBAR1 - XBAR2; each randomDiffs entry
 #     is computed the same as the test statistic from the data.
 # The data are randomly permuted into the two comparison groups.
-# The vector "index" is the data locations chosen to be "First".
-# The vector "-index" is un-selected values left to be "Second".
+# The vector "index" is the data locations chosen to be "Second".
+# The vector "-index" is un-selected values left to be "First".
 # In the textbook the randomDiffs vector is often called result.
 # Start the resampling process!
 
