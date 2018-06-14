@@ -18,7 +18,7 @@ summary <- DRAFT %>%
             s    = sd(num1970))
 print.data.frame(summary)
 
-ggplot(draftdata, aes(x = halfyear, y = num1970)) + 
+ggplot(DRAFT, aes(x = halfyear, y = num1970)) + 
   geom_boxplot() +
   ggtitle("Draft Numbers by Half-Year for 1970") +
   ylab("draft number")
@@ -55,7 +55,7 @@ print(testStatistic)
 # We use as.numeric() to turn the tibble into a numeric vector.
 
 draftnumbers   <- DRAFT$num1970
-n_all          <- length(hours)
+n_all          <- length(draftnumbers)
 n_first        <- as.numeric(filter(DRAFT, halfyear == "First") %>% 
                                summarize(length(num1970)))
 
@@ -92,14 +92,14 @@ randomDiffs <- numeric(N)
 
 for(i in 1:N){
     index <- sample(n_all, n_first)
-    randomDiffs <- mean(draftnumbers[index]) - mean(draftnumbers[-index])
+    randomDiffs[i] <- mean(draftnumbers[index]) - mean(draftnumbers[-index])
    }
 
 # Display resampling results (null distribution) as a histogram.
 # Plot the observed difference on the null dist. for comparison.
 
 library(ggplot2)
-ggplot(data.frame(nulldist = randomDiff), aes(x = nulldist)) +
+ggplot(data.frame(nulldist = randomDiffs), aes(x = nulldist)) +
   geom_histogram() +
   geom_vline(xintercept = testStatistic)
 
