@@ -2,6 +2,9 @@
 # One-tailed test for the 1970 the Vietnam draft lottery data
 # Did the second half of the year have lower average draft numbers?
 
+library(dplyr)
+library(ggplot2)
+
 # Ho: mu_second = mu_first
 # Ha: mu_second < mu_first
 
@@ -91,7 +94,7 @@ randomDiffs <- numeric(N)
 # Aaaaaaaaaaaaaaaaaaaaaaaaaaaaand let's simulate!
 
 for(i in 1:N){
-    index <- sample(n_all, n_first)
+    index <- sample(n_all, n_second)
     randomDiffs[i] <- mean(draftnumbers[index]) - mean(draftnumbers[-index])
    }
 
