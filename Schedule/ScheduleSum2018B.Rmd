@@ -55,51 +55,50 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    In Class:
    
-   * Testing for two proportions   
-   * Contingency/frequency tables
-      + independence
-      + homogeneity
-      + goodness of fit
+   * Concept of hypothesis tests
+   * Permutation tests for two means
+   * One-tailed versus two-tailed significance
    
    Before Next Class: 
    
    * Read *Chihara and Hesterberg* Sections 3.6 -- 3.8
-   * Complete AsULearn Lesson *TBA*
 
 ## Day 15 (MON Jun 18)
  
    In Class:
    
+   * Traditional tests for two means
+   * Contingency/frequency tables
+      + independence
+
+   Before Next Class: 
+   
+   * Review *Chihara and Hesterberg* Chapter 3
+   * Complete AsULearn Lesson *Classical Hypothesis Testing for Two Means*
+
+## Day 16 (TUE Jun 19)
+
+   In Class:
+   
    * Contingency/frequency tables
       + independence
       + homogeneity
       + goodness of fit
 
    Before Next Class: 
-   
-   * Review *Chihara and Hesterberg* Chapter 3
-   * Complete AsULearn Lesson *TBA*
 
-## Day 16 (TUE Jun 19)
-
-   In Class:
-   
-   * Putting it all together!
-
-   Before Next Class: 
-   
-   * Prepare for EXAM 2
+   * Review *Chihara and Hesterberg* Chapter 3   
+   * Complete AsULearn Lesson *Chi-Square Tests for Tables of Counts*
 
 ## Day 17 (WED Jun 20)
 
-   In Class:
+   * Sampling distributions
+      + calculation
+      + simulation
+      + approximation 
    
-   * EXAM 2
-
-   Before Next Class: 
-   
-   * Read *Chihara and Hesterberg* Sections 5.1 -- 5.3
-   * Complete AsULearn Lesson *TBA*
+   * Read *Chihara and Hesterberg* Sections 4.1 -- 4.3
+   * Complete AsULearn Lesson *Introduction to Sampling Distributions*
 
 ## Day 18 (THU Jun 21)
 
@@ -112,40 +111,40 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Section 4.3
-   * TBA
+   * Prepare for Exam 2
 
 ## Day 19 (FRI Jun 22)
+
+   In Class:
+   
+   * EXAM 2
+
+   Before Next Class: 
+   
+   * Finish Exam 2
+
+## Day 20 (MON Jun 25)
+
+   In Class:
 
    In Class:
    
    * Central limit theorem
       + means
       + proportions
-      + continuity correction
+      + continuity correction   
 
    Before Next Class: 
    
-   * Read *Chihara and Hesterberg* Sections 5.1 -- 5.3 and 7.1 -- 7.4
-   * TBA
+   * Read *Chihara and Hesterberg* Sections 5.1 -- 5.5 and 7.1 -- 7.4
 
-## Day 20 (MON Jun 25)
+## Day 21 (TUE Jun 26)
 
    In Class:
    
    * One-sample bootstrap
    * Bootstrap standard error
    * Bootstrap percentile intervals
-
-   Before Next Class: 
-   
-   * Read *Chihara and Hesterberg* Sections 5.4 -- 5.5
-   * TBA
-
-## Day 21 (TUE Jun 26)
-
-   In Class:
-   
    * Two-sample bootstrap
    * Comparing populations
 
@@ -158,8 +157,11 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
 
    In Class:
    
-   * Bias of an estimator
-   * Bootstrap accuracy
+   * One-sample bootstrap
+   * Bootstrap standard error
+   * Bootstrap percentile intervals
+   * Two-sample bootstrap
+   * Comparing populations
 
    Before Next Class: 
    
