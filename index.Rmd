@@ -8,7 +8,7 @@ title: "Welcome!"
 
 * [Course Schedule](./Schedule/ScheduleF2018.html)
 
-* [Course Data Files](TBA)
+* [Course Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html)
 
 * [ASU RStudio Server](https://mathr.math.appstate.edu)
 
