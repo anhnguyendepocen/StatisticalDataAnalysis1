@@ -1,0 +1,30 @@
+# https://en.wikipedia.org/wiki/IQ_classification
+# https://en.wikipedia.org/wiki/Mensa_International
+
+n <- 100
+p <- .55
+x <- 50
+
+probs = dbinom(0:n, n, p)
+barplot(probs, names = 0:n, space = 0, 
+        xlim = c(0, n + 1), ylim = c(0, 1.1 * max(probs)), 
+        main = "Normal Approximation to Binomial",
+        col = c(rep("red", x + 1), rep("gray", n - (x + 1))))
+curve(dnorm((x-0.5), n*p, sqrt(n*p*(1-p))), 
+      from = 0, to = n + 1, 
+      xlim = c(0, n + 1), 
+      add=T, col="blue")
+abline(v = x + .5)
+
+data.frame(method = c("Exact Binomial", 
+                      "Normal Approx", 
+                      "Corrected"),
+           probability = c(pbinom(x, n, p), 
+                           pnorm(x, n*p, sqrt(n*p*(1-p))),
+                           pnorm(x + .5, n*p, sqrt(n*p*(1-p))))) 
+                           
+                           
+AF <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datafiles/master/Instructor/annualinflation.csv")
+plot(AF$year, AF$inflation, type="o", ylab = "annual inflation", xlab = "year")
+abline(h = mean(AF$inflation), col="red")
+

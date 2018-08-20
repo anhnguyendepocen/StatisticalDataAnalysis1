@@ -20,7 +20,8 @@ POP <- read.csv(file=url("https://raw.githubusercontent.com/STAT-JET-ASU/Datafil
 
 # Select the two variables we want to test and make a table
 
-Observed <- table(POP$gender,POP$top_goal)
+Observed <- table(POP$district_type,POP$top_goal)
+prop.table(Observed, 1)
 
 # Use function we created to calculate the chi-square test statistic
 
@@ -36,18 +37,18 @@ Expected <- outer(rowSums(Observed),colSums(Observed))/sum(Observed)
 # Start with selecting the two variables to be analyzed
 # If there is missing data, filter out those cases first
 
-gender <- POP$gender
+gender <- POP$district_type
 goals  <- POP$top_goal
 
 alpha <- .05
 N <- 10^4-1
 
-randomChisq<-numeric(N)
+randomChisq <- numeric(N)
 
 for (i in 1:N){
   goalPerm <-sample(goals)
   randomTable <- table(gender, goalPerm)
-  randomChisq[i]<-chisq(randomTable)
+  randomChisq[i] <- chisq(randomTable)
 }
 
 # Graph the null distribution of the test statistic
@@ -71,11 +72,11 @@ print(paste("The p-value for the test of independence is ", format(pvalue, scien
 # The built-in R function for the chi-square test
 # This is NOT the same function we created earlier
 
-chisq.test(table(POP$gender,POP$top_goal))
+chisq.test(table(POP$district_type,POP$top_goal))
 
 # Using Monte-Carlo simulation to get a p-value
 
-chisq.test(table(POP$gender,POP$top_goal), simulate.p.value = TRUE)
+chisq.test(table(POP$district_type,POP$top_goal), simulate.p.value = TRUE)
 
 
 
