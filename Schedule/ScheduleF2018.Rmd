@@ -1,0 +1,84 @@
+---
+title: "STT 3850 Statistical Data Analysis 1<br>Fall 2018 Course Schedule"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    highlight: textmate
+    theme: cosmo
+    css: "../css/style.css"
+---
+
+<hr>
+
+```{block, start-note, type='rmdnote'}
+* We will use rental and free digital textbooks.
+* All required software for this course is provided.
+* Please bring a notebook and pencil to every class.
+* Be prepared to actively participate and collaborate.
+* Refer to the [Course Syllabus](../Syllabus/SyllabusF2018.html) for additional details.
+* **This schedule is a work in progress. Check often for updates!**
+```
+
+Class time in this course will be a mix of lecture and hands-on activities. STT 3850 is an introductory course with no statistics prerequisite and is required for students from several majors. Students come into the course with a broad mix of mathematics, statistics, and programming skills. This means that the most effective mode of instruction tends to be a semi-flipped classroom approach where some lecture occurs outside the classroom in the form of videos. This frees up class time to spend on collaborative work where students can give and receive individual help from peers and the instructor. Do not treat this instructional mode as an invitation to skip class! Your classmates are one of your greatest resources.
+
+## Week 01 (AUG 20)
+
+IN CLASS
+
+   * NO CLASS MONDAY (Convocation)
+   * Overview, syllabus, class assessments
+   * Introduction to R and RStudio server
+
+ASSIGNMENTS
+
+   * Read Chihara and Hesterberg Chapter 1
+   * Read _Modern Dive_, [Chapter 1. Introduction](https://moderndive.com/index.html)
+   * Read [_Getting used to R, RStudio, and R Markdown_](https://ismayc.github.io/rbasics-book/)
+   * Watch ["The History of S and R"](https://youtu.be/jk9S3RTAl38) (~10 minutes)
+   * Watch ["Introduction to the R Language"](https://youtu.be/APm4SxJx0eg) (~30 minutes)
+   * Complete _Introduction to R_ on [DataCamp](https://www.datacamp.com/)
+   * Complete [A Tutorial on Loops in R - Usage and Alternatives](https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r)
+
+
+## Week 02 (AUG 27)
+
+IN CLASS
+
+   * Creating and manipulating vectors
+   * Dataset and variable vocabulary
+   * Loading CSV files from the web
+   * Introduction to visualization
+
+ASSIGNMENTS
+
+   * Read Chihara and Hesterberg Section 2.1
+   * Read _Modern Dive_, [Chapter 2. Getting Started with Data in R](https://moderndive.com/2-getting-started.html)
+   * Read _Modern Dive_, [Chapter 3. Data Visualization via `ggplot2`](https://moderndive.com/3-viz.html)
+   * Complete Video Lesson _Discrete and Continuous Random Variables_
+   * Complete _Introduction to Data_ on [DataCamp](https://www.datacamp.com/)
+   * Complete _Reporting with R Markdown_ on [DataCamp](https://www.datacamp.com/)
+
+```{block, week2note, type='rmdnote'}
+* REMINDER: You should be taking notes on concepts, functions, and procedures presented in the [DataCamp](https://www.datacamp.com/) modules. Markdown documents are a good way to create your own annotated code library and to integrate information from various sources (e.g., textbook readings, videos, class exercises). Take time to organize your notes!
+```
+
+
+<hr>
+
+__This schedule will be updated as the semester progresses!__
+
+<hr>
+
+
+### Final Exam
+
+```{block, FINAL, type='rmdnote'}
+You will be doing group project presentations during our [final exam](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_fall_2018_exam_schedule_final.pdf) period.
+
+* Tuesday 12/11 @ 11am in WA307 for STT3850-102 (11am section)
+* Wednesday 12/12 @ 8am in WA307 for STT3850-101 (10am section)
+```

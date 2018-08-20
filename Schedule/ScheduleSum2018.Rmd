@@ -365,9 +365,6 @@ Class time in this course will be a mix of lecture and hands-on activities. STT 
    * EXAM 3
 
 
-
-
-
 ```{block, FINAL, type='rmdnote'}
 *  SOME TEXT HERE
 ```
