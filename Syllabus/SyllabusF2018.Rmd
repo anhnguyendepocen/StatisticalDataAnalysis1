@@ -38,7 +38,7 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 **Required Textbooks**
 
 Chihara, L. and Hesterberg, T. (2011). _Mathematical Statistics with Resampling and R_. Hoboken, NJ: John Wiley & Sons, Inc. (rental)<br>
-Ismay, C. and Kim, A.Y. (2018). [_An Introduction to Statistical and Data Sciences via R_](https://moderndive.com/index.html).
+Ismay, C. and Kim, A.Y. (2018). [_Modern Dive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com/index.html).
 
 
 **Course Assessment & Grading**
