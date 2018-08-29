@@ -51,8 +51,8 @@ IN CLASS
    * Creating and manipulating vectors
    * Dataset and variable vocabulary
    * Loading CSV files from the web
-   * Introduction to visualization
-
+   * __NEW:__ Creating and Manipulating Vectors activity (THU)
+   
 ASSIGNMENTS
 
    * Read Chihara and Hesterberg Section 2.1
@@ -61,12 +61,79 @@ ASSIGNMENTS
    * Complete Video Lesson _Discrete and Continuous Random Variables_
    * Complete _Introduction to Data_ on [DataCamp](https://www.datacamp.com/)
    * Complete _Reporting with R Markdown_ on [DataCamp](https://www.datacamp.com/)
-
+   * __NEW:__ Complete Creating and Manipulating Vectors activity 
+   
 ```{block, week2note, type='rmdnote'}
 * REMINDER: You should be taking notes on concepts, functions, and procedures presented in the [DataCamp](https://www.datacamp.com/) modules. Markdown documents are a good way to create your own annotated code library and to integrate information from various sources (e.g., textbook readings, videos, class exercises). Take time to organize your notes!
 ```
 
 
+## Week 03 (SEP 03)
+
+IN CLASS
+
+   * NO CLASS MONDAY (Labor Day)
+   * Concepts of `tidy` data
+   * Summarizing data
+   * TBA class activity
+   
+ASSIGNMENTS
+
+   * Read Chihara and Hesterberg Sections 2.2 and 2.3
+   * Read _Modern Dive_, [Chapter 4. Tidy Data via `tidyr`](https://moderndive.com/4-tidy.html)
+   * Read _Modern Dive_, [Chapter 5. Data Wrangling via `dplyr`](https://moderndive.com/5-wrangling.html)
+   * Complete _Introduction to the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
+   * TBA homework activity
+
+
+## Week 04 (SEP 10)
+
+IN CLASS
+
+   * Fundamentals of probability
+   * Binomial distribution
+   
+ASSIGNMENTS
+ 
+   * Complete Video Lesson _Binomial and Geometric Distributions_
+   * Complete Probability and Combinatorics HW
+   * Complete Binomial Distribution Practice HW 
+   * Complete Geometric Distribution Practice HW 
+   * Complete _Exploratory Data Analysis_ on [DataCamp](https://www.datacamp.com/)
+
+
+## Week 05 (SEP 17)
+
+IN CLASS
+
+   * Normal distribution
+   * Assessing normality
+   * TBA class activity
+   
+ASSIGNMENTS
+
+   * Read Chihara and Hesterberg Sections 2.4, 2.5, 2.6, and 2.7
+   * Complete Video Lesson _Normal and Related Distributions_
+   * Complete _Working with Data in the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
+   * Complete _Categorical Data in the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
+   * TBA homework activity   
+
+```{block, week5note, type='rmdnote'}
+* Make sure you are caught up on all assignments by the end of this week! Next week you will be putting everything you've learned to use in your group projects.
+```
+
+
+## Week 06 (SEP 24)
+
+IN CLASS
+
+   * Group project work time
+   
+ASSIGNMENTS
+
+   * TBA
+   
+   
 <hr>
 
 __This schedule will be updated as the semester progresses!__
