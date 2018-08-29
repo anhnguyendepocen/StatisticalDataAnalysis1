@@ -93,7 +93,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, August 28, 2018 @ 07:35:32 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Wednesday, August 29, 2018 @ 12:44:23 PM</p>
           </hgroup>
   </slide>
 
@@ -121,15 +121,18 @@
 
 <p>If we collect data from a whole population, it is called a <strong>census</strong>.</p>
 
+<p>The definining characteristics of theoretical probability models are also called <strong>parameters</strong>.</p>
+
 </article></slide><slide class=""><hgroup><h2>Dataset Structure</h2></hgroup><article  id="dataset-structure">
 
 <ul>
 <li><p>A <strong>variable</strong> is some characteristic of interest that can differ between individuals in a population.</p></li>
 <li><p>An <strong>observational unit</strong> (or <strong>observation</strong>) is a single individual, object, or entity about which we have collected data for one or more characteristics (variables).</p></li>
 <li><p>An observation may be called a case, subject, or participant.</p></li>
+<li><p>Ideally, each observational unit has a <strong>value</strong> for each variable.</p></li>
 </ul>
 
-<p>A <strong>dataset</strong> is a collection of information for all observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call <code>tidy</code> data.</p>
+<p>A <strong>dataset</strong> is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call <code>tidy</code> data.</p>
 
 </article></slide><slide class=""><hgroup><h2><code>tidy</code> Data</h2></hgroup><article  id="tidy-data">
 
@@ -180,7 +183,7 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 </article></slide><slide class=""><hgroup><h2>Reading Data into R</h2></hgroup><article  id="reading-data-into-r">
 
-<p>Many different types of data files can be read into R. We will be using primarily CVS files read from the web using their URL. Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>Class Data Files</a> page contains links to many data files provided by the instructor and the textbook.</p>
+<p>Many different types of data files can be read into R. We will be using primarily CSV files read from the web using their URL. Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>Class Data Files</a> page contains links to many data files provided by the instructor and the textbook.</p>
 
 <p>Using <code>read.csv()</code> function to input a CSV dataset from a URL.</p>
 
@@ -192,7 +195,7 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 </article></slide><slide class=""><hgroup><h2>Data Frame vs. Tibble</h2></hgroup><article  id="data-frame-vs.-tibble">
 
-<p>The <code>read.csv()</code> function converts a CVS file into a <strong>data frame</strong>.</p>
+<p>The <code>read.csv()</code> function converts a CSV file into a <strong>data frame</strong>.</p>
 
 <p>A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.</p>
 
@@ -201,6 +204,8 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 <p>Before doing any kind of data modeling or inference, you need to explore your dataset and become familiar with its structure and contents&#8212;that&#39;s the first step in EDA!</p>
 
 </article></slide><slide class=""><hgroup><h2>Structure vs. Glimpse</h2></hgroup><article  id="structure-vs.-glimpse">
+
+<p>The <code>str()</code> function is part of base code, <code>glimpse()</code> is part of the <code>tidyverse</code> package <code>dplyr</code>.</p>
 
 <pre class = 'prettyprint lang-r'>str(flightDelays)</pre>
 
@@ -217,6 +222,8 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
  $ Delayed30   : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 1 1 1 1 2 ...</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
+
+<p>How does the output of <code>glimpse()</code> differ from <code>str()</code>?</p>
 
 <pre class = 'prettyprint lang-r'>library(dplyr)
 glimpse(flightDelays)</pre>
