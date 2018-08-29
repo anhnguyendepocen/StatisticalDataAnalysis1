@@ -1,0 +1,114 @@
+---
+title: "Creating and Manipulating Vectors"
+author: "YOUR NAME HERE"
+date: "`r Sys.time()`"
+output: html_document
+---
+
+### Problem 1
+
+Create vectors to represent the outcomes or sample spaces for the following scenarios using `c`, `:`, `seq`, and/or `rep`. Whenever possible, try to be efficient by using the options other than `c`. Store your vectors using `<-` and use `print()` to show the contents.
+
+* The sample space of a random variable X is {0, 1, 2, ..., 10}.
+
+```{r}
+
+```
+
+* Scores on a test can be 0 or any positive, even integer up to 100.
+
+```{r}
+
+```
+
+* A machine reads the pH of a solution to one decimal place of precision.
+
+```{r}
+
+```
+
+* A player in a particular game can choose rock, paper, scissors, lizard, or Spock.
+
+```{r}
+
+```
+
+* A clock counts down from 60 seconds to zero seconds in whole-second increments.
+
+```{r}
+
+```
+
+* A song's chorus contains the following three phrases, sung once in order then repeated.
+    + I get knocked down
+    + But I get up again
+    + You're never gonna keep me down
+
+```{r}
+
+```
+
+* In a particular group of 100 people, each person has one of four blood types: A, B, AB, or O.
+    + A = 40%
+    + B = 11%
+    + AB = 4%
+    + O = 45%
+    
+```{r}
+
+```
+
+
+### Problem 2
+
+Consider two classes of STT3850. Section 101 has 7 actuarial science majors, 12 computer science majors, 5 mathematics majors, and 7 majors in other science disciplines. The counts for Section 102 are 4, 13, 5, and 9. Be sure to `print()` each object you create below.
+
+* Create two named vectors, one for each section, that contain the counts in each major with the appropriate major labels.
+* Use the two vectors you made to create a third vector that contains the total number of students in each major category.
+* Using the combined data, create a vector that shows the fraction of students in each major.
+* Extract a vector that contains only the fractions for Actuarial Science and Mathematics.
+* Create a data frame that contains the following variables: section, major, and count. 
+
+```{r}
+
+```
+
+
+### Problem 3
+
+Suppose we want to simulate repeatedly rolling a single six-sided die.
+
+* Create and `print()` vector called DIE that contains the integers 1 through 6.
+* Use `sample()` to simulate rolling the die 1000 times and store the results as ROLLS. 
+* Create and `print()` a summary to show how many times each value occurs in ROLLS.
+
+```{r}
+
+```
+
+
+### Problem 4
+
+Write a `for` loop to help create a vector that contains the first 20 numbers in the [Fibonacci sequence](https://www.mathsisfun.com/numbers/fibonacci-sequence.html). 
+
+* Use the `numeric` function to pre-create a vector of zeroes called FIB in which to store your results. 
+* Set the first element of FIB to zero.
+* Set the second element of FIB to one.
+* Use a loop to calculate the remaining 18 elements (i.e., elements 3 through 20) and store them in FIB.
+* Print the contents of FIB.
+* If you don't get the correct 20 numbers, recheck your work!
+
+```{r}
+
+```
+
+EXTENSION: Can you modify your code to allow someone to select how many numbers they want to generate?
+
+```{r}
+
+```
+
+
+<hr>
+
+END!!!
