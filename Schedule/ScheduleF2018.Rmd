@@ -82,6 +82,7 @@ ASSIGNMENTS
    * Read Chihara and Hesterberg Sections 2.2 and 2.3
    * Read _Modern Dive_, [Chapter 4. Tidy Data via `tidyr`](https://moderndive.com/4-tidy.html)
    * Read _Modern Dive_, [Chapter 5. Data Wrangling via `dplyr`](https://moderndive.com/5-wrangling.html)
+   * Complete Video Lesson _Measures of Center and Spread (Variability)_
    * Complete _Introduction to the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
    * TBA homework activity
 
