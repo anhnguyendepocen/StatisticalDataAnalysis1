@@ -1,0 +1,163 @@
+---
+title: "Describing Distributions<br>&#9654; Categorical Data"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+## Describing Distributions
+
+__categorial variables__
+
+* __frequency__
+* __relative frequency__
+
+numerical variables
+
+* shape
+* center
+* spread
+* outliers
+
+Shape, center, and spread characterize the pattern of values or observations. Outliers are deviations from the pattern.
+
+
+## Exploring Categorical Data
+
+* frequency table
+* relative frequency table
+* cumulative frequency table
+* cumulative relative frequency table
+* bar chart / barplot
+* ~~pie chart~~
+
+“There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
+
+
+## Frequency Tables
+
+In the 1970s, University of California Berkeley was sued for sex discrimination in graduate school admissions. The berkeley.csv dataset contains fall 1973 data for the six largest departments.
+
+```{r, echo=FALSE}
+berkdata <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv")
+```
+
+```{r}
+summary(berkdata)
+```
+
+For space, I hid the `read.csv` code used to import the data and name it `berkdata`. 
+
+
+## Using `table()` and `prop.table()`
+
+```{r}
+table(berkdata$sex)
+prop.table(table(berkdata$sex))
+round(prop.table(table(berkdata$sex)), 4)
+```
+
+
+## &nbsp;
+
+```{r}
+table(berkdata$sex, berkdata$status)
+prop.table(table(berkdata$sex, berkdata$status), 1)
+```
+
+What happens if you use 2 instead of 1 in `prop.table` above?
+
+
+## Using `dplyr` to Make "Tables"
+
+```{r}
+library(dplyr)
+berkdata %>% count(sex)
+```
+
+The `table()` function produces a named vector or matrix. The method above produces a `tibble`.
+
+Some functions such as `chisq.test()` expect vector or matrix input, so consider the purpose of the summary.
+
+
+## Cumulative Frequency 
+
+```{r}
+berkdata %>% 
+  count(department) %>% 
+  arrange(desc(n)) %>% 
+  mutate(cum_n    = cumsum(n),
+         prop     = prop.table(n),
+         cum_prop = cumsum(prop))
+```
+
+
+## Using `dplyr` for Two Variables
+
+```{r}
+berkdata %>% 
+  count(sex, status)
+```
+
+
+## &nbsp;
+
+```{r}
+library(tidyr)
+berkdata %>% 
+  count(sex, status) %>% 
+  spread(status, n)
+```
+
+This form can aid summarizing and visualizing, but is it `tidy`?
+
+
+## Barplots for One Variable
+
+```{r, fig.height=4}
+library(ggplot2)
+ggplot(berkdata, aes(x = sex)) + geom_bar()
+```
+
+
+## Improve the Presentation
+
+```{r, fig.height=3.4}
+ggplot(berkdata, aes(x = sex)) + 
+  geom_bar(fill = "lightblue") +
+  labs(title = "Berkeley Admissions Data",
+       x = "sex of applicant")
+```
+
+
+## Barplots for Two Variables
+
+```{r, fig.height=4.25}
+ggplot(berkdata, aes(x = sex, fill = status)) + geom_bar()
+```
+
+
+## Proportions vs. Counts
+
+```{r, fig.height=3.65}
+ggplot(berkdata, aes(x = sex, fill = status)) + 
+  geom_bar(position = "fill") +
+  labs(y = "proportion")
+```
+
+
+## Barplots from a Table
+
+We can still make a barplot if we have summarized vs. raw data.
+
+```{r, fig.height=3}
+dept_tab <- berkdata %>% count(department)
+ggplot(dept_tab, aes(x = department, y = n)) + 
+  geom_bar(stat = "identity")
+```
+
+
