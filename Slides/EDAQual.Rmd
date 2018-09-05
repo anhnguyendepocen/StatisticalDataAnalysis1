@@ -40,7 +40,7 @@ Shape, center, and spread characterize the pattern of values or observations. Ou
 
 ## Frequency Tables
 
-In the 1970s, University of California Berkeley was sued for sex discrimination in graduate school admissions. The berkeley.csv dataset contains fall 1973 data for the six largest departments.
+In the 1970s, University of California Berkeley was sued for sex discrimination in graduate school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments.
 
 ```{r, echo=FALSE}
 berkdata <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv")
@@ -159,5 +159,4 @@ dept_tab <- berkdata %>% count(department)
 ggplot(dept_tab, aes(x = department, y = n)) + 
   geom_bar(stat = "identity")
 ```
-
 
