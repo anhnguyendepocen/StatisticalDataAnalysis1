@@ -57,7 +57,8 @@ For two qualitative variables of your choice, create a table and a plot to summa
 ```
 
 
-
 <hr>
 
 END!!!
+
+
