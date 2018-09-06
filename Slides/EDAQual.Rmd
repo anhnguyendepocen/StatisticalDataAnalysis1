@@ -175,10 +175,10 @@ ggplot(NULL, aes(x = classyear, y = students)) +
 
 ## More About Color
 
-The online _Cookbook for R_ shows some [color options](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) and built-in color palettes for plots. You can use any web color by name (if it has one), hex code, or rgb value (e.g., [HTML Color Codes](https://htmlcolorcodes.com/color-names/)).
+The online _Cookbook for R_ shows some [color options](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) and built-in color palettes for plots. You can use colors by name (if it has one that R recognizes, use `colors()` function to see a list), hex code, or rgb value (e.g., [HTML Color Codes](https://htmlcolorcodes.com/color-names/) or [ColorHexa](https://www.colorhexa.com/)).
 
-* color typically refers to points, lines, outlines
-* fill typically refers to some internal shading
+* _color_ typically refers to points, lines, outlines
+* _fill_ typically refers to some internal shading
 
 ```{r eval=FALSE}
 ggplot(berkdata, aes(x = sex, fill = status)) +
