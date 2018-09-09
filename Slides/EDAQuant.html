@@ -93,7 +93,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, September 04, 2018 @ 08:21:27 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Sunday, September 09, 2018 @ 05:43:26 PM</p>
           </hgroup>
   </slide>
 
@@ -106,7 +106,7 @@
 <li>relative frequency</li>
 </ul>
 
-<p><strong>numerical variables</strong></p>
+<p><strong>quantitative variables</strong></p>
 
 <ul>
 <li><strong>shape</strong></li>
@@ -164,7 +164,7 @@
 </ul></li>
 </ul>
 
-<p>See AsULearn Statistics Terms &amp; Concepts glossary and course textbooks for more information on plots.</p>
+<p>See AsULearn Statistics Terms &amp; Concepts glossary and course textbooks for more information on plots and summaries.</p>
 
 </article></slide><slide class=""><hgroup><h2>Plotting Some Data</h2></hgroup><article  id="plotting-some-data">
 
@@ -269,6 +269,91 @@ skewness(mileage$mpg)</pre>
 <pre class = 'prettyprint lang-r'>kurtosis(mileage$mpg) - 3</pre>
 
 <pre >[1] 0.6725558</pre>
+
+<p>We will discuss more about connections between measures in upcoming slides.</p>
+
+</article></slide><slide class=""><hgroup><h2>Center</h2></hgroup><article  id="center">
+
+<ul>
+<li>mean
+
+<ul>
+<li>arithmetic mean (&quot;average&quot;, <em>expected value</em>)</li>
+<li>geometric mean</li>
+<li>weighted mean</li>
+<li>trimmed mean</li>
+</ul></li>
+<li>median</li>
+<li>mode (we use this more with reference to shape)</li>
+</ul>
+
+<p>Mean and median are both the &quot;middle&quot; of a given distribution, but the two summaries define middle differently. Video lesson &quot;Measures of Center and Spread&quot; discusses this in more depth.</p>
+
+</article></slide><slide class=""><hgroup><h2>Spread</h2></hgroup><article  id="spread">
+
+<ul>
+<li>variance
+
+<ul>
+<li>population</li>
+<li>sample</li>
+</ul></li>
+<li>standard deviation</li>
+<li>mean absolute deviation (mad)</li>
+<li>median absolute deviation (<em>also</em> mad?)</li>
+<li>interquartile range (IQR)</li>
+<li>range</li>
+</ul>
+
+<p>Summarizing the deviations of a set of values from some center point is a common technique in statistics.</p>
+
+</article></slide><slide class=""><hgroup><h2>Measures Based on Moments</h2></hgroup><article  id="measures-based-on-moments">
+
+<ul>
+<li>mean &#8211; first moment (\(\mu\))</li>
+<li>variance &#8211; second moment</li>
+</ul>
+
+<p>\[M_2 = \frac{(X - \mu)^2}{n} = \sigma^2\text{, } \text{standard deviation} = \sigma \]</p>
+
+<ul>
+<li>skewness &#8211; third moment</li>
+</ul>
+
+<p>\[M_3 = \frac{(X - \mu)^3}{n}\text{ and }skewness = \frac{(X - \mu)^3}{\sigma^3}\]</p>
+
+<ul>
+<li>kurtosis &#8211; fourth moment</li>
+</ul>
+
+<p>\[M_4 = \frac{(X - \mu)^4}{n}\text{ and }kurtosis = \frac{(X - \mu)^4}{\sigma^4}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Measures Based on Counts</h2></hgroup><article  id="measures-based-on-counts">
+
+<ul>
+<li>five-number-summary
+
+<ul>
+<li>minimum</li>
+<li>first quartile (Q<sub>1</sub>)</li>
+<li>median</li>
+<li>third quartile (Q<sub>3</sub>)</li>
+<li>maximum</li>
+</ul></li>
+<li>interquartile range (IQR)</li>
+<li>range</li>
+<li>percentiles / quantiles</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Boxplots and Outliers</h2></hgroup><article  id="boxplots-and-outliers">
+
+<p>One of the most common rules for determining outliers is based on the five-number summary. We can visualize the five-number summary and outliers in a boxplot.</p>
+
+<p style="text-align: center">
+
+<img src="https://stat-jet-asu.github.io/Moodlepics/boxplot.png">
+
+</p>
 
 </article></slide><slide class=""><hgroup><h2>More TBA</h2></hgroup><article  id="more-tba">
 

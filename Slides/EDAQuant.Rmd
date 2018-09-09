@@ -16,7 +16,7 @@ categorial variables
 * frequency
 * relative frequency
 
-__numerical variables__
+__quantitative variables__
 
 * __shape__
 * __center__
@@ -52,7 +52,7 @@ We rely heavily on plots to assess shape. Summary measures like skewness and kur
 * boxplot
     * [geom_boxplot()](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)
 
-See AsULearn Statistics Terms & Concepts glossary and course textbooks for more information on plots.
+See AsULearn Statistics Terms & Concepts glossary and course textbooks for more information on plots and summaries.
 
     
 ## Plotting Some Data
@@ -157,6 +157,71 @@ skewness(mileage$mpg)
 kurtosis(mileage$mpg)
 kurtosis(mileage$mpg) - 3
 ```
+
+We will discuss more about connections between measures in upcoming slides.
+
+
+## Center
+
+* mean
+    * arithmetic mean ("average", _expected value_)
+    * geometric mean
+    * weighted mean
+    * trimmed mean
+* median
+* mode (we use this more with reference to shape)
+
+Mean and median are both the "middle" of a given distribution, but the two summaries define middle differently. Video lesson "Measures of Center and Spread" discusses this in more depth.
+
+
+## Spread
+
+* variance
+    * population
+    * sample
+* standard deviation
+* mean absolute deviation (mad)
+* median absolute deviation (_also_ mad?)
+* interquartile range (IQR)
+* range
+
+Summarizing the deviations of a set of values from some center point is a common technique in statistics. 
+
+
+## Measures Based on Moments
+
+* mean -- first moment ($\mu$)
+* variance -- second moment
+
+$$M_2 = \frac{(X - \mu)^2}{n} = \sigma^2\text{, } \text{standard deviation} = \sigma $$
+
+* skewness -- third moment
+
+$$M_3 = \frac{(X - \mu)^3}{n}\text{ and }skewness = \frac{(X - \mu)^3}{\sigma^3}$$
+
+* kurtosis -- fourth moment
+
+$$M_4 = \frac{(X - \mu)^4}{n}\text{ and }kurtosis = \frac{(X - \mu)^4}{\sigma^4}$$
+
+
+## Measures Based on Counts
+
+* five-number-summary
+    * minimum
+    * first quartile (Q<sub>1</sub>)
+    * median
+    * third quartile (Q<sub>3</sub>)
+    * maximum
+* interquartile range (IQR)
+* range
+* percentiles / quantiles
+
+
+## Boxplots and Outliers
+
+One of the most common rules for determining outliers is based on the five-number summary. We can visualize the five-number summary and outliers in a boxplot.
+
+<p style="text-align: center"><img src="https://stat-jet-asu.github.io/Moodlepics/boxplot.png"></p>
 
 
 ## More TBA
