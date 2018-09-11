@@ -235,7 +235,19 @@ $$M_4 = \frac{\Sigma(X - \mu)^4}{n}$$
 $$kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}$$
 
 
-## Measures Based on Counts
+## Moment-Based Summaries in R
+
+* `mean()`
+* `var()`
+* `sd()`
+* `skewness()`
+* `kurtosis()`
+* `mad()` (not a moment, but a related concept)
+
+Skewness and kurtosis require the `moments` package. You should explore the syntax, parameters, and output of each function.
+
+
+## Measures Based on Ordered Counts
 
 * five-number-summary
     * minimum
@@ -248,11 +260,35 @@ $$kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}$$
 * percentiles / quantiles
 
 
+## Count-Based Summaries in R
+
+* `fivenum()`
+* `min()`
+* `median()`
+* `max()`
+* `IQR()`
+* `range()`
+* `quantile()`
+
+Again, you should explore the syntax, parameters, and output of each function to understand how it works.
+
+
 ## Boxplots and Outliers
 
 One of the most common rules for determining outliers is based on the five-number summary. We can visualize the five-number summary and outliers in a boxplot.
 
 <p style="text-align: center"><img src="https://stat-jet-asu.github.io/Moodlepics/boxplot.png"></p>
+
+
+## Calculating the Fences
+
+```{r}
+lowerFence <- fivenum(mileage$mpg)[2] - 1.5 * IQR(mileage$mpg)
+print(lowerFence)
+upperFence <- fivenum(mileage$mpg)[4] + 1.5 * IQR(mileage$mpg)
+print(upperFence)
+boxplot.stats(sort(mileage$mpg))[4]
+```
 
 
 ## Boxplot for One Variable
@@ -264,10 +300,10 @@ ggplot(mileage, aes(x = 1, y = mpg)) + geom_boxplot()
 
 ## Comparing Groups
 
-Load the [maunaloac02.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv) dataset into RStudio. Let's compare!
+Load the [FlightDelays.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv) dataset into RStudio. Let's compare!
 
 ```{r, echo=FALSE}
-CO2 <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv")
+CO2 <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv")
 ```
 
 ```{r}
@@ -278,7 +314,7 @@ glimpse(CO2)
 ## Comparative Boxplots
 
 ```{r, fig.height=4.3}
-ggplot(CO2, aes(x = decade, y = co2raw)) + geom_boxplot()
+ggplot(CO2, aes(x = Carrier, y = FlightLength)) + geom_boxplot()
 ```
 
 
