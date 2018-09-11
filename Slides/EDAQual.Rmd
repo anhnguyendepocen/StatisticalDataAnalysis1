@@ -9,6 +9,13 @@ output: ioslides_presentation
 knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
 ```
 
+## 
+
+<p style="text-align: center;">![](http://www-history.mcs.st-andrews.ac.uk/BigPictures/Fisher.jpeg)</p>
+
+<p>"...the object of statistical methods is the reduction of data. A quantity of data, which usually by its mere bulk is incapable of entering the mind, is to be replaced by relatively few quantities which shall adequately represent the whole, or...shall contain as much as possible, ideally the whole, of the relevant information contained in the original data." ~ R.A. Fisher, 1921</p>
+
+
 ## Describing Distributions
 
 __categorial variables__
@@ -36,7 +43,7 @@ Shape, center, and spread characterize the pattern of values or observations. Ou
 * [bar chart / barplot](https://ggplot2.tidyverse.org/reference/geom_bar.html)
 * ~~pie chart~~
 
-“There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.”
+“There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.” (some attribute this to John Tukey, but that cannot be verified)
 
 
 ## Frequency Tables
@@ -57,13 +64,13 @@ For space, I hid the `read.csv` code used to import the data and name it `berkda
 ## Using `table()` and `prop.table()`
 
 ```{r}
-table(berkdata$sex)
-prop.table(table(berkdata$sex))
-round(prop.table(table(berkdata$sex)), 4)
+table(berkdata$sex)   # frequencies
+prop.table(table(berkdata$sex))   # relative frequencies
+round(prop.table(table(berkdata$sex)), 4)   # rounded for display
 ```
 
 
-## &nbsp;
+## Contingency (Two-Way) Tables
 
 ```{r}
 table(berkdata$sex, berkdata$status)
@@ -85,7 +92,7 @@ The `table()` function produces a named vector or matrix. The method above produ
 Some functions such as `chisq.test()` expect vector or matrix input, so consider the purpose of the summary.
 
 
-## Cumulative Frequency 
+## Cumulative Tables 
 
 ```{r}
 berkdata %>% 
@@ -192,7 +199,7 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 ```
 
 
-## &nbsp;
+## A Custom Color Example
 
 ```{r echo=FALSE}
 ggplot(berkdata, aes(x = sex, fill = status)) +
@@ -205,3 +212,17 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
        y = "number of applicants")
 ```
 
+
+## Three Variables?
+
+```{r echo=FALSE}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar(color = "darkgray") +
+  facet_grid(. ~ department) +
+  scale_fill_manual(values = c("palegreen", "turquoise")) +
+  labs(title = "Berkeley Admissions Data",
+       subtitle = "Largest Six Departments, Fall 1973",
+       caption = "data = berkeley.csv",
+       x = "sex of applicant",
+       y = "number of applicants")
+```

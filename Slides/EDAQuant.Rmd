@@ -9,6 +9,22 @@ output: ioslides_presentation
 knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
 ```
 
+## &nbsp;
+
+
+
+"If we need a short suggestion of what exploratory data analysis is, I would suggest that
+
+
+* It is an attitude AND
+
+* A flexibility AND
+
+* Some graph paper (or transparencies, or both)."
+
+<p>~ John Tukey, 1980</p>
+
+
 ## Describing Distributions
 
 categorial variables
@@ -55,7 +71,7 @@ We rely heavily on plots to assess shape. Summary measures like skewness and kur
 See AsULearn Statistics Terms & Concepts glossary and course textbooks for more information on plots and summaries.
 
     
-## Plotting Some Data
+## Some Data to Plot
 
 Load [gasmileage.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv) and [oldfaithful.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oldfaithful.csv) into RStudio. Let's plot! 
 
@@ -190,18 +206,33 @@ Summarizing the deviations of a set of values from some center point is a common
 
 ## Measures Based on Moments
 
-* mean -- first moment ($\mu$)
-* variance -- second moment
+In physics, a moment of force is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.
 
-$$M_2 = \frac{(X - \mu)^2}{n} = \sigma^2\text{, } \text{standard deviation} = \sigma $$
+mean (first moment)
 
-* skewness -- third moment
+* the mean $\mu$ is the value that makes $\Sigma(X - \mu)^1 = 0$ true
+* mean is the center of mass or _balance point_ of a distribution
 
-$$M_3 = \frac{(X - \mu)^3}{n}\text{ and }skewness = \frac{(X - \mu)^3}{\sigma^3}$$
+variance (second moment)
 
-* kurtosis -- fourth moment
+$$M_2 = \frac{\Sigma(X - \mu)^2}{n} = \sigma^2$$ 
 
-$$M_4 = \frac{(X - \mu)^4}{n}\text{ and }kurtosis = \frac{(X - \mu)^4}{\sigma^4}$$
+$$\text{standard deviation} = \sigma $$
+
+
+## &nbsp;
+
+skewness (third moment)
+
+$$M_3 = \frac{\Sigma(X - \mu)^3}{n}$$
+
+$$skewness = \frac{\Sigma(X - \mu)^3}{\sigma^3}$$
+
+kurtosis (fourth moment)
+
+$$M_4 = \frac{\Sigma(X - \mu)^4}{n}$$
+
+$$kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}$$
 
 
 ## Measures Based on Counts
@@ -222,6 +253,33 @@ $$M_4 = \frac{(X - \mu)^4}{n}\text{ and }kurtosis = \frac{(X - \mu)^4}{\sigma^4}
 One of the most common rules for determining outliers is based on the five-number summary. We can visualize the five-number summary and outliers in a boxplot.
 
 <p style="text-align: center"><img src="https://stat-jet-asu.github.io/Moodlepics/boxplot.png"></p>
+
+
+## Boxplot for One Variable
+
+```{r, fig.height=4.3}
+ggplot(mileage, aes(x = 1, y = mpg)) + geom_boxplot()
+```
+
+
+## Comparing Groups
+
+The Mauna Loa Observatory on the island of Hawaii has been measuring the concentration of carbon dioxide (CO2) in earth’s atmosphere since the 1950's. It is part of the National Oceanic and Atmospheric Administration (NOAA). ([maunaloac02.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv)) 
+
+```{r, echo=FALSE}
+CO2 <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv")
+```
+
+```{r}
+glimpse(CO2)
+```
+
+
+## Comparative Boxplot
+
+```{r}
+ggplot(CO2, aes(x = decade, y = co2raw)) + geom_boxplot()
+```
 
 
 ## More TBA
