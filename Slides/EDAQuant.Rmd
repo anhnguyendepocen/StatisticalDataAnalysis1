@@ -264,7 +264,7 @@ ggplot(mileage, aes(x = 1, y = mpg)) + geom_boxplot()
 
 ## Comparing Groups
 
-The Mauna Loa Observatory on the island of Hawaii has been measuring the concentration of carbon dioxide (CO2) in earth’s atmosphere since the 1950's. It is part of the National Oceanic and Atmospheric Administration (NOAA). ([maunaloac02.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv)) 
+Load the [maunaloac02.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv) dataset into RStudio. Let's compare!
 
 ```{r, echo=FALSE}
 CO2 <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/maunaloaCO2.csv")
@@ -275,9 +275,9 @@ glimpse(CO2)
 ```
 
 
-## Comparative Boxplot
+## Comparative Boxplots
 
-```{r}
+```{r, fig.height=4.3}
 ggplot(CO2, aes(x = decade, y = co2raw)) + geom_boxplot()
 ```
 
