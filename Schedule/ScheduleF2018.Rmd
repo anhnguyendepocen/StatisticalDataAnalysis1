@@ -97,9 +97,9 @@ IN CLASS
 ASSIGNMENTS
  
    * Complete Video Lesson _Binomial and Geometric Distributions_
-   * Complete Probability and Combinatorics HW
-   * Complete Binomial Distribution Practice HW 
-   * Complete Geometric Distribution Practice HW 
+   * ~~Complete Probability and Combinatorics HW~~ (will update)
+   * ~~Complete Binomial Distribution Practice HW~~ (will update)
+   * ~~Complete Geometric Distribution Practice HW~~ (will update) 
    * Complete _Exploratory Data Analysis_ on [DataCamp](https://www.datacamp.com/)
 
 
