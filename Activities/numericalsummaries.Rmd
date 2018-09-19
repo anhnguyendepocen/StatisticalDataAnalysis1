@@ -1,0 +1,98 @@
+---
+title: "Quantitative Summaries"
+author: "YOUR NAME HERE"
+date: "`r Sys.time()`"
+output: html_document
+---
+
+Consider the Flight Delays dataset discussed in Chapter 1 of the Chihara & Hesterberg textbook, which contains information on selected flights departing from LaGuardia airport in 2009. Complete all problems below using that dataset. Use `dplyr` functions when possible for descriptive analyses. Create all plots using `ggplot2` and be sure to add an informative title and labels for the x and y axes.
+
+```{r}
+# Load any necessary packages here. Suppress messages for this code chunk.
+```
+
+
+### Problem 1
+
+Summarize the lengths of flight delays, including sample size, mean, standard deviation, and five-number summary.
+
+```{r}
+
+```
+
+
+### Problem 2
+
+Create a boxplot to accompany your summaries in Problem 1. Calculate the upper fence and determine how many outliers there are in the data.
+
+```{r}
+
+```
+
+
+### Problem 3
+
+Consider the mean and median you found in Problem 1. Explain what the value of each tells us in the context of the variable; remember that the units of measure are minutes. Why are the two "centers" so different?
+
+ANSWER: 
+
+
+### Problem 4
+
+Modify the destination variable so that each destination is labeled by city name rather than airport code. Summarize flight lengths by destination, including sample size, mean, standard deviation, median, and IQR. Order the results by increasing mean.
+
+```{r}
+
+```
+
+
+### Problem 5
+
+Create semi-transparent overlapping density plots to show flight length by destination. 
+
+```{r}
+
+```
+
+
+### Problem 6
+
+How does the variability of flight lengths differ by destination? Are the similar or different? How do you know? Remember that the units of measure are minutes.
+
+ANSWER: 
+
+
+### Problem 7
+
+Reorder the variable representing day of the week so that the days are in order from Sunday to Saturday. Summarize the delays by both carrier and day (at the same time), including sample size, mean, standard deviation, and maximum. 
+
+```{r}
+
+```
+
+
+### Problem 8
+
+Create an appropriate plot to visualize the distribution of delays by both carrier and day.
+
+```{r}
+
+```
+
+
+### Problem 9
+
+Is there a relationship between the length of the flight and how long it was delayed? Investigate this question.
+
+```{r}
+
+```
+
+ANSWER:
+
+
+<hr>
+
+END!!!
+
+
