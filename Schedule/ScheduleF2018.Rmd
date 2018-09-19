@@ -130,7 +130,7 @@ ASSIGNMENTS
    * Read Chihara and Hesterberg Sections 2.4, 2.5, 2.6, and 2.7
    * Complete Video Lesson _Binomial and Geometric Distributions_
    * Complete Video Lesson _Normal and Related Distributions_
-   * Complete _Working with Data in the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
+   * Complete _Communicating with Data in the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
 
 ```{block, week6note, type='rmdnote'}
 * Make sure you are caught up on all assignments by the end of this week! Next week you will be putting everything you've learned to use in your group projects.
