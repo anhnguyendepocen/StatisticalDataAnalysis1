@@ -1,5 +1,5 @@
 ---
-title: "Binomial and Geometric Distributions"
+title: "Bernoulli, Binomial, and Geometric Distributions"
 author: "Author: Jill E. Thomley"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: ioslides_presentation
