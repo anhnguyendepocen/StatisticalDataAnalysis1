@@ -321,3 +321,8 @@ ggplot(CO2, aes(x = Carrier, y = FlightLength)) + geom_boxplot()
 ## More TBA
 
 Additional slides will be added!
+
+
+## &nbsp;
+
+http://www.cookbook-r.com/Graphs/
