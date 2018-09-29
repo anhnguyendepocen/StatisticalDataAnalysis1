@@ -92,7 +92,6 @@ Suppose we want to simulate repeatedly rolling a single six-sided die.
 Write a `for` loop to help create a vector that contains the first 20 numbers in the [Fibonacci sequence](https://www.mathsisfun.com/numbers/fibonacci-sequence.html). 
 
 * Use the `numeric` function to pre-create a vector of zeroes called FIB in which to store your results. 
-* Set the first element of FIB to zero.
 * Set the second element of FIB to one.
 * Use a loop to calculate the remaining 18 elements (i.e., elements 3 through 20) and store them in FIB.
 * Print the contents of FIB.

@@ -1,0 +1,90 @@
+---
+title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    highlight: textmate
+    theme: cosmo
+    css: "../css/style.css"
+---
+
+<hr>
+
+```{block, startnote, type='rmdnote'}
+* We will use rental and free digital textbooks.
+* All required software for this course is provided.
+* Please bring a notebook and pencil to every class.
+* Be prepared to actively participate and collaborate.
+* Refer to the [Course Syllabus](../Syllabus/SyllabusS2019.html) for additional details.
+* **This schedule is a work in progress. Check often for updates!**
+```
+
+Class time in this course will be a mix of lecture and hands-on activities. STT 3850 is an introductory course with no statistics prerequisite and is required for students from several majors. Students come into the course with a broad mix of mathematics, statistics, and programming skills. This means that the most effective mode of instruction tends to be a semi-flipped classroom approach where some lecture occurs outside the classroom in the form of videos. This frees up class time to spend on collaborative work where students can give and receive individual help from peers and the instructor. Do not treat this instructional mode as an invitation to skip class! Your classmates are one of your greatest resources.
+
+## Week 01 (JAN 14)
+
+DUE FRIDAY @ 5PM:
+
+
+IN CLASS THIS WEEK:
+
+
+BEFORE NEXT WEEK:
+
+
+
+## Week 02 (JAN 21)
+
+## Week 03 (JAN 28)
+
+## Week 04 (FEB 04)
+
+## Week 05 (FEB 11)
+
+## Week 06 (FEB 18)
+
+## Week 07 (FEB 25)
+
+## SPRING BREAK
+
+```{block, springbreak, type='rmdnote'}
+TBA
+```
+
+## Week 08 (MAR 11)
+
+## Week 09 (MAR 18)
+
+## Week 10 (MAR 25)
+
+## Week 11 (APR 01)
+
+## Week 12 (APR 08)
+
+## Week 13 (APR 15)
+
+## Week 14 (APR 22)
+
+* No Class on Tuesday 04/23
+
+## Week 15 (APR 29)
+
+* No Class on Thursday 04/02 (Reading Day)
+
+
+<hr>
+
+__This schedule will be updated as the semester progresses!__
+
+<hr>
+
+
+### Final Exam
+
+```{block, finalexam, type='rmdnote'}
+TBA
+```

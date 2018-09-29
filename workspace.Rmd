@@ -1,0 +1,23 @@
+---
+title: "Untitled"
+author: "Jill Thomley"
+date: "9/3/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+## Barplots from a Table
+
+Data for all F73 applicants is only available as a summary table.
+
+|        | Accepted | Rejected | Total |
+|--------|:--------:|:--------:|:-----:|
+| Female |     1494 |     2827 |  4321 |
+| Male   |     3738 |     4704 |  8442 |
+| Total  |     5232 |     7531 | 12763 |
+```
+

@@ -1,0 +1,8 @@
+---
+title: "Untitled"
+author: "Jill Thomley"
+date: "9/25/2018"
+output: html_document
+---
+
+<img src="http://www-history.mcs.st-andrews.ac.uk/BigPictures/Fisher.jpeg" height=100><img src="http://www-history.mcs.st-andrews.ac.uk/BigPictures/Fisher.jpeg" width=100>

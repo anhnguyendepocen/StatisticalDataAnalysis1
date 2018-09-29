@@ -1,11 +1,11 @@
 ---
-title: "Categorical Summaries"
+title: "Qualitative Summaries"
 author: "YOUR NAME HERE"
 date: "`r Sys.time()`"
 output: html_document
 ---
 
-Consider the Flight Delays dataset discussed in Chapter 1 of the Chihara & Hesterberg textbook, which contains information on selected flights departing from LaGuardia airport in 2009. Complete the problems below using that dataset. For all plots, be sure to add an informative title and labels for the x and y axes.
+Consider the Flight Delays dataset discussed in Chapter 1 of the Chihara & Hesterberg textbook, which contains information on selected flights departing from LaGuardia airport in 2009. Complete all problems below using that dataset. Create all plots using `ggplot2` and be sure to add an informative title and labels for the x and y axes.
 
 ```{r}
 # Load any necessary packages here. Suppress messages for this code chunk.
