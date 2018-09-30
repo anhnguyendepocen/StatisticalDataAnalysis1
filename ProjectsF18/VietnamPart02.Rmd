@@ -1,0 +1,37 @@
+---
+title: "Vietnam Draft, Part 1"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+---
+
+<hr>
+
+### The Process
+
+In December 1969, the U.S. Selective Service System conducted a lottery to a determine draft order for eligible men in the upcoming year. The 366 days of the year (including February 29) were written on small pieces of paper. Each was placed in a plastic capsule, then the capsules were hand-mixed in a shoebox and dumped in a glass jar. Capsules were pulled out one at a time. The first number chosen was 258 (September 14). Anyone born on that day in 1944 through 1950 was assigned lottery number 1. The first 195 birthdates drawn were later called to serve in the order they were drawn. Some people asserted that the numbers were not randomly distributed through the year, in particular when you compared the first half of the year to the second half of the year. ([data](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv)) || ([description](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/vietnamdraft.html))
+
+<center>![Representative Alexander Pirnie (R-NY) drawing the first draft number. Image is public domain.](https://stat-jet-asu.github.io/Moodlepics/draftlottery1968.jpg)</center>
+
+
+### The Problem
+
+The draft numbers for 1970 were drawn without replacement from the set $x = \{1, 2, 3, ..., 366\}$. The probability of drawing any draft number remaining in the pool at each step of the process was believed to be equal for all numbers, which would mean that all possible permutations of the 366 integers were equally likely---a fair process. It is impossible to prove whether the selection process was biased (non-random), but we can assess whether the outcome seems to be consistent with randomness. For this part of the project, you will use exploratory data analysis.
+
+
+### Your Analyses
+
+
+5) Randomly generate draft numbers and assign them to the birthdays in the dataset. Save the results in a data frame or tibble that contains only the birthday information and your randomly assigned draft numbers. Display the resulting dataset structure.
+
+<hr>
+
+END PART 1
+
+
+
+
+
