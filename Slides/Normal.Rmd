@@ -1,0 +1,231 @@
+---
+title: "The Normal (Gaussian) Distribution"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+
+# Normal Distribution
+
+## The Normal Model
+
+The normal distribution is a continuous probability distribution. Very few concepts in real life are truly normally distributed, but many are _approximately_ normal. The normal is also the limiting distribution for many statistics and other distributions when the sample size n $\rightarrow \infty$.
+
+$$X \sim N(\mu,\sigma^2)$$
+
+_x_ = {-$\infty$ to +$\infty$}
+    
+$\mu$ = the expected value (mean) of the distribution
+    
+$\sigma^2$ = the variance of the distribution
+
+The standard normal distribution $Z$ has $\mu$ = 0 and $\sigma^2$ = $\sigma$ = 1.
+
+
+## Probability Density Function (pdf)
+
+Unlike the pmf in discrete distributions, the probability density function (pdf) of a continuous distribution does not compute probability, because the area under a point is zero. Instead it gives the height of the function at x.
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+
+R has a function to solve the pmf for any given binomial model. Inputs may be single values or vectors.
+
+<center>$f(x)$ = `dnorm(x, mu, sigma)`</center><br>
+
+Note that the function uses $\sigma$ rather than $\sigma^2$ as the parameter. 
+
+
+## Cumulative Distribution Function (CDF)
+
+The probability of a given number of successes _or fewer_ is found using the CDF, which integrates the area under the curve. This is similar to a discrete distribution. The normal has no closed-form solution for $F(x)$. R has a function for the normal CDF / inverse.
+
+$$F(x)=P(X \leq x) = \int\limits_{i=-\infty}^x \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+
+$P(X \leq x)$ = $F(x)$ = `pnorm(x, mu, sigma)`
+
+$P(X > x)$ = $1-F(x)$ = use `lower.tail = FALSE`
+
+$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(q, mu, sigma)` 
+
+
+## Expected Value and Variance
+
+The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the normal parameters $\mu$ and $\sigma^2$.
+
+$$E[X] = \int\limits_{\text{all x}} x f(x) \rightarrow \mu$$
+
+$$Var[X] = \int\limits_{\text{all x}} (x - \mu)^2 f(x) \rightarrow \sigma^2$$
+
+$$SD[X] = \sqrt{Var[X]}$$
+
+
+## The Empirical Rule
+
+The normal distribution is unimodal and perfectly symmetric.
+
+<p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg"></p>
+
+
+* approximately 68% of the curve area is between $\mu \pm 1\sigma$ 
+* approximately 95% of the curve area is between $\mu \pm 3\sigma$ 
+* approximately 99.7% of the curve area is between $\mu \pm 3\sigma$ 
+
+
+## Simulating the Normal Distribution
+
+To generate `s` random normal values, use `rnorm (s, n, p)`.
+
+(more TBA)
+
+
+# Assessing Normality
+
+## Are data from a normal distribution?
+
+Many statistical tests require data to be drawn from a normal distribution. Researchers may also interested in determining whether some variable of interest is normally distributed. For example, Belgian scholar [Adolphe Quetelet](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Quetelet.html) (1796-1874) had a hypothesis that the natural distribution of human heights is a bell curve (i.e., normal distribution). 
+
+We can investigate this using height data gathered by another famous statistician. [Francis Galton](http://www-history.mcs.st-andrews.ac.uk/Biographies/Galton.html) (1822-1911) investigated the relationship between the heights of parents and their offspring. Some of his data can be found in [galtonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv).
+
+For easier visualization and to study variability, we will draw a smaller sample from this data set to work with first.
+
+
+## The Galton Height Data
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+galtonhts <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv")
+library(dplyr)
+```
+
+```{r}
+glimpse(galtonhts)
+htSampleF <- sample(galtonhts$Father, 100)
+xbarF     <- mean(htSampleF)
+stdvF     <- sd(htSampleF)
+```
+
+
+## Density Plot
+
+Does the density of the data match a theoretical normal density plot with the same mean and variance?
+
+```{r, eval=FALSE}
+library(ggplot2)
+ggplot(NULL, aes(x = htSampleF)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbarF, stdvF),   # use data mean and sd   
+                color = "red")
+```
+
+Create a density plot of the data and superimpose a theoretical normal model on the same axes. Does the data deviate too far from the shape of the theoretical model?
+
+Notice we are using `dnorm` because the density plot shows f(x).
+
+
+## Data vs. Theoretical
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(NULL, aes(x = htSampleF)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbarF, stdvF), 
+                color = "red")
+```
+
+
+## Empirical Cumulative Distribution Plot
+
+Does the ECDF of the data match a theoretical normal CDF plot with the same mean and variance?
+
+```{r, eval=FALSE}
+library(ggplot2)
+ggplot(NULL, aes(x = htSampleF)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbarF, stdvF),   # use data mean and sd 
+                color = "red")
+```
+
+Create an ECDF plot of the data and superimpose a theoretical normal model on the same axes. Does the data deviate too far from the shape of the theoretical model?
+
+Notice we are using `pnorm` because the ECDF plot shows F(x).
+
+
+## Data vs. Theoretical
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(NULL, aes(x = htSampleF)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbarF, stdvF), 
+                color = "red")
+```
+
+
+## Comparing Quantiles
+
+Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance? Example:
+
+```{r}
+deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+print.data.frame(tibble(data = quantile(htSampleF, deciles), 
+                 theory = qnorm(deciles, xbarF, stdvF)))
+```
+
+
+## Plot of the Deciles
+
+```{r, echo = FALSE}
+plotdata <- tibble(data = quantile(htSampleF, deciles), 
+                   theory = qnorm(deciles, xbarF, stdvF))
+ggplot(plotdata, aes(x = theory, y = data)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0, color = "red")
+```
+
+
+## Quantile-Quantile Plot (QQ Plot)
+
+Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance?
+
+```{r, eval=FALSE}
+library(ggplot2)
+ggplot(NULL, aes(sample = htSampleF)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+Notice the difference in syntax in the aesthetics, which uses `sample` rather than `x` to indicate the variable to be plotted. In the final plot, the x axis will be the theoretical quantiles on a standard normal curve, while the y axis is the data quantiles. There is a point representing each data value.
+
+
+## The QQ Plot
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(NULL, aes(sample = htSampleF)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+
+## Skewness and Kurtosis
+
+The skewness of a normal distribution is 0, while the kurtosis is 3. Data from a normal distribution should have similar values.
+
+```{r}
+library(moments)
+skewK <- tibble(Statistic = c("Skewness", "Kurtosis", "Excess K"),
+                Theory    = c(0, 3, 0),
+                Data      = c(round(skewness(htSampleF), 2), 
+                              round(kurtosis(htSampleF), 2), 
+                              round(kurtosis(htSampleF) - 3, 2)))
+print.data.frame(skewK)
+```
+
