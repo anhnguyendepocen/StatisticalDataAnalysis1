@@ -16,7 +16,7 @@ knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
 <p>"...the object of statistical methods is the reduction of data. A quantity of data, which usually by its mere bulk is incapable of entering the mind, is to be replaced by relatively few quantities which shall adequately represent the whole, or...shall contain as much as possible, ideally the whole, of the relevant information contained in the original data." ~ R.A. Fisher, 1921</p>
 
 
-## Describing Distributions
+## How We Describe Distribution
 
 __categorial variables__
 

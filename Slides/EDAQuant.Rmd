@@ -25,7 +25,7 @@ knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
 <p>~ John Tukey, 1980</p>
 
 
-## Describing Distributions
+## How We Describe Distributions
 
 categorial variables
 
