@@ -147,6 +147,22 @@ ASSIGNMENTS
 
    * Complete group projects
    
+   
+## Week 08 (OCT 08)  
+
+IN CLASS
+
+   * Normal distribution
+   * Assessing normality
+   * Fundamentals of Hypothesis Testing
+
+ASSIGNMENTS
+
+   * Read Chihara and Hesterberg Sections 2.4, 2.5, 2.6, 2.7, 3.1, and 3.2
+   * Complete Video Lesson _Normal and Related Distributions_
+   * Complete Video Lesson _Theory and Concepts of Hypothesis Testing_
+   * Complete _Foundations of Probability in R_ on [DataCamp](https://www.datacamp.com/)
+   
 <hr>
 
 __This schedule will be updated as the semester progresses!__
