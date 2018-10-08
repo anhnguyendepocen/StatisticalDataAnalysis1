@@ -72,7 +72,7 @@ The normal distribution is unimodal and perfectly symmetric.
 
 
 * approximately 68% of the curve area is between $\mu \pm 1\sigma$ 
-* approximately 95% of the curve area is between $\mu \pm 3\sigma$ 
+* approximately 95% of the curve area is between $\mu \pm 2\sigma$ 
 * approximately 99.7% of the curve area is between $\mu \pm 3\sigma$ 
 
 
