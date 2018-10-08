@@ -33,7 +33,7 @@ Unlike the pmf in discrete distributions, the probability density function (pdf)
 
 $$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
 
-R has a function to solve the pmf for any given binomial model. Inputs may be single values or vectors.
+R has a function to solve the pmf for any given normal model. Inputs may be single values or vectors.
 
 <center>$f(x)$ = `dnorm(x, mu, sigma)`</center><br>
 
@@ -44,7 +44,7 @@ Note that the function uses $\sigma$ rather than $\sigma^2$ as the parameter.
 
 The probability of a given number of successes _or fewer_ is found using the CDF, which integrates the area under the curve. This is similar to a discrete distribution. The normal has no closed-form solution for $F(x)$. R has a function for the normal CDF / inverse.
 
-$$F(x)=P(X \leq x) = \int\limits_{i=-\infty}^x \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+$$F(x)=P(X \leq x) = \int\limits_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
 
 $P(X \leq x)$ = $F(x)$ = `pnorm(x, mu, sigma)`
 
@@ -55,11 +55,11 @@ $q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(q, mu, sigma)`
 
 ## Expected Value and Variance
 
-The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the normal parameters $\mu$ and $\sigma^2$.
+The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to parameters $\mu$ and $\sigma^2$.
 
-$$E[X] = \int\limits_{\text{all x}} x f(x) \rightarrow \mu$$
+$$E[X] = \int\limits_{-\infty}^{+\infty} x f(x) \rightarrow \mu$$
 
-$$Var[X] = \int\limits_{\text{all x}} (x - \mu)^2 f(x) \rightarrow \sigma^2$$
+$$Var[X] = \int\limits_{-\infty}^{+\infty} (x - \mu)^2 f(x) \rightarrow \sigma^2$$
 
 $$SD[X] = \sqrt{Var[X]}$$
 
@@ -78,7 +78,7 @@ The normal distribution is unimodal and perfectly symmetric.
 
 ## Simulating the Normal Distribution
 
-To generate `s` random normal values, use `rnorm (s, n, p)`.
+To generate `s` random normal values, use `rnorm (s, mu, sigma)`.
 
 (more TBA)
 
