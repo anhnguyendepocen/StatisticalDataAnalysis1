@@ -234,13 +234,13 @@ print.data.frame(skewK)
 
 Construct a `tibble` containing samples of size 50 drawn from the following distributions. Assess  normality for each sample. Repeat with samples of size 1000.
 
-* $X_2 \text{~} Unif(0,1)$
-* $X_3 \text{~} Exp(1)$
-* $X_4 \text{~} Bin(10, 0.5)$
-* $X_5 \text{~} Bin(10, 0.2)$
-* $X_6 \text{~} Bin(10, 0.8)$
+* $X_1 \text{~} Unif(0,1)$
+* $X_2 \text{~} Exp(1)$
+* $X_3 \text{~} Bin(10, 0.5)$
+* $X_4 \text{~} Bin(10, 0.2)$
+* $X_5 \text{~} Bin(10, 0.8)$
 * $X_6 \text{~} t(3)$
-* $X_6 \text{~} t(100)$
+* $X_7 \text{~} t(100)$
 
 
 ## Galton Height Data
