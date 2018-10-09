@@ -108,6 +108,8 @@ xbarF     <- mean(htSampleF)
 stdvF     <- sd(htSampleF)
 ```
 
+Your sample will look a bit different from the slides and others.
+
 
 ## Density Plot
 
@@ -232,22 +234,40 @@ print.data.frame(skewK)
 
 ## Exploring Other Distributions
 
-Construct a `tibble` containing samples of size 50 drawn from the following distributions. Assess  normality for each sample. Repeat with samples of size 1000.
+Construct a `tibble` containing samples of size 50 drawn from the following distributions. Assess  normality for each sample. Repeat with samples of size 1000 or more.
 
-* $X_1 \text{~} Unif(0,1)$
-* $X_2 \text{~} Exp(1)$
-* $X_3 \text{~} Bin(10, 0.5)$
-* $X_4 \text{~} Bin(10, 0.2)$
-* $X_5 \text{~} Bin(10, 0.8)$
-* $X_6 \text{~} t(3)$
-* $X_7 \text{~} t(100)$
+<table>
+<tr>
+<td>
+$X_1 \text{~} Unif(0,1)$<br>
+$X_2 \text{~} Exp(1)$<br>
+$X_3 \text{~} Bin(10, 0.5)$<br>
+$X_4 \text{~} Bin(100, 0.5)$
+</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>
+$X_5 \text{~} Bin(10, 0.2)$<br>
+$X_6 \text{~} Bin(10, 0.8)$<br>
+$X_7 \text{~} t(3)$<br>
+$X_8 \text{~} t(100)$
+</td>
+</tr>
+</table><p>
+
+For each distribution, consider the shape of its pmf or pdf and CDF versus those of the normal distribution. 
+
+Look at the shapes that tend to be produced by skewed data, data that is flatter than a bell curve (e.g., uniform), or discrete data (e.g., binomial), as well as skewness / kurtosis.
 
 
 ## Galton Height Data
 
 Assess the heigh variables in Galton's data for normality. For the children, perform the assessment with and without grouping by gender. Was Quetelet right to believe human height is normally distributed?
 
-Additional human measurement data can be found in the following datasets.
+Additional human measurements can be found in the following datasets. Do they confirm or contradict Quetelet's hypothesis? How do you know?
 
 * [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv)
 * [egyptianskulls.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/egyptianskulls.csv)
