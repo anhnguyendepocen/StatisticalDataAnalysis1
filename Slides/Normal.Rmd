@@ -50,7 +50,7 @@ $P(X \leq x)$ = $F(x)$ = `pnorm(x, mu, sigma)`
 
 $P(X > x)$ = $1-F(x)$ = use `lower.tail = FALSE`
 
-$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(q, mu, sigma)` 
+$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qnorm(q, mu, sigma)` 
 
 
 ## Expected Value and Variance
@@ -228,4 +228,28 @@ skewK <- tibble(Statistic = c("Skewness", "Kurtosis", "Excess K"),
                               round(kurtosis(htSampleF) - 3, 2)))
 print.data.frame(skewK)
 ```
+
+
+## Exploring Other Distributions
+
+Construct a `tibble` containing samples of size 50 drawn from the following distributions. Assess  normality for each sample. Repeat with samples of size 1000.
+
+* $X_2 \text{~} Unif(0,1)$
+* $X_3 \text{~} Exp(1)$
+* $X_4 \text{~} Bin(10, 0.5)$
+* $X_5 \text{~} Bin(10, 0.2)$
+* $X_6 \text{~} Bin(10, 0.8)$
+* $X_6 \text{~} t(3)$
+* $X_6 \text{~} t(100)$
+
+
+## Galton Height Data
+
+Assess the heigh variables in Galton's data for normality. For the children, perform the assessment with and without grouping by gender. Was Quetelet right to believe human height is normally distributed?
+
+Additional human measurement data can be found in the following datasets.
+
+* [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv)
+* [egyptianskulls.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/egyptianskulls.csv)
+* [pearsonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/pearsonheightdata.csv)
 
