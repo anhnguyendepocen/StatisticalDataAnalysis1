@@ -155,6 +155,7 @@ IN CLASS
    * Normal distribution
    * Assessing normality
    * Fundamentals of Hypothesis Testing
+   * NO CLASS THURSDAY (Fall Break)
 
 ASSIGNMENTS
 
@@ -162,6 +163,107 @@ ASSIGNMENTS
    * Complete Video Lesson _Normal and Related Distributions_
    * Complete Video Lesson _Theory and Concepts of Hypothesis Testing_
    * Complete _Foundations of Probability in R_ on [DataCamp](https://www.datacamp.com/)
+   
+   
+## Week 09 (OCT 15)
+
+IN CLASS
+
+   * Tests for two means, two proportions
+   
+ASSIGNMENTS
+
+   * Complete Video Lesson _Classical Hypothesis Testing for One Mean_
+   * Complete Video Lesson _Classical Hypothesis Testing for Two Means_
+   * Complete Video Lesson _Classical Hypothesis Testing for One Proportion_
+   * Complete Video Lesson _Classical Hypothesis Testing for Two Proportions_
+   
+
+## Week 10 (OCT 22)
+
+IN CLASS
+
+   * Independence, goodness of fit, homogeneity
+   
+ASSIGNMENTS
+
+   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
+   * Complete Video Lesson _Chi-Square Tests for Tables of Counts_
+   * TBA
+   
+
+## Week 11 (OCT 29)
+
+IN CLASS
+
+   * Sampling distributions
+   
+ASSIGNMENTS
+
+   * Complete _Inference for Categorical Data_ on [DataCamp](https://www.datacamp.com/)
+   * Complete Video Lesson _Introduction to Sampling Distributions_
+   * TBA
+
+
+## Week 12 (NOV 05)
+
+IN CLASS
+
+   * Normal approximation to the binomial
+   * Estimation
+   
+ASSIGNMENTS
+
+   * TBA
+   
+
+## Week 13 (NOV 12)
+
+IN CLASS
+
+   * Group projects work time
+   
+ASSIGNMENTS
+
+   * Complete group projects
+   
+
+## Week 14 (NOV 19)
+
+IN CLASS
+
+   * Estimation
+   * NO CLASS WEDNESDAY (Thanksgiving)
+   * NO CLASS THURSDAY (Thanksgiving)
+
+ASSIGNMENTS
+
+   * Complete _Modeling with Data in the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
+   
+
+## Week 15 (NOV 28)
+
+IN CLASS
+
+   * Estimation
+   * Linear models
+   
+ASSIGNMENTS
+
+   * TBA
+   
+
+## Week 16 (DEC 03)
+
+IN CLASS
+
+   * Group projects work time
+   * NO CLASS THURSDAY (Reading Day)
+
+ASSIGNMENTS
+
+   * Complete group projects and presentations  
+   
    
 <hr>
 
