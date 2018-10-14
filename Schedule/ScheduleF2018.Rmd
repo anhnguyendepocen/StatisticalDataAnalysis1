@@ -175,9 +175,8 @@ ASSIGNMENTS
 
    * Complete Video Lesson _Classical Hypothesis Testing for One Mean_
    * Complete Video Lesson _Classical Hypothesis Testing for Two Means_
-   * Complete Video Lesson _Classical Hypothesis Testing for One Proportion_
-   * Complete Video Lesson _Classical Hypothesis Testing for Two Proportions_
-   
+   * Complete Video Lesson _Classical Hypothesis Testing for Proportions_
+
 
 ## Week 10 (OCT 22)
 
