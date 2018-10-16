@@ -176,6 +176,7 @@ ASSIGNMENTS
    * Complete Video Lesson _Classical Hypothesis Testing for One Mean_
    * Complete Video Lesson _Classical Hypothesis Testing for Two Means_
    * Complete Video Lesson _Classical Hypothesis Testing for Proportions_
+   * TBA
 
 
 ## Week 10 (OCT 22)
