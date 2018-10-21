@@ -93,7 +93,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Sunday, October 07, 2018 @ 04:20:32 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Friday, October 19, 2018 @ 02:28:56 PM</p>
           </hgroup>
   </slide>
 
@@ -181,9 +181,13 @@
 
 </article></slide><slide class=""><hgroup><h2>Simulating the Binomial Distribution</h2></hgroup><article  id="simulating-the-binomial-distribution">
 
-<p>To generate <code>s</code> random binomial values, use <code>rbinom (s, n, p)</code>.</p>
+<p>In addition to calculating probabilities, we can simulate random binomial values in R using <code>rbinom (s, n, p)</code>.</p>
 
-<p>(more TBA)</p>
+<p><em>s</em> = the number of random values we want to generate</p>
+
+<p><em>n</em> = number of trials</p>
+
+<p><em>p</em> = probability of success on a single trial</p>
 
 </article></slide><slide class=""><hgroup><h2>Zener Card Tests</h2></hgroup><article  id="zener-card-tests">
 
@@ -197,38 +201,37 @@
 
 <p>Zener cards, shown above, were developed by Karl Zener in the 1930s for parapsychological testing. They were featured in the movie <em>Ghostbusters</em>, used by Dr. Peter Venkman (Bill Murray), a PhD in psychology and parapsychology. Take a <a href='https://www.psychic-experiences.com/psychic-tests/zener-cards.php' title=''>Zener card test</a>!</p>
 
-</article></slide><slide class=""><hgroup><h2>Modeling the Zener Card Test</h2></hgroup><article  id="modeling-the-zener-card-test">
-
-<p>Assuming we conduct a test with an open deck as described&#8230;</p>
+</article></slide><slide class=""><hgroup><h2>Modeling the Zener Test: Distribution</h2></hgroup><article  id="modeling-the-zener-test-distribution">
 
 <ul>
-<li>What are the parameters of the binomial model?</li>
-<li>Calculate the pmf and CDF for X = number correct.</li>
-<li>Display the pmf and CDF in a data frame or tibble.</li>
-<li>Plot the pmf. Color the &quot;significant&quot; X values (10 or more).</li>
-<li>Plot the pmf. Color the &quot;significant&quot; X values (more than 10).</li>
-<li>Plot the CDF. Color the &quot;significant&quot; X values (10 or more).</li>
-<li>Plot the CDF. Color the &quot;significant&quot; X values (more than 10).</li>
+<li>What are the parameters of the appropriate binomial model?</li>
+<li>Calculate the complete pmf and CDF for X = number correct.</li>
+<li>Display the pmf and CDF together in a data frame or tibble.</li>
+<li>What is the expected number of correct guesses?</li>
+<li>What is the probability of getting <em>exactly</em> the expected value?</li>
+<li>What is the variance and SD in number of correct guesses?</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Modeling the Zener Card Test</h2></hgroup><article  id="modeling-the-zener-card-test-1">
+</article></slide><slide class=""><hgroup><h2>Modeling the Zener Test: Score Results</h2></hgroup><article  id="modeling-the-zener-test-score-results">
 
 <ul>
-<li>What is the expected number of correct guesses?</li>
-<li>What is the probability of getting <em>exactly</em> that number?</li>
-<li>What is the variance / SD in the number of correct guesses?</li>
 <li>What is the probability of getting 10 or more cards correct?</li>
 <li>What is the probability of getting more than 10 cards correct?</li>
 <li>What are the probabilities associated with <em>your</em> test results?</li>
-<li>What is the chance of exceeding 10 correct on multiple tests?</li>
+<li>Plot the pmf and color the &quot;significant&quot; X values if we use the 10 or more rule.</li>
+<li>Plot the pmf and color the &quot;significant&quot; X values if we use the more than 10 rule.</li>
+<li>Plot the pmf and color the area correspoding to your results.</li>
 </ul>
 
-<hr>
+</article></slide><slide class=""><hgroup><h2>Modeling the Zener Test: Extensions</h2></hgroup><article  id="modeling-the-zener-test-extensions">
 
 <ul>
+<li>What is the chance of 10 or more correct on multiple tests?</li>
+<li>What is the chance of exceeding 10 correct on multiple tests?</li>
 <li>What if our test used a total of 100 trials rather than 25?</li>
 <li>What if there were more symbols in the Zener card deck?</li>
 <li>How can we simulate the outcome of one or more tests?</li>
+<li>What if we used a closed deck rather than an open deck?</li>
 </ul></article></slide>
 
 

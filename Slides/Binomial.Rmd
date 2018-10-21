@@ -92,9 +92,13 @@ $$SD[X] = \sqrt{Var[X]}$$
 
 ## Simulating the Binomial Distribution
 
-To generate `s` random binomial values, use `rbinom (s, n, p)`.
+In addition to calculating probabilities, we can simulate random binomial values in R using `rbinom (s, n, p)`.
 
-(more TBA)
+_s_ = the number of random values we want to generate
+
+_n_ = number of trials
+    
+_p_ = probability of success on a single trial
 
 
 ## Zener Card Tests
@@ -106,33 +110,34 @@ To generate `s` random binomial values, use `rbinom (s, n, p)`.
 Zener cards, shown above, were developed by Karl Zener in the 1930s for parapsychological testing. They were featured in the movie _Ghostbusters_, used by Dr. Peter Venkman (Bill Murray), a PhD in psychology and parapsychology. Take a [Zener card test](https://www.psychic-experiences.com/psychic-tests/zener-cards.php)!
 
 
-## Modeling the Zener Card Test
+## Modeling the Zener Test: Distribution
 
-Assuming we conduct a test with an open deck as described... 
-
-* What are the parameters of the binomial model?
-* Calculate the pmf and CDF for X = number correct.
-* Display the pmf and CDF in a data frame or tibble.
-* Plot the pmf. Color the "significant" X values (10 or more).
-* Plot the pmf. Color the "significant" X values (more than 10).
-* Plot the CDF. Color the "significant" X values (10 or more).
-* Plot the CDF. Color the "significant" X values (more than 10).
-
-
-## Modeling the Zener Card Test
-
+* What are the parameters of the appropriate binomial model?
+* Calculate the complete pmf and CDF for X = number correct.
+* Display the pmf and CDF together in a data frame or tibble.
 * What is the expected number of correct guesses?
-* What is the probability of getting _exactly_ that number?
-* What is the variance / SD in the number of correct guesses?
+* What is the probability of getting _exactly_ the expected value?
+* What is the variance and SD in number of correct guesses?
+
+
+## Modeling the Zener Test: Score Results
+
 * What is the probability of getting 10 or more cards correct?
 * What is the probability of getting more than 10 cards correct?
 * What are the probabilities associated with _your_ test results?
+* Plot the pmf and color the "significant" X values if we use the 10 or more rule.
+* Plot the pmf and color the "significant" X values if we use the more than 10 rule.
+* Plot the pmf and color the area correspoding to your results.
+
+
+## Modeling the Zener Test: Extensions
+
+* What is the chance of 10 or more correct on multiple tests?
 * What is the chance of exceeding 10 correct on multiple tests?
-
-<hr>
-
 * What if our test used a total of 100 trials rather than 25?
 * What if there were more symbols in the Zener card deck?
 * How can we simulate the outcome of one or more tests?
+* What if we used a closed deck rather than an open deck?
+
 
 
