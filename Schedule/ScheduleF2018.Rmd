@@ -176,7 +176,6 @@ ASSIGNMENTS
    * Complete Video Lesson _Classical Hypothesis Testing for One Mean_
    * Complete Video Lesson _Classical Hypothesis Testing for Two Means_
    * Complete Video Lesson _Classical Hypothesis Testing for Proportions_
-   * TBA
 
 
 ## Week 10 (OCT 22)
@@ -187,9 +186,8 @@ IN CLASS
    
 ASSIGNMENTS
 
-   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
    * Complete Video Lesson _Chi-Square Tests for Tables of Counts_
-   * TBA
+   * Complete hypothesis testing in R assignment (TBA)
    
 
 ## Week 11 (OCT 29)
@@ -200,7 +198,7 @@ IN CLASS
    
 ASSIGNMENTS
 
-   * Complete _Inference for Categorical Data_ on [DataCamp](https://www.datacamp.com/)
+   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
    * Complete Video Lesson _Introduction to Sampling Distributions_
    * TBA
 
@@ -214,6 +212,7 @@ IN CLASS
    
 ASSIGNMENTS
 
+   * Complete _Inference for Categorical Data_ on [DataCamp](https://www.datacamp.com/)
    * TBA
    
 
