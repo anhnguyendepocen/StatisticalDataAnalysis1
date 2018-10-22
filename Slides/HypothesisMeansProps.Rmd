@@ -13,12 +13,14 @@ library(ggplot2)
 
 ## Before You Begin
 
-Complete the following video lessons on AsULearn. They will introduce you to the logical framework of hypothesis testing and traditional asymptotic hypothesis tests for the population value of one mean or proportion, as well as for comparing two populations means or proportions.
+Complete the following video lessons on AsULearn. They will introduce you to the logical framework of hypothesis testing, asymptotic tests for assessing the value of a single population mean or proportion using sample data, as well as comparing two population means or proportions.
 
 * Theory and Concepts of Hypothesis Testing
 * Classical Hypothesis Testing for One Mean
 * Classical Hypothesis Testing for Two Means
 * Classical Hypothesis Testing for Proportions
+
+In-class lecture will be used to supplement these materials and help you develop connections.
 
 
 # Comparing Two Means
@@ -87,7 +89,11 @@ ggplot(battery, aes(sample = hours, color = type)) + stat_qq() + stat_qq_line()
 
 ## Tests for Two Means
 
-Open the R Markdown file [Comparing Two Means](https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/ComparingTwoMeans.Rmd) to continue.
+Open the R Markdown file [Comparing Two Means](https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/ComparingTwoMeans.Rmd) to continue. We will assess the hypotheses in three different ways.
+
+* traditional asymptotic t-test
+* complete permutation test
+* permutation resampling test
 
 
 # Comparing Proportions
@@ -127,7 +133,7 @@ In R, we use `prop.test()` to conduct a test for two proportions.
 
 ## Comparing Proportions Example
 
-Do magnets affect homing pigeons' skills?  ([homingpigeons.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/homingpigeons.csv))
+Does a magnetic pulse affect navigation?  ([homingpigeons.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/homingpigeons.csv))
 
 ```{r, echo=FALSE}
 homing <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/homingpigeons.csv")

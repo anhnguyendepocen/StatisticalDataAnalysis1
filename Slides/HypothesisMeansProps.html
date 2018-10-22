@@ -93,13 +93,13 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Sunday, October 21, 2018 @ 08:06:42 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Monday, October 22, 2018 @ 09:48:49 AM</p>
           </hgroup>
   </slide>
 
 <slide class=""><hgroup><h2>Before You Begin</h2></hgroup><article  id="before-you-begin">
 
-<p>Complete the following video lessons on AsULearn. They will introduce you to the logical framework of hypothesis testing and traditional asymptotic hypothesis tests for the population value of one mean or proportion, as well as for comparing two populations means or proportions.</p>
+<p>Complete the following video lessons on AsULearn. They will introduce you to the logical framework of hypothesis testing, asymptotic tests for assessing the value of a single population mean or proportion using sample data, as well as comparing two population means or proportions.</p>
 
 <ul>
 <li>Theory and Concepts of Hypothesis Testing</li>
@@ -107,6 +107,8 @@
 <li>Classical Hypothesis Testing for Two Means</li>
 <li>Classical Hypothesis Testing for Proportions</li>
 </ul>
+
+<p>In-class lecture will be used to supplement these materials and help you develop connections.</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Comparing Two Means</h2></hgroup><article  id="comparing-two-means">
 
@@ -172,7 +174,13 @@ print.data.frame(summaries, row.names = FALSE)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Tests for Two Means</h2></hgroup><article  id="tests-for-two-means">
 
-<p>Open the R Markdown file <a href='https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/ComparingTwoMeans.Rmd' title=''>Comparing Two Means</a> to continue.</p>
+<p>Open the R Markdown file <a href='https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/ComparingTwoMeans.Rmd' title=''>Comparing Two Means</a> to continue. We will assess the hypotheses in three different ways.</p>
+
+<ul>
+<li>traditional asymptotic t-test</li>
+<li>complete permutation test</li>
+<li>permutation resampling test</li>
+</ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Comparing Proportions</h2></hgroup><article  id="comparing-proportions">
 
@@ -211,7 +219,7 @@ print.data.frame(summaries, row.names = FALSE)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Comparing Proportions Example</h2></hgroup><article  id="comparing-proportions-example">
 
-<p>Do magnets affect homing pigeons&#39; skills? (<a href='https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/homingpigeons.csv' title=''>homingpigeons.csv</a>)</p>
+<p>Does a magnetic pulse affect navigation? (<a href='https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/homingpigeons.csv' title=''>homingpigeons.csv</a>)</p>
 
 <pre class = 'prettyprint lang-r'>str(homing)</pre>
 
