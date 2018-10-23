@@ -1,5 +1,5 @@
 ---
-title: "Hypothesis Testing:<br>Means or Proportions"
+title: "Hypothesis Testing<br>&#9654; Means or Proportions"
 author: "Author: Jill E. Thomley"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: ioslides_presentation
@@ -20,7 +20,16 @@ Complete the following video lessons on AsULearn. They will introduce you to the
 * Classical Hypothesis Testing for Two Means
 * Classical Hypothesis Testing for Proportions
 
-In-class lecture will be used to supplement these materials and help you develop connections.
+Also read the appropriate sections of _Chihara_ Chapter 3. Class time will be used to supplement these materials, introduce the concepts and methods of permutation tests, and help develop connections between the mathematics and programming.  
+
+
+## Comments on Notation
+
+Statistical notation can vary, since many disciplines have made contributions to statistical theory and practice. For means, we most often see the population mean represented by $\mu$ and the sample mean represented by $\bar{x}$. The textbook, the lesson videos, and these slides all follow this convention.
+
+For proportions, one common notation is to use $\pi$ to represent the population proportion with and $p$ for the sample proportion (Greek versus Roman letters, like $\mu$ and $\bar{x}$). These slides use that convention. However, the lesson videos use another common system where the population proportion is $p$ and the sample proportion is $\widehat{p}$. The textbook seems to use a mix of notations.
+
+In any context, make sure you know whether $p$ is being used as the population parameter or sample statistic.
 
 
 # Comparing Two Means
@@ -53,7 +62,7 @@ test statistic (unpooled)
 
 $$t=\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$
 
-The p-value is calculated using a _t_ distribution with $\nu$ degrees of freedom, which depends on the sample sizes.
+The p-value is calculated using a _t_ distribution with $\nu$ degrees of freedom, where $\nu$ depends on the sample sizes.
 
 In R, we use `t.test()` to perform a test for two means.
 
@@ -87,13 +96,36 @@ ggplot(battery, aes(x = type, y = hours)) + geom_boxplot()
 ggplot(battery, aes(sample = hours, color = type)) + stat_qq() + stat_qq_line()
 ```
 
+
+## The _t_ Distribution
+
+As degrees of freedom $\nu \rightarrow \infty$, the $t$ distribution converges to the standard normal distribution.
+
+```{r, echo=FALSE, fig.height=4}
+ggplot(NULL, aes(x = c(-8, 8))) +
+  stat_function(fun = dt, args = list(df = 2), color = "blue") +
+  stat_function(fun = dt, args = list(df = 10), color = "darkgreen") +
+  stat_function(fun = dnorm, args = list(0, 1), color = "red") +
+  geom_segment(aes(x = 5, y = 0.20, xend = 6, yend = 0.20), color = "blue") +
+  geom_segment(aes(x = 5, y = 0.18, xend = 6, yend = 0.18), color = "darkgreen") +
+  geom_segment(aes(x = 5, y = 0.16, xend = 6, yend = 0.16), color = "red") +
+  geom_text(aes(x = 6.2, y = 0.20, label = "2 DF"), hjust = "left", color = "blue") +
+  geom_text(aes(x = 6.2, y = 0.18, label = "10 DF"), hjust = "left", color = "darkgreen") +
+  geom_text(aes(x = 6.2, y = 0.16, label = "N(0,1)"), hjust = "left", color = "red") +
+  scale_x_continuous(breaks = seq(-8, 8, 1)) +
+  labs(x = "x", y = "f(x)")
+```
+
+
 ## Tests for Two Means
 
-Open the R Markdown file [Comparing Two Means](https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/ComparingTwoMeans.Rmd) to continue. We will assess the hypotheses in three different ways.
+Open the R Markdown file [Testing Two Means](https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/TestingTwoMeans.Rmd) to continue. We will assess the hypotheses three different ways.
 
 * traditional asymptotic t-test
 * complete permutation test
 * permutation resampling test
+
+Pay attention to the assumptions of each test, the test statistic used, and the way in which the p-value is calculated.
 
 
 # Comparing Proportions
@@ -120,7 +152,7 @@ $$H_a: \pi_1 > \pi_2 \text{ (or } H_a: \pi_1 - \pi_2 > 0)$$
 assumptions
 
 * independent simple random samples from the populations
-* large enough sample sizes for the normal approximation to the binomial to be valid (one rule is np > 10 and n(1-p) = 10)
+* large enough sample sizes for the normal approximation to the binomial to be valid (one rule is np &ge; 15 and n(1-p) &ge; 15)
 
 test statistic 
 
@@ -158,18 +190,47 @@ ggplot(homing, aes(x = group, fill = home)) + geom_bar(position = "fill") + ylab
 ```
 
 
-## Are np > 10 and n(1-p) > 10?
+## Are np &ge; 15 and n(1&minus;p) &ge; 15?
+
+Recall the summaries we computed. We can use them to check the assumption by multiplying the appropriate vectors.
 
 ```{r, echo=FALSE}
 print.data.frame(summaries, row.names = FALSE)
 ```
 
 ```{r}
-summaries$n * summaries$p_hat_y >= 10
-summaries$n * summaries$p_hat_n >= 10
+summaries$n * summaries$p_hat_y >= 15
+summaries$n * summaries$p_hat_n >= 15
 ```
 
 
 ## Tests for Two Proportions
 
-Continue using R Markdown file [Comparing Two Proportions](https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/ComparingTwoProportions.Rmd).
+Continue using R Markdown file [Testing Two Proportions](https://raw.githubusercontent.com/STAT-JET-ASU/StatisticalDataAnalysis1/master/TestingTwoProportions.Rmd). We will assess the hypotheses three different ways.
+
+* traditional test as implemented in R
+    + the relationship between Z and $\chi^2$ distributions
+    + continuity correction for normal approximation
+* permutation resampling test
+
+Pay attention to the assumptions of each test, the test statistic used, and the way in which the p-value is calculated.
+
+
+# Other Parameters
+
+## Two Medians and Two Variances
+
+* Let $\theta_1$ and $\theta_2$ be the medians of two populations, estimated by sample medians $\widehat{\theta}_1$ and $\widehat{\theta}_2$. Test whether the population medians are equal or not using permutation resampling.
+
+* Let $\sigma^2_1$ and $\sigma^2_2$ be the variances of two populations, estimated by sample variances $S^2_1$ and $S^2_2$. Test whether the population variances are equal or not using permutation resampling.<br><br>The standard test statistic for two variances is the ratio $\frac{S^2_1}{S^2_2}$.<br><br>Compare resampling results to the results of `var.test()`.
+
+
+
+
+
+
+
+
+
+
+

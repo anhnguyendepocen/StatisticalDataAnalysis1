@@ -42,28 +42,28 @@ print(battTest)
 
 ### Complete Permutation Test
 
-How many different combinations are possible?
+How many different unique recombinations of the data are possible?
 
 ```{r}
 numCombos <- choose(12, 6)
 print(numCombos)
 ```
 
-What are all possible unique combinations?
+What are all possible unique combinations? Choose data for "brand".
 
 ```{r}
-combinations <- combn(battery$hours, 6)
+combinations <- combn(12, 6)
 combinations[ , 1:10]
 ```
 
-Take a closer look at a single combination.
+Take a closer look at one combination from among the possibilities.
 
 ```{r}
 alldata <- data.frame(index = 1:12, hours = battery$hours)
 print.data.frame(alldata, row.names = FALSE)
 
-brand   <- combinations[ ,1]
-index   <- which(battery$hours %in% brand)
+index   <- combinations[ ,1]
+brand   <- battery$hours[index]
 generic <- battery$hours[-index]
 
 permdata <- data.frame(brand_index = index, 
@@ -79,8 +79,8 @@ Find mean differences for all permuted groups.
 permMeanDiff <- numeric(numCombos)
 
 for (i in 1:numCombos){
-  brand   <- combinations[1:6,i]
-  index   <- which(battery$hours %in% brand)
+  index   <- combinations[ ,i]
+  brand   <- battery$hours[index]
   generic <- battery$hours[-index]
   permMeanDiff[i] <- mean(brand) - mean(generic)
 }

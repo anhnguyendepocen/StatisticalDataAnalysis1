@@ -24,12 +24,22 @@ str(homing)
 ```{r}
 summaries <- homing %>% 
   group_by(group) %>% summarize(n = n(), 
-                                p_hat_y = mean(home == "no"), 
-                                p_hat_n = mean(home == "yes"))
-print.data.frame(summaries)
+                                phat_y = mean(home == "no"), 
+                                phat_n = mean(home == "yes"))
+print.data.frame(summaries, rwo.names = FALSE)
+
 ggplot(homing, aes(x = group, fill = home)) + geom_bar(position = "fill") + ylab("proportion")
-ggplot(summaries, aes(x = group, y = p_hat_n)) + geom_bar(stat = "identity") + ggtitle("Proportion of No")
-ggplot(summaries, aes(x = group, y = p_hat_y)) + geom_bar(stat = "identity") + ggtitle("Proportion of Yes")
+
+ggplot(summaries, aes(x = group, y = phat_n)) + 
+  geom_bar(stat = "identity") + 
+  ggtitle("Proportion of No")
+
+ggplot(summaries, aes(x = group, y = phat_y)) + 
+  geom_bar(stat = "identity") + 
+  ggtitle("Proportion of Yes")
+
+summaries$n * summaries$phat_y >= 15
+summaries$n * summaries$phat_n >= 15
 ```
 
 
@@ -37,12 +47,15 @@ ggplot(summaries, aes(x = group, y = p_hat_y)) + geom_bar(stat = "identity") + g
 
 ```{r}
 table(homing$group, homing$home)
-obsPropDiff_n <- -diff(summaries$p_hat_n)
-obsPropDiff_y <- -diff(summaries$p_hat_y)
+
+obsPropDiff_n <- -diff(summaries$phat_n)
+obsPropDiff_y <- -diff(summaries$phat_y)
 print(obsPropDiff_n)
 print(obsPropDiff_y)
+
 homeTest1 <- prop.test(table(homing$group, homing$home), correct = FALSE)
 print(homeTest1)
+
 homeTest2 <- prop.test(table(homing$group, homing$home), correct = TRUE)
 print(homeTest2)
 ```
