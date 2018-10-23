@@ -27,7 +27,7 @@ Also read the appropriate sections of _Chihara_ Chapter 3. Class time will be us
 
 Statistical notation can vary, since many disciplines have made contributions to statistical theory and practice. For means, we most often see the population mean represented by $\mu$ and the sample mean represented by $\bar{x}$. The textbook, the lesson videos, and these slides all follow this convention.
 
-For proportions, one common notation is to use $\pi$ to represent the population proportion with and $p$ for the sample proportion (Greek versus Roman letters, like $\mu$ and $\bar{x}$). These slides use that convention. However, the lesson videos use another common system where the population proportion is $p$ and the sample proportion is $\widehat{p}$. The textbook seems to use a mix of notations.
+For proportions, one common notation is to use $\pi$ to represent the population proportion with and $p$ for the sample proportion (Greek versus Roman letters, like $\mu$ and $\bar{x}$). These slides use that convention. However, the lesson videos use another common system where the population proportion is $p$ and the sample is $\widehat{p}$. The textbook seems to use a mix of notations.
 
 In any context, make sure you know whether $p$ is being used as the population parameter or sample statistic.
 
