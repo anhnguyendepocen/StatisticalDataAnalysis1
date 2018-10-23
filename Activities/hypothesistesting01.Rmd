@@ -1,0 +1,46 @@
+---
+title: "Hypothesis Testing: Comparing Two Groups"
+author: "YOUR NAME HERE"
+date: "`r Sys.time()`"
+output: html_document
+---
+
+Consider the Flight Delays dataset discussed in Chapter 1 of the Chihara & Hesterberg textbook, which contains data on selected flights departing from LaGuardia airport in 2009. Complete all problems below using that dataset. 
+
+```{r}
+# Load any necessary packages here. Suppress messages for this code chunk.
+```
+
+
+### Problem 1
+
+Conduct a traditional t-test and a permutation resampling test to determine whether the average delay times of the two airlines differ. 
+
+```{r}
+
+```
+
+
+### Problem 2
+
+Conduct a traditional z-test and a permutation resampling test to determine whether United Airlines has a greater proportion of flights delayed by 30 minutes than American Airlines. 
+
+```{r}
+
+```
+
+
+### Problem 3
+
+Conduct a traditional F-test and permutation resampling test to determine whether the variance in flight delay times is different between the two carriers. Unlike means and proportions, the test statistic used for a test of two variances is the _ratio_ of the variances, not the difference.
+
+```{r}
+
+```
+
+
+<hr>
+
+END!!!
+
+

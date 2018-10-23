@@ -224,7 +224,7 @@ Pay attention to the assumptions of each test, the test statistic used, and the 
 
 * Let $\sigma^2_1$ and $\sigma^2_2$ be the variances of two populations, estimated by sample variances $S^2_1$ and $S^2_2$. Test whether the population variances are equal or not using permutation resampling.<br><br>The standard test statistic for two variances is the ratio $\frac{S^2_1}{S^2_2}$.<br><br>Compare resampling results to the results of `var.test()`.
 
-
+The F-test for variances assumes that we have two independent random samples from normally distributed populations. 
 
 
 
