@@ -108,7 +108,7 @@ IN CLASS
 
    * NO CLASS MONDAY (Hurricane Florence)
    * NO CLASS TUESDAY (Hurricane Florence)
-   * Summarizing Quantitative Data activities
+   * Summarizing Quantitative Data activity
    
 ASSIGNMENTS
  
@@ -187,7 +187,7 @@ IN CLASS
 ASSIGNMENTS
 
    * Complete Video Lesson _Chi-Square Tests for Tables of Counts_
-   * Complete hypothesis testing in R assignment (TBA)
+   * Complete Hypothesis Testing: Comparing Two Groups activity
    
 
 ## Week 11 (OCT 29)
