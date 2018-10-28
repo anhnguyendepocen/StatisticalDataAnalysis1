@@ -182,7 +182,7 @@ ASSIGNMENTS
 
 IN CLASS
 
-   * Independence, goodness of fit, homogeneity
+   * Tests for two proportions, independence
    
 ASSIGNMENTS
 
@@ -194,27 +194,27 @@ ASSIGNMENTS
 
 IN CLASS
 
-   * Sampling distributions
-   
+   * DataCamp worktime (Monday)
+   * Goodness of fit and homogeneity tests
+
 ASSIGNMENTS
 
    * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
-   * Complete Video Lesson _Introduction to Sampling Distributions_
-   * TBA
 
 
 ## Week 12 (NOV 05)
 
 IN CLASS
 
+   * Sampling distributions
    * Normal approximation to the binomial
-   * Estimation
-   
+
 ASSIGNMENTS
 
+   * Complete Video Lesson _Introduction to Sampling Distributions_
    * Complete _Inference for Categorical Data_ on [DataCamp](https://www.datacamp.com/)
-   * TBA
-   
+   * Complete Hypothesis Testing: Chi-Square tests activity
+
 
 ## Week 13 (NOV 12)
 
@@ -249,7 +249,7 @@ IN CLASS
    
 ASSIGNMENTS
 
-   * TBA
+   * Complete Estimation activity
    
 
 ## Week 16 (DEC 03)
