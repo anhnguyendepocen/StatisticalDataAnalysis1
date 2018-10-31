@@ -1,0 +1,296 @@
+---
+title: "Describing Distributions<br>&#9654; Categorical Data"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+## 
+
+<p style="text-align: center;">![](http://www-history.mcs.st-andrews.ac.uk/BigPictures/Fisher.jpeg)</p>
+
+<p>"...the object of statistical methods is the reduction of data. A quantity of data, which usually by its mere bulk is incapable of entering the mind, is to be replaced by relatively few quantities which shall adequately represent the whole, or...shall contain as much as possible, ideally the whole, of the relevant information contained in the original data." ~ R.A. Fisher, 1921</p>
+
+
+## How We Describe Distributions
+
+<p style="text-decoration: underline;">Categorical Variables</p>
+
+* frequency / relative frequency
+
+*Summaries based on counting how many times categories occur.*
+
+<p style="text-decoration: underline;">Quantitative Variables</p>
+
+* shape
+* center
+* spread
+* outliers
+
+*Shape, center, and spread characterize the pattern of numerical observations. Outliers are deviations from the pattern.*
+
+
+## Exploring Categorical Data
+
+* frequency table
+* relative frequency table
+* cumulative frequency table
+* cumulative relative frequency table
+* contingency table
+* [bar chart / barplot](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+* ~~pie chart~~
+
+“There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.” (some attribute this quote to John Tukey, and while that fact cannot be verified, it is generally a true statement)
+
+
+## Frequency Tables
+
+In the 1970s, University of California Berkeley was sued for sex discrimination in graduate school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments.
+
+```{r echo=FALSE}
+berkdata <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv")
+```
+
+```{r}
+summary(berkdata)
+```
+
+For space, I hid the `read.csv()` code used to import the data and name it `berkdata` using echo=FALSE in the R code chunk.
+
+
+## Using `table()` and `prop.table()`
+
+```{r}
+table(berkdata$sex)
+prop.table(table(berkdata$sex))
+round(prop.table(table(berkdata$sex)), 4)
+```
+
+
+## Contingency (Two-Way) Tables
+
+```{r}
+conTAB <- table(berkdata$sex, berkdata$status)
+print(conTAB)
+addmargins(conTAB)
+```
+
+
+## Row Proportions
+
+Proportions are calculated by treating each row as a separate frequency table. The rows (not columns) sum to one or 100%.
+
+```{r}
+prop.table(conTAB, 1)
+rowSums(prop.table(conTAB, 1))
+```
+
+
+## Column Proportions
+
+Proportions are calculated by treating each column as a table. The columns (not rows) sum to one or 100%.
+
+```{r}
+prop.table(conTAB, 2)
+colSums(prop.table(conTAB, 2))
+```
+
+
+## Using `dplyr` to Make "Tables"
+
+The `table()` function produces a named vector or matrix. The method using `dplyr` (in `tidyverse`) produces a `tibble`.
+
+```{r}
+library(tidyverse)
+berkdata %>% count(sex)
+```
+
+Some functions such as `chisq.test()` expect vector or matrix input, so consider the reason for making the table.
+
+
+## Cumulative Frequency Tables 
+
+```{r}
+berkdata %>% 
+  count(department) %>% 
+  arrange(desc(n)) %>% 
+  mutate(cumulative_count      = cumsum(n),
+         proportion            = prop.table(n),
+         cumulative_proportion = cumsum(proportion))
+```
+
+
+## Using `dplyr` for Contingency Tables
+
+When we use `dplyr` two summarize two variables, we still get all combinations with non-zero counts, but arranged in a `tibble`. If a combination has no cases (n = 0), it will not be included, which may be problematic in subsequent analyses.
+
+```{r}
+berkdata %>% 
+  count(sex, status)
+```
+
+
+## Rearranging the "Table"
+
+The `tidyr` package has functions like `gather()` and `spread()` to help manipulate `tibble` arrangement.
+
+```{r}
+library(tidyverse)
+berkdata %>% 
+  count(sex, status) %>% 
+  spread(status, n)
+```
+
+This format could help with data visualization, but is it `tidy`?
+
+
+## Barplots using `ggplot2`
+
+```{r fig.height=3.7}
+library(tidyverse)
+ggplot(berkdata, aes(x = sex)) + 
+  geom_bar()
+```
+
+
+## Improve the Presentation
+
+```{r fig.height=3.7}
+ggplot(berkdata, aes(x = sex)) + 
+  geom_bar(fill = "lightblue", color = "gray") +
+  labs(title = "Berkeley Admissions Data", x = "applicant sex")
+```
+
+
+## Barplots for Two Variables
+
+```{r fig.height=4}
+ggplot(berkdata, aes(x = sex, fill = status)) + 
+  geom_bar()
+```
+
+
+## Bars Side-by-Side vs. Stacked
+
+```{r fig.height=4}
+ggplot(berkdata, aes(x = sex, fill = status)) + 
+  geom_bar(position = "dodge")
+```
+
+
+## Proportions vs. Counts
+
+```{r fig.height=4}
+ggplot(berkdata, aes(x = sex, fill = status)) + 
+  geom_bar(position = "fill") + labs(y = "proportion")
+```
+
+
+## Barplots from Summarized Data
+
+We can still make a barplot if we have summarized vs. raw data.
+
+```{r fig.height=3}
+dept_tab <- berkdata %>% count(department)
+ggplot(dept_tab, aes(x = department, y = n)) + 
+  geom_bar(stat = "identity")
+```
+
+
+## Barplots Without a Data Frame
+
+```{r fig.height=3}
+classyear <- factor(c("FR", "SO", "JR", "SR"),
+                    levels = c("FR", "SO", "JR", "SR"))
+students  <- c(254, 223, 219, 185)
+ggplot(NULL, aes(x = classyear, y = students)) + 
+  geom_bar(stat = "identity")
+```
+
+
+## More About Color
+
+The online _Cookbook for R_ shows some [color options](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) and built-in color palettes for plots. You can use colors by name (if it has one that R recognizes, use `colors()` function to see a list), hex code, or rgb value (e.g., [HTML Color Codes](https://htmlcolorcodes.com/color-names/) or [ColorHexa](https://www.colorhexa.com/)).
+
+* _color_ typically refers to points, lines, outlines
+* _fill_ typically refers to some internal shading
+
+```{r eval=FALSE}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar(color = "darkgray") +
+  scale_fill_manual(values = c("palegreen", "turquoise")) +
+  labs(title = "Berkeley Admissions Data",
+       subtitle = "Largest Six Departments, Fall 1973",
+       caption = "source dataset = berkeley.csv",
+       x = "sex of applicant", y = "number of applicants")
+```
+
+
+## &nbsp;
+
+```{r echo=FALSE}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar(color = "darkgray") +
+  scale_fill_manual(values = c("palegreen", "turquoise")) +
+  labs(title = "Berkeley Admissions Data",
+       subtitle = "Largest Six Departments, Fall 1973",
+       caption = "source dataset = berkeley.csv",
+       x = "sex of applicant",
+       y = "number of applicants")
+```
+
+
+## Three Variables? Use Faceting
+
+Faceting creates multiple "panes" in a plot according to some chosen grouping variable. Use `facet_grid()` or `facet_wrap()` to achieve different configurations.
+
+```{r eval=FALSE}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar(color = "darkgray") +
+  facet_grid(. ~ department) +
+  scale_fill_manual(values = c("palegreen", "turquoise")) +
+  labs(title = "Berkeley Admissions Data",
+       subtitle = "Largest Six Departments, Fall 1973",
+       caption = "source dataset = berkeley.csv",
+       x = "sex of applicant",
+       y = "number of applicants")
+```
+
+
+## &nbsp;
+
+Here the six plots are configured into a 1 x 6 grid.
+
+```{r echo=FALSE, fig.height=4}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar(color = "darkgray") +
+  facet_grid(. ~ department) +
+  scale_fill_manual(values = c("palegreen", "turquoise")) +
+  labs(title = "Berkeley Admissions Data",
+       subtitle = "Largest Six Departments, Fall 1973",
+       caption = "source dataset = berkeley.csv",
+       x = "sex of applicant",
+       y = "number of applicants")
+```
+
+
+## Use `facet.wrap()` vs. `facet.grid()`
+
+Here the six plots are wrapped into multiple rows.
+
+```{r echo=FALSE, fig.height=4}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar(color = "darkgray") +
+  facet_wrap(. ~ department) +
+  scale_fill_manual(values = c("palegreen", "turquoise")) +
+  labs(title = "Berkeley Admissions Data",
+       subtitle = "Largest Six Departments, Fall 1973",
+       caption = "source dataset = berkeley.csv",
+       x = "sex of applicant",
+       y = "number of applicants")
+```
+
