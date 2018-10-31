@@ -199,7 +199,7 @@ IN CLASS
 
 ASSIGNMENTS
 
-   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
+   * Work on _Foundations of Inference_ on [DataCamp](https://www.datacamp.com/)
 
 
 ## Week 12 (NOV 05)
@@ -212,7 +212,8 @@ IN CLASS
 ASSIGNMENTS
 
    * Complete Video Lesson _Introduction to Sampling Distributions_
-   * Complete _Inference for Categorical Data_ on [DataCamp](https://www.datacamp.com/)
+   * Complete _Foundations of Inference_ on [DataCamp](https://www.datacamp.com/)
+   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
    * Complete Hypothesis Testing: Chi-Square tests activity
 
 
@@ -237,7 +238,7 @@ IN CLASS
 
 ASSIGNMENTS
 
-   * Complete _Modeling with Data in the Tidyverse_ on [DataCamp](https://www.datacamp.com/)
+   * TBA
    
 
 ## Week 15 (NOV 28)
@@ -245,10 +246,10 @@ ASSIGNMENTS
 IN CLASS
 
    * Estimation
-   * Linear models
-   
+
 ASSIGNMENTS
 
+   * Complete _Inference for Categorical Data_ on [DataCamp](https://www.datacamp.com/)
    * Complete Estimation activity
    
 
