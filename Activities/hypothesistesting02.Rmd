@@ -33,7 +33,7 @@ Consider the Flight Delays dataset. Is the distribution of flights throughout th
 
 ### Problem 3
 
-The following data are the results of 25 gas mileage readings on a given vehicle. Determine whether the population distribution of gas mileage for the vehicle is (a) N(37, 1.75^2^); and (b) normally distributed, with no specified mean and variance. 
+The following data are the results of 25 gas mileage readings on a given vehicle. Determine whether the population distribution of gas mileage for the vehicle is (a) N(37, 1.5^2^); and (b) normally distributed, with no specified mean and variance. 
 
 ```{r}
 gastest <- data.frame(mpg = c(38.0, 38.2, 37.1, 38.3, 40.2, 37.1, 38.6, 41.2, 35.8, 37.9, 36.5, 37.7, 39.5, 35.0, 37.3, 35.6, 33.1, 37.8, 38.4, 37.6, 38.8, 36.6, 36.9, 34.2, 36.8))
