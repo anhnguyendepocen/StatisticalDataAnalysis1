@@ -1,0 +1,75 @@
+---
+title: "Popularity Study, Part 2"
+author: "PUT THE NAMES OF ALL GROUP MEMBERS HERE"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "")
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+```{r, echo=FALSE}
+# load all packages and datasets here
+
+```
+
+<hr>
+
+For all tests, write the null and alternative hypotheses, report the test statistic and the p-value, state whether or not you reject the null hypothesis, and then give your conclusion in terms of the original question.
+
+1) Researchers chose their sample with the goal of having about 1/3 of  students come from each school district type. Were they successful? Perform a goodness of fit test. If they weren't successful, which districts have too many or two few students selected?
+
+Ho: 
+
+Ha: 
+
+Traditional Test:
+```{r}
+# test code here
+```
+
+Conclusions:
+
+
+2) Perform a permutation hypothesis test to determine whether there is there a statistically significant relationship between gender and top goal. If so, what is the nature of the relationship?
+
+Ho: 
+
+Ha: 
+
+Permutation Test:
+```{r}
+# test code here
+```
+
+Conclusions:
+
+
+3) Given the sampling strategy the researchers used in this study, we could consider each type of school district to be a separate population. Perform a traditional hypothesis test to determine whether the distribution of top goal is the same in all three types of school district. If not, in what ways do the district types differ?
+
+Ho: 
+
+Ha: 
+
+Traditional Test:
+```{r}
+# test code here
+```
+
+Conclusions:
+
+
+4) A chi-square test shows that the three types of school districts do not have the same proportions of boys and girls (p = 0.0024). How might this affect your tests and conclusions in (2) and (3)?
+
+ANSWER:
+
+<hr>
+
+END PART 2
+

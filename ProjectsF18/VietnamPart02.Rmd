@@ -1,0 +1,42 @@
+---
+title: "Vietnam Draft, Part 2"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+---
+
+<hr>
+
+### The Process
+
+In December 1969, the U.S. Selective Service System conducted a lottery to a determine draft order for eligible men in the upcoming year. The 366 days of the year (including February 29) were written on small pieces of paper. Each was placed in a plastic capsule, then the capsules were hand-mixed in a shoebox and dumped in a glass jar. Capsules were pulled out one at a time. The first number chosen was 258 (September 14). Anyone born on that day in 1944 through 1950 was assigned lottery number 1. The first 195 birthdates drawn were later called to serve in the order they were drawn. Some people asserted that the numbers were not randomly distributed through the year, in particular when you compared the first half of the year to the second half of the year. ([data](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv)) || ([description](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/vietnamdraft.html))
+
+
+### The Problem
+
+The draft numbers for 1970 were drawn without replacement from the set $x = \{1, 2, 3, ..., 366\}$. The probability of drawing any draft number remaining in the pool at each step of the process was believed to be equal for all numbers, which would mean that all possible permutations of the 366 integers were equally likely---a fair process. It is impossible to prove whether the selection process was biased (non-random), but we can assess whether the outcome seems to be consistent with randomness. For this part of the project, you will use inferential analysis to expore the question of fairness from different perspectives.
+
+
+### Your Analyses
+
+For all tests, write the null and alternative hypotheses, report the test statistic and the p-value, state whether or not you reject the null hypothesis, and then give your conclusion in terms of the original question.
+
+1) Perform both a traditional and a permutation hypothesis to determine whether the mean draft number for the second half of the year and the mean draft number for the first half of the year are significantly different. If so, which mean is smaller?
+
+2) As noted above, the largest draft number called up for service in 1970 was 195. Perform a both a traditional and permutation hypothesis to determine whether the the second half of the year had a significantly larger proportion of draft numbers that were less than or equal to 195 compared to the first half of the year. 
+
+3) The overall distribution of draft numbers is discrete uniform. If the process was truly random, then the distribution of draft numbers in each half of the year should also be essentially uniform as well. Perform a goodness of fit test to determine whether draft numbers in the second half of the year are uniformly distributed.
+
+4) How do your analyses support the assertion that the draft was unfair? Why are they not _proof_ of unfairness?
+
+<hr>
+
+END PART 2
+
+
+
+
+
