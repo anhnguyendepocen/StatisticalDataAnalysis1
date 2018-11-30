@@ -199,7 +199,7 @@ IN CLASS
 
 ASSIGNMENTS
 
-   * Work on _Foundations of Inference_ on [DataCamp](https://www.datacamp.com/)
+   * N/A
 
 
 ## Week 12 (NOV 05)
@@ -213,7 +213,6 @@ ASSIGNMENTS
 
    * Complete Video Lesson _Introduction to Sampling Distributions_
    * Complete _Foundations of Inference_ on [DataCamp](https://www.datacamp.com/)
-   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
    * Complete Hypothesis Testing: Chi-Square tests activity
 
 
@@ -238,7 +237,7 @@ IN CLASS
 
 ASSIGNMENTS
 
-   * TBA
+   * Complete _Inference for Numerical Data_ on [DataCamp](https://www.datacamp.com/)
    
 
 ## Week 15 (NOV 28)
