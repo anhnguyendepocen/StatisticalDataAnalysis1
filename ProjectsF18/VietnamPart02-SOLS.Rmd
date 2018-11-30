@@ -1,0 +1,149 @@
+---
+title: "Vietnam Draft, Part 2"
+author: "SOLUTIONS"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "")
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+```{r, warning = FALSE}
+library(tidyverse)
+draft <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv")
+```
+
+<hr>
+
+For all tests, write the null and alternative hypotheses, report the test statistic and the p-value, state whether or not you reject the null hypothesis, and then give your conclusion in terms of the original question.
+
+1) Perform both a traditional and a permutation hypothesis to determine whether the mean draft number for the second half of the year and the mean draft number for the first half of the year are significantly different. If so, which mean is smaller?
+
+Ho: $\mu_{first} = \mu_{second}$
+
+Ha: $\mu_{first} \neq \mu_{second}$
+
+Traditional Test:
+```{r}
+t.test(draft$num1970 ~ draft$halfyear)
+```
+
+Permutation Test:
+```{r}
+halfmeans <- draft %>% group_by(halfyear) %>%  summarize(xbar = mean(num1970))
+print(halfmeans)
+
+teststat <- -diff(halfmeans$xbar)
+
+N <- 10^5 - 1
+permMeanDiff <- numeric(N)
+
+testdata <- draft$num1970
+
+for (i in 1:N){
+   index  <- sample(366, 182)
+   first  <- testdata[index]
+   second <- testdata[-index]
+   permMeanDiff[i] <- mean(first) - mean(second)
+}
+
+pvalue.lower <- (sum(permMeanDiff <= teststat) + 1) / (N + 1)
+pvalue.upper <- (sum(permMeanDiff >= teststat) + 1) / (N + 1)
+pvalue.twotail <- 2 * min(pvalue.lower, pvalue.upper)
+
+print(teststat)
+print(pvalue.twotail)
+```
+
+Conclusions: We reject Ho at the &alpha; = 0.05 level and conclude that two means are different. Based on the sample means, the second half of the year had lower draft numbers, on average, than the first half of the year.
+
+
+2) As noted above, the largest draft number called up for service in 1970 was 195. Perform a both a traditional and permutation hypothesis to determine whether the the second half of the year had a significantly larger proportion of draft numbers that were less than or equal to 195 compared to the first half of the year. 
+
+Ho: $\pi_{first} = \pi_{second}$
+
+Ha: $\pi_{first} < \pi_{second}$
+
+Traditional Test:
+```{r}
+draft <- draft %>% mutate(leq195 = ifelse(num1970 <= 195, "drafted", "not drafted"))
+
+prop.test(table(draft$halfyear, draft$leq195), alternative = "less")
+```
+
+Permutation Test:
+```{r}
+halfprops <- draft %>% group_by(halfyear) %>%  summarize(phat = mean(leq195 == "drafted"))
+print(halfprops)
+
+teststat <- -diff(halfprops$phat)
+
+N <- 10^5 - 1
+permPropDiff <- numeric(N)
+
+testdata <- draft$leq195
+
+for (i in 1:N){
+   index  <- sample(366, 182)
+   first  <- testdata[index]
+   second <- testdata[-index]
+   permMeanDiff[i] <- mean(first == "drafted") - mean(second == "drafted")
+}
+
+pvalue.lower <- (sum(permPropDiff <= teststat) + 1) / (N + 1)
+
+print(teststat)
+print(pvalue.lower)
+```
+
+Conclusions: We reject Ho at the &alpha; = 0.05 level and conclude that the first half of the year had a lower proportion of draft numbers that were less than or equal to 195 than the second half of the year.
+
+
+3) The overall distribution of draft numbers is discrete uniform. If the process was truly random, then the distribution of draft numbers in each half of the year should also be essentially uniform as well. Perform a goodness of fit test to determine whether draft numbers in the second half of the year are uniformly distributed.
+
+Ho: The draft numbers in the second half of the year are uniformly distributed.
+
+Ha: The draft numbers in the second half of the year are not uniformly distributed.
+
+Traditional Test:
+```{r}
+draft <- draft %>% filter(halfyear == "Second") %>% 
+  mutate(testcategories = case_when(num1970 >= 1   & num1970 <= 61  ~ 'cat1',
+                                    num1970 >= 62  & num1970 <= 122 ~ 'cat2',
+                                    num1970 >= 123 & num1970 <= 183 ~ 'cat3',
+                                    num1970 >= 184 & num1970 <= 244 ~ 'cat4',
+                                    num1970 >= 245 & num1970 <= 305 ~ 'cat5',
+                                    num1970 >= 306 & num1970 <= 366 ~ 'cat6'))
+
+observed <- table(draft$testcategories)
+
+ggplot(draft, aes(x = testcategories)) + 
+  geom_bar(aes(y=..count../sum(..count..))) +
+  geom_hline(yintercept = 1/6, col = "red") +
+  ylab("proportion")
+
+chisq.test(observed)
+```
+
+Conclusions: We fail to reject Ho at the &alpha; = 0.05 level and conclude that draft numbers in the second half of the year are uniformly distributed. However, the barplot looks a little nonrandom.
+
+
+4) How do your analyses support the assertion that the draft was unfair? Why are they not _proof_ of unfairness?
+
+ANSWER: The test for means showed that the second half of the year seemed to have significantly higher draft numbers, on average, while the test for proportions showed that a statistically larger proportion of draft numbers that actually got called up were in the second half of the year. The goodness of fit test does not support the assertion, since it suggests that the numbers were uniformly distributed, though the plot hints at some nonuniformity. Hypothesis testing is probabilistic, with the p-values giving us information on the likelihood of observing certain values by chance alone. A random process could have produced the outcome in 1970, it is just not a very likely. Failing to reject Ho in the goodness of fit test may have been due to insufficient data, not Ho actually being true (e.g., Type II error). Therefore our tests are evidence that it the selectionp process was probably not fair, but not proof.
+
+
+<hr>
+
+END PART 2
+
+
+
+
+
