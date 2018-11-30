@@ -1,0 +1,142 @@
+---
+title: "Bootstrap CIs"
+author: "SOLUTIONS"
+date: "`r Sys.time()`"
+output: html_document
+---
+
+```{r, message=FALSE}
+# Load any necessary packages here. Suppress messages for this code chunk.
+library(dplyr)
+library(ggplot2)
+```
+
+
+### Problem 1
+
+Consider the Flight Delays dataset discussed in Chapter 1 of the Chihara & Hesterberg textbook, which contains data on selected flights departing from LaGuardia airport in 2009. Assume the data are a representative sample of flights and use only flights with a positive delay time. 
+
+A) Compute a traditional 95% confidence internal to estimate mean delay time for flights that are delayed.
+
+```{r}
+flights <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv") %>% 
+  filter(Delay > 0)
+delays <- flights$Delay
+n      <- length(delays)
+mean(delays) + qt(c(0.025, 0.975), n-1) * sd(delays)/sqrt(n) 
+```
+
+We can state with 95% confidence that the true mean delay time is between `r round(mean(delays) + qt(0.025, n-1) * sd(delays)/sqrt(n), 1)` and `r round(mean(delays) + qt(0.975, n-1) * sd(delays)/sqrt(n), 1)` minutes.
+
+
+B) Compute a 95% bootstrap percentile interval to estimte mean delay time for flights that are delayed. 
+
+```{r}
+N <- 10^4
+
+bootmean <- numeric(N)
+
+for (i in 1:N){
+  bootsample <- sample(delays, n, replace = TRUE)
+  bootmean[i] <- mean(bootsample)
+}
+
+quantile(bootmean, c(0.025, 0.975))
+```
+
+We can state with 95% confidence that the true mean delay time is between `r round(quantile(bootmean, 0.025), 1)` and `r round(quantile(bootmean, 0.975), 1)` minutes.
+
+
+C) The distribution of delays is quite right skewed. Using your bootstrap distribution, determine whether the sampling distribution of the sample mean is approximately normal in this situation. 
+
+```{r}
+ggplot(NULL, aes(x = bootmean)) + 
+  geom_histogram(fill = "lightblue", color = "gray")
+ggplot(NULL, aes(x = bootmean)) + 
+  geom_density(fill = "lightblue", color = "gray") +
+  stat_function(fun = dnorm, args = list(mean(bootmean), sd(bootmean)), color = "red")
+ggplot(NULL, aes(sample = bootmean)) + 
+  geom_qq() + 
+  geom_qq_line(color = "red")
+```
+
+ANSWER: The density and quantile-quantile plots suggest that the data are bell-shaped, since the empirical data follows the theoretical model well in noth cases. This indicates that the Central Limit Theorem would apply in this situation, which is why the traditional and boostrapping results are so similar.
+
+
+### Problem 2
+
+Consider the Popular Kids dataset used in the class projects. Find a 95% bootstrap percentile interval to estimate the population proportion of kids who would choose grades as their top goal. Based on the interval, can we say with confidence that a majority of the population represented by this sample would choose grades? Explain.
+
+```{r}
+popkids <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/popular.csv")
+
+topgoal <- popkids$top_goal
+n       <- length(topgoal)
+
+N <- 10^4
+
+bootprop <- numeric(N)
+
+for (i in 1:N){
+  bootsample <- sample(topgoal, n, replace = TRUE)
+  bootprop[i] <- mean(bootsample == "grades")
+}
+
+quantile(bootprop, c(0.025, 0.975))
+```
+
+We can state with 95% confidence that the true proportion of children who would choose grades is between `r round(quantile(bootprop, 0.025), 3)` and `r round(quantile(bootprop, 0.975), 3)`. We cannot say with confidence that it is a majority because the lower end of the interval dips below 50%.
+
+EXTRA NOTE: The density and quantile-quantile plots suggest that the data are bell-shaped, since the empirical data follows the theoretical model well in noth cases. This indicates that the Central Limit Theorem would apply in this situation, and we could use the traditional methods if we chose.
+
+```{r}
+ggplot(NULL, aes(x = bootprop)) + 
+  geom_histogram(fill = "lightblue", color = "gray")
+ggplot(NULL, aes(x = bootprop)) + 
+  geom_density(fill = "lightblue", color = "gray") +
+  stat_function(fun = dnorm, args = list(mean(bootprop), sd(bootprop)), color = "red")
+ggplot(NULL, aes(sample = bootprop)) + 
+  geom_qq() + 
+  geom_qq_line(color = "red")
+```
+
+
+### Problem 3
+
+For the scenario in Problem 1, compute a 95% bootstrap percentile interval for the median delay time.
+
+```{r}
+N <- 10^4
+
+bootmedian <- numeric(N)
+
+for (i in 1:N){
+  bootsample <- sample(delays, n, replace = TRUE)
+  bootmedian[i] <- median(bootsample)
+}
+
+quantile(bootmedian, c(0.025, 0.975))
+```
+
+We can state with 95% confidence that the true median delay time is between `r quantile(bootmedian, 0.025)` and `r quantile(bootmedian, 0.975)` minutes.
+
+
+EXTRA NOTE: The sampling distribution of the median is not quite bell-shaped.
+
+```{r}
+ggplot(NULL, aes(x = bootmedian)) + 
+  geom_histogram(fill = "lightblue", color = "gray")
+ggplot(NULL, aes(x = bootmedian)) + 
+  geom_density(fill = "lightblue", color = "gray") +
+  stat_function(fun = dnorm, args = list(mean(bootmedian), sd(bootmedian)), color = "red")
+ggplot(NULL, aes(sample = bootmedian)) + 
+  geom_qq() + 
+  geom_qq_line(color = "red")
+```
+
+
+<hr>
+
+END!!!
+
+
