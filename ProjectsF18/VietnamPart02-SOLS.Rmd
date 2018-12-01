@@ -74,7 +74,7 @@ Traditional Test:
 ```{r}
 draft <- draft %>% mutate(leq195 = ifelse(num1970 <= 195, "drafted", "not drafted"))
 
-prop.test(table(draft$halfyear, draft$leq195), alternative = "less")
+prop.test(table(draft$halfyear, draft$leq195), alternative = "less", correct = FALSE)
 ```
 
 Permutation Test:
