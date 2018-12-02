@@ -10,7 +10,7 @@ output:
 **Instructor:**    Dr. Jill E. Thomley  
 **E-Mail:**        thomleyje@appstate.edu  
 **Office:**        Walker Hall 228  
-**Office Hours:**  see [My Schedule](https://jillthomley.github.io/scheduleSum18.html)
+**Office Hours:**  see [My Schedule](https://jillthomley.github.io/scheduleF18.html)
 
 I will use the Course Announcements forum on [AsULearn](https://asulearn.appstate.edu/) to send out announcements and course information. You are responsible for knowing the content of all postings in addition to anything I say in class. Except for emergencies, all written communication should be handled through your Private Forum on [AsULearn](https://asulearn.appstate.edu/). I prefer this method because it stores all exchanges in a place where we can easily access them and it keeps my class communications separate from the rest of my email.
 
