@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Sunday, January 13, 2019 @ 07:42:15 PM'
+date: 'Updated: Sunday, January 13, 2019 @ 08:19:12 PM'
 output: 
   html_document: 
     toc: true
