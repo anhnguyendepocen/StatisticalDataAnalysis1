@@ -39,13 +39,7 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 * STATISTICS—THE BIG PICTURE: Understand why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world around us; become acquainted with the ethics of data collection.
 
 
-**Required Textbooks**
-
-* Chihara, L. and Hesterberg, T. (2011). _Mathematical Statistics with Resampling and R, 2nd Edition_. (rental)
-* Ismay, C. and Kim, A.Y. (2018). [_Modern Dive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com/index.html). (digital)
-
-
-**Assessment & Grading**
+**Assessment and Grading**
 
 The only way to learn statistics is to **DO** statistics, which includes statistical software. Reading the textbook, learning the language, and practicing exercises using real data are critical to your learning and success. Class activities and assessments have been structured with these principles in mind. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must "speak the language" (statistics and R) to effectively demonstrate your knowledge. This course uses a standards-based grading methods, which we will discuss further in class.
 
@@ -122,6 +116,17 @@ Class attendance will be used to assign - or + modifiers to your earned letter g
 The [Course Schedule](../Schedule/ScheduleS2019.html) and AsULearn contain additional information. Grades will be kept on [AsULearn](https://asulearn.appstate.edu/). You should monitor your grades throughout the term to make sure they are complete and accurate. Feel free to inquire about your grades at any time.  
 
 
+**Inclement Weather**
+
+All due dates will remain in effect even if the university cancels classes or closes for inclement weather. You should check AsULearn for alternate assignments. Completion of the assignment will serve as your attendance for that class period. Course accommodations for power outages and other weather-related issues will be made as circumstances require, at the discretion of the instructor.
+
+
+**Required Textbooks**
+
+* Chihara, L. and Hesterberg, T. (2011). _Mathematical Statistics with Resampling and R, 2nd Edition_. (rental)
+* Ismay, C. and Kim, A.Y. (2018). [_Modern Dive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com/index.html). (digital)
+
+
 **Computers and Software**
 
 This course will use the RStudio server  (https://mathr.math.appstate.edu/) that has the programs listed below (and more) installed. Note that all technology used in the class is either open source (free) or will be accessible to students enrolled in the course for no cost.
@@ -136,14 +141,9 @@ You must have an active internet connection and be registered in the course to a
 <img src="RStudioLogIn.jpg" width="564" style="display: block; margin: auto;" />
 
 
-**Expectations**  
+**General Expectations**  
 
 Be proactive in your learning! If you have not read/watched assigned materials and attempted assigned problems before coming to class or office hours, you will likely be confused, feel lost, and have a terrible experience in this course. I DO NOT WANT THAT TO HAPPEN! Appalachian students are expected to make intensive engagement with courses their first priority. Practically speaking, this means students should spend about 1-3 hours on course work outside class for every hour they spend in class. If you are not comfortable or have not done well in quantitative courses in the past, you may need to spend more time completing work for this course. I realize that many students work during the school year to finance their educations; however, that does not change the requirements of this (or any) course. Budget your time accordingly and pace yourself so that you can keep up and complete all your work on time. I am here to help you with this material and I want to see you succeed.
-
-
-**Inclement Weather**
-
-All due dates will remain in effect even if the university cancels classes or closes for inclement weather. You should check AsULearn for alternate assignments. Completion of the assignment will serve as your attendance for that class period. Course accommodations for power outages and other weather-related issues will be made as circumstances require, at the discretion of the instructor.
 
 
 **How To Get Unstuck**
