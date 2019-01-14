@@ -46,6 +46,27 @@ $$H_a: \text{[Variable 1] and [Variable 2] are not independent}.$$
 <br>Replace [Variable 1] and [Variable 2] with actual variable names from the problem. There is only one possible alternative in this test, unlike tests for comparing means and proportions. Always compute the p-value using the upper tail.
 
 
+## Berkeley Bias Data
+
+
+## Observed Counts
+
+
+## Expected Counts
+
+
+## Test Statistic
+
+
+## P-Value using $\chi^2$
+
+
+## Using `chisq.test`
+
+
+## Monte Carlo Simulation
+
+
 # Homogeneity
 
 ## Null and Alternative Hypotheses

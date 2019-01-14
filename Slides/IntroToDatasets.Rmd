@@ -1,0 +1,188 @@
+---
+title: "Intro to Datasets"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+
+## Data vs. Information
+
+Statistical methods help us transform raw data into information that provides knowledge and helps us make decisions.
+
+* We use descriptive statistics to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have. 
+
+* In inferential statistics, sample data are used to generalize or make predictions about the larger population from which the sample was selected.
+
+We will often talk about the distribution of a particular variable, which describes how often the possible responses occur.
+
+
+## Population vs. Sample
+
+A sample is a subset selected from some larger population of interest. The  population is defined by the research question(s) being investigated. It is the complete set of people, objects, or entities in which we are interested.
+
+* A summary measure for a population is called a parameter.
+
+* A summary measure for a sample is called a statistic.
+
+Sample statistics are used to estimate population parameters.
+
+If we collect data from a whole population, it is called a census.
+
+The definining characteristics of theoretical probability models are also referred to as parameters.
+
+
+## Dataset Structure
+
+* A variable is some characteristic of interest that can differ between individuals in a population.
+
+* An observational unit (or observation) is a single individual, object, or entity about which we have collected data for one or more characteristics (variables).
+
+* An observation may be called a case, subject, or participant.
+
+* Ideally, each observational unit has a value for each variable.
+
+A dataset is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call `tidy` data. 
+
+
+## `tidy` Data
+
+<p style="text-align:center"><img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" width = 775><br>
+Tidy data graphic from http://r4ds.had.co.nz/tidy-data.html</p>
+
+<p>Most of the data we will work with in STT3850 is already in `tidy` format, though there may be missing data and other issues we have to address before conducting analyses.</p>
+
+
+## Types of Variables
+
+* categorical / qualitative
+    + nominal
+    + ordinal
+
+* numerical / quantitative
+    + interval
+    + ratio
+
+Numerical variables are also classified as discrete or continuous.
+
+Ranks are technically ordinal data, but sometimes we treat them as if they are numbers (e.g., reporting average rank).
+
+How might these correspond to different classes of vectors in R?
+
+
+## Exploratory Data Analysis (EDA)
+
+EDA is used to "examin[e] and describ[e] data to gain insight, discover structure, and detect anomalies and outliers."
+
+<p style="text-align:center"><img src="http://www.gstatic.com/hostedimg/40cab8ae05c45196_large" height = 250></p>
+
+John Tukey (1915--2000), author of _Exploratory Data Analysis_ (1977) referred to EDA as numerical, counting, and graphical detective work.
+
+
+## Reading Data into R
+
+Many different types of data files can be read into R. We will be using primarily CSV files read from the web using their URL. Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains links to many datasets provided by the textbook or created by the instructor.
+
+Use the `read.csv()` function to input a CSV file using its URL. 
+
+`flightdelays <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/flightdelays.csv"))`
+
+The Flight Delays dataset is introduced in Ch. 1 of the _Chihara_ textbook. You can read about its origin and contents there.
+
+```{r include=FALSE}
+flightdelays <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv")
+```
+
+
+## Data Frame vs. Tibble
+
+The `read.csv()` function converts a CSV file into a data frame.
+
+A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.
+
+A tibble is a somewhat tweaked version of a data frame found in the 'tidyverse. In most cases in STT3850 the terms may be used interchangeably. For more, see [Tibbles](http://r4ds.had.co.nz/tibbles.html) in _R for Data Science_.
+
+Before doing any kind of data modeling or inference, you need to explore your dataset and become familiar with its structure and contents---that's the first step in EDA!
+
+We will be using the `dplyr` and `ggplot2` packages for our EDA. These and other tools are collected in `tidyverse`.
+
+
+## Structure vs. Glimpse
+
+The `str()` function is part of base R code, while the `glimpse()` function comes from the `tidyverse` package `dplyr`.
+
+```{r}
+str(flightdelays)
+```
+
+
+##
+
+These two functions are very similar, but how does the output of `glimpse()` differ from `str()`?
+
+```{r}
+library(tidyverse)
+glimpse(flightdelays)
+```
+
+
+## Other Useful Functions
+
+Other functions for exploring dataset structure are given below. Use them on the Flight Delays dataset. What do they tell you?
+
+* `attributes()`
+* `dim()`
+* `names()`
+* `nrow()`
+* `ncol()`
+* `head()`
+* `tail()`
+* `sum(complete.cases())`
+* `sum(!complete.cases())`
+
+
+## Data Summaries
+
+Once we know the overall structure of our dataset, we need to understand its contents. We will discuss more specific functions later, but we can get an overview using `summary()`.
+
+```{r}
+summary(flightdelays)
+```
+
+
+## Missing Data Values
+
+In Flight Delays, every variable had a value for every case. That is often not true in real-life data. Missing data values often require special treatment and should be found during EDA.
+
+The [couples.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv) dataset contains the height (in mm) and age (in years) for a sample of married couples. 
+
+The [personalitySTT3850.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/personalitySTT3850.csv) dataset has Jungian (Myers-Briggs) personality type and other selected information about students from Dr. Thomley's past STT3850 classes.
+
+Use the exploratory functions to discover which can help us find missing values in these datasets.
+
+Missing quantitative values and missing categorical values may be stored or displayed differently.
+
+
+## More About Missing Values
+
+The `which()` function can help identify the locations of missing values when paired with the `is.na()` function. The result is the row numbers of the NA cases. 
+
+```{r include=FALSE}
+couples <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv")
+```
+
+```{r}
+which(is.na(couples$wAge) == TRUE)
+index <- which(is.na(couples$hAge) == TRUE)
+couples[index,]
+```
+
+
+## 
+
+<p style="text-align:center"><img src="https://stat-jet-asu.github.io/Moodlepics/swimmingindata.jpg"></p>
+

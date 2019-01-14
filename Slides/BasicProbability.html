@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Intro to Datasets</title>
+  <title>Basic Probability</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,7 +20,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Intro to Datasets',
+                title: 'Basic Probability',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -93,197 +93,203 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Saturday, September 01, 2018 @ 08:39:09 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, October 30, 2018 @ 10:17:01 AM</p>
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2>Data vs. Information</h2></hgroup><article  id="data-vs.-information">
+<slide class=""><hgroup><h2>Randomness!</h2></hgroup><article  id="randomness">
 
-<p>Statistical methods help us transform raw data into information that provides knowledge and helps us make decisions.</p>
+<p>We can define the concept of randomness as a lack of pattern or exact predictability in a sequence or set of events.</p>
 
-<ul>
-<li><p>We use <strong>descriptive statistics</strong> to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have.</p></li>
-<li><p>In <strong>inferential statistics</strong>, sample data are used to generalize or make predictions about the larger population from which the sample was selected.</p></li>
-</ul>
+<p>Individual random events are by definition unpredictable, but the relative frequency of different outcomes over a very large number of events (often called &quot;trials&quot;) <em>is</em> predictable.</p>
 
-<p>We will often talk about the <strong>distribution</strong> of a particular variable, which describes how often the possible responses occur.</p>
+<p>Example: if you roll two six-sided dice and add the values, the result of individual rolls is unpredictable, but in the long run a sum of seven will occur twice as often as a sum of four.</p>
 
-</article></slide><slide class=""><hgroup><h2>Population vs. Sample</h2></hgroup><article  id="population-vs.-sample">
+<p>Randomness reflects our uncertainty about an outcome, not haphazardness in the process that produces an outcome.</p>
 
-<p>A sample is a subset selected from some larger population of interest. The population is defined by the research question(s) being investigated. It is the complete set of people, objects, or entities in which we are interested.</p>
+</article></slide><slide class=""><hgroup><h2>Random Circumstance</h2></hgroup><article  id="random-circumstance">
 
-<ul>
-<li><p>A summary measure for a <strong>population</strong> is called a <strong>parameter</strong>.</p></li>
-<li><p>A summary measure for a <strong>sample</strong> is called a <strong>statistic</strong>.</p></li>
-</ul>
-
-<p>Sample statistics are used to estimate population parameters.</p>
-
-<p>If we collect data from a whole population, it is called a <strong>census</strong>.</p>
-
-<p>The definining characteristics of theoretical probability models are also called <strong>parameters</strong>.</p>
-
-</article></slide><slide class=""><hgroup><h2>Dataset Structure</h2></hgroup><article  id="dataset-structure">
+<p>A random circumstance is a scenario in which an exact outcome or sequence of outcomes is unpredictable. We can think about two kinds of random circumstances.</p>
 
 <ul>
-<li><p>A <strong>variable</strong> is some characteristic of interest that can differ between individuals in a population.</p></li>
-<li><p>An <strong>observational unit</strong> (or <strong>observation</strong>) is a single individual, object, or entity about which we have collected data for one or more characteristics (variables).</p></li>
-<li><p>An observation may be called a case, subject, or participant.</p></li>
-<li><p>Ideally, each observational unit has a <strong>value</strong> for each variable.</p></li>
+<li>The outcome is not determined until we observe it.</li>
 </ul>
 
-<p>A <strong>dataset</strong> is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call <code>tidy</code> data.</p>
+<p>Example: will the coin flip at the beginning of a football game be heads or tails?</p>
 
-</article></slide><slide class=""><hgroup><h2><code>tidy</code> Data</h2></hgroup><article  id="tidy-data">
+<ul>
+<li>The outcome has already been determined, but our state of knowledge about the outcome is uncertain.</li>
+</ul>
 
-<p style="text-align:center">
+<p>Example: does someone have a BRCA or PALB2 gene mutation? They either have it or they do not, but we do not know until we perform an appropriate genetic test.</p>
 
-<img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" width = 775><br> Tidy data graphic from <a href='http://r4ds.had.co.nz/tidy-data.html' title=''>http://r4ds.had.co.nz/tidy-data.html</a>
+</article></slide><slide class=""><hgroup><h2>What are the Chances?</h2></hgroup><article  id="what-are-the-chances">
+
+<p>While we cannot predict exactly what will happen for any given random circumstance, we can often determine a set of possible outcomes and attach a probability to each outcome.</p>
+
+<p>Probabilities for the outcomes in a given random circumstance may at times depend on other random circumstances.</p>
+
+<p>Example: the chance of being injured in a car accident depends on whether or not the person is wearing a seatbelt.</p>
+
+<p>We can refer to random circumstances as random variables and use them to mathematically model the world.</p>
+
+<p>A circumstance that is not random is <em>deterministic</em>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Probability Interpretations</h2></hgroup><article  id="probability-interpretations">
+
+<p>For situations that we can imagine repeating many times, the probability of an outcome is the fraction of the time it would happen in the long run. We express probabilities as fractions, proportions, or percentages.</p>
+
+<ul>
+<li><p>relative frequency probabilities rely on determining how often each outcome occurs relative to the others, based on logical assumptions and theory, or on direct observation of events (empirical or experimental probability)</p></li>
+<li><p>personal probabilities (or subjective probabilities) rely on an individual&#39;s judgment and experience, often when there is not enough data or a circumstance is not repeatable</p></li>
+</ul>
+
+<p>We are using concepts and axioms of classical probability. Other systems like fuzzy logic may use different definitions/axioms.</p>
+
+</article></slide><slide class=""><hgroup><h2>Outcomes vs. Events</h2></hgroup><article  id="outcomes-vs.-events">
+
+<p>For a given discrete random variable \(X\)&#8230;</p>
+
+<ul>
+<li>sample space: the set of all unique possible outcomes, which can be a discrete list or a mathematical expression</li>
+</ul>
+
+<p>\[x = \{\text{set of outcomes}\}\]</p>
+
+<ul>
+<li>simple event: a unique possible outcome (one element of \(x\))</li>
+<li>compound event: a set of 2 or more outcomes/simple events</li>
+</ul>
+
+<p>In general, an <em>event</em> is a set of one or more simple events drawn from the sample space of the random variable.</p>
+
+<p>Later slides address the additional concepts of complementary, mutally exclusive, and independent vs. dependent events.</p>
+
+</article></slide><slide class=""><hgroup><h2>Probability Fundamentals</h2></hgroup><article  id="probability-fundamentals">
+
+<p>For a given discrete random variable \(X\)&#8230;</p>
+
+<ul>
+<li>The probability of any outcome is between 0 and 1 (inclusive)</li>
+</ul>
+
+<p>\[0 \leq P(x_i) \leq 1\]</p>
+
+<ul>
+<li>The sum of the probabilities across all possible outcomes is 1</li>
+</ul>
+
+<p>Even personal probabilities must be <em>coherent</em> probabilities: the values have to be between 0 and 1 and they can not contradict one another. If you think you have a 20% chance of getting the job for which you just interviewed, then you should believe you have an 80% chance of not getting it.</p>
+
+<p>Question: what do extreme probability values 0 and 1 indicate?</p>
+
+</article></slide><slide class=""><hgroup><h2>Complementary Events</h2></hgroup><article  id="complementary-events">
+
+<p>One event is the complement of another if they do not contain any of the same simple events and together they contain all the simple events in the sample space. In other words, they do not overlap and together they cover the whole sample space.</p>
+
+<p>For an event \(A\) and its complement \(A^c\), \(P(A^c) = 1 - P(A)\).</p>
+
+<p>Example:</p>
+
+<p>\(X\) = result of rolling one fair six-sided die, so \(x = \{1, 2, 3, 4, 5, 6\}\) with all values equally likely to occur</p>
+
+<p>Let \(A\) = the event that the roll is a 6 and \(A^c\) = the roll is not a 6</p>
+
+<p>For a standard die, \(P(A) = \frac{1}{6}\) and thus \(P(A^c) = 1 - \frac{1}{6} = \frac{5}{6}\)</p>
+
+</article></slide><slide class=""><hgroup><h2>Mutually Exclusive Events</h2></hgroup><article  id="mutually-exclusive-events">
+
+<p>Two events are mutually exclusive (also called disjoint) if they do not contain any of the same simple events. By definition, events that are complementary are also mutually exclusive, but not all mutually exclusive events are complementary.</p>
+
+<p>\(X\) = result of rolling one six-sided die, so \(x = \{1, 2, 3, 4, 5, 6\}\)</p>
+
+<ul>
+<li>Event \(A\) = the roll of a six-sided die is even = \(\{2, 4, 6\}\)</li>
+<li>Event \(B\) = the roll of a six-sided die is odd = \(\{1, 3, 5\}\)</li>
+<li>Event \(C\) = the roll of a six-sided die is exactly \(5\) = \(\{5\}\)</li>
+</ul>
+
+<p>Events \(A\) and \(B\) are mutually exclusive and complementary. \(A\) and \(C\) are mutually exclusive, but they are not complementary. \(B\) and \(C\) are neither mutually exclusive nor complementary.</p>
+
+</article></slide><slide class=""><hgroup><h2>Independent Events</h2></hgroup><article  id="independent-events">
+
+<p>Two events are independent if knowing that one will occur (or has occurred) does not affect the probability that the other will occur. Otherwise the events are dependent.</p>
+
+<p>Being dependent does not mean one event causes the other. It just means they are related in some way.</p>
+
+<p>To explore and determine independence, we have to consider conditional probability of one event, given another event.</p>
+
+<p>Independence is an important assumption for many statistical methods&#8212;for example, that data are an independent random sample from some population of interest.</p>
+
+</article></slide><slide class=""><hgroup><h2>Conditional Probability</h2></hgroup><article  id="conditional-probability">
+
+<p>Sometimes, the probabilities of outcomes for a random variable depend on another random variable.</p>
+
+<p>Conditional probability of event \(B\), given event \(A\), is the long run relative frequency with which \(B\) occurs when \(A\) has occurred or will occur. We write this as \(P(B|A)\).</p>
+
+<p>Reminder: just because events \(A\) and \(B\) depend on one another does not necessarily mean one event causes the other.</p>
+
+<p>Cause and effect determinations rely on other methods, such as performing a controlled experiment.</p>
+
+</article></slide><slide class=""><hgroup><h2>Addition Rule</h2></hgroup><article  id="addition-rule">
+
+<p>What is the probability that either one or both of two particular events happen? In other words, for one randomly chosen case, only \(A\) <em>or</em> \(B\) must be true, but both may be true in some cases.</p>
+
+<ul>
+<li><p>\(P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)\)</p></li>
+<li><p>\(P(A \text{ or } B) = P(A) + P(B)\), if \(A\) and \(B\) are mutually exclusive</p></li>
+</ul>
+
+<p>If A and B are mutually exclusive, \(P(A \text{ and } B) = 0\) → impossible!</p>
+
+<p style="text-align: center;">
+
+<img src="https://www.onlinemathlearning.com/image-files/xprobability-mutually-exclusive.png.pagespeed.ic.X6H14tz8Fk.png" height = 200>
 
 </p>
 
-<p>
+</article></slide><slide class=""><hgroup><h2>Multiplication Rule</h2></hgroup><article  id="multiplication-rule">
 
-Most of the data we will work with in STT3850 is already in <code>tidy</code> format, though there may be missing data and other issues we have to address before conducting analyses.
-
-</p>
-
-</article></slide><slide class=""><hgroup><h2>Types of Variables</h2></hgroup><article  id="types-of-variables">
+<p>What is the probabilty that two events happen either together or in sequencen (depending on the problem)?</p>
 
 <ul>
-<li>categorical / qualitative
-
-<ul>
-<li>nominal</li>
-<li>ordinal</li>
-</ul></li>
-<li>numerical / quantitative
-
-<ul>
-<li>interval</li>
-<li>ratio</li>
-</ul></li>
+<li><p>\(P(A \text{ and } B) = P(A)P(B|A) = P(B)P(A|B)\)</p></li>
+<li><p>\(P(A \text{ and } B) = P(A)P(B)\), if \(A\) and \(B\) are independent</p></li>
+<li><p>We can extend the rule for multiple independent events</p></li>
 </ul>
 
-<p>Numerical variables are also classified as discrete or continuous.</p>
+<p>\(P(B|A)\) is read as &quot;the conditional probability of event B given event A&quot; or &quot;the probability of B given A&quot;.</p>
 
-<p>Ranks are technically ordinal data, but sometimes we treat them as if they are numbers (e.g., reporting average rank).</p>
+<p>If \(A\) occurs first, does it affect the probability of \(B\) occurring?</p>
 
-</article></slide><slide class=""><hgroup><h2>Exploratory Data Analysis (EDA)</h2></hgroup><article  id="exploratory-data-analysis-eda">
+</article></slide><slide class=""><hgroup><h2>Conditional Multiplication</h2></hgroup><article  id="conditional-multiplication">
 
-<p>EDA is used to &quot;examin[e] and describ[e] data to gain insight, discover structure, and detect anomalies and outliers.&quot;</p>
+<p>This is an algebraic restatement of the multiplication rule above; sometimes useful to consider it this way, depending on what we know in a given scenario.</p>
 
-<p style="text-align:center">
+<p>\[P(B|A) = \frac{P(A \text{ and } B)}{P(A)}\]</p>
 
-<img src="http://www.gstatic.com/hostedimg/40cab8ae05c45196_large" height = 250>
+<p>Since the labels given to events A and B are essentially arbitrary, we can write the expression either way.</p>
 
-</p>
+<p>\[P(A|B) = \frac{P(A \text{ and } B)}{P(B)}\]</p>
 
-<p>John Tukey (1915&#8211;2000), author of <em>Exploratory Data Analysis</em> (1977) referred to EDA as numerical, counting, and graphical detective work.</p>
+</article></slide><slide class=""><hgroup><h2>Independent Events?</h2></hgroup><article  id="independent-events-1">
 
-</article></slide><slide class=""><hgroup><h2>Reading Data into R</h2></hgroup><article  id="reading-data-into-r">
-
-<p>Many different types of data files can be read into R. We will be using primarily CSV files read from the web using their URL. Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>Class Data Files</a> page contains links to many data files provided by the instructor and the textbook.</p>
-
-<p>Using <code>read.csv()</code> function to input a CSV dataset from a URL.</p>
-
-<p><code>flightDelays &lt;- read.csv(file = url(&quot;https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv&quot;))</code></p>
-
-<p><code>flightDelays &lt;- read.csv(&quot;https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv&quot;)</code></p>
-
-<p>The Flight Delays data is introduced in Ch. 1 of the textbook.</p>
-
-</article></slide><slide class=""><hgroup><h2>Data Frame vs. Tibble</h2></hgroup><article  id="data-frame-vs.-tibble">
-
-<p>The <code>read.csv()</code> function converts a CSV file into a <strong>data frame</strong>.</p>
-
-<p>A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.</p>
-
-<p>A <strong>tibble</strong> is a slightly tweaked version of a <strong>data frame</strong>. In most cases in STT3850 the two terms may be used interchangeably. For more information, see <a href='http://r4ds.had.co.nz/tibbles.html' title=''>Tibbles</a> in <em>R for Data Science</em>.</p>
-
-<p>Before doing any kind of data modeling or inference, you need to explore your dataset and become familiar with its structure and contents&#8212;that&#39;s the first step in EDA!</p>
-
-</article></slide><slide class=""><hgroup><h2>Structure vs. Glimpse</h2></hgroup><article  id="structure-vs.-glimpse">
-
-<p>The <code>str()</code> function is part of base code, <code>glimpse()</code> is part of the <code>tidyverse</code> package <code>dplyr</code>.</p>
-
-<pre class = 'prettyprint lang-r'>str(flightDelays)</pre>
-
-<pre >&#39;data.frame&#39;:   4029 obs. of  10 variables:
- $ ID          : int  1 2 3 4 5 6 7 8 9 10 ...
- $ Carrier     : Factor w/ 2 levels &quot;AA&quot;,&quot;UA&quot;: 2 2 2 2 2 2 2 2 2 2 ...
- $ FlightNo    : int  403 405 409 511 667 669 673 677 679 681 ...
- $ Destination : Factor w/ 7 levels &quot;BNA&quot;,&quot;DEN&quot;,&quot;DFW&quot;,..: 2 2 2 6 6 6 6 6 6 6 ...
- $ DepartTime  : Factor w/ 5 levels &quot;4-8am&quot;,&quot;4-8pm&quot;,..: 1 4 2 4 1 1 4 4 5 5 ...
- $ Day         : Factor w/ 7 levels &quot;Fri&quot;,&quot;Mon&quot;,&quot;Sat&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
- $ Month       : Factor w/ 2 levels &quot;June&quot;,&quot;May&quot;: 2 2 2 2 2 2 2 2 2 2 ...
- $ FlightLength: int  281 277 279 158 143 150 158 160 160 163 ...
- $ Delay       : int  -1 102 4 -2 -3 0 -5 0 10 60 ...
- $ Delayed30   : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 1 1 1 1 2 ...</pre>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
-
-<p>How does the output of <code>glimpse()</code> differ from <code>str()</code>?</p>
-
-<pre class = 'prettyprint lang-r'>library(dplyr)
-glimpse(flightDelays)</pre>
-
-<pre >Observations: 4,029
-Variables: 10
-$ ID           &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15...
-$ Carrier      &lt;fct&gt; UA, UA, UA, UA, UA, UA, UA, UA, UA, UA, UA, UA, U...
-$ FlightNo     &lt;int&gt; 403, 405, 409, 511, 667, 669, 673, 677, 679, 681,...
-$ Destination  &lt;fct&gt; DEN, DEN, DEN, ORD, ORD, ORD, ORD, ORD, ORD, ORD,...
-$ DepartTime   &lt;fct&gt; 4-8am, 8-Noon, 4-8pm, 8-Noon, 4-8am, 4-8am, 8-Noo...
-$ Day          &lt;fct&gt; Fri, Fri, Fri, Fri, Fri, Fri, Fri, Fri, Fri, Fri,...
-$ Month        &lt;fct&gt; May, May, May, May, May, May, May, May, May, May,...
-$ FlightLength &lt;int&gt; 281, 277, 279, 158, 143, 150, 158, 160, 160, 163,...
-$ Delay        &lt;int&gt; -1, 102, 4, -2, -3, 0, -5, 0, 10, 60, 0, 32, 0, 4...
-$ Delayed30    &lt;fct&gt; No, Yes, No, No, No, No, No, No, No, Yes, No, Yes...</pre>
-
-</article></slide><slide class=""><hgroup><h2>Summaries</h2></hgroup><article  id="summaries">
-
-<pre class = 'prettyprint lang-r'>summary(flightDelays)</pre>
-
-<pre >       ID       Carrier      FlightNo      Destination    DepartTime  
- Min.   :   1   AA:2906   Min.   :  71.0   BNA: 172    4-8am   : 699  
- 1st Qu.:1008   UA:1123   1st Qu.: 371.0   DEN: 264    4-8pm   : 972  
- Median :2015             Median : 691.0   DFW: 918    8-Mid   : 257  
- Mean   :2015             Mean   : 827.1   IAD:  55    8-Noon  :1053  
- 3rd Qu.:3022             3rd Qu.: 787.0   MIA: 610    Noon-4pm:1048  
- Max.   :4029             Max.   :2255.0   ORD:1785                   
-                                           STL: 225                   
-  Day       Month       FlightLength       Delay        Delayed30 
- Fri:637   June:2030   Min.   : 68.0   Min.   :-19.00   No :3432  
- Mon:630   May :1999   1st Qu.:155.0   1st Qu.: -6.00   Yes: 597  
- Sat:453               Median :163.0   Median : -3.00             
- Sun:551               Mean   :185.3   Mean   : 11.74             
- Thu:566               3rd Qu.:228.0   3rd Qu.:  5.00             
- Tue:628               Max.   :295.0   Max.   :693.00             
- Wed:564                                                          </pre>
-
-</article></slide><slide class=""><hgroup><h2>Other Useful Functions</h2></hgroup><article  id="other-useful-functions">
-
-<p>See the <a href='https://raw.githubusercontent.com/STAT-JET-ASU/Scripts/master/Dataset-Structure.R?token=ALn2zRXOJWr_OeL4Q8lMeUQSYnE0dVjDks5biDhwwA%3D%3D' title=''>Dataset Structure</a> script for some other functions you can use to explore and summarize dataset structure, such as:</p>
+<p>How do we know if events \(A\) and \(B\) are independent?</p>
 
 <ul>
-<li><code>attributes()</code></li>
-<li><code>dim()</code></li>
-<li><code>nrow()</code></li>
-<li><code>ncol()</code></li>
-<li><code>head()</code></li>
-<li><code>tail()</code></li>
-<li><code>sum(complete.cases())</code></li>
-<li><code>sum(!complete.cases())</code></li>
+<li><p>The physical situation makes it clear that knowing event \(A\) does not change the probability that event \(B\) will occur.</p></li>
+<li><p>If conditional probability \(P(A|B)\) equals the unconditional probability \(P(A)\), then knowing \(B\) does not matter and the events \(A\) and \(B\) are independent.</p></li>
+<li><p>By the same reasoning as above, if \(P(B|A) = P(B)\), then \(A\) and \(B\) are independent.</p></li>
+<li><p>\(A\) and \(B\) are independent \(\iff P(A \text{ and } B) = P(A)P(B)\)</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
+</article></slide><slide class=""><hgroup><h2>Confusion of the Inverse</h2></hgroup><article  id="confusion-of-the-inverse">
 
-<p style="text-align:center">
+<p>For dependent events \(A\) and \(B\), \(P(A|B) \neq P(B|A)\). People often make the mistake of assuming they are. This is called <em>confusion of the inverse</em>.</p>
 
-<img src="https://stat-jet-asu.github.io/Moodlepics/swimmingindata.jpg">
+<p>Example: What is the probability that someone tests positive for a disease, given that we know they have the disease? Then what about the inverse, the probability that someone has the disease, given a positive test? Mosts tests are not 100% accurate.</p>
 
-</p></article></slide>
+<p>P(have disease | positive test) \(\neq\) P(postive test | have disease)</p></article></slide>
 
 
   <slide class="backdrop"></slide>

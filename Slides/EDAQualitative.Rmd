@@ -71,12 +71,22 @@ round(prop.table(table(berkdata$sex)), 4)
 ```
 
 
+## Using `table()` and `prop.table()`
+
+```{r}
+statusTab <- table(berkdata$status)
+print(statusTab)
+prop.table(statusTab)
+round(prop.table(statusTab), 4)
+```
+
+
 ## Contingency (Two-Way) Tables
 
 ```{r}
-conTAB <- table(berkdata$sex, berkdata$status)
-print(conTAB)
-addmargins(conTAB)
+sexbystatusTab <- table(berkdata$sex, berkdata$status)
+print(sexbystatusTab)
+addmargins(sexbystatusTab)
 ```
 
 
@@ -85,8 +95,8 @@ addmargins(conTAB)
 Proportions are calculated by treating each row as a separate frequency table. The rows (not columns) sum to one or 100%.
 
 ```{r}
-prop.table(conTAB, 1)
-rowSums(prop.table(conTAB, 1))
+prop.table(sexbystatusTab, 1)
+rowSums(prop.table(sexbystatusTab, 1))
 ```
 
 
@@ -95,8 +105,8 @@ rowSums(prop.table(conTAB, 1))
 Proportions are calculated by treating each column as a table. The columns (not rows) sum to one or 100%.
 
 ```{r}
-prop.table(conTAB, 2)
-colSums(prop.table(conTAB, 2))
+prop.table(sexbystatusTab, 2)
+colSums(prop.table(sexbystatusTab, 2))
 ```
 
 
@@ -157,12 +167,21 @@ ggplot(berkdata, aes(x = sex)) +
 ```
 
 
+## Proportions Instead of Counts
+
+```{r fig.height=3.7}
+library(tidyverse)
+ggplot(berkdata, aes(x = sex)) + 
+  geom_bar(aes(y=..count../sum(..count..))) + ylab("proportion")
+```
+
+
 ## Improve the Presentation
 
 ```{r fig.height=3.7}
 ggplot(berkdata, aes(x = sex)) + 
   geom_bar(fill = "lightblue", color = "gray") +
-  labs(title = "Berkeley Admissions Data", x = "applicant sex")
+  labs(title = "Berkeley Grad Applicants F73", x = "applicant sex")
 ```
 
 
@@ -197,7 +216,7 @@ We can still make a barplot if we have summarized vs. raw data.
 ```{r fig.height=3}
 dept_tab <- berkdata %>% count(department)
 ggplot(dept_tab, aes(x = department, y = n)) + 
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity") + labs(y = "count")
 ```
 
 
@@ -223,8 +242,8 @@ The online _Cookbook for R_ shows some [color options](http://www.cookbook-r.com
 ggplot(berkdata, aes(x = sex, fill = status)) +
   geom_bar(color = "darkgray") +
   scale_fill_manual(values = c("palegreen", "turquoise")) +
-  labs(title = "Berkeley Admissions Data",
-       subtitle = "Largest Six Departments, Fall 1973",
+  labs(title = "Berkeley Grad Applicants, Fall 1973",
+       subtitle = "Six Largest Department Applicant Pools",
        caption = "source dataset = berkeley.csv",
        x = "sex of applicant", y = "number of applicants")
 ```
@@ -236,8 +255,8 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 ggplot(berkdata, aes(x = sex, fill = status)) +
   geom_bar(color = "darkgray") +
   scale_fill_manual(values = c("palegreen", "turquoise")) +
-  labs(title = "Berkeley Admissions Data",
-       subtitle = "Largest Six Departments, Fall 1973",
+  labs(title = "Berkeley Grad Applicants, Fall 1973",
+       subtitle = "Data from Six Largest Department Applicant Pools",
        caption = "source dataset = berkeley.csv",
        x = "sex of applicant",
        y = "number of applicants")
@@ -253,8 +272,8 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   geom_bar(color = "darkgray") +
   facet_grid(. ~ department) +
   scale_fill_manual(values = c("palegreen", "turquoise")) +
-  labs(title = "Berkeley Admissions Data",
-       subtitle = "Largest Six Departments, Fall 1973",
+  labs(title = "Berkeley Grad Applicants, Fall 1973",
+       subtitle = "Data from Six Largest Department Applicant Pools",
        caption = "source dataset = berkeley.csv",
        x = "sex of applicant",
        y = "number of applicants")
@@ -270,8 +289,8 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   geom_bar(color = "darkgray") +
   facet_grid(. ~ department) +
   scale_fill_manual(values = c("palegreen", "turquoise")) +
-  labs(title = "Berkeley Admissions Data",
-       subtitle = "Largest Six Departments, Fall 1973",
+  labs(title = "Berkeley Grad Applicants, Fall 1973",
+       subtitle = "Data from Six Largest Department Applicant Pools",
        caption = "source dataset = berkeley.csv",
        x = "sex of applicant",
        y = "number of applicants")
@@ -287,10 +306,14 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   geom_bar(color = "darkgray") +
   facet_wrap(. ~ department) +
   scale_fill_manual(values = c("palegreen", "turquoise")) +
-  labs(title = "Berkeley Admissions Data",
-       subtitle = "Largest Six Departments, Fall 1973",
+  labs(title = "Berkeley Grad Applicants in Fall 73",
+       subtitle = "Data from Six Largest Department Applicant Pools",
        caption = "source dataset = berkeley.csv",
        x = "sex of applicant",
        y = "number of applicants")
 ```
 
+
+## Adding a Horizontal Line
+
+TBA!

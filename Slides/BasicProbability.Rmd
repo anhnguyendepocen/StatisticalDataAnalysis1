@@ -1,0 +1,200 @@
+---
+title: "Basic Probability"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+
+## Randomness!
+
+We can define the concept of randomness as a lack of pattern or exact predictability in a sequence or set of events. 
+
+Individual random events are by definition unpredictable, but the relative frequency of different outcomes over a very large number of events (often called "trials") _is_ predictable. 
+
+Example: if you roll two six-sided dice and add the values, the result of individual rolls is unpredictable, but in the long run a sum of seven will occur twice as often as a sum of four. 
+
+Randomness reflects our uncertainty about an outcome, not haphazardness in the process that produces an outcome.
+
+
+## Random Circumstance
+
+A random circumstance is a scenario in which an exact outcome or sequence of outcomes is unpredictable. We can think about two kinds of random circumstances.
+
+* The outcome is not determined until we observe it. 
+
+Example: will the coin flip at the beginning of a football game be heads or tails?
+
+* The outcome has already been determined, but our state of knowledge about the outcome is uncertain. 
+
+Example: does someone have a BRCA or PALB2 gene mutation? They either have it or they do not, but we do not know until we perform an appropriate genetic test.
+
+
+## What are the Chances?
+
+While we cannot predict exactly what will happen for any given random circumstance, we can often determine a set of possible outcomes and attach a probability to each outcome.
+
+Probabilities for the outcomes in a given random circumstance may at times depend on other random circumstances. 
+
+Example: the chance of being injured in a car accident depends on whether or not the person is wearing a seatbelt.
+
+We can refer to random circumstances as random variables and use them to mathematically model the world. 
+
+A circumstance that is not random is _deterministic_.
+
+
+## Probability Interpretations
+
+For situations that we can imagine repeating many times, the probability of an outcome is the fraction of the time it would happen in the long run. We express probabilities as fractions, proportions, or percentages.
+
+* relative frequency probabilities rely on determining how often each outcome occurs relative to the others, based on logical assumptions and theory, or on direct observation of events (empirical or experimental probability) 
+
+* personal probabilities (or subjective probabilities) rely on an individual's judgment and experience, often when there is not enough data or a circumstance is not repeatable
+
+We are using concepts and axioms of classical probability. Other systems like fuzzy logic may use different definitions/axioms.
+
+
+## Outcomes vs. Events 
+
+For a given discrete random variable $X$...
+
+* sample space: the set of all unique possible outcomes, which can be a discrete list or a mathematical expression
+
+$$x = \{\text{set of outcomes}\}$$
+
+* simple event: a unique possible outcome (one element of $x$)
+* compound event: a set of 2 or more outcomes/simple events
+
+In general, an _event_ is a set of one or more simple events drawn from the sample space of the random variable.
+
+Later slides address the additional concepts of complementary, mutally exclusive, and independent vs. dependent events.
+
+
+## Probability Fundamentals 
+
+For a given discrete random variable $X$...
+
+* The probability of any outcome is between 0 and 1 (inclusive)
+
+$$0 \leq P(x_i) \leq 1$$
+
+* The sum of the probabilities across all possible outcomes is 1
+
+Even personal probabilities must be _coherent_ probabilities: the values have to be between 0 and 1 and they can not contradict one another. If you think you have a 20% chance of getting the job for which you just interviewed, then you should believe you have an 80% chance of not getting it. 
+
+Question: what do extreme probability values 0 and 1 indicate?
+
+
+## Complementary Events
+
+One event is the complement of another if they do not contain any of the same simple events and together they contain all the simple events in the sample space. In other words, they do not overlap and together they cover the whole sample space.
+
+For an event $A$ and its complement $A^c$, $P(A^c) = 1 - P(A)$.
+
+Example: 
+
+$X$ = result of rolling one fair six-sided die, so $x = \{1, 2, 3, 4, 5, 6\}$ with all values equally likely to occur
+
+Let $A$ = the event that the roll is a 6 and $A^c$ = the roll is not a 6
+
+For a standard die, $P(A) = \frac{1}{6}$ and thus $P(A^c) = 1 - \frac{1}{6} = \frac{5}{6}$
+
+
+## Mutually Exclusive Events
+
+Two events are mutually exclusive (also called disjoint) if they do not contain any of the same simple events. By definition, events that are complementary are also mutually exclusive, but not all mutually exclusive events are complementary.
+
+$X$ = result of rolling one six-sided die, so $x = \{1, 2, 3, 4, 5, 6\}$
+
+* Event $A$ = the roll of a six-sided die is even = $\{2, 4, 6\}$
+* Event $B$ = the roll of a six-sided die is odd = $\{1, 3, 5\}$
+* Event $C$ = the roll of a six-sided die is exactly $5$ = $\{5\}$
+
+Events $A$ and $B$ are mutually exclusive and complementary. $A$ and $C$ are mutually exclusive, but they are not complementary. $B$ and $C$ are neither mutually exclusive nor complementary.
+
+
+## Independent Events
+
+Two events are independent if knowing that one will occur (or has occurred) does not affect the probability that the other will occur. Otherwise the events are dependent.
+
+Being dependent does not mean one event causes the other. It just means they are related in some way.
+
+To explore and determine independence, we have to consider conditional probability of one event, given another event.
+
+Independence is an important assumption for many statistical methods---for example, that data are an independent random sample from some population of interest.
+
+
+## Conditional Probability
+
+Sometimes, the probabilities of outcomes for a random variable depend on another random variable. 
+
+Conditional probability of event $B$, given event $A$, is the long run relative frequency with which $B$ occurs when $A$ has occurred or will occur. We write this as $P(B|A)$. 
+
+Reminder: just because events $A$ and $B$ depend on one another does not necessarily mean one event causes the other. 
+
+Cause and effect determinations rely on other methods, such as performing a controlled experiment.
+
+
+## Addition Rule
+
+What is the probability that either one or both of two particular events happen? In other words, for one randomly chosen case, only $A$ _or_ $B$ must be true, but both may be true in some cases.
+
+*  $P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)$
+
+*  $P(A \text{ or } B) = P(A) + P(B)$, if $A$ and $B$ are mutually exclusive
+
+If A and B are mutually exclusive, $P(A \text{ and } B) = 0$ &rarr; impossible!
+
+<p style="text-align: center;"><img src="https://www.onlinemathlearning.com/image-files/xprobability-mutually-exclusive.png.pagespeed.ic.X6H14tz8Fk.png" height = 200></p>
+
+
+## Multiplication Rule
+
+What is the probabilty that two events happen either together or in sequencen (depending on the problem)?
+
+*  $P(A \text{ and } B) = P(A)P(B|A) = P(B)P(A|B)$
+
+*  $P(A \text{ and } B) = P(A)P(B)$, if $A$ and $B$ are independent
+
+*  We can extend the rule for multiple independent events
+
+$P(B|A)$ is read as "the conditional probability of event B given event A" or "the probability of B given A". 
+
+If $A$ occurs first, does it affect the probability of $B$ occurring?
+
+
+## Conditional Multiplication
+
+This is an algebraic restatement of the multiplication rule above; sometimes useful to consider it this way, depending on what we know in a given scenario. 
+
+$$P(B|A) = \frac{P(A \text{ and } B)}{P(A)}$$
+
+Since the labels given to events A and B are essentially arbitrary, we can write the expression either way.
+
+$$P(A|B) = \frac{P(A \text{ and } B)}{P(B)}$$
+
+
+## Independent Events?
+
+How do we know if events $A$ and $B$ are independent?
+
+* The physical situation makes it clear that knowing event $A$ does not change the probability that event $B$ will occur.
+
+* If conditional probability $P(A|B)$ equals the unconditional probability $P(A)$, then knowing $B$ does not matter and the events $A$ and $B$ are independent.
+
+* By the same reasoning as above, if $P(B|A) = P(B)$, then $A$ and $B$ are independent.
+
+* $A$ and $B$ are independent $\iff P(A \text{ and } B) = P(A)P(B)$
+
+
+## Confusion of the Inverse
+
+For dependent events $A$ and $B$, $P(A|B) \neq P(B|A)$. People often make the mistake of assuming they are. This is called _confusion of the inverse_.
+
+Example: What is the probability that someone tests positive for a disease, given that we know they have the disease? Then what about the inverse, the probability that someone has the disease, given a positive test? Mosts tests are not 100% accurate.
+
+P(have disease | positive test) $\neq$ P(postive test | have disease)
