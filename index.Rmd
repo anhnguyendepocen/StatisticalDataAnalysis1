@@ -4,9 +4,9 @@ title: "Welcome!"
 
 <hr>
 
-* [Course Syllabus](./Syllabus/SyllabusF2018.html)
+* [Course Syllabus](./Syllabus/SyllabusS2019.html)
 
-* [Course Schedule](./Schedule/ScheduleF2018.html)
+* [Course Schedule](./Schedule/ScheduleS2019.html)
 
 * [Course Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html)
 
@@ -18,6 +18,6 @@ title: "Welcome!"
 
 <figure><img src="./images/DataCamp125px.png" alt="DataCamp" align="left"></figure><br>
 
-_This class is supported by DataCamp, an intuitive learning platform for data science. Learn R, Python, and SQL the way many people learn best, through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization, or machine learning and learn faster through immediate and personalised feedback on every exercise._
+_This class is supported by [DataCamp](https://www.datacamp.com), an intuitive learning platform for data science. Learn R, Python, and SQL the way many people learn best, through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization, or machine learning and learn faster through immediate and personalised feedback on every exercise._
 
 <hr>

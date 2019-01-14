@@ -49,43 +49,71 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 
 The only way to learn statistics is to **DO** statistics, which includes statistical software. Reading the textbook, learning the language, and practicing exercises using real data are critical to your learning and success. Class activities and assessments have been structured with these principles in mind. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must "speak the language" (statistics and R) to effectively demonstrate your knowledge. This course uses a standards-based grading methods, which we will discuss further in class.
 
-```{r, echo = FALSE}
-library(kableExtra)
-df <- data.frame(Outcome = c("I can further my learning by making a good faith effort to complete assigned homework problems.", 
-                             "I can further my learning by engaging positively with external resources in the discipline.", 
-                             "I can produce thoughtful reflections about my learning in this class.", 
-                             "I can demonstrate my knowledge of probability models and assessment of normality.", 
-                             "I can demonstrate my knowledge of creating and visualizing linear models created from data.",
-                             "I can demonstrate my knowledge of simulating, calculating, and describing statistical distributions.",
-                             "I can demonstrate my knowledge of asymptotic and bootstrap parameter estimation procedures.",
-                             "I can demonstrate my knowledge of asymptotic and resampling hypothesis testing procedures.",
-                             "I can demonstrate effective statistical computing and reporting skills using R and reproducible methods. ",
-                             "I can demonstrate my integration of knowledge/skills across the course."),
-                 C = c("Reasonable attempt made on at least 70% of HW assignments",
-                       "At least 5 of 10 DataCamp assignments completed with 80% or more of points earned", 
-                       "At least 7 of 15 reflections completed in a satisfactory manner", 
-                       "Proficient score on 1 proficiency assessment problem", 
-                       "Proficient score on 1 proficiency assessment problem",
-                       "Proficient score on 1 proficiency assessment problem",
-                       "Proficient score on 1 proficiency assessment problem",
-                       "Proficient score on 1 proficiency assessment problem",
-                       "Proficient score on 1 proficiency assessment problem",
-                       "Score of 60% or more on the cumulative final exam"), 
-                 A = c("Reasonable attempt made on at least 90% of HW assignments", 
-                       "At least 9 of 10 DataCamp assignments completed with 80% or more of points earned", 
-                       "At least 13 of 15 reflections completed in a satisfactory manner", 
-                       "Proficient score on 3 proficiency assessment problems",
-                       "Proficient score on 3 proficiency assessment problems",
-                       "Proficient score on 3 proficiency assessment problems",
-                       "Proficient score on 3 proficiency assessment problems",
-                       "Proficient score on 3 proficiency assessment problems",
-                       "Proficient score on 3 proficiency assessment problems",
-                       "Score of 80% or more on the cumulative final exam"))
-knitr::kable(df, format = "html", align = c("l","l","l")) %>%
-  row_spec(0, align = "c") %>% 
-  add_header_above(c(" ", "Criteria to earn a course grade of..." = 2)) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) 
-```
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+ <thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1"></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Criteria to earn a course grade of...</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;text-align: center;"> Outcome </th>
+   <th style="text-align:left;text-align: center;"> C </th>
+   <th style="text-align:left;text-align: center;"> A </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> I can further my learning by making a good faith effort to complete assigned homework problems. </td>
+   <td style="text-align:left;"> Reasonable attempt made on at least 70% of HW assignments </td>
+   <td style="text-align:left;"> Reasonable attempt made on at least 90% of HW assignments </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can further my learning by engaging positively with external resources in the discipline. </td>
+   <td style="text-align:left;"> At least 5 of 10 DataCamp assignments completed with 80% or more of points earned </td>
+   <td style="text-align:left;"> At least 9 of 10 DataCamp assignments completed with 80% or more of points earned </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can produce thoughtful reflections about my learning in this class. </td>
+   <td style="text-align:left;"> At least 7 of 15 reflections completed in a satisfactory manner </td>
+   <td style="text-align:left;"> At least 13 of 15 reflections completed in a satisfactory manner </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate my knowledge of probability models and assessment of normality. </td>
+   <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
+   <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate my knowledge of creating and visualizing linear models created from data. </td>
+   <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
+   <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate my knowledge of simulating, calculating, and describing statistical distributions. </td>
+   <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
+   <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate my knowledge of asymptotic and bootstrap parameter estimation procedures. </td>
+   <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
+   <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate my knowledge of asymptotic and resampling hypothesis testing procedures. </td>
+   <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
+   <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate effective statistical computing and reporting skills using R and reproducible methods. </td>
+   <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
+   <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I can demonstrate my integration of knowledge/skills across the course. </td>
+   <td style="text-align:left;"> Score of 60% or more on the cumulative final exam </td>
+   <td style="text-align:left;"> Score of 80% or more on the cumulative final exam </td>
+  </tr>
+</tbody>
+</table>
 
 To earn a course grade of B, you must achieve at least C level in all outcomes, with additional demonstrated achievement halfway to A level. There are two ways to do this: (1) achieve at least 50% (5/10) of the A-level requirements, with the rest at least at the C level; or (2) surpass all 10 of the C level requirements to the halfway point between C and A. To earn a course grade of D you must achieve at least halfway to C level on all outcomes, which _must_ include earning at least 60% on the cumulative final exam. 
 
@@ -105,9 +133,7 @@ This course will use the RStudio server  (https://mathr.math.appstate.edu/) that
 
 You must have an active internet connection and be registered in the course to access the ASU RStudio server. To access the server, point any web browser to <https://mathr.math.appstate.edu/>. Use your Appstate Username and Password to log in. A screen shot of the RStudio server is shown below. If you have problems with your Appstate Username or Password visit [IT Support Services](http://support.appstate.edu/) or call 262-6266.
 
-```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("RStudioLogIn.jpg", dpi = 128)
-```
+<img src="RStudioLogIn.jpg" width="564" style="display: block; margin: auto;" />
 
 
 **Expectations**  

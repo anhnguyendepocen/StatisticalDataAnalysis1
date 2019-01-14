@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+date: 'Updated: Sunday, January 13, 2019 @ 07:42:15 PM'
 output: 
   html_document: 
     toc: true
@@ -15,27 +15,33 @@ output:
 
 ***
 
-```{block, updates, type='rmdimportant'}
-* **This schedule is a work in progress. Check often for updates!**
-```
+<div class="rmdimportant">
+<ul>
+<li><strong>This schedule is a work in progress. Check often for updates!</strong></li>
+</ul>
+</div>
 
-```{block, startnote, type='rmdnote'}
-* We will use rental and free digital textbooks.
-* All required software for this course is provided.
-* Please bring a notebook and pencil to every class.
-* Be prepared to actively participate and collaborate.
-* Refer to the [Course Syllabus](../Syllabus/SyllabusS2019.html) for additional details.
-```
+<div class="rmdnote">
+<ul>
+<li>We will use rental and free digital textbooks.</li>
+<li>All required software for this course is provided.</li>
+<li>Please bring a notebook and pencil to every class.</li>
+<li>Be prepared to actively participate and collaborate.</li>
+<li>Refer to the <a href="../Syllabus/SyllabusS2019.html">Course Syllabus</a> for additional details.</li>
+</ul>
+</div>
 
-```{block, introoptional, type='rmdoptional'}
-Optionally, you may wish to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and  [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html).  Jenny's advice is also in chapters 6 and 7 of _[Happy Git and GitHub for the useR](http://happygitwithr.com/)_.  Note that [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are all installed on the [ASU RStudio server](https://mathr.math.appstate.edu/) and you can access these resources using any web browser.
-
-Watch the following videos as appropriate:
-
-* [Install R on Mac (2 min)](https://www.youtube.com/watch?v=lJxVRgiX-ik)    
-* [Install R for Windows (3 min)](https://www.youtube.com/watch?v=LII6of-5Odw)    
-* [Install R and RStudio on Windows (5 min)](https://www.youtube.com/watch?v=eD07NznguA4)    
-```
+<div class="rmdoptional">
+<p>Optionally, you may wish to install <a href="http://git-scm.com/downloads">Git</a>, <a href="http://cran.r-project.org">R</a>, <a href="http://www.rstudio.com/products/rstudio/download/">RStudio</a>, <a href="https://www.zotero.org">zotero</a>, and <a href="http://www.ctan.org/starter"><span class="math inline">\(LaTeX\)</span></a> on your personal computer. If you do, follow Jenny Bryan's excellent advice for <a href="http://stat545-ubc.github.io/block000_r-rstudio-install.html">installing R and RStudio</a> and <a href="http://stat545-ubc.github.io/git01_git-install.html">installing Git</a>. Jenny's advice is also in chapters 6 and 7 of <em><a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a></em>. Note that <a href="http://git-scm.com/downloads">Git</a>, <a href="http://cran.r-project.org">R</a>, <a href="http://www.rstudio.com/products/rstudio/download/">RStudio</a>, and <a href="http://www.ctan.org/starter"><span class="math inline">\(LaTeX\)</span></a> are all installed on the <a href="https://mathr.math.appstate.edu/">ASU RStudio server</a> and you can access these resources using any web browser.</p>
+<p>Watch the following videos as appropriate:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=lJxVRgiX-ik">Install R on Mac (2 min)</a><br />
+</li>
+<li><a href="https://www.youtube.com/watch?v=LII6of-5Odw">Install R for Windows (3 min)</a><br />
+</li>
+<li><a href="https://www.youtube.com/watch?v=eD07NznguA4">Install R and RStudio on Windows (5 min)</a></li>
+</ul>
+</div>
 
 ***
 ### Course Overview
@@ -50,10 +56,12 @@ DC = [_DataCamp_](https://www.datacamp.com/)
 JB = [_JB Statistics_](https://www.youtube.com/user/jbstatistics/videos)  
 HW = homework
 
-```{block, duedates, type='rmdimportant'}
-* **All assignments are due on Thursday @ 11pm of the week in which they appear.** 
-* **Check AsULearn for more detailed assignment instructions, rubrics, and grades.**
-```
+<div class="rmdimportant">
+<ul>
+<li><strong>All assignments are due on Thursday @ 11pm of the week in which they appear.</strong></li>
+<li><strong>Check AsULearn for more detailed assignment instructions, rubrics, and grades.</strong></li>
+</ul>
+</div>
 
 
 ***
@@ -251,9 +259,11 @@ HW = homework
 ***
 ### Spring Break
 
-```{block, springbreak, type='rmdnote'}
-* If you're not already caught up on your work, try to be on schedule by the time you get back!
-```
+<div class="rmdnote">
+<ul>
+<li>If you're not already caught up on your work, try to be on schedule by the time you get back!</li>
+</ul>
+</div>
 
 
 ***
@@ -411,6 +421,8 @@ HW = homework
 ***
 ### Final Exam
 
-```{block, final, type='rmdnote'}
-* Our [final exam time](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_spring_2019_exam_schedule.pdf) is Tuesday May 07 @ 2:00pm in our usual classroom. You will take your cumulative final exam at this time.
-```
+<div class="rmdnote">
+<ul>
+<li>Our <a href="https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_spring_2019_exam_schedule.pdf">final exam time</a> is Tuesday May 07 @ 2:00pm in our usual classroom. You will take your cumulative final exam at this time.</li>
+</ul>
+</div>
