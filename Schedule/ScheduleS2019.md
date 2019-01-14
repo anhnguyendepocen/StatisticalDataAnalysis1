@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Sunday, January 13, 2019 @ 08:19:12 PM'
+date: 'Updated: Monday, January 14, 2019 @ 01:02:22 PM'
 output: 
   html_document: 
     toc: true
@@ -31,17 +31,6 @@ output:
 </ul>
 </div>
 
-<div class="rmdoptional">
-<p>Optionally, you may wish to install <a href="http://git-scm.com/downloads">Git</a>, <a href="http://cran.r-project.org">R</a>, <a href="http://www.rstudio.com/products/rstudio/download/">RStudio</a>, <a href="https://www.zotero.org">zotero</a>, and <a href="http://www.ctan.org/starter"><span class="math inline">\(LaTeX\)</span></a> on your personal computer. If you do, follow Jenny Bryan's excellent advice for <a href="http://stat545-ubc.github.io/block000_r-rstudio-install.html">installing R and RStudio</a> and <a href="http://stat545-ubc.github.io/git01_git-install.html">installing Git</a>. Jenny's advice is also in chapters 6 and 7 of <em><a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a></em>. Note that <a href="http://git-scm.com/downloads">Git</a>, <a href="http://cran.r-project.org">R</a>, <a href="http://www.rstudio.com/products/rstudio/download/">RStudio</a>, and <a href="http://www.ctan.org/starter"><span class="math inline">\(LaTeX\)</span></a> are all installed on the <a href="https://mathr.math.appstate.edu/">ASU RStudio server</a> and you can access these resources using any web browser.</p>
-<p>Watch the following videos as appropriate:</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=lJxVRgiX-ik">Install R on Mac (2 min)</a><br />
-</li>
-<li><a href="https://www.youtube.com/watch?v=LII6of-5Odw">Install R for Windows (3 min)</a><br />
-</li>
-<li><a href="https://www.youtube.com/watch?v=eD07NznguA4">Install R and RStudio on Windows (5 min)</a></li>
-</ul>
-</div>
 
 ***
 ### Course Overview

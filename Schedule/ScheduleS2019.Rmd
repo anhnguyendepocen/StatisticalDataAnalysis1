@@ -27,15 +27,6 @@ output:
 * Refer to the [Course Syllabus](../Syllabus/SyllabusS2019.html) for additional details.
 ```
 
-```{block, introoptional, type='rmdoptional'}
-Optionally, you may wish to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and  [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html).  Jenny's advice is also in chapters 6 and 7 of _[Happy Git and GitHub for the useR](http://happygitwithr.com/)_.  Note that [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are all installed on the [ASU RStudio server](https://mathr.math.appstate.edu/) and you can access these resources using any web browser.
-
-Watch the following videos as appropriate:
-
-* [Install R on Mac (2 min)](https://www.youtube.com/watch?v=lJxVRgiX-ik)    
-* [Install R for Windows (3 min)](https://www.youtube.com/watch?v=LII6of-5Odw)    
-* [Install R and RStudio on Windows (5 min)](https://www.youtube.com/watch?v=eD07NznguA4)    
-```
 
 ***
 ### Course Overview
