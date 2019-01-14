@@ -1,0 +1,128 @@
+---
+title: "Chihara & Hesterberg 1st Edition Outline"
+author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+---
+
+<hr>
+
+### Chapter 1 -- Data and Case Studies
+
+* 1.1. Case Study: Flight Delays
+* 1.2. Case Study: Birth Weights of Babies
+* 1.3. Case Study: Verizon Repair Times
+* 1.4. Sampling
+* 1.5. Parameters and Statistics
+* 1.6. Case Study: General Social Survey
+* 1.7. Sample Surveys
+* 1.8. Case Study: Beer and Hot Wings
+* 1.9. Case Study: Black Spruce Seedlings
+* 1.10. Studies
+* 1.11. Exercises
+
+
+### Chapter 2 -- Exploratory Data Anlaysis
+
+* 2.1. Basic Plots
+* 2.2. Numeric Summaries
+    * 2.2.1. Center
+    * 2.2.2. Spread
+    * 2.2.3. Shape
+* 2.3. Boxplots
+* 2.4. Quantiles and Normal Quantile Plots
+* 2.5. Empirical Cumulative Distribution Plots
+* 2.6. Scatter Plots
+* 2.7. Skewness and Kurtosis
+* 2.8. Exercises
+
+
+### Chapter 3 -- Hypothesis Testing
+
+* 3.1. Introduction to Hypothesis Testing
+* 3.2. Hypotheses
+* 3.3. Permutation Tests
+    * 3.3.1. Implementation Issues
+    * 3.3.2. One-Sided and Two-Sided Tests
+    * 3.3.3. Other Statistics
+    * 3.3.4. Assumptions
+* 3.4. Contingency Tables
+    * 3.4.1. Permutation Test for Independence
+    * 3.4.2. Chi-Square Reference Distribution
+* 3.5. Chi-Square Test of Independence
+* 3.6. Test of Homogeneity
+* 3.7. Goodness-of-Fit: All Parameters Known
+* 3.8. Goodness-of-Fit: Some Parameters Estimated 
+* 3.9. Exercises 
+
+
+### Chapter 4 -- Sampling Distributions
+
+* 4.1. Sampling Distributions
+* 4.2. Calculating Sampling Distributions
+* 4.3. The Central Limit Theorem
+    * 4.3.1. CLT for Binomial Data
+    * 4.3.2. Continuity Correction for Discrete Random Variables
+    * 4.3.3. Accuracy of the Central Limit Theorem
+    * 4.3.4. CLT for Sampling Without Replacement
+* 4.4. Exercises
+
+
+### Chapter 5 -- The Bootstrap
+
+* 5.1. Introduction to the Bootstrap
+* 5.2. The Plug-In Principle
+    * 5.2.1. Estimating the Population Distribution
+    * 5.2.2. How Useful is the Bootstrap Distribution?
+* 5.3. Bootstrap Percentile Intervals
+* 5.4. Two Sample Bootstrap
+    * 5.4.1 The Two Independent Populations Assumption
+* 5.5. Other Statistics
+* 5.6. Bias
+* 5.7. Monte Carlo Sampling: "The Second Bootstrap Principle"
+* 5.8. Accuracy of Bootstrap Distributions
+    * 5.8.1. The Sample Mean: Large Sample Size
+    * 5.8.2. The Sample Mean: Small Sample Size
+    * 5.8.3. Sample Median
+* 5.9. How Many Bootstrap Samples Are Needed?
+* 5.10. Exercises
+
+
+### Chapter 7 -- The Bootstrap
+
+* 7.1. Confidence Intervals for Means
+    * 7.1.1. Confidence Intervals for a Mean, &sigma; Known
+    * 7.1.2. Confidence Intervals for a Mean, &sigma; Unknown
+    * 7.1.3. Confidence Intervals for Differences in Means
+* 7.2. Confidence Intervals in General
+    * 7.2.1. Location and Scale Parameters
+* 7.3. One-Sided Confidence Intervals
+* 7.4. Confidence Intervals for Proportions
+    * 7.4.1. The Agresti-Coull Interval for a Proportion
+    * 7.4.2. Confidence Interval for the Difference of Proportions
+* 7.5. Bootstrap t Confidence Intervals
+    * 7.5.1. Comparing Bootstrap t and Formula t Confidence Intervals
+* 7.6. Exercises
+
+
+### Chapter 8 -- Classical Inference: Hypothesis Testing
+
+* 8.1. Hypothesis Tests for Means and Proportions
+    * 8.1.1. One Population
+    * 8.1.2. Comparing Two Populations
+* 8.2. Type I and Type II Errors
+    * 8.2.1. Type I Errors
+    * 8.2.2. Type II Errors
+* 8.3. More on Testing
+    * 8.3.1. On Signficance
+    * 8.3.2. Adjustments for Multiple Testing
+    * 8.3.3. *P*-values versus Critical Regions
+* 8.4. Likelihood Ratio Tests
+    * 8.4.1. Simple Hypotheses and the Neyman Pearson Lemma 
+    * 8.4.2. Generalized Likelihood Ratio Tests
+* 8.5. Exercises
+
+
