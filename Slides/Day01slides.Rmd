@@ -1,0 +1,162 @@
+---
+title: "STT 3850 Statistical<br>Data Analysis 1---Day 1"
+author: "Jill Thomley"
+date: "`r Sys.Date()`"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Greetings!
+
+Welcome to the first day of STT 3850 Statistical Data Analysis 1 S19 with Dr. Thomley. To prepare for the start of class...
+
+* Log on to [AsULearn](https://asulearn.appstate.edu/)!
+
+* Find and open the link "Syllabus and Schedule"
+
+* Find and open the link "Day 1 Introduction"
+
+* Begin to familiarize yourself with the course documents and our AsULearn site. AsULearn is the vital hub of our course for assignments and communication.
+
+When instructed, you will also record your attendance. You will do this every day. The required password will be given to you at the start of each class meeting.
+
+
+## Motivating Philosophies
+
+From: [ASA Statement on the Role of Statistics in Data Science](http://magazine.amstat.org/blog/2015/10/01/asa-statement-on-the-role-of-statistics-in-data-science/)
+
+The foundations of data science include, but are not limited to: database management, statistics/machine learning, distributed and parallel computing.
+
+"Framing questions statistically allows us to leverage data resources to extract knowledge and obtain better answers."
+
+"Statistical methods aim to focus attention on findings that can be reproduced by other researchers with different data resources."
+
+"...next generation of statistical professionals needs a broader skill set and must be more able to engage with database and distributed systems experts."
+
+
+##
+
+“Starting September 1 [2016], JASA ACS will require code and data as a minimum standard for reproducibility of statistical scientific research. New infrastructure is being established to support this initiative … A new editorial role—associate editor for reproducibility (AER)—will be added to ensure we meet a standard of reproducibility.” ([Reproducible Research in JASA](http://magazine.amstat.org/blog/2016/07/01/jasa-reproducible16/))
+
+ASA also released [Recommendations to Funding Agencies for Supporting Reproducible Research](https://www.amstat.org/ASA/News/ASA-Develops-Reproducible-Research-Recommendations.aspx) in January 2017, suggesting more statistician reviewers to assess quality of plans for data management and research reproducibility.
+
+Potential barrier: researchers may lack programming and “best practices” skillsets. Also, some disciplines or organizations may not recognize computer data and code as research products in and of themselves. 
+
+
+## Multidisciplinary Data Science!
+
+<img src = "http://i.imgur.com/aoz1BJy.jpg" width = 775/>
+
+
+## What is my Background?
+
+* Medical research in high school
+* BA in Psychology from Harvard
+* MS in Industrial / Organizational Psychology from RPI
+* PhD in Decision Sciences and Engineering Systems RPI
+    * statistics and operations research
+    * information systems and databases
+* Health care research at Albany, NY VA hospital
+* Statistical consulting in a variety of disciplines
+* Grant evaluation, primarily in STEM education
+* Basic, Excel, Fathom, StatCrunch, SPSS, SAS, Minitab, R, Git...
+* Also, I just completely &hearts; data!
+
+
+##
+
+<p style="text-align: center;"><img src = "images/rstudio-logo.png" width=600;></p>
+<p style="text-align: center;">
+<img src = "images/rmarkdown.png" width=100;>
+<img src = "images/tidyverse.png" width=100;>
+<img src = "images/dplyr.png" width=100;>
+<img src = "images/ggplot2.png" width=100;>
+<img src = "images/tidyr.png" width=100;>
+<img src = "images/readxl.png" width=100;>
+</p>
+
+<p>[R](https://cran.r-project.org/) : a free and open-source statistical programming language</p>
+
+<p>[R Studio](https://www.rstudio.com/) : a free and open-source IDE for R, supports projects and add-ins, has integrated support for Git and GitHub</p>
+
+
+## Sign on to RStudio Server
+
+Use your ASU Username and Password to log in to the [RStudio server](https://mathr.math.appstate.edu/). Let me know if you have trouble!
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("RStudioLogIn.jpg", dpi = 150)
+```
+
+
+##
+
+<p style="text-align: center;"><img src = "images/datacamp-logo.png" width=600;><br><br></p>
+
+<p>[DataCamp](https://www.datacamp.com) is an "intuitive learning platform" for data science. Learn concepts and R code via short videos and hands-on-the-keyboard exercises, with feedback on each exercise.</p>
+
+<p>Multiple tracks for people with different interests and needs.</p>
+
+<p>[ASA on Data Science](http://magazine.amstat.org/blog/2015/10/01/asa-statement-on-the-role-of-statistics-in-data-science/): “Statistical education and training must continue to evolve…”</p>
+
+
+## Sign on to DataCamp
+
+* Sign in or create an account on [DataCamp](https://www.datacamp.com/). Use your ASU email address.
+
+* Go into your profile and add your first and last name so it shows up on the class roster.
+
+* Accept the invitation to join our DataCamp class. You may need to go to your email to do this.
+
+You will have six months of free access to DataCamp, during which you can access all content---not just courses I assign.
+
+
+## Syllabus and Schedule
+
+Switch over to the course syllabus and schedule and we will talk some more about objectives and assessments.
+
+As we review these documents, remember that STT 3850 is a 4 credit hour course. The standard expectation for an upper level college course is that you will spend **3** hours outside of class for every **1** hour spent in class.
+
+<p style="text-align: center;">4 + (3 &times; 4) = 16 hours per week</p>
+
+There are no prerequisites for this course other than MAT 1110 Calculus With Analytic Geometry I. Students are not expected to have statistics or programming experience. If you do come into the course with one or both, you _may_ not require as much time to master course concepts, but do not assume until you try. 
+
+
+## First Private Forum Post
+
+Send me a message in your Private Forum.
+
+* What is your preferred name?
+
+* What are your preferred pronouns?
+
+* What is your class year and major?
+
+* Have you taken STT 3850 before?
+
+* Is there anything else you want me to know?
+
+
+##
+
+<p style="text-align: center;"><img src = "https://imgs.xkcd.com/comics/code_quality.png"></p>
+
+<p style="text-align: center;"><img src = "https://imgs.xkcd.com/comics/code_quality_3.png"></p>
+
+
+##
+
+<p style="text-align: center;"><img src = "https://imgs.xkcd.com/comics/machine_learning.png"></p>
+
+
+##
+
+<p style="text-align: center;"><img src = "https://raw.githubusercontent.com/STAT-JET-ASU/Moodlepics/master/Nope-Space.gif?token=ALn2zT1xjvkKKCTrvFK20YRDhkSXrMidks5cR1howA%3D%3D"></p>
+
+
+## &nbsp;
+
+<p style="text-align:center"><img src="https://stat-jet-asu.github.io/Moodlepics/swimmingindata.jpg"></p>
