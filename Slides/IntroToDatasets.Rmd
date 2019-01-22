@@ -139,7 +139,7 @@ glimpse(draft)
 
 ## Other Useful Functions
 
-Other functions for exploring dataset structure are given below. Use them on the Flight Delays dataset. What do they tell you?
+Other functions for exploring dataset structure are given below. Use them on the Vietnam Draft dataset. What do they tell you?
 
 * `attributes()`
 * `dim()`
