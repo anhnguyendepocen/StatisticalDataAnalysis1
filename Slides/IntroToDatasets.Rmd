@@ -18,7 +18,14 @@ Statistical methods help us transform raw data into information that provides kn
 
 * In inferential statistics, sample data are used to generalize or make predictions about the larger population from which the sample was selected.
 
+* Data visualization is important for exploration, verification, and presentation of statistical results.
+
 We will often talk about the distribution of a particular variable, which describes how often the possible responses occur.
+
+
+##
+
+<p style="text-align:center;"><img src="https://cdn-images-1.medium.com/max/1200/1*i7WFO9wP0wB-nv3YrkrMPg.png" width = 700></p>
 
 
 ## Population vs. Sample
@@ -87,20 +94,20 @@ John Tukey (1915--2000), author of _Exploratory Data Analysis_ (1977) referred t
 
 Many different types of data files can be read into R. We will be using primarily CSV files read from the web using their URL. Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains links to many datasets provided by the textbook or created by the instructor.
 
-Use the `read.csv()` function to input a CSV file using its URL. 
+Use the `read.csv()` function to input the CSV file using its URL. 
 
-`flightdelays <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/flightdelays.csv"))`
+The `read.csv()` function converts a CSV file into a data frame. 
 
-The Flight Delays dataset is introduced in Ch. 1 of the _Chihara_ textbook. You can read about its origin and contents there.
+There is also a function `read_csv()` in the `readr` package. How do the two functions differ?
+
+`draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))`
 
 ```{r include=FALSE}
-flightdelays <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv")
+draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))
 ```
 
 
 ## Data Frame vs. Tibble
-
-The `read.csv()` function converts a CSV file into a data frame.
 
 A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.
 
@@ -116,7 +123,7 @@ We will be using the `dplyr` and `ggplot2` packages for our EDA. These and other
 The `str()` function is part of base R code, while the `glimpse()` function comes from the `tidyverse` package `dplyr`.
 
 ```{r}
-str(flightdelays)
+str(draft)
 ```
 
 
@@ -126,7 +133,7 @@ These two functions are very similar, but how does the output of `glimpse()` dif
 
 ```{r}
 library(tidyverse)
-glimpse(flightdelays)
+glimpse(draft)
 ```
 
 
@@ -150,13 +157,15 @@ Other functions for exploring dataset structure are given below. Use them on the
 Once we know the overall structure of our dataset, we need to understand its contents. We will discuss more specific functions later, but we can get an overview using `summary()`.
 
 ```{r}
-summary(flightdelays)
+summary(draft)
 ```
 
 
 ## Missing Data Values
 
-In Flight Delays, every variable had a value for every case. That is often not true in real-life data. Missing data values often require special treatment and should be found during EDA.
+In some datasets, every variable had a value for every case. That is frequently *not* true in real-life data. Missing data values need special treatment and should be found during EDA. 
+
+Missing quantitative values and missing categorical values may be stored or displayed differently.
 
 The [couples.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv) dataset contains the height (in mm) and age (in years) for a sample of married couples. 
 
@@ -164,25 +173,14 @@ The [personalitySTT3850.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Data
 
 Use the exploratory functions to discover which can help us find missing values in these datasets.
 
-Missing quantitative values and missing categorical values may be stored or displayed differently.
-
 
 ## More About Missing Values
 
 The `which()` function can help identify the locations of missing values when paired with the `is.na()` function. The result is the row numbers of the NA cases. 
 
-```{r include=FALSE}
-couples <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv")
-```
-
 ```{r}
-which(is.na(couples$wAge) == TRUE)
-index <- which(is.na(couples$hAge) == TRUE)
-couples[index,]
+which(is.na(draft$draftnumber) == TRUE)
+index <- which(is.na(draft$draftnumber) == TRUE)
+draft[index,]
 ```
-
-
-## 
-
-<p style="text-align:center"><img src="https://stat-jet-asu.github.io/Moodlepics/swimmingindata.jpg"></p>
 

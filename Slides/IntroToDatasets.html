@@ -62,6 +62,10 @@
       font-style: italic;
     }
 
+    summary {
+      display: list-item;
+    }
+
     slides > slide {
       -webkit-transition: all 0.4s ease-in-out;
       -moz-transition: all 0.4s ease-in-out;
@@ -93,7 +97,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, October 30, 2018 @ 01:41:19 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, January 22, 2019 @ 11:56:28 AM</p>
           </hgroup>
   </slide>
 
@@ -104,9 +108,18 @@
 <ul>
 <li><p>We use descriptive statistics to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have.</p></li>
 <li><p>In inferential statistics, sample data are used to generalize or make predictions about the larger population from which the sample was selected.</p></li>
+<li><p>Data visualization is important for exploration, verification, and presentation of statistical results.</p></li>
 </ul>
 
 <p>We will often talk about the distribution of a particular variable, which describes how often the possible responses occur.</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
+
+<p style="text-align:center;">
+
+<img src="https://cdn-images-1.medium.com/max/1200/1*i7WFO9wP0wB-nv3YrkrMPg.png" width = 700>
+
+</p>
 
 </article></slide><slide class=""><hgroup><h2>Population vs. Sample</h2></hgroup><article  id="population-vs.-sample">
 
@@ -187,15 +200,15 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 <p>Many different types of data files can be read into R. We will be using primarily CSV files read from the web using their URL. Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>class data files</a> page contains links to many datasets provided by the textbook or created by the instructor.</p>
 
-<p>Use the <code>read.csv()</code> function to input a CSV file using its URL.</p>
-
-<p><code>flightdelays &lt;- read.csv(file = url(&quot;https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/flightdelays.csv&quot;))</code></p>
-
-<p>The Flight Delays dataset is introduced in Ch. 1 of the <em>Chihara</em> textbook. You can read about its origin and contents there.</p>
-
-</article></slide><slide class=""><hgroup><h2>Data Frame vs. Tibble</h2></hgroup><article  id="data-frame-vs.-tibble">
+<p>Use the <code>read.csv()</code> function to input the CSV file using its URL.</p>
 
 <p>The <code>read.csv()</code> function converts a CSV file into a data frame.</p>
+
+<p>There is also a function <code>read_csv()</code> in the <code>readr</code> package. How do the two functions differ?</p>
+
+<p><code>draft &lt;- read.csv(file = url(&quot;https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv&quot;))</code></p>
+
+</article></slide><slide class=""><hgroup><h2>Data Frame vs. Tibble</h2></hgroup><article  id="data-frame-vs.-tibble">
 
 <p>A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.</p>
 
@@ -209,39 +222,29 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 <p>The <code>str()</code> function is part of base R code, while the <code>glimpse()</code> function comes from the <code>tidyverse</code> package <code>dplyr</code>.</p>
 
-<pre class = 'prettyprint lang-r'>str(flightdelays)</pre>
+<pre class = 'prettyprint lang-r'>str(draft)</pre>
 
-<pre >&#39;data.frame&#39;:   4029 obs. of  10 variables:
- $ ID          : int  1 2 3 4 5 6 7 8 9 10 ...
- $ Carrier     : Factor w/ 2 levels &quot;AA&quot;,&quot;UA&quot;: 2 2 2 2 2 2 2 2 2 2 ...
- $ FlightNo    : int  403 405 409 511 667 669 673 677 679 681 ...
- $ Destination : Factor w/ 7 levels &quot;BNA&quot;,&quot;DEN&quot;,&quot;DFW&quot;,..: 2 2 2 6 6 6 6 6 6 6 ...
- $ DepartTime  : Factor w/ 5 levels &quot;4-8am&quot;,&quot;4-8pm&quot;,..: 1 4 2 4 1 1 4 4 5 5 ...
- $ Day         : Factor w/ 7 levels &quot;Fri&quot;,&quot;Mon&quot;,&quot;Sat&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
- $ Month       : Factor w/ 2 levels &quot;June&quot;,&quot;May&quot;: 2 2 2 2 2 2 2 2 2 2 ...
- $ FlightLength: int  281 277 279 158 143 150 158 160 160 163 ...
- $ Delay       : int  -1 102 4 -2 -3 0 -5 0 10 60 ...
- $ Delayed30   : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 1 1 1 1 2 ...</pre>
+<pre >&#39;data.frame&#39;:   1464 obs. of  5 variables:
+ $ month      : Factor w/ 12 levels &quot;Apr&quot;,&quot;Aug&quot;,&quot;Dec&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+ $ day        : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ draftyear  : int  1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 ...
+ $ halfyear   : Factor w/ 2 levels &quot;First&quot;,&quot;Second&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+ $ draftnumber: int  305 159 251 215 101 224 306 199 194 325 ...</pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
 
 <p>These two functions are very similar, but how does the output of <code>glimpse()</code> differ from <code>str()</code>?</p>
 
 <pre class = 'prettyprint lang-r'>library(tidyverse)
-glimpse(flightdelays)</pre>
+glimpse(draft)</pre>
 
-<pre >Observations: 4,029
-Variables: 10
-$ ID           &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15...
-$ Carrier      &lt;fct&gt; UA, UA, UA, UA, UA, UA, UA, UA, UA, UA, UA, UA, U...
-$ FlightNo     &lt;int&gt; 403, 405, 409, 511, 667, 669, 673, 677, 679, 681,...
-$ Destination  &lt;fct&gt; DEN, DEN, DEN, ORD, ORD, ORD, ORD, ORD, ORD, ORD,...
-$ DepartTime   &lt;fct&gt; 4-8am, 8-Noon, 4-8pm, 8-Noon, 4-8am, 4-8am, 8-Noo...
-$ Day          &lt;fct&gt; Fri, Fri, Fri, Fri, Fri, Fri, Fri, Fri, Fri, Fri,...
-$ Month        &lt;fct&gt; May, May, May, May, May, May, May, May, May, May,...
-$ FlightLength &lt;int&gt; 281, 277, 279, 158, 143, 150, 158, 160, 160, 163,...
-$ Delay        &lt;int&gt; -1, 102, 4, -2, -3, 0, -5, 0, 10, 60, 0, 32, 0, 4...
-$ Delayed30    &lt;fct&gt; No, Yes, No, No, No, No, No, No, No, Yes, No, Yes...</pre>
+<pre >Observations: 1,464
+Variables: 5
+$ month       &lt;fct&gt; Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Ja…
+$ day         &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
+$ draftyear   &lt;int&gt; 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970…
+$ halfyear    &lt;fct&gt; First, First, First, First, First, First, First, Fir…
+$ draftnumber &lt;int&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32…</pre>
 
 </article></slide><slide class=""><hgroup><h2>Other Useful Functions</h2></hgroup><article  id="other-useful-functions">
 
@@ -263,28 +266,22 @@ $ Delayed30    &lt;fct&gt; No, Yes, No, No, No, No, No, No, No, Yes, No, Yes...<
 
 <p>Once we know the overall structure of our dataset, we need to understand its contents. We will discuss more specific functions later, but we can get an overview using <code>summary()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>summary(flightdelays)</pre>
+<pre class = 'prettyprint lang-r'>summary(draft)</pre>
 
-<pre >       ID       Carrier      FlightNo      Destination    DepartTime  
- Min.   :   1   AA:2906   Min.   :  71.0   BNA: 172    4-8am   : 699  
- 1st Qu.:1008   UA:1123   1st Qu.: 371.0   DEN: 264    4-8pm   : 972  
- Median :2015             Median : 691.0   DFW: 918    8-Mid   : 257  
- Mean   :2015             Mean   : 827.1   IAD:  55    8-Noon  :1053  
- 3rd Qu.:3022             3rd Qu.: 787.0   MIA: 610    Noon-4pm:1048  
- Max.   :4029             Max.   :2255.0   ORD:1785                   
-                                           STL: 225                   
-  Day       Month       FlightLength       Delay        Delayed30 
- Fri:637   June:2030   Min.   : 68.0   Min.   :-19.00   No :3432  
- Mon:630   May :1999   1st Qu.:155.0   1st Qu.: -6.00   Yes: 597  
- Sat:453               Median :163.0   Median : -3.00             
- Sun:551               Mean   :185.3   Mean   : 11.74             
- Thu:566               3rd Qu.:228.0   3rd Qu.:  5.00             
- Tue:628               Max.   :295.0   Max.   :693.00             
- Wed:564                                                          </pre>
+<pre >     month          day          draftyear      halfyear    draftnumber   
+ Aug    :124   Min.   : 1.00   Min.   :1970   First :728   Min.   :  1.0  
+ Dec    :124   1st Qu.: 8.00   1st Qu.:1971   Second:736   1st Qu.: 92.0  
+ Jan    :124   Median :16.00   Median :1972                Median :183.0  
+ Jul    :124   Mean   :15.76   Mean   :1972                Mean   :183.3  
+ Mar    :124   3rd Qu.:23.00   3rd Qu.:1972                3rd Qu.:274.8  
+ May    :124   Max.   :31.00   Max.   :1973                Max.   :366.0  
+ (Other):720                                               NA&#39;s   :2      </pre>
 
 </article></slide><slide class=""><hgroup><h2>Missing Data Values</h2></hgroup><article  id="missing-data-values">
 
-<p>In Flight Delays, every variable had a value for every case. That is often not true in real-life data. Missing data values often require special treatment and should be found during EDA.</p>
+<p>In some datasets, every variable had a value for every case. That is frequently <em>not</em> true in real-life data. Missing data values need special treatment and should be found during EDA.</p>
+
+<p>Missing quantitative values and missing categorical values may be stored or displayed differently.</p>
 
 <p>The <a href='https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv' title=''>couples.csv</a> dataset contains the height (in mm) and age (in years) for a sample of married couples.</p>
 
@@ -292,31 +289,20 @@ $ Delayed30    &lt;fct&gt; No, Yes, No, No, No, No, No, No, No, Yes, No, Yes...<
 
 <p>Use the exploratory functions to discover which can help us find missing values in these datasets.</p>
 
-<p>Missing quantitative values and missing categorical values may be stored or displayed differently.</p>
-
 </article></slide><slide class=""><hgroup><h2>More About Missing Values</h2></hgroup><article  id="more-about-missing-values">
 
 <p>The <code>which()</code> function can help identify the locations of missing values when paired with the <code>is.na()</code> function. The result is the row numbers of the NA cases.</p>
 
-<pre class = 'prettyprint lang-r'>which(is.na(couples$wAge) == TRUE)</pre>
+<pre class = 'prettyprint lang-r'>which(is.na(draft$draftnumber) == TRUE)</pre>
 
-<pre > [1]   8  14  22  30  35  45  51  53  59  60  62  68  77  78  79  90 122
-[18] 123 124 131 132 151 155 156 164 165 166 178 191 194 196</pre>
+<pre >[1]  426 1158</pre>
 
-<pre class = 'prettyprint lang-r'>index &lt;- which(is.na(couples$hAge) == TRUE)
-couples[index,]</pre>
+<pre class = 'prettyprint lang-r'>index &lt;- which(is.na(draft$draftnumber) == TRUE)
+draft[index,]</pre>
 
-<pre >                  Names wAge hAge wHeight hHeight
-51       Roger and Anne   NA   NA      NA      NA
-62 Joseph and Elizabeth   NA   NA      NA      NA</pre>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
-
-<p style="text-align:center">
-
-<img src="https://stat-jet-asu.github.io/Moodlepics/swimmingindata.jpg">
-
-</p></article></slide>
+<pre >     month day draftyear halfyear draftnumber
+426    Feb  29      1971    First          NA
+1158   Feb  29      1973    First          NA</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
