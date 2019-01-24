@@ -88,7 +88,7 @@ Potential barrier: researchers may lack programming and “best practices” ski
 Use your ASU Username and Password to log in to the [RStudio server](https://mathr.math.appstate.edu/). Let me know if you have trouble!
 
 ```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("RStudioLogIn.jpg", dpi = 150)
+knitr::include_graphics("images/RStudioLogIn.jpg", dpi = 150)
 ```
 
 
@@ -129,32 +129,32 @@ There are no prerequisites for this course other than MAT 1110 Calculus With Ana
 
 Send me a message in your Private Forum.
 
-* What is your preferred name?
+* What is your preferred first name?
 
 * What are your preferred pronouns?
 
-* What is your class year and major?
+* What is your class year and major(s)/minor(s)?
 
-* Have you taken STT 3850 before?
+* Have you taken STT 3850 before? What was your experience?
 
-* Is there anything else you want me to know?
-
-
-##
-
-<p style="text-align: center;"><img src = "https://imgs.xkcd.com/comics/code_quality.png"></p>
-
-<p style="text-align: center;"><img src = "https://imgs.xkcd.com/comics/code_quality_3.png"></p>
+* Is there anything else you would like me to know?
 
 
 ##
 
-<p style="text-align: center;"><img src = "https://imgs.xkcd.com/comics/machine_learning.png"></p>
+<p style="text-align: center;"><img src = "images/code_quality_1_xkcd.png"></p>
+
+<p style="text-align: center;"><img src = "images/code_quality_3_xkcd.png"></p>
 
 
-##
+## &nbsp;
 
-<p style="text-align: center;"><img src = "https://raw.githubusercontent.com/STAT-JET-ASU/Moodlepics/master/Nope-Space.gif?token=ALn2zT1xjvkKKCTrvFK20YRDhkSXrMidks5cR1howA%3D%3D"></p>
+<p style="text-align: center;"><img src = "images/machine_learning_xkcd.png"></p>
+
+
+## &nbsp;
+
+<p style="text-align: center;"><img src = "images/Nope-Space.gif"></p>
 
 
 ## &nbsp;
