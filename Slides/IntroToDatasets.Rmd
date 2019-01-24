@@ -6,8 +6,20 @@ output: ioslides_presentation
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 ```
+
+## Before We Begin...
+
+These slides assume that you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r).
+
+It would also be helpful to read beforehand Chapter 2 of the digital text [*Modern Dive*](https://moderndive.com/).
+
+These slides are not meant to be standalone information, but rather a guide for hands-on lecture. Be prepared to take notes to flesh out the contents. 
+
+I recommend that you create an R Markdown document where you can include information and code from the slides as well as your own additional notes and explorations.
+
+These slides were produced using R Markdown. See "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/).
 
 
 ## Data vs. Information
@@ -25,7 +37,9 @@ We will often talk about the distribution of a particular variable, which descri
 
 ##
 
-<p style="text-align:center;"><img src="https://cdn-images-1.medium.com/max/1200/1*i7WFO9wP0wB-nv3YrkrMPg.png" width = 700></p>
+<p style="text-align:center;"><img src="https://cdn-images-1.medium.com/max/1200/1*i7WFO9wP0wB-nv3YrkrMPg.png" width = 500></p>
+
+We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the appropriate context.
 
 
 ## Population vs. Sample
@@ -83,9 +97,9 @@ How might these correspond to different classes of vectors in R?
 
 ## Exploratory Data Analysis (EDA)
 
-EDA is used to "examin[e] and describ[e] data to gain insight, discover structure, and detect anomalies and outliers."
+We use EDA to "examin[e] and describ[e] data to gain insight, discover structure, and detect anomalies and outliers."
 
-<p style="text-align:center"><img src="http://www.gstatic.com/hostedimg/40cab8ae05c45196_large" height = 250></p>
+<p style="text-align:center"><img src="images/john_tukey.jpg" height = 250></p>
 
 John Tukey (1915--2000), author of _Exploratory Data Analysis_ (1977) referred to EDA as numerical, counting, and graphical detective work.
 
@@ -98,12 +112,15 @@ Use the `read.csv()` function to input the CSV file using its URL.
 
 The `read.csv()` function converts a CSV file into a data frame. 
 
-There is also a function `read_csv()` in the `readr` package. How do the two functions differ?
-
 `draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))`
+
+The `readr` package contains the function `read_csv()`. Create `draft_alt` using this function. How do `draft` and `draft_alt` differ? Let's explore and discuss!
 
 ```{r include=FALSE}
 draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))
+
+library(readr)
+draft_alt <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))
 ```
 
 
@@ -118,6 +135,19 @@ Before doing any kind of data modeling or inference, you need to explore your da
 We will be using the `dplyr` and `ggplot2` packages for our EDA. These and other tools are collected in `tidyverse`.
 
 
+## Reminders Before We Proceed
+
+When you apply any function() to an object in R, pay attention to what kind of object that function outputs. Is it a vector? Matrix? List? Other? Since the output of one function is often the input to another, you need to know!
+
+We can access columns of a `data.frame` (or any list) using the `$` operator, as below: 
+
+* `dataset_name$column_name`
+
+* `list_name$list_component`
+
+We can access elements of vectors, matrices, and data frames using `[]` (indices) to indicate locations within the array. Vectors use one index `[i]`. Matrices require a row and column `[i,j]`.
+
+
 ## Structure vs. Glimpse
 
 The `str()` function is part of base R code, while the `glimpse()` function comes from the `tidyverse` package `dplyr`.
@@ -126,6 +156,7 @@ The `str()` function is part of base R code, while the `glimpse()` function come
 str(draft)
 ```
 
+Try using `str()` on `draft_alt`. Compare the results.
 
 ##
 
@@ -135,6 +166,8 @@ These two functions are very similar, but how does the output of `glimpse()` dif
 library(tidyverse)
 glimpse(draft)
 ```
+
+Try using `glimpse()` on `draft_alt`. Compare the results.
 
 
 ## Other Useful Functions
@@ -148,13 +181,13 @@ Other functions for exploring dataset structure are given below. Use them on the
 * `ncol()`
 * `head()`
 * `tail()`
-* `sum(complete.cases())`
-* `sum(!complete.cases())`
+* `sum(complete.cases())` # this is two nested functions
+* `sum(!complete.cases())` # what does the ! do?
 
 
 ## Data Summaries
 
-Once we know the overall structure of our dataset, we need to understand its contents. We will discuss more specific functions later, but we can get an overview using `summary()`.
+Once we know the overall structure of our dataset, we need to understand its contents. Later we will explore specific functions like `mean()` and `sd()`, as well as `summarize()` in `dplyr`, but we can get an overview using `summary()`.
 
 ```{r}
 summary(draft)
@@ -167,9 +200,9 @@ In some datasets, every variable had a value for every case. That is frequently 
 
 Missing quantitative values and missing categorical values may be stored or displayed differently.
 
-The [couples.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv) dataset contains the height (in mm) and age (in years) for a sample of married couples. 
+* The [couples.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/couples.csv) dataset contains the height (in mm) and age (in years) for a sample of married couples. 
 
-The [personalitySTT3850.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/personalitySTT3850.csv) dataset has Jungian (Myers-Briggs) personality type and other selected information about students from Dr. Thomley's past STT3850 classes.
+* The [personalitySTT3850.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/personalitySTT3850.csv) dataset contains Jungian (Myers-Briggs) personality type and other selected information about students from Dr. Thomley's past STT3850 classes.
 
 Use the exploratory functions to discover which can help us find missing values in these datasets.
 
@@ -183,4 +216,22 @@ which(is.na(draft$draftnumber) == TRUE)
 index <- which(is.na(draft$draftnumber) == TRUE)
 draft[index,]
 ```
+
+
+## More About Indices
+
+```{r}
+draft[index, 1:3]
+draft[index, "day"]
+draft[index, c("month", "day", "draftyear")]
+```
+
+
+## Explore some more datasets!
+
+Try exploring some of the datasets presented and discussed in Chapter 1 of your  *Mathematical Statistics with Resampling and R, 2nd Edition* textbook. 
+
+You can find the textbook data files on our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page or in the `resampledata` package.
+
+Practice so you become proficient in determining the structure of a dataset so you can start the work of transforming raw data into useful information and knowledge.
 
