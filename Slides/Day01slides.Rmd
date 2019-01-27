@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical<br>Data Analysis 1---Day 1"
-author: "Jill Thomley"
-date: "`r Sys.Date()`"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: ioslides_presentation
 ---
 

@@ -128,7 +128,7 @@ draft_alt <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU
 
 A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.
 
-A tibble is a somewhat tweaked version of a data frame found in the 'tidyverse. In most cases in STT3850 the terms may be used interchangeably. For more, see [Tibbles](http://r4ds.had.co.nz/tibbles.html) in _R for Data Science_.
+A tibble is a somewhat tweaked version of a data frame found in the `tidyverse`. For more, see [Tibbles](http://r4ds.had.co.nz/tibbles.html) in _R for Data Science_.
 
 Before doing any kind of data modeling or inference, you need to explore your dataset and become familiar with its structure and contents---that's the first step in EDA!
 

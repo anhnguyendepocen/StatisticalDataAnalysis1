@@ -97,7 +97,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Thursday, January 24, 2019 @ 01:27:03 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Sunday, January 27, 2019 @ 04:15:03 PM</p>
           </hgroup>
   </slide>
 
@@ -226,7 +226,7 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 <p>A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.</p>
 
-<p>A tibble is a somewhat tweaked version of a data frame found in the &#39;tidyverse. In most cases in STT3850 the terms may be used interchangeably. For more, see <a href='http://r4ds.had.co.nz/tibbles.html' title=''>Tibbles</a> in <em>R for Data Science</em>.</p>
+<p>A tibble is a somewhat tweaked version of a data frame found in the <code>tidyverse</code>. For more, see <a href='http://r4ds.had.co.nz/tibbles.html' title=''>Tibbles</a> in <em>R for Data Science</em>.</p>
 
 <p>Before doing any kind of data modeling or inference, you need to explore your dataset and become familiar with its structure and contents&#8212;that&#39;s the first step in EDA!</p>
 
@@ -251,12 +251,13 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 <pre class = 'prettyprint lang-r'>str(draft)</pre>
 
-<pre >&#39;data.frame&#39;:   1464 obs. of  5 variables:
+<pre >&#39;data.frame&#39;:   1464 obs. of  6 variables:
  $ month      : Factor w/ 12 levels &quot;Apr&quot;,&quot;Aug&quot;,&quot;Dec&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
  $ day        : int  1 2 3 4 5 6 7 8 9 10 ...
  $ draftyear  : int  1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 ...
  $ halfyear   : Factor w/ 2 levels &quot;First&quot;,&quot;Second&quot;: 1 1 1 1 1 1 1 1 1 1 ...
- $ draftnumber: int  305 159 251 215 101 224 306 199 194 325 ...</pre>
+ $ draftnumber: Factor w/ 368 levels &quot;&quot;,&quot;*&quot;,&quot;1&quot;,&quot;10&quot;,..: 232 69 172 132 6 142 233 113 108 254 ...
+ $ X          : logi  NA NA NA NA NA NA ...</pre>
 
 <p>Try using <code>str()</code> on <code>draft_alt</code>. Compare the results.</p>
 
@@ -268,12 +269,13 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 glimpse(draft)</pre>
 
 <pre >Observations: 1,464
-Variables: 5
+Variables: 6
 $ month       &lt;fct&gt; Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Ja…
 $ day         &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
 $ draftyear   &lt;int&gt; 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970…
 $ halfyear    &lt;fct&gt; First, First, First, First, First, First, First, Fir…
-$ draftnumber &lt;int&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32…</pre>
+$ draftnumber &lt;fct&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32…
+$ X           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</pre>
 
 <p>Try using <code>glimpse()</code> on <code>draft_alt</code>. Compare the results.</p>
 
@@ -299,14 +301,22 @@ $ draftnumber &lt;int&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32�
 
 <pre class = 'prettyprint lang-r'>summary(draft)</pre>
 
-<pre >     month          day          draftyear      halfyear    draftnumber   
- Aug    :124   Min.   : 1.00   Min.   :1970   First :728   Min.   :  1.0  
- Dec    :124   1st Qu.: 8.00   1st Qu.:1971   Second:736   1st Qu.: 92.0  
- Jan    :124   Median :16.00   Median :1972                Median :183.0  
- Jul    :124   Mean   :15.76   Mean   :1972                Mean   :183.3  
- Mar    :124   3rd Qu.:23.00   3rd Qu.:1972                3rd Qu.:274.8  
- May    :124   Max.   :31.00   Max.   :1973                Max.   :366.0  
- (Other):720                                               NA&#39;s   :2      </pre>
+<pre >     month          day          draftyear      halfyear    draftnumber  
+ Aug    :124   Min.   : 1.00   Min.   :1970   First :728   1      :   4  
+ Dec    :124   1st Qu.: 8.00   1st Qu.:1971   Second:736   10     :   4  
+ Jan    :124   Median :16.00   Median :1972                100    :   4  
+ Jul    :124   Mean   :15.76   Mean   :1972                101    :   4  
+ Mar    :124   3rd Qu.:23.00   3rd Qu.:1972                102    :   4  
+ May    :124   Max.   :31.00   Max.   :1973                103    :   4  
+ (Other):720                                               (Other):1440  
+    X          
+ Mode:logical  
+ NA&#39;s:1464     
+               
+               
+               
+               
+               </pre>
 
 </article></slide><slide class=""><hgroup><h2>Missing Data Values</h2></hgroup><article  id="missing-data-values">
 
@@ -327,32 +337,29 @@ $ draftnumber &lt;int&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32�
 
 <pre class = 'prettyprint lang-r'>which(is.na(draft$draftnumber) == TRUE)</pre>
 
-<pre >[1]  426 1158</pre>
+<pre >integer(0)</pre>
 
 <pre class = 'prettyprint lang-r'>index &lt;- which(is.na(draft$draftnumber) == TRUE)
 draft[index,]</pre>
 
-<pre >     month day draftyear halfyear draftnumber
-426    Feb  29      1971    First          NA
-1158   Feb  29      1973    First          NA</pre>
+<pre >[1] month       day         draftyear   halfyear    draftnumber X          
+&lt;0 rows&gt; (or 0-length row.names)</pre>
 
 </article></slide><slide class=""><hgroup><h2>More About Indices</h2></hgroup><article  id="more-about-indices">
 
 <pre class = 'prettyprint lang-r'>draft[index, 1:3]</pre>
 
-<pre >     month day draftyear
-426    Feb  29      1971
-1158   Feb  29      1973</pre>
+<pre >[1] month     day       draftyear
+&lt;0 rows&gt; (or 0-length row.names)</pre>
 
 <pre class = 'prettyprint lang-r'>draft[index, &quot;day&quot;]</pre>
 
-<pre >[1] 29 29</pre>
+<pre >integer(0)</pre>
 
 <pre class = 'prettyprint lang-r'>draft[index, c(&quot;month&quot;, &quot;day&quot;, &quot;draftyear&quot;)]</pre>
 
-<pre >     month day draftyear
-426    Feb  29      1971
-1158   Feb  29      1973</pre>
+<pre >[1] month     day       draftyear
+&lt;0 rows&gt; (or 0-length row.names)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Explore some more datasets!</h2></hgroup><article  id="explore-some-more-datasets">
 
