@@ -49,7 +49,7 @@ knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
 
 ## Frequency Tables
 
-In the 1970s, University of California Berkeley was sued for sex discrimination in graduate school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments.
+In the early 1970s, UC Berkeley was concerned about possible sex discrimination in grad school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments.
 
 ```{r echo=FALSE}
 berkdata <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv")
@@ -82,6 +82,8 @@ round(prop.table(statusTab), 4)
 
 What is the result if you use `as.data.frame()` on statusTab?
 
+Why might you want to convert your summary's object type?
+
 
 ## Contingency (Two-Way) Tables
 
@@ -90,6 +92,15 @@ sexbystatusTab <- table(berkdata$sex, berkdata$status)
 print(sexbystatusTab)
 addmargins(sexbystatusTab)
 ```
+
+
+## Contingency Table as `tidy` Data
+
+```{r}
+as.data.frame(sexbystatusTab)
+```
+
+This verion of a summary table would be easier to plot with a package like `ggplot2`. Consider the purpose of the summary. Will it be the input for another process?
 
 
 ## Row Proportions
@@ -114,14 +125,14 @@ colSums(prop.table(sexbystatusTab, 2))
 
 ## Using `dplyr` to Make "Tables"
 
-The `table()` function produces a named vector or matrix. The method using `dplyr` (in `tidyverse`) produces a `tibble`.
+The `table()` function produces a named vector or matrix. The method using the `dplyr` package produces a `tibble`.
 
 ```{r}
-library(tidyverse)
+library(dplyr)
 berkdata %>% count(sex)
 ```
 
-Some functions such as `chisq.test()` expect vector or matrix input, so consider the reason for making the table.
+Some functions such as `chisq.test()` expect vector or matrix input. Again, consider the reason for making the table.
 
 
 ## Cumulative Frequency Tables 
@@ -130,20 +141,22 @@ Some functions such as `chisq.test()` expect vector or matrix input, so consider
 berkdata %>% 
   count(department) %>% 
   arrange(desc(n)) %>% 
-  mutate(cum_count = cumsum(n),
-         prop      = prop.table(n),
+  mutate(prop      = prop.table(n),
+         cum_count = cumsum(n),
          cum_prop  = cumsum(prop))
 ```
 
 
 ## Using `dplyr` for Contingency Tables
 
-When we use `dplyr` to summarize two variables, we still get all combinations with non-zero counts, but arranged in a `tibble`. If a combination has no cases (n = 0), it will not be included, which may be problematic in subsequent analyses.
+When we use `dplyr` to summarize two variables, we still get all combinations with non-zero counts, but arranged in a `tibble`. 
 
 ```{r}
 berkdata %>% 
   count(sex, status)
 ```
+
+If a combination has no cases (n = 0), it will not be included in the `tibble`, which may be a problem.
 
 
 ## Rearranging the "Table"
@@ -237,12 +250,12 @@ ggplot(dept_tab, aes(x = department, y = n)) +
 
 ## Barplots Without a Data Frame
 
+We also can create a barplot from vectors not in a data frame.
+
 ```{r fig.height=3}
-classyear <- factor(c("FR", "SO", "JR", "SR"),
-                    levels = c("FR", "SO", "JR", "SR"))
-students  <- c(254, 223, 219, 185)
-ggplot(NULL, aes(x = classyear, y = students)) + 
-  geom_bar(stat = "identity")
+department <- factor(c("A", "B", "C", "D", "E", "F"))
+n <- c(933, 585, 918, 792, 584, 714)
+ggplot(NULL, aes(x = department, y = n)) + geom_bar(stat = "identity")
 ```
 
 
@@ -312,4 +325,21 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
        x = "sex of applicant",
        y = "number of applicants")
 ```
+
+
+## Conclusions
+
+* Do the overall rejection rates for male and female applicants suggest bias in admissions?
+
+* What does faceting the data by department show with regard to rejection of applicants?
+
+* Are there any other summaries / plots you would like to see? Can you create them?
+
+* Do you prefer tables or barplots for exploring the data? Why?
+
+The Berkeley bias dataset is an example of Simpson's Paradox.
+
+<hr>
+
+Bickel, P. J., Hammel, E. A., & O’Connell, J. W. (1975). Sex bias in graduate admissions: Data from Berkeley. _Science_, 187(4175), 398–404. http://doi.org/10.1126/science.187.4175.398↩
 

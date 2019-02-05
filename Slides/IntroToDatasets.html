@@ -97,7 +97,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Sunday, January 27, 2019 @ 04:15:03 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, January 29, 2019 @ 02:26:36 PM</p>
           </hgroup>
   </slide>
 
@@ -251,13 +251,12 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 
 <pre class = 'prettyprint lang-r'>str(draft)</pre>
 
-<pre >&#39;data.frame&#39;:   1464 obs. of  6 variables:
+<pre >&#39;data.frame&#39;:   1464 obs. of  5 variables:
  $ month      : Factor w/ 12 levels &quot;Apr&quot;,&quot;Aug&quot;,&quot;Dec&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
  $ day        : int  1 2 3 4 5 6 7 8 9 10 ...
  $ draftyear  : int  1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 ...
  $ halfyear   : Factor w/ 2 levels &quot;First&quot;,&quot;Second&quot;: 1 1 1 1 1 1 1 1 1 1 ...
- $ draftnumber: Factor w/ 368 levels &quot;&quot;,&quot;*&quot;,&quot;1&quot;,&quot;10&quot;,..: 232 69 172 132 6 142 233 113 108 254 ...
- $ X          : logi  NA NA NA NA NA NA ...</pre>
+ $ draftnumber: Factor w/ 368 levels &quot;&quot;,&quot;*&quot;,&quot;1&quot;,&quot;10&quot;,..: 232 69 172 132 6 142 233 113 108 254 ...</pre>
 
 <p>Try using <code>str()</code> on <code>draft_alt</code>. Compare the results.</p>
 
@@ -269,13 +268,12 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
 glimpse(draft)</pre>
 
 <pre >Observations: 1,464
-Variables: 6
+Variables: 5
 $ month       &lt;fct&gt; Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Ja…
 $ day         &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
 $ draftyear   &lt;int&gt; 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970…
 $ halfyear    &lt;fct&gt; First, First, First, First, First, First, First, Fir…
-$ draftnumber &lt;fct&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32…
-$ X           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</pre>
+$ draftnumber &lt;fct&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32…</pre>
 
 <p>Try using <code>glimpse()</code> on <code>draft_alt</code>. Compare the results.</p>
 
@@ -308,15 +306,7 @@ $ X           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, �
  Jul    :124   Mean   :15.76   Mean   :1972                101    :   4  
  Mar    :124   3rd Qu.:23.00   3rd Qu.:1972                102    :   4  
  May    :124   Max.   :31.00   Max.   :1973                103    :   4  
- (Other):720                                               (Other):1440  
-    X          
- Mode:logical  
- NA&#39;s:1464     
-               
-               
-               
-               
-               </pre>
+ (Other):720                                               (Other):1440  </pre>
 
 </article></slide><slide class=""><hgroup><h2>Missing Data Values</h2></hgroup><article  id="missing-data-values">
 
@@ -342,7 +332,7 @@ $ X           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, �
 <pre class = 'prettyprint lang-r'>index &lt;- which(is.na(draft$draftnumber) == TRUE)
 draft[index,]</pre>
 
-<pre >[1] month       day         draftyear   halfyear    draftnumber X          
+<pre >[1] month       day         draftyear   halfyear    draftnumber
 &lt;0 rows&gt; (or 0-length row.names)</pre>
 
 </article></slide><slide class=""><hgroup><h2>More About Indices</h2></hgroup><article  id="more-about-indices">
