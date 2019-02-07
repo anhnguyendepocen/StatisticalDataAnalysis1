@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Monday, January 14, 2019 @ 01:02:22 PM'
+date: 'Updated: Thursday, February 07, 2019 @ 01:35:24 PM'
 output: 
   html_document: 
     toc: true
@@ -152,7 +152,7 @@ HW = homework
 #### In Class
 
 * Summarizing data
-* MD CH04 activities
+* ~~MD CH04 activities~~
 * Work on HW assignments
 
 #### Due THU @ 11pm
@@ -180,6 +180,7 @@ HW = homework
 
 #### In Class
 
+* Summarizing data [added]
 * Modeling with data
 * Simple linear regression
 

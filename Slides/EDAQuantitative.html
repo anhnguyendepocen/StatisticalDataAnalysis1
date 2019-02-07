@@ -97,7 +97,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Monday, February 04, 2019 @ 09:05:31 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Thursday, February 07, 2019 @ 02:12:09 PM</p>
           </hgroup>
   </slide>
 
@@ -413,7 +413,21 @@ skewness(mileage$mpg)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarizing Using <code>dplyr</code></h2></hgroup><article  id="summarizing-using-dplyr">
 
-<p>TBA!</p>
+<pre class = 'prettyprint lang-r'>mileage %&gt;% summarize(n     = n(),
+                      xbar  = mean(mpg, na.rm = TRUE),
+                      stdev = sd(mpg, na.rm = TRUE),
+                      min   = fivenum(mpg)[1],
+                      Q1    = fivenum(mpg)[2],
+                      med   = fivenum(mpg)[3],                  
+                      Q3    = fivenum(mpg)[4],
+                      max   = fivenum(mpg)[5],
+                      skew  = skewness(mpg, na.rm = TRUE),
+                      kurt  = kurtosis(mpg, na.rm = TRUE))</pre>
+
+<pre >    n   xbar    stdev min    Q1 med    Q3  max       skew     kurt
+1 100 36.994 2.417897  30 35.65  37 38.35 44.9 0.05014194 3.672556</pre>
+
+<p>Use <code>group_by()</code> before <code>summarize()</code> if you want summaries for separate subgroups in your dataset.</p>
 
 </article></slide><slide class=""><hgroup><h2>Boxplots and Outliers</h2></hgroup><article  id="boxplots-and-outliers">
 
@@ -444,7 +458,14 @@ print(upperFence)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Calculating the Fences in <code>dplyr</code></h2></hgroup><article  id="calculating-the-fences-in-dplyr">
 
-<p>TBA!</p>
+<pre class = 'prettyprint lang-r'>mileage %&gt;% 
+  summarize(lower_fence = fivenum(mpg)[2] - 1.5 * IQR(mpg),
+            upper_fence = fivenum(mpg)[4] + 1.5 * IQR(mpg))</pre>
+
+<pre >  lower_fence upper_fence
+1      31.675      42.325</pre>
+
+<p>Use <code>group_by()</code> before <code>summarize()</code> if you want fences for separate subgroups in your dataset.</p>
 
 </article></slide><slide class=""><hgroup><h2>Boxplot for One Variable</h2></hgroup><article  id="boxplot-for-one-variable">
 

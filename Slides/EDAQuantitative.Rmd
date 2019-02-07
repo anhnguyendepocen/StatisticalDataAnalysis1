@@ -277,7 +277,20 @@ Again, you should explore the syntax, parameters, and output of each function to
 
 ## Summarizing Using `dplyr`
 
-TBA! 
+```{r}
+mileage %>% summarize(n     = n(),
+                      xbar  = mean(mpg, na.rm = TRUE),
+                      stdev = sd(mpg, na.rm = TRUE),
+                      min   = fivenum(mpg)[1],
+                      Q1    = fivenum(mpg)[2],
+                      med   = fivenum(mpg)[3],                  
+                      Q3    = fivenum(mpg)[4],
+                      max   = fivenum(mpg)[5],
+                      skew  = skewness(mpg, na.rm = TRUE),
+                      kurt  = kurtosis(mpg, na.rm = TRUE))
+```
+ 
+Use `group_by()` before `summarize()` if you want summaries for separate subgroups in your dataset.
 
 
 ## Boxplots and Outliers
@@ -300,7 +313,13 @@ boxplot.stats(sort(mileage$mpg))[4]
 
 ## Calculating the Fences in `dplyr`
 
-TBA!
+```{r}
+mileage %>% 
+  summarize(lower_fence = fivenum(mpg)[2] - 1.5 * IQR(mpg),
+            upper_fence = fivenum(mpg)[4] + 1.5 * IQR(mpg))
+```
+
+Use `group_by()` before `summarize()` if you want fences for separate subgroups in your dataset.
 
 
 ## Boxplot for One Variable
