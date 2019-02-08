@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Friday, February 08, 2019 @ 11:04:31 AM'
+date: 'Updated: Friday, February 08, 2019 @ 06:50:52 PM'
 output: 
   html_document: 
     toc: true
@@ -163,7 +163,7 @@ HW = homework
 
 #### Before Next Week
 
-* Read MSRR CH09
+* Read MSRR CH09, Sections 1-3
 * Read MD [Chapter 6. Basic Regression](https://moderndive.com/6-regression.html)
 * Watch JB [Introduction to Simple Linear Regression](https://youtu.be/KsVBBJRb9TE) (~8 minutes)
 * Watch JB [Simple Linear Regression: The Least Squares Regression Line](https://youtu.be/coQAAN4eY5s) (~7 minutes)
