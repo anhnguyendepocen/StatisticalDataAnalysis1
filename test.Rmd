@@ -1,0 +1,22 @@
+---
+title: "Untitled"
+author: "Jill Thomley"
+date: "1/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars, eval=FALSE}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, ref.label='cars'}
+
+```
