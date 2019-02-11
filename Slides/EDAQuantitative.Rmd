@@ -151,6 +151,15 @@ ggplot(geyser, aes(x = wait_time)) +
 ```
 
 
+## Add Some Color
+
+```{r, fig.height = 3.7}
+ggplot(mileage, aes(x = mpg)) + 
+  geom_histogram(aes(y=..density..), bins = 10, color = "black") + 
+  geom_density(fill = "lightblue", color = "blue", alpha = 0.50)
+```
+
+
 ## Empirical Cumulative Distribution
 
 ```{r, fig.height = 4.3}
@@ -160,10 +169,11 @@ ggplot(mileage, aes(x = mpg)) + stat_ecdf()
 
 ## Density and ECDF
 
-```{r, fig.height = 3.7}
+```{r, fig.height = 3.5}
 ggplot(mileage, aes(x = mpg)) + 
-  geom_density() + 
-  stat_ecdf()
+  geom_density(color = "lightblue", fill = "lightblue") + 
+  stat_ecdf(color = "blue") + 
+  geom_vline(xintercept = quantile(mileage$mpg), c(.25, .50, .75))
 ```
 
 
@@ -349,6 +359,20 @@ ggplot(flt_del, aes(x = Carrier, y = FlightLength)) + geom_boxplot()
 ```
 
 
+## Fences for Each Airline 
+
+```{r, fig.height = 4.3}
+flt_del %>% 
+  group_by(Carrier) %>% 
+  summarize(LF = fivenum(FlightLength)[2] - 1.5 * IQR(FlightLength),
+            UF = fivenum(FlightLength)[4] + 1.5 * IQR(FlightLength))
+```
+
+Compare these values to the plots and summary statistics for the two airlines. Why are they different?
+
+You may need to explore other variables in the dataset to fully answer this question.
+
+
 ## Comparative Boxplots Plus
 
 Consider some of the options you learned when working with barplots in the Categorical Data slides or in DataCamp courses. They apply here as well.
@@ -360,8 +384,8 @@ ggplot(flt_del, aes(x = Carrier, y = FlightLength, fill = Carrier)) +
   geom_boxplot() +
   facet_wrap(~ Month) +
   scale_x_discrete(labels = c("American", "United")) +
-  scale_fill_manual(values=c("lightgreen","lightblue")) +
-  theme(legend.position="none") +
+  scale_fill_manual(values = c("lightgreen", "lightblue")) +
+  theme(legend.position = "none") +
   labs(title = "Length of AA and UA Flights from LGA in 2013",
        y = "Length of Flight (minutes)",
        caption = "Source: Chihara & Hesterberg, FlightDelays")
@@ -372,5 +396,21 @@ ggplot(flt_del, aes(x = Carrier, y = FlightLength, fill = Carrier)) +
 
 ```{r ref.label = 'boxplot_enhanced', echo = FALSE, fig.height = 5.0}
 
+```
+
+
+##
+
+```{r}
+ggplot(flt_del, aes(x = FlightLength)) +
+  geom_density() +
+  facet_grid(Carrier ~ Month)
+```
+
+
+## &nbsp;
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/xkcd_boyfriend.png", dpi = 100)
 ```
 
