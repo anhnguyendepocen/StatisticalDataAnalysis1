@@ -108,6 +108,8 @@ $\mu$ = the mean of the distribution
     
 $\sigma^2$ = the variance of the distribution
 
+Default parameter settings in `rnorm()` are `mu=0` and `sigma=1`, so if we want a sample from the standard normal distribution, we only need to enter sample size, `rnorm(s)`.
+
 
 # Assessing Normality
 
@@ -115,19 +117,23 @@ $\sigma^2$ = the variance of the distribution
 
 Many statistical tests require data to be drawn from a normal distribution. Researchers may also interested in determining whether some variable of interest is normally distributed. For example, Belgian scholar [Adolphe Quetelet](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Quetelet.html) (1796-1874) had a hypothesis that the natural distribution of human heights is a bell curve (i.e., normal distribution). 
 
-We can investigate this using height data gathered by another famous statistician. [Francis Galton](http://www-history.mcs.st-andrews.ac.uk/Biographies/Galton.html) (1822-1911) investigated the relationship between the heights of parents and their offspring. Some of his data can be found in [galtonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv).
+We can investigate this using height data gathered by another famous statistician. [Francis Galton](http://www-history.mcs.st-andrews.ac.uk/Biographies/Galton.html) (1822-1911) investigated the relationship between the heights of parents and their offspring. Some of his data can be found in [galtonparentheights.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonparentheights.csv).
 
 
-## The Galton Height Data
+## The Galton Height Data (Parents)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-galtonhts <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv")
+parent_hts <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonparentheights.csv")
 ```
 
 ```{r}
-glimpse(galtonhts)
-xbarF     <- mean(galtonhts$Father)
-stdvF     <- sd(galtonhts$Father)
+glimpse(parent_hts)
+```
+
+```{r}
+ht_stats <- parent_hts %>% 
+  summarize(xbar = mean(Father), s = sd(Father))
+ht_stats
 ```
 
 
@@ -136,10 +142,10 @@ stdvF     <- sd(galtonhts$Father)
 Does the density of the data match a theoretical normal density plot with the same mean and variance?
 
 ```{r, eval=FALSE}
-ggplot(galtonhts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Father)) + 
   geom_density() +
   stat_function(fun = dnorm, 
-                args = list(xbarF, stdvF),   
+                args = list(ht_stats$xbar, ht_stats$s),   
                 color = "red")
 ```
 
@@ -151,10 +157,10 @@ Notice we are using `dnorm` because the density plot shows f(x).
 ## Data vs. Theoretical
 
 ```{r, echo=FALSE}
-ggplot(galtonhts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Father)) + 
   geom_density() +
   stat_function(fun = dnorm, 
-                args = list(xbarF, stdvF), 
+                args = list(ht_stats$xbar, ht_stats$s), 
                 color = "red")
 ```
 
@@ -164,10 +170,10 @@ ggplot(galtonhts, aes(x = Father)) +
 Does the ECDF of the data match a theoretical normal CDF plot with the same mean and variance?
 
 ```{r, eval=FALSE}
-ggplot(galtonhts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Father)) + 
   stat_ecdf() +
   stat_function(fun = pnorm, 
-                args = list(xbarF, stdvF), 
+                args = list(ht_stats$xbar, ht_stats$s), 
                 color = "red")
 ```
 
@@ -179,30 +185,30 @@ Notice we are using `pnorm` because the ECDF plot shows F(x).
 ## Data vs. Theoretical
 
 ```{r, echo=FALSE}
-ggplot(galtonhts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Father)) + 
   stat_ecdf() +
   stat_function(fun = pnorm, 
-                args = list(xbarF, stdvF), 
+                args = list(ht_stats$xbar, ht_stats$s), 
                 color = "red")
 ```
 
 
 ## Comparing Quantiles
 
-Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance? Example:
+Do data quantiles match the theoretical normal quantiles?
 
 ```{r}
 deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
-print.data.frame(tibble(data = quantile(galtonhts$Father, deciles), 
-                        theory = round(qnorm(deciles, xbarF, stdvF),2)))
+tibble(data   = quantile(parent_hts$Father, deciles), 
+       theory = round(qnorm(deciles, ht_stats$xbar, ht_stats$s),2))
 ```
 
 
 ## Plot of the Deciles
 
 ```{r, echo = FALSE}
-plotdata <- tibble(data = quantile(galtonhts$Father, deciles), 
-                   theory = qnorm(deciles, xbarF, stdvF))
+plotdata <- tibble(data = quantile(parent_hts$Father, deciles), 
+                   theory = qnorm(deciles, ht_stats$xbar, ht_stats$s))
 ggplot(plotdata, aes(x = theory, y = data)) + 
   geom_point() + 
   geom_abline(slope = 1, intercept = 0, color = "red")
@@ -214,7 +220,7 @@ ggplot(plotdata, aes(x = theory, y = data)) +
 Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance?
 
 ```{r, eval=FALSE}
-ggplot(galtonhts, aes(sample = Father)) + 
+ggplot(parent_hts, aes(sample = Father)) + 
   stat_qq() +
   stat_qq_line(color = "red")
 ```
@@ -225,7 +231,7 @@ Notice the difference in syntax in the aesthetics, which uses `sample` rather th
 ## QQ Plot
 
 ```{r, echo=FALSE}
-ggplot(galtonhts, aes(sample = Father)) + 
+ggplot(parent_hts, aes(sample = Father)) + 
   stat_qq() +
   stat_qq_line(color = "red")
 ```
@@ -237,13 +243,26 @@ The skewness of a normal distribution is 0 and the kurtosis is 3. Data from a no
 
 ```{r}
 library(moments)
-skewK <- tibble(Statistic = c("Skewness", "Kurtosis", "Excess K"),
-                Theory = c(0, 3, 0),
-                Data   = round(c(skewness(galtonhts$Father), 
-                                 kurtosis(galtonhts$Father), 
-                                 kurtosis(galtonhts$Father) - 3), 2))
+skewK <- tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+                theory = c(0, 3, 0),
+                data   = round(c(skewness(parent_hts$Father), 
+                                 kurtosis(parent_hts$Father), 
+                                 kurtosis(parent_hts$Father) - 3), 
+                               2))
 print.data.frame(skewK, row.names = FALSE)
 ```
+
+
+## Galton Height Data
+
+Assess the other Galton height measurements for normality. For the child data, perform the assessment with and without groups by gender. Was Quetelet right to think human height is normally distributed? How do you know?
+
+* [galtonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv) (for child data)
+
+Additional human measurements can be found in the following datasets. Do they confirm or contradict Quetelet's hypotheses about height or other measurements? How do you know?
+
+* [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv)
+* [pearsonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/pearsonheightdata.csv)
 
 
 ## Exploring Other Distributions
@@ -286,14 +305,4 @@ $X_{13} \text{~} t(250)$
 For each distribution, consider the shape of its pmf or pdf and CDF versus those of the normal distribution. 
 
 Look at the shapes that tend to be produced by skewed data, data that is flatter than a bell curve (e.g., uniform), or discrete data (e.g., binomial), as well as skewness and kurtosis.
-
-
-## Galton Height Data
-
-Assess the other height measurements in the Galton dataset for normality. For the child data, perform the assessment with and without grouping by gender. Was Quetelet right to think human height is normally distributed?
-
-Additional human measurements can be found in the following datasets. Do they confirm or contradict Quetelet's hypotheses about height or other measurements? How do you know?
-
-* [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv)
-* [pearsonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/pearsonheightdata.csv)
 
