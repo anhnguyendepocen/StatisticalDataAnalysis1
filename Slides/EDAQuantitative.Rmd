@@ -314,10 +314,10 @@ One of the most common rules for determining outliers is based on the five-numbe
 
 ```{r}
 lowerFence <- fivenum(mileage$mpg)[2] - 1.5 * IQR(mileage$mpg)
-print(lowerFence)
+lowerFence
 upperFence <- fivenum(mileage$mpg)[4] + 1.5 * IQR(mileage$mpg)
-print(upperFence)
-boxplot.stats(sort(mileage$mpg))[4]
+upperFence
+boxplot.stats(sort(mileage$mpg))$out
 ```
 
 
@@ -329,7 +329,11 @@ mileage %>%
             upper_fence = fivenum(mpg)[4] + 1.5 * IQR(mpg))
 ```
 
-Use `group_by()` before `summarize()` if you want fences for separate subgroups in your dataset.
+Use `group_by()` before `summarize()` if you want the fences for separate subgroups in your dataset.
+
+<hr>
+
+You can also `filter()` the dataset for cases containing outliers using the fences, rather than simply using `boxplot.stats()` to print outlier values. Why might this be more beneficial?
 
 
 ## Boxplot for One Variable
