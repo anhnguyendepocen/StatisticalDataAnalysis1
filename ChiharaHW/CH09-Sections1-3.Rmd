@@ -1,5 +1,5 @@
 ---
-title: "MSRR CH02, Sections 1-3 HW"
+title: "MSRR CH09, Sections 1-3 HW"
 author: "YOUR NAME HERE"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: 
@@ -26,9 +26,33 @@ Load the packages and datasets you need here.
 
 
 ***
-#### Problem 2.1
+#### Problem 9.6
 
-Note: Test for equality using code, not just visual inspection.
+Part (a) 
+
+```{r}
+
+```
+
+Part (b)
+
+Note: For "What do you observe?", comment on linearity, direction of trend, and outliers.
+
+```{r}
+
+```
+
+ANSWER: 
+
+Part (c)
+
+Hint: Use `filter()` with `Weight` to remove the outliers.
+
+```{r}
+
+```
+
+ANSWER: 
 
 ```{r}
 
@@ -36,19 +60,7 @@ Note: Test for equality using code, not just visual inspection.
 
 
 ***
-#### Problem 2.2
-
-Note: Test for equality using code, not just visual inspection.
-
-```{r}
-
-```
-
-
-***
-#### Problem 2.5
-
-Note: In (c), create the table of proportions you need to answer (d) as well as a table of counts.
+#### Problem 9.8
 
 Part (a)
 
@@ -62,7 +74,23 @@ Part (b)
 
 ```
 
-ANSWER:
+ANSWER: 
+
+
+***
+#### Problem 9.9
+
+Part (a)
+
+```{r}
+
+```
+
+Part (b)
+
+```{r}
+
+```
 
 Part (c)
 
@@ -76,7 +104,7 @@ ANSWER:
 
 
 ***
-#### Problem 2.6
+#### Problem 9.16
 
 Note: In (b), create a table of proportions as well as a table of counts to answer the question. In (c), also compute the upper fence for each group to show the upper cutoff for outliers.
 
@@ -92,25 +120,15 @@ Part (b)
 
 ```
 
+INTERPRETATION:
+
 Part (c)
 
 ```{r}
 
 ```
 
-Comparison 1: 
-
-Comparison 2: 
-
-Comparison 3: 
-
-Part (d)
-
-```{r}
-
-```
-
-Part (e)
+Part (d) ADDED Perform a residual analysis like [MD 6.1.4](https://moderndive.com/6-regression.html#model1) and comment on the appropriateness of a straight-line model. 
 
 ```{r}
 
