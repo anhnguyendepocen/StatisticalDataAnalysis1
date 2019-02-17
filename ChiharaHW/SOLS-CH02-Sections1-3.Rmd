@@ -1,6 +1,6 @@
 ---
 title: "MSRR CH02, Sections 1-3 HW"
-author: "YOUR NAME HERE"
+author: "SOLUTIONS"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: 
   html_document: 
@@ -26,6 +26,8 @@ library(ggplot2)
 library(resampledata)
 ```
 
+Nonlinear transformations change the spacing of the data on the real number line, so f(statistic(x)) is not equal to statistic(f(x)).
+
 
 ***
 #### Problem 2.1
@@ -36,17 +38,26 @@ Note: Test for equality using code, not just visual inspection.
 # basic solution
 data    <- c(3, 5, 8, 15, 20, 21)
 logdata <- log(data)
-log(mean(data)) == mean(logdata)
-
+xbar_data <- mean(data)
+med_data  <- median(data)
+xbar_logdata <- mean(logdata)
+med_logdata  <- median(logdata)
+log(xbar_data) == xbar_logdata
+log(med_data) == median(logdata)
 
 # solution using dplyr
-tibble(data = c(3, 5, 8, 15, 20, 21)) %>% 
+summary1 <- tibble(data = c(3, 5, 8, 15, 20, 21)) %>% 
   mutate(logdata = log(data)) %>% 
-  summarize(xbar_data     = mean(data),
-            xbar_logdata  = mean(logdata),
-            log_xbar_data = log(xbar_data),
-            test_equality = log_xbar_data == xbar_logdata)
+  summarize(xbar_data         = mean(data),
+            med_data          = median(data),
+            xbar_logdata      = mean(logdata),
+            med_logdata       = median(logdata),
+            test_equal_mean   = log(xbar_data) == xbar_logdata,
+            test_equal_median = log(med_data) == median(logdata))
+glimpse(summary1)   # using glimpse because of long variable names
 ```
+
+Nonlinear transformations change the spacing of the data on the real number line, so f(statistic(x)) is not equal to statistic(f(x)). 
 
 
 ***
@@ -57,14 +68,23 @@ Note: Test for equality using code, not just visual inspection.
 ```{r}
 data     <- c(1, 2, 4, 5, 6, 8, 11, 15)
 sqrtdata <- sqrt(data)
+xbar_data <- mean(data)
+med_data  <- median(data)
+xbar_sqrtdata <- mean(sqrtdata)
+med_sqrtdata  <- median(sqrtdata)
+log(xbar_data) == xbar_sqrtdata
+log(med_data) == median(sqrtdata)
 
 # solution using dplyr
-tibble(data = c(1, 2, 4, 5, 6, 8, 11, 15)) %>% 
+summary2 <- tibble(data = c(1, 2, 4, 5, 6, 8, 11, 15)) %>% 
   mutate(sqrtdata = sqrt(data)) %>% 
-  summarize(xbar_data     = mean(data),
-            med_data      = median(data),
-            xbar_sqrtdata = mean(sqrtdata),
-            med_sqrtdata  = median(sqrtdata))
+  summarize(xbar_data         = mean(data),
+            med_data          = median(data),
+            xbar_sqrtdata     = mean(sqrtdata),
+            med_sqrtdata      = median(sqrtdata),
+            test_equal_mean   = sqrt(xbar_data) == xbar_sqrtdata,
+            test_equal_median = sqrt(med_data) == median(sqrtdata))
+glimpse(summary2)   # using glimpse because of long variable names
 ```
 
 
@@ -84,10 +104,9 @@ GSS2002 %>% count(DeathPenalty)
 
 ggplot(GSS2002, aes(DeathPenalty)) + 
   geom_bar(fill = "lightblue", color = "darkgray") +
-  labs(title = "TBA",
-       subtitle = "TBA",
+  labs(title = "People convicted of murder should be subject to the death penalty.",
        caption = "source: MSRR GSS2002 dataset",
-       x = "Question: people convicted of murder should be subject to the death penalty.",
+       x = "Survey Responses",
        y = "Number of Respondents")
 ```
 
@@ -109,7 +128,7 @@ prop.table(table(GSS2002$OwnGun, GSS2002$DeathPenalty), 1)
 
 Part (d)
 
-ANSWER: 
+ANSWER: They appear different. About 80% of gun owners favor the death penalty versus about 65% of non gun owners.
 
 
 ***
@@ -165,25 +184,47 @@ ggplot(Recidivism, aes(x = Offense, y = Days)) +
        y = "Number of Days to Recidivism")
 ```
 
-Comparison 1: 
+Comparison 1: The groups seem to have similar minimums, Q1, and maximum values.
 
-Comparison 2: 
+Comparison 2: The median is the misdemeanor group seems to be slightly larger.
 
-Comparison 3: 
+Comparison 3: There are no outliers in either group.
+
+Overall, the distributions appear to be similar in shape, center, and spread.
 
 Part (d)
 
 ```{r}
+# using base
 quantile(Recidivism$Days, c(0.25, 0.50, 0.75), na.rm = TRUE)
+
+# using dplyr
+Recidivism %>% 
+  summarize(Q1  = quantile(Days, 0.25, na.rm = TRUE),
+            Med = quantile(Days, 0.50, na.rm = TRUE),
+            Q3  = quantile(Days, 0.75, na.rm = TRUE))
+
+# extra, by groups to go with boxplot
+Recidivism %>% 
+  filter(complete.cases(Age25)) %>% 
+  group_by(Age25) %>% 
+  summarize(Q1  = quantile(Days, 0.25, na.rm = TRUE),
+            Med = quantile(Days, 0.50, na.rm = TRUE),
+            Q3  = quantile(Days, 0.75, na.rm = TRUE))
 ```
 
 Part (e)
 
 ```{r}
-
+Recidivism %>% 
+  filter(complete.cases(Age25)) %>% 
+  ggplot(aes(x = Days, color = Age25)) +
+  stat_ecdf() +
+  geom_vline(xintercept = 400) +
+  geom_hline(yintercept = c(.46, .53), color = "gray")   # eyeball estimates of intersections
 ```
 
-ANSWER:
+ANSWER: Of those who recidivated, about 53% of those under 25 did so on or before 400 days, versus about 46% of those 25 and over. (The variable label says "Over 25" but the description in Chapter 1 states that the group is actually 25 and over.)
 
 
 ***
