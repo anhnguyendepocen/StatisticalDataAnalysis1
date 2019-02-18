@@ -1,0 +1,109 @@
+---
+title: "MSRR CH02, Sections 4-6 HW"
+author: "SOLUTIONS / Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, comment = "")
+```
+
+***
+
+**Instructions**
+
+Complete the following problems from _Mathematical Statistics with Resampling and R_. You can access the textbook datasets on our [Class Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page or from the `R` package `resampledata`. The textbook examples use base `R`code for plotting, but you `ggplot2` for visualizations. You may use `table()` to make tables, but you should use `dplyr` for other summaries. Refer to the case studies in Chapter 1 to add informative titles and axis labels to your plots and to provide context for your answers.
+
+Load the packages and datasets you need here.
+
+```{r}
+
+```
+
+
+***
+#### Problem 2.7
+
+Part (a)
+
+Note: For summaries, include sample size, mean, standard deviation, five-number summary, skewness, and kurtosis.
+
+```{r}
+
+```
+
+Part (b)
+
+Note: Also make a density plot and ecdf plot. As we learned in class, include theoretical normal reference curves.
+
+```{r}
+
+```
+
+ANSWER: 
+
+Part (c)
+
+```{r}
+
+```
+
+Part (d)
+
+Note: For summaries, include sample size, mean, standard deviation, five-number summary, skewness, and kurtosis. Use `dplyr` functions rather than `tapply()`.
+
+```{r}
+
+```
+
+Part (e)
+
+```{r}
+
+```
+
+ANSWER: 
+
+
+***
+#### Problem 2.8
+
+Note: Where the problem asks you to "describe the distribution," discuss the shape and possible outliers. Choose an appropriate number of bins for the histograms.
+
+Part (a)
+
+```{r}
+
+```
+
+ANSWER: 
+
+Part (b)
+
+Note: Use `mutate` and name the new variable `m.cpc_diff`.
+
+```{r}
+
+```
+
+ANSWER: 
+
+Part (c)
+
+```{r}
+
+```
+
+ANSWER: 
+
+
+***
+
+```{r}
+sessionInfo()
+```
+
