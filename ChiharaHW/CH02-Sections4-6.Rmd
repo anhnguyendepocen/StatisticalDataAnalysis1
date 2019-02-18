@@ -38,7 +38,7 @@ Note: For summaries, include sample size, mean, standard deviation, five-number 
 
 Part (b)
 
-Note: Also make a density plot and ecdf plot. As we learned in class, include theoretical normal reference curves.
+Note: Also make a density plot and ecdf plot. As we learned to do in class, include theoretical normal reference curves.
 
 ```{r}
 
