@@ -1,6 +1,6 @@
 ---
 title: "MSRR CH02, Sections 1-3 HW"
-author: "SOLUTIONS"
+author: "SOLUTIONS / Jill E. Thomley"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: 
   html_document: 
@@ -25,8 +25,6 @@ library(dplyr)
 library(ggplot2)
 library(resampledata)
 ```
-
-Nonlinear transformations change the spacing of the data on the real number line, so f(statistic(x)) is not equal to statistic(f(x)).
 
 
 ***
@@ -57,7 +55,7 @@ summary1 <- tibble(data = c(3, 5, 8, 15, 20, 21)) %>%
 glimpse(summary1)   # using glimpse because of long variable names
 ```
 
-Nonlinear transformations change the spacing of the data on the real number line, so f(statistic(x)) is not equal to statistic(f(x)). 
+Nonlinear transformations alter proportional spacing of data on the number line, so f(statistic(x)) is not equal to statistic(f(x)).
 
 
 ***
@@ -86,6 +84,8 @@ summary2 <- tibble(data = c(1, 2, 4, 5, 6, 8, 11, 15)) %>%
             test_equal_median = sqrt(med_data) == median(sqrtdata))
 glimpse(summary2)   # using glimpse because of long variable names
 ```
+
+Nonlinear transformations alter proportional spacing of data on the number line, so f(statistic(x)) is not equal to statistic(f(x)).
 
 
 ***
