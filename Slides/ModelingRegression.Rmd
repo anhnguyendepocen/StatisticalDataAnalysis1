@@ -9,7 +9,7 @@ output: ioslides_presentation
 knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 ```
 
-## What is modeling?
+## Modeling
 
 What is a model?
 
@@ -54,7 +54,7 @@ The residual for each data point is the difference between the observed value of
 $$y_i - \hat{y}_i = (b_0 + b_1 x_i + e_i) - (b_0 + b_1 x_i) = e_i$$
 
 
-In least squares modeling, the best-fit line is the one that meets the following criteria.
+In least squares modeling, the best-fit line is the one that...
 
 Passes through the point $(\bar{x}, \bar{y})$.
 
@@ -93,12 +93,13 @@ Individual people are likely not perfect squares, but maybe they are squares *on
 
 ## Anthropometric Data
 
-The datafile [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv) contains measurements from some of Dr. Thomley's previous statistics students.
+The datafile [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv) contains measurements from some of Dr. Thomley's previous stats students ([description](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/anthropometric.html)).
 
 ```{r, echo = FALSE}
 anthro <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv")
 library(dplyr)
 library(ggplot2)
+library(moderndive)
 ```
 
 ```{r}
@@ -134,5 +135,106 @@ ggplot(anthro_sample, aes(x = height, y = armspan)) +
 ```
 
 
+## Scatterplot with Fitted Line
 
+```{r, fig.height = 3.4}
+ggplot(anthro_sample, aes(x = height, y = armspan)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  coord_fixed(xlim = c(60, 80), ylim = c(60, 80))
+```
+
+
+## Scatterplot with Fitted & Plotted Lines
+
+```{r, fig.height = 3.1}
+ggplot(anthro_sample, aes(x = height, y = armspan)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_abline(intercept = 0, slope = 1, color = "red") +
+  coord_fixed(xlim = c(60, 80), ylim = c(60, 80))
+```
+
+
+## Different Samples, Varying Estimates
+
+```{r}
+# there are more efficient ways to do this, notice the pattern
+size_n <- 20
+
+sample01 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S01")
+sample02 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S02")
+sample03 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S03")
+sample04 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S04")
+sample05 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S05")
+sample06 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S06")
+sample07 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S07")
+sample08 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S08")
+sample09 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S09")
+sample10 <- sample_n(anthro, size_n) %>% mutate(samplenum = "S10")
+
+tensamps <- rbind(sample01, sample02, sample03, sample04, sample05,
+                  sample06, sample07, sample08, sample09, sample10)
+```
+
+
+## Plotting All the Estimated Lines
+
+```{r, fig.height = 3.4}
+ggplot(tensamps, aes(x = height, y = armspan, color = samplenum)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  coord_fixed(xlim = c(60, 80), ylim = c(60, 80))
+```
+
+
+## Fitting the Linear Model
+
+```{r}
+square_model <- lm(height ~ armspan, data = anthro_sample)
+
+square_model   # try str(square_model) and see what you get
+
+square_model$coefficients
+```
+
+
+## Accessing the Output
+
+```{r}
+get_regression_table(square_model)   # from package moderndive
+```
+
+This output is a `tibble`, why is this potentially useful to us? 
+
+
+##
+
+```{r}
+get_regression_points(square_model)   # from package moderndive
+```
+
+The output is a `tibble`, why is this potentially useful to us? 
+
+
+## 
+
+```{r}
+summary(square_model)
+```
+
+
+## Parallel Slopes Model
+
+```{r, fig.height = 4}
+ggplot(anthro_sample, aes(x = height, y = armspan, color = gender)) +
+  geom_point() + geom_smooth(method = "lm", se = FALSE)
+```
+
+## 
+
+```{r}
+square_model_gender <- lm(armspan ~ height + gender, data = anthro_sample)
+get_regression_table(square_model_gender)
+```
 
