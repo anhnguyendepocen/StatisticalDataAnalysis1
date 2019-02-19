@@ -191,7 +191,7 @@ ggplot(tensamps, aes(x = height, y = armspan, color = samplenum)) +
 ## Fitting the Linear Model
 
 ```{r}
-square_model <- lm(height ~ armspan, data = anthro_sample)
+square_model <- lm(armspan ~ height, data = anthro_sample)
 
 square_model   # try str(square_model) and see what you get
 
@@ -199,28 +199,41 @@ square_model$coefficients
 ```
 
 
-## Accessing the Output
-
-```{r}
-get_regression_table(square_model)   # from package moderndive
-```
-
-This output is a `tibble`, why is this potentially useful to us? 
-
-
-##
-
-```{r}
-get_regression_points(square_model)   # from package moderndive
-```
-
-The output is a `tibble`, why is this potentially useful to us? 
-
-
 ## 
 
 ```{r}
 summary(square_model)
+```
+
+
+## Accessing Results---Coefficients
+
+The package `moderndive` contains some useful functions to help us easily access regression output for information and additional analysis.
+
+```{r}
+square_model_table <- get_regression_table(square_model)
+
+square_model_table
+```
+
+This output is a `tibble`. Why is this potentially useful to us? 
+
+
+## Accessing Results---Fits and Residuals
+
+```{r}
+square_model_points <- get_regression_points(square_model)
+
+head(square_model_points)
+```
+
+What are `height_hat` and `residual`?
+
+
+## R-Squared
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/xkcdRsquared.jpg")
 ```
 
 
@@ -234,7 +247,9 @@ ggplot(anthro_sample, aes(x = height, y = armspan, color = gender)) +
 ## 
 
 ```{r}
-square_model_gender <- lm(armspan ~ height + gender, data = anthro_sample)
-get_regression_table(square_model_gender)
+square_model_pll <- lm(armspan ~ height + gender, data = anthro_sample)
+
+square_model_pll
 ```
 
+What are the equations of the parallel lines?
