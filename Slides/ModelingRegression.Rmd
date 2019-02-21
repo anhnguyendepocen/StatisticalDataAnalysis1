@@ -33,7 +33,7 @@ These slides were produced using R Markdown. See "[4.1 ioslides presentation](ht
 
 ## A General Model
 
-General modeling framework: y is a function of one or more x values, plus some amount of random error.
+General modeling framework: $y$ is a function of one or more $x$ variables, plus some amount of random error.
 
 $$y = f(\overrightarrow{x}) + \epsilon$$
 
@@ -42,6 +42,8 @@ $$y = f(\overrightarrow{x}) + \epsilon$$
 * x is an *explanatory* or *predictor* variable ("signal")
 
 * $\epsilon$ is the unsystematic error component ("noise")
+
+The function $f(\overrightarrow{x})$ can assume a variety of forms, depending on the system and relationships we are trying to model. Finding the right model is often an iterative process. We frequently assume that $\epsilon$ is a normally distributed random variable.
 
 
 ## Simple Linear Model
@@ -75,6 +77,17 @@ In least squares modeling, the best-fit line has the properties:
 * Sum of the squared residuals $\sum_{i=1}^{n} {e_i}^2$ is minimized
 
 The sum of squared residuals (SSE) is an important quantity in regression analysis and is used for several purposes.
+
+
+## Interpreting Slope and Intercept
+
+Mathematically, the y-intercept $\beta_0$ and its estimate $b_0$ represent the value of $\hat{y}$ when $x$ = 0. 
+
+The intercept term may or may not have a useful interpretation in context, depending on whether $x$ = 0 is meaningful. 
+
+The intercept units are the same as the units of the $y$ variable.
+
+MORE ON SLOPE HERE TBA
 
 
 ## Are People Squares?
@@ -268,7 +281,7 @@ head(square_model_points)
 What are `height_hat` and `residual`?
 
 
-## Aseessing Results---R^2^
+## Assessing Results---R^2^
 
 R^2^ is the proportion of variation in the $y$ variable explained by the model $f(x)$. It is also known as *coefficient of determination*. 
 
@@ -299,7 +312,7 @@ R^2^ is often used to assess model fit and to compare potential models for the s
 knitr::include_graphics("images/xkcdRsquared.jpg")
 ```
 
-## R^2^ for Our Model
+## R^2^ for Our Vitruvian Model
 
 ```{r}
 square_model_points %>% 
