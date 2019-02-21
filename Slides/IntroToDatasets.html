@@ -97,15 +97,15 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, January 29, 2019 @ 02:26:36 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Wednesday, February 20, 2019 @ 09:52:30 PM</p>
           </hgroup>
   </slide>
 
 <slide class=""><hgroup><h2>Before We Begin&#8230;</h2></hgroup><article  id="before-we-begin...">
 
-<p>These slides assume that you have completed the DataCamp course <a href='https://www.datacamp.com/courses/free-introduction-to-r' title=''>Introduction to R</a>.</p>
+<p>These slides assume you have completed the DataCamp course <a href='https://www.datacamp.com/courses/free-introduction-to-r' title=''>Introduction to R</a>.</p>
 
-<p>It would also be helpful to read beforehand Chapter 2 of the digital text <a href='https://moderndive.com/' title=''><em>Modern Dive</em></a>.</p>
+<p>It also would be be helpful to read Chapter 2 of the digital text <a href='https://moderndive.com/' title=''><em>Modern Dive</em></a>.</p>
 
 <p>These slides are not meant to be standalone information, but rather a guide for hands-on lecture. Be prepared to take notes to flesh out the contents.</p>
 
@@ -256,7 +256,7 @@ Most of the data we will work with in STT3850 is already in <code>tidy</code> fo
  $ day        : int  1 2 3 4 5 6 7 8 9 10 ...
  $ draftyear  : int  1970 1970 1970 1970 1970 1970 1970 1970 1970 1970 ...
  $ halfyear   : Factor w/ 2 levels &quot;First&quot;,&quot;Second&quot;: 1 1 1 1 1 1 1 1 1 1 ...
- $ draftnumber: Factor w/ 368 levels &quot;&quot;,&quot;*&quot;,&quot;1&quot;,&quot;10&quot;,..: 232 69 172 132 6 142 233 113 108 254 ...</pre>
+ $ draftnumber: int  232 69 172 132 6 142 233 113 108 254 ...</pre>
 
 <p>Try using <code>str()</code> on <code>draft_alt</code>. Compare the results.</p>
 
@@ -273,7 +273,7 @@ $ month       &lt;fct&gt; Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Jan, Ja�
 $ day         &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
 $ draftyear   &lt;int&gt; 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970, 1970…
 $ halfyear    &lt;fct&gt; First, First, First, First, First, First, First, Fir…
-$ draftnumber &lt;fct&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32…</pre>
+$ draftnumber &lt;int&gt; 232, 69, 172, 132, 6, 142, 233, 113, 108, 254, 258, …</pre>
 
 <p>Try using <code>glimpse()</code> on <code>draft_alt</code>. Compare the results.</p>
 
@@ -299,14 +299,22 @@ $ draftnumber &lt;fct&gt; 305, 159, 251, 215, 101, 224, 306, 199, 194, 325, 32�
 
 <pre class = 'prettyprint lang-r'>summary(draft)</pre>
 
-<pre >     month          day          draftyear      halfyear    draftnumber  
- Aug    :124   Min.   : 1.00   Min.   :1970   First :728   1      :   4  
- Dec    :124   1st Qu.: 8.00   1st Qu.:1971   Second:736   10     :   4  
- Jan    :124   Median :16.00   Median :1972                100    :   4  
- Jul    :124   Mean   :15.76   Mean   :1972                101    :   4  
- Mar    :124   3rd Qu.:23.00   3rd Qu.:1972                102    :   4  
- May    :124   Max.   :31.00   Max.   :1973                103    :   4  
- (Other):720                                               (Other):1440  </pre>
+<pre >     month          day          draftyear      halfyear  
+ Aug    :124   Min.   : 1.00   Min.   :1970   First :728  
+ Dec    :124   1st Qu.: 8.00   1st Qu.:1971   Second:736  
+ Jan    :124   Median :16.00   Median :1972               
+ Jul    :124   Mean   :15.76   Mean   :1972               
+ Mar    :124   3rd Qu.:23.00   3rd Qu.:1972               
+ May    :124   Max.   :31.00   Max.   :1973               
+ (Other):720                                              
+  draftnumber    
+ Min.   :  1.00  
+ 1st Qu.: 93.75  
+ Median :185.00  
+ Mean   :185.09  
+ 3rd Qu.:276.25  
+ Max.   :368.00  
+                 </pre>
 
 </article></slide><slide class=""><hgroup><h2>Missing Data Values</h2></hgroup><article  id="missing-data-values">
 

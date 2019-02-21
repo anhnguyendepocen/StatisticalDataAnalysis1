@@ -11,9 +11,9 @@ knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 
 ## Before We Begin...
 
-These slides assume that you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r).
+These slides assume you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r).
 
-It would also be helpful to read beforehand Chapter 2 of the digital text [*Modern Dive*](https://moderndive.com/).
+It also would be be helpful to read Chapter 2 of the digital text [*Modern Dive*](https://moderndive.com/).
 
 These slides are not meant to be standalone information, but rather a guide for hands-on lecture. Be prepared to take notes to flesh out the contents. 
 
