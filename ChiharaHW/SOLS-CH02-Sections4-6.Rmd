@@ -1,0 +1,166 @@
+---
+title: "MSRR CH02, Sections 4-6 HW"
+author: "SOLUTIONS / Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, comment = "")
+```
+
+***
+
+**Instructions**
+
+Complete the following problems from _Mathematical Statistics with Resampling and R_. You can access the textbook datasets on our [Class Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page or from the `R` package `resampledata`. The textbook examples use base `R`code for plotting, but you `ggplot2` for visualizations. You may use `table()` to make tables, but you should use `dplyr` for other summaries. Refer to the case studies in Chapter 1 to add informative titles and axis labels to your plots and to provide context for your answers.
+
+Load the packages and datasets you need here.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(moments)
+library(resampledata)
+```
+
+
+***
+#### Problem 2.7
+
+Part (a)
+
+Note: For summaries, include sample size, mean, standard deviation, five-number summary, skewness, and kurtosis.
+
+```{r}
+Spruce %>% 
+  summarize(n     = n(),
+            xbar  = mean(Ht.change, na.rm = TRUE),
+            stdev = sd(Ht.change, na.rm = TRUE),
+            min   = fivenum(Ht.change)[1],
+            Q1    = fivenum(Ht.change)[2],
+            med   = fivenum(Ht.change)[3],                  
+            Q3    = fivenum(Ht.change)[4],
+            max   = fivenum(Ht.change)[5],
+            skew  = skewness(Ht.change, na.rm = TRUE),
+            kurt  = kurtosis(Ht.change, na.rm = TRUE))
+```
+
+Part (b)
+
+Note: Also make a density plot and ecdf plot. As we learned to do in class, include theoretical normal reference curves.
+
+```{r}
+ht_stats <- Spruce %>% 
+  summarize(xbar = mean(Ht.change), s = sd(Ht.change))
+ht_stats
+
+ggplot(Spruce, aes(x = Ht.change)) +
+  geom_histogram(bins = sqrt(72))
+
+ggplot(Spruce, aes(x = Ht.change)) +
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(ht_stats$xbar, ht_stats$s),   
+                color = "red")
+
+ggplot(Spruce, aes(x = Ht.change)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(ht_stats$xbar, ht_stats$s), 
+                color = "red")
+
+ggplot(Spruce, aes(sample = Ht.change)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+ANSWER: The plots based on data do not deviate too far from the theoretical normal plots. There is no evidence of strong skew or outliers. The distribution appears to be approximately normal.
+
+Part (c)
+
+```{r}
+ggplot(Spruce, aes(x = Fertilizer, y = Di.change)) +
+  geom_boxplot()
+```
+
+Part (d)
+
+Note: For summaries, include sample size, mean, standard deviation, five-number summary, skewness, and kurtosis. Use `dplyr` functions rather than `tapply()`.
+
+```{r}
+Spruce %>% 
+  group_by(Fertilizer) %>% 
+  summarize(n     = n(),
+            xbar  = mean(Di.change, na.rm = TRUE),
+            stdev = sd(Di.change, na.rm = TRUE),
+            min   = fivenum(Di.change)[1],
+            Q1    = fivenum(Di.change)[2],
+            med   = fivenum(Di.change)[3],                  
+            Q3    = fivenum(Di.change)[4],
+            max   = fivenum(Di.change)[5],
+            skew  = skewness(Di.change, na.rm = TRUE),
+            kurt  = kurtosis(Di.change, na.rm = TRUE))
+```
+
+Part (e)
+
+```{r}
+ggplot(Spruce, aes(x = Di.change, y = Ht.change)) +
+  geom_point()
+```
+
+ANSWER: Change in diameter and change in height appear to have a positive and roughly linear relationship.
+
+
+***
+#### Problem 2.8
+
+Note: Where the problem asks you to "describe the distribution," discuss the shape and possible outliers. Choose an appropriate number of bins for the histograms.
+
+Part (a)
+
+```{r}
+ggplot(MobileAds, aes(x = m.cpc_pre)) +
+  geom_histogram(bins = sqrt(655))
+
+ggplot(MobileAds, aes(x = m.cpc_post)) +
+  geom_histogram(bins = sqrt(655))
+```
+
+ANSWER: Both distributions appear to be strongly right skewed and may have outliers on the right side.
+
+Part (b)
+
+Note: Use `mutate` and name the new variable `m.cpc_diff`.
+
+```{r}
+MobileAds <- MobileAds %>% 
+  mutate(m.cpc_diff = m.cpc_post - m.cpc_pre)
+
+ggplot(MobileAds, aes(x = m.cpc_diff)) +
+  geom_histogram(bins = sqrt(655))
+```
+
+ANSWER: The difference distribution appears to be roughly symmetric, but it may have outliers on both sides.
+
+Part (c)
+
+```{r}
+ggplot(MobileAds, aes(sample = m.cpc_diff)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+ANSWER: The distribution does not appear to be approximately normal. It deviates strongly from the theoretical normal reference line. (This shape is characteristic of a *leptokurtic* distribution.)
+
+
+***
+
+```{r}
+sessionInfo()
+```
+
