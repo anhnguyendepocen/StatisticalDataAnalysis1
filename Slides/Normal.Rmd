@@ -193,9 +193,18 @@ ggplot(parent_hts, aes(x = Father)) +
 ```
 
 
-## Comparing Quantiles
+## Reminder: Theoretical Normal Curve
 
-Do data quantiles match the theoretical normal quantiles?
+<p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg"></p>
+
+Notice the placement of the percentiles (also called quantiles) on the theoretical normal distribution. If we know $\mu$ and $\sigma$ we can determine the locations of the quantiles.
+
+This will allow us to contruct a normal quantile-quantile plot, also known as a qq plot or  normal probability plot.
+
+
+## Example: Comparing Quantiles
+
+Do the data quantiles match the theoretical normal quantiles?
 
 ```{r}
 deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
@@ -204,7 +213,7 @@ tibble(data   = quantile(parent_hts$Father, deciles),
 ```
 
 
-## Plot of the Deciles
+## Plot of Data vs. Theoretical Deciles
 
 ```{r, echo = FALSE}
 plotdata <- tibble(data = quantile(parent_hts$Father, deciles), 
