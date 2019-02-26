@@ -162,6 +162,11 @@ HW = homework
 * Watch JB [Introduction to Simple Linear Regression](https://youtu.be/KsVBBJRb9TE) (~8 minutes)
 * Watch JB [Simple Linear Regression: The Least Squares Regression Line](https://youtu.be/coQAAN4eY5s) (~7 minutes)
 * Watch JB [Simple Linear Regression: Interpreting Model Parameters](https://youtu.be/I8Dr1OGUdZQ) (~5 minutes)
+* Watch JB [Simple Linear Regression: Assumptions](https://youtu.be/gHMTzdbpQTw) (~3 minutes)
+* Watch JB [Checking Assumptions with Residual Plots](https://youtu.be/iMdtTCX2Q70) (~8 minutes)
+* Watch JB [Simple Linear Regression: Always Plot Your Data!](https://youtu.be/sfH43temzQY) (~6 minutes)
+* Watch JB [Simple Linear Regression: An Example](https://youtu.be/xIDjj6ZyFuw) (~10 minutes)
+* Watch JB [Simple Linear Regression: Transformations](https://youtu.be/HIcqQhn3vSM) (~8 minutes)
 
 
 ***
@@ -181,11 +186,12 @@ HW = homework
 
 #### Before Next Week
 
-* Watch JB [Simple Linear Regression: Assumptions](https://youtu.be/gHMTzdbpQTw) (~3 minutes)
-* Watch JB [Checking Assumptions with Residual Plots](https://youtu.be/iMdtTCX2Q70) (~8 minutes)
-* Watch JB [Simple Linear Regression: Always Plot Your Data!](https://youtu.be/sfH43temzQY) (~6 minutes)
-* Watch JB [Simple Linear Regression: An Example](https://youtu.be/xIDjj6ZyFuw) (~10 minutes)
-* Watch JB [Simple Linear Regression: Transformations](https://youtu.be/HIcqQhn3vSM) (~8 minutes)
+* Watch JB [Introduction to Discrete Random Variables and Probability Distributions](https://youtu.be/oHcrna8Fk18) (~14 minutes)
+* Watch JB [The Expected Value and Variance of Discrete Random Variables](https://youtu.be/Vyk8HQOckIE) (~12 minutes)
+* Watch JB [Introduction to the Bernoulli Distribution](https://youtu.be/bT1p5tJwn_0) (~5 minutes)
+* Watch JB [An Introduction to the Binomial Distribution](https://youtu.be/qIzC1-9PwQo) (~14 minutes)
+* Watch JB [Binomial/Not Binomial: Some Examples]() (~x minutes)
+* Review entries in Probability and Distributions Glossary: Bernoulli trial, binomial distribution, combination, cumulative distribution function, expected value, i.i.d., law of averages, probability, probability distribution, probability mass function, random variable, sample space
 
 
 ***
@@ -194,6 +200,7 @@ HW = homework
 #### In Class
 
 * Modeling with data
+* Probability
 
 #### Due THU @ 11pm
 
@@ -204,13 +211,13 @@ HW = homework
 #### Before Next Week
 
 * Read MSSR CH02, Sections 4-6 
-* Watch JB [Introduction to Discrete Random Variables and Probability Distributions](https://youtu.be/oHcrna8Fk18) (~14 minutes)
-* Watch JB [The Expected Value and Variance of Discrete Random Variables](https://youtu.be/Vyk8HQOckIE) (~12 minutes)
 * Watch JB [An Introduction to Continuous Probability Distributions](https://youtu.be/OWSOhpS00_s) (~6 minutes)
+* Watch JB [Introduction to the Continuous Uniform Distribution](https://youtu.be/-qt8CPIadWQ) (~7 minutes)
 * Watch JB [An Introduction to the Normal Distribution](https://youtu.be/iYiOVISWXS4) (~6 minutes)
 * Watch JB [Standardizing Normally Distributed Random Variables](https://youtu.be/BN-2XOMnoCs) (~7 minutes)
+* Watch JB [The Normal Approximation to the Binomial Distribution](https://youtu.be/CCqWkJ_pqNU) (~14 minutes)
 * Watch JB [Normal Quantile-Quantile Plots](https://youtu.be/X9_ISJ0YpGw) (~12 minutes)
-* Explore relevant entries in the Probability and Distributions glossary
+* Review entries in Probability and Distributions Glossary: normal distribution, probability density function, standardization, uniform distribution
 
 
 ***
@@ -218,18 +225,19 @@ HW = homework
 
 #### In Class
 
-* Normal distribution
+* Probability
 * Assessing normality
 * Work on HW assignments
 
 #### Due THU @ 11pm
 
+* DC _Introduction to Probability_
 * MSRR CH02, Sections 4-6 HW
 * Reflection #07
 
 #### Before Next Week
 
-* Prepare for normality and modeling assessment!
+* Prepare for probability and modeling assessment!
 
 
 ***
@@ -245,24 +253,23 @@ HW = homework
 
 #### In Class
 
-* Normal distribution and modeling assessment
+* Probability and modeling assessment
 
 #### Due THU @ 11pm
 
-* Normality and modeling proficiency problems
+* Prob / modeling proficiency problems
 * Reflection #08
 
 #### Before Next Week
 
 * Read MSSR CH04
 * Read MD [Chapter 8. Sampling](https://moderndive.com/8-sampling.html)
-* Watch JB [Introduction to the Bernoulli Distribution](https://youtu.be/bT1p5tJwn_0) (~5 minutes)
-* Watch JB [An Introduction to the Binomial Distribution](https://youtu.be/qIzC1-9PwQo) (~14 minutes)
-* Watch JB [The Normal Approximation to the Binomial Distribution](https://youtu.be/CCqWkJ_pqNU) (~14 minutes)
 * Watch JB [Sampling Distributions: Introduction to the Concept](https://youtu.be/Zbw-YvELsaM) (~8 minutes)
 * Watch JB [The Sampling Distribution of the Sample Mean](https://youtu.be/0zqNGDVNKgA) (~8 minutes)
 * Watch JB [Introduction to the Central Limit Theorem](https://youtu.be/Pujol1yC1_A) (~13 minutes)
-* Explore relevant entries in the Probability and Distributions glossary
+* Watch JB [Deriving the Mean and Variance of the Sample Mean](https://youtu.be/7mYDHbrLEQo) (~5 minutes)
+* Watch JB [Proof that Sample Variance is an Unbiased Estimator](https://youtu.be/D1hgiAla3KI) (~7 minutes)
+* Review entries in Probability and Distributions Glossary: central limit theorem, law of large numbers, sampling distribution
 
 
 ***
@@ -270,17 +277,18 @@ HW = homework
 
 #### In Class
 
-* Sampling distributions
+* Topic: sampling distributions
 
 #### Due THU @ 11pm
 
-* DC _Introduction to Probability_
+* TBA
 * Reflection #09
 
 #### Before Next Week
 
 * Read MSSR CH05 and CH07
 * TBA
+* Review entries in Probability and Distributions Glossary: Student's t distribution
 
 
 ***
@@ -288,11 +296,11 @@ HW = homework
 
 #### In Class
 
-* Confidence intervals
+* Topic: confidence intervals
 
 #### Due THU @ 11pm
 
-* DC _Foundations of Inference_
+* TBA
 * Reflection #10
 
 #### Before Next Week
@@ -306,17 +314,18 @@ HW = homework
 
 #### In Class
 
-* Hypothesis tests for means and proportions
+* Topic: hypothesis tests
 
 #### Due THU @ 11pm
 
-* DC _Inference for Numerical Data_
+* TBA
 * Reflection #11
 
 #### Before Next Week
 
 * Read MSSR CH10
 * TBA
+* Review entries in Probability and Distributions Glossary: chi-square distribution
 
 
 ***
@@ -324,11 +333,11 @@ HW = homework
 
 #### In Class
 
-* Tests of independence and goodness of fit
+* Topic: hypothesis tests
 
 #### Due THU @ 11pm
 
-* DC _Inference for Categorical Data_
+* TBA
 * Reflection #12
 
 #### Before Next Week
@@ -345,7 +354,7 @@ HW = homework
 
 #### Due THU @ 11pm
 
-* Sampling and inference proficiency problems
+* Sampling / inference proficiency problems
 * Reflection #13
 
 #### Before Next Week

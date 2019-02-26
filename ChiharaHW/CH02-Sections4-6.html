@@ -186,14 +186,14 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">MSRR CH02, Sections 4-6 HW</h1>
 <h4 class="author"><em>SOLUTIONS / Jill E. Thomley</em></h4>
-<h4 class="date"><em>Updated: Monday, February 18, 2019 @ 05:27:34 PM</em></h4>
+<h4 class="date"><em>Updated: Tuesday, February 26, 2019 @ 12:05:18 AM</em></h4>
 
 </div>
 
 
 <hr />
 <p><strong>Instructions</strong></p>
-<p>Complete the following problems from <em>Mathematical Statistics with Resampling and R</em>. You can access the textbook datasets on our <a href="https://stat-jet-asu.github.io/Datasets/DatasetList.html">Class Data Files</a> page or from the <code>R</code> package <code>resampledata</code>. The textbook examples use base <code>R</code>code for plotting, but you <code>ggplot2</code> for visualizations. You may use <code>table()</code> to make tables, but you should use <code>dplyr</code> for other summaries. Refer to the case studies in Chapter 1 to add informative titles and axis labels to your plots and to provide context for your answers.</p>
+<p>Complete the following problems from <em>Mathematical Statistics with Resampling and R</em> and additional example problems using the normal distribution functions in <code>R</code>. You can access the textbook datasets on our <a href="https://stat-jet-asu.github.io/Datasets/DatasetList.html">Class Data Files</a> page or from the <code>R</code> package <code>resampledata</code>. The textbook examples use base <code>R</code>code for plotting, but you <code>ggplot2</code> for visualizations. You may use <code>table()</code> to make tables, but you should use <code>dplyr</code> for other summaries. Refer to the case studies in Chapter 1 to add informative titles and axis labels to your plots and to provide context for your answers.</p>
 <p>Load the packages and datasets you need here.</p>
 <hr />
 <div id="problem-2.7" class="section level4">
@@ -221,6 +221,30 @@ $(document).ready(function () {
 <p>Part (c)</p>
 <p>ANSWER:</p>
 <hr />
+</div>
+<div id="r-problem-1" class="section level4">
+<h4><code>R</code> Problem 1</h4>
+<p>Let the random variable X have a standard normal distribution.</p>
+<p>Part (a) : What is P(X &lt; 1.5)?</p>
+<p>Part (b) : What is P(-2.0 &lt; X &lt; 1.5)?</p>
+<p>Part (c) : What is P(X &lt; -1.75 or X &gt; 1.75)?</p>
+<p>Part (d) : What value of x satisfies P(X &lt; x) = 0.45?</p>
+<p>Part (e) : What value of x satisfies P(X ≥ x) = 0.35?</p>
+<p>Part (f) : The middle 50% of the area under a standard normal curve lies between what values?</p>
+<hr />
+</div>
+<div id="r-problem-2" class="section level4">
+<h4><code>R</code> Problem 2</h4>
+<p>In Hottsylvania, the mean July midday temperature is 32 °C with a standard deviation of 3 °C. Assume that midday temperatures can be modeled with an approximately normal distribution. July has 31 days.</p>
+<p>Part (a) : About how many days should be less than 29.44 °C (about 85 °F)?</p>
+<p>Part (b) : How many days should have a midday temperature between 35 °C and 38 °C?</p>
+<p>Part (c) : The midday temperature of the hottest 30% of days should be greater than what temperature?</p>
+<hr />
+</div>
+<div id="r-problem-3" class="section level4">
+<h4><code>R</code> Problem 3</h4>
+<p>Generate a random sample of size 100 from a standard normal distribution. Create a density plot and a normal probability plot with appropriate theoretical reference curves.</p>
+<hr />
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 3.5.1 (2018-07-02)
 Platform: x86_64-redhat-linux-gnu (64-bit)
@@ -243,7 +267,7 @@ attached base packages:
 loaded via a namespace (and not attached):
  [1] compiler_3.5.1  magrittr_1.5    tools_3.5.1     htmltools_0.3.6
  [5] yaml_2.2.0      Rcpp_1.0.0      stringi_1.3.1   rmarkdown_1.11 
- [9] knitr_1.21      stringr_1.4.0   xfun_0.4        digest_0.6.18  
+ [9] knitr_1.21      stringr_1.4.0   xfun_0.5        digest_0.6.18  
 [13] evaluate_0.13  </code></pre>
 </div>
 

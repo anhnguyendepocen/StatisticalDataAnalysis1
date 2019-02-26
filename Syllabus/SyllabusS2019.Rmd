@@ -26,17 +26,17 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 
 **Objectives**
 
-* PROBABILITY: Understand and explain basic theoretical properties of discrete and continuous probability models, such as expected value and variance; solve applied problems using one or more probability models.
+* PROBABILITY: Demonstrate understanding and be able to explain theoretical properties of selected discrete and continuous probability models, such as expected value and variance; solve applied problems using one or more probability models.
 
-* DISTRIBUTIONS: Understand and explain the properties of frequency, shape, center, spread, and outliers in the context of observed data; be able to appropriately summarize and visualize data; be able to calculate, simulate, and summarize sampling distributions for commonly used statistics such as means and proportions.
+* DISTRIBUTIONS: Demonstrate understanding and be able to explain the properties of frequency, shape, center, spread, and outliers in the context of observed data; be able to appropriately summarize and visualize data; be able to calculate, simulate, and summarize sampling distributions for commonly used statistics such as means and proportions.
 
-* STRENGTH OF STATISTICAL EVIDENCE: Understand the logic and construction of hypothesis tests and confidence intervals, including the meaning of p-values; be able to perform selected asymptotic, resampling, and bootstrap inference procedures and interpret results in the context of the original problems; be able to discuss and verify the assumptions of modeling and inferential procedures.
+* STRENGTH OF STATISTICAL EVIDENCE: Be able to explain the logic and construction of hypothesis tests and confidence intervals, including the meaning of p-values; be able to perform selected asymptotic, resampling, and bootstrap inference procedures and interpret results in the context of the original problems; be able to discuss and verify the assumptions of modeling and inferential procedures.
 
 * COMPARE AND CONNECT: Compare analytical/theoretical results with resampling/bootstrapping results to connect the different modes of exploration; analyze data sets in different ways depending on the research question(s).
 
 * STATISTICAL COMPUTING: Effectively and efficiently implement and report statistical calculations, procedures, and visualizations using R, incorporating some of the principles of reproducible research.
 
-* STATISTICS—THE BIG PICTURE: Understand why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world around us; become acquainted with the ethics of data collection.
+* STATISTICS—THE BIG PICTURE: Demonstrate understanding of why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world; become acquainted with statistical ethics.
 
 
 **Assessment and Grading**
@@ -48,13 +48,13 @@ library(kableExtra)
 df <- data.frame(Outcome = c("I can further my learning by making a good faith effort to complete assigned homework problems.", 
                              "I can further my learning by engaging positively with external resources in the discipline.", 
                              "I can produce thoughtful reflections about my learning in this class.", 
-                             "I can demonstrate my knowledge of probability models and assessment of normality.", 
+                             "I can demonstrate my knowledge of the normal distribution and assessment of normality.", 
                              "I can demonstrate my knowledge of creating and visualizing linear models created from data.",
                              "I can demonstrate my knowledge of simulating, calculating, and describing statistical distributions.",
                              "I can demonstrate my knowledge of asymptotic and bootstrap parameter estimation procedures.",
                              "I can demonstrate my knowledge of asymptotic and resampling hypothesis testing procedures.",
                              "I can demonstrate effective statistical computing and reporting skills using R and reproducible methods. ",
-                             "I can demonstrate my integration of knowledge/skills across the course."),
+                             "I can demonstrate my integration of knowledge and skills across the course."),
                  C = c("Reasonable attempt made on at least 70% of HW assignments",
                        "At least 5 of 10 DataCamp assignments completed with 80% or more of points earned", 
                        "At least 7 of 15 reflections completed in a satisfactory manner", 

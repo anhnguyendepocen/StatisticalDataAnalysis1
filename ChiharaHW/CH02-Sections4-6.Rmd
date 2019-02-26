@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, comment = "")
 
 **Instructions**
 
-Complete the following problems from _Mathematical Statistics with Resampling and R_. You can access the textbook datasets on our [Class Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page or from the `R` package `resampledata`. The textbook examples use base `R`code for plotting, but you `ggplot2` for visualizations. You may use `table()` to make tables, but you should use `dplyr` for other summaries. Refer to the case studies in Chapter 1 to add informative titles and axis labels to your plots and to provide context for your answers.
+Complete the following problems from _Mathematical Statistics with Resampling and R_ and additional example problems using the normal distribution functions in `R`. You can access the textbook datasets on our [Class Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page or from the `R` package `resampledata`. The textbook examples use base `R`code for plotting, but you `ggplot2` for visualizations. You may use `table()` to make tables, but you should use `dplyr` for other summaries. Refer to the case studies in Chapter 1 to add informative titles and axis labels to your plots and to provide context for your answers.
 
 Load the packages and datasets you need here.
 
@@ -99,6 +99,82 @@ Part (c)
 ```
 
 ANSWER: 
+
+
+***
+#### `R` Problem 1
+
+Let the random variable X have a standard normal distribution.
+
+Part (a) : What is P(X < 1.5)?
+
+```{r}
+
+```
+
+Part (b) : What is P(-2.0 < X < 1.5)?
+
+```{r}
+
+```
+
+Part (c) : What is P(X < -1.75 or X > 1.75)?
+
+```{r}
+
+```
+
+Part (d) : What value of x satisfies P(X < x) = 0.45?
+
+```{r}
+
+```
+
+Part (e) : What value of x satisfies P(X ≥ x) = 0.35?
+
+```{r}
+
+```
+
+Part (f) : The middle 50% of the area under a standard normal curve lies between what values?
+
+```{r}
+
+```
+
+
+***
+#### `R` Problem 2
+
+In Hottsylvania, the mean July midday temperature is 32 °C with a standard deviation of 3 °C. Assume that midday temperatures can be modeled with an approximately normal distribution. July has 31 days.
+
+Part (a) : About how many days should be less than 29.44 °C (about 85 °F)?
+
+```{r}
+
+```
+
+Part (b) : How many days should have a midday temperature between 35 °C and 38 °C?
+
+```{r}
+
+```
+
+Part (c) : The midday temperature of the hottest 30% of days should be greater than what temperature?
+
+```{r}
+
+```
+
+
+***
+#### `R` Problem 3
+
+Generate a random sample of size 100 from a standard normal distribution. Create a density plot and a normal probability plot with appropriate theoretical reference curves.
+
+```{r}
+
+```
 
 
 ***

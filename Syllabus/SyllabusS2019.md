@@ -26,17 +26,17 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 
 **Objectives**
 
-* PROBABILITY: Understand and explain basic theoretical properties of discrete and continuous probability models, such as expected value and variance; solve applied problems using one or more probability models.
+* PROBABILITY: Demonstrate understanding and be able to explain theoretical properties of selected discrete and continuous probability models, such as expected value and variance; solve applied problems using one or more probability models.
 
-* DISTRIBUTIONS: Understand and explain the properties of frequency, shape, center, spread, and outliers in the context of observed data; be able to appropriately summarize and visualize data; be able to calculate, simulate, and summarize sampling distributions for commonly used statistics such as means and proportions.
+* DISTRIBUTIONS: Demonstrate understanding and be able to explain the properties of frequency, shape, center, spread, and outliers in the context of observed data; be able to appropriately summarize and visualize data; be able to calculate, simulate, and summarize sampling distributions for commonly used statistics such as means and proportions.
 
-* STRENGTH OF STATISTICAL EVIDENCE: Understand the logic and construction of hypothesis tests and confidence intervals, including the meaning of p-values; be able to perform selected asymptotic, resampling, and bootstrap inference procedures and interpret results in the context of the original problems; be able to discuss and verify the assumptions of modeling and inferential procedures.
+* STRENGTH OF STATISTICAL EVIDENCE: Be able to explain the logic and construction of hypothesis tests and confidence intervals, including the meaning of p-values; be able to perform selected asymptotic, resampling, and bootstrap inference procedures and interpret results in the context of the original problems; be able to discuss and verify the assumptions of modeling and inferential procedures.
 
 * COMPARE AND CONNECT: Compare analytical/theoretical results with resampling/bootstrapping results to connect the different modes of exploration; analyze data sets in different ways depending on the research question(s).
 
 * STATISTICAL COMPUTING: Effectively and efficiently implement and report statistical calculations, procedures, and visualizations using R, incorporating some of the principles of reproducible research.
 
-* STATISTICS—THE BIG PICTURE: Understand why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world around us; become acquainted with the ethics of data collection.
+* STATISTICS—THE BIG PICTURE: Demonstrate understanding of why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world; become acquainted with statistical ethics.
 
 
 **Assessment and Grading**
@@ -47,7 +47,7 @@ The only way to learn statistics is to **DO** statistics, which includes statist
  <thead>
 <tr>
 <th style="border-bottom:hidden" colspan="1"></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">Criteria to earn a course grade of...</div></th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Criteria to earn a course grade of...</div></th>
 </tr>
   <tr>
    <th style="text-align:left;text-align: center;"> Outcome </th>
@@ -72,7 +72,7 @@ The only way to learn statistics is to **DO** statistics, which includes statist
    <td style="text-align:left;"> At least 13 of 15 reflections completed in a satisfactory manner </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> I can demonstrate my knowledge of probability models and assessment of normality. </td>
+   <td style="text-align:left;"> I can demonstrate my knowledge of the normal distribution and assessment of normality. </td>
    <td style="text-align:left;"> Proficient score on 1 proficiency assessment problem </td>
    <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
   </tr>
@@ -102,7 +102,7 @@ The only way to learn statistics is to **DO** statistics, which includes statist
    <td style="text-align:left;"> Proficient score on 3 proficiency assessment problems </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> I can demonstrate my integration of knowledge/skills across the course. </td>
+   <td style="text-align:left;"> I can demonstrate my integration of knowledge and skills across the course. </td>
    <td style="text-align:left;"> Score of 60% or more on the cumulative final exam </td>
    <td style="text-align:left;"> Score of 80% or more on the cumulative final exam </td>
   </tr>
