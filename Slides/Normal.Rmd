@@ -71,7 +71,7 @@ $q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qnorm(q, mu, sigma)`
 ggplot(NULL, aes(-4:4)) + 
   stat_function(fun = pnorm, args = list(0, 1)) +
   scale_x_continuous(breaks = seq(-4, 4, 1)) +
-  labs(x = "x", y = "f(x)")
+  labs(x = "x", y = "F(x)")
 ```
 
 
@@ -100,15 +100,15 @@ The normal distribution is unimodal and perfectly symmetric.
 
 ## Simulating the Normal Distribution
 
-In addition to calculating probabilities, we can simulate random normal values in R using `rnorm (s, mu, sigma)`.
+In addition to calculating probabilities, we can simulate random normal values in R using `rnorm (n, mu, sigma)`.
 
-_s_ = the number of random values we want to generate
+_n_ = the number of random values we want to generate
 
 $\mu$ = the mean of the distribution
     
-$\sigma^2$ = the variance of the distribution
+$\sigma$ = the standard deviation of the distribution
 
-Default parameter settings in `rnorm()` are `mu=0` and `sigma=1`, so if we want a sample from the standard normal distribution, we only need to enter sample size, `rnorm(s)`.
+Default parameter settings in `rnorm()` are `mu = 0` and `sigma = 1`, so if we want a sample from the standard normal distribution, we only need to enter sample size, `rnorm(n)`.
 
 
 # Assessing Normality
