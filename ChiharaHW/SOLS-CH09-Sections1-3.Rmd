@@ -47,7 +47,7 @@ Note: For "What do you observe?", comment on linearity, direction of trend, and 
 ggplot(Olympics2012, aes(x = Height, y = Weight)) +
   geom_point() +
   geom_jitter() +
-  labs(title = "Height vs. Weight of Selected 2012 Olympic Athletes",
+  labs(title = "Weight vs. Height of Selected 2012 Olympic Athletes",
        x = "Height (inches)",
        y = "Weight (pounds)",
        caption = "source: MSRR Olympics2012 dataset")
@@ -77,7 +77,7 @@ Reminder: You can embed the value of a calculated object like `corr_diff` in the
 ggplot(filter(Olympics2012, Weight < 250), aes(x = Height, y = Weight)) +
   geom_point() +
   geom_jitter() +
-  labs(title = "Height vs. Weight of Selected 2012 Olympic Athletes",
+  labs(title = "Weight vs. Height of Selected 2012 Olympic Athletes",
        subtitle = "note: bivariate outliers with weights over 250 pounds removed",
        x = "Height (inches)",
        y = "Weight (pounds)",
@@ -124,7 +124,12 @@ Note: Also make a scatterplot of field goal percentage versus offensive rebounds
 
 ```{r}
 ggplot(NBA1617, aes(x = OffReb, y = PercFG)) +
-  geom_point()
+  geom_point() +
+  labs(title = "Field Goal Percentage vs. Offensive Rebounds",
+       subtitle = "data for selected NBA players during the 2016-2017 season",
+       x = "number of offensive rebounds",
+       y = "field goal percentage",
+       caption = "source: MSRR NBA1617 dataset")
 
 NBA1617 %>% 
   summarize(correlation = cor(PercFG, OffReb))
@@ -142,9 +147,19 @@ team_means
 
 Part (c)
 
-```{r}
+```{r, warning = FALSE}
 ggplot(team_means, aes(x = xbar_OffReb, y = xbar_PercFG)) +
-  geom_point()
+  geom_point() + 
+  geom_label(aes(label = Team), 
+             hjust = c(0, 1, 0, 1), 
+             nudge_x = c(.1, -.1, .1, -.1), 
+             vjust = c(0, 0, 1, 1), 
+             nudge_y = c(.1, .1, -.1, -.1)) +
+  labs(title = "Field Goal Percentage vs. Offensive Rebounds",
+       subtitle = "mean data for four selected teams during the 2016-2017 season",
+       x = "mean number of offensive rebounds",
+       y = "mean field goal percentage",
+       caption = "source: MSRR NBA1617 dataset")
 
 team_means %>% 
   summarize(correlation = cor(xbar_PercFG, xbar_OffReb))
@@ -161,7 +176,10 @@ Part (a)
 ```{r}
 ggplot(Beerwings, aes(x = Hotwings, y = Beer)) +
   geom_point() +
-  labs(x = "number of hot wings", y = "ounces of beer")
+  labs(title = "Beer Consumption vs. Hot Wing Consumption",
+       x = "number of hot wings",
+       y = "ounces of beer",
+       caption = "source: MSRR Hotwings dataset")
 
 Beerwings %>% 
   summarize(correlation = cor(Beer, Hotwings))
@@ -195,10 +213,11 @@ ggplot(wing_points, aes(x = residual)) +
 
 ggplot(wing_points, aes(x = Hotwings, y = residual)) +
   geom_point() +
-  geom_hline(yintercept = 0)
+  geom_hline(yintercept = 0) +
+  labs(x = "number of hot wings (x)")
 ```
 
-ANSWER: The histogram is very slightly left skewed and the scatterplot of residuals versus x seems to show some non-random scatter; perhaps a U-shape? A straight-line model may not be appropriate.  
+ANSWER: The histogram is very slightly left skewed and the scatterplot of residuals versus x seems to show some non-random 
 
 
 ***
