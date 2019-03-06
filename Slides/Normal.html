@@ -97,7 +97,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Tuesday, February 26, 2019 @ 03:55:27 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Thursday, February 28, 2019 @ 04:30:10 PM</p>
           </hgroup>
   </slide>
 
@@ -127,13 +127,13 @@
 
 <center>
 
-\(f(x)\) = <code>dnorm(x, mu, sigma)</code>
+\(f(x)\) = <code>dnorm(x, mean, sd)</code>
 
 </center>
 
 <p><br></p>
 
-<p>Note that the function uses \(\sigma\) rather than \(\sigma^2\) as the parameter.</p>
+<p>Note that the <code>R</code> function uses standard deviation rather than variance as the parameter.</p>
 
 </article></slide><slide class=""><hgroup><h2>Standard Normal Density</h2></hgroup><article  id="standard-normal-density">
 
@@ -150,11 +150,11 @@
 
 <p>\[F(x)=P(X \leq x) = \int\limits_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx\]</p>
 
-<p>\(P(X \leq x)\) = \(F(x)\) = <code>pnorm(x, mu, sigma)</code></p>
+<p>\(P(X \leq x)\) = \(F(x)\) = <code>pnorm(q, mean, sd)</code></p>
 
 <p>\(P(X &gt; x)\) = \(1-F(x)\) = <code>pnorm</code> with <code>lower.tail = FALSE</code></p>
 
-<p>\(q^{th}\) percentile (approx) = \(F^{-1}(x)\) = <code>qnorm(q, mu, sigma)</code></p>
+<p>\(q^{th}\) percentile (approx) = \(F^{-1}(x)\) = <code>qnorm(p, mean, sd)</code></p>
 
 </article></slide><slide class=""><hgroup><h2>Standard Normal CDF</h2></hgroup><article  id="standard-normal-cdf">
 
@@ -193,15 +193,15 @@
 
 </article></slide><slide class=""><hgroup><h2>Simulating the Normal Distribution</h2></hgroup><article  id="simulating-the-normal-distribution">
 
-<p>In addition to calculating probabilities, we can simulate random normal values in R using <code>rnorm (n, mu, sigma)</code>.</p>
+<p>In addition to calculating probabilities, we can simulate random normal values in R using <code>rnorm (n, mean, sd)</code>.</p>
 
 <p><em>n</em> = the number of random values we want to generate</p>
 
-<p>\(\mu\) = the mean of the distribution</p>
+<p><em>mean</em> = the mean of the distribution</p>
 
-<p>\(\sigma\) = the standard deviation of the distribution</p>
+<p><em>sd</em> = the standard deviation of the distribution</p>
 
-<p>Default parameter settings in <code>rnorm()</code> are <code>mu = 0</code> and <code>sigma = 1</code>, so if we want a sample from the standard normal distribution, we only need to enter sample size, <code>rnorm(n)</code>.</p>
+<p>As with the other <em>norm</em> functions, the default parameter settings in <code>rnorm()</code> are <code>mean = 0</code> and <code>sd = 1</code>. If we want a sample from the standard normal distribution, we only need to enter a value for sample size, <code>rnorm(n)</code>.</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Assessing Normality</h2></hgroup><article  id="assessing-normality">
 

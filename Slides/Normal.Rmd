@@ -37,9 +37,9 @@ $$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
 
 R has a function to solve the pmf for any given normal model. Inputs may be single values or vectors.
 
-<center>$f(x)$ = `dnorm(x, mu, sigma)`</center><br>
+<center>$f(x)$ = `dnorm(x, mean, sd)`</center><br>
 
-Note that the function uses $\sigma$ rather than $\sigma^2$ as the parameter. 
+Note that the `R` function uses standard deviation rather than variance as the parameter. 
 
 
 ## Standard Normal Density
@@ -58,11 +58,11 @@ The probability of a given number of successes _or fewer_ is found using the CDF
 
 $$F(x)=P(X \leq x) = \int\limits_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
 
-$P(X \leq x)$ = $F(x)$ = `pnorm(x, mu, sigma)`
+$P(X \leq x)$ = $F(x)$ = `pnorm(q, mean, sd)`
 
 $P(X > x)$ = $1-F(x)$ = `pnorm` with `lower.tail = FALSE`
 
-$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qnorm(q, mu, sigma)` 
+$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qnorm(p, mean, sd)` 
 
 
 ## Standard Normal CDF
@@ -100,15 +100,15 @@ The normal distribution is unimodal and perfectly symmetric.
 
 ## Simulating the Normal Distribution
 
-In addition to calculating probabilities, we can simulate random normal values in R using `rnorm (n, mu, sigma)`.
+In addition to calculating probabilities, we can simulate random normal values in R using `rnorm (n, mean, sd)`.
 
 _n_ = the number of random values we want to generate
 
-$\mu$ = the mean of the distribution
+_mean_ = the mean of the distribution
     
-$\sigma$ = the standard deviation of the distribution
+_sd_ = the standard deviation of the distribution
 
-Default parameter settings in `rnorm()` are `mu = 0` and `sigma = 1`, so if we want a sample from the standard normal distribution, we only need to enter sample size, `rnorm(n)`.
+As with the other *norm* functions, the default parameter settings in `rnorm()` are `mean = 0` and `sd = 1`. If we want a sample from the standard normal distribution, we only need to enter a value for sample size, `rnorm(n)`.
 
 
 # Assessing Normality

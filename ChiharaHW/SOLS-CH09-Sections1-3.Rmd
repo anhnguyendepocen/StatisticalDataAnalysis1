@@ -111,7 +111,7 @@ RangersTwins2016 %>%
   summarize(correlation = cor(BA, RBI))
 ```
 
-ANSWER: The Rangers alone had a stronger correlation than the combined teams, while the Twins had a weaker correlation. (But, neither relationship seems strictly linear.)
+ANSWER: The Rangers alone had a stronger correlation than the combined teams, while the Twins had a weaker correlation. (But, when looking at the plot, neither relationship seems strictly linear.)
 
 
 ***

@@ -24,6 +24,7 @@ Load the packages and datasets you need here.
 library(dplyr)
 library(ggplot2)
 library(moments)
+library(ggthemes)
 library(resampledata)
 ```
 
@@ -155,7 +156,184 @@ ggplot(MobileAds, aes(sample = m.cpc_diff)) +
   stat_qq_line(color = "red")
 ```
 
-ANSWER: The distribution does not appear to be approximately normal. It deviates strongly from the theoretical normal reference line. (This shape is characteristic of a *leptokurtic* distribution.)
+ANSWER: The distribution does not appear to be approximately normal. It deviates strongly from the theoretical normal reference line. (This shape is characteristic of a *leptokurtic* distribution, which matches what we see in the histogram.)
+
+
+***
+#### `R` Problem 1
+
+Let the random variable X have a standard normal distribution.
+
+Part (a) : What is P(X < 1.5)?
+
+```{r}
+x <- 1.5
+
+prob <- pnorm(x, 0, 1)
+
+ggplot(NULL, aes(c(-4, 4))) +
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(-4, x)) +
+  scale_x_continuous(breaks = x) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = sprintf("probability = %1.4f", prob),  y = "") +
+  theme_classic()
+```
+
+Part (b) : What is P(-2.0 < X < 1.5)?
+
+```{r}
+x1 <- -2.0
+x2 <- 1.5
+  
+prob <- pnorm(x2, 0, 1) - pnorm(x1, 0, 1)
+
+ggplot(NULL, aes(c(-4, 4))) +
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(x1, x2)) +
+  scale_x_continuous(breaks = c(x1, x2)) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = sprintf("probability = %1.4f", prob),  y = "") +
+  theme_classic()
+```
+
+Part (c) : What is P(X < -1.75 or X > 1.75)?
+
+```{r}
+x1 <- -1.75
+x2 <- 1.75
+  
+prob <- pnorm(x1, 0, 1) + pnorm(x2, 0, 1, lower.tail = FALSE)
+
+ggplot(NULL, aes(c(-4, 4))) +
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(-4, x1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(x2, 4)) +
+  scale_x_continuous(breaks = c(x1, x2)) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = sprintf("probability = %1.4f", prob),  y = "") +
+  theme_classic()
+```
+
+Part (d) : What value of x satisfies P(X < x) = 0.45?
+
+```{r}
+prob <- 0.45
+  
+x <- qnorm(prob, 0, 1)
+
+ggplot(NULL, aes(c(-4, 4))) +
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(-4, x)) +
+  scale_x_continuous(breaks = x) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = sprintf("probability = %1.2f", prob),  y = "") +
+  theme_classic()
+```
+
+Part (e) : What value of x satisfies P(X ≥ x) = 0.35?
+
+```{r}
+prob <- 0.35
+  
+x <- qnorm(prob, 0, 1, lower.tail = FALSE)
+
+ggplot(NULL, aes(c(-4, 4))) +
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(x, 4)) +
+  scale_x_continuous(breaks = x) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = sprintf("probability = %1.2f", prob),  y = "") +
+  theme_classic()
+```
+
+Part (f) : The middle 50% of the area under a standard normal curve lies between what values?
+
+```{r}
+prob1 <- 0.25
+prob2 <- 0.25
+  
+x1 <- qnorm(prob1, 0, 1)
+x2 <- qnorm(prob2, 0, 1, lower.tail = FALSE)
+
+ggplot(NULL, aes(c(-4, 4))) +
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00008B", xlim = c(x1, x2)) +
+  scale_x_continuous(breaks = c(x1, x2)) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = sprintf("probability = %1.2f", prob1 + prob2),  y = "") +
+  theme_classic()
+```
+
+
+***
+#### `R` Problem 2
+
+In Hottsylvania, the mean July midday temperature is 32 °C with a standard deviation of 3 °C. Assume that midday temperatures can be modeled with an approximately normal distribution. July has 31 days.
+
+```{r}
+m <- 32   # mean
+s <- 3    # standard deviation
+
+ggplot(NULL, aes(c(m - 4*s, m + 4*s))) +
+  stat_function(fun = dnorm, args = list(m, s)) +
+  scale_x_continuous(breaks = seq(m - 4*s, m + 4*s, s)) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  labs(x = "Hottsylvania midday July temperature in °C", y = "") +
+  theme_classic()
+```
+
+
+Part (a) : About how many days should be less than 29.44 °C (about 85 °F)?
+
+```{r}
+x    <- 29.44
+days <- 31 * pnorm(x, m, s)
+
+sprintf("About %1.0f days should be less than %1.2f °C.", days, x)
+```
+
+Part (b) : How many days should have a midday temperature between 35 °C and 38 °C?
+
+```{r}
+x1   <- 35
+x2   <- 38
+days <- 31 * (pnorm(x2, m, s) - pnorm(x1, m, s))
+
+sprintf("About %1.0f days should be between %1.0f °C and %1.0f °C.", days, x1, x2)
+```
+
+Part (c) : The midday temperature of the hottest 30% of days should be greater than what temperature?
+
+```{r}
+prob <- 0.30
+pct  <- prob * 100
+x    <- qnorm(prob, m, s, lower.tail = FALSE)
+
+sprintf("The hottest %1.0f%% of days should be greater than %1.2f °C.", pct, x)
+```
+
+
+***
+#### `R` Problem 3
+
+Generate a random sample of size 100 from a standard normal distribution. Create a density plot and a normal probability plot with appropriate theoretical reference curves.
+
+```{r}
+# your plots will vary depending on your random sample
+rand_dat <- rnorm(100)
+
+ggplot(NULL, aes(x = rand_dat)) +
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(mean(rand_dat), sd(rand_dat)),   
+                color = "red")
+
+ggplot(NULL, aes(sample = rand_dat)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+
+```
 
 
 ***
