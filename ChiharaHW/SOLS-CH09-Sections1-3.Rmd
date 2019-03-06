@@ -156,7 +156,7 @@ ggplot(team_means, aes(x = xbar_OffReb, y = xbar_PercFG)) +
              vjust = c(0, 0, 1, 1), 
              nudge_y = c(.1, .1, -.1, -.1)) +
   labs(title = "Field Goal Percentage vs. Offensive Rebounds",
-       subtitle = "mean data for four selected teams during the 2016-2017 season",
+       subtitle = "mean data for four NBA teams during the 2016-2017 season",
        x = "mean number of offensive rebounds",
        y = "mean field goal percentage",
        caption = "source: MSRR NBA1617 dataset")
