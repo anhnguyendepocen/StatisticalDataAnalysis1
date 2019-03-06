@@ -82,6 +82,8 @@ ANSWER:
 
 Part (a)
 
+Note: Also make a scatterplot of field goal percentage versus offensive rebounds.
+
 ```{r}
 
 ```
@@ -97,10 +99,6 @@ Part (c)
 ```{r}
 
 ```
-
-Part (d)
-
-ANSWER: 
 
 
 ***
@@ -127,6 +125,8 @@ Part (c)
 ```{r}
 
 ```
+
+INTERPRETATION:
 
 Part (d) ADDED Perform a residual analysis like [MD 6.1.4](https://moderndive.com/6-regression.html#model1) and comment on the appropriateness of a straight-line model. 
 

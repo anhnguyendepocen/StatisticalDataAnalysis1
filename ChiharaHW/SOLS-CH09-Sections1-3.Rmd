@@ -23,6 +23,7 @@ Load the packages and datasets you need here.
 ```{r}
 library(dplyr)
 library(ggplot2)
+library(moderndive)
 library(resampledata)
 ```
 
@@ -119,25 +120,35 @@ ANSWER: The Rangers alone had a stronger correlation than the combined teams, wh
 
 Part (a)
 
-```{r}
+Note: Also make a scatterplot of field goal percentage versus offensive rebounds.
 
+```{r}
+ggplot(NBA1617, aes(x = OffReb, y = PercFG)) +
+  geom_point()
+
+NBA1617 %>% 
+  summarize(correlation = cor(PercFG, OffReb))
 ```
 
 Part (b)
 
 ```{r}
-
+team_means <- NBA1617 %>% 
+  group_by(Team) %>% 
+  summarize(xbar_PercFG = mean(PercFG),
+            xbar_OffReb = mean(OffReb))
+team_means
 ```
 
 Part (c)
 
 ```{r}
+ggplot(team_means, aes(x = xbar_OffReb, y = xbar_PercFG)) +
+  geom_point()
 
+team_means %>% 
+  summarize(correlation = cor(xbar_PercFG, xbar_OffReb))
 ```
-
-Part (d)
-
-ANSWER: 
 
 
 ***
@@ -148,30 +159,46 @@ Note: In (b), create a table of proportions as well as a table of counts to answ
 Part (a)
 
 ```{r}
+ggplot(Beerwings, aes(x = Hotwings, y = Beer)) +
+  geom_point() +
+  labs(x = "number of hot wings", y = "ounces of beer")
 
+Beerwings %>% 
+  summarize(correlation = cor(Beer, Hotwings))
 ```
 
 Part (b)
 
 ```{r}
-
+wing_model <- lm(Beer ~ Hotwings, data = Beerwings)
+wing_model
 ```
 
-INTERPRETATION:
+INTERPRETATION: The equation of the least-squares regression line is $\hat{y}$ = `r round(wing_model$coefficients[1], 3)` + `r round(wing_model$coefficients[2], 3)`($x$). For each additional hot wing eaten, a person consumes an additional `r wing_model$coefficients[2]` ounces of beer (on average). 
 
 Part (c)
 
 ```{r}
-
+wing_summaries <- get_regression_summaries(wing_model)
+wing_summaries$r_squared
 ```
+
+INTERPRETATION: About `r 100 * wing_summaries$r_squared`% of the variability in ounces of beer consumed is explained by number of hot wings eaten.
 
 Part (d) ADDED Perform a residual analysis like [MD 6.1.4](https://moderndive.com/6-regression.html#model1) and comment on the appropriateness of a straight-line model. 
 
 ```{r}
+wing_points <- get_regression_points(wing_model)
 
+ggplot(wing_points, aes(x = residual)) +
+  geom_histogram(bins = 6)
+
+ggplot(wing_points, aes(x = Hotwings, y = residual)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
 ```
 
-ANSWER:
+ANSWER: The histogram is very slightly left skewed and the scatterplot of residuals versus x seems to show some non-random scatter; perhaps a U-shape? A straight-line model may not be appropriate.  
 
 
 ***
