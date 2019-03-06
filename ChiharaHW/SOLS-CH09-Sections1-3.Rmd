@@ -165,11 +165,11 @@ team_means %>%
   summarize(correlation = cor(xbar_PercFG, xbar_OffReb))
 ```
 
+ANSWER: The correlation is stronger for the averaged team data than the individual players.
+
 
 ***
 #### Problem 9.16
-
-Note: In (b), create a table of proportions as well as a table of counts to answer the question. In (c), also compute the upper fence for each group to show the upper cutoff for outliers.
 
 Part (a)
 
