@@ -67,7 +67,7 @@ corr_diff <- corr2 - corr1
 corr_diff
 ```
 
-ANSWER: The correlation increased by about `r round(corr_diff, 3)`, so the outliers appear to haver been influential.
+ANSWER: The correlation increased by about `r round(corr_diff, 3)` when the outliers were removed, so they appear to haver been influential. The relationship is more strongly linear without those points.
 
 Reminder: You can embed the value of a calculated object like `corr_diff` in the text of your answer rather than typing it by hand. This enhances reprodicibility. See the **Basic R Markdown Cheat Sheet > 5. Embed Code > inline code**.
 
@@ -192,7 +192,7 @@ wing_model <- lm(Beer ~ Hotwings, data = Beerwings)
 wing_model
 ```
 
-INTERPRETATION: The equation of the least-squares regression line is $\hat{y}$ = `r round(wing_model$coefficients[1], 3)` + `r round(wing_model$coefficients[2], 3)`($x$). For each additional hot wing eaten, a person consumes an additional `r wing_model$coefficients[2]` ounces of beer (on average). 
+INTERPRETATION: The equation of the least-squares regression line is $\hat{y}$ = `r round(wing_model$coefficients[1], 3)` + `r round(wing_model$coefficients[2], 3)`($x$). For each additional hot wing eaten, a person consumes an additional `r round(wing_model$coefficients[2], 2)` ounces of beer (on average). 
 
 Part (c)
 
