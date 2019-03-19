@@ -100,7 +100,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Updated: Monday, March 18, 2019 @ 08:56:26 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Updated: Monday, March 18, 2019 @ 09:20:11 PM</p>
           </hgroup>
   </slide>
 
@@ -170,7 +170,7 @@ slide:not(.current) .plotly.html-widget{
 
 <center>
 
-\(P(X = x)\) = \(f(x)\) = <code>dbinom(x, n, p)</code>
+\(P(X = x)\) = \(f(x)\) = <code>dbinom(x, size, prob)</code>
 
 </center>
 
@@ -180,17 +180,17 @@ slide:not(.current) .plotly.html-widget{
 
 <p>\[F(x)=P(X \leq x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}\]</p>
 
-<p>R has a function to solve the pmf for any given binomial model, as well as its inverse.</p>
+<p>R has a function to solve the pmf for any given binomial model, as well as its inverse. Be careful of the function notation in R!</p>
 
-<p>\(P(X \leq x)\) = \(F(x)\) = <code>pbinom(q, n, p)</code></p>
+<p>\(P(X \leq x)\) = \(F(x)\) = <code>pbinom(q, size, prob)</code></p>
 
 <p>\(P(X &gt; x)\) = \(1-F(x)\) = use <code>lower.tail = FALSE</code> (carefully)</p>
 
-<p>\(q^{th}\) percentile (approx) = \(F^{-1}(x)\) = <code>qbinom(p, n, p)</code></p>
+<p>\(q^{th}\) percentile (approx) = \(F^{-1}(x)\) = <code>qbinom(p, size, prob)</code></p>
 
 </article></slide><slide class=""><hgroup><h2>Expected Value and Variance</h2></hgroup><article  id="expected-value-and-variance">
 
-<p>The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the two binomial parameters <em>n</em> and <em>p</em>.</p>
+<p>The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the two binomial parameters \(n\) and \(p\).</p>
 
 <p>\[E[X] = \sum\limits_{\text{all x}} x f(x) \rightarrow np\]</p>
 
@@ -202,13 +202,15 @@ slide:not(.current) .plotly.html-widget{
 
 <p>In addition to calculating probabilities, we can simulate random binomial values in R using <code>rbinom (n, size, prob)</code>.</p>
 
-<p>Be careful, since the function notation in <code>R</code> could be confused with the Binomial parameters!</p>
-
 <p><code>n</code> = the number of random values we want to generate</p>
 
 <p><code>size</code> = number of trials (this is the Binomial parameter \(n\))</p>
 
 <p><code>prob</code> = probability of success on a single trial (parameter \(p\))</p>
+
+<hr>
+
+<p>Reminder: Take care when using <code>dbinom</code>, <code>pbinom</code>, <code>qbinom</code>, and <code>rbinom</code>&#8212;the function notation in <code>R</code> could be confused with the Binomial parameters!</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Plotting the Binomial</h2></hgroup><article  id="plotting-the-binomial">
 

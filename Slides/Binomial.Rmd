@@ -7,7 +7,9 @@ output: ioslides_presentation
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
 ```
+
 
 ## Before We Begin...
 
@@ -75,7 +77,7 @@ $$\left( \frac{n!}{x!(n-x)!} \right) p^x(1-p)^{n-x}$$
 
 R has a function to solve the pmf for any given binomial model. Inputs may be single values or vectors. 
 
-<center>$P(X = x)$ = $f(x)$ = `dbinom(x, n, p)`</center>
+<center>$P(X = x)$ = $f(x)$ = `dbinom(x, size, prob)`</center>
 
 
 ## Cumulative Distribution Function (CDF)
@@ -84,18 +86,18 @@ The probability of a given number of successes _or fewer_ is found using the CDF
 
 $$F(x)=P(X \leq x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
 
-R has a function to solve the pmf for any given binomial model, as well as its inverse.
+R has a function to solve the pmf for any given binomial model, as well as its inverse. Be careful of the function notation in R!
 
-$P(X \leq x)$ = $F(x)$ = `pbinom(q, n, p)`
+$P(X \leq x)$ = $F(x)$ = `pbinom(q, size, prob)`
 
 $P(X > x)$ = $1-F(x)$ = use `lower.tail = FALSE` (carefully)
 
-$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(p, n, p)` 
+$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(p, size, prob)` 
 
 
 ## Expected Value and Variance
 
-The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the two binomial parameters _n_ and _p_.
+The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the two binomial parameters $n$ and $p$.
 
 $$E[X] = \sum\limits_{\text{all x}} x f(x) \rightarrow np$$
 
@@ -107,22 +109,20 @@ $$SD[X] = \sqrt{Var[X]}$$
 
 In addition to calculating probabilities, we can simulate random binomial values in R using `rbinom (n, size, prob)`.
 
-Be careful, since the function notation in `R` could be confused with the Binomial parameters!
-
 `n` = the number of random values we want to generate
 
 `size` = number of trials (this is the Binomial parameter $n$)
     
 `prob` = probability of success on a single trial (parameter $p$)
 
+<hr>
+
+Reminder: Take care when using `dbinom`, `pbinom`, `qbinom`, and `rbinom`---the function notation in `R` could be confused with the Binomial parameters!
+
 
 # Plotting the Binomial
 
 ## Create the Mass Function
-
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
-library(tidyverse)
-```
 
 ```{r}
 n <- 10

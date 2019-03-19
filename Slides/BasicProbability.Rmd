@@ -6,7 +6,7 @@ output: ioslides_presentation
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
 ```
 
 
@@ -195,3 +195,4 @@ For dependent events $A$ and $B$, $P(A|B) \neq P(B|A)$. People often make the mi
 Example: What is the probability that someone tests positive for a disease, given that we know they have the disease? Then what about the inverse, the probability that someone has the disease, given a positive test? Mosts tests are not 100% accurate.
 
 P(have disease | positive test) $\neq$ P(postive test | have disease)
+
