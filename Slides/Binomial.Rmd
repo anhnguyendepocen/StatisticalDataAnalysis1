@@ -6,8 +6,21 @@ output: ioslides_presentation
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
 ```
+
+## Before We Begin...
+
+These slides assume you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r).
+
+It would be helpful to complete an additional DataCamp course [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r).
+
+These slides are not meant to be standalone information, but rather a guide for hands-on lecture. Be prepared to take notes to flesh out the contents. 
+
+I recommend that you create an R Markdown document where you can include information and code from the slides as well as your own additional notes and explorations.
+
+These slides were produced using R Markdown. See "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/).
+
 
 # Bernoulli Trials
 
@@ -17,13 +30,13 @@ A Bernoulli trial is a single random event that has two possible outcomes, often
 
 Success is not necessarily a good outcome, but it is the outcome of interest for a given problem or scenario.
 
-Classic examples include a coin flip where a head is considered success and a tail is considered failure, or one roll of a standard 6-sided die where 1 is success and any other number is failure.
+Classic examples include a coin flip where a head is considered success and a tail is considered failure, or one roll of a standard 6-sided die where 1 is success and anything else is failure.
 
-The Bernoulli model has a single parameter.
+The Bernoulli model has a single parameter $p$.
 
-* _p_ = probability of success  
-* _q_ = probability of failure = 1 - _p_  
-* _p_ + _q_ = 1  
+* $p$ = probability of success  
+* $q$ = probability of failure = 1 - $p$  
+* $p$ + $q$ = 1
 
 
 ## Bernoulli Trial as Building Block
@@ -43,41 +56,41 @@ The binomial distribution is a discrete probability distribution. It models the 
 
 $$X \sim Bin(n,p)$$
 
-_x_ = number of successes = {0, 1, 2, ..., n}
+$x$ = number of successes = {0, 1, 2, ..., n}
     
-_n_ = number of trials
+$n$ = number of trials
     
-_p_ = probability of success on a single trial
+$p$ = probability of success on a single trial
     
-1 - _p_ = probability of failure on a single trial
+1 - $p$ = probability of failure on a single trial (sometimes called $q$)
 
 
 ## Probability Mass Function (pmf)
 
-The probability of a given number of successes x in a Bernoulli model is found using the probability mass function (pmf).
+The probability of a given number of successes x in a Bernoulli model is found using the probability mass function (pmf). This differs somewhat from a continuous pdf.
 
 $$P(X = x) = f(x) = {n \choose x}p^x(1-p)^{n-x} = $$
 
 $$\left( \frac{n!}{x!(n-x)!} \right) p^x(1-p)^{n-x}$$
 
-R has a function to solve the pmf for any given binomial model. Inputs may be single values or vectors.
+R has a function to solve the pmf for any given binomial model. Inputs may be single values or vectors. 
 
 <center>$P(X = x)$ = $f(x)$ = `dbinom(x, n, p)`</center>
 
 
 ## Cumulative Distribution Function (CDF)
 
-The probability of a given number of successes _or fewer_ is found using the CDF.
+The probability of a given number of successes _or fewer_ is found using the CDF. This differs slightly from a continuous CDF.
 
 $$F(x)=P(X \leq x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
 
 R has a function to solve the pmf for any given binomial model, as well as its inverse.
 
-$P(X \leq x)$ = $F(x)$ = `pbinom(x, n, p)`
+$P(X \leq x)$ = $F(x)$ = `pbinom(q, n, p)`
 
-$P(X > x)$ = $1-F(x)$ = use `lower.tail = FALSE`
+$P(X > x)$ = $1-F(x)$ = use `lower.tail = FALSE` (carefully)
 
-$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(q, n, p)` 
+$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(p, n, p)` 
 
 
 ## Expected Value and Variance
@@ -92,14 +105,54 @@ $$SD[X] = \sqrt{Var[X]}$$
 
 ## Simulating the Binomial Distribution
 
-In addition to calculating probabilities, we can simulate random binomial values in R using `rbinom (s, n, p)`.
+In addition to calculating probabilities, we can simulate random binomial values in R using `rbinom (n, size, prob)`.
 
-_s_ = the number of random values we want to generate
+Be careful, since the function notation in `R` could be confused with the Binomial parameters!
 
-_n_ = number of trials
+`n` = the number of random values we want to generate
+
+`size` = number of trials (this is the Binomial parameter $n$)
     
-_p_ = probability of success on a single trial
+`prob` = probability of success on a single trial (parameter $p$)
 
+
+# Plotting the Binomial
+
+## Create the Mass Function
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(tidyverse)
+```
+
+```{r}
+n <- 10
+p <- .5
+bin_pmf <- tibble(x = 0:n, probability = dbinom(x, n, p))
+print.data.frame(bin_pmf, digits = 4, row.names = FALSE)
+```
+
+
+## Plot the Mass Function
+
+```{r, fig.height = 3.75}
+ggplot(bin_pmf, aes(x = x, y = probability)) + 
+  geom_bar(stat = "identity", fill = "darkgray") +
+  scale_x_continuous(breaks = 0:n)
+```
+
+
+## Shading the Mass Function
+
+```{r, fig.height = 3.2}
+bin_pmf <- bin_pmf %>% 
+  mutate(shading = ifelse(x <= 3, "red", "darkgray"))
+ggplot(bin_pmf, aes(x = x, y = probability)) + 
+  geom_bar(stat = "identity", fill = bin_pmf$shading) +
+  scale_x_continuous(breaks = 0:n)
+```
+
+
+# Binomial Example
 
 ## Zener Card Tests
 
@@ -138,6 +191,4 @@ Zener cards, shown above, were developed by Karl Zener in the 1930s for parapsyc
 * What if there were more symbols in the Zener card deck?
 * How can we simulate the outcome of one or more tests?
 * What if we used a closed deck rather than an open deck?
-
-
 
