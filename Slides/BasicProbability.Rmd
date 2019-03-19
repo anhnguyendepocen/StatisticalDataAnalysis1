@@ -141,13 +141,10 @@ Cause and effect determinations rely on other methods, such as performing a cont
 
 ## Addition Rule
 
-What is the probability that either one or both of two particular events happen? In other words, for one randomly chosen case, only $A$ _or_ $B$ must be true, but both may be true in some cases.
+What is the probability that either one or both of two particular events happen? For a randomly chosen case, only $A$ _or_ $B$ must be true, but both may be true in some cases.
 
 *  $P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)$
-
-*  $P(A \text{ or } B) = P(A) + P(B)$, if $A$ and $B$ are mutually exclusive
-
-If A and B are mutually exclusive, $P(A \text{ and } B) = 0$ &rarr; impossible!
+*  $P(A \text{ or } B) = P(A) + P(B)$, if the events $A$ and $B$ are mutually exclusive, since $P(A \text{ and } B) = 0$ &rarr; impossible!
 
 <p style="text-align: center;"><img src="https://www.onlinemathlearning.com/image-files/xprobability-mutually-exclusive.png.pagespeed.ic.X6H14tz8Fk.png" height = 200></p>
 
@@ -188,7 +185,7 @@ How do we know if events $A$ and $B$ are independent?
 
 * By the same reasoning as above, if $P(B|A) = P(B)$, then $A$ and $B$ are independent.
 
-* $A$ and $B$ are independent $\iff P(A \text{ and } B) = P(A)P(B)$
+* $A$ and $B$ independent $\iff P(A \text{ and } B) = P(A)P(B)$
 
 
 ## Confusion of the Inverse
