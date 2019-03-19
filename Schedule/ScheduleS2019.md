@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Tuesday, February 26, 2019 @ 12:14:16 AM'
+date: 'Updated: Monday, March 18, 2019 @ 07:59:32 PM'
 output: 
   html_document: 
     toc: true
@@ -270,6 +270,8 @@ HW = homework
 * Watch JB [Sampling Distributions: Introduction to the Concept](https://youtu.be/Zbw-YvELsaM) (~8 minutes)
 * Watch JB [The Sampling Distribution of the Sample Mean](https://youtu.be/0zqNGDVNKgA) (~8 minutes)
 * Watch JB [Introduction to the Central Limit Theorem](https://youtu.be/Pujol1yC1_A) (~13 minutes)
+* Watch JB [The Sampling Distribution of the Sample Proportion](https://youtu.be/fuGwbG9_W1c) (~10 minutes)
+* Watch JB [The Sampling Distribution of the Difference in Sample Means](https://youtu.be/4HB-FL529ag) (~10 minutes)
 * Explore relevant entries in the Probability and Distributions glossary
 
 
@@ -283,12 +285,18 @@ HW = homework
 #### Due THU @ 11pm
 
 * DC _Introduction to Probability_
+* _Introduction to Probability_ HW
 * Reflection #09
 
 #### Before Next Week
 
 * Read MSSR CH05 and CH07
-* TBA
+* Watch JB [Introduction to Confidence Intervals](https://youtu.be/27iSnzss2wM) (~7 minutes)
+* Watch JB [Intro to Confidence Intervals for One Mean (Sigma Known)](https://youtu.be/bT1p5tJwn_0) (~11 minutes)
+* Watch JB [Confidence Intervals for One Mean: Interpreting the Interval](https://youtu.be/JYP6gc--sGQ) (~6 minutes)
+* Watch JB [What Factors Affect the Margin of Error? (In a Confidence Interval for One Mean)](https://youtu.be/bFefxSE5bmo) (~10 minutes)
+* Watch JB [Confidence Intervals for One Mean: Sigma Not Known (t Method)](https://youtu.be/bT1p5tJwn_0) (~10 minutes)
+* Watch JB [Introduction to the t Distribution (non-technical)](https://youtu.be/bT1p5tJwn_0) (~9 minutes)
 
 
 ***
@@ -301,12 +309,23 @@ HW = homework
 #### Due THU @ 11pm
 
 * DC _Foundations of Inference_
+* _Foundations of Inference_ HW
+* MSRR CH04 HW
 * Reflection #10
 
 #### Before Next Week
 
 * Read MSSR CH03 and CH08
-* TBA
+* Watch JB [An Introduction to Hypothesis Testing](https://youtu.be/tTeMYuS87oU) (~10 minutes)
+* Watch JB [What is a p-value? (Updated and extended version)](https://youtu.be/UsU-O2Z1rAs) (~11 minutes)
+* Watch JB [Type I Errors, Type II Errors, and the Power of the Test](https://youtu.be/7mE-K_w1v90) (~8 minutes)
+* Watch JB [Statistical Significance versus Practical Significance](https://youtu.be/_k1MQTUCXmU) (~5 minutes)
+* Watch JB [The Relationship Between Confidence Intervals and Hypothesis Tests](https://youtu.be/k1at8VukIbw) (~6 minutes)
+* Watch JB [Inference for Two Means: Introduction](https://youtu.be/86ss6qOTfts) (~6 minutes)
+* Watch JB [Welch (Unpooled Variance) t Tests and Confidence Intervals: Introduction](https://youtu.be/2-ecXltt2vI) (~10 minutes)
+* Watch JB [Welch (Unpooled Variance) t Tests and Confidence Intervals: An Example](https://youtu.be/gzrmHpA54Sc) (~10 minutes)
+* Watch JB [An Introduction to Inference for Two Proportions](https://youtu.be/g0at6LpYvHc) (~15 minutes)
+* Watch JB [Inference for Two Proportions: An Example...](https://youtu.be/OIYkOiQX3fk) (~12 minutes)
 
 
 ***
@@ -319,6 +338,7 @@ HW = homework
 #### Due THU @ 11pm
 
 * DC _Inference for Numerical Data_
+* MSRR CH05 and CH07 HW
 * Reflection #11
 
 #### Before Next Week
@@ -337,6 +357,7 @@ HW = homework
 #### Due THU @ 11pm
 
 * DC _Inference for Categorical Data_
+* MSSR CH03, CH08, and CH10 HW HW
 * Reflection #12
 
 #### Before Next Week
