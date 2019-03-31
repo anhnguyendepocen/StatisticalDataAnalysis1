@@ -6,8 +6,10 @@ output: ioslides_presentation
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
 ```
+
 
 ## Before We Begin...
 
@@ -160,10 +162,11 @@ Try using `str()` on `draft_alt`. Compare the results.
 
 ##
 
-These two functions are very similar, but how does the output of `glimpse()` differ from `str()`?
+These two functions are very similar, but how does the output of `glimpse()` differ from `str()`? 
+
+Remember to use `library(dplyr)` or `library(tidyverse)`...
 
 ```{r}
-library(tidyverse)
 glimpse(draft)
 ```
 

@@ -298,12 +298,12 @@ HW = homework
 
 * Confidence intervals
 
-#### Due THU @ 11pm
+#### Due SAT @ 11pm
 
 * DC _Foundations of Inference_
 * _Foundations of Inference_ HW
 * MSRR CH04 HW
-* Reflection #10
+* ~~Reflection #10~~
 
 #### Before Next Week
 
@@ -327,16 +327,19 @@ HW = homework
 
 * Hypothesis tests for means and proportions
 
-#### Due THU @ 11pm
+#### Due SAT @ 11pm
 
 * DC _Inference for Numerical Data_
 * MSRR CH05 and CH07 HW
-* Reflection #11
+* Reflection #10
 
 #### Before Next Week
 
 * Read MSSR CH10
-* TBA
+* Watch JB [Chi-square Tests for One-way Tables](https://youtu.be/gkgyg-eR0TQ) (~9 minutes)
+* Watch JB [Goodness of Fit for the Binomial Distribution](https://youtu.be/O7wy6iBFdE8) (~15 minutes)
+* Watch JB [Chi-square Tests of Independence](https://youtu.be/L1QPBGoDmT0) (~10 minutes)
+* Watch JB [Chi-square tests for count data: Finding the p-value](https://youtu.be/HwD7ekD5l0g) (~5 minutes)
 
 
 ***
@@ -346,11 +349,11 @@ HW = homework
 
 * Tests of independence and goodness of fit
 
-#### Due THU @ 11pm
+#### Due SAT @ 11pm
 
 * DC _Inference for Categorical Data_
 * MSSR CH03, CH08, and CH10 HW HW
-* Reflection #12
+* Reflection #11
 
 #### Before Next Week
 
@@ -364,16 +367,14 @@ HW = homework
 
 * Sampling and inference assessment
 
-#### Due THU @ 11pm
+#### Due SAT @ 11pm
 
 * Sampling and inference proficiency problems
-* Reflection #13
+* Reflection #12
 
 #### Before Next Week
 
-* Read MD [Chapter 7. Multiple Regression](https://moderndive.com/7-multiple-regression.html)
-* Read MD [Chapter 12. Thinking with Data](https://moderndive.com/12-thinking-with-data.html)
-* TBA
+* Review for normality and modeling reassessment
 
 
 ***
@@ -382,16 +383,16 @@ HW = homework
 #### In Class
 
 * No Class TUE APR 23, State Holiday
-* Putting it all together!
+* Normality and modeling reassessment
 
-#### Due THU @ 11pm
+#### Due SAT @ 11pm
 
 * TBA
-* Reflection #14
+* Reflection #13
 
 #### Before Next Week
 
-* Prepare for proficiency re-assessment!
+* Review for sampling and inference reassessment
 
 
 ***
@@ -399,22 +400,22 @@ HW = homework
 
 #### In Class
 
-* Proficiency reassessment
+* Sampling and inference reassessment
 * No Class THU MAY 02, Reading Day
 
-#### Due THU @ 11pm
+#### Due SAT @ 11pm
 
-* Proficiency problem revisions
-* Reflection #15
+* Sampling and inference reassessment
+* Reflection #14
 
 #### Before Next Week
 
-* TBA
+* Prepare for comprehensive final exam!
 
 
 ***
 ### Final Exam
 
 ```{block, final, type='rmdnote'}
-* Our [final exam time](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_spring_2019_exam_schedule.pdf) is Tuesday May 07 @ 2:00pm in our usual classroom. You will take your cumulative final exam at this time.
+* Our [final exam time](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_spring_2019_exam_schedule.pdf) is Tuesday May 07 @ 2:00pm in our usual classroom. You will take your cumulative final exam and complete Reflection 15 at this time.
 ```
