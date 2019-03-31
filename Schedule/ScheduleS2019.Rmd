@@ -387,7 +387,7 @@ HW = homework
 
 #### Due SAT @ 11pm
 
-* TBA
+* Normality and modeling reassessments
 * Reflection #13
 
 #### Before Next Week
@@ -405,7 +405,7 @@ HW = homework
 
 #### Due SAT @ 11pm
 
-* Sampling and inference reassessment
+* Sampling and inference reassessments
 * Reflection #14
 
 #### Before Next Week

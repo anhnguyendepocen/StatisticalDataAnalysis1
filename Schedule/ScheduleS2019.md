@@ -1,7 +1,7 @@
 ---
 title: "STT 3850 Statistical Data Analysis 1<br>Spring 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Sunday, March 31, 2019 @ 06:46:35 PM'
+date: 'Updated: Sunday, March 31, 2019 @ 07:14:50 PM'
 output: 
   html_document: 
     toc: true
@@ -395,7 +395,7 @@ HW = homework
 
 #### Due SAT @ 11pm
 
-* TBA
+* Normality and modeling reassessments
 * Reflection #13
 
 #### Before Next Week
@@ -413,7 +413,7 @@ HW = homework
 
 #### Due SAT @ 11pm
 
-* Sampling and inference reassessment
+* Sampling and inference reassessments
 * Reflection #14
 
 #### Before Next Week
