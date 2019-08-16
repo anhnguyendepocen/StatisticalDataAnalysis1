@@ -127,6 +127,11 @@ No class TUE, AUG 27 (Convocation)
 * MD [Chapter 3. Data Visualization](https://moderndive.com/3-viz.html)
 * MD [Chapter 4. Data Wrangling](https://moderndive.com/4-wrangling.html)
 * MD [Chapter 5. Data Importing & “Tidy” Data](https://moderndive.com/5-tidy.html)
+* Slides: [Introduction to Datasets](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/01_IntroToDatasets.html)
+* Slides: [EDA---Categorical Data](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/02_EDACategorical.html)
+* Slides: [EDA---Numerical Data](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/03_EDANumerical.html)
+* Slides: [Normal Distribution](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/04_NormalDistribution.html)
+* Slides: [Assessing Normality](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/05_NormalAssessment.html)
 * [GGPlot Examples Best Reference](https://www.datanovia.com/en/blog/ggplot-examples-best-reference/)
 * Video: [Measures of Central Tendency](https://youtu.be/NM_iOLUwZFA) (~ 9 minutes)
 * Video: [Measures of Variability](https://youtu.be/Cx2tGUze60s) (~ 12 minutes)
@@ -207,6 +212,7 @@ No class TUE, AUG 27 (Convocation)
 
 * MD [Chapter 6. Basic Regression](https://moderndive.com/6-regression.html)
 * MD [Chapter 7. Multiple Regression](https://moderndive.com/7-multiple-regression.html)
+* Slides: [Introduction to Datasets](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/01_IntroToDatasets.html)
 * Video: [Introduction to Simple Linear Regression](https://youtu.be/KsVBBJRb9TE) (~ 8 minutes)
 * Video: [The Least Squares Regression Line](https://youtu.be/coQAAN4eY5s)(~ 8 minutes)
 * Video: [Interpreting Model Parameters](https://youtu.be/I8Dr1OGUdZQ) (~ 5 minutes)
@@ -228,7 +234,7 @@ No class TUE, AUG 27 (Convocation)
 * Scatterplots in `ggplot2`
 * Correlation coefficient
 * Least squares criterion
-* Model fitting with `lm`
+* Model fitting with `lm`                       Q
 
 ### Week 07 (SEP 30)
 
