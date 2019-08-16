@@ -1,7 +1,7 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Friday, August 16, 2019 @ 04:24:10 PM'
+date: 'Updated: Friday, August 16, 2019 @ 04:43:49 PM'
 output: 
   html_document: 
     highlight: textmate
@@ -24,7 +24,7 @@ output:
 <li>Final Exam for Section 103 --- TUE, DEC 10 @ 11am</li>
 <li>Final Exam for Section 104 --- THU, DEC 05 @ 02pm</li>
 </ul></li>
-<li>See schedule below and AsULearn for additional assessments.</li>
+<li>See schedule below and AsULearn for DataCamp assessments.</li>
 </ul>
 </div>
 
@@ -88,7 +88,6 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * [RStudio server](https://mathr.math.appstate.edu) sign-in 
 * Private Forum message 
 * DC [Introduction to `R`](https://www.datacamp.com/courses/free-introduction-to-r)
-* Reflection #01
 
 #### In-Class Topics & Activities
 
@@ -106,7 +105,6 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Intermediate `R`](https://www.datacamp.com/courses/intermediate-r)
-* Reflection #02
 
 #### In-Class Topics & Activities
 
@@ -158,7 +156,6 @@ No class TUE, AUG 27 (Convocation)
 
 * DC [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data)
 * DC [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-* Reflection #03
 
 #### In-Class Topics & Activities
 
@@ -172,7 +169,6 @@ No class TUE, AUG 27 (Convocation)
 
 * DC [Data Visualization with `ggplot2` (Part 1)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1)
 * DC [Exploratory Data Analysis](https://www.datacamp.com/courses/exploratory-data-analysis)
-* Reflection #04
 
 #### In-Class Topics & Activities
 
@@ -196,7 +192,6 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * Project 1
-* Reflection #05
 
 #### In-Class Topics & Activities
 
@@ -237,7 +232,6 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Modeling with Data in the Tidyverse](https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse)
-* Reflection #06
 
 #### In-Class Topics & Activities
 
@@ -250,7 +244,7 @@ No class TUE, AUG 27 (Convocation)
 
 #### Integrations (Due SUN @ 11pm)
 
-* Reflection #07
+* None---make sure you are all caught up on material!
 
 #### In-Class Topics & Activities
 
@@ -268,7 +262,6 @@ OCT 08 is the halfway point!
 #### Integrations (Due SUN @ 11pm)
 
 * Project 2
-* Reflection #10
 
 #### In-Class Topics & Activities
 

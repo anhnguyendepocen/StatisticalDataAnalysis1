@@ -21,7 +21,7 @@ output:
     * Group Project --- WED, DEC 04 @ 11pm (Reading Day)
     * Final Exam for Section 103 --- TUE, DEC 10 @ 11am
     * Final Exam for Section 104 --- THU, DEC 05 @ 02pm
-* See schedule below and AsULearn for additional assessments.
+* See schedule below and AsULearn for DataCamp assessments.
 ```
 
 ```{block, startnote, type='rmdnote'}
@@ -80,7 +80,6 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * [RStudio server](https://mathr.math.appstate.edu) sign-in 
 * Private Forum message 
 * DC [Introduction to `R`](https://www.datacamp.com/courses/free-introduction-to-r)
-* Reflection #01
 
 #### In-Class Topics & Activities
 
@@ -98,7 +97,6 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Intermediate `R`](https://www.datacamp.com/courses/intermediate-r)
-* Reflection #02
 
 #### In-Class Topics & Activities
 
@@ -150,7 +148,6 @@ No class TUE, AUG 27 (Convocation)
 
 * DC [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data)
 * DC [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-* Reflection #03
 
 #### In-Class Topics & Activities
 
@@ -164,7 +161,6 @@ No class TUE, AUG 27 (Convocation)
 
 * DC [Data Visualization with `ggplot2` (Part 1)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1)
 * DC [Exploratory Data Analysis](https://www.datacamp.com/courses/exploratory-data-analysis)
-* Reflection #04
 
 #### In-Class Topics & Activities
 
@@ -186,7 +182,6 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * Project 1
-* Reflection #05
 
 #### In-Class Topics & Activities
 
@@ -227,7 +222,6 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Modeling with Data in the Tidyverse](https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse)
-* Reflection #06
 
 #### In-Class Topics & Activities
 
@@ -240,7 +234,7 @@ No class TUE, AUG 27 (Convocation)
 
 #### Integrations (Due SUN @ 11pm)
 
-* Reflection #07
+* None---make sure you are all caught up on material!
 
 #### In-Class Topics & Activities
 
@@ -258,7 +252,6 @@ OCT 08 is the halfway point!
 #### Integrations (Due SUN @ 11pm)
 
 * Project 2
-* Reflection #10
 
 #### In-Class Topics & Activities
 
