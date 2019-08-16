@@ -32,9 +32,9 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 
 * COMPARE AND CONNECT: Compare analytical/theoretical results with resampling/bootstrapping results to connect the different modes of exploration; analyze data sets in different ways depending on the research question(s).
 
-* STATISTICAL COMPUTING: Effectively and efficiently implement and report statistical calculations, procedures, and visualizations using R, incorporating some of the principles of reproducible research.
+* STATISTICAL COMPUTING: Effectively and efficiently implement and report statistical calculations, procedures, and visualizations using R and R Markdown, incorporating some of the principles of reproducible research.
 
-* STATISTICS—THE BIG PICTURE: Demonstrate understanding of why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world; become acquainted with statistical ethics.
+* STATISTICS—THE BIG PICTURE: Demonstrate understanding of why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world.
 
 
 **Assessment and Grading**

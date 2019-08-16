@@ -1,5 +1,5 @@
 ---
-title: "Welcome!"
+title: "STT3850 Statistical Data Analysis 1"
 output: 
   html_document: 
     theme: cosmo
