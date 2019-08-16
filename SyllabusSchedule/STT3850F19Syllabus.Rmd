@@ -54,7 +54,7 @@ You **must pass** the cumulative final exam to pass the course. No exceptions.
 
 Class attendance on project workdays will be factored into the project grades.
 
-The [Course Schedule](../Schedule/ScheduleS2019.html) and AsULearn contain additional information. Grades will be kept on [AsULearn](https://asulearn.appstate.edu/). You should monitor your grades throughout the term to make sure they are complete and accurate. Feel free to inquire about your grades at any time.  
+The [Course Schedule](STT3850F19Schedule.html) and AsULearn contain additional information. This course will use the standard 10-point +/- grading scale (93--100 = A, 90--92 = A--, 87--89 = B+, etc.) to determine final grades. Grades will be kept on [AsULearn](https://asulearn.appstate.edu/). You should monitor your grades throughout the term to make sure they are complete and accurate. Feel free to inquire about your grades at any time.  
 
 
 **Inclement Weather**
