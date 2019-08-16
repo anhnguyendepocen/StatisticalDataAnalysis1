@@ -3,3 +3,6 @@
 
 # Update textbook data, also in package resampledata
 
+# Update modeling slides w/ all the moderndive functions, rearrange
+
+# add shading under curve to normal slides

@@ -1,0 +1,90 @@
+---
+title: "Arsenic in Wells in Bangladesh"
+subtitle: "Confidence Intervals"
+author: "Jill Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, comment = "")
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+Bangladesh <- read.csv("http://sites.google.com/site/chiharahesterberg/data2/Bangladesh.csv")
+```
+
+### Descriptive Statistics
+
+```{r}
+arsenic_summ <- Bangladesh %>% 
+  summarize(xbar  = mean(Arsenic),
+            s = sd(Arsenic))
+
+print(arsenic_summ)
+
+ggplot(Bangladesh, aes(Arsenic)) + 
+  geom_histogram(bins = 15)
+
+ggplot(Bangladesh, aes(Arsenic)) + 
+  geom_density()
+
+ggplot(Bangladesh, aes(x = 1, y = Arsenic)) + 
+  geom_boxplot()
+
+ggplot(Bangladesh, aes(sample = Arsenic)) + 
+  stat_qq() + 
+  stat_qq_line()
+```
+
+```{r}
+# traditional confidence interval using formula
+```
+
+
+```{r}
+# traditional confidence interval using t.test
+
+```
+
+```{r}
+Arsenic <- pull(Bangladesh, Arsenic)
+Arsenic <- Bangladesh$Arsenic
+
+n <- length(Arsenic)
+N <- 10^4
+
+arsenic_mean <- numeric(N)
+
+for (i in 1:N)
+{
+  x <- sample(Arsenic, n, replace = TRUE)
+  arsenic_mean[i] <- mean(x)
+}
+
+ggplot() + 
+  geom_histogram(aes(arsenic_mean), bins = 15) + 
+  labs(title = "Bootstrap distribution of means") + 
+  geom_vline(xintercept = mean(Arsenic), colour = "blue")
+
+df <- data.frame(x = arsenic_mean)
+ggplot(df, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line()
+
+mean(arsenic_mean)                 #bootstrap mean
+mean(arsenic_mean) - mean(Arsenic) #bias
+sd(arsenic_mean)                   #bootstrap SE
+
+sum(arsenic_mean > 161.3224) / N
+sum(arsenic_mean < 89.75262) / N
+```
+```
+

@@ -74,7 +74,6 @@ HW = homework
 #### Before THU
 
 * Read ["ASA Statement on the Role of Statistics in Data Science"](http://magazine.amstat.org/blog/2015/10/01/asa-statement-on-the-role-of-statistics-in-data-science/)
-* Read ["Reproducible Research in JASA"](http://magazine.amstat.org/blog/2016/07/01/jasa-reproducible16/)
 * Read ["ASA Develops Reproducible Research Recommendations"](https://www.amstat.org/ASA/News/ASA-Develops-Reproducible-Research-Recommendations.aspx)
 
 #### Before Next Week

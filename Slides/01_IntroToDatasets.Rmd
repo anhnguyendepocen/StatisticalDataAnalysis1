@@ -1,8 +1,10 @@
 ---
-title: "Intro to Datasets"
+title: "Introduction<br>to Datasets"
 author: "Author: Jill E. Thomley"
-date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
-output: ioslides_presentation
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
 ---
 
 ```{r global_options, include=FALSE}
@@ -13,46 +15,44 @@ library(tidyverse)
 
 ## Before We Begin...
 
-These slides assume you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r).
+These slides assume you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r). It also complements the content of the course [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data).
 
-It also would be be helpful to read Chapter 2 of the digital text [*Modern Dive*](https://moderndive.com/).
+It also would be be helpful to read Chapter 1 of the textbook *Mathematical Statistics with Resampling and R* and Chapter 2 of the digital text [*Modern Dive*](https://moderndive.com/).
 
-These slides are not meant to be standalone information, but rather a guide for hands-on lecture. Be prepared to take notes to flesh out the contents. 
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations.
 
-I recommend that you create an R Markdown document where you can include information and code from the slides as well as your own additional notes and explorations.
-
-These slides were produced using R Markdown. See "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/).
+Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in how to create R Markdown slides. 
 
 
 ## Data vs. Information
 
 Statistical methods help us transform raw data into information that provides knowledge and helps us make decisions.
 
-* We use descriptive statistics to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have. 
+* We use **descriptive statistics** to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have. 
 
-* In inferential statistics, sample data are used to generalize or make predictions about the larger population from which the sample was selected.
+* In **inferential statistics**, we use sample data to generalize or make predictions about the larger population from which the sample was selected.
 
 * Data visualization is important for exploration, verification, and presentation of statistical results.
 
-We will often talk about the distribution of a particular variable, which describes how often the possible responses occur.
+We will often discuss the **distribution** of a population/variable, which describes possible values and often they occur.
 
 
 ##
 
-<p style="text-align:center;"><img src="https://cdn-images-1.medium.com/max/1200/1*i7WFO9wP0wB-nv3YrkrMPg.png" width = 500></p>
+<p style="text-align:center;"><img src="images/analysispyramid.jpg" width = 700></p>
 
-We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the appropriate context.
+We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the **appropriate context**.
 
 
 ## Population vs. Sample
 
 A sample is a subset selected from some larger population of interest. The  population is defined by the research question(s) being investigated. It is the complete set of people, objects, or entities in which we are interested.
 
-* A summary measure for a population is called a parameter.
+* A summary measure for a population is called a **parameter**.
 
-* A summary measure for a sample is called a statistic.
+* A summary measure for a sample is called a **statistic**.
 
-Sample statistics are used to estimate population parameters.
+Sample statistics are used to **estimate** population parameters.
 
 If we collect data from a whole population, it is called a census.
 
@@ -61,15 +61,15 @@ The definining characteristics of theoretical probability models are also referr
 
 ## Dataset Structure
 
-* A variable is some characteristic of interest that can differ between individuals in a population.
+* A **variable** is some characteristic of interest that can differ between individuals in a population.
 
-* An observational unit (or observation) is a single individual, object, or entity about which we have collected data for one or more characteristics (variables).
+* An observational unit (or **observation**) is a single individual, object, or entity about which we have collected data for one or more characteristics (variables).
 
 * An observation may be called a case, subject, or participant.
 
 * Ideally, each observational unit has a value for each variable.
 
-A dataset is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call `tidy` data. 
+A **dataset** is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call `tidy` data. 
 
 
 ## `tidy` Data
@@ -94,7 +94,7 @@ Numerical variables are also classified as discrete or continuous.
 
 Ranks are technically ordinal data, but sometimes we treat them as if they are numbers (e.g., reporting average rank).
 
-How might these correspond to different classes of vectors in R?
+How might these correspond to different classes of vectors in `R`?
 
 
 ## Exploratory Data Analysis (EDA)
@@ -103,12 +103,12 @@ We use EDA to "examin[e] and describ[e] data to gain insight, discover structure
 
 <p style="text-align:center"><img src="images/john_tukey.jpg" height = 250></p>
 
-John Tukey (1915--2000), author of _Exploratory Data Analysis_ (1977) referred to EDA as numerical, counting, and graphical detective work.
+John Tukey (1915--2000), author of _Exploratory Data Analysis_ (1977) referred to EDA as numerical, counting, and graphical detective work. He is credited with introducing the terms 'bit' and 'software' while working on early computers at Bell Labs.
 
 
-## Reading Data into R
+## Reading Data into `R`
 
-Many different types of data files can be read into R. We will be using primarily CSV files read from the web using their URL. Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains links to many datasets provided by the textbook or created by the instructor.
+Many different types of data files can be read into `R`. We will be using primarily CSV files read from the web using their URL. Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains links to many datasets provided by the textbook or created by the instructor.
 
 Use the `read.csv()` function to input the CSV file using its URL. 
 
@@ -116,7 +116,7 @@ The `read.csv()` function converts a CSV file into a data frame.
 
 `draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))`
 
-The `readr` package contains the function `read_csv()`. Create `draft_alt` using this function. How do `draft` and `draft_alt` differ? Let's explore and discuss!
+The `readr` package contains the function `read_csv()`, which many prefer. Create `draft_alt` using this function. How do `draft` and `draft_alt` differ? Let's explore and discuss!
 
 ```{r include=FALSE}
 draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))
@@ -128,7 +128,7 @@ draft_alt <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU
 
 ## Data Frame vs. Tibble
 
-A data frame is a two dimensional structure or array in R. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.
+A data frame is a two dimensional structure or array in `R`. It is a special case of a list where each component (column) has equal length. Each column can contain a different variable type.
 
 A tibble is a somewhat tweaked version of a data frame found in the `tidyverse`. For more, see [Tibbles](http://r4ds.had.co.nz/tibbles.html) in _R for Data Science_.
 
@@ -139,7 +139,7 @@ We will be using the `dplyr` and `ggplot2` packages for our EDA. These and other
 
 ## Reminders Before We Proceed
 
-When you apply any function() to an object in R, pay attention to what kind of object that function outputs. Is it a vector? Matrix? List? Other? Since the output of one function is often the input to another, you need to know!
+When you apply any `function()` to an object in ``R``, pay attention to what kind of object that function outputs. Is it a vector? Matrix? List? Other? Since the output of one function is often the input to another, you need to know!
 
 We can access columns of a `data.frame` (or any list) using the `$` operator, as below: 
 
@@ -152,7 +152,7 @@ We can access elements of vectors, matrices, and data frames using `[]` (indices
 
 ## Structure vs. Glimpse
 
-The `str()` function is part of base R code, while the `glimpse()` function comes from the `tidyverse` package `dplyr`.
+The `str()` function is part of base `R` code, while the `glimpse()` function comes from the `tidyverse` package `dplyr`.
 
 ```{r}
 str(draft)
@@ -232,7 +232,7 @@ draft[index, c("month", "day", "draftyear")]
 
 ## Explore some more datasets!
 
-Try exploring some of the datasets presented and discussed in Chapter 1 of your  *Mathematical Statistics with Resampling and R, 2nd Edition* textbook. 
+Try exploring some of the datasets presented and discussed in Chapter 1 of your  *Mathematical Statistics with Resampling and `R`, 2nd Edition* textbook. 
 
 You can find the textbook data files on our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page or in the `resampledata` package.
 

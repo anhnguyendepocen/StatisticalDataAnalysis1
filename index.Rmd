@@ -1,14 +1,19 @@
 ---
 title: "Welcome!"
+output: 
+  html_document: 
+    theme: cosmo
 ---
 
 <hr>
 
-* [Course Syllabus](./Syllabus/SyllabusS2019.html)
+* [Course Syllabus](./SyllabusSchedule/STT3850F19Syllabus.html)
 
-* [Course Schedule](./Schedule/ScheduleS2019.html)
+* [Course Schedule](./SyllabusSchedule/STT3850F19Schedule.html)
 
 * [Course Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html)
+
+* [Course Repository](https://github.com/STAT-JET-ASU/StatisticalDataAnalysis1)
 
 * [ASU RStudio Server](https://mathr.math.appstate.edu)
 

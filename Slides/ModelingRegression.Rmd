@@ -37,13 +37,13 @@ General modeling framework: $y$ is a function of one or more $x$ variables, plus
 
 $$y = f(\overrightarrow{x}) + \epsilon$$
 
-* y is the *outcome* or *predicted* variable
+* y is the *outcome*, *response*, or *predicted* variable
 
 * x is an *explanatory* or *predictor* variable ("signal")
 
 * $\epsilon$ is the unsystematic error component ("noise")
 
-The function $f(\overrightarrow{x})$ can assume a variety of forms, depending on the system and relationships we are trying to model. Finding the right model is often an iterative process. We frequently assume that $\epsilon$ is a normally distributed random variable.
+The function $f(\overrightarrow{x})$ can assume a variety of forms, depending on the system and relationships we are trying to model. Finding the right model is often an iterative process. We often assume that $\epsilon$ is a normally distributed random variable.
 
 
 ## Simple Linear Model
@@ -52,11 +52,11 @@ Our theoretical simple linear model has the following form, with $f(x)$ being th
 
 $$y = f(x) + \epsilon = \beta_0 + \beta_1 x + \epsilon$$
 
-We use data to estimate the $\beta$ parameters. The observed value of the *ith* data point $y_i$ in the sample can be expressed in terms of the fitted line and its residual (deviation from the line).
+We use data to estimate the $\beta$ parameters. The observed value of the *ith* data point $y_i$ in the sample can be expressed in terms of the fitted line and a residual (deviation from the line).
 
 $$y_i = b_0 + b_1 x_i + e_i$$
 
-The predicted (fitted) value $\hat{y}_i$ is a prediction made by plugging the value $x_i$ into the fitted line. 
+The fitted (predicted) value $\hat{y}_i$ is a point lying on the fitted line, obtained by plugging the value $x_i$ into the fitted line. 
 
 $$\hat{y}_i = b_0 + b_1 x_i \rightarrow y_i = \hat{y}_i + e_i$$
 
