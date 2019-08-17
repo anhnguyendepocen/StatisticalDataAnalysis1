@@ -1,9 +1,12 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Friday, August 16, 2019 @ 04:43:49 PM'
+date: 'Updated: Saturday, August 17, 2019 @ 01:01:39 PM'
 output: 
   html_document: 
+    toc: true
+    toc_depth: 3
+    toc_float: true
     highlight: textmate
     theme: cosmo
     css: "../css/style.css"
@@ -23,8 +26,11 @@ output:
 <li>Group Project --- WED, DEC 04 @ 11pm (Reading Day)</li>
 <li>Final Exam for Section 103 --- TUE, DEC 10 @ 11am</li>
 <li>Final Exam for Section 104 --- THU, DEC 05 @ 02pm</li>
+<li>See schedule and AsULearn for DataCamp assessments.</li>
 </ul></li>
-<li>See schedule below and AsULearn for DataCamp assessments.</li>
+<li><strong>Class meets on Tuesday, Wednesday, and Thursday, with exceptions noted.</strong></li>
+<li><strong>Most assignments are due on Sunday @ 11pm of the week in which they appear.</strong></li>
+<li><strong>Refer to AsULearn for more detailed assignment instructions, rubrics, and grades.</strong></li>
 </ul>
 </div>
 
@@ -50,14 +56,6 @@ MSRR = Mathematical Statistics with Resampling and R (rental textbook)
 MD = [Modern Dive](https://moderndive.com/) (digital textbook)  
 DC = [DataCamp](https://www.datacamp.com/) (online tutorials)  
 
-<div class="rmdimportant">
-<ul>
-<li><strong>Class meets on Tuesday, Wednesday, and Thursday, with exceptions noted.</strong></li>
-<li><strong>Most assignments are due on Sunday @ 11pm of the week in which they appear.</strong></li>
-<li><strong>Refer to AsULearn for more detailed assignment instructions, rubrics, and grades.</strong></li>
-</ul>
-</div>
-
 
 ***
 ## Section 1: Programming
@@ -68,6 +66,8 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * Vectors, matrices, lists
 * `for` and `while` loops
 * Writing basic functions
+* Working in RStudio
+* Using [R Markdown](https://rmarkdown.rstudio.com/)
 
 ### Explorations
 
@@ -82,14 +82,7 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 
 ### Week 01 (AUG 19)
 
-#### Integrations (Due SUN @ 11pm)
-
-* [DataCamp](https://www.datacamp.com/) account 
-* [RStudio server](https://mathr.math.appstate.edu) sign-in 
-* Private Forum message 
-* DC [Introduction to `R`](https://www.datacamp.com/courses/free-introduction-to-r)
-
-#### In-Class Topics & Activities
+#### In-Class Engagement
 
 * Course introduction
 * Technology accounts set-up
@@ -98,19 +91,33 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * [YaRrr! Vectors](https://bookdown.org/ndphillips/YaRrr/vectors.html)
 * [YaRrr! Creating matrices and dataframes](https://bookdown.org/ndphillips/YaRrr/creating-matrices-and-dataframes.html)
 
+#### Integrations (Due SUN @ 11pm)
+
+* [DataCamp](https://www.datacamp.com/) account 
+* [RStudio server](https://mathr.math.appstate.edu) sign-in 
+* Private Forum message 
+* DC [Introduction to `R`](https://www.datacamp.com/courses/free-introduction-to-r)
+
 ### Week 02 (AUG 26)
 
 No class TUE, AUG 27 (Convocation)
+
+#### In-Class Engagement
+
+* `for` and `while`loops
+* Writing basic functions
+* More about `R` Markdown
 
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Intermediate `R`](https://www.datacamp.com/courses/intermediate-r)
 
-#### In-Class Topics & Activities
-
-* `for` and `while`loops
-* Writing basic functions
-* More about R Markdown
+<div class="rmdnote">
+<ul>
+<li>Material in all subsequent sections and assessments rely heavily on the skills you will learn here. Gaining a reasonable amount of proficiency now will save you time later. Take good notes and practice!</li>
+<li>Check out <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a> for base <code>R</code> and the <code>R</code> Markdown Reference Guide.</li>
+</ul>
+</div>
 
 
 ***
@@ -126,6 +133,7 @@ No class TUE, AUG 27 (Convocation)
     * densities
     * boxplots
 * Assessing normality
+* `tidyverse` tools
 
 ### Explorations
 
@@ -138,7 +146,6 @@ No class TUE, AUG 27 (Convocation)
 * Slides: [EDA---Numerical Data](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/03_EDANumerical.html)
 * Slides: [Normal Distribution](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/04_NormalDistribution.html)
 * Slides: [Assessing Normality](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/05_NormalAssessment.html)
-* [GGPlot Examples Best Reference](https://www.datanovia.com/en/blog/ggplot-examples-best-reference/)
 * Video: [Measures of Central Tendency](https://youtu.be/NM_iOLUwZFA) (~ 9 minutes)
 * Video: [Measures of Variability](https://youtu.be/Cx2tGUze60s) (~ 12 minutes)
 * Video: [The Sample Variance: Why Divide by n-1?](https://youtu.be/9ONRMymR2Eg) (~ 7 minutes)
@@ -146,40 +153,41 @@ No class TUE, AUG 27 (Convocation)
 * Video: [An Introduction to the Normal Distribution](https://youtu.be/iYiOVISWXS4) (~ 6 minutes)
 * Video: [Standardizing Normally Distributed Random Variables](https://youtu.be/4R8xm19DmPM) (~ 11 minutes)
 * Video: [Normal Quantile-Quantile Plot](https://youtu.be/X9_ISJ0YpGw) (~ 12 minutes)
+* [GGPlot Examples Best Reference](https://www.datanovia.com/en/blog/ggplot-examples-best-reference/)
 * [`ggplot2` reference page](https://ggplot2.tidyverse.org/reference/index.html)
 * [`dplyr` reference page](https://dplyr.tidyverse.org/reference/index.html)
 * [`tidyr` reference page](https://tidyr.tidyverse.org/reference/index.html)
 
 ### Week 03 (SEP 02)
 
-#### Integrations (Due SUN @ 11pm)
-
-* DC [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data)
-* DC [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-
-#### In-Class Topics & Activities
+#### In-Class Engagement
 
 * [introduction to `dplyr`](http://stat545.com/block009_dplyr-intro.html)
 * [`dplyr` functions for a single dataset](http://stat545.com/block010_dplyr-end-single-table.html)
 * [Introduction to `ggplot2`](https://uc-r.github.io/ggplot_intro)
 
+#### Integrations (Due SUN @ 11pm)
+
+* DC [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data)
+* DC [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+
 ### Week 04 (SEP 09)
+
+#### In-Class Engagement
+
+* [How to Change GGPlot Labels](https://www.datanovia.com/en/blog/how-to-change-ggplot-labels/)
+* Boxplots and detecting outliers in data
+* Normal distribution and assessing normality
 
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Data Visualization with `ggplot2` (Part 1)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1)
 * DC [Exploratory Data Analysis](https://www.datacamp.com/courses/exploratory-data-analysis)
 
-#### In-Class Topics & Activities
-
-* [How to Change GGPlot Labels](https://www.datanovia.com/en/blog/how-to-change-ggplot-labels/)
-* Boxplots and detecting outliers in data
-* Normal distribution and assessing normality
-
 <div class="rmdnote">
 <ul>
-<li>The <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> is &quot;an opinionated collection of R packages designed for data science&quot; that share a common philosophy for effective data manipulation, explorations and visualization. We will use it througout this course.</li>
-<li>Check out <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a> for data transformation, data visualization, and Markdown.</li>
+<li>The <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> is &quot;an opinionated collection of R packages designed for data science&quot; that share a common philosophy for effective data manipulation, explorations and visualization. We will use <code>tidy</code> data concepts and packages throughout this course, especially <code>dplyr</code> and <code>ggplot2</code>.</li>
+<li>Check out <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a> for data transformation, data visualization, <code>R</code> Markdown, and more.</li>
 </ul>
 </div>
 
@@ -189,13 +197,13 @@ No class TUE, AUG 27 (Convocation)
 
 ### Week 05 (SEP 16)
 
-#### Integrations (Due SUN @ 11pm)
-
-* Project 1
-
-#### In-Class Topics & Activities
+#### In-Class Engagement
 
 * Work on Project 1
+
+#### Integrations (Due SUN @ 11pm)
+
+* Project 1 write-up
 
 
 ***
@@ -212,6 +220,7 @@ No class TUE, AUG 27 (Convocation)
     * MSE and RSME
     * Slope / intercept
 * Predicting with models
+* `moderndive` tools
 
 ### Explorations
 
@@ -229,28 +238,37 @@ No class TUE, AUG 27 (Convocation)
 
 ### Week 06 (SEP 23)
 
+#### In-Class Engagement
+
+* Scatterplots in `ggplot2`
+* Correlation coefficients
+* Least squares criterion
+* Model fitting with `lm`
+
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Modeling with Data in the Tidyverse](https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse)
 
-#### In-Class Topics & Activities
-
-* Scatterplots in `ggplot2`
-* Correlation coefficient
-* Least squares criterion
-* Model fitting with `lm`                       Q
-
 ### Week 07 (SEP 30)
+
+#### In-Class Engagement
+
+* Parallel slopes model
+* Making predictions
+* Influential points
 
 #### Integrations (Due SUN @ 11pm)
 
-* None---make sure you are all caught up on material!
+* Make sure you are all caught up on material!
 
-#### In-Class Topics & Activities
+<div class="rmdnote">
+<ul>
+<li>Linear regression is one of the oldest statistical techniques; the name comes from an 1886 article by Francis Galton, &quot;Regression Towards Mediocrity in Hereditary Stature&quot;.</li>
+<li>Linear models are the foundation of many other types of statistical methods and have close connections to linear algebra, including manipulations of correlation matrices.</li>
+<li>The <code>moderndive</code> package includes many <strong>wrapper functions</strong> to help us extract useful information from the <code>lm</code> function output and format them for analysis and reporting.</li>
+</ul>
+</div>
 
-* Making predictions
-* Parallel slopes model
-* Influential points
 
 ***
 ## Project 2
@@ -259,13 +277,13 @@ No class TUE, AUG 27 (Convocation)
 
 OCT 08 is the halfway point!
 
-#### Integrations (Due SUN @ 11pm)
-
-* Project 2
-
-#### In-Class Topics & Activities
+#### In-Class Engagement
 
 * Work on Project 2
+
+#### Integrations (Due SUN @ 11pm)
+
+* Project 2 write-up
 
 
 ***
