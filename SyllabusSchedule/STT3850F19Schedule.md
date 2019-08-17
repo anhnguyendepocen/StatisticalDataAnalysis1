@@ -1,7 +1,7 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Saturday, August 17, 2019 @ 01:01:39 PM'
+date: 'Updated: Saturday, August 17, 2019 @ 03:50:43 PM'
 output: 
   html_document: 
     toc: true
@@ -77,6 +77,7 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * Video: [The History of S and R](https://youtu.be/jk9S3RTAl38) (~10 minutes)
 * Video: [Introduction to the R Language](https://youtu.be/APm4SxJx0eg) (~30 minutes)
 * [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/)
+* [Advanced `R` Style Guide](http://adv-r.had.co.nz/Style.html)
 * [Initial Steps Toward Reproducible Research](https://kbroman.org/steps2rr/)
 * [ASA Statement on the Role of Statistics in Data Science](http://magazine.amstat.org/blog/2015/10/01/asa-statement-on-the-role-of-statistics-in-data-science/)
 
