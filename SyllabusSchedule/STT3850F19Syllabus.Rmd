@@ -65,7 +65,7 @@ All due dates will remain in effect even if the university cancels classes or cl
 **Required Textbooks**
 
 * Chihara, L. and Hesterberg, T. (2011). _Mathematical Statistics with Resampling and R, 2nd Edition_. (rental)
-* Ismay, C. and Kim, A.Y. (2018). [_Modern Dive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com/index.html). (digital)
+* Ismay, C. and Kim, A.Y. (2019). [_Modern Dive: Statistical Inference via Data Science_](https://moderndive.com/index.html). (digital)
 
 
 **Computers and Software**
