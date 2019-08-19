@@ -39,9 +39,9 @@ The foundations of data science include, but are not limited to: database manage
 "...next generation of statistical professionals needs a broader skill set and must be more able to engage with database and distributed systems experts."
 
 
-##
+## &nbsp;
 
-“Starting September 1 [2016], JASA ACS will require code and data as a minimum standard for reproducibility of statistical scientific research. New infrastructure is being established to support this initiative … A new editorial role—associate editor for reproducibility (AER)—will be added to ensure we meet a standard of reproducibility.” ([Reproducible Research in JASA](http://magazine.amstat.org/blog/2016/07/01/jasa-reproducible16/))
+“Starting September 1 [2016], JASA ACS will require code and data as a minimum standard for reproducibility of statistical scientific research. New infrastructure is being established to support this initiative...” ([Reproducible Research in JASA](http://magazine.amstat.org/blog/2016/07/01/jasa-reproducible16/))
 
 ASA also released [Recommendations to Funding Agencies for Supporting Reproducible Research](https://www.amstat.org/ASA/News/ASA-Develops-Reproducible-Research-Recommendations.aspx) in January 2017, suggesting more statistician reviewers to assess quality of plans for data management and research reproducibility.
 
@@ -116,6 +116,13 @@ knitr::include_graphics("images/RStudioLogIn.jpg", dpi = 150)
 You will have six months of free access to DataCamp, during which you can access all content---not just courses I assign.
 
 
+##
+
+<p style="text-align: center;"><img src = "images/moderndivetitle.PNG" width=500;><br><br></p>
+
+<p>The [Modern Dive](https://moderndive.com/) digital textbook "assumes no prerequisites: no algebra, no calculus, and no prior programming/coding experience. This is intended to be a gentle introduction to the practice of analyzing data and answering questions using data the way data scientists, statisticians, data journalists, and other researchers would."</p>
+
+
 ## Syllabus and Schedule
 
 Switch over to the course syllabus and schedule and we will talk some more about objectives and assessments.
@@ -129,23 +136,20 @@ There are no prerequisites for this course other than MAT 1110 Calculus With Ana
 
 ##
 
-Exploration
+Exploration/Engagement/Reflection
 
 * read the physical textbook and watch the assigned videos
 * engage with digital textbooks and other online materials
+* come to class, take organized notes, actively participate
+* self-assess your strengths and weaknesses as we progress
 
-
-Integration
+Integration/Assessments
 
 * complete assigned DataCamp modules
 * practice new and existing data and `R` skills
-* review and understand misconceptions
-* solidify knowledge and make connections
-* demonstrate content / skill proficiency
-
-Reflection
-
-* self-assess strengths and weaknesses
+* solidify knowledge and make new connections
+* review and understand your misconceptions
+* demonstrate content and skill proficiency
 
 
 ## First Private Forum Post
@@ -160,19 +164,9 @@ Send me a message in your Private Forum.
 
 * Have you taken STT 3850 before? What was your experience?
 
+* Are there any particular concerns you have about this course?
+
 * Is there anything else you would like me to know about you?
-
-
-##
-
-<p style="text-align: center;"><img src = "images/code_quality_1_xkcd.png"></p>
-
-<p style="text-align: center;"><img src = "images/code_quality_3_xkcd.png"></p>
-
-
-## &nbsp;
-
-<p style="text-align: center;"><img src = "images/machine_learning_xkcd.png"></p>
 
 
 ## &nbsp;
