@@ -19,9 +19,9 @@ Welcome to the first day of STT 3850 Statistical Data Analysis 1 F19 with Dr. Th
 
 * Find and open the link "Syllabus and Schedule"
 
-* Find and open the link "Day 1 Introduction"
+* Find and open the link "Day 1 Introduction Slides"
 
-* Begin to familiarize yourself with the various documents and our AsULearn site. AsULearn is the vital hub of our course for assignments and communication.
+* Together we will begin to familiarize you with the documents and contents of our AsULearn site. AsULearn is the vital hub of our course for assignments and communication.
 
 When instructed, you will also record your attendance. You will do this every day. The required password will be given to you at the start of each class meeting.
 
@@ -52,6 +52,7 @@ Potential barrier: researchers may lack programming and “best practices” ski
 
 <img src = "http://i.imgur.com/aoz1BJy.jpg" width = 775/>
 
+Where are you in this diagram?
 
 ## What is my Background?
 
@@ -142,6 +143,7 @@ Exploration/Engagement/Reflection
 * engage with digital textbooks and other online materials
 * come to class, take organized notes, actively participate
 * self-assess your strengths and weaknesses as we progress
+* use office hours to get individualized attention/feedback
 
 Integration/Assessments
 
