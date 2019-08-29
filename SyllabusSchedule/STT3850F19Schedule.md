@@ -1,7 +1,7 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Saturday, August 17, 2019 @ 03:50:43 PM'
+date: 'Updated: Wednesday, August 28, 2019 @ 09:34:29 PM'
 output: 
   html_document: 
     toc: true
@@ -80,6 +80,9 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * [Advanced `R` Style Guide](http://adv-r.had.co.nz/Style.html)
 * [Initial Steps Toward Reproducible Research](https://kbroman.org/steps2rr/)
 * [ASA Statement on the Role of Statistics in Data Science](http://magazine.amstat.org/blog/2015/10/01/asa-statement-on-the-role-of-statistics-in-data-science/)
+* [A Tutorial on Using Functions in R!](https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial) <span style="color: red;">NEW!</span>
+* [R Functions in Detail (With Examples)](https://www.datamentor.io/r-programming/function/) <span style="color: red;">NEW!</span>
+* [Programming with R: Creating Functions](https://swcarpentry.github.io/r-novice-inflammation/02-func-R/) <span style="color: red;">NEW!</span>
 
 ### Week 01 (AUG 19)
 
