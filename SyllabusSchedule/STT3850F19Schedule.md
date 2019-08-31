@@ -1,7 +1,7 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Wednesday, August 28, 2019 @ 09:34:29 PM'
+date: 'Updated: Saturday, August 31, 2019 @ 01:05:51 PM'
 output: 
   html_document: 
     toc: true
@@ -101,6 +101,7 @@ DC = [DataCamp](https://www.datacamp.com/) (online tutorials)
 * [RStudio server](https://mathr.math.appstate.edu) sign-in 
 * Private Forum message 
 * DC [Introduction to `R`](https://www.datacamp.com/courses/free-introduction-to-r)
+* Introduction to R Feedback Survey
 
 ### Week 02 (AUG 26)
 
@@ -115,6 +116,7 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Intermediate `R`](https://www.datacamp.com/courses/intermediate-r)
+* Intermediate R Feedback Survey
 
 <div class="rmdnote">
 <ul>
@@ -173,7 +175,9 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data)
+* Introduction to Data Feedback Survey
 * DC [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+* Introduction to the Tidyverse Feedback Survey
 
 ### Week 04 (SEP 09)
 
@@ -186,7 +190,9 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Data Visualization with `ggplot2` (Part 1)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1)
+* Data Visualization with `ggplot2` (Part 1) Feedback Survey
 * DC [Exploratory Data Analysis](https://www.datacamp.com/courses/exploratory-data-analysis)
+* Exploratory Data Analysis Feedback Survey
 
 <div class="rmdnote">
 <ul>
@@ -252,6 +258,7 @@ No class TUE, AUG 27 (Convocation)
 #### Integrations (Due SUN @ 11pm)
 
 * DC [Modeling with Data in the Tidyverse](https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse)
+* Modeling with Data in the Tidyverse Feedback Survey
 
 ### Week 07 (SEP 30)
 
