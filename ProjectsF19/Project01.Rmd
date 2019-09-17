@@ -10,6 +10,7 @@ output:
 ---
 
 ```{r globalopts, include = FALSE}
+# LOAD ALL PACKAGES IN THIS CHUNK
 library(knitr)
 opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 ```
@@ -62,7 +63,7 @@ A) Write the code to create `star_wars_matrix2`, including the row and column na
 # Put your code here.
 ```
 
-B) Create `ticket_prices_matrix` as a data frame rather than a matrix using `data.frame`.
+B) Create `ticket_prices_matrix` as a data frame rather than a matrix using `data.frame`. The matrix is supposed to represent increasing ticket prices over time, but it DataCamp assigns higher prices to the older movies. Correct this error and put the prices in the correct order in your version.
 
 ```{r prob2pricedf}
 # Put your code here.
@@ -93,7 +94,7 @@ Now adapt your code as the basis for a function `FIBfunction` that will generate
 NOTE: All plots should have appropriate titles and axis labels.
 
 ***
-The dataset [STT3850majors](https://github.com/STAT-JET-ASU/Datasets/blob/master/Instructor/STT3850majors.csv) contains, as the name suggests, information about the majors in Dr. Thomley's STT3850 sections for several semesters/academic years.
+The dataset [STT3850majors](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/STT3850majors.csv) contains, as the name suggests, information about the majors in Dr. Thomley's STT3850 sections for several semesters/academic years.
 
 A) Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
 
@@ -119,7 +120,7 @@ D) Make a `ggplot2` barplot that shows proportion of `CodedMajor` within each ac
 # Put your code here.
 ```
 
-E) Which major is most comonly found in Dr. Thomley's STT3850 classes? Has it been a constant proportion over the academic years contained in the dataset? If so, about what proportion? If not, what kind of pattern do you see?
+E) Which major is most common in Dr. Thomley's STT3850 classes? Has it been a constant proportion over the academic years contained in the dataset? If so, about what proportion? If not, what kind of pattern do you see?
 
 **ANSWER**:
 
