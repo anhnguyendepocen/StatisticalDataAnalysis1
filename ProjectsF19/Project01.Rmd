@@ -57,13 +57,13 @@ Create, store, and print out the vectors below using functions `:`, `c`, `seq`, 
 
 In DataCamp's [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r) course, you learned about matrices and data frames. For the Chapter 3 exercises "Adding a row" and "A little arithmetic with matrices (2)," the course created `star_wars_matrix2` and `ticket_prices_matrix` for you because you had already practiced similar skills in other exercises. 
 
-A) Write the code to create `star_wars_matrix2`, including the row and column names. 
+A) Write the code to create `star_wars_matrix2`, including the row and column names. Print the results.
 
 ```{r prob2sw2matrix}
 # Put your code here.
 ```
 
-B) Create `ticket_prices_matrix` as a data frame rather than a matrix using `data.frame`. The matrix is supposed to represent increasing ticket prices over time, but it DataCamp assigns higher prices to the older movies. Correct this error and put the prices in the correct order in your version.
+B) Create `ticket_prices_matrix` as a data frame rather than a matrix using `data.frame`. The matrix is supposed to represent increasing ticket prices over time, but it DataCamp assigns higher prices to the older movies. Correct this error and put the prices in the correct order in your version. Print the results.
 
 ```{r prob2pricedf}
 # Put your code here.
