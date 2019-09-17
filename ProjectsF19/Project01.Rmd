@@ -93,7 +93,7 @@ Now adapt your code as the basis for a function `FIBfunction` that will generate
 NOTE: All plots should have appropriate titles and axis labels.
 
 ***
-The dataset [STT3850majors](https://github.com/STAT-JET-ASU/Datasets/blob/master/Instructor/STT3850majors.csv) contains, as the name suggests, information about the majors in Dr. Thomley's STT3850 sections for several semesters.
+The dataset [STT3850majors](https://github.com/STAT-JET-ASU/Datasets/blob/master/Instructor/STT3850majors.csv) contains, as the name suggests, information about the majors in Dr. Thomley's STT3850 sections for several semesters/academic years.
 
 A) Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
 
