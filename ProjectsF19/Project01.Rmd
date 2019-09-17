@@ -1,0 +1,216 @@
+---
+title: "Project 1--Programming and EDA"
+author: "YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    code_folding: hide
+---
+
+```{r globalopts, include = FALSE}
+library(knitr)
+opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+```
+
+## {.tabset}
+
+### **Problem 1**
+  
+Create, store, and print out the vectors below using functions `:`, `c`, `seq`, and/or `rep`. Use the object names indicated in CAPS.
+
+* X: The sample space of a random variable X is integers {0, 1, 2, ..., 10}.
+* PH: A machine reads the pH of a solution to one decimal place of precision.
+* CLOCK: A clock counts down from 60 to 0 seconds in whole-second increments.
+* PLAY: A player in a game can choose to play rock, paper, scissors, lizard, or Spock.
+* CLASS: In a class of 60 people, there are 5 groups in the following proportions.
+    + Actuarial Science = 15%
+    + Computer Science = 40%
+    + Mathematical Sciences = 20%
+    + Other Sciences = 20%
+    + Business = 5%
+
+```{r prob1codeX}
+# Put your code here.
+```
+
+```{r prob1codePH}
+# Put your code here.
+```
+
+```{r prob1codeCLOCK}
+# Put your code here.
+```
+
+```{r prob1codePLAY}
+# Put your code here.
+```
+
+```{r prob1codeCLASS}
+# Put your code here.
+```
+
+
+### **Problem 2**
+
+In DataCamp's [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r) course, you learned about matrices and data frames. For the Chapter 3 exercises "Adding a row" and "A little arithmetic with matrices (2)," the course created `star_wars_matrix2` and `ticket_prices_matrix` for you because you had already practiced similar skills in other exercises. 
+
+A) Write the code to create `star_wars_matrix2`, including the row and column names. 
+
+```{r prob2sw2matrix}
+# Put your code here.
+```
+
+B) Create `ticket_prices_matrix` as a data frame rather than a matrix using `data.frame`.
+
+```{r prob2pricedf}
+# Put your code here.
+```
+
+
+### **Problem 3**
+
+Write a `for` loop to create a vector `FIB` that contains the first 10 numbers in the classic [Fibonacci sequence](https://www.mathsisfun.com/numbers/fibonacci-sequence.html). 
+
+![](https://www.onlinemathlearning.com/image-files/fibonacci-golden-spiral.png)
+
+Store and print `FIB` when it is finished. If you don't get the correct sequence of numbers, check your work!
+  
+```{r prob3loop}
+# Put your code here.
+```
+
+Now adapt your code as the basis for a function `FIBfunction` that will generate the first **n** digits of the Fibonacci sequence when the user inputs the argument `n`. You should be able to save the vector output of your function as an object using the assignment arrow (e.g., `<-` (e.g., `outputvector <- FIBfunction(inputvalue)`). Once you have a working function, demonstrate it using `n` = 20. Store the result and print it out.
+
+```{r prob3func}
+# Put your code here.
+```
+
+
+### **Problem 4**
+
+NOTE: All plots should have appropriate titles and axis labels.
+
+***
+The dataset [STT3850majors](https://github.com/STAT-JET-ASU/Datasets/blob/master/Instructor/STT3850majors.csv) contains, as the name suggests, information about the majors in Dr. Thomley's STT3850 sections for several semesters.
+
+A) Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
+
+```{r prob4dataset}
+# Put your code here.
+```
+
+B) Convert `Year` into a factor with the order `Freshman`, `Sophomore`, `Junior`, `Senior`, and `Graduate Certificate Program`. Then make a frequency table for the variable.
+
+```{r prob4recode}
+# Put your code here.
+```
+
+C) Make a `ggplot2` barplot to show the distribution of `CodedMajor` with proportions on the y-axis.
+
+```{r prob4barplot1}
+# Put your code here.
+```
+
+D) Make a `ggplot2` barplot that shows proportion of `CodedMajor` within each academic year `AY`.
+
+```{r prob4barplot2}
+# Put your code here.
+```
+
+E) Which major is most comonly found in Dr. Thomley's STT3850 classes? Has it been a constant proportion over the academic years contained in the dataset? If so, about what proportion? If not, what kind of pattern do you see?
+
+**ANSWER**:
+
+
+### **Problem 5**
+
+NOTE: All plots should have appropriate titles and axis labels. If you need to use a calculated numerical answer in a subsequent analysis, you should store it and call it back when needed, not type the value by hand. If you store a calculated answer, be sure to print it as well so I can see it in your writeup.
+
+***
+In January 2007, Entertainment Weekly magazine featured a cover story about three Academy Award nominees for Best Actress: Meryl Streep, Judy Densch, and Helen Mirren. One primary focus of the article was how old these three women were, relative to previous winners, and the perceived Hollywood bias in favor of younger actresses. This discussion that persists in one form or another to this day. (data: [oscarages.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv))
+
+A) Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
+
+```{r prob5dataset}
+# Put your code here.
+```
+
+B) Use `filter` and a single `summarize` (with any other necessary functions) to compute and display five-number summaries, IQR, and the lower and upper fences for Best Actor and Best Actress winners prior to 2007.
+
+```{r prob6summaries}
+# Put your code here.
+```
+
+C) Create boxplots to compare the ages of Best Actor and Best Actress winners prior to 2007.
+
+```{r prob5boxplots}
+# Put your code here.
+```
+
+D) Which actress actually won the Best Actress Oscar in 2007? How old was she? For what movie did she win? Use the `filter` and `select` functions to find and display the answer, not visual inspection of the dataset.
+
+```{r prob5winner}
+# Put your code here.
+```
+
+F) Was the 2007 Best Actress winner an outlier compared to previous Best Actress winners? If she were a man, would she have been an outlier compared to previous Best Actor winners? Determine the answers using code, not visual inspection.
+
+```{r prob5outlier}
+# Put your code here.
+```
+
+G) In what way do your analyses appear to support an assertion of age bias againt women in Hollywood? Cite values of specific statistics and/or features of your boxplots in your discussion. 
+
+**ANSWER**: 
+
+
+### **Problem 6**
+
+NOTE: You do not need to label your plots here. If you store a calculated answer, be sure to print it as well.
+
+***
+A) Go to the Galton height data [description](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/galtonheightdata.html) and import the dataset. Use `glimpse` and `head` to display the dataset structure.
+
+```{r prob7dataset}
+# Put your code here.
+```
+
+B) Use `mutate` and `ifelse` or `case_when` to recode two variables: (1) `Gender` to "male" and female"; and (2)  `Height` so that all the female heights are multiplied by 1.08 while male heights stay the same.
+
+```{r prob7recode}
+# Put your code here.
+```
+
+C) Assess recoded height for normality using a density plot, ECDF plot, QQ plot, skewness and kurtosis. All plots should have a theoretical reference line for comparison. State your conclusion and how you made your decision.
+
+```{r prob7histogram}
+# Put your code here.
+```
+
+```{r prob7density}
+# Put your code here.
+```
+
+```{r prob7ecdf}
+# Put your code here.
+```
+
+```{r prob7qqplot}
+# Put your code here.
+```
+
+```{r prob7skewkurt}
+# Put your code here.
+```
+
+**ANSWER**:
+
+
+### Session Info
+
+```{r}
+sessionInfo()
+```
+
