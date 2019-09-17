@@ -1,5 +1,5 @@
 ---
-title: "Project 1--Programming and EDA"
+title: "Project 1--Basic Programming and EDA"
 author: "YOUR NAME HERE"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
@@ -209,6 +209,8 @@ C) Assess recoded height for normality using a density plot, ECDF plot, QQ plot,
 
 
 ### Session Info
+
+**Names of Collaborators**:
 
 ```{r}
 sessionInfo()
