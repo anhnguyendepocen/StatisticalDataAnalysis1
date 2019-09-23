@@ -85,9 +85,13 @@ Mathematically, the y-intercept $\beta_0$ and its estimate $b_0$ represent the v
 
 The intercept term may or may not have a useful interpretation in context, depending on whether $x$ = 0 is meaningful. 
 
-The intercept units are the same as the units of the $y$ variable.
+The units of measure for the intercept are the same as the units of measure for the $y$ variable.
 
-MORE ON SLOPE HERE TBA
+<hr>
+
+Slope is a rate of change; how many units of measure does the $\hat{y}$ value change when $x$ changes by one unit.
+
+Since slope is a rate ($\Delta y$ / $\Delta x$), the units of measure for slope are $y$ units of measure / $x$ units of measure.
 
 
 ## Are People Squares?
@@ -109,11 +113,9 @@ If Vitruvius is correct, what is the model's slope and y-intercept?
 
 <p style="text-align: center;">$armspan =$ _____ $+$ _____ $(height)$</p>
 
-
-
 What would the value of $\epsilon$ be if all people were perfect squares?
 
-Individual people are likely not perfect squares, but maybe they are squares *on average*, with some amount of random variation for each individual. Or, maybe there is a different relationship.
+Individual people are likely not perfect squares, but maybe they are squares *on average*, with some amount of random variation for each person. Or, maybe there is a different relationship.
 
 
 ## Anthropometric Data
@@ -270,6 +272,17 @@ square_model_table
 This output is a `tibble`. Why is this potentially useful to us? 
 
 
+## Accessing Results---Coefficients
+
+We can also print the results in a formatted Markdown version. It looks somewhat different in reports versus slides.
+
+```{r}
+get_regression_table(square_model, digits = 2, print = TRUE)
+```
+
+<br>The CIs help estimate the true values of the slope and intercept for the population versus just our data.
+
+
 ## Accessing Results---Fits and Residuals
 
 ```{r}
@@ -279,6 +292,8 @@ head(square_model_points)
 ```
 
 What are `height_hat` and `residual`?
+
+There is also a `digits` and `print` option for this function.
 
 
 ## Assessing Results---R^2^
@@ -292,16 +307,6 @@ $$0 \le R^2 \le 1$$
 For a deterministic relationship where $x$ is a perfect predictor of $y$, R^2^ = 1 (all variation explained).
 
 If $x$ and $y$ have no relationship with respect to the fitted model, R^2^ = 0 (no variation explained).
-
-
-## 
-
-```{r, fig.height = 4}
-ggplot(anthro_sample, aes(x = height, y = armspan)) +
-  geom_point() + 
-  geom_hline(yintercept = mean(anthro_sample$armspan)) +
-  coord_fixed(xlim = c(60, 80), ylim = c(60, 80))
-```
 
 
 ## Model Fit?
@@ -322,6 +327,19 @@ summary(square_model)$r.squared
 ```
 
 About `r round(100*summary(square_model)$r.squared)`% of the variability in people's armspans is explained by our model using height. 
+
+
+## Model Summaries
+
+There are additional summaries that help us interpret and make predictions using the fitted linear model.
+
+```{r}
+get_regression_summaries(square_model, digits = 2, print = TRUE)
+```
+
+<br>RMSE is the standard deviation of the model residuals, with n as the denominator and $\Sigma (y_i - \hat{y}_i)^2$ as the numerator.
+
+Sigma is an estimate of the standard deviation of the population errors ($\epsilon$), with denominator n - 2 (if there is one predictor).
 
 
 ## Parallel Slopes Model
@@ -352,10 +370,10 @@ ggplot(anthro_sample, aes(x = height, y = armspan, color = gender)) +
 ```{r}
 square_model_pll <- lm(armspan ~ height + gender, data = anthro_sample)
 
-square_model_pll
+get_regression_table(square_model_pll, print = TRUE)
 ```
 
-What are the equations of the two models?
+<br>What are the equations of the two models?
 
 model_F:
 
@@ -366,5 +384,4 @@ model_M:
 ```{r}
 summary(square_model_pll)
 ```
-
 
