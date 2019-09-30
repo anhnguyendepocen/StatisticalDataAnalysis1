@@ -1,7 +1,7 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Saturday, August 31, 2019 @ 01:05:51 PM'
+date: 'Updated: Monday, September 30, 2019 @ 05:29:52 PM'
 output: 
   html_document: 
     toc: true
@@ -296,6 +296,53 @@ OCT 08 is the halfway point!
 
 * Project 2 write-up
 
+***
+## Section 4: Sampling
+
+### Proficiencies
+
+* Sampling from vectors and datasets
+* Sampling with/without replacement
+* Sampling distributions using simulation
+* Explaining/using the Central Limit Theorem
+* Constructing and using confidence intervals
+
+### Explorations
+
+* MSRR Chapter 4. Sampling Distributions
+* MSRR Chapter 5. Introduction to Confidence Intervals
+* MSRR Chapter 7. More Confidence Intervals
+* MD [Chapter 7. Sampling](https://moderndive.com/7-sampling.html)
+* MD [Chapter 8. Bootstrapping and Confidence Intervals](https://moderndive.com/8-confidence-intervals.html)
+* Video: [Sampling Distributions: Introduction to the Concept](https://youtu.be/Zbw-YvELsaM) (~ 8 minutes)
+* Video: [The Sampling Distribution of the Sample Mean](https://youtu.be/q50GpTdFYyI) (~ 12 minutes)
+* Video: [Introduction to the Central Limit Theorem](https://youtu.be/Pujol1yC1_A) (~ 13 minutes)
+* Video: [Introduction to Confidence Intervals](https://youtu.be/27iSnzss2wM) (~ 7 minutes)
+* Video: [Introduction to the t Distribution](https://youtu.be/Uv6nGIgZMVw) (~ 9 minutes)
+
+### Week 09 (OCT 14)
+
+No class TUE, OCT 15 (Fall Break)
+
+#### In-Class Engagement
+
+* Sampling in `R` with and without replacement
+* Fundamentals of the Central Limit Theorem (CLT)
+
+#### Integrations (Due SUN @ 11pm)
+
+* DC [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
+
+### Week 10 (OCT 21)
+
+#### In-Class Engagement
+
+* Bootstrap percentile intervals
+* CLT-based confidence intervals
+
+#### Integrations (Due SUN @ 11pm)
+
+* DC [Foundations of Inference](https://www.datacamp.com/courses/foundations-of-inference)
 
 ***
-**SECOND HALF OF SCHEDULE TBA**
+**REMAINDER OF SCHEDULE TBA**
