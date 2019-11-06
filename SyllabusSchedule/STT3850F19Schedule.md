@@ -1,7 +1,7 @@
 ---
 title: "STT3850 Statistical Data Analysis 1<br>Fall 2019 Course Schedule"
 author: "Instructor: Jill E. Thomley (thomleyje@appstate.edu)"
-date: 'Updated: Monday, September 30, 2019 @ 05:29:52 PM'
+date: 'Updated: Tuesday, November 05, 2019 @ 07:49:31 PM'
 output: 
   html_document: 
     toc: true
@@ -22,8 +22,8 @@ output:
 <ul>
 <li>Project 1 --- SUN, SEP 22 @ 11pm</li>
 <li>Project 2 --- SUN, OCT 13 @ 11pm</li>
-<li>Project 3 --- SUN, NOV 24 @ 11pm</li>
-<li>Group Project --- WED, DEC 04 @ 11pm (Reading Day)</li>
+<li>Project 3 --- TUE, NOV 26 @ 11pm</li>
+<li><del>Group Project --- WED, DEC 04 @ 11pm (Reading Day)</del> (REMOVED)</li>
 <li>Final Exam for Section 103 --- TUE, DEC 10 @ 11am</li>
 <li>Final Exam for Section 104 --- THU, DEC 05 @ 02pm</li>
 <li>See schedule and AsULearn for DataCamp assessments.</li>
@@ -118,14 +118,6 @@ No class TUE, AUG 27 (Convocation)
 * DC [Intermediate `R`](https://www.datacamp.com/courses/intermediate-r)
 * Intermediate R Feedback Survey
 
-<div class="rmdnote">
-<ul>
-<li>Material in all subsequent sections and assessments rely heavily on the skills you will learn here. Gaining a reasonable amount of proficiency now will save you time later. Take good notes and practice!</li>
-<li>Check out <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a> for base <code>R</code> and the <code>R</code> Markdown Reference Guide.</li>
-</ul>
-</div>
-
-
 ***
 ## Section 2: Exploring (EDA)
 
@@ -194,17 +186,6 @@ No class TUE, AUG 27 (Convocation)
 * DC [Exploratory Data Analysis](https://www.datacamp.com/courses/exploratory-data-analysis)
 * Exploratory Data Analysis Feedback Survey
 
-<div class="rmdnote">
-<ul>
-<li>The <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> is &quot;an opinionated collection of R packages designed for data science&quot; that share a common philosophy for effective data manipulation, explorations and visualization. We will use <code>tidy</code> data concepts and packages throughout this course, especially <code>dplyr</code> and <code>ggplot2</code>.</li>
-<li>Check out <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a> for data transformation, data visualization, <code>R</code> Markdown, and more.</li>
-</ul>
-</div>
-
-
-*** 
-## Project 1
-
 ### Week 05 (SEP 16)
 
 #### In-Class Engagement
@@ -272,18 +253,6 @@ No class TUE, AUG 27 (Convocation)
 
 * Make sure you are all caught up on material!
 
-<div class="rmdnote">
-<ul>
-<li>Linear regression is one of the oldest statistical techniques; the name comes from an 1886 article by Francis Galton, &quot;Regression Towards Mediocrity in Hereditary Stature&quot;.</li>
-<li>Linear models are the foundation of many other types of statistical methods and have close connections to linear algebra, including manipulations of correlation matrices.</li>
-<li>The <code>moderndive</code> package includes many <strong>wrapper functions</strong> to help us extract useful information from the <code>lm</code> function output and format them for analysis and reporting.</li>
-</ul>
-</div>
-
-
-***
-## Project 2
-
 ### Week 08 (OCT 07)
 
 OCT 08 is the halfway point!
@@ -295,6 +264,7 @@ OCT 08 is the halfway point!
 #### Integrations (Due SUN @ 11pm)
 
 * Project 2 write-up
+
 
 ***
 ## Section 4: Sampling
@@ -344,5 +314,82 @@ No class TUE, OCT 15 (Fall Break)
 
 * DC [Foundations of Inference](https://www.datacamp.com/courses/foundations-of-inference)
 
+### Week 11 (OCT 28)
+
+#### In-Class Engagement
+
+* Bootstrap percentile intervals
+* CLT-based confidence intervals
+
+#### Integrations (Due SUN @ 11pm)
+
+* DC [Inference for Numerical Data](https://www.datacamp.com/courses/inference-for-numerical-data)
+
 ***
-**REMAINDER OF SCHEDULE TBA**
+## Section 5: Inferring
+
+### Explorations
+
+* Read MSRR Chapter 3. Introduction to Hypothesis Testing
+* Read MSRR Chapter 8. More Hypothesis Testing
+* Read MSRR Chapter 10. (Testing for) Categorical Data
+* MD [Chapter 8. Bootstrapping & Confidence Intervals](https://moderndive.com/8-confidence-intervals.html)
+* MD [Chapter 9. Hypothesis Testing](https://moderndive.com/9-hypothesis-testing.html)
+* Video: [An Introduction to Hypothesis Testing](https://youtu.be/tTeMYuS87oU) (~ 10 minutes)
+* Video: [What is a p-value?](https://youtu.be/UsU-O2Z1rAs) (~ 11 minutes)
+* Video: [Type I Errors, Type II Errors, and the Power of the Test](https://youtu.be/7mE-K_w1v90) (~ 8 minutes)
+* Video: [Inference for Two Means: Introduction](https://youtu.be/86ss6qOTfts) (~ 6 minutes)
+* Video: [The Sampling Distribution of the Difference in Sample Means](https://youtu.be/4HB-FL529ag) (~ 6 minutes)
+
+### Week 12 (NOV 04)
+
+#### In-Class Engagement
+
+* Hypothesis testing
+
+### Week 13 (NOV 11)
+
+#### In-Class Engagement
+
+* Hypothesis testing
+
+
+### Week 14 (NOV 18)
+
+#### In-Class Engagement
+
+* Hypothesis testing (TUE)
+* Work on Project 3 (WED, THU)
+
+### Week 15 (NOV 25)
+
+#### In-Class Engagement
+
+* Work on Project 3
+* No class WED, NOV 27 (Thanksgiving)  
+* No class THU, NOV 28 (Thanksgiving)
+
+#### Integrations (Due TUE @ 11pm)
+
+* Project 3 write-up
+
+### Week 16 (DEC 02)
+
+#### In-Class Engagement
+
+* Review for Final Exam
+* Last class day is TUE, DEC 03  
+* Reading Day is WED, DEC 04 
+
+
+***
+## Final Exam
+
+<div class="rmdnote">
+<ul>
+<li>Final Exam for Section 103 (TWR @ 12:30pm) --- TUE, DEC 10 @ 11am</li>
+<li>Final Exam for Section 104 (TWR @ 02:00pm) --- THU, DEC 05 @ 02pm</li>
+<li><a href="https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_fall_2019_exam_schedule.pdf">ASU Fall 2019 Exam Schedule</a></li>
+</ul>
+</div>
+

@@ -43,12 +43,12 @@ The only way to learn statistics is to **DO** statistics, which includes statist
 
 **ASSESSMENTS**
 
-* DataCamp (30%) 
-* Project 1 (15%)
-* Project 2 (15%)
-* Project 3 (15%)
-* Group Project (10%)
-* Final Exam (15%)
+* DataCamp ~~(30%)~~ (32%) 
+* Project 1 ~~(15%)~~ (17%)
+* Project 2 ~~(15%)~~ (17%)
+* Project 3 ~~(15%)~~ (17%)
+* ~~Group Project (10%)~~ (REMOVED, points redistributed)
+* Final Exam ~~(15%)~~ (17%)
 
 You **must pass** the cumulative final exam to pass the course. No exceptions.
 

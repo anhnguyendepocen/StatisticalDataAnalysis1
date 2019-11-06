@@ -20,8 +20,8 @@ output:
 * **MAJOR ASSESSMENTS / DUE DATES**
     * Project 1 --- SUN, SEP 22 @ 11pm
     * Project 2 --- SUN, OCT 13 @ 11pm
-    * Project 3 --- SUN, NOV 24 @ 11pm
-    * Group Project --- WED, DEC 04 @ 11pm (Reading Day)
+    * Project 3 --- TUE, NOV 26 @ 11pm
+    * ~~Group Project --- WED, DEC 04 @ 11pm (Reading Day)~~ (REMOVED)
     * Final Exam for Section 103 --- TUE, DEC 10 @ 11am
     * Final Exam for Section 104 --- THU, DEC 05 @ 02pm
     * See schedule and AsULearn for DataCamp assessments.
@@ -112,12 +112,6 @@ No class TUE, AUG 27 (Convocation)
 * DC [Intermediate `R`](https://www.datacamp.com/courses/intermediate-r)
 * Intermediate R Feedback Survey
 
-```{block, section01note, type='rmdnote'}
-* Material in all subsequent sections and assessments rely heavily on the skills you will learn here. Gaining a reasonable amount of proficiency now will save you time later. Take good notes and practice!
-* Check out [RStudio Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/) for base `R` and the `R` Markdown Reference Guide.
-```
-
-
 ***
 ## Section 2: Exploring (EDA)
 
@@ -186,15 +180,6 @@ No class TUE, AUG 27 (Convocation)
 * DC [Exploratory Data Analysis](https://www.datacamp.com/courses/exploratory-data-analysis)
 * Exploratory Data Analysis Feedback Survey
 
-```{block, section02note, type='rmdnote'}
-* The [`tidyverse`](https://www.tidyverse.org/) is "an opinionated collection of R packages designed for data science" that share a common philosophy for effective data manipulation, explorations and visualization. We will use `tidy` data concepts and packages throughout this course, especially `dplyr` and `ggplot2`.
-* Check out [RStudio Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/) for data transformation, data visualization, `R` Markdown, and more.
-```
-
-
-*** 
-## Project 1
-
 ### Week 05 (SEP 16)
 
 #### In-Class Engagement
@@ -262,16 +247,6 @@ No class TUE, AUG 27 (Convocation)
 
 * Make sure you are all caught up on material!
 
-```{block, section03note, type='rmdnote'}
-* Linear regression is one of the oldest statistical techniques; the name comes from an 1886 article by Francis Galton, "Regression Towards Mediocrity in Hereditary Stature". 
-* Linear models are the foundation of many other types of statistical methods and have close connections to linear algebra, including manipulations of correlation matrices.
-* The `moderndive` package includes many **wrapper functions** to help us extract useful information from the `lm` function output and format them for analysis and reporting. 
-```
-
-
-***
-## Project 2
-
 ### Week 08 (OCT 07)
 
 OCT 08 is the halfway point!
@@ -283,6 +258,7 @@ OCT 08 is the halfway point!
 #### Integrations (Due SUN @ 11pm)
 
 * Project 2 write-up
+
 
 ***
 ## Section 4: Sampling
@@ -332,5 +308,80 @@ No class TUE, OCT 15 (Fall Break)
 
 * DC [Foundations of Inference](https://www.datacamp.com/courses/foundations-of-inference)
 
+### Week 11 (OCT 28)
+
+#### In-Class Engagement
+
+* Bootstrap percentile intervals
+* CLT-based confidence intervals
+
+#### Integrations (Due SUN @ 11pm)
+
+* DC [Inference for Numerical Data](https://www.datacamp.com/courses/inference-for-numerical-data)
+
 ***
-**REMAINDER OF SCHEDULE TBA**
+## Section 5: Inferring
+
+### Explorations
+
+* Read MSRR Chapter 3. Introduction to Hypothesis Testing
+* Read MSRR Chapter 8. More Hypothesis Testing
+* Read MSRR Chapter 10. (Testing for) Categorical Data
+* MD [Chapter 8. Bootstrapping & Confidence Intervals](https://moderndive.com/8-confidence-intervals.html)
+* MD [Chapter 9. Hypothesis Testing](https://moderndive.com/9-hypothesis-testing.html)
+* Video: [An Introduction to Hypothesis Testing](https://youtu.be/tTeMYuS87oU) (~ 10 minutes)
+* Video: [What is a p-value?](https://youtu.be/UsU-O2Z1rAs) (~ 11 minutes)
+* Video: [Type I Errors, Type II Errors, and the Power of the Test](https://youtu.be/7mE-K_w1v90) (~ 8 minutes)
+* Video: [Inference for Two Means: Introduction](https://youtu.be/86ss6qOTfts) (~ 6 minutes)
+* Video: [The Sampling Distribution of the Difference in Sample Means](https://youtu.be/4HB-FL529ag) (~ 6 minutes)
+
+### Week 12 (NOV 04)
+
+#### In-Class Engagement
+
+* Hypothesis testing
+
+### Week 13 (NOV 11)
+
+#### In-Class Engagement
+
+* Hypothesis testing
+
+
+### Week 14 (NOV 18)
+
+#### In-Class Engagement
+
+* Hypothesis testing (TUE)
+* Work on Project 3 (WED, THU)
+
+### Week 15 (NOV 25)
+
+#### In-Class Engagement
+
+* Work on Project 3
+* No class WED, NOV 27 (Thanksgiving)  
+* No class THU, NOV 28 (Thanksgiving)
+
+#### Integrations (Due TUE @ 11pm)
+
+* Project 3 write-up
+
+### Week 16 (DEC 02)
+
+#### In-Class Engagement
+
+* Review for Final Exam
+* Last class day is TUE, DEC 03  
+* Reading Day is WED, DEC 04 
+
+
+***
+## Final Exam
+
+```{block, final, type='rmdnote'}
+* Final Exam for Section 103 (TWR @ 12:30pm) --- TUE, DEC 10 @ 11am
+* Final Exam for Section 104 (TWR @ 02:00pm) --- THU, DEC 05 @ 02pm
+* [ASU Fall 2019 Exam Schedule](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_fall_2019_exam_schedule.pdf)
+```
+
