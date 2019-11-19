@@ -1,0 +1,205 @@
+---
+title: "Project 4--Inferential Statistics"
+author: "YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globalopts, include = FALSE}
+library(knitr)
+opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+```
+
+### **Packages/Data**
+
+Load all packages and datasets here. Use `glimpse` to visualize the structure of each dataset.
+
+Packages Used
+
+```{r}
+
+```
+
+Fast Food Data
+
+```{r fastfooddata}
+
+```
+
+Smallpox Data
+
+```{r smallpoxdata}
+
+```
+
+MLB Salary Data
+
+```{r mlbsalarydata}
+
+```
+
+Vietnam Draft Data
+
+```{r}
+
+```
+
+**NOTE: Do not use `infer` or any other pre-packaged resampling packages/functions for these problems. Write your own sampling loops like we did in class (based on the MSRR textbook).**
+
+
+***
+### **Problem 1**
+
+Nutritionists recommend against eating fast food because it is high in sodium, saturated fat, trans fat, and cholesterol. Eating too much over a long period of time can lead to health problems such as high blood pressure, heart disease, and obesity. Many fast-food meals contain more than an entire day's worth of recommended calories! According to the [Cleveland Clinic](https://my.clevelandclinic.org/health/articles/11208-fat-what-you-need-to-know), a person eating the general 2000 calorie diet should have at most 22g of saturated fat per day. Use the [`fastfood2017.csv`](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/fastfood2017.csv) dataset to perform the following analysis.
+
+A) Create a summary to show the proportion of burgers with more than 22g of saturated fat and the number of data values used in that calculation.
+
+```{r}
+
+```
+
+B) The `fastfood2017` dataset contains only a sample of available fast food burgers. Create a 95% bootstrap percentile interval to estimate the true proportion of all fast food burgers that have more than 22g of saturated fat.
+
+```{r}
+
+```
+
+C) Assess your simulation results for normality using a density plot, a QQ plot, skewness value, and kurtosis value. Would it be reasonable to compute a traditional confidence interval for a proportion, assuming that this is also an independent random sample of fast food burgers? Explain.
+
+```{r}
+
+```
+
+**ANSWER:**
+
+D) According to the description, the burgers selected for inclusion in the dataset for the various restaurants were the smallest hamburger, the smallest cheeseburger, and some of the restaurant’s most well known larger burgers (e.g., Big Mac). Thus it is not a purely random sample from the population. How might this affect the bootstrap estimate?
+
+**ANSWER:** 
+
+
+***
+### **Problem 2**
+
+In the late 1700s, smallpox killed about one in four children born in London. Scientists knew that inoculations (i.e., vaccines) were effective in reducing mortality, but no one was sure how they worked. Doctors often prescribed tonics to prepare patients before vaccination. Dr. William Watson became the physician for a large London orphanage 1762. Administrators were concerned about rapid spread of disease in crowded conditions and ordered vaccinations for all of the children who lived there. Watson used this chance to investigate the effectiveness of vaccine pre-treatments. This is considered to be one of the first historical examples of the kind of research we now call a clinical trial. 
+
+In his first experiment, Watson divided thirty-one children into three groups. 
+
+* pre-vaccination treatment of mercury and jalap (a strong laxative/purgative)
+* pre-vaccination treatment of senna and syrup of roses (a mild laxative)
+* no pre-vaccination treatment (control group)
+
+Watson observed and counted the number of smallpox lesions that appeared on each child. In general, more pocks is a sign of a more severe infection and greater chance of mortality. The data from Watson's experiment can be found in the file [smallpox.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/smallpox.csv). (Note: It was perfectly acceptable to conduct experiments like this throughout much of human history, but in the present day this generally would be considered unethical, especially with children as subjects.)
+
+A) Filter the dataset to extract the data for the control and mercury and jalap groups in Watson's first experiment only. Then compute the mean and standard deviation of the number of pocks in each group, as well as the sample sizes. Finally create a boxplot to compare the distribution of pocks in the two groups. 
+
+```{r}
+
+```
+
+B) Conduct a permutation resampling test to determine whether the means of the control and senna/syrup of roses groups are different. Include the appropriate null and alternative hypotheses, the test statistic, a plot of the simulation results, the p-value, and your statistical decision about whether to reject Ho.
+
+```{r}
+
+```
+
+C) Statistically speaking, did the mercury and jalap pre-treatment make the smallpox vaccination significantly more effective, as measured by the number of pocks that appeared post-vaccination? How do you know? 
+
+**ANSWER:**
+
+D) Conduct a traditional t-test for the question in (B). Print the results and state your decision about whether to reject Ho.
+
+```{r}
+
+```
+
+E) Given the assumptions of the traditional two-sample t-test, is the p-value produced by the the `t.test` function reliable? Use evidence from your descriptive analysis and/or simulation to support your answer.
+
+**ANSWER:**
+
+
+***
+### **Problem 3**
+
+In 2013, the New York Yankees had the highest average team salary among all Major League Baseball (MLB) teams. However, was it statistically larger than the average salary of the rest of the teams in the league combined? Use the data in the file [mlb2013.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/mlb2013.csv) to test this hypothesis. (*Technically*, this data could be a population, but we can also consider it a sample from the possible salary structures for that season and thus prone to some sampling variability.)
+
+A) Use `mutate` to add a new variable to the dataset that identifies players according to whether they played for the New York Yankees (NYY) or one of the other teams (OTH). Then `summarize` mean, standard deviation, and n for salary in each group (NYY versus OTH). Also create a boxplot to compare salary distributions for the NYY and OTH groups. 
+
+```{r}
+
+```
+
+B) Conduct a permutation resampling test to determine whether the Yankees' mean was statistically larger than the mean of the rest of the league combined. Include the appropriate null and alternative hypotheses, the test statistic, a plot of the simulation results, the p-value, and your statistical decision about whether to reject Ho.
+
+```{r}
+
+```
+
+C) Compute a 95% bootstrap percentile interval to estimate the difference between the two group means. Also create a density plot to visualize the bootstrap sampling distribution.
+
+```{r}
+
+```
+
+D) Use the `t.test` function to compute a traditional 95% confidence interval for the difference between means.
+
+```{r}
+
+```
+
+E) Using the results of the permutation resampling test, can we conclude at the $\alpha$ = 0.05 level of significance that the Yankee's mean salary was statistically larger than mean salary of the rest of the teams combined? Is the estimated difference given by your bootstrap perentile interval large enough to have practical significance, in context? Why or why not?
+
+**ANSWER:** 
+
+F) Why are the results of the bootstrap percentile interval and the traditional t-based confidence interval noticeably different for this problem? Which is more reliable? Explain.
+
+**ANSWER:**
+
+
+***
+### **Problem 4**
+
+In December 1969, the U.S. Selective Service System conducted a lottery to a determine draft order for eligible men in the upcoming year. The 366 days of the year (including February 29) were written on small pieces of paper. Each was placed in a plastic capsule, then the capsules were hand-mixed in a shoebox and dumped in a glass jar. Capsules were pulled out one at a time. The first birthday chosen was September 14. Anyone born on that day in 1944 through 1950 was assigned draft lottery number 1 and they would be the first group of men called up. Overall, draft numbers 1 through 195 were called up to serve in 1970, in the order they were drawn. Some people asserted that the numbers were not randomly distributed through the year, in particular when you compared the first half and second half of the year. While any ordering of the 366 numbers is possible in a random process, we can test whether the process that produced the numbers appears to be fair or biased using permutation resampling to replicate a random process. The dataset [vietnamdraft.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv) contains draft numbers for several years. 
+
+A) Compute the proportion of birthdays in each half of the year that were drafted in 1970, as well as the number of days in each half of the year.
+
+```{r}
+
+```
+
+B) Conduct a permutation resampling test for the difference between the proportions to determine whether the process was fair or biased against birthdays in the second half of the year (i.e., were a greater proportion of birthdays in the second half of the year called up than in the first?). Write your own sampling loop like we did in class (based on the MSRR textbook).Include the appropriate null and alternative hypotheses, the test statistic, a plot of the simulation results, the p-value, and your statistical decision about whether to reject Ho.
+
+```{r}
+
+```
+
+C) Based on the permutation test, should we conclude that the process used to draw the draft numbers for 1970 was not sufficiently random? Explain.
+
+**ANSWER:**
+
+D) Selective Service changed the process by which the draft numbers were assigned during the 1970 drawing to increase the randomness and hopefully eliminate any sort of bias. Determine whether there was any statistically significant difference between the proportions of birthdays called up in the two halves of the year in 1971. Overall, fewer birthdays were called that year; the highest number was 125. Include the appropriate null and alternative hypotheses, the test statistic, a plot of the simulation results, the p-value, and your statistical decision about whether to reject Ho.
+
+```{r}
+
+```
+
+E) Based on the permutation test, should we conclude that the changes instituted by Selective Service resulted in a process that was sufficiently random? Explain.
+
+**ANSWER:**
+
+F) Why can we not create a bootstrap percentile interval to estimate the difference in proportions in this problem? (Hint: Consider the sampling method.)
+
+**ANSWER:**
+
+
+***
+### Session Info
+
+**Names of Collaborators**:
+
+```{r}
+sessionInfo()
+```
+
