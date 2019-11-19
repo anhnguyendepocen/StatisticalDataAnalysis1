@@ -99,7 +99,7 @@ A) Filter the dataset to extract the data for the control and mercury and jalap 
 
 ```
 
-B) Conduct a permutation resampling test to determine whether the means of the control and senna/syrup of roses groups are different. Include the appropriate null and alternative hypotheses, the test statistic, a plot of the simulation results, the p-value, and your statistical decision about whether to reject Ho.
+B) Conduct a permutation resampling test to determine whether the means of the control and mercury and jalap groups are different. Include the appropriate null and alternative hypotheses, the test statistic, a plot of the simulation results, the p-value, and your statistical decision about whether to reject Ho.
 
 ```{r}
 
