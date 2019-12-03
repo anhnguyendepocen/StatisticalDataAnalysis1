@@ -12,6 +12,8 @@ output:
 knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 ```
 
+## Review Topics
+
 ### Descriptive Statistics
 
 * Compare different groups using descriptive statistics
@@ -63,3 +65,19 @@ knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 
 * Be able to explain the function of a line or chunk of R code
 
+## Final Exam
+
+**Section 103 (class time TWR @ 12:30/01:00pm) — Your final exam is Tuesday, DEC 10 @ 11:00am in WA307B**<br>
+**Section 104 (class time TWR @ 02:00pm) — Your final exam is Thursday, DEC 05 @ 02:00pm in WA307B**
+
+1. I will give you up to 10 points of extra credit on the final exam if you prepare and submit a Markdown "cheat sheet" covering the above review topics.
+
+2. You will not be asked to code on the final exam. I will provide analyses and code, and you will answer questions about them.
+
+3. You will have the option to hand-write or type your answers to the final exam. Hand-written answers will be turned in to me, typewritten answers will be submitted online.
+
+4. **As per the syllabus, you must pass the final exam with 60% *before* any extra credit to pass the class! No exceptions.**
+
+
+***
+### Go forth and study~!
