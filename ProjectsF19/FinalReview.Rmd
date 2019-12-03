@@ -1,0 +1,65 @@
+---
+title: "Final Exam Review Topics"
+author: "Fall 2019 // Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globalopts, include = FALSE}
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+```
+
+### Descriptive Statistics
+
+* Compare different groups using descriptive statistics
+    + measures of center such as mean, median
+    + measures of variability such as sd, IQR
+* Interpret plots and determine distribution shape 
+    + histogram
+    + density plot
+    + ecdf plot
+* Interpret various assessments of normality
+    + density plot
+    + QQ plot
+    + skewness
+    + kurtosis
+* Detect outliers using boxplots and fences
+
+### Regression Modeling
+
+* Interpret correlations / correlation matrices
+* Interpret scatterplots (e.g., linearity, outliers)
+* Interpret regression coefficients in context
+* Interpret R^2^, residual standard error, MSE
+* Discuss whether a model is a good predictor
+
+### Central Limit Theorem
+
+* Be able to explain sampling distributions and the CLT
+* Explain whether the CLT applies in a given situation
+
+### Bootstrapping
+
+* Interpret the results of a bootstrap analysis
+    + shape of the bootstrap sampling distribution
+    + the meaning of a bootstrap percentile interval
+* Explain whether bootstrapping is appropriate
+
+### Hypothesis Testing
+
+* Write the appropriate statistical hypotheses
+* Determine the appropriate p-value in context
+* Make the appropriate statistical decision about Ho
+* Assess the shape of a permutation distribution
+* Compare permutation and traditional results
+* Explain whether a traditional test is valid in context
+* Interpret hypothesis testing results in context
+* Determine possibility of Type I or II errors
+
+### Programming
+
+* Be able to explain the function of a line or chunk of R code
+
