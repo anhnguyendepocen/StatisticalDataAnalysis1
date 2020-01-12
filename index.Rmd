@@ -7,13 +7,11 @@ output:
 
 <hr>
 
-* [Course Syllabus](./SyllabusSchedule/STT3850F19Syllabus.html)
+* [Course Syllabus](./SyllabusSchedule/STT3850S20Syllabus.html)
 
-* [Course Schedule](./SyllabusSchedule/STT3850F19Schedule.html)
+* [GitHub Repository](https://github.com/STAT-JET-ASU/StatisticalDataAnalysis1)
 
 * [Course Data Files](https://stat-jet-asu.github.io/Datasets/DatasetList.html)
-
-* [Course Repository](https://github.com/STAT-JET-ASU/StatisticalDataAnalysis1)
 
 * [ASU RStudio Server](https://mathr.math.appstate.edu)
 
