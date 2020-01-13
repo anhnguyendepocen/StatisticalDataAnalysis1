@@ -1,0 +1,167 @@
+---
+title: "Case Study: Semmelweis and Handwashing #1"
+author: "Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 4
+    toc_float: false
+    code_folding: hide
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+```{r loadpackages}
+library(tidyverse)
+library(kableExtra)
+```
+
+***
+### **Problem Overview**
+
+Postpartum infections, known puerperal fever or "childbed fever," are caused by bacteria invading the female reproductive tract following childbirth or miscarriage. Historically this has been a major cause of maternal mortality; some estimates suggest that the long-term rate has been about one maternal death for every 100 births, though this has varied widely across time and in different locations. Hungarian physician Dr. Ignaz Semmelweis (1818--1965), a physician at Vienna General Hospital, developed a theory that the cause of the often-high mortality rates he observed in the hospital's maternity clinics was contaminated hands among doctors who were delivering the babies. Louis Pasteur's formal experiments on the relationship between germs and disease would not be carried out until the early 1860s, so the idea of contamination being the culprit was still a novel idea. 
+
+We will analyze Semmelweis's data to help confirm or refute his theory. One dataset has information about women giving birth in two different clinics at Vienna General Hospital for the years 1841 to 1846. It includes total number of births for the year, as well as the total maternal deaths. The second dataset contains similar data by month from before and after Semmelweis instituted an antiseptic handwashing protocol at Clinic 1 near the end of May 1847---common sense now, but radical at the time! The mortality rate in each time interval is the number of maternal deaths per 100 births. 
+
+#### **Dataset 1**
+
+```{r readdataset1}
+data <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweisannualbyclinic.csv"
+by_clinic <- read_csv(file = url(data)) %>% 
+  mutate(mortality = 100 * deaths / births)
+```
+
+```{r exploredataset1}
+glimpse(by_clinic)
+head(by_clinic)
+```
+
+#### **Dataset 2**
+
+```{r readdataset2}
+handwashing_start <- as.Date("1847-06-01")
+data <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweismonthly.csv"
+by_month <- read_csv(file = url(data)) %>% 
+  mutate(mortality = 100 * deaths / births,
+         handwashing = ifelse(date < handwashing_start, "dirty", "washed"))
+```
+
+```{r exploreddataset2}
+glimpse(by_month)
+head(by_month)
+```
+
+***
+### **Identifying the Problem**
+
+Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room, or from one patient to another. Yikes! Semmelweis thought the medical students were transferring some kind of “morbid poison” from dissected cadavers to the maternity patients. 
+
+#### **Visualizing Mortality over Time** 
+
+```{r clinicsplot, fig.align = "center"}
+ggplot(by_clinic, aes(x = year, y = mortality, fill = clinic)) +
+  geom_bar(position = "dodge", stat = "identity", width = .75, color = "darkgray") +
+  scale_x_continuous(breaks = 1841:1846) +
+  scale_y_continuous(limits = c(0, 16), breaks = seq(from = 0, to = 16, by = 2)) +
+  scale_fill_brewer(palette = "Purples", labels = c("Clinic 1", "Clinic 2")) +
+  geom_text(aes(label = round(mortality, 1)), position = position_dodge(.8), vjust = -.5) +
+  labs(title = "Maternal Mortality at Vienna General Hospital from 1841 to 1846",
+       caption = "Note: Clinic 1 was served by medical students while Clinic 2 was served by midwife students.",
+       x = "year",
+       y = "number of maternal deaths per 100 births") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+```
+
+#### **Summarizing Mortality over Time**
+
+```{r}
+by_clinic_summaries <- by_clinic %>%
+  group_by(clinic) %>%
+  summarize(n = n(),
+            average = mean(mortality),
+            `std. dev.` = sd(mortality),
+            minimim = min(mortality),
+            maximum = max(mortality))
+
+kable(by_clinic_summaries, format = "html", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), 
+                font_size = 14,
+                full_width = FALSE) %>% 
+  add_header_above(c("", "Summaries of Mortality Across Years" = 5)) %>% 
+  footnote(general = "Clinic 1 served by medical students, Clinic 2 served by midwives.", 
+           general_title = "Note: ",
+           footnote_as_chunk = TRUE)
+```
+
+***
+### **Semmelweis's Intervention**
+
+Semmelweis introduced a handwashing protocol using chlorinated lime, which is now known to be a disinfectant. The descriptive analyses below compare maternal mortality rates in Clinic 1 before and after his protocol was introduced. (Note: We believe these are the data only for Clinic 1. Semmelweis's writing on the subject is somewhat ambiguous. For our purposes here, assume that is the case. We will discuss the implications more at a later date.)
+
+#### **Visualizing Mortality over Time**
+
+```{r interventionplot, fig.align = "center"}
+ggplot(by_month, aes(x = date, y = mortality, color = handwashing)) +
+  geom_line(size = 1) +
+  scale_y_continuous(limits = c(0, 35), breaks = seq(0, 35, 5)) +
+  geom_vline(xintercept = handwashing_start, linetype = "dashed") +
+  scale_color_brewer(palette = "Paired") +
+    labs(title = "Maternal Mortality Rates at Vienna General Hospital Clinic 1",
+       subtitle = "Maternal deaths per 100 births for each month from Jan 1841 to Mar 1849",
+       caption = "Note: Dashed line denotes the start of Semmelweis's handwashing protocol in late May 1847.",
+       y = "maternal mortality rate") +
+  theme_minimal()
+```
+
+#### **Summarizing Mortality over Time**
+
+```{r}
+by_month_summaries <- by_month %>%
+  group_by(handwashing) %>%
+  summarize(n = n(),
+            average = mean(mortality),
+            `std. dev.` = sd(mortality),
+            minimim = fivenum(mortality)[1],
+            Q1 = fivenum(mortality)[2],
+            median = fivenum(mortality)[3],
+            Q3 = fivenum(mortality)[4],
+            maximum = fivenum(mortality)[5],
+            lower = fivenum(mortality)[2] - 1.5 * IQR(mortality),
+            upper = fivenum(mortality)[4] + 1.5 * IQR(mortality))
+
+kable(by_month_summaries, format = "html", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), 
+                font_size = 14,
+                full_width = FALSE) %>% 
+  add_header_above(c("", "", "Moments" = 2, "Five-Number Summary" = 5, "Fences" = 2)) %>% 
+  footnote(general = "Dirty indicates months prior to Semmelweis's intervention, washed indicates months after.", 
+           general_title = "Note: ",
+           footnote_as_chunk = TRUE)
+```
+
+```{r interventionboxplot, fig.align = "center"}
+ggplot(by_month, aes(x = handwashing, y = mortality)) +
+  geom_boxplot(fill = c("#A6CEE3", "#1F78B4")) +
+  scale_y_continuous(breaks = seq(0, 36, 2)) +
+  geom_hline(yintercept = by_month_summaries$upper, 
+             linetype = "dashed", size = 1,
+             color = c("#A6CEE3", "#1F78B4")) +
+  labs(title = "Boxplots for Maternal Mortality Data",
+       subtitle = "dashed lines indicate upper fences for outliers",
+       x = "before and after Semmelweis instituted handwashing",
+       y = "maternal mortality rate") +
+  coord_flip() +
+  theme_minimal()
+```
+
+***
+```{r}
+sessionInfo()
+```
+
