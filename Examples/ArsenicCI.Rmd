@@ -18,73 +18,142 @@ library(tidyverse)
 ```
 
 ```{r}
-Bangladesh <- read.csv("http://sites.google.com/site/chiharahesterberg/data2/Bangladesh.csv")
+Bangladesh <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv")
 ```
+
 
 ### Descriptive Statistics
 
 ```{r}
 arsenic_summ <- Bangladesh %>% 
-  summarize(xbar  = mean(Arsenic),
-            s = sd(Arsenic))
+  summarize(n     = n(),
+            xbar  = mean(Arsenic),
+            v     = var(Arsenic),
+            s     = sd(Arsenic))
 
 print(arsenic_summ)
 
 ggplot(Bangladesh, aes(Arsenic)) + 
-  geom_histogram(bins = 15)
-
-ggplot(Bangladesh, aes(Arsenic)) + 
   geom_density()
 
-ggplot(Bangladesh, aes(x = 1, y = Arsenic)) + 
-  geom_boxplot()
+ggplot(Bangladesh, aes(y = Arsenic)) + 
+  geom_boxplot() +
+  coord_flip()
 
 ggplot(Bangladesh, aes(sample = Arsenic)) + 
   stat_qq() + 
   stat_qq_line()
-```
 
-```{r}
-# traditional confidence interval using formula
-```
-
-
-```{r}
-# traditional confidence interval using t.test
-
+mean(Arsenic <= 10)
 ```
 
 ```{r}
 Arsenic <- pull(Bangladesh, Arsenic)
-Arsenic <- Bangladesh$Arsenic
+n       <- length(Arsenic)
 
-n <- length(Arsenic)
-N <- 10^4
+sims <- 10^5
+arsenic_mean <- numeric(sims)  # we called this results before
 
-arsenic_mean <- numeric(N)
-
-for (i in 1:N)
-{
-  x <- sample(Arsenic, n, replace = TRUE)
-  arsenic_mean[i] <- mean(x)
+for (i in 1:sims) {
+  arsenic_mean[i] <- mean(sample(Arsenic, n, replace = TRUE))
 }
 
-ggplot() + 
-  geom_histogram(aes(arsenic_mean), bins = 15) + 
+ggplot(NULL, aes(x = arsenic_mean)) + 
+  geom_density(fill = "gray") + 
   labs(title = "Bootstrap distribution of means") + 
-  geom_vline(xintercept = mean(Arsenic), colour = "blue")
+  geom_vline(xintercept = mean(Arsenic), colour = "blue", linetype = "dashed")
 
-df <- data.frame(x = arsenic_mean)
-ggplot(df, aes(sample = x)) + 
+ggplot(NULL, aes(sample = arsenic_mean)) + 
   stat_qq() + 
-  stat_qq_line()
+  stat_qq_line(color = "red")
 
-mean(arsenic_mean)                 #bootstrap mean
-mean(arsenic_mean) - mean(Arsenic) #bias
-sd(arsenic_mean)                   #bootstrap SE
+mean(arsenic_mean)                 # bootstrap mean
+var(arsenic_mean)                  # bootstrap variance
+sd(arsenic_mean)                   # bootstrap SE
 
-sum(arsenic_mean > 161.3224) / N
-sum(arsenic_mean < 89.75262) / N
+# What fraction of the time did I get a mean <= 10?
+
+mean(arsenic_mean <= 10)
+
+
+
+# Where is the middle 95% of possible means? 
+
+quantile(arsenic_mean, c(.025, .975))
+
+ggplot(NULL, aes(x = arsenic_mean)) + 
+  geom_density(fill = "gray") + 
+  labs(title = "Bootstrap distribution of means") + 
+  geom_vline(xintercept = mean(Arsenic), colour = "blue", linetype = "dashed")
+
+library(moments)
+skewness(arsenic_mean)
+kurtosis(arsenic_mean)
 ```
+
+
+```{r}
+arsenic_summ <- Bangladesh %>% 
+  summarize(n     = n(),
+            prop  = mean(Arsenic > 10))
+
+print(arsenic_summ)
 ```
+
+```{r}
+Arsenic <- pull(Bangladesh, Arsenic)
+n       <- length(Arsenic)
+
+sims <- 10^5
+arsenic_prop <- numeric(sims)  # change arsenic_mean to arsenic_prop
+
+for (i in 1:sims) {
+  arsenic_prop[i] <- mean(sample(Arsenic, n, replace = TRUE) > 10)
+}
+
+ggplot(NULL, aes(x = arsenic_prop)) + 
+  geom_density(fill = "gray") + 
+  labs(title = "Bootstrap distribution of means") + 
+  geom_vline(xintercept = mean(Arsenic > 10), colour = "blue", linetype = "dashed")
+
+ggplot(NULL, aes(sample = arsenic_prop)) + 
+  stat_qq() + 
+  stat_qq_line(color = "red")
+
+mean(arsenic_prop)                 # bootstrap mean
+var(arsenic_prop)                  # bootstrap variance
+sd(arsenic_prop)                   # bootstrap SE
+
+# Where is the middle 95% of possible means? 
+
+quantile(arsenic_prop, c(.025, .975))
+
+ggplot(NULL, aes(x = arsenic_prop)) + 
+  geom_density(fill = "gray") + 
+  labs(title = "Bootstrap distribution of proportions") + 
+  geom_vline(xintercept = mean(Arsenic > 10), colour = "blue", linetype = "dashed") +
+  geom_vline(xintercept = quantile(arsenic_prop, c(.025, .975)), color = "red") +
+  geom_vline(xintercept = quantile(arsenic_prop, c(.005, .995)), color = "purple")
+```
+
+```{r}
+t.test(Bangladesh$Arsenic)
+
+phat <- 0.5756
+n    <- 271
+
+phat - 1.96 * sqrt(phat*(1 - phat)/n)
+phat + 1.96 * sqrt(phat*(1 - phat)/n)
+```
+
+
+
+
+
+
+
+
+
+
+
 

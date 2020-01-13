@@ -1,0 +1,182 @@
+---
+title: "Spruce Example"
+subtitle: "Permutation Resampling Hypothesis Test"
+author: "Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, comment = "")
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+spruce <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Spruce.csv"))
+head(spruce)
+```
+
+### Question: Are the heights of trees in the Fertilizer categories the same at the start?
+
+#### Descriptives
+
+```{r}
+stats <- spruce %>% 
+  filter(!is.na(Height0)) %>% 
+  group_by(Fertilizer) %>% 
+  summarize(xbar = mean(Height0),
+            stdv = sd(Height0),
+            n    = n())
+
+print.data.frame(stats)
+
+ggplot(spruce, aes(x = Fertilizer, y = Height0)) +
+  geom_boxplot() +
+  coord_flip()
+
+ggplot(spruce, aes(x = Height0, color = Fertilizer)) +
+  geom_density()
+
+ggplot(spruce, aes(sample = Height0, color = Fertilizer)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+<hr>
+
+#### Null and Alternative Hypotheses
+
+$$H_0: \mu_F = \mu_NF \rightarrow \mu_F - \mu_NF = 0$$
+
+$$H_a: \mu_F \neq \mu_NF \rightarrow \mu_F - \mu_NF \neq 0$$
+
+#### Permutation Testing
+
+```{r}
+teststat <- stats$xbar[1] - stats$xbar[2]
+teststat
+```
+
+```{r}
+height0 <- spruce %>% filter(!is.na(Height0)) %>% pull(Height0)
+
+total_n <- length(height0)
+group_n <- stats$n[1]  
+
+alpha <- .05
+
+sims <- 10^5 - 1
+
+randstat <- numeric(sims)
+
+for (i in 1:sims) {
+  index <- sample(total_n, group_n)
+  randstat[i] <- mean(height0[index]) - mean(height0[-index])
+}
+
+ggplot(NULL, aes(x = randstat)) +
+  geom_histogram(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = teststat, color = "blue", linetype = "dashed") +
+  labs(title = "Permutation Resampling Distribution for Test Statistic",
+       subtitle = "vertical dashed line indicates the observed value of the test statistic") +
+  theme_classic()
+```
+
+#### Two-Tailed P-Value
+
+$$H_a: \mu_F \neq \mu_NF \rightarrow \mu_F - \mu_NF \neq 0$$
+
+```{r}
+pval_upper <- (sum(randstat >= teststat) + 1) / (sims + 1)
+pval_lower <- (sum(randstat <= teststat) + 1) / (sims + 1)
+pval_2side <- 2 * min(pval_lower, pval_upper)
+decision <- ifelse(pval_2side <= alpha, "reject the null hypothesis", "not reject the null hypothesis")
+pval_2side
+decision
+```
+
+
+### Question: Are fertilized trees significantly taller at the end of the experiment?
+
+#### Descriptives
+
+```{r}
+stats <- spruce %>% 
+  filter(!is.na(Height5)) %>% 
+  group_by(Fertilizer) %>% 
+  summarize(xbar = mean(Height5),
+            stdv = sd(Height5),
+            n    = n())
+
+print.data.frame(stats)
+
+ggplot(spruce, aes(x = Fertilizer, y = Height5)) +
+  geom_boxplot() +
+  coord_flip()
+
+ggplot(spruce, aes(x = Height5, color = Fertilizer)) +
+  geom_density()
+
+ggplot(spruce, aes(sample = Height5, color = Fertilizer)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+<hr>
+
+#### Null and Alternative Hypotheses
+
+$$H_0: \mu_F = \mu_NF \rightarrow \mu_F - \mu_NF = 0$$
+
+$$H_a: \mu_F > \mu_NF \rightarrow \mu_F - \mu_NF > 0$$
+
+#### Permutation Testing
+
+```{r}
+teststat <- stats$xbar[1] - stats$xbar[2]
+teststat
+```
+
+```{r}
+height5 <- spruce %>% filter(!is.na(Height5)) %>% pull(Height5)
+
+total_n <- length(height5)
+group_n <- stats$n[1]  
+
+alpha <- .05
+
+sims <- 10^5 - 1
+
+randstat <- numeric(sims)
+
+for (i in 1:sims) {
+  index <- sample(total_n, group_n)
+  randstat[i] <- mean(height5[index]) - mean(height5[-index])
+}
+
+ggplot(NULL, aes(x = randstat)) +
+  geom_histogram(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = teststat, color = "blue", linetype = "dashed") +
+  labs(title = "Permutation Resampling Distribution for Test Statistic",
+       subtitle = "vertical dashed line indicates the observed value of the test statistic") +
+  theme_classic()
+```
+
+#### Upper-Tailed P-Value
+
+$$H_a: \mu_F > \mu_NF \rightarrow \mu_F - \mu_NF > 0$$
+
+```{r}
+pval_upper <- (sum(randstat >= teststat) + 1) / (sims + 1)
+decision <- ifelse(pval_upper <= alpha, "reject the null hypothesis", "not reject the null hypothesis")
+pval_upper
+decision
+```
+
+

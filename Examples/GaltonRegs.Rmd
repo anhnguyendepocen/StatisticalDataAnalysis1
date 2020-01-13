@@ -1,0 +1,55 @@
+---
+title: "Untitled"
+author: "Jill Thomley"
+date: "10/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(moderndive)
+
+galton <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv"))
+
+galton <- galton %>% 
+  mutate(GenderR = case_when(Gender == "M" ~ "male",
+                             Gender == "F" ~ "female"),
+         HeightR = case_when(GenderR == "male" ~ Height,
+                             GenderR == "female" ~ Height * 1.08),
+         MidHeight = (Mother + Father)/2) %>% 
+  select(Father, Mother, MidHeight, Gender, GenderR, Height, HeightR)
+
+```
+
+### Model 1
+
+```{r}
+ggplot(galton, aes(x = MidHeight, y = Height)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+summary(lm(Height ~ MidHeight, data = galton))
+```
+
+### Model 2
+
+```{r}
+ggplot(galton, aes(x = MidHeight, y = HeightR)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+summary(lm(HeightR ~ MidHeight, data = galton))
+```
+
+### Model 3
+
+```{r}
+ggplot(galton, aes(x = MidHeight, y = Height, color = GenderR)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+summary(lm(Height ~ MidHeight + Gender, data = galton))
+```
+

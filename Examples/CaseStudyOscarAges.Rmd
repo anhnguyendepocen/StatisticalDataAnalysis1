@@ -1,0 +1,183 @@
+---
+title: "Oscar Winner Ages Case Study"
+author: "Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globalopts, include = FALSE}
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+```
+
+```{r packages}
+library(tidyverse)
+library(kableExtra)
+library(ggthemes)
+```
+
+```{r dataset}
+oscar <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv")
+glimpse(oscar)
+head(oscar)
+```
+
+In January 2007, Entertainment Weekly magazine featured a cover story about three Academy Award nominees for Best Actress: Meryl Streep, Judy Densch, and Helen Mirren. One primary focus of the article was how old these three women were, relative to previous winners, and the perceived Hollywood bias in favor of younger actresses. This discussion that persists in one form or another to this day. (data: [oscarages.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv))
+
+A) Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
+
+```{r prob5dataset}
+
+```
+
+B) Use `filter` and a single `summarize` (with any other necessary functions) to compute and display five-number summaries, IQR, and the lower and upper fences for Best Actor and Best Actress winners prior to 2007.
+
+```{r prob6summaries}
+oscarpre2007 <- oscar %>% 
+  filter(ceremony < 2007, category %in% c("Best Actor", "Best Actress"))
+
+agesumms <- oscarpre2007 %>% 
+  group_by(category) %>% 
+  summarize(minimum = fivenum(age)[1],
+            Q1          = fivenum(age)[2],
+            median      = fivenum(age)[3],
+            Q3          = fivenum(age)[4],
+            maximum     = fivenum(age)[5],
+            iqr         = IQR(age),
+            lowerfence  = Q1 - 1.5*iqr,
+            upperfence  = Q3 + 1.5*iqr)
+
+# https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+kable(agesumms, format = "html", escape = FALSE, align = c("l", rep("c", times = 7))) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+C) Create boxplots to compare the ages of Best Actor and Best Actress winners prior to 2007.
+
+```{r prob5boxplots}
+# http://bconnelly.net/posts/creating_colorblind-friendly_figures/
+# https://i.stack.imgur.com/eddZp.png 
+# https://www.color-blindness.com/coblis-color-blindness-simulator/
+
+ggplot(oscarpre2007, aes(x = category, y = age)) +
+  geom_boxplot(fill = c("#66C2A5", "#8DA0CB"), 
+               outlier.colour = "#505050",
+               outlier.size = 3, 
+               outlier.alpha = 0.5) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Award Category",
+       y = "Age (years)") +
+  scale_y_continuous(breaks = seq(20, 85, 5)) +
+  theme_linedraw() +
+  coord_flip()
+```
+
+D) Which actress actually won the Best Actress Oscar in 2007? How old was she? For what movie did she win? Use the `filter` and `select` functions to find and display the answer, not visual inspection of the dataset.
+
+```{r prob5winner}
+actresswinner2007 <- oscar %>% 
+  filter(ceremony == 2007, category == "Best Actress") %>% 
+  select(name, age, title)
+
+actresswinner2007
+```
+
+F) Was the 2007 Best Actress winner an outlier compared to previous Best Actress winners? If she were a man, would she have been an outlier compared to previous Best Actor winners? Determine the answers using code, not visual inspection.
+
+```{r prob5outlier}
+actresswinner2007$age > agesumms$upperfence
+
+agesumms %>% select(category, upperfence) %>% mutate(IsHelenMirrenOutlier = actresswinner2007$age > upperfence)
+```
+
+G) In what way do your analyses appear to support an assertion of age bias againt women in Hollywood? Cite values of specific statistics and/or features of your boxplots in your discussion. 
+
+**ANSWER**: Looking at the five number summary, for all values except the maximum, the Best Actor statistics are 8-10 years larger than the Best Actress statistics. This is also true of the largest points that are not outliers, which can be seen in the boxplot. The fences show a similar pattern. A Best Actor less than 21 would be unusual, but a Best Actress winner would have to be a pre-teen (11 years old) to be unusually young. The upper fence for Best Actors is 65, roughly the historical retirement age in the United States. However, the cutoff for Best Actress is a full decade younger. Further, the minimum for Best Actors is larger than Q1 for Best Actresses, which means at least 25% of the Best Actress winners were younger than the youngest Best Actor winner. Overall, the spread of the two groups is similar (IQR = 11), but the distribution of Best Actress ages is shifted down a full decade, with a handful of older outliers.
+
+```{r}
+# not required, but these are the cases that are outliers
+
+oscarpre2007 %>% filter((category == "Best Actress" & age > 55) |
+                        (category == "Best Actor" & age > 65))
+```
+
+
+
+### **Problem 6**
+
+NOTE: You do not need to label your plots here. If you store a calculated answer, be sure to print it as well.
+
+***
+A) Go to the Galton height data [description](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/galtonheightdata.html) and import the dataset. Use `glimpse` and `head` to display the dataset structure.
+
+```{r prob7dataset}
+galton <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv"))
+glimpse(galton)
+head(galton)
+```
+
+B) Use `mutate` and `ifelse` or `case_when` to recode two variables: (1) `Gender` to "male" and female"; and (2)  `Height` so that all the female heights are multiplied by 1.08 while male heights stay the same.
+
+```{r prob7recode}
+# select used after the mutate is optional, done here for visualization
+galton <- galton %>% 
+  mutate(GenderR = case_when(Gender == "M" ~ "male",
+                             Gender == "F" ~ "female"),
+         HeightR = case_when(GenderR == "male" ~ Height,
+                             GenderR == "female" ~ Height * 1.08)) %>% 
+  select(Family, Father, Mother, Gender, GenderR, Height, HeightR, Kids)
+head(galton)
+```
+
+C) Assess recoded height for normality using a density plot, ECDF plot, QQ plot, skewness and kurtosis. All plots should have a theoretical reference line for comparison. State your conclusion and how you made your decision.
+
+```{r prob7density}
+ht_stats <- galton %>% 
+  summarize(xbar = mean(HeightR), stdv = sd(HeightR))
+ht_stats
+
+ggplot(galton, aes(x = HeightR)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(ht_stats$xbar, ht_stats$stdv),   
+                color = "red")
+```
+
+```{r prob7ecdf}
+ggplot(galton, aes(x = HeightR)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(ht_stats$xbar, ht_stats$stdv), 
+                color = "red")
+```
+
+```{r prob7qqplot}
+ggplot(galton, aes(sample = HeightR)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+```{r prob7skewkurt}
+library(moments)
+skewK <- tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+                theory = c(0, 3, 0),
+                data   = round(c(skewness(galton$HeightR), 
+                                 kurtosis(galton$HeightR), 
+                                 kurtosis(galton$HeightR) - 3), 
+                               2))
+print.data.frame(skewK, row.names = FALSE)
+```
+
+**ANSWER**: The density plot shows that the data distribution is roughly symmetric and bell-shaped, with the primary deviation from normality being a slightly off-center peak. This is supported by a skewness value that is very near zero and a kurtosis that is a only a little larger than the normal distribution's theoretical value of 3. The ECDF plot does not vary too far from the normal distribution CDF, and the QQ plot is a quite linear with no systematic deviation from the normal reference line. It is fair to say these data are approximately normally distributed, with deviations being explained by sampling variability.
+
+
+### Session Info
+
+**Names of Collaborators**: Me, Myself, and I :)
+
+```{r}
+sessionInfo()
+```
+

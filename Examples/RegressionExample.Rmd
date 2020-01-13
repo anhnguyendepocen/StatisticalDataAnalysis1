@@ -1,0 +1,106 @@
+---
+title: "Untitled"
+author: "Jill Thomley"
+date: "10/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+lego <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/lego816.csv"))
+
+farm <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/farmpop2.csv"))
+
+library(dplyr)
+library(ggplot2)
+library(moderndive)
+```
+
+```{r}
+ggplot(lego, aes(x = pieces, y = price)) +
+  geom_point()
+```
+
+```{r}
+ggplot(lego, aes(x = pieces, y = price)) +
+  geom_point() +
+  geom_smooth(method = lm)
+```
+
+```{r}
+pricemodel <- lm(price ~ pieces, data = lego)
+summary(pricemodel)
+```
+
+```{r}
+get_regression_table(pricemodel, digits = 3, print = TRUE)
+```
+
+```{r}
+get_regression_summaries(pricemodel, digits = 3, print = TRUE)
+```
+
+```{r}
+points <- get_regression_points(pricemodel)
+head(points)
+```
+
+```{r}
+setpieces <- data.frame(pieces = c(100, 500, 1000, 1500))
+setpieces
+
+newpred <- get_regression_points(pricemodel, 
+                                 newdata = setpieces)
+newpred
+```
+
+```{r}
+lego %>% filter(pieces > 3500)
+
+lego2 <- lego %>% filter(pieces < 3500)
+```
+
+
+
+
+
+
+
+
+```{r}
+ggplot(lego2, aes(x = pieces, y = price)) +
+  geom_point() +
+  geom_smooth(method = lm)
+```
+
+```{r}
+pricemodel2 <- lm(price ~ pieces, data = lego2)
+summary(pricemodel2)
+```
+
+```{r}
+lego2points <- get_regression_points(pricemodel2)
+
+ggplot(lego2points, aes(x = residual)) +
+  geom_density()
+
+library(moments)
+skewness(lego2points$residual)
+kurtosis(lego2points$residual)
+```
+
+```{r}
+
+
+ggplot(farm, aes(x = year, y = pct_labor_force)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+summary(lm(pct_labor_force ~ year, data = farm))
+```
+
+
+

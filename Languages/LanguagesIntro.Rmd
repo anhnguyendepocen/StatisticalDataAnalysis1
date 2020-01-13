@@ -1,0 +1,334 @@
+---
+title: "TBA"
+author: "TBA // Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 3
+    toc_float: false
+    theme: yeti
+    highlight: textmate
+---
+
+***
+```{r globalopts, include = FALSE}
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE, echo = FALSE)
+library(tidyverse)
+library(moderndive)
+library(moments)
+library(scales)
+```
+
+## Popularity of Programming Languages
+
+### The Dataset
+
+How can we tell what programming languages are currently most widely used, as well as which languages seem to be growing in popularity or fading over time? One source of data is the programming question-and-answer site Stack Overflow. Each question has a tag or tags that describe its topic(s) and are searchable by users. For example, there is a tag for languages like `R` or Python, as well as for packages like `ggplot2` or `pandas`. By analyzing data on the number of questions tagged for a language, we can get some sense of how many people might be using it. Individuals can access data about Stack Overflow from the Stack Exchange Data Explorer. The rows of the dataset contain frequency counts for individual question tags by year across several years (2008--2018), as well as the total count of all tags for the given year. 
+
+```{r out.width = "50%", fig.align = "center", echo = FALSE}
+knitr::include_graphics("tags.png")
+```
+
+A Look at the Data
+
+```{r}
+by_tag_year <- read_csv("by_tag_year.csv")
+by_tag_year
+```
+
+### Most Common Question Tags
+
+```{r}
+top_25_tags <- by_tag_year %>%
+  group_by(tag) %>%
+  summarize(tag_total = sum(number),
+            years_total = sum(year_total),
+            fraction = tag_total / years_total) %>%
+  arrange(desc(tag_total)) %>% 
+  head(n = 25)
+
+ggplot(top_25_tags, aes(x = reorder(tag, fraction), y = fraction)) +
+  geom_bar(stat = "identity", width = .5, color = "darkgray", fill = "#7570B3") +
+  scale_y_continuous(breaks = seq(0, .15, .01)) +
+  labs(title = "Overall Top 25 Question Tags on Stack Overflow for Years 2008-2018",
+       subtitle = "Note: There were a total of 4080 distinct question tags used during this 11-year period.",
+       x = "question tag",
+       y = "relative frequency of tag as a fraction of all tags for the observed period") +
+  coord_flip() +
+  theme_minimal()
+```
+
+```{r}
+highest_tags <- head(top_25_tags$tag, n = 6)
+
+by_tag_top_5 <- by_tag_year %>% 
+  filter(tag %in% highest_tags) %>% 
+  mutate(fraction = number / year_total)
+
+ggplot(by_tag_top_5, aes(x = year, y = fraction, fill = tag)) +
+  geom_bar(stat = "identity", width = .5, color = "gray") +
+  scale_x_continuous(breaks = 2008:2018) +
+  scale_y_continuous(breaks = seq(0, .15, .02)) +
+  scale_fill_brewer(palette = "Set2") +
+  facet_wrap( ~ tag) +
+  labs(title = "Overall Top 6 Question Tags on Stack Overflow for Years 2008-2018",
+       subtitle = "Yearly fractions for the six tags that were found to have the largest overall frequencies",
+       x = "year",
+       y = "fraction of all tags for a given year") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none")
+```
+
+### Tags for `R`, `dplyr`, and `ggplot2`
+
+How has the occurrance of the `R` tag and the two most common `tidyverse` packages changed over time? Can we model this increase using regression analysis?
+
+```{r}
+by_tag_year_rdg <- by_tag_year %>% 
+  filter(tag %in% c("r", "dplyr", "ggplot2")) %>% 
+  mutate(percent = 100 * number / year_total) 
+```
+
+```{r}
+ggplot(by_tag_year_rdg, aes(x = year, y = percent, color = tag)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_x_continuous(breaks = 2008:2018) +
+  scale_y_continuous(limits = c(-0.25, 3), label = unit_format(unit = "%", digits = 2)) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(title = "Questions on Stack Overflow with R, dplyr, or ggplot2 Tags",
+       y = "percent of all tags in a given year") +
+  theme_minimal()
+```
+
+```{r}
+by_tag_year_r <- by_tag_year %>% 
+  filter(tag  == "r") %>% 
+  mutate(percent = 100 * number / year_total) 
+```
+
+Linear Regression Model for `R` Tag Only
+
+```{r}
+growthr <- lm(percent ~ year, data = by_tag_year_r)
+summary(growthr)
+```
+
+Predictions for Years 2020 and 2030
+
+```{r}
+get_regression_points(growthr, newdata = data.frame(year = c(2020, 2030)), print = TRUE)
+```
+
+***
+## The Importance of Good Handwashing
+
+### The Datasets
+
+Postpartum infections, known puerperal fever or "childbed fever," are caused by bacteria invading the female reproductive tract following childbirth or miscarriage. Historically it has been a major cause of maternal mortality and it still impacts poorer regions. Hungarian physician Dr. Ignaz Semmelweis (1818--1965), a physician at Vienna General Hospital, pioneered antiseptic procedures to try to prevent such infections. He theorized that the cause was contaminated hands among doctors delivering the babies. The concept of germs were not known at the time, and so routine handwashing before procedures was uncommon. We will analyze Semmelweis's data to help confirm or refute his theory. One dataset has information about women giving birth in two different clinics at Vienna General Hospital for the years 1841 to 1846. It includes total number of births for the year, as well as the total maternal deaths. The second dataset contains similar data by month from before and after Semmelweis instituted an antiseptic handwashing protocol at Clinic 1 near the end of May 1847---common sense now, but radical at the time! The mortality rate in each time interval is the number of maternal deaths per 100 births. 
+
+```{r}
+yearly_deaths_by_clinic <- read_csv("yearly_deaths_by_clinic.csv") %>% 
+  mutate(mortality_rate = 100 * deaths / births)
+glimpse(yearly_deaths_by_clinic)
+```
+
+```{r, echo = TRUE}
+# CODE CHUNK #1
+
+handwashing_start = as.Date("1847-06-01")
+
+monthly_deaths <- read_csv("monthly_deaths.csv") %>% 
+  mutate(mortality_rate = 100 * deaths / births,
+         handwashing = ifelse(date < handwashing_start, "dirty", "washed"))
+glimpse(monthly_deaths)
+```
+
+### Identifying the Problem
+
+Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room. Yikes! Semmelweis thought medical students were transferring some kind of "morbid poison" from dissected cadavers to the maternity patients.
+
+```{r}
+ggplot(yearly_deaths_by_clinic, aes(x = year, y = mortality_rate, fill = clinic)) +
+  geom_col(position = "dodge", width = .75) +
+  scale_x_continuous(breaks = 1841:1846) +
+  scale_fill_brewer(palette = "Set2") +
+  geom_text(aes(label = round(mortality_rate, 2)), position = position_dodge(.8), vjust = -.5) +
+  labs(title = "Maternal Mortality Rates at Vienna General Hospital 1841-1946",
+       subtitle = "Rate is number of maternal deaths per 100 births in each of the indicated years",
+       caption = "Note: Clinic 1 was served by medical students while Clinic 2 was served by midwife students.",
+       y = "maternal mortality rate") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+```
+
+```{r}
+yearly_deaths_by_clinic %>% 
+  group_by(clinic) %>% 
+  summarize(xbar = mean(mortality_rate),
+            stdv = sd(mortality_rate),
+            n    = n())
+```
+
+### Semmelweis's Intervention
+
+Semmelweis introduced a handwashing protocol using chlorinated lime, which is now known to be a disinfectant. The descriptive analyses below compare maternal mortality rates in Clinic 1 before and after his protocol was introduced.
+
+```{r}
+ggplot(monthly_deaths, aes(x = date, y = mortality_rate, color = handwashing)) +
+  geom_line(size = 1.25) +
+  scale_y_continuous(breaks = seq(0, 35, 5), limits = c(0, 35)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_vline(xintercept = handwashing_start, linetype = "dashed") +
+  labs(title = "Maternal Mortality Rates at Vienna General Hospital Clinic 1",
+       subtitle = "Maternal deaths per 100 births for each month from Jan 1841 to Mar 1849",
+       caption = "Note: Dashed line denotes the start of Semmelweis's handwashing protocol in late May 1847.",
+       y = "maternal mortality rate") +
+  theme_minimal()
+```
+
+```{r}
+summaries <- monthly_deaths %>% 
+  group_by(handwashing) %>% 
+  summarize(xbar = mean(mortality_rate),
+            stdv = sd(mortality_rate),
+            n    = n(),
+            lower_fence  = fivenum(mortality_rate)[2] - 1.5 * IQR(mortality_rate),
+            upper_fence  = fivenum(mortality_rate)[4] + 1.5 * IQR(mortality_rate))
+summaries
+```
+
+```{r}
+ggplot(monthly_deaths, aes(x = handwashing, y = mortality_rate)) +
+  geom_boxplot(fill = c("#A6CEE3", "#1F78B4")) +
+  scale_y_continuous(breaks = seq(0, 36, 2)) +
+  labs(title = "Boxplots for Maternal Mortality Data",
+       x = "before or after handwashing was instituted",
+       y = "maternal mortality rate") +
+  coord_flip() +
+  theme_minimal()
+```
+
+```{r}
+ggplot(monthly_deaths, aes(sample = mortality_rate, color = handwashing)) +
+  stat_qq_line(color = "black") +
+  stat_qq() +
+  facet_wrap( ~ handwashing) +
+  scale_color_brewer(palette = "Paired") +
+  labs(title = "Normal Quantile-Quantile Plots for Maternal Mortality Data",
+       x = "theoretical",
+       y = "sample") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+
+### Does Handwashing Reduce Mortality?
+
+The goal of handwashing was to reduce maternal mortality. On average, were the rates of maternal mortality significantly lower after the handwashing protocol was introduced? The permutation test below seeks to answer that question. The 95% bootstrap percentile is also provided to estimate the difference in mean rates.
+
+```{r, echo = TRUE}
+# CODE CHUNK #2
+
+teststat <- summaries$xbar[1] - summaries$xbar[2]     
+
+testdata <- monthly_deaths %>% pull(mortality_rate)   
+total_n  <- length(testdata)                          
+group_n  <- summaries$n[1]                            
+
+sims     <- 10^5-1
+randstat <- numeric(sims)
+
+for (i in 1:sims) {
+  index       <- sample(total_n, group_n)
+  randstat[i] <- mean(testdata[index]) - mean(testdata[-index])
+}
+```
+
+```{r}
+pval_upper <- (sum(randstat >= teststat) + 1) / (sims + 1)
+pval_lower <- (sum(randstat <= teststat) + 1) / (sims + 1)
+pval_2side <- 2 * min(pval_lower, pval_upper)
+data.frame(quantity = c("test statistic", 
+                        "lower-tail p-value",
+                        "upper-tail p-value",
+                        "two-sided p-value"),
+           value    = c(teststat, pval_lower, pval_upper, pval_2side))
+```
+
+```{r}
+ggplot(NULL, aes(x = randstat)) +
+  geom_density() +
+  geom_vline(xintercept = teststat, color = "red", linetype = "dashed") +
+  labs(title = "Density Plot of Permutation Simulation Results",
+       subtitle = "The dashed line is the value of the observed test statistic",
+       x = "mean differences generated by permutation resampling") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(NULL, aes(sample = randstat)) +
+  stat_qq() +
+  stat_qq_line() +
+  labs(title = "Normal Quantile-Quantile Plot of Permutation Simulation Results") +
+  theme_minimal()
+```
+
+```{r}
+data.frame(results = randstat) %>% 
+  summarize(data = "permutation results",
+            skewness = skewness(results),
+            kurtosis = kurtosis(results))
+```
+
+```{r, echo = TRUE}
+# CODE CHUNK #3
+
+data_dirty <- monthly_deaths %>% filter(handwashing == "dirty") %>% pull(mortality_rate)
+n_dirty    <- length(data_dirty)
+
+data_clean <- monthly_deaths %>% filter(handwashing == "washed") %>% pull(mortality_rate)
+n_clean    <- length(data_clean)
+
+sims       <- 10^5
+mean_diffs <- numeric(sims)
+
+for (i in 1:sims) {
+    sample_dirty <- sample(data_dirty, n_dirty, replace = TRUE)
+    sample_clean <- sample(data_clean, n_clean, replace = TRUE)  
+    mean_diffs[i] <- mean(sample_dirty) - mean(sample_clean)
+}
+
+round(quantile(mean_diffs, c(.025, .975)), 2)
+```
+
+```{r}
+ggplot(NULL, aes(x = mean_diffs)) +
+  geom_density() +
+  labs(title = "Density Plot of Bootstrap Simulation Results",
+       x = "mean differences generated by bootstrap resampling") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(NULL, aes(sample = mean_diffs)) +
+  stat_qq() +
+  stat_qq_line() +
+  labs(title = "Normal Quantile-Quantile Plot of Bootstrap Simulation Results") +
+  theme_minimal()
+```
+
+```{r}
+data.frame(results = mean_diffs) %>% 
+  summarize(data = "bootstrap results",
+            skewness = skewness(results),
+            kurtosis = kurtosis(results))
+```
+
+***
+```{r}
+sessionInfo()
+```
+

@@ -1,0 +1,228 @@
+---
+title: "Data Science Project 3<br>Making the Data Juicy!"
+author: "Danni Miranda"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document:
+    toc: true
+    depth: 3
+    theme: yeti
+    highlight: textmate
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+```
+
+```{r}
+# load all your packages here
+library(readxl)
+library(tidyr)
+library(tidyverse)
+library(blscrapeR)
+library(XML)
+library(lubridate)
+```
+
+<hr>
+
+## Purpose
+
+To quote the folks at the data visualization website [information is beautiful](https://informationisbeautiful.net/data/), "...80% of the work involved in creating an infographic is data-gathering, shaping and checking. Making the data juicy." You will flex data science skills you have acquired this semester to read in, assemble, clean, and code datasets. For this project you will submit this Markdown document contianing all your code and an `Rdata` file containing the datasets you made. You will be graded on both correctness and efficiency.
+
+
+### Gapminder World
+
+The [Gapminder](https://www.gapminder.org) web site contains a variety of health, wealth, political, social, and environmental data for countries all around the world. The `gapminderSTT2860F19.xlsx` workbook, which you can download from AsULearn, contains various sociopolitical country ratings downloaded from [Gapminder Data](http://gapm.io/dpop), as well as country region and code data obtained from the United Nations.
+
+* countries (downloaded from https://unstats.un.org/unsd/methodology/m49/)
+* democracy score (explained at https://www.systemicpeace.org/polityproject.html)
+* corruption perception index (explained at https://www.transparency.org/cpi2018)
+* human development index (explained at http://hdr.undp.org/en/content/human-development-index-hdi)
+
+### Create Dataset #1
+
+* Read in all of the worksheets from the Excel workbook. For each of the democracy, corruption, and development sheets, use `gather()` or `pivot_longer()` to tidy the data so that the file has three variables: `country`, `year`, and the score (see names in the dataset structure below).
+
+```{r worksheets}
+countries <- read_excel("gapminderSTT2860F19.xlsx",
+                        sheet = "countries")
+dem_score <- read_excel("gapminderSTT2860F19.xlsx", 
+    sheet = "democracy score") %>% 
+  gather(key = "year", value = dem_score, c(2:213))
+
+cper <- read_excel("gapminderSTT2860F19.xlsx", 
+    sheet = "corruption perception index") %>%
+  gather(key = "year", value = corrupt_per_index, c(2:7))
+
+hdev <- read_excel("gapminderSTT2860F19.xlsx", 
+    sheet = "human development index") %>% 
+  gather(key = "year", value = human_dev_index, c(2:27))
+
+```
+
+* Use your data files to create a single dataset called `worldscores`. It should be limited to data from the 21st century (i.e., 2001 and beyond), include countries that appear in *any* of the three Gapminder sheets (democracy score, corruption perception index, or human development index), and contain the following variables in the specified order. Verify this structure using `glimpse()`.
+
+    * `name` (chr) -- country name
+    * `region` (chr) -- UN region
+    * `subregion` (chr) -- UN subregion
+    * `M49code` (num) -- UN M49 code
+    * `ISOcode` (chr) -- UN ISO 3166-1 alpha-3 code
+    * `year` (num) -- year
+    * `development` (num) -- human development index
+    * `corruption` (num) -- corruption perception index
+    * `democracy` (num) -- democracy score
+    * `dem_cat` (fct) -- an ordered factor variable indicating whether a country is an autocracy (score of -10 to -6), an anocracy (score of -5 to +5), or a democracy (score of +6 to +10)
+
+ 
+
+```{r worldscores}
+worldscores <- dem_score %>%
+  full_join(cper, by = c("country", "year")) %>%
+  full_join(hdev, by = c("country", "year")) %>%
+  left_join(countries, by = c("country" = "Country")) %>%
+  mutate(dem_cat = case_when(
+  dem_score == -10:-6 ~ "autocracy",
+  dem_score ==  -5:5 ~ "autocracy",
+  dem_score == 6:10 ~ "democracy")) %>%
+  filter(year >= 2001) %>%
+  rename("name" = "country", "region" = "Region", "subregion" = "Subregion", "devolopment" = "human_dev_index", "corruption" = "corrupt_per_index", "democracy" = "dem_score", "ISOcode" = "ISOalpha3code") %>%
+  select(1,6:9,2,5,4,3,10)
+  
+glimpse(worldscores)
+
+```
+
+* Determine how many missing values there are in each variable, and how many rows in your dataset have complete data (i.e., no missing values for any variable).  
+
+```{r missingvalues}
+sum(is.na(worldscores$name))
+sum(is.na(worldscores$region))
+sum(is.na(worldscores$subregion))
+sum(is.na(worldscores$M49code))
+sum(is.na(worldscores$ISOcode))
+sum(is.na(worldscores$year))
+sum(is.na(worldscores$devolopment))
+sum(is.na(worldscores$corruption))
+sum(is.na(worldscores$democracy))
+sum(is.na(worldscores$dem_cat))
+sum(complete.cases(worldscores))
+
+```
+
+
+### Powerball Jackpots
+
+[Powerball](https://www.powerball.com/games/powerball) is popular American lottery game offered by forty-four states, as well as the District of Columbia, Puerto Rico and the US Virgin Islands. It is coordinated by the non-profit [Multi-State Lottery Association (MUSL)](https://www.musl.com/). 
+
+* Powerball® costs $2 per play. 
+* Select five numbers from 1 to 69 for the white balls; then select one number from 1 to 26 for the red Powerball.
+* Choose your numbers on a play slip or let the lottery terminal randomly pick your numbers.
+* Jackpots start at $40 million and grow from there!
+* Players win a prize by matching one of the 9 Ways to Win.
+
+Drawings are supposed to be random and independent, with all white balls are equally likely to be chosen. The same is true of red balls. Players have always selected five white balls and one red ball. However, the Powerball lottery has had different rulesets over time with respect to how many white and red balls there are for players to choose from, which affects the chances of winning the various prizes. The Jackpot increases in value until someone wins and then it resets to its minimum value. This minimum has also changed over time. You can read about changes over time in the [Powerball](https://en.wikipedia.org/wiki/Powerball) Wikipedia article and on the `History` tab of the [About Powerball](https://www.powerball.com/about) page of the Powerball website.
+
+### Create Dataset #2
+
+* Go to the [Lottery Powerball Winning Numbers](https://catalog.data.gov/dataset/lottery-powerball-winning-numbers-beginning-2010) page of the Data Catalogue on the federal data repository website [data.gov](https://www.data.gov/). Right-click the <span style="font-size: 12px; color: #ffffff; background-color: #19657D; padding: 2px;"><i class="fa fa-download"></i> Download</span> button for the CSV file to get the web link and use that to import the dataset into RStudio using `read_csv()`. Notice that whomever formatted the data put all six lottery numbers into a single column, with the five white ball values listed in order from smallest to largest, followed by the value of the red ball. When you read in the data, also do the following coding and cleaning operations and then use `glimpse()` to show the structure. 
+
+    * Remove the multiplier information variable from the dataset.
+    * Change the class of the drawing date variable from `chr` to `date`.
+    * Split the winning numbers column into six separate numeric columns.
+    * Remove the original winning numbers string variable from the dataset.
+    * Rename variables as needed to get workable names for cleaning and joining.
+
+```{r winningnumbers}
+powerball.num <- read.csv(file = "https://data.ny.gov/api/views/d6yy-54nr/rows.csv?accessType=DOWNLOAD")
+powerball_sim <- subset(powerball.num, select = -Multiplier)
+powerball_sim$"Draw.Date" <- as.Date(powerball_sim$"Draw.Date", "%m/%d/%y")
+powerball_data <- separate(powerball_sim, "Winning.Numbers", into = c("white1", "white2", "white3", "white4", "white5", "red"))
+transform.data.frame(powerball_data, "Draw.Date" = as.Date(`Draw.Date`, "%m/%d/%y"))
+
+glimpse(powerball_data)
+
+
+```
+
+* Search the web and find the winning numbers for Powerball drawings in January 2010, which are missing from the winning numbers dataset. Use create a data frame and use `rbind()` to add that information the dataset above. Use `glimpse()` to show the structure.
+
+```{r add2010numbers}
+Draw.Date  <- c("1/30/2010", "1/27/2010", "1/23/2010", "1/20/2010", "1/16/2010", "1/13/2010", "1/9/2010", "1/6/2010", "1/2/2010")
+white1 <- c(6, 6, 15, 15, 7, 8, 20, 20, 3)
+white2 <- c(26, 15, 16, 32, 8, 11, 41, 27, 7)
+white3 <- c(35, 20, 20, 43, 23, 15, 44, 29, 23)
+white4 <- c(47, 26, 42, 44, 41, 32, 50, 56, 27)
+white5 <- c(48, 31, 53, 46, 55, 50, 54, 58, 42)
+red <- c(21, 9, 17, 19, 23, 27, 22, 31, 37)
+powerball_jan <- data.frame(Draw.Date, white1, white2, white3, white4, white5, red )
+transform.data.frame(powerball_jan, "Draw.Date" = as.Date(`Draw.Date`, "%m/%d/%y"))
+glimpse(powerball_jan)
+```
+
+* Use the code given below to scrape the values of the Powerball jackpots from the [Jackpot History](http://www.lottofactor.com/script/jackpot_history/draw_date/101) page of TinBu LLC's [Lotto Factor](http://www.lottofactor.com/) website. Note that by the site's [Terms of Service](http://www.lottofactor.com/script/showpage/1001030/m/terms.html) these data are copyrighted in this form. However, we may use them for personal academic purposes as long at they are not publicly displayed. I did a a small amount of pre-cleaning to remove a "noise" character from the data (which can happen with HTML tables) and some extraneous space. When you read in the data, also do the following coding and cleaning operations and then use `glimpse()` to show the structure. 
+
+    * Remove the information about the change in Jackpot values.
+    * Split the drawing day-date information into separate columns.
+    * Change the class of the drawing date variable from `chr` to `date`.
+    * Remove extra symbols and convert Jackpot amounts into numeric data.
+    * Rename variables as needed to get workable names for cleaning and joining.
+
+```{r jackpotvalues}
+# requires the package XML
+url <- "http://www.lottofactor.com/script/jackpot_history/draw_date/101"
+jackpot_vals <- readHTMLTable(url)[[18]] %>% 
+  mutate_all(~ str_replace(., pattern = "Â", replacement = ""),
+             ~ str_trim(., "both"))
+
+names(jackpot_vals)[1] <- "Draw.Date"
+names(jackpot_vals)[2] <- "jackpot_amount"
+names(jackpot_vals)[3] <- "change"
+transform.data.frame(jackpot_vals, "jackpot_amount" = as.numeric(`jackpot_amount`))
+transform.data.frame(jackpot_vals, "Draw.Date" = as.Date(`Draw.Date`, "%m/%d/%y"))
+separate(jackpot_vals, col = "Draw.Date", into = c("drawday", "Draw.Date"), sep = " ") %>%
+mutate(drawdate = as.Date(Draw.Date, "%m/%d/%y"), 
+       jackpot_amount = str_replace(jackpot_amount, pattern = "Billion", ""),
+       jackpot_amount = str_replace(jackpot_amount, pattern = "Millions", ""),
+       jackpot_amount = as.numeric(substring(jackpot_amount, 3)))
+
+glimpse(jackpot_vals)
+```
+
+* Use the code given below to read a dataset that includes value inflation adjustments for US dollars in prior years based on the value of the 2019 dollar. It uses Consumer Price Index (CPI) information scraped from the [Bureau of Labor Statistics](https://www.bls.gov/). For example, one 2002 dollar is equivalent to 71 cents in 2019 with respect to its purchasing power. Another way to think about it is that we need $1 / 0.71 = $1.41 today to purchase the same item or service we could have bought for $1 in 2002. Thus, a windfall of $1 million would be relatively greater in 2002 than 2019; back then what you could buy for $1 million would cost $1,408,451 now. Convert `year` and `base_year` into numeric variables, then use `glimpse()` to show the structure.
+
+```{r inflationvalues}
+# requires the package blscrapeR
+inflation_adj <- inflation_adjust(2019)
+transform.data.frame(inflation_adj, year = as.numeric(`year`), base_year = as.numeric(base_year))
+
+glimpse(inflation_adj)
+```
+
+* Use your data files to create a single dataset called `powerball`. It should be limited to the time span from January 2010 to the present and contain the following variables. Verify this structure using `glimpse()`.
+
+    * `drawdate` (date) -- date the drawing took place in yyyy-mm-dd format
+    * `drawday` (chr) -- day of the week on which the drawing took place
+    * `ballcolor` (chr) -- whether the ball was `white` or `powerball` (red)
+    * `ballvalue` (num) -- the numerical value of the white or red ball
+    * `jackpot_actual` (num) -- dollar value of the jackpot (in millions)
+    * `jackpot_inflat` (num) -- jackpot value inflated to 2019 dollars
+
+```{r powerball}
+powerball_all <- rbind(powerball_jan, powerball_data)
+powerball <- powerball_all %>%
+  left_join(jackpot_vals, by = "Draw.Date") 
+  #mutate(str_replace(powerball_all, pattern = white1:red)) %>%
+  #rename("drawdate = Draw.Date", "ballcolor = white 1, white 2, white 3, white 4, white 5, red", "ballvalue = Winning.Numbers", "jackpot_actual = jackpot_vals", "jackpot_inflat = inflation_adj")
+
+glimpse(powerball_all)
+  
+```
+
+
+<hr>
+
+```{r}
+sessionInfo()
+```
+

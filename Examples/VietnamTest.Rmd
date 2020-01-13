@@ -1,0 +1,111 @@
+---
+title: "Battery Life Example"
+subtitle: "Permutation Resampling Hypothesis Test"
+author: "Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, comment = "")
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+draft <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv")) %>% 
+  filter(draftyear == 1972) %>% 
+  arrange(draftnumber)
+draft
+```
+
+
+### Descriptive Statistics
+
+```{r}
+stats <- draft %>% 
+  filter(!is.na(draftnumber)) %>% 
+  group_by(halfyear) %>% 
+  summarize(prop = mean(draftnumber <= 95),
+            n    = n())
+
+print.data.frame(stats)
+```
+
+<hr>
+
+### Possible Hypotheses
+
+#### Question 1: Is the proportion of numbers <= 195 greater in the second half of the year than the first?
+
+$$H_0: \pi_{first} = \pi_{second} \rightarrow \pi_{first} - \pi_{second} = 0$$
+
+$$H_a: \pi_{first} = \pi_{second} \rightarrow \pi_{first} - \pi_{second} \neq 0$$
+
+```{r}
+teststat <- stats$prop[1] - stats$prop[2]
+teststat
+```
+
+<hr>
+
+### Permutation Testing
+
+How many unique regroupings would there be for an exact permutation test?
+
+```{r}
+choose(366, 182) # how many regroupings
+factorial(366)   # how many orderings
+```
+
+
+We will use permutation resampling rather than an exact permutation test.
+
+```{r}
+draftnumber <- draft %>% filter(!is.na(draftnumber)) %>% pull(draftnumber)
+
+total_n <- length(draftnumber)
+group_n <- stats$n[1]  
+
+alpha <- .05
+
+sims <- 10^6 - 1
+
+randstat <- numeric(sims)
+
+for (i in 1:sims) {
+  index <- sample(total_n, group_n)
+  randstat[i] <- mean(draftnumber[index] <= 95) - mean(draftnumber[-index] <= 95)
+}
+
+ggplot(NULL, aes(x = randstat)) +
+  geom_histogram(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = teststat, color = "blue", linetype = "dashed") +
+  labs(title = "Permutation Resampling Distribution for Test Statistic",
+       subtitle = "vertical dashed line indicates the observed value of the test statistic") +
+  theme_linedraw()
+```
+
+<hr>
+
+### Computing P-Values
+
+#### Lower-Tail P-Value
+
+$$H_a: \mu_G < \mu_B \rightarrow \mu_G - \mu_B < 0$$
+
+```{r}
+pval_upper <- (sum(randstat >= teststat) + 1) / (sims + 1)
+pval_lower <- (sum(randstat <= teststat) + 1) / (sims + 1)
+pval_2side <- 2 * min(pval_lower, pval_upper)
+decision <- ifelse(pval_2side <= alpha, "reject the null hypothesis", "not reject the null hypothesis")
+pval_2side
+decision
+```
+
+The p-value for this test is `r pval_lower`. Based on $\alpha$ = `r alpha`, we should `r decision`.
