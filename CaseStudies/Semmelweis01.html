@@ -192,7 +192,7 @@ summary {
 
 <h1 class="title toc-ignore">Case Study: Semmelweis and Handwashing #1</h1>
 <h4 class="author">Jill E. Thomley</h4>
-<h4 class="date">Monday, January 13, 2020 @ 02:20 PM</h4>
+<h4 class="date">Monday, January 13, 2020 @ 03:21 PM</h4>
 
 </div>
 
@@ -275,7 +275,7 @@ $ handwashing &lt;chr&gt; &quot;dirty&quot;, &quot;dirty&quot;, &quot;dirty&quot
 </div>
 <div id="identifying-the-problem" class="section level3">
 <h3><strong>Identifying the Problem</strong></h3>
-<p>Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room, or from one patient to another. Yikes! Semmelweis thought the medical students were transferring some kind of “morbid poison” from dissected cadavers to the maternity patients.</p>
+<p>Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room, or from one patient to another. Yikes! Semmelweis thought the medical students were transferring some kind of “morbid poison” from dissected cadavers to the maternity patients. The two clinics used approximately the same techniques, and Dr. Semmelweis had already gone through a meticulous process of eliminating most of the other possible clinic differences that could contribute to the problem, including even religious practices.</p>
 <div id="visualizing-mortality-over-time" class="section level4">
 <h4><strong>Visualizing Mortality over Time</strong></h4>
 <pre class="r"><code>ggplot(by_clinic, aes(x = year, y = mortality, fill = clinic)) +

@@ -59,7 +59,7 @@ head(by_month)
 ***
 ### **Identifying the Problem**
 
-Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room, or from one patient to another. Yikes! Semmelweis thought the medical students were transferring some kind of “morbid poison” from dissected cadavers to the maternity patients. 
+Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room, or from one patient to another. Yikes! Semmelweis thought the medical students were transferring some kind of “morbid poison” from dissected cadavers to the maternity patients. The two clinics used approximately the same techniques, and Dr. Semmelweis had already gone through a meticulous process of eliminating most of the other possible clinic differences that could contribute to the problem, including even religious practices.
 
 #### **Visualizing Mortality over Time** 
 
