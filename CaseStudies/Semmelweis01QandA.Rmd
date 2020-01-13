@@ -1,0 +1,31 @@
+---
+title: 'Q&A: Semmelweis and Handwashing #1'
+author: '<br>NAME:'
+output:
+  word_document: default
+  html_document:
+    highlight: textmate
+    theme: yeti
+  pdf_document: default
+---
+
+<hr>
+### Answer the following questions your own...
+
+#### **Identifying the Problem**
+
+Based on the analysis of annual mortality data from 1841-1846, do you think Dr. Semmelweis was right to believe that there was a problem in Clinic 1 versus Clinic 2? Was lack of handwashing a reasonable theory? Support your answer using specific information from the problem description and analysis.
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+#### **Semmelweis's Intervention**
+
+Does the analysis of monthly mortality data from before and after Semmelweis's intervention generally support his theory? Could the outcomes we observe after handwashing was started be a just coincidence (i.e., random)? Support your answer using specific information from the problem description and analysis.
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+### Discuss in pairs or groups and then answer...
+
+#### **Pooling Your Knowledge**
+
+Would you make any changes to your answers after comparing and discussing the questions with classmates? Why or why not?
