@@ -6,4 +6,4 @@ This course provides an overview of modern statistical data analysis. Programmin
 
 http://bulletin.appstate.edu/
 
-Some additional materials (e.g., solutions) are kept in a private repository. If you are an instructor interested in seeing these materials, please contact me at thomleyje@appstate.edu.
+Some additional materials (e.g., solutions) are kept in a private repository. If you are an instructor interested in seeing some of these materials, please contact me at thomleyje@appstate.edu.
