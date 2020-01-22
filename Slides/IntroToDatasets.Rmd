@@ -20,11 +20,12 @@ These slides are not meant to be standalone information. You should take notes t
 **Related Materials**
 
 * Ch 1 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
-* Ch 2 of [*Modern Dive*](https://moderndive.com/)
+* Ch 1 of [*Modern Dive*](https://moderndive.com/1-getting-started.html)
 * DataCamp [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r)
 * DataCamp [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data)
 
-Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
+Refer to "[
+4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
 
 
 ## Data vs. Information
@@ -121,6 +122,7 @@ John Tukey (1915–2000), author of the seminal book *Exploratory Data Analysis*
 We will be using the `dplyr` and `ggplot2` packages for our EDA. These tools and `readr` are part of the `tidyverse`.
 
 Many different types of data files can be read into `R`. We will be using primarily CSV files read from the web using their URL. Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains links to many datasets.
+
 
 ## Reading Data into `R`
 
