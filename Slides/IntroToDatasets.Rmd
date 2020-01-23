@@ -180,7 +180,7 @@ Try using `glimpse()` and `str()` on `spruceT`. Compare results.
 
 ## Other Useful Functions
 
-Other functions for exploring dataset structure are given below. Use them on the Vietnam Draft dataset. What do they tell you?
+Other functions for exploring dataset structure are given below. Use them on the Spruce dataset. What do they tell you?
 
 * `attributes()`
 * `dim()`
