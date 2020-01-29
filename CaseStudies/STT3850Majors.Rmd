@@ -1,0 +1,98 @@
+---
+title: "Case Study: STT3850 Majors #1"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+<hr>
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+Load the package(s) you will need.
+
+```{r loadpackages}
+
+```
+
+Load the dataset `stt3850majors.csv`.
+
+```{r loaddata}
+
+```
+
+Run `glimpse()` on the dataset you created.
+
+```{r glimpsedata}
+
+```
+
+Run `head()` with `n = 10` to visualize the first 10 rows.
+
+```{r headdata}
+
+```
+
+Description
+
+WRITE A BRIEF DATASET DESCRIPTION HERE
+
+Variables
+
+* College: WRITE A BRIEF VARIABLE DESCRIPTION HERE
+* Year:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
+* BannerMajor:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
+* CodedMajor:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
+* Semester:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
+* AY:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
+
+Make `Year` and `Coded Major` factor variables. 
+
+```{r makefactors}
+stt3850majors <- stt3850majors %>% 
+  mutate(Year = factor(Year, levels = c("Freshman", 
+                                        "Sophomore", 
+                                        "Junior", 
+                                        "Senior", 
+                                        "Graduate Certificate Program")),
+         CodedMajor = factor(CodedMajor, levels = c("Computer Science", 
+                                                    "Mathematical Sciences", 
+                                                    "Other Sciences", 
+                                                    "Other"))
+         )
+```
+
+Use `table()` to summarize each variable in the dataset.
+
+```{r basetables}
+
+```
+
+Use `count()` to summarize each variable in the dataset.
+
+```{r dplyrcounts}
+
+```
+
+Summarize counts and proportions for `CodedMajor` using `dplyr`.
+
+```{r dplyrprops}
+
+```
+
+Create basic barplots for `Year` and `CodedMajor`.
+
+```{r basicbarplots}
+
+```
+
+
+***
+```{r}
+sessionInfo()
+```
