@@ -104,7 +104,7 @@ prop.table(statusTab)
 round(prop.table(statusTab), 4)
 ```
 
-What is the result if you use `as.data.frame()` on statusTab? Why might you want to convert your summary's class?
+The `table` class of object in `R` is essentially an array where the locations have been named.
 
 
 ## Using `dplyr` to Make a "Table"
@@ -172,7 +172,7 @@ ggplot(berkdata, aes(x = sex)) +
 ```{r fig.height=3.4}
 library(ggplot2)
 ggplot(berkdata, aes(x = sex)) + 
-  geom_bar(aes(y=..count../sum(..count..))) + 
+  geom_bar(aes(y = ..count../sum(..count..))) + 
   labs(y = "proportion")
 ```
 
