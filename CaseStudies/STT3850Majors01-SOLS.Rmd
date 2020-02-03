@@ -1,0 +1,124 @@
+---
+title: "Case Study: STT3850 Majors #1"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+<hr>
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+Load the package(s) you will need.
+
+```{r loadpackages}
+library(tidyverse)
+```
+
+Load the dataset `stt3850majors.csv`.
+
+```{r loaddata}
+stt3850majors <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/stt3850majors.csv"))
+```
+
+Run `glimpse()` on the dataset you created.
+
+```{r glimpsedata}
+glimpse(stt3850majors)
+```
+
+Run `head()` with `n = 10` to visualize the first 10 rows.
+
+```{r headdata}
+head(stt3850majors, n = 10)
+```
+
+Description
+
+Data for students in Dr. Thomley's STT3850 classes from Fall 2014 to Spring 2020.
+
+Variables
+
+* College: ASU college associated with student major
+* Year: student class level (freshman, sophomore, etc.)
+* BannerMajor: student major as it appeared in Banner
+* CodedMajor: majors categorized into one of four groups
+* Semester: semester (S = spring, F = Fall, Sum = summer)
+* AY: academic year
+
+Make `Year` and `Coded Major` factor variables. 
+
+```{r makefactors}
+stt3850majors <- stt3850majors %>% 
+  mutate(Year = factor(Year, levels = c("Freshman", 
+                                        "Sophomore", 
+                                        "Junior", 
+                                        "Senior", 
+                                        "Graduate Certificate Program")),
+         CodedMajor = factor(CodedMajor, levels = c("Computer Science", 
+                                                    "Mathematical Sciences", 
+                                                    "Other Sciences", 
+                                                    "Other"))
+         )
+```
+
+Use `table()` to summarize each variable in the dataset.
+
+```{r basetables}
+table(stt3850majors$College)
+table(stt3850majors$Year)
+table(stt3850majors$BannerMajor)
+table(stt3850majors$CodedMajor)
+table(stt3850majors$Semester)
+table(stt3850majors$AY)
+```
+
+Use `count()` to summarize each variable in the dataset.
+
+```{r dplyrcounts}
+count(stt3850majors, College)
+count(stt3850majors, Year)
+count(stt3850majors, BannerMajor)
+count(stt3850majors, CodedMajor)
+count(stt3850majors, Semester)
+count(stt3850majors, AY)
+```
+
+Summarize counts and proportions for `CodedMajor` using `dplyr`.
+
+```{r dplyrprops}
+stt3850majors %>% 
+  count(CodedMajor) %>% 
+  mutate(prop = prop.table(n))
+
+# base code version for contrast
+prop.table(table(stt3850majors$CodedMajor))
+```
+
+Create basic barplots for `Year` and `CodedMajor`.
+
+```{r basicbarplots}
+ggplot(stt3850majors, aes(x = Year)) +
+  geom_bar()
+
+ggplot(stt3850majors, aes(x = Year)) + 
+  geom_bar(aes(y=..count../sum(..count..))) + 
+  labs(y = "proportion")
+
+ggplot(stt3850majors, aes(x = CodedMajor)) +
+  geom_bar()
+
+ggplot(stt3850majors, aes(x = CodedMajor)) + 
+  geom_bar(aes(y=..count../sum(..count..))) + 
+  labs(y = "proportion")
+```
+
+***
+```{r}
+sessionInfo()
+```
