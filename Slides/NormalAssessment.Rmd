@@ -40,9 +40,8 @@ glimpse(parent_hts)
 ```
 
 ```{r}
-ht_stats <- parent_hts %>% 
-  summarize(xbar = mean(Father), sd = sd(Father))
-ht_stats
+xbar <- mean(parent_hts$Mother)
+s    <- sd(parent_hts$Mother)
 ```
 
 
@@ -51,10 +50,10 @@ ht_stats
 Does the density of the data match a theoretical normal density plot with the same mean and variance?
 
 ```{r, eval=FALSE}
-ggplot(parent_hts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Mother)) + 
   geom_density() +
   stat_function(fun = dnorm, 
-                args = list(ht_stats$xbar, ht_stats$sd),   
+                args = list(xbar, s),   
                 color = "red")
 ```
 
@@ -66,10 +65,10 @@ Notice we are using `dnorm` because the density plot shows f(x).
 ## Data vs. Theoretical
 
 ```{r, echo=FALSE}
-ggplot(parent_hts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Mother)) + 
   geom_density() +
   stat_function(fun = dnorm, 
-                args = list(ht_stats$xbar, ht_stats$sd), 
+                args = list(xbar, s), 
                 color = "red")
 ```
 
@@ -79,10 +78,10 @@ ggplot(parent_hts, aes(x = Father)) +
 Does the ECDF of the data match a theoretical normal CDF plot with the same mean and variance?
 
 ```{r, eval=FALSE}
-ggplot(parent_hts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Mother)) + 
   stat_ecdf() +
   stat_function(fun = pnorm, 
-                args = list(ht_stats$xbar, ht_stats$sd), 
+                args = list(xbar, s), 
                 color = "red")
 ```
 
@@ -94,10 +93,10 @@ Notice we are using `pnorm` because the ECDF plot shows F(x).
 ## Data vs. Theoretical
 
 ```{r, echo=FALSE}
-ggplot(parent_hts, aes(x = Father)) + 
+ggplot(parent_hts, aes(x = Mother)) + 
   stat_ecdf() +
   stat_function(fun = pnorm, 
-                args = list(ht_stats$xbar, ht_stats$sd), 
+                args = list(xbar, s), 
                 color = "red")
 ```
 
@@ -117,16 +116,16 @@ Do the data quantiles match the theoretical normal quantiles?
 
 ```{r}
 deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
-tibble(data   = quantile(parent_hts$Father, deciles), 
-       theory = round(qnorm(deciles, ht_stats$xbar, ht_stats$sd),2))
+tibble(data   = quantile(parent_hts$Mother, deciles), 
+       theory = round(qnorm(deciles, xbar, s),2))
 ```
 
 
 ## Plot of Data vs. Theoretical Deciles
 
 ```{r, echo = FALSE}
-plotdata <- tibble(data = quantile(parent_hts$Father, deciles), 
-                   theory = qnorm(deciles, ht_stats$xbar, ht_stats$sd))
+plotdata <- tibble(data = quantile(parent_hts$Mother, deciles), 
+                   theory = qnorm(deciles, xbar, s))
 ggplot(plotdata, aes(x = theory, y = data)) + 
   geom_point() + 
   geom_abline(slope = 1, intercept = 0, color = "red")
@@ -138,7 +137,7 @@ ggplot(plotdata, aes(x = theory, y = data)) +
 Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance?
 
 ```{r, eval=FALSE}
-ggplot(parent_hts, aes(sample = Father)) + 
+ggplot(parent_hts, aes(sample = Mother)) + 
   stat_qq() +
   stat_qq_line(color = "red")
 ```
@@ -149,7 +148,7 @@ Notice the difference in syntax in the aesthetics, which uses `sample` rather th
 ## QQ Plot
 
 ```{r, echo=FALSE}
-ggplot(parent_hts, aes(sample = Father)) + 
+ggplot(parent_hts, aes(sample = Mother)) + 
   stat_qq() +
   stat_qq_line(color = "red")
 ```
@@ -163,9 +162,9 @@ The skewness of a normal distribution is 0 and the kurtosis is 3. Data from a no
 library(moments)
 skewK <- tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
                 theory = c(0, 3, 0),
-                data   = round(c(skewness(parent_hts$Father), 
-                                 kurtosis(parent_hts$Father), 
-                                 kurtosis(parent_hts$Father) - 3), 
+                data   = round(c(skewness(parent_hts$Mother), 
+                                 kurtosis(parent_hts$Mother), 
+                                 kurtosis(parent_hts$Mother) - 3), 
                                2))
 print.data.frame(skewK, row.names = FALSE)
 ```
@@ -203,8 +202,8 @@ $X_4 \text{~} Bin(100, 0.5)$
 <td>
 $X_5 \text{~} Bin(10, 0.2)$<br>
 $X_6 \text{~} Bin(100, 0.2)$<br>
-$X_8 \text{~} Bin(10, 0.8)$<br>
-$X_9 \text{~} Bin(100, 0.8)$
+$X_7 \text{~} Bin(10, 0.8)$<br>
+$X_8 \text{~} Bin(100, 0.8)$
 </td>
 <td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
 <td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
@@ -212,10 +211,10 @@ $X_9 \text{~} Bin(100, 0.8)$
 <td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
 <td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
 <td>
-$X_{10} \text{~} t(3)$<br>
-$X_{11} \text{~} t(20)$<br>
-$X_{12} \text{~} t(100)$<br>
-$X_{13} \text{~} t(250)$
+$X_9 \text{~} t(3)$<br>
+$X_{10} \text{~} t(20)$<br>
+$X_{11} \text{~} t(100)$<br>
+$X_{12} \text{~} t(250)$
 </td>
 </tr>
 </table><p>

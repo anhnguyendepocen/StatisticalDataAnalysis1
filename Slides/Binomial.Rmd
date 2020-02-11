@@ -6,7 +6,7 @@ output: ioslides_presentation
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
 library(tidyverse)
 ```
 
@@ -26,7 +26,11 @@ These slides were produced using R Markdown. See "[4.1 ioslides presentation](ht
 
 # Bernoulli Trials
 
-## What is a Bernoulli Trial?
+##
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bT1p5tJwn_0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Parameters and Notation
 
 A Bernoulli trial is a single random event that has two possible outcomes, often called "success" and "failure". 
 
@@ -52,7 +56,12 @@ Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://
 
 # Binomial Distribution
 
-## The Binomial Model
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qIzC1-9PwQo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Notation and Parameters
 
 The binomial distribution is a discrete probability distribution. It models the number of successes in a sequence of independent Bernoulli trials. 
 

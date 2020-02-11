@@ -15,12 +15,12 @@ library(kableExtra)
 
 ## Before We Begin...
 
-These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations.
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
 
 **Related Materials**
 
-* Chapter 2 of *Mathematical Statistics with Resampling and R*
-* Chapter 3 of [*Modern Dive*](https://moderndive.com/)
+* Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* Ch 3 of [*Modern Dive*](https://moderndive.com/)
 * DataCamp [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
 
 Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
