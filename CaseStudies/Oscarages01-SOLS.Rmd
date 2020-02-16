@@ -1,0 +1,318 @@
+---
+title: "Case Study: Oscar Winner Ages"
+author: "SOLUTIONS // Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+<hr>
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### **NOTE:** I updated some erroneous ages in the dataset betweeen the time we did the class activity and when I compiled the solutions. If you re-run your code you will also have the updated values. 
+
+<hr>
+
+Load the package(s) you will need.
+
+```{r loadpackages}
+library(tidyverse)
+```
+
+In January 2007, Entertainment Weekly magazine featured a [cover story](http://www.simplystreep.com/gallery/displayimage.php?album=345&pid=25019#top_display_media) about three Academy Award nominees for Best Actress (Meryl Streep, Judy Densch, and Helen Mirren), with a cover tagline that proclaimed "The Silver Foxes Rule!" This theme continued inside, with the article focusing in large part on how old these three women were, relative to previous winners, and the perceived Hollywood bias in favor of younger actresses. This discussion persists in one form or another to this day. (data: [oscarages.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv))
+
+A) Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
+
+```{r}
+oscar <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv")
+```
+
+B) Use `filter` to create a dataset that contains data only for Best Actor and Best Actress winners prior to the 2007 Academy Awards ceremony. Note that the variable `ceremony` refers to the ceremony year.
+
+There are a few ways to handle the `filter()` statement, since there are multiple criteria. The `dplyr` package contains the `%in%` function, which makes choosing a subset of a variable's values easy and succinct.
+
+```{r}
+# acceptable
+oscarpre2007 <- oscar %>%
+  filter(ceremony < 2007, category == "Best Actor" | category == "Best Actress")
+```
+
+```{r}
+# acceptable
+oscarpre2007 <- oscar %>%
+  filter(ceremony < 2007, category != "Supporting Actor", category != "Supporting Actress")
+```
+
+```{r}
+# better way
+oscarpre2007 <- oscar %>%
+  filter(ceremony < 2007, category %in% c("Best Actor", "Best Actress"))
+```
+
+C) Use `summarize` (with any other necessary functions) on your new dataset to compute and display the sample sizes, means, standard deviations, five-number summaries, IQR, and the lower and upper fences for Best Actor and Best Actress winners prior to 2007.
+
+After filtering, you have two groups left in the `category` variable: `Best Actor` and `Best Actress`. Use `group_by()` to get separate summaries for the two groups. Once a statistic is computed inside `summarize()`, it can be used in subsequent summaries, like the lower and upper fence calculations below. The `print.data.frame()` function is rounding to four significant digits.
+
+```{r}
+agesumms <- oscarpre2007 %>% 
+  group_by(category) %>% 
+  summarize(n       = n(),
+            meanAge  = mean(age),
+            sdAge    = sd(age),
+            minAge   = fivenum(age)[1],
+            Q1Age    = fivenum(age)[2],
+            medAge   = fivenum(age)[3],
+            Q3Age    = fivenum(age)[4],
+            maxAge   = fivenum(age)[5],
+            iqrAge   = IQR(age),
+            lowFence = Q1Age - 1.5 * iqrAge,
+            uppFence = Q3Age + 1.5 * iqrAge)
+print.data.frame(agesumms, digits = 4)
+```
+
+D) Create boxplots to compare the ages of Best Actor and Best Actress winners prior to 2007. Add an informative title, x and y axis labels, a caption that shows the data source, and color in the plots to improve the display.
+
+There are several different ways to handle color in boxplots. One is to specify a `color` or `fill` variable in the aesthetic of the plot, but you may need to suppressed the redundant legend in that case. The other is to specify the colors in `geom_boxplot()`. You can also format aspects of the plot like the outliers (see [the ggplot2 reference page](https://ggplot2.tidyverse.org/reference/geom_boxplot.html) for boxplots).
+
+Below are three examples of boxplots comparing the ages of Best Actor and Best Actress winners. The last graph shows how you can change the presentation to better visualize overlapping outliers and set more desirable labels for the quantitative axis, as well as apply a theme and flip the display of the axes for a horizontal visualization.
+
+```{r}
+ggplot(oscarpre2007, aes(x = category, y = age, fill = category)) +
+  geom_boxplot() +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Award Category",
+       y = "Age in Years",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv") +
+  theme(legend.position = "none")
+```
+
+```{r}
+ggplot(oscarpre2007, aes(x = category, y = age, fill = category)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Accent") +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Award Category",
+       y = "Age in Years",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv") +
+  theme(legend.position = "none")
+```
+
+```{r}
+ggplot(oscarpre2007, aes(x = category, y = age)) +
+  geom_boxplot(fill = c("#FE6100", "#FFB000"), outlier.size = 4, outlier.alpha = 0.5) +
+  scale_y_continuous(breaks = seq(20, 85, 5)) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Award Category",
+       y = "Age in Years",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv") +
+  theme_linedraw() +
+  coord_flip()
+```
+
+**Note:** The colors in the plots above were chosen to be color-blind friendly. You can read more about color-blind safe palettes and using colors in plots at the links below.
+
+* https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40
+* http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
+* https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/
+
+E) Use `facet_grid` create histograms to compare the age distributions of Best Actor and Best Actress winners prior to 2007. Arrange the plots so they are stacked versus side-by-side. Add an informative title, x and y axis labels, a caption that shows the data source. 
+
+As with boxplots, there are several ways to create histograms to compare the distributions of the two groups. The last shows how you can customize the quantitative axis and one way to use colors.
+
+```{r}
+ggplot(oscarpre2007, aes(x = age)) +
+  geom_histogram() +
+  facet_grid(category ~ .) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Age in Years",
+       y = "Count",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv")
+```
+
+```{r}
+ggplot(oscarpre2007, aes(x = age, fill = category)) +
+  geom_histogram() +
+  facet_grid(category ~ .) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Age in Years",
+       y = "Count",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv") +
+  theme(legend.position = "none")
+```
+
+```{r}
+ggplot(oscarpre2007, aes(x = age, fill = category)) +
+  geom_histogram(color = "black", bins = 15) +
+  theme(legend.position = "none") +
+  scale_fill_brewer(palette = "Accent") +
+  scale_x_continuous(breaks = seq(20, 85, 5)) +
+  facet_grid(category ~ .) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Age in Years",
+       y = "Count",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv")
+```
+
+**Bonus plots! Comparitive Densities**
+
+```{r}
+ggplot(oscarpre2007, aes(x = age, fill = category)) +
+  geom_density(alpha = 0.5) +
+  scale_fill_brewer(palette = "Accent") +
+  scale_x_continuous(breaks = seq(20, 85, 5)) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       subtitle = "dashed lines indicate mean ages of Best Actor and Best Actress winners",
+       x = "Age in Years",
+       y = "Density",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv") +
+  geom_vline(xintercept = agesumms$meanAge, linetype = "dashed", color = c("darkgreen", "purple")) +
+  theme_linedraw()
+```
+
+```{r}
+ggplot(oscarpre2007, aes(x = age, fill = category)) +
+  geom_density() +
+  theme(legend.position = "none") +
+  scale_fill_brewer(palette = "Accent") +
+  scale_x_continuous(breaks = seq(20, 85, 5)) +
+  facet_grid(category ~ .) +
+  labs(title = "Ages of Best Actor and Best Actress Winners Before 2007",
+       x = "Age in Years",
+       y = "Density",
+       caption = "Source: STT3850 class datasets, Instructor dataset oscarages.csv")
+```
+
+F) Which actress actually won the Best Actress Oscar in 2007? How old was she? For what movie did she win? Use the `filter` and `select` functions to display the answer. You'll need to go back to the full dataset for this.
+
+```{r}
+(actresswinner2007 <- oscar %>% 
+  filter(ceremony == 2007, category == "Best Actress") %>% 
+  select(name, age, title))
+```
+
+G) Was the 2007 Best Actress winner an outlier compared to previous Best Actress winners? If she were a man, would she have been an outlier compared to previous Best Actor winners? Determine the answers using code.
+
+How you go about answering this question depends in part on how you plan to use the output. Below are some options. All of the methods shown use the summaries you created earlier and some type of logical test. You should avoid typing values by hand (e.g., the fence values) into your code. 
+
+```{r}
+actresswinner2007$age > agesumms$uppFence
+
+ifelse(actresswinner2007$age > agesumms$uppFence, "Outlier", "Not an Outlier")
+
+agesumms %>% select(category, uppFence) %>% 
+  mutate(IsHelenMirrenAnOutlier = actresswinner2007$age > uppFence)
+
+agesumms %>% select(category, uppFence) %>% 
+  mutate(IsHelenMirrenAnOutlier = ifelse(actresswinner2007$age > uppFence, "Yes", "No"))
+```
+
+H) The 2007 article made several other statements. For example (1) For the last 10 years, the Academy hasn't awarded a Best Actress Oscar to anyone over 39; (2) For the past nine years, that age limit has hovered even lower, at 35; (3) In fact, if one of our cover subjects wins next month, she'll become the most mature recipient since 1990, when Jessica Tandy took home the gold for *Driving Miss Daisy*; (4) Since then, only one actress over 50 has won the supporting category, and that was Densch herself, for *Shakespeare in Love* in '99. Can you verify these statements using code? What are the corresponding values for the Best Actor and Best Supporting Actor categories?
+
+For the first question, "the last 10 years" would be the 1997 through 2006 ceremonies. We can filter the data in a couple different ways to get the Best Actress winners from those years. A similar logic would apply for the past nine years, or since 1990.
+
+(1) For the last 10 years, the Academy hasn't awarded a Best Actress Oscar to anyone over 39.
+
+```{r}
+oscar %>% 
+  filter(ceremony >= 1997, ceremony <= 2006, category == "Best Actress") %>% 
+  summarize(oldest_winner = max(age))
+
+oscar %>% 
+  filter(ceremony %in% 1997:2006, category == "Best Actress") %>% 
+  arrange(desc(age))
+```
+
+(2) For the past nine years, that age limit has hovered even lower, at 35.
+
+```{r}
+oscar %>% 
+  filter(ceremony %in% 1998:2006, category == "Best Actress") %>% 
+  summarize(oldest_winner = max(age))
+```
+
+(3) In fact, if one of our cover subjects wins next month, she'll become the most mature recipient since 1990, when Jessica Tandy took home the gold for *Driving Miss Daisy*. (According to the first page of the article, Meryl Streep was 57 years old, Judy Densch was 72, and Helen Mirren was 61 at the time.)
+
+```{r}
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Best Actress", age > 57)
+
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Best Actress") %>% 
+  arrange(desc(age))
+```
+
+(4) Since then, only one actress over 50 has won the supporting category, and that was Densch herself, for *Shakespeare in Love* in '99.
+
+```{r}
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Supporting Actress", age > 50)
+```
+
+For the Best Actors and Supporting Actors...
+
+(1) How many Best Actors were older than 39 in the last 10 years? Who is the oldest?
+
+```{r}
+oscar %>% 
+  filter(ceremony >= 1997, ceremony <= 2006, category == "Best Actor") %>% 
+  summarize(oldest_winner = max(age))
+
+oscar %>% 
+  filter(ceremony %in% 1997:2006, category == "Best Actor") %>% 
+  arrange(desc(age))
+
+oscar %>% 
+  filter(ceremony >= 1997, ceremony <= 2006, category == "Best Actor") %>% 
+  summarize(fraction_39_or_under = mean(age > 39))
+```
+
+(2) How many Best Actors were older than 35 in the last nine years? Who is the oldest?
+
+```{r}
+oscar %>% 
+  filter(ceremony %in% 1998:2006, category == "Best Actor") %>% 
+  summarize(oldest_winner = max(age))
+
+oscar %>% 
+  filter(ceremony >= 1997, ceremony <= 2006, category == "Best Actor") %>% 
+  summarize(fraction_35_or_under = mean(age > 35))
+```
+
+(3) How many Best Actors since 1990 are older than the three Best Actress nominees?
+
+```{r}
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Best Actor") %>% 
+  arrange(desc(age))
+
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Best Actor", age > 57)
+
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Best Actor", age > 61)
+
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Best Actor", age > 72)
+```
+
+(4) How many supporting actors since 1990 have been over 50?
+
+```{r}
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Supporting Actor", age > 50) %>% 
+  arrange(desc(age))
+
+oscar %>% 
+  filter(ceremony %in% 1990:2006, category == "Supporting Actor") %>% 
+  summarize(fraction_over_50 = mean(age > 50))
+```
+
+```{r}
+sessionInfo()
+```
+
