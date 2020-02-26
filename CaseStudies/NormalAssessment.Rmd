@@ -1,0 +1,92 @@
+---
+title: "Assessing Normality Practice"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    code_folding: hide
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+```{r loadpackages}
+library(tidyverse)
+```
+
+***
+#### **Gas Mileage**
+
+```{r}
+mileage <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv")
+```
+
+```{r}
+# Normality Assessment Here
+```
+
+
+#### **Old Faithful**
+
+```{r}
+geyser <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oldfaithful.csv")
+```
+
+```{r}
+# Normality Assessment Here
+```
+
+
+#### **Bangladesh Wells**
+
+```{r}
+wells <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv")
+```
+
+```{r}
+# Normality Assessment Here
+```
+
+
+#### **Semmelweiss**
+
+```{r}
+handwashing_start <- as.Date("1847-06-01")
+data <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweismonthly.csv"
+by_month <- read_csv(file = url(data)) %>% 
+  mutate(mortality = 100 * deaths / births,
+         handwashing = ifelse(date < handwashing_start, "dirty", "washed"))
+```
+
+```{r}
+# Normality Assessment Here
+```
+
+```{r}
+# Normality Assessment by Groups Here
+```
+
+
+#### **Oscar Ages**
+
+```{r}
+oscar <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv")
+```
+
+```{r}
+# Normality Assessment Here
+```
+
+```{r}
+# Normality Assessment by Groups Here
+```
+
+
+***
+```{r}
+sessionInfo()
+```
+
