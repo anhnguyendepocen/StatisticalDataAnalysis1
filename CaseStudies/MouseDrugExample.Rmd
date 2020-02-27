@@ -1,0 +1,140 @@
+---
+title: "Case Study: Mouse Drug Example"
+output: html_document
+---
+
+```{r globaloptions}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+
+This example is taken from Chapter 3 of MSRR, 2nd Edition (pp. 47-51).
+
+```{r}
+data <- tibble(treatment = rep(c("Drug", "Control"), each = 3),
+               maze_time = c(30, 25, 20, 18, 21, 22))
+data
+```
+
+$$H_0: \mu_D = \mu_C \rightarrow \mu_D - \mu_C = 0$$
+
+$$H_a: \mu_D > \mu_C \rightarrow \mu_D - \mu_C > 0$$
+
+
+```{r}
+summ <- data %>% 
+  group_by(treatment) %>% 
+  summarize(n    = n(),
+            xbar = mean(maze_time),
+            s    = sd(maze_time))
+
+summ
+
+obs_diff <- diff(summ$xbar)
+
+sprintf("The observed mean difference (xbar_D - xbar_C) is %1.2f seconds.", obs_diff)
+```
+
+
+```{r}
+sprintf("The number of possible unique regroupings for the data is %d.", choose(6, 3))
+```
+
+
+```{r}
+set.seed(1)
+
+simdata <- pull(data, maze_time)
+total_n <- length(simdata)
+group_n <- summ$n[2]
+
+N_sims <- 10^5-1
+
+rand_diffs <- numeric(N_sims)
+
+for(i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+```
+
+
+```{r}
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_bar(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+```
+
+
+```{r}
+alpha <- .05
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: mu_D = mu_C vs. Ha: mu_D > mu_C is %1.5f.", pvalue.upper)
+ifelse(pvalue.upper <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+
+Suppose the scientists ran the maze experiment a second time.
+
+```{r}
+newdata <- tibble(treatment = rep(c("Drug", "Control"), each = 6),
+                  maze_time = c(25, 33, 24, 28, 18, 22, 18, 17, 22, 20, 18, 22))
+newdata
+```
+
+
+```{r}
+summ <- newdata %>% 
+  group_by(treatment) %>% 
+  summarize(n    = n(),
+            xbar = mean(maze_time),
+            s    = sd(maze_time))
+
+summ
+
+obs_diff <- diff(summ$xbar)
+
+sprintf("The observed mean difference (xbar_D - xbar_C) is %1.2f seconds.", obs_diff)
+```
+
+
+```{r}
+sprintf("The number of possible unique regroupings for the data is %d.", choose(12, 6))
+```
+
+
+```{r}
+simdata <- pull(newdata, maze_time)
+total_n <- length(simdata)
+group_n <- summ$n[2]
+
+N_sims <- 10^5-1
+
+rand_diffs <- numeric(N_sims)
+
+for(i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+```
+
+
+```{r}
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+```
+
+
+```{r}
+alpha <- .05
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: mu_D = mu_C vs. Ha: mu_D > mu_C is %1.5f.", pvalue.upper)
+ifelse(pvalue.upper <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
