@@ -1,0 +1,223 @@
+---
+title: "Exam 1: Take-Home Component"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+<hr>
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+Load all packages and datasets you used here.
+
+```{r loadpackages&data}
+
+```
+
+**Note:** You should be using `tidyverse` functions whenever possible for manipulating and summarizing data and for making plots. Except for plots used specifically to assess normality, your plots should have appropriate titles and axis labels (e.g., not the default variable names). If you have a partial code attempt that prevents your Markdown from compiling to HTML, comment out the code so `R` will not try to compile it but I can still see your efforts.  
+
+***
+### Problem 1
+
+#### Background
+
+In December 1969, the U.S. Selective Service System conducted a lottery to a create a "random"
+draft order for eligible men in the upcoming year 1970. Read the [dataset description](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/vietnamdraft.html) for the Vietnam Draft [dataset](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv) that contains the results of this and subsequent Vietnam lotteries, including the linked New York Times article "Statisticians Charge Draft Lottery Was Not Random" to learn about how the lottery was conducted.
+
+Statistically speaking, the draft numbers for 1970 were drawn without replacement from the integer set $x = \{1, 2, 3, ..., 366\}$. The probability of drawing any draft number remaining in the pool at each step of the process was believed to be equal for all numbers, which would mean that all possible permutations of the 366 integers were equally likely---a fair process. It is impossible to prove whether the selection process was biased (non-random), but we can explore whether the outcome for 1970 seems to be consistent with randomness.
+
+#### Your Analyses
+
+(A) In your opinion, what are two aspects of the physical process used to select the numbers in the 1970 draft lottery (refer back to the NYT article for details) that could cast doubt on the fairness of the results, even before examining statistical evidence like monthly means? How could those two aspects have impacted the randomness?
+
+**ANSWER:** TYPE YOUR ANSWER HERE
+
+(B) Filter the dataset so that you extract only the data for draft year 1970.
+
+```{r}
+
+```
+
+(C) Calculate the sample size, mean, and median of the set of draft numbers.
+
+```{r}
+
+```
+
+(D) Calculate the sample size, mean, and median of draft numbers for each month.
+
+```{r}
+
+```
+
+(E) Create a new variable in your filtered dataset called `drafted` that has the value `yes` if a draft number was called up in 1970 and `no` if it was not. 
+
+```{r}
+
+```
+
+(F) Use this new variable to compute the probability that a man born in the first half of the year had his draft number called. Do the same for the second half of the year.
+
+```{r}
+
+```
+
+(G) Use your new variable to create a barplot that displays the proportion of draft numbers were called or not called up within each half of the year. (Hint: The proportions of "yes" you see here should match your probability calculations above.)
+
+```{r}
+
+```
+
+***
+### Problem 2
+
+#### Background
+
+Review the details of Case Study 1.4: Iowa Recidivism found on p. 4 of the MSRR, 2nd Ed. textbook. 
+
+#### Your Analyses
+
+(A) Why is this dataset be considered to be a population by the authors of the textbook? Alternatively, in what context could it be considered a sample?
+
+**ANSWER:** TYPE YOUR ANSWER HERE
+
+(B) Use `glimpse` to visualize the contents and structure of the dataset.
+
+```{r}
+
+```
+
+(C) Create a new variable in the dataset called `Weeks` that transforms the number of days to recidivism into number of weeks to recidivism.
+
+```{r}
+
+```
+
+(D) Summarize the number of weeks to recidivism, including n, mean, standard deviation, and five-number summary. Use the `quantile()` function to compute the deciles for number of weeks to recidivism. Use the `seq()` function in the `quantile()` function to express the set of quantiles you are trying to find.
+
+```{r}
+
+```
+
+(E) Demonstrate that we could have found mean and standard deviation for number of weeks to recidivism by first computing the mean and standard deviation for number of days to recidivism and then transforming those values to weeks.
+
+```{r}
+
+```
+
+(F) Create side-by-side boxplots for number of weeks to recidivism, grouped by type of violation. Filter out the "no recidivism" group first, since we know all their data is NA.
+
+```{r}
+
+```
+
+(G) Compute the upper and lower fences for each group represented in your comparitive boxplots. Display in some manner the values of any outliers that exist in each group.
+
+```{r}
+
+```
+
+(H) For the full `Recidivism` dataset, convert the variable containing data about age at release into an ordered factor variable so that the age groups will be presented in ascending order. 
+
+```{r}
+
+```
+
+(I) Create a frequency table that summarizes the counts, proportions, cumulative counts, and cumulative proportions for the variable containing data about age at release.
+
+```{r}
+
+```
+
+***
+### Problem 3
+
+#### Background
+
+A [digital communication channel transmits binary signals](http://what-when-how.com/data-communications-and-networking/digital-transmission-of-digital-data/) (0 or 1). These signals are then built into larger messages. For example, ASCII represents letters and other symbols using an 8-bit binary code. Suppose a system is susceptible to electronic interference, so there is a 1% chance that any single bit sent by the system will be incorrectly received (i.e., the sender transmits 0, which the receiver mistakenly interprets as 1). Assume the interference is non-patterned, so all errors are random and independent. One simple method for error reduction is repetition code. For critical messages, we can use triple repetition code (TRC). The individual digits are transmitted as repeated blocks of three identical digits (a single 0 in the message would be sent as the block 000 and a single 1 would be sent as 111). The receiver uses a "majority logic decoding" method on blocks. If the majority of the three-block's digits are interpreted by the receiver as 0, then the transmitted digit represented by the block is recorded as a 0. If the majority are interpreted as 1, then the digit is recorded as a 1. For example, 001 is received as 0 and 101 is received as 1. We can model a system like this using the binomial and/or normal distributions.
+
+### Your Analyses
+
+(A) A 1000 Mbit/s system transmits 10^9^ individual bits per second. If each bit has a 0.001% chance of being incorrectly received, how many errors per second would we expect to get, on average? What is the standard deviation of the number of errors? Calculate the answers using the theoretical binomial model.
+
+```{r}
+
+```
+
+(B) What is the probability of getting no errors in a given second? What is the probability that the system exceeds the expected number of errors? What is the probability that the number of errors is within one standard deviation of the mean? Calculate the theoretical answer.
+
+```{r}
+
+```
+
+(C) Verify your calculations (A) and (B) using simulation with 100,000 randomly generated values. Also plot a histogram of your simulation results.
+
+```{r}
+
+```
+
+(D) In the class videos and *Foundations of Probability in R* DataCamp course, you learned about the normal approximation to the binomial distribution. Create a plot showing the theoretical normal curve that would correspond to the binomial scenario in (A). Label the mean and four standard deviations on either side of the mean. 
+
+```{r}
+
+```
+
+(E) Is the normal approximate appropriate here? Assess your simulation results for normality using a density plot, EDCF plot, QQ plot, and calculations of skewness and kurtosis.
+
+```{r}
+
+```
+
+(F) What is the probability of getting no errors in a given second? What is the probability that the system exceeds the expected number of errors? What is the probability that the number of errors is within one standard deviation of the mean? Calculate the theoretical answer. Calculate the theoretical answer using the normal model.
+
+```{r}
+
+```
+
+(F) Transmitting single bits on this system results in a fairly large number of errors. What if we use triple repetition code (TRC) strategy here? That would be a different binomial model. Let X be the number of bits in a single TRC block that are correctly received. Compute the pmf of X. Display the results and create a bar plot. 
+
+```{r}
+
+```
+
+(G) What is the probability that any single TRC block (e.g., 000) is interpreted correctly?
+
+```{r}
+
+```
+
+(H) Suppose we have a parallel system that lets us transmit 10^9^ bits per second using TRC, similar to (A) but with reduced error due to the built-in redundancy. How many errors per second would we expect to get now? What percentage reduction does this represent compared to the single-bit system?
+
+```{r}
+
+```
+
+Just for fun! Modify the code below to display the ASCII representation of your name. 
+
+```{r, message = FALSE}
+require(gtools)
+require(broman)
+require(BMS)
+NAMELET  <- c("J", "i", "l", "l", "T", "h", "o", "m", "l", "e", "y")
+n        <- length(NAMELET)
+NAMEHEX  <- convert2hex(asc(NAMELET))
+NAMEBIN  <- matrix(rep(0, n * 8), ncol = 8)
+for (i in 1:n) {
+    NAMEBIN[i, 1:8] <- hex2bin(NAMEHEX[i])
+}
+rownames(NAMEBIN) <- NAMELET
+colnames(NAMEBIN) <- c("Bit1", "Bit2", "Bit3", "Bit4", "Bit5", "Bit6", "Bit7", "Bit8")
+print(NAMEBIN)
+```
+
+***
+```{r}
+sessionInfo()
+```
+
