@@ -1,0 +1,99 @@
+---
+title: "Sampling Distributions: Introduction to the Concept"
+subtitle: "JB Statistics Video Lesson Companion `R` Code"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Zbw-YvELsaM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+library(combinat)
+```
+
+University Class Population
+
+```{r createpop}
+pop_ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276)
+
+(mu <- mean(pop_ages))
+```
+
+University Class Sample (1)
+
+```{r sample1}
+sampleIDs <- c(3, 6, 15)
+sample_ages <- pop_ages[sampleIDs] # use vector index [ ] to get data for sampled students
+(xbar1 <- mean(sample_ages))
+```
+
+University Class Sample (2)
+
+```{r sample2}
+sampleIDs <- c(5, 15, 16)
+sample_ages <- pop_ages[sampleIDs]
+(xbar2 <- mean(sample_ages))
+```
+
+Resampling Many Times
+
+```{r simsamples}
+sims  <- 10^6              # number of samples
+pop_N <- length(pop_ages)  # population size
+n     <- 3                 # sample size
+
+sim_means <- numeric(sims) # store the simulated sample means
+
+for (i in 1:sims) {
+  sampleIDs    <- sample(pop_N, n)           # choose sample IDs
+  sim_means[i] <- mean(pop_ages[sampleIDs])  # compute/store mean
+}
+
+ggplot(NULL, aes(x = sim_means)) +
+  geom_histogram(bins = 15, color = "gray", fill = "blue") +
+  geom_vline(xintercept = mu, color = "red")
+
+mean(sim_means)
+sd(sim_means)
+```
+
+Number of Possible Samples?
+
+```{r combinations}
+choose(pop_N, n)
+```
+
+Means of All Possible Samples
+
+```{r allsamples}
+all_samples <- combn(pop_ages, n)        # each matrix column is one sample
+all_means   <- colSums(all_samples) / n  # compute the mean of each sample
+
+ggplot(NULL, aes(x = all_means)) +
+  geom_dotplot(dotsize = 0.35) +
+  geom_vline(xintercept = mu, color = "red") +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(title = "Means of All Possible Samples of n = 3 from the Population of Class Ages",
+       x = "Mean Age in Months")
+
+mean(all_means)
+sd(all_means)
+```
+
+***
+```{r}
+sessionInfo()
+```
+
