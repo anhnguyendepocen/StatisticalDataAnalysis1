@@ -63,7 +63,8 @@ for (i in 1:sims) {
 
 ggplot(NULL, aes(x = sim_means)) +
   geom_histogram(bins = 15, color = "gray", fill = "blue") +
-  geom_vline(xintercept = mu, color = "red")
+  geom_vline(xintercept = mu, color = "red") +
+  theme_linedraw()
 
 mean(sim_means)
 sd(sim_means)
@@ -84,7 +85,7 @@ all_means   <- colSums(all_samples) / n  # compute the mean of each sample
 ggplot(NULL, aes(x = all_means)) +
   geom_dotplot(dotsize = 0.35) +
   geom_vline(xintercept = mu, color = "red") +
-  scale_y_continuous(NULL, breaks = NULL) +
+  scale_y_continuous(NULL, breaks = NULL, expand = c(0, 0)) +
   labs(title = "Means of All Possible Samples of n = 3 from the Population of Class Ages",
        x = "Mean Age in Months")
 
