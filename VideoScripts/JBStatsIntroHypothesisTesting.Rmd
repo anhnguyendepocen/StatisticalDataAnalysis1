@@ -1,0 +1,81 @@
+---
+title: "An Introduction to Hypothesis Testing"
+subtitle: "JB Statistics Video Lesson Companion `R` Code"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tTeMYuS87oU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+```
+
+Purely Guessing Cards: Binomial Model
+
+```{r purelyrandommodel}
+n <- 100
+p <- 1/4
+(expected_value <- n * p)
+
+bin_pmf <- tibble(x = 0:n, probability = dbinom(x, n, p))
+
+bin_pmf_50 <- bin_pmf %>% 
+  filter(x <= 50)
+
+ggplot(bin_pmf_50, aes(x = x, y = probability)) + 
+  geom_bar(stat = "identity", color = "gray", fill = "blue") +
+  labs(title = "Probability Distribution for X = Number of Card Suits Guessed Correctly",
+       subtitle = "number correct of n = 100 independent and purely random guesses, truncated at x = 50",
+       x = "number correct") +
+  theme_linedraw()
+```
+
+Evidence about Pete's Guessing Skills 
+
+```{r assessingpetedata}
+pete_x <- 28  # change this to test 44 correct guesses
+
+bin_pmf <- bin_pmf %>% 
+  mutate(shading = ifelse(x >= pete_x, "red", "blue"))
+
+bin_pmf_50 <- bin_pmf %>% 
+  filter(x <= 50)
+
+ggplot(bin_pmf_50, aes(x = x, y = probability, fill = shading)) + 
+  geom_bar(stat = "identity", fill = bin_pmf_50$shading) +
+  annotate("rect", xmin = pete_x - 0.5, xmax = 50, ymin = 0, ymax = .1, alpha = .2) +
+  labs(title = "Probability Distribution for X = Number of Card Suits Guessed Correctly",
+       subtitle = "the red-shaded bars (upper tail, gray box) indicate Pete's guess of 28 correct and higher",
+       x = "number correct") +
+  theme_linedraw()
+
+(pete_prob <- pbinom(pete_x - 1, n, p, lower.tail = FALSE))  # find the blue area and subtract from 1
+```
+
+An Extension: Flipping the Question
+
+**Question:** What is the minimum number of cards would Pete have to guess correctly to be in the top 20% of the distribution?
+
+```{r}
+qbinom(.20, n, p, lower.tail = FALSE)
+```
+
+
+
+***
+```{r}
+sessionInfo()
+```
+
