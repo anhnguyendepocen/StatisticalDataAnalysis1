@@ -58,7 +58,7 @@ How many unique regroupings of the data are possible in this scenario?
 sprintf("The number of possible unique regroupings for the data is %d.", choose(6, 3))
 ```
 
-The Excel spreadsheet `MouseDrugExample.xlsx` shows all posisble regroupings, as does Table 3.1 in the textbook. We could find these in `R`, but it quickly becomes too many to be feasible. Instead, we randomly sample from the possible regroupings a very large number of times. This is a permutation resampling test.
+The Excel spreadsheet `MouseDrugExample.xlsx` shows all possible regroupings, as does Table 3.1 in the textbook. We could find these in `R`, but it quickly becomes too many to be feasible. Instead, we randomly sample from the possible regroupings a very large number of times. This is a permutation resampling test.
 
 ```{r resamplingsim}
 set.seed(1)  # delete or change this to see different permutations
