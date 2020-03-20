@@ -44,7 +44,7 @@ ggplot(bin_pmf_50, aes(x = x, y = probability)) +
 
 Evidence about Pete's Guessing Skills 
 
-```{r assessingpetedata}
+```{r petedatasimulation}
 pete_x <- 28  # change this to test 44 correct guesses
 
 bin_pmf <- bin_pmf %>% 
@@ -68,7 +68,7 @@ An Extension: Flipping the Question
 
 **Question:** What is the minimum number of cards would Pete have to guess correctly to be in the top 20% of the distribution?
 
-```{r}
+```{r petedataexact}
 upper_pct <- 0.20
 lower_pct <- 1 - upper_pct
 
@@ -93,9 +93,7 @@ ggplot(bin_cdf_50, aes(x = x, y = cum_prob)) +
 (threshold <- qbinom(upper_pct, n, p, lower.tail = FALSE))
 ```
 
-
 ***
 ```{r}
 sessionInfo()
 ```
-

@@ -1,0 +1,143 @@
+---
+title: "Example 3.1: Mouse Drug Trials"
+subtitle: "Mathematical Statistics with Resampling and R, 2nd Edition"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+***
+**Example 3.1 from MSRR, 2nd Edition (pp. 47-51)**
+
+Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+library(combinat)
+```
+
+Create the dataset for the experiment
+
+```{r createdataset}
+(data <- tibble(treatment = rep(c("Drug", "Control"), each = 3),
+               maze_time = c(30, 25, 20, 18, 21, 22)))
+```
+
+Write the null and alternative hypotheses
+
+$$H_0: \mu_D = \mu_C \rightarrow \mu_D - \mu_C = 0$$
+
+$$H_a: \mu_D > \mu_C \rightarrow \mu_D - \mu_C > 0$$
+
+Summarize sample size, mean, and variability of the experimental data
+
+```{r summarystats}
+(summ <- data %>% 
+  group_by(treatment) %>% 
+  summarize(n    = n(),
+            xbar = mean(maze_time),
+            s    = sd(maze_time)))
+```
+
+Compute the observed difference between the means (the test statistic)
+
+```{r teststatcalc}
+(obs_diff <- diff(summ$xbar))
+```
+
+How many unique regroupings of the data are possible in this scenario?
+
+```{r regroupingscalc}
+sprintf("The number of possible unique regroupings for the data is %d.", choose(6, 3))
+```
+
+The Excel spreadsheet `MouseDrugExample.xlsx` shows all posisble regroupings, as does Table 3.1 in the textbook. We could find these in `R`, but it quickly becomes too many to be feasible. Instead, we randomly sample from the possible regroupings a very large number of times. This is a permutation resampling test.
+
+```{r resamplingsim}
+set.seed(1)  # delete or change this to see different permutations
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(data, maze_time)  # data merged into a single pool 
+total_n <- length(simdata)        # total number of observations n
+group_n <- summ$n[2]              # observations in the drug group 
+
+N_sims <- 10^5-1                  # number of resampling loops
+
+rand_diffs <- numeric(N_sims)     # vector to store sim results
+
+for (i in 1:N_sims) {
+  # select sampleIDs for Drug group
+  index <- sample(total_n, group_n)
+  # divide the data into groups and compute the mean difference
+  # index is the sampleIDs chosen and -index is IDs NOT chosen
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+```
+
+Plot the resampling results to view the distribution
+
+```{r plotresults}
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_bar(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+```
+
+Compute the p-value of the test using the resampling results
+
+```{r pvaluecalc}
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: mu_D = mu_C vs. Ha: mu_D > mu_C is %1.5f.", pvalue.upper)
+ifelse(pvalue.upper <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+Suppose the scientists ran the maze experiment a second time with more mice
+
+```{r newexperiment}
+(newdata <- tibble(treatment = rep(c("Drug", "Control"), each = 6),
+                  maze_time = c(25, 33, 24, 28, 18, 22, 18, 17, 22, 20, 18, 22)))
+
+(summ <- newdata %>% 
+  group_by(treatment) %>% 
+  summarize(n    = n(),
+            xbar = mean(maze_time),
+            s    = sd(maze_time)))
+
+(obs_diff <- diff(summ$xbar))
+
+alpha <- .05
+
+simdata <- pull(newdata, maze_time)
+total_n <- length(simdata)
+group_n <- summ$n[2]
+
+N_sims <- 10^5-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: mu_D = mu_C vs. Ha: mu_D > mu_C is %1.5f.", pvalue.upper)
+ifelse(pvalue.upper <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+***
+```{r}
+sessionInfo()
+```
