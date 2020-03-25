@@ -16,22 +16,32 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Zbw-YvELsaM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ***
-Packages Used
+#### Packages Used
+
+We will use `tideverse` for our summary statistics and plots. We need the `combinat` package for the `combn()` funtion, which finds all possible combinations of a given size from a vector of values.
 
 ```{r loadpackages}
 library(tidyverse)
 library(combinat)
 ```
 
-University Class Population
+#### University Class Population
+
+The video uses a population of 16 students in a college classroom as an example. The variable of interest is the students' ages in months. We can create this population in `R` as a vector. Each value in the vector has a location or index numbered from 1-16. We can identify a value via its location and acces it with `[ ]` notation.
 
 ```{r createpop}
 pop_ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276)
 
+pop_ages[1]   # first value
+pop_ages[10]  # tenth value
+pop_ages[c(1, 10)]  # first and tenth values
+
 (mu <- mean(pop_ages))
 ```
 
-University Class Sample (1)
+#### University Class Sample (1)
+
+The first random sample of n = 3 students includes students 3, 6, and 15.
 
 ```{r sample1}
 sampleIDs <- c(3, 6, 15)
@@ -39,7 +49,9 @@ sample_ages <- pop_ages[sampleIDs] # use vector index [ ] to get data for sample
 (xbar1 <- mean(sample_ages))
 ```
 
-University Class Sample (2)
+#### University Class Sample (2)
+
+The second random sample of n = 3 students includes students 5, 15, and 16. Notice that student 15 is included in both samples. Since each sample is independent of the other and all samples are equally likely, it is not unusual for this to happen.
 
 ```{r sample2}
 sampleIDs <- c(5, 15, 16)
@@ -47,18 +59,20 @@ sample_ages <- pop_ages[sampleIDs]
 (xbar2 <- mean(sample_ages))
 ```
 
-Resampling Many Times
+#### Resampling Many Times
+
+We will take advantage of being able to choose values using `[ ]` to take a large number of random samples from the population. While it is possible to accomplish what we want by using the `sample()` function directly on the vector here, we are laying down a methodological foundation for resampling-based hypothesis tests by doing it this way.
 
 ```{r simsamples}
 sims  <- 10^6              # number of samples
 pop_N <- length(pop_ages)  # population size
 n     <- 3                 # sample size
 
-sim_means <- numeric(sims) # store the simulated sample means
+sim_means <- numeric(sims) # vector to store the means of the random samples
 
 for (i in 1:sims) {
-  sampleIDs    <- sample(pop_N, n)           # choose sample IDs
-  sim_means[i] <- mean(pop_ages[sampleIDs])  # compute/store mean
+  sampleIDs    <- sample(pop_N, n)           # randomly choose n sample IDs
+  sim_means[i] <- mean(pop_ages[sampleIDs])  # compute/store the sample mean
 }
 
 ggplot(NULL, aes(x = sim_means)) +
@@ -68,15 +82,24 @@ ggplot(NULL, aes(x = sim_means)) +
 
 mean(sim_means)
 sd(sim_means)
+
+# if you are confused about this, run it a few times and see what happens
+# clarify for yourself so that you understand what pop_N is and what n is
+
+sample(pop_N, n)
 ```
 
-Number of Possible Samples?
+#### Number of Possible Samples?
+
+How many possible samples are there if we wanted to find the exact sampling distribution?
 
 ```{r combinations}
 choose(pop_N, n)
 ```
 
-Means of All Possible Samples
+#### Means of All Possible Samples
+
+The `combn()` function finds all the unique samples of n = 3 from the population and outputs the results as a matrix, one sample in each column. We can then compute all the sample means and plot them. Notice the `NULL` where we would usually put the dataset name in the `ggplot()` function, since the data are in a vector instead of a data frame. 
 
 ```{r allsamples}
 all_samples <- combn(pop_ages, n)        # each matrix column is one sample
@@ -90,7 +113,6 @@ ggplot(NULL, aes(x = all_means)) +
        x = "Mean Age in Months")
 
 mean(all_means)
-sd(all_means)
 ```
 
 ***
