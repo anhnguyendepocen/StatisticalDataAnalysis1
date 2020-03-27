@@ -1,0 +1,203 @@
+---
+title: "The Sampling Distribution of the Sample Mean"
+subtitle: "JB Statistics Video Lesson Companion `R` Code"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/q50GpTdFYyI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+#### Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+library(gridExtra)  # necessary to arrange some plots
+```
+
+#### The Sampling Distribution of $\bar{X}$
+
+Let $\mu$ be the mean and $\sigma$ be the standard deviation of a population. Let the random variable $\bar{X}$ represent the sample mean of $n$ independently drawn observations (i.e., a random sample of size $n$). The mean, variance, and standard deviation of the variable $\bar{X}$ are given by the following expressions:
+
+
+$$E(\bar{x}) = \mu_{\bar{x}} = \mu$$
+
+$$Var(\bar{x}) = \sigma^2_{\bar{x}} = \frac{\sigma^2}{n}$$
+
+$$SD(\bar{x}) = \sqrt{Var(\bar{x})} = \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$$
+
+#### Visualizing When the Population is Normal
+
+The plot and table demonstrate how the variability changes as the sample size grows larger. How much do we have to increase the sample size in order to cut the standard deviation in half?
+
+```{r visualizingcurves}
+mu    <- 0  # enter a value for the mean 
+sigma <- 1  # enter a value for the SD
+
+ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) + 
+  stat_function(fun = dnorm, args = list(mu, sigma)) +                           # population curve
+  stat_function(fun = dnorm, args = list(mu, sigma/sqrt(2)), col = "red") +      # x-bar when n = 2
+  stat_function(fun = dnorm, args = list(mu, sigma/sqrt(4)), col = "green") +    # x-bar when n = 4
+  stat_function(fun = dnorm, args = list(mu, sigma/sqrt(8)), col = "orange") +   # x-bar when n = 8
+  stat_function(fun = dnorm, args = list(mu, sigma/sqrt(16)), col = "purple") +  # x-bar when n = 8
+  scale_x_continuous(breaks = seq(mu - (4 * sigma),  mu + (4 * sigma), sigma)) +
+  labs(title = "Population Distribution vs. Sampling Distributions for n = 2, 4, 8, and 16", 
+       x = NULL, 
+       y = "f(x)") + 
+  theme_linedraw()
+
+tibble(n = c(1, 2, 4, 8, 16),
+       SD = sigma/sqrt(n))
+```
+
+#### Standardizing the Sampling Distribution
+
+Prior to the advent of technology like `R` that can directly calculate probabilities, we needed to standardize scores in order to look up probabilities on a standard normal reference table. Standardized scores are also widely used in traditional statistical inference procedures, so it is important to understand the concept. Here we show it using simulation with randomly generated values from a normal distribution. You can experiment with different values for the population parameters and sample size.
+
+```{r standardizingsim}
+mu         <- 100  # enter a value for the mean 
+sigma      <- 10   # enter a value for the SD
+n          <- 4    # enter a value for the sample size (1 = population)
+sigma_xbar <- sigma/sqrt(n)
+
+pop_vals   <- rnorm(10^5, mu, sigma)   # 10^5 individual values from the population
+
+pop_vals_z <- (pop_vals - mu) / sigma  # standardized population values (z-scores)
+
+mean_vals <- numeric(10^5)  # 10^5 means from random samples of the chosen size n
+for (i in 1:10^5) {
+  mean_vals[i] <- mean(rnorm(n, mu, sigma))
+}
+
+mean_vals_z <- (mean_vals - mu) / (sigma_xbar)  #standardized means (zscores)
+
+plotA <- ggplot(NULL, aes(x = pop_vals)) +
+  geom_density() +
+  scale_x_continuous(breaks = seq(mu - (6 * sigma),  mu + (6 * sigma), sigma)) +
+  labs(title = "Population Distribution") +
+  theme_linedraw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = .5))
+
+plotB <- ggplot(NULL, aes(x = pop_vals_z)) +
+  geom_density() +
+  scale_x_continuous(breaks = seq(-6, 6, 1)) +
+  labs(title = "Standardized Population Distribution") +
+  theme_linedraw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = .5))
+
+plotC <- ggplot(NULL, aes(x = mean_vals)) +
+  geom_density() +
+  scale_x_continuous(breaks = seq(mu - (6 * sigma_xbar),  mu + (6 * sigma_xbar), sigma_xbar)) +
+  labs(title = paste("Sampling Distribution for n =", n)) +
+  theme_linedraw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = .5))
+
+plotD <- ggplot(NULL, aes(x = mean_vals_z)) +
+  geom_density() +
+  scale_x_continuous(breaks = seq(-6, 6, 1)) +
+  labs(title = "Standardized Sampling Distribution") +
+  theme_linedraw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = .5))
+
+grid.arrange(plotA, plotC, plotB, plotD,
+             top = "Exploring the Sampling Distribution of the Mean with Standardization")
+```
+
+#### Example: Protein in a Quarter Pound Patty
+
+The amount of protein in a single patty
+
+```{r proteinexample1}
+mu    <- 21.4 
+sigma <- 1.9
+x     <- 23.0
+z     <- (x - mu)/sigma
+
+plotX <- ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) +
+  stat_function(fun = dnorm, args = list(mu, sigma)) +
+  geom_area(stat = "function", 
+            fun = dnorm, 
+            args = list(mu, sigma), 
+            fill = "blue", 
+            xlim = c(x, mu + 4 * sigma)) +  # shades from x to the upper limit 
+  scale_x_continuous(breaks = seq(mu - (4 * sigma),  mu + (4 * sigma), sigma)) +
+  labs(title = "Distribution of Protein in Individual Beef Patties", 
+       x = "grams of protein", 
+       y = "f(x)") + 
+  theme_linedraw()
+
+plotZ <- ggplot(NULL, aes(-4:4)) +
+  stat_function(fun = dnorm) +
+  geom_area(stat = "function", 
+            fun = dnorm, 
+            fill = "blue", 
+            xlim = c(z, 4)) +
+  scale_x_continuous(breaks = seq(-4,  4, 1)) +
+  labs(title = "Standardized Distribution of Protein in Individual Beef Patties", 
+       x = "z-score for grams of protein", 
+       y = "f(x)") + 
+  theme_linedraw()
+
+grid.arrange(plotX, plotZ)
+
+pnorm(x, mu, sigma, lower.tail = FALSE)
+pnorm(z, lower.tail = FALSE)  # default settings are mu = 0 and sigma = 1
+```
+
+The average amount of protein $n$ patties
+
+```{r proteinexample2}
+mu         <- 21.4 
+sigma      <- 1.9
+n          <- 4
+sigma_xbar <- sigma/sqrt(n)
+x_bar      <- 23.0
+z_xbar          <- (x_bar - mu)/sigma_xbar
+
+plotXbar <- ggplot(NULL, aes((mu - 4 * sigma_xbar):(mu + 4 * sigma_xbar))) +
+  stat_function(fun = dnorm, args = list(mu, sigma_xbar)) +
+  geom_area(stat = "function", 
+            fun = dnorm, 
+            args = list(mu, sigma_xbar), 
+            fill = "blue", 
+            xlim = c(x, mu + 4 * sigma_xbar)) + 
+  scale_x_continuous(breaks = seq(mu - (4 * sigma_xbar),  mu + (4 * sigma_xbar), sigma_xbar)) +
+  labs(title = paste("Distribution of Mean Protein in a Sample of", n, "Beef Patties"), 
+       x = "mean grams of protein", 
+       y = "f(x)") + 
+  theme_linedraw()
+
+plotZxbar <- ggplot(NULL, aes(-4:4)) +
+  stat_function(fun = dnorm) +
+  geom_area(stat = "function", 
+            fun = dnorm, 
+            fill = "blue", 
+            xlim = c(z_xbar, 4)) +
+  scale_x_continuous(breaks = seq(-4,  4, 1)) +
+  labs(title = paste("Standardized Distribution of Mean Protein in a Aample of", n, "Beef Patties"), 
+       x = "z-score for mean grams of protein", 
+       y = "f(x)") + 
+  theme_linedraw()
+
+grid.arrange(plotXbar, plotZxbar)
+
+pnorm(x_bar, mu, sigma_xbar, lower.tail = FALSE)
+pnorm(z_xbar, lower.tail = FALSE)  # default settings are mu = 0 and sigma = 1
+```
+
+
+
+
+
+***
+```{r}
+sessionInfo()
+```

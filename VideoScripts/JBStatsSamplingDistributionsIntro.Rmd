@@ -18,11 +18,9 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 ***
 #### Packages Used
 
-We will use `tideverse` for our summary statistics and plots. We need the `combinat` package for the `combn()` funtion, which finds all possible combinations of a given size from a vector of values.
-
 ```{r loadpackages}
 library(tidyverse)
-library(combinat)
+library(combinat)  # required for combn() function
 ```
 
 #### University Class Population
