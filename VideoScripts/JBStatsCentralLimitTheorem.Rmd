@@ -1,0 +1,207 @@
+---
+title: "Introduction to the Central Limit Theorem"
+subtitle: "JB Statistics Video Lesson Companion `R` Code"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Pujol1yC1_A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+#### Packages Used
+
+```{r loadpackages}
+library(tidyverse)
+library(gridExtra)
+```
+
+#### Explore the Central Limit Theorem via Simulation
+
+The Exponential Distribution
+
+The exponential distribution has a single parameter $\lambda$, which is the rate of the exponential decay. The larger the value of $\lambda$, the steeper the initial slope. For X ~ Exp($\lambda$), the mean and standard deviation are $\mu$ = $\frac{1}{\lambda}$ and $\sigma = \frac{1}{\lambda}$. Thus, for Exp(1), both the mean and standard deviation are 1. You can change the value of $\lambda$ (to any real number greater than zero) in the plot below to visualize other exponential distributions.
+
+```{r exppop}
+lambda <- 1
+ggplot(NULL, aes(0:6)) + 
+  stat_function(fun = dexp, args = list(lambda)) +  
+  labs(title = paste("Probability Density Function of Exp(", lambda, ")", sep = ""), x = "x", y = "f(x)") + 
+  theme_linedraw()
+```
+
+How does the shape of the sampling distribution of $\bar{x}$ compare? We will first explore this via simulation. Instead of histograms as in the video, we will use density plots, but the principle is the same. We will also include a QQ plot to assess normality. Change the value of $n$ below and observe what happens. You can also experiment with different values of $\lambda$. How large does $n$ have to be to make the sampling distribution of $\bar{x}$ look approximately normal to you? Is the rough guideline of 30 enough here?
+
+```{r expsim}
+n          <- 2
+lambda     <- 1
+
+mu         <- 1/lambda
+sigma      <- 1/lambda
+sigma_xbar <- sigma/sqrt(n)
+
+sims       <- 10^5  # we will do a 100,000 simulations
+samplemeans <- numeric(sims)
+for (i in 1:sims) {
+  samplemeans[i] <- mean(rexp(n, lambda))
+}
+
+# the black dotted curve is the exponential population
+# the blue curve is the simulated sampling distribution
+# the red curve is a normal distribution having mean mu
+# and standard deviation sigma_xbar, used for reference
+
+ggplot(NULL, aes((-2/n):(6/n))) + 
+  stat_function(fun = dexp, args = list(lambda), linetype = "dotted") +   
+  geom_density(aes(x = samplemeans), color = "gray", fill = "lightblue", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(mu, sigma_xbar), color = "red") +
+  labs(x = "individual values (dotted black curve) and sample means", y = "density") + 
+  theme_linedraw()
+```
+
+It can be difficult to judge normality using density plots, so we can use a plot more specifically geeared for assessing normality.
+
+```{r expsimqq}
+ggplot(NULL, aes(sample = samplemeans)) +
+  geom_qq() +
+  geom_qq_line(color = "red")
+```
+
+If we standardize, the distribution will converge to the standard normal distribution.
+
+```{r expsimstandardized}
+zscores <- (samplemeans - mean(samplemeans)) / sd(samplemeans)
+
+ggplot(NULL, aes(-6:6)) + 
+  geom_density(aes(x = zscores), color = "gray", fill = "lightblue", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(0, 1), color = "red") +
+  labs(x = "standardized sample means", y = "density") + 
+  theme_linedraw()
+```
+
+The Uniform Distribution
+
+The uniform distribution X ~ Unif($a, b$) has a "rectangular" shape with two parameters, which are the upper and lower boundaries of possible values. The uniform distribution with $a$ = 0 and $b$ = 1 is the standard uniform distribution (the plot is a unit square).
+
+```{r unifpop}
+a <- 0
+b <- 1
+
+ggplot(NULL, aes(a:b)) + 
+  stat_function(fun = dunif, args = list(a, b)) +  
+  labs(title = paste("Probability Density Function of Unif(", a, ", ", b, ")", sep = ""), x = "x", y = "f(x)") + 
+  scale_y_continuous(limits = c(0,1)) +
+  theme_linedraw() +
+  coord_fixed()  # x and y axes have the same spacing
+```
+
+How does the shape of the sampling distribution of $\bar{x}$ compare when we start with a symmetric distribution versus the right skew we had above? How large does $n$ have to be to make the sampling distribution of $\bar{x}$ look approximately normal to you?
+
+```{r unifsim}
+n          <- 2
+a          <- 0
+b          <- 1
+
+mu         <- (b - a)/2
+sigma      <- sqrt((a - b)^2/12)
+sigma_xbar <- sigma/sqrt(n)
+
+sims       <- 10^5  # we will do a 100,000 simulations
+samplemeans <- numeric(sims)
+for (i in 1:sims) {
+  samplemeans[i] <- mean(runif(n, a, b))
+}
+
+# the black dotted curve is the exponential population
+# the blue curve is the simulated sampling distribution
+# the red curve is a normal distribution having mean mu
+# and standard deviation sigma_xbar, used for reference
+
+ggplot(NULL, aes(a:b)) + 
+  stat_function(fun = dunif, args = list(a, b), linetype = "dotted") +   
+  geom_density(aes(x = samplemeans), color = "gray", fill = "lightblue", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(mu, sigma_xbar), color = "red") +
+  labs(x = "individual values (dotted black curve) and sample means", y = "density") + 
+  theme_linedraw()
+```
+
+Again we assess normality using the normal quantile-quantile plot.
+
+```{r unifsimqq}
+ggplot(NULL, aes(sample = samplemeans)) +
+  geom_qq() +
+  geom_qq_line(color = "red")
+```
+
+Notice that this code is identical to what we used for the exponential distribution. That is one benfit of using standardized scores.
+
+```{r unifsimstandardized}
+zscores <- (samplemeans - mean(samplemeans)) / sd(samplemeans)
+
+ggplot(NULL, aes(-6:6)) + 
+  geom_density(aes(x = zscores), color = "gray", fill = "lightblue", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(0, 1), color = "red") +
+  labs(x = "standardized sample means", y = "density") + 
+  theme_linedraw()
+```
+
+#### Salary Example
+
+Salaries are generally right skewed. That should make sense if you think about it. There is a natural lower boundary of zero with the majority of individuals having salaries relatively near the lower end of the number line. A smaller number of individuals make somewhat larger amounts of money, with an even smaller number making an exceptionally large amount of money, as shown in the plot below of US Household Income. Therefore, we cannot use a normal model to compute probabilities for individual salaries, even if we know the mean and standard deviation. However, we can for the mean salary of a sufficiently large sample thanks to the Central Limit Theorem.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Distribution_of_Annual_Household_Income_in_the_United_States_2010.png" width = 600">
+
+```{r}
+mu         <- 62000
+sigma      <- 32000
+n          <- 100
+
+sigma_xbar <- sigma/sqrt(n)
+  
+x_bar      <- 66000
+(z_xbar     <- (x_bar - mu) / sigma_xbar)
+
+pnorm(x_bar, mu, sigma_xbar, lower.tail = FALSE)
+pnorm(z_xbar, lower.tail = FALSE)
+
+plotXbar <- ggplot(NULL, aes((mu - 4 * sigma_xbar):(mu + 4 * sigma_xbar))) +
+  stat_function(fun = dnorm, args = list(mu, sigma_xbar)) +
+  geom_area(stat = "function", 
+            fun = dnorm, 
+            args = list(mu, sigma_xbar), 
+            fill = "blue", 
+            xlim = c(x_bar, mu + 4 * sigma_xbar)) + 
+  scale_x_continuous(breaks = seq(mu - (4 * sigma_xbar),  mu + (4 * sigma_xbar), sigma_xbar)) +
+  labs(title = paste("Distribution of Mean Salary for Samples of n =", n), 
+       x = "mean salary in dollars", 
+       y = "f(x)") + 
+  theme_linedraw()
+
+plotZxbar <- ggplot(NULL, aes(-4:4)) +
+  stat_function(fun = dnorm) +
+  geom_area(stat = "function", 
+            fun = dnorm, 
+            fill = "blue", 
+            xlim = c(z_xbar, 4)) +
+  scale_x_continuous(breaks = seq(-4,  4, 1)) +
+  labs(title = paste("Standardized Distribution of Mean Salary for n =", n), 
+       x = "mean salary in dollars", 
+       y = "f(x)") + 
+  theme_linedraw()
+
+grid.arrange(plotXbar, plotZxbar)
+```
+
+
+
+***
+```{r}
+sessionInfo()
+```

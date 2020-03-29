@@ -60,7 +60,7 @@ tibble(n = c(1, 2, 4, 8, 16),
 
 #### Standardizing the Sampling Distribution
 
-Prior to the advent of technology like `R` that can directly calculate probabilities, we needed to standardize scores in order to look up probabilities on a standard normal reference table. Standardized scores are also widely used in traditional statistical inference procedures, so it is important to understand the concept. Here we show it using simulation with randomly generated values from a normal distribution. You can experiment with different values for the population parameters and sample size.
+Prior to the advent of technology like `R` that can directly calculate probabilities, we needed to standardize scores in order to look up probabilities on a standard normal reference table. Standardized scores are also widely used in traditional statistical inference procedures, so it is important to understand the concept. Here we show it using simulation with randomly generated values from a normal distribution. You can experiment with different values for the population parameters and sample size. Pay attention to the scales on the x-axes of the four plots and how they change (or do not change) and you change the sample size. 
 
 ```{r standardizingsim}
 mu         <- 100  # enter a value for the mean 
@@ -118,8 +118,12 @@ The amount of protein in a single patty
 ```{r proteinexample1}
 mu    <- 21.4 
 sigma <- 1.9
+
 x     <- 23.0
+pnorm(x, mu, sigma, lower.tail = FALSE)
+
 z     <- (x - mu)/sigma
+pnorm(z, lower.tail = FALSE)  # default settings are mu = 0 and sigma = 1
 
 plotX <- ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) +
   stat_function(fun = dnorm, args = list(mu, sigma)) +
@@ -130,6 +134,7 @@ plotX <- ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) +
             xlim = c(x, mu + 4 * sigma)) +  # shades from x to the upper limit 
   scale_x_continuous(breaks = seq(mu - (4 * sigma),  mu + (4 * sigma), sigma)) +
   labs(title = "Distribution of Protein in Individual Beef Patties", 
+       subtitle = paste("area greater than or equal to an individual value of", x),
        x = "grams of protein", 
        y = "f(x)") + 
   theme_linedraw()
@@ -142,14 +147,12 @@ plotZ <- ggplot(NULL, aes(-4:4)) +
             xlim = c(z, 4)) +
   scale_x_continuous(breaks = seq(-4,  4, 1)) +
   labs(title = "Standardized Distribution of Protein in Individual Beef Patties", 
+       subtitle = paste("the area greater than or equal to a z-score of", round(z, 2)),
        x = "z-score for grams of protein", 
        y = "f(x)") + 
   theme_linedraw()
 
 grid.arrange(plotX, plotZ)
-
-pnorm(x, mu, sigma, lower.tail = FALSE)
-pnorm(z, lower.tail = FALSE)  # default settings are mu = 0 and sigma = 1
 ```
 
 The average amount of protein $n$ patties
@@ -158,9 +161,14 @@ The average amount of protein $n$ patties
 mu         <- 21.4 
 sigma      <- 1.9
 n          <- 4
+
 sigma_xbar <- sigma/sqrt(n)
+
 x_bar      <- 23.0
-z_xbar          <- (x_bar - mu)/sigma_xbar
+pnorm(x_bar, mu, sigma_xbar, lower.tail = FALSE)
+
+z_xbar     <- (x_bar - mu)/sigma_xbar
+pnorm(z_xbar, lower.tail = FALSE)  # default settings are mu = 0 and sigma = 1
 
 plotXbar <- ggplot(NULL, aes((mu - 4 * sigma_xbar):(mu + 4 * sigma_xbar))) +
   stat_function(fun = dnorm, args = list(mu, sigma_xbar)) +
@@ -168,9 +176,10 @@ plotXbar <- ggplot(NULL, aes((mu - 4 * sigma_xbar):(mu + 4 * sigma_xbar))) +
             fun = dnorm, 
             args = list(mu, sigma_xbar), 
             fill = "blue", 
-            xlim = c(x, mu + 4 * sigma_xbar)) + 
+            xlim = c(x_bar, mu + 4 * sigma_xbar)) + 
   scale_x_continuous(breaks = seq(mu - (4 * sigma_xbar),  mu + (4 * sigma_xbar), sigma_xbar)) +
   labs(title = paste("Distribution of Mean Protein in a Sample of", n, "Beef Patties"), 
+       subtitle = paste("area greater than or equal to a mean of", x_bar),
        x = "mean grams of protein", 
        y = "f(x)") + 
   theme_linedraw()
@@ -182,19 +191,14 @@ plotZxbar <- ggplot(NULL, aes(-4:4)) +
             fill = "blue", 
             xlim = c(z_xbar, 4)) +
   scale_x_continuous(breaks = seq(-4,  4, 1)) +
-  labs(title = paste("Standardized Distribution of Mean Protein in a Aample of", n, "Beef Patties"), 
+  labs(title = paste("Standardized Distribution of Mean Protein in a Sample of", n, "Beef Patties"), 
+       subtitle = paste("the area greater than or equal to a z-score of", round(z_xbar, 2)),
        x = "z-score for mean grams of protein", 
        y = "f(x)") + 
   theme_linedraw()
 
 grid.arrange(plotXbar, plotZxbar)
-
-pnorm(x_bar, mu, sigma_xbar, lower.tail = FALSE)
-pnorm(z_xbar, lower.tail = FALSE)  # default settings are mu = 0 and sigma = 1
 ```
-
-
-
 
 
 ***
