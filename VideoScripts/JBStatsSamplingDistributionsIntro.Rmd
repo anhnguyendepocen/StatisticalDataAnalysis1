@@ -1,6 +1,6 @@
 ---
 title: "Sampling Distributions: Introduction to the Concept"
-subtitle: "JB Statistics Video Lesson Companion `R` Code"
+subtitle: "Companion `R` Code for JB Statistics Video Lesson"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
@@ -74,8 +74,8 @@ for (i in 1:sims) {
 }
 
 ggplot(NULL, aes(x = sim_means)) +
-  geom_histogram(bins = 15, color = "gray", fill = "blue") +
-  geom_vline(xintercept = mu, color = "red") +
+  geom_histogram(bins = 15, color = "gray", fill = "steelblue") +
+  geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
   theme_linedraw()
 
 mean(sim_means)
@@ -105,7 +105,7 @@ all_means   <- colSums(all_samples) / n  # compute the mean of each sample
 
 ggplot(NULL, aes(x = all_means)) +
   geom_dotplot(dotsize = 0.35) +
-  geom_vline(xintercept = mu, color = "red") +
+  geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
   scale_y_continuous(NULL, breaks = NULL, expand = c(0, 0)) +
   labs(title = "Means of All Possible Samples of n = 3 from the Population of Class Ages",
        x = "Mean Age in Months")

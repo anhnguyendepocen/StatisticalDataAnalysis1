@@ -1,6 +1,6 @@
 ---
 title: "An Introduction to Hypothesis Testing"
-subtitle: "JB Statistics Video Lesson Companion `R` Code"
+subtitle: "Companion `R` Code for JB Statistics Video Lesson"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
@@ -63,7 +63,7 @@ ggplot(bin_pmf_50, aes(x = x, y = probability, fill = shading)) +
   geom_bar(stat = "identity", color = "gray", fill = bin_pmf_50$shading) +
   annotate("rect", xmin = pete_x - 0.5, xmax = 50, ymin = 0, ymax = .1, alpha = .2) +
   labs(title = "Probability Distribution for X = Number of Card Suits Guessed Correctly",
-       subtitle = "the red-shaded bars (upper tail, gray box) indicate Pete's guess of 28 correct and higher",
+       subtitle = "the red-shaded bars (upper tail, gray box) indicate the value of Pete's guess and higher",
        x = "number correct") +
   theme_linedraw()
 
