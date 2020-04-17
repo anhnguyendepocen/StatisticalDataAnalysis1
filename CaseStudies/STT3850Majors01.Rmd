@@ -40,16 +40,16 @@ Run `head()` with `n = 10` to visualize the first 10 rows.
 
 Description
 
-WRITE A BRIEF DATASET DESCRIPTION HERE
+All students in Dr. Thomley's STT3850 classes since F14 (as listed in Banner)
 
 Variables
 
-* College: WRITE A BRIEF VARIABLE DESCRIPTION HERE
-* Year:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
-* BannerMajor:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
-* CodedMajor:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
-* Semester:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
-* AY:  WRITE A BRIEF VARIABLE DESCRIPTION HERE
+* College: ASU college the student is in
+* Year: Student's year  (e.g., freshman, sophomore, etc)
+* BannerMajor: Student's major as listed in Banner
+* CodedMajor: Condensed categorization of student major
+* Semester: The semester the student took STT3850 with Dr. Thomley
+* AY: Academic year
 
 Make `Year` and `Coded Major` factor variables. 
 

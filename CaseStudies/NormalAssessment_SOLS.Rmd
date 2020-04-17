@@ -1,0 +1,221 @@
+---
+title: "Assessing Normality Practice"
+author: "SOLUTIONS // Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    code_folding: hide
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+```{r loadpackages}
+library(tidyverse)
+library(moments)
+library(scales)
+```
+
+***
+#### **Gas Mileage**
+
+```{r}
+mileage <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv")
+```
+
+```{r}
+xbar <- mean(mileage$mpg)
+s    <- sd(mileage$mpg)
+
+# density plot
+ggplot(mileage, aes(x = mpg)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbar, s),   
+                color = "red") +
+  scale_x_continuous(breaks = seq(xbar - (4 * s), xbar + (4 * s), s),
+                     labels = number_format(accuracy = 0.01)) +
+  labs(title = "Density Plot of Gas Mileage Test Data with Theoretical Normal Density",
+       x = "miles per gallon",
+       caption = "source: instructor dataset mileage.csv")
+
+# ecdf plot
+ggplot(mileage, aes(x = mpg)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbar, s), 
+                color = "red")
+
+# qq plot
+ggplot(mileage, aes(sample = mpg)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+
+# skewness & kurtosis
+print.data.frame(tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+                        theory = c(0, 3, 0),
+                        data   = round(c(skewness(mileage$mpg), 
+                                         kurtosis(mileage$mpg), 
+                                         kurtosis(mileage$mpg) - 3), 
+                                       2)),
+                 row.names = FALSE)
+```
+
+
+#### **Old Faithful**
+
+```{r}
+geyser <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oldfaithful.csv")
+```
+
+```{r}
+xbar <- mean(geyser$erupt_time)
+s    <- sd(geyser$erupt_time)
+
+# density plot
+ggplot(geyser, aes(x = erupt_time)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbar, s),   
+                color = "red") +
+  scale_x_continuous(breaks = seq(xbar - (4 * s), xbar + (4 * s), s),
+                     labels = number_format(accuracy = 0.01)) +
+  labs(title = "Density Plot of Old Faithful Eruptions with Theoretical Normal Density",
+       x = "eruption time in minutes",
+       caption = "source: instructor dataset oldfaithful.csv")
+
+# ecdf plot
+ggplot(geyser, aes(x = erupt_time)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbar, s), 
+                color = "red")
+
+# qq plot
+ggplot(geyser, aes(sample = erupt_time)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+
+# skewness & kurtosis
+print.data.frame(tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+                        theory = c(0, 3, 0),
+                        data   = round(c(skewness(geyser$erupt_time), 
+                                         kurtosis(geyser$erupt_time), 
+                                         kurtosis(geyser$erupt_time) - 3), 
+                                       2)),
+                 row.names = FALSE)
+```
+
+```{r}
+geyser <- geyser %>% mutate(erupt_category = ifelse(erupt_time < 3, "short", "long"))
+
+ggplot(geyser, aes(x = erupt_time)) + 
+  geom_density() +
+  facet_wrap(~ erupt_category)
+
+ggplot(geyser, aes(x = erupt_time)) + 
+  stat_ecdf() +
+  facet_wrap(~ erupt_category)
+  
+ggplot(geyser, aes(sample = erupt_time)) + 
+  stat_qq() +
+  stat_qq_line(color = "red") +
+  facet_wrap(~ erupt_category)
+```
+
+
+#### **Bangladesh Wells**
+
+```{r}
+wells <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv")
+```
+
+```{r}
+xbar <- mean(wells$Arsenic)
+s    <- sd(wells$Arsenic)
+
+# density plot
+ggplot(wells, aes(x = Arsenic)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbar, s),   
+                color = "red") +
+  scale_x_continuous(breaks = seq(xbar - (4 * s), xbar + (4 * s), s),
+                     labels = number_format(accuracy = 0.01)) +
+  labs(title = "Density Plot of Arsenic Contamination with Theoretical Normal Density",
+       x = "arsenic level in parts per million (ppm)",
+       caption = "source: textbook dataset Bangladesh.csv")
+
+# ecdf plot
+ggplot(wells, aes(x = Arsenic)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbar, s), 
+                color = "red")
+
+# qq plot
+ggplot(wells, aes(sample = Arsenic)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+
+# skewness & kurtosis
+print.data.frame(tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+                        theory = c(0, 3, 0),
+                        data   = round(c(skewness(wells$Arsenic), 
+                                         kurtosis(wells$Arsenic), 
+                                         kurtosis(wells$Arsenic) - 3), 
+                                       2)),
+                 row.names = FALSE)
+```
+
+
+#### **Semmelweiss**
+
+```{r}
+handwashing_start <- as.Date("1847-06-01")
+data <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweismonthly.csv"
+by_month <- read_csv(file = url(data)) %>% 
+  mutate(mortality = 100 * deaths / births,
+         handwashing = ifelse(date < handwashing_start, "dirty", "washed"))
+```
+
+```{r}
+xbar <- mean(by_month$mortality)
+s    <- sd(by_month$mortality)
+
+# density plot
+ggplot(by_month, aes(x = mortality)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbar, s),   
+                color = "red")
+```
+
+```{r}
+# Normality Assessment by Groups Here
+```
+
+
+#### **Oscar Ages**
+
+```{r}
+oscar <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv")
+```
+
+```{r}
+# Normality Assessment Here
+```
+
+```{r}
+# Normality Assessment by Groups Here
+```
+
+
+***
+```{r}
+sessionInfo()
+```
+

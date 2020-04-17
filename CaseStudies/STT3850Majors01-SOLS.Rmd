@@ -1,6 +1,6 @@
 ---
 title: "Case Study: STT3850 Majors #1"
-author: "PUT YOUR NAME HERE"
+author: "SOLUTIONS // Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
   html_document: 

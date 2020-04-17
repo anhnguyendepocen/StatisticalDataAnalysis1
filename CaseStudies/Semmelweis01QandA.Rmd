@@ -1,12 +1,10 @@
 ---
-title: 'Q&A: Semmelweis and Handwashing #1'
-author: '<br>NAME:'
+title: "Q&A: Semmelweis and Handwashing #1"
+author: "<br>NAME:"
 output:
   html_document:
     highlight: textmate
     theme: yeti
-  word_document: default
-  pdf_document: default
 ---
 
 <hr>

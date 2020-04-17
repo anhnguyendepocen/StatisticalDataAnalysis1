@@ -1,0 +1,21 @@
+---
+title: "Q&A: STT3850 Majors #1"
+author: '<br>NAME:'
+output:
+  html_document:
+    highlight: textmate
+    theme: yeti
+---
+
+<hr>
+### Answer the following question your own...
+
+Consider the descriptive summaries and plots you created for the `stt3850majors` dataset. State five pieces of information we can learn about Dr. Thomley's STT3850 classes from these summaries. Be as specific as you can (i.e., include quantitative values such as counts or percentages wherever you can).
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+### Trade your paper with one of your peers...
+
+#### Commenter's Name: 
+
+Offer at least one suggestion for improvement in the statements written above. Once you have provided your written feedback, discuss it with the person you swapped with.

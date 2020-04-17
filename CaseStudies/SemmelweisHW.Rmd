@@ -1,0 +1,281 @@
+---
+title: "Semmelweis Week 12 HW"
+author: "Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 4
+    toc_float: false
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+```{r loadpackages}
+library(tidyverse)
+library(kableExtra)
+library(infer)
+```
+
+***
+#### **The Datasets**
+```{r readdataset1}
+data <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweisannualbyclinic.csv"
+by_clinic <- read_csv(file = url(data)) %>% 
+  mutate(mortality = 100 * deaths / births)
+glimpse(by_clinic)
+```
+
+```{r readdataset2}
+handwashing_start <- as.Date("1847-06-01")
+data <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweismonthly.csv"
+by_month <- read_csv(file = url(data)) %>% 
+  mutate(mortality = 100 * deaths / births,
+         handwashing = ifelse(date < handwashing_start, "dirty", "washed"))
+glimpse(by_month)
+```
+
+#### **Testing Clinic 1 vs Clinic 2** 
+
+Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. The germ theory of disease had not yet been developed, so no one thought to wash their hands when going from the morgue to the delivery room, or from one patient to another. Yikes! Semmelweis thought the medical students were transferring some kind of “morbid poison” from dissected cadavers to the maternity patients. The two clinics used approximately the same techniques, and Dr. Semmelweis had already gone through a meticulous process of eliminating most of the other possible clinic differences that could contribute to the problem, including even religious practices.
+
+```{r clinicsplot, fig.align = "center"}
+ggplot(by_clinic, aes(x = year, y = mortality, fill = clinic)) +
+  geom_bar(position = "dodge", stat = "identity", width = .75, color = "darkgray") +
+  scale_x_continuous(breaks = 1841:1846) +
+  scale_y_continuous(limits = c(0, 16), breaks = seq(from = 0, to = 16, by = 2)) +
+  scale_fill_brewer(palette = "Purples", labels = c("Clinic 1", "Clinic 2")) +
+  geom_text(aes(label = round(mortality, 1)), position = position_dodge(.8), vjust = -.5) +
+  labs(title = "Maternal Mortality at Vienna General Hospital from 1841 to 1846",
+       caption = "Note: Clinic 1 was served by medical students while Clinic 2 was served by midwife students.",
+       x = "year",
+       y = "number of maternal deaths per 100 births") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+```
+
+##### **Research Question and Hypotheses**
+
+Was the average mortality for Clinic 1 was statistically significantly greater than the average mortality for Clinic 2 between 1841 and 1846? Or was the difference Semmelweis observed just random error?
+
+$$H_0: \mu_{1} = \mu_{2}$$
+
+$$H_a: \mu_{1} > \mu_{2}$$
+
+##### **Summaries of Observed Mortality**
+
+```{r clinicsummaries}
+by_clinic_summaries <- by_clinic %>%
+  group_by(clinic) %>%
+  summarize(n = n(),
+            xbar = mean(mortality),
+            sd = sd(mortality))
+
+kable(by_clinic_summaries, format = "html", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), 
+                font_size = 14,
+                full_width = FALSE) %>% 
+  add_header_above(c("", "summaries of mortality" = 3))
+```
+
+##### **Hypothesis Test Using Infer**
+
+```{r clinictestinfer}
+null_distribution <- by_clinic %>%
+  specify(mortality ~ clinic) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("clinic 1", "clinic 2"))
+
+obs_diff <- by_clinic %>% 
+  specify(mortality ~ clinic) %>% 
+  calculate(stat = "diff in means", order = c("clinic 1", "clinic 2"))
+obs_diff
+
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff, direction = "right")
+
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff, direction = "right")
+```
+
+We would reject the null hypothesis at $\alpha = 0.05$ and conclude that the average mortality for Clinic 1 was statistically significantly greater than the average mortality for Clinic 2 between 1841 and 1846. Semmelweis' concerns appear to be valid. There is only a 5% chance that we committed a Type I error. Even if we committed such an error, some good handwashing probably can't hurt in this situation, so better safe than sorry! 
+
+Overall, the small p-value suggests that there is a very small probability that the observed mortality difference between 1841 and 1846 was due solely to random chance.
+
+##### **Hypothesis Test Using MSRR**
+
+Here we will reverse the two groups in the hypotheses for our convenience, because of the way `R` orders groups. However, they are mathematically identical. This means we will be calculating a lower-tail ("left") p-value. 
+
+$$H_0: \mu_{2} = \mu_{1}$$
+
+$$H_a: \mu_{2} < \mu_{1}$$
+
+```{r clinictestMSRR}
+obs_diff <- diff(by_clinic_summaries$xbar)
+
+sprintf("The test statistic xbar2 - xbar1 is %1.5f.", obs_diff)
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(by_clinic, mortality)
+total_n <- length(simdata)
+group_n <- by_clinic_summaries$n[2]
+
+N_sims <- 10^5-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue", bins = 10) +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+pvalue.lower <- (sum(rand_diffs <= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: mu2 = mu1 vs. Ha: mu2 < mu1 is %1.5f.", pvalue.lower)
+ifelse(pvalue.lower <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+We reached the same conclusion using this method. Clinic 2's mortality rate is statistically significantly less (on average) than that of Clinic 1. You can also see that the group ordering is flexible as long as we are logically consistent with direction throughout the test (hypotheses, test statistic, and p-value calculation). The next problems further highlights this idea.
+
+
+***
+#### **Testing Dirty vs Clean Hands**
+
+Semmelweis introduced a handwashing protocol using chlorinated lime, which is now known to be a disinfectant. The descriptive analyses below compare maternal mortality rates in Clinic 1 before and after his protocol was introduced. (Note: We believe these are the data only for Clinic 1. Semmelweis's writing on the subject is somewhat ambiguous. For our purposes here, assume that is the case. We will discuss the implications more at a later date.)
+
+```{r interventionplot, fig.align = "center"}
+ggplot(by_month, aes(x = date, y = mortality, color = handwashing)) +
+  geom_line(size = 1) +
+  scale_y_continuous(limits = c(0, 35), breaks = seq(0, 35, 5)) +
+  geom_vline(xintercept = handwashing_start, linetype = "dashed") +
+  scale_color_brewer(palette = "Paired") +
+    labs(title = "Maternal Mortality Rates at Vienna General Hospital Clinic 1",
+       subtitle = "Maternal deaths per 100 births for each month from Jan 1841 to Mar 1849",
+       caption = "Note: Dashed line denotes the start of Semmelweis's handwashing protocol in late May 1847.",
+       y = "maternal mortality rate") +
+  theme_minimal()
+```
+
+##### **Research Question and Hypotheses**
+
+Did average mortality statistically significantly decrease after the introduction of handwashing in May 1847? One possible version of the hypotheses is:
+
+$$H_0: \mu_{dirty} = \mu_{washed}$$
+
+$$H_a: \mu_{dirty} > \mu_{washed}$$
+
+We could also equivalently write the hypotheses as:
+
+$$H_0: \mu_{washed} = \mu_{dirty}$$
+
+$$H_a: \mu_{washed} < \mu_{dirty}$$
+
+##### **Summaries of Observed Mortality**
+
+```{r interventionsummaries}
+by_month_summaries <- by_month %>%
+  group_by(handwashing) %>%
+  summarize(n = n(),
+            xbar = mean(mortality),
+            sd = sd(mortality))
+
+kable(by_month_summaries, format = "html", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), 
+                font_size = 14,
+                full_width = FALSE) %>% 
+  add_header_above(c("", "summaries of mortality" = 3))
+```
+
+##### **Hypothesis Test Using Infer #1**
+
+```{r interventiontestinfer1}
+null_distribution <- by_month %>%
+  specify(mortality ~ handwashing) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("dirty", "washed"))
+
+obs_diff <- by_month %>% 
+  specify(mortality ~ handwashing) %>% 
+  calculate(stat = "diff in means", order = c("dirty", "washed"))
+obs_diff
+
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff, direction = "right")
+
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff, direction = "right")
+```
+
+##### **Hypothesis Test Using Infer #2**
+
+```{r interventiontestinfer2}
+null_distribution <- by_month %>%
+  specify(mortality ~ handwashing) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("washed", "dirty"))
+
+obs_diff <- by_month %>% 
+  specify(mortality ~ handwashing) %>% 
+  calculate(stat = "diff in means", order = c("washed", "dirty"))
+obs_diff
+
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff, direction = "left")
+
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff, direction = "left")
+```
+
+##### **Hypothesis Test Using MSRR**
+
+This test follows the second set of hypotheses, since W is alphabetically after D, which matches Hypothesis Test Using Infer #2.
+
+```{r interventiontestMSRR}
+obs_diff <- diff(by_month_summaries$xbar)
+
+sprintf("The test statistic xbarW - xbarD is %1.5f.", obs_diff)
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(by_month, mortality)
+total_n <- length(simdata)
+group_n <- by_month_summaries$n[2]
+
+N_sims <- 10^5-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue", bins = 10) +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+pvalue.lower <- (sum(rand_diffs <= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: muW = muD vs. Ha: muW < muD is %1.5f.", pvalue.lower)
+ifelse(pvalue.lower <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+We would reject the null hypothesis at $\alpha = 0.05$ and conclude that the average mortality decreased by a statistically significant amount after the introduction of handwashing. Success! 
+
+According to the p-value, the chance that the results are due solely to random chance is effectively zero. None of the simulated differences were as extreme or more extreme than the observed difference (test statistic). 
+
+***
+```{r}
+sessionInfo()
+```
+

@@ -1,0 +1,397 @@
+---
+title: "MSRR Week 12 HW"
+author: "Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 4
+    toc_float: false
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+```{r loadpackages}
+library(tidyverse)
+library(infer)
+```
+
+***
+#### **Datasets**
+
+```{r}
+flightdelays <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/FlightDelays.csv")
+glimpse(flightdelays)
+```
+
+#### **Exercise 3.5**
+
+a) Is the difference in mean delay times between the two carriers statistically significant?
+
+$$H_0: \mu_{AA} = \mu_{UA}$$
+
+$$H_a: \mu_{AA} \neq \mu_{UA}$$
+
+```{r}
+by_carrier_summ <- flightdelays %>%
+  group_by(Carrier) %>%
+  summarize(n = n(),
+            xbar = mean(Delay),
+            sd = sd(Delay))
+by_carrier_summ
+```
+
+**Note:** We can typically do many more repetitions with the MSRR algorithm than we can with the `infer` package, especially with larger datasets. Here we are doing 1000 repetition in `infer` and 10,000 using the MSRR algorithm.
+
+Using the `infer` package
+
+```{r}
+null_distribution <- flightdelays %>%
+  specify(Delay ~ Carrier) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("AA", "UA"))
+
+obs_diff <- flightdelays %>% 
+  specify(Delay ~ Carrier) %>% 
+  calculate(stat = "diff in means", order = c("AA", "UA"))
+obs_diff
+
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff, direction = "both")
+
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff, direction = "both")
+```
+
+Using the MSRR algorithm
+
+```{r}
+obs_diff <- diff(by_carrier_summ$xbar)
+
+sprintf("The test statistic xbarAA - xbarUA is %1.5f.", obs_diff)
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(flightdelays, Delay)
+total_n <- length(simdata)
+group_n <- by_carrier_summ$n[2]
+
+N_sims <- 10^4-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue", bins = 10) +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+pvalue.lower <- (sum(rand_diffs <= obs_diff) + 1)/(N_sims + 1)
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+pvalue.2side <- min(pvalue.lower, pvalue.upper)
+sprintf("The p-value for Ho: muAA = muUA vs. Ha: muAA =/= muUA is %1.5f.", pvalue.2side)
+ifelse(pvalue.2side <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+
+b) Is the difference in mean delay times between the two months statistically significant?
+
+$$H_0: \mu_{May} = \mu_{June}$$
+
+$$H_a: \mu_{May} \neq \mu_{June}$$
+
+```{r}
+by_month_summ <- flightdelays %>%
+  group_by(Month) %>%
+  summarize(n = n(),
+            xbar = mean(Delay),
+            sd = sd(Delay))
+by_month_summ
+```
+
+Using the `infer` package
+
+```{r}
+null_distribution <- flightdelays %>%
+  specify(Delay ~ Month) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("May", "June"))
+
+obs_diff <- flightdelays %>% 
+  specify(Delay ~ Month) %>% 
+  calculate(stat = "diff in means", order = c("May", "June"))
+obs_diff
+
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff, direction = "both")
+
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff, direction = "both")
+```
+
+Using the MSRR algorithm
+
+```{r}
+obs_diff <- diff(by_month_summ$xbar)
+
+sprintf("The test statistic xbarMay - xbarJune is %1.5f.", obs_diff)
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(flightdelays, Delay)
+total_n <- length(simdata)
+group_n <- by_month_summ$n[2]
+
+N_sims <- 10^4-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index]) - mean(simdata[-index])
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue", bins = 10) +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+pvalue.lower <- (sum(rand_diffs <= obs_diff) + 1)/(N_sims + 1)
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+pvalue.2side <- min(pvalue.lower, pvalue.upper)
+sprintf("The p-value for Ho: muMay = muJune vs. Ha: muMay =/= muJune is %1.5f.", pvalue.2side)
+ifelse(pvalue.2side <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+#### **Exercise 3.9**
+
+a) Is the difference proportion of flights delayed 20 minutes or more between months statistically significant?
+
+$$H_0: \pi_{May} = \pi_{June}$$
+
+$$H_a: \pi_{May} \neq \pi_{June}$$
+
+```{r}
+flightdelays <- flightdelays %>% 
+  mutate(Delayed20 = ifelse(Delay >=20, "Yes", "No"))
+
+by_month_summ <- flightdelays %>%
+  group_by(Month) %>%
+  summarize(n = n(),
+            prop = mean(Delayed20 == "Yes"))
+by_month_summ
+```
+
+Using the `infer` package
+
+```{r}
+null_distribution <- flightdelays %>%
+  specify(Delayed20 ~ Month, success = "Yes") %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in props", order = c("May", "June"))
+
+obs_diff <- flightdelays %>% 
+  specify(Delayed20 ~ Month, success = "Yes") %>% 
+  calculate(stat = "diff in props", order = c("May", "June"))
+obs_diff
+
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff, direction = "both")
+
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff, direction = "both")
+```
+
+Using the MSRR algorithm
+
+```{r}
+obs_diff <- diff(by_month_summ$prop)
+
+sprintf("The test statistic propMay - propJune is %1.5f.", obs_diff)
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(flightdelays, Delayed20)
+total_n <- length(simdata)
+group_n <- by_month_summ$n[2]
+
+N_sims <- 10^4-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- mean(simdata[index] == "Yes") - mean(simdata[-index] == "Yes")
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue", bins = 10) +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+pvalue.lower <- (sum(rand_diffs <= obs_diff) + 1)/(N_sims + 1)
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+pvalue.2side <- min(pvalue.lower, pvalue.upper)
+sprintf("The p-value for Ho: piMay = piJune vs. Ha: piMay =/= piJune is %1.5f.", pvalue.2side)
+ifelse(pvalue.2side <= alpha, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+b) Is the ratio of variances for the two months statistically diffeent from 1?
+
+$$H_0: \frac{\sigma^2_{June}}{\sigma^2_{May}} = 1$$
+
+$$H_a: \frac{\sigma^2_{June}}{\sigma^2_{May}} \neq 1$$
+
+Note: I will not be asking a question like this on Exam 2, but I wanted to push you to think a bit about how such tests might work. For a test that assumes equal variances, you might need a test like this.
+
+Unlike the difference between means or difference between proportions, where switching the order of the groups produces the same magnitude of test statistic either way (but with opposite signs), the ratio of two proportions is not symmetric if you invert it. Therefore, it is customary to arrange the ratios with the larger variance on top and find the upper-tail p-value.
+
+```{r}
+by_month_summ <- flightdelays %>%
+  group_by(Month) %>%
+  summarize(n = n(),
+            variance = var(Delay))
+by_month_summ
+```
+
+Using the MSRR algorithm
+
+**Note:** The `infer` package cannot perform this test.
+
+```{r}
+obs_diff <- by_month_summ$variance[1] / by_month_summ$variance[2]
+
+sprintf("The ratio varJune / varMay is %1.5f.", obs_diff)
+
+alpha <- .05 # chance of Type I error / significance level of test
+
+simdata <- pull(flightdelays, Delay)
+total_n <- length(simdata)
+group_n <- by_month_summ$n[2]
+
+N_sims <- 10^4-1
+
+rand_diffs <- numeric(N_sims)
+
+for (i in 1:N_sims) {
+  index <- sample(total_n, group_n)
+  rand_diffs[i] <- var(simdata[index]) / var(simdata[-index])
+}
+
+ggplot(NULL, aes(x = rand_diffs)) +
+  geom_histogram(color = "gray", fill = "lightblue", bins = 10) +
+  geom_vline(xintercept = obs_diff, color = "blue", linetype = "dashed")
+
+pvalue.upper <- (sum(rand_diffs >= obs_diff) + 1)/(N_sims + 1)
+sprintf("The p-value for Ho: varMay/varJune = 1 vs. Ha: varMay/varJune =/= 1 is %1.5f.", pvalue.upper)
+ifelse(pvalue.upper <= alpha/2, sprintf("Reject Ho."), sprintf("Do not reject Ho."))
+```
+
+#### **Exercise 4.7**
+
+a) The distribution is strongly right-skewed. The mean and standard deviation are summarized at the end.
+
+```{r}
+ggplot(flightdelays, aes(x = Delay)) +
+  geom_histogram(color = "gray", fill = "lightblue")
+```
+
+b) The sampling distribution of $\bar(x)$ when $n = 25$ is still right-skewed, but less than the population. The mean and standard error are summarized at the end.
+
+```{r}
+sims      <- 10^4
+results25 <- numeric(sims)
+for (i in 1:sims) {
+  results25[i] <- mean(sample(flightdelays$Delay, 25))
+}
+
+ggplot(NULL, aes(x = results25)) +
+  geom_histogram(color = "gray", fill = "lightblue")
+```
+
+c) We get the theoretical standard error using the Central Limit Theorem. Compare this to the sample estimate value shown below. The mean and standard error are summarized at the end.
+
+```{r}
+sd(flightdelays$Delay)/sqrt(25)
+```
+
+d) The sampling distribution of $\bar(x)$ when $n = 250$ is still slightly right-skewed, but less than the population or the sampling distribution when when $n = 25$. The mean and standard error are summarized at the end.
+
+```{r}
+sims       <- 10^4
+results250 <- numeric(sims)
+for (i in 1:sims) {
+  results250[i] <- mean(sample(flightdelays$Delay, 250))
+}
+
+ggplot(NULL, aes(x = results250)) +
+  geom_histogram(color = "gray", fill = "lightblue")
+```
+
+Means, standard deviation (population), and estimated standard error (sample means).
+
+```{r}
+tibble(distribution = c("population", "mean (n = 25)", "mean (n = 250)"),
+       mean         = c(mean(flightdelays$Delay), mean(results25), mean(results250)),
+       sd_se        = c(sd(flightdelays$Delay), sd(results25), sd(results250)))
+```
+
+
+#### **Exercise 4.20**
+
+a) The theoretical sampling distribution of W is normal, since both X and Y are normal.
+
+```{r}
+meanX <- 7
+sdX   <- 3
+varX  <- sdX^2
+nX    <- 9
+  
+meanY <- 10
+sdY   <- 5
+varY  <- sdY^2
+nY    <- 12
+
+(meanW <- meanX - meanY)
+(varW  <- varX/nX + varY/nY)
+(sdW   <- sqrt(varW))
+
+```
+
+b) Adapting the code shown in the textbook...
+
+```{r}
+W <- numeric(10000)
+for (i in 1:10000) {
+  x    <- rnorm(9, 7, 3)
+  y    <- rnorm(12, 10, 5)
+  W[i] <- mean(x) - mean(y)
+}
+
+ggplot(NULL, aes(x = W)) +
+  geom_histogram(bins = 15, color = "gray", fill = "lightblue")
+
+mean(W)
+sd(W)
+```
+
+c) Calculating theoretical and empirical probabilities...
+
+```{r}
+pnorm(-1.5, meanW, sdW)
+mean(W < -1.5)
+```
+
+***
+```{r}
+sessionInfo()
+```
+
