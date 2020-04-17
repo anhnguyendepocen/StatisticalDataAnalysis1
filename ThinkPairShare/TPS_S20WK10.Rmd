@@ -1,0 +1,40 @@
+---
+title: "Think-Pair-Share: Precision vs. Accuracy Search"
+author: "SOLUTIONS // Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+***
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+**Original Response Post:** 
+
+1) Rank the four possibilities in order from most desirable to least desirable.
+
+2) Explain your rationale and/or decision making process for your rankings.
+
+**Feedback:**
+
+Everyone did a good job explaining their rankings. All respondents agreed that being both precise and accurate is best, and that being neither precise nor accurate was worst. There was some disagreement, however, on the middle two rankings: how do we choose between accuracy and precision?
+
+In statistics we like to have minimum-variance unbiased estimators (MVUEs) for population parameters. In other words, we like estimators that have low variability (precision) and no bias (accuracy). The sample mean is a good example of an MVUE. It is both an accurate and precise estimator of the population mean, and we can describe its behavior well with the central limit theorem. While discussing descriptive statistics, you learned that the formula for computing sample variance is not the same as the formula for computing population variance. 
+
+$$s^2 = \frac{\sum^n_{i=1} (x_i - \bar{x})^2}{n-1}$$
+
+$$\sigma^2 = \frac{\sum^n_{i=1} (x_i - \mu)^2}{n}$$
+
+The reason we divide by $n-1$ instead of $n$ in the sample variance formula is to adjust for the bias; doing so makes it unbiased (i.e., more accurate). In situations where we know how to adjust for bias, or where the bias is small, we might want an estimator that is precise rather than accurate. An example would a scale that yields very close to the same value when we weigh the same object more than once, but which we know is always off by 5 pounds (precise, inaccurate). This could be preferrable to a scale that averages correct weight but which varies much more widely in results when we weigh the same object more than once (accurate, imprecise), since we can easily adjust for the accuracy.
+
+Overall, whether we prefer precision or accuracy when we have can't have both depends on the relative magnitude of each and what our overall goal is. Often we can adjust for inaccuracy, and larger sample sizes tend to improve precision. Going back to the example of sample versus population variance, as $n \rightarrow \infty$ there is less of a difference between the two formulas, so increased sample size would improve both accuracy and precision.
+
+***
+```{r}
+sessionInfo()
+```
+
