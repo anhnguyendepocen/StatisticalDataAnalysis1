@@ -7,7 +7,7 @@ output:
 
 <hr>
 
-* [Course Syllabus](./SyllabusSchedule/STT3850S20Syllabus.html)
+* [Course Syllabus](./SyllabusSchedule/STT3850S21Syllabus.html)
 
 * [GitHub Repository](https://github.com/STAT-JET-ASU/StatisticalDataAnalysis1)
 
