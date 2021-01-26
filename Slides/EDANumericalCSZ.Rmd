@@ -1,0 +1,360 @@
+---
+title: "EDA &#9654; Numerical Data<br>Center, Spread, Z-Scores"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+library(tidyverse)
+library(moments)
+```
+
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* Ch 2 of [*Modern Dive*](https://moderndive.com/2-viz.html)
+* Ch 3 of [*Modern Dive*](https://moderndive.com/3-wrangling.html)
+* Ch 4 of [*Modern Dive*](https://moderndive.com/4-tidy.html)
+* DataCamp [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+
+
+## How We Describe Distributions
+
+**Categorical Variables**
+
+* frequency / relative frequency
+
+*Summaries based on counting how many times categories occur.*
+
+**Quantitative Variables**
+
+* shape
+* center
+* spread
+* outliers
+
+*Shape, center, and spread characterize the pattern of numerical observations. Outliers are deviations from the pattern.*
+
+
+## Center
+
+* mean
+    * arithmetic mean ("average", _expected value_)
+    * weighted mean
+    * trimmed mean
+    * geometric mean (n^th^ root of the product)
+* median (50^th^ percentile/quantile)
+* mode (we use this more with reference to shape)
+
+Mean and median are both the "middle" of a given distribution, but the two summaries define middle or _center_ differently. If a distribution is perfectly symmetric, mean = median.
+
+
+## Spread
+
+* variance
+    * population
+    * sample
+* standard deviation
+* mean absolute deviation (mad)
+* median absolute deviation (_also_ mad?)
+* interquartile range (IQR)
+* range
+
+Summarizing the deviations of a set of values from some center point (like a mean) is a common technique in statistics. 
+
+
+## Measures Based on Moments
+
+In physics, a moment of force is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.
+
+mean (first moment)
+
+* the mean $\mu$ is the value that makes $\Sigma(X - \mu)^1 = 0$ true
+* mean is the center of mass or _balance point_ of a distribution
+
+variance (second moment)
+
+$$M_2 = \sigma^2 = \frac{\Sigma(X - \mu)^2}{n}$$ 
+
+$$\text{standard deviation} = \sqrt{\text{variance}} = \sigma $$
+
+
+## Population vs. Sample Variance
+
+The previous slide shows the formula for *population* variance. 
+
+When computing sample variance, we make a small change to the formula so that it is an *unbiased* estimator of the population variance (i.e., in the long run sample variance will neither over- nor under-estimate population variance).
+
+$$\text{sample variance} = s^2 = \frac{\Sigma(x_i - \bar{x})^2}{n-1}$$ 
+
+$$\text{sample standard deviation} = \sqrt{\text{sample variance}} = s$$
+
+Recall we use different symbols for parameters versus statistics. If you are not yet familiar with the symbols for mean, variance, standard deviation, and sample size, this is a good time to learn!
+
+
+## Z-Score (Standardized Score)
+
+Mean and standard deviation have the same units as the data points they are summarizing (e.g., data in inches have a mean expressed in inches). 
+
+However, standard deviation itself can be a unit of measure. A z-score tells us how many standard deviations above or below the mean a given point is located.
+
+$$z = \frac{X - \mu}{\sigma} \text{ (population)}$$
+
+$$z = \frac{x - \bar{x}}{s} \text{ (in a sample)}$$
+
+The data units cancel out. A z-score of +2 would be interpreted as "two standard deviations above the mean".
+
+
+## Skewness and Kurtosis
+
+skewness (based on the third moment)
+
+$$M_3 = \frac{\Sigma(X - \mu)^3}{n}$$
+
+$$skewness = \frac{\Sigma(X - \mu)^3}{\sigma^3}$$
+
+kurtosis (based on the fourth moment)
+
+$$M_4 = \frac{\Sigma(X - \mu)^4}{n}$$
+
+$$kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}$$
+
+
+## Moment-Based Summaries in R
+
+* `mean()`
+* `var()`
+* `sd()`
+* `skewness()`
+* `kurtosis()`
+
+The `var()` and `sd()` functions calculate sample variance and standard deviation. How could you get population variance if your data were a population?
+
+The `skewness()` and `kurtosis()` functions are found in the `moments` package, so you need to use `library(moments)`.
+
+You should explore the syntax and output of these functions.
+
+
+## Measures Based on Ordered Counts
+
+* five-number-summary
+    * minimum &mdash; smallest data point
+    * first quartile (Q<sub>1</sub>) &mdash; 25% of data is below, 75% is above
+    * median &mdash; 50% of data is below, 50% is above ("center")
+    * third quartile (Q<sub>3</sub>) &mdash; 75% of data is below, 25% is above
+    * maximum &mdash; largest data point
+* interquartile range (IQR) &mdash; Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)
+* range &mdash; maximum - minimum (overall width of the dataset)
+* percentiles / quantiles &mdash; the n*th* percentile or quantile has n% of the data below it (e.g., Q<sub>1</sub> is the 25th percentile of the dataset and the median is the 50th percentile)
+
+
+## Count-Based Summaries in R
+
+* `fivenum()`
+* `min()`
+* `median()`
+* `max()`
+* `IQR()`
+* `range()`
+* `diff(range())`
+* `quantile()`
+
+Again, you should explore the syntax, parameters, and output of each function to understand how it works.
+
+
+## Some Data to Summarize
+
+Read datasets [gasmileage.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv) and [happyface.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/happyface.csv) into RStudio. Remember you need `library(tidyverse)` for many of the functions we will use, including `read_csv()`. In coming slides they will be referred to by the following names.
+
+* `mileage`: results of 100 EPA gas mileage tests for a particular model of car, in miles per gallon (mpg)
+
+* `happyf`: results for an experiment where some servers drew happy faces on the back of  customer's restaurant checks and others did not, with the tip percentage they received
+
+In `happyf` the sex of the server is recorded as a binary variable `male` or `female`, since it is an older dataset ([published in 1996](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x)).
+
+
+## Explore the Datasets
+
+```{r, echo = FALSE}
+mileage <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv")
+happyf <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/happyface.csv")
+```
+
+```{r}
+glimpse(mileage)
+glimpse(happyf)
+```
+
+
+## Summarizing Using `dplyr`
+
+You can add/remove functions as needed. The `na.rm` ignores `NA` (missing) values in the variable, else you get `NA` as output.
+
+```{r, eval = FALSE}
+library(moments) # you only need this for skew and kurt
+datasetname %>% 
+  summarize(n    = n(),
+            xbar = mean(variablename, na.rm = TRUE),
+            s    = sd(variablename, na.rm = TRUE),
+            min  = fivenum(variablename)[1],
+            Q1   = fivenum(variablename)[2],
+            med  = fivenum(variablename)[3],                  
+            Q3   = fivenum(variablename)[4],
+            max  = fivenum(variablename)[5],
+            iqr  = IQR(variablename, na.rm = TRUE),
+            rng  = diff(range(variablename, na.rm = TRUE)),
+            skew = skewness(variablename, na.rm = TRUE),
+            kurt = kurtosis(variablename, na.rm = TRUE))
+```
+
+
+## Summarizing `mpg`
+
+I removed `skewness()` and `kurtosis()` here, but added `sum()`.
+
+```{r, eval = FALSE}
+mileage %>% 
+ summarize(n     = n(),
+            xbar  = mean(mpg),
+            s     = sd(mpg),
+            min   = fivenum(mpg)[1],
+            Q1    = fivenum(mpg)[2],
+            med   = fivenum(mpg)[3],                  
+            Q3    = fivenum(mpg)[4],
+            max   = fivenum(mpg)[5],
+            iqr   = IQR(mpg),
+            rng   = diff(range(mpg)),
+            total = sum(mpg))
+```
+ 
+ 
+## The Output is a `tibble`
+
+Both the input and output are datasets, but the components of the output are the summaries computed from the input dataset. Each summary measure is a variable, with a single observation. You can `filter()` and `select()` and otherwise manipulate this tibble, especially if you save it as an object.
+
+```{r echo = FALSE}
+# I know these data have no NA values
+mileage %>% 
+  summarize(n     = n(),
+            xbar  = mean(mpg),
+            s     = sd(mpg),
+            min   = fivenum(mpg)[1],
+            Q1    = fivenum(mpg)[2],
+            med   = fivenum(mpg)[3],                  
+            Q3    = fivenum(mpg)[4],
+            max   = fivenum(mpg)[5],
+            iqr   = IQR(mpg),
+            rng   = diff(range(mpg)),
+            total = sum(mpg))
+```
+
+
+## 
+
+```{r}
+mpg_summaries <- mileage %>% 
+  summarize(n     = n(),
+            xbar  = mean(mpg),
+            s     = sd(mpg),
+            min   = fivenum(mpg)[1],
+            Q1    = fivenum(mpg)[2],
+            med   = fivenum(mpg)[3],                  
+            Q3    = fivenum(mpg)[4],
+            max   = fivenum(mpg)[5],
+            iqr   = IQR(mpg),
+            rng   = diff(range(mpg)),
+            total = sum(mpg))
+mpg_summaries %>% 
+  select(n, xbar, s)
+```
+
+
+## Summarizing by Groups Using `dplyr`
+
+Use `group_by()` before the `summarize()` function to group the observations into subgroups by one or more other variables of interest. Here I use two, since the original experiment analyzed both together. 
+
+```{r, eval = FALSE}
+library(moments) # again, I know there are no NA values
+happyf %>% 
+  group_by(Sex, Message) %>% 
+  summarize(n    = n(),
+            xbar = mean(TipPct),
+            s    = sd(TipPct),
+            min  = fivenum(TipPct)[1],
+            Q1   = fivenum(TipPct)[2],
+            med  = fivenum(TipPct)[3],                  
+            Q3   = fivenum(TipPct)[4],
+            max  = fivenum(TipPct)[5])
+```
+ 
+
+## Output for Grouped Summaries
+
+The output is a tibble with four observations, or one for each group. We could use a `filter()` to choose only certain rows after summarizing.
+
+```{r echo = FALSE}
+library(moments)
+happyf %>% 
+  group_by(Sex, Message) %>% 
+  summarize(n    = n(),
+            xbar = mean(TipPct, na.rm = TRUE),
+            s    = sd(TipPct, na.rm = TRUE),
+            min  = fivenum(TipPct)[1],
+            Q1   = fivenum(TipPct)[2],
+            med  = fivenum(TipPct)[3],                  
+            Q3   = fivenum(TipPct)[4],
+            max  = fivenum(TipPct)[5])
+```
+
+
+## The `quantile()` Function
+
+Within the `quantile()` function, you can specify one or more quantiles to compute. Here we are finding the deciles of the `mpg` distribution. Creating vectors with functions like `seq()` can often make programming more efficient.
+
+```{r}
+quantile(mileage$mpg, probs = c(.1, .2, .3, .4, .5, .6, .7, .8, .9))
+
+quantile(mileage$mpg, probs = seq(from = 0.1, to = 0.9, by = 0.1))
+```
+
+
+## Z-Scores with `dplyr`
+
+Recall from earlier the formula for z-scores. Here we create a new variable that contains the z-score for every `mpg` value.
+
+```{r}
+mileage <- mileage %>% 
+  mutate(zscores = (mpg - mean(mpg)) / sd(mpg))
+head(mileage)
+```
+
+
+## Better Way with `scale()` Function
+
+The `scale()` function is better here, because you can also use it with `group_by()` to get z-scores within groups.
+
+```{r}
+mileage <- mileage %>% 
+  mutate(zscores = scale(mpg))
+head(mileage)
+```
+
+
+## More on the `scale()` Function
+
+The `scale()` function attaches some additional information to the `zscores` column. Note that the attributes `center` and `scale` are the mean and standard deviation of `mpg`.
+
+
+```{r}
+str(mileage)
+```
+
