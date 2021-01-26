@@ -239,7 +239,7 @@ mileage %>%
  
 ## The Output is a `tibble`
 
-Both the input and output are datasets, but the components of the output are the summaries computed from the input dataset. Each summary measure is a variable, with a single observation. You can `filter()` and `select()` and otherwise manipulate this tibble, especially if you save it as an object.
+Both the input and output are datasets, but the components of the output are the summaries computed from the input dataset. Each summary measure is a variable, with a single observation. You can `filter()` and `select()` and otherwise manipulate this `tibble`, especially if you save it as an object.
 
 ```{r echo = FALSE}
 # I know these data have no NA values
