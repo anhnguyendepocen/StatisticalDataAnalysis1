@@ -55,12 +55,12 @@ These slides are not meant to be standalone information. You should take notes t
 * median (50^th^ percentile/quantile)
 * mode (we use this more with reference to shape)
 
-Mean and median are both the "middle" of a given distribution, but the two summaries define middle or _center_ differently. If a distribution is perfectly symmetric, mean = median.
+Mean and median are both the "middle" of a given distribution, but the two summaries define middle or _center_ differently and may be very different values when calculated. If a distribution is perfectly symmetric, then mean = median.
 
 
-## Spread
+## Spread (or *Variability*)
 
-* variance
+* variance (*variance* is one specific measure of *variability*)
     * population
     * sample
 * standard deviation
@@ -72,20 +72,30 @@ Mean and median are both the "middle" of a given distribution, but the two summa
 Summarizing the deviations of a set of values from some center point (like a mean) is a common technique in statistics. 
 
 
-## Measures Based on Moments
+## Measures Based on Moments--Mean
 
-In physics, a moment of force is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.
+In physics, a *moment of force* (or *torque*) is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.
 
 mean (first moment)
 
-* the mean $\mu$ is the value that makes $\Sigma(X - \mu)^1 = 0$ true
-* mean is the center of mass or _balance point_ of a distribution
+* $X - \mu$ calculates the distance of point X from the mean $\mu$
+* the mean $\mu$ is the value that makes $\Sigma(X - \mu)^1 = 0$ true for all points $X_i$ in a given distribution
+* mean is the **center of mass** or *balance point* of a distribution
+
+Think of the number line as a see-saw and the data points as objects sitting on the see-saw, exerting a downward force. The mean is the fulcrum that perfectly balances all the data points and keeps the see-saw level.
+
+
+## Variance and Standard Deviation
 
 variance (second moment)
 
-$$M_2 = \sigma^2 = \frac{\Sigma(X - \mu)^2}{n}$$ 
+$$M_2 = \sigma^2 = \frac{\Sigma(X - \mu)^2}{n}$$
+
+The variance is the average *squared* distance of all points from the mean. Points that are farther away from $\mu$ will be weighted somewhat more heavily. Whatever units of measure $X$ has will be squared as well, so it is less useful for description.
 
 $$\text{standard deviation} = \sqrt{\text{variance}} = \sigma $$
+
+While not strictly mathematically true, it is helpful to think of SD as roughly the average distance of all points from the mean. Its units are also the same as the mean and the original data.
 
 
 ## Population vs. Sample Variance
@@ -112,6 +122,17 @@ $$z = \frac{X - \mu}{\sigma} \text{ (population)}$$
 $$z = \frac{x - \bar{x}}{s} \text{ (in a sample)}$$
 
 The data units cancel out. A z-score of +2 would be interpreted as "two standard deviations above the mean".
+
+
+## The Mathematics of Z-Scores
+
+Why are z-scores *standardized* scores? The calculation performs a linear transformation (re-scaling) of the values, similar to when we convert degrees Fahrenheit to Celsius. Data points maintain their relative relationships to each other, we are just using a new number line as a reference point.
+
+$(X - \mu)$ re-centers the data, and the new mean is always zero
+
+dividing by $\sigma$ re-scales the number line, so the SD is always one
+
+The act of dividing also cancels out original measurement units. We then talk about data points in terms of how many standard deviations they are above or below the mean. It helps compare variables that may originally have been on very different scales by using a common or *standard* scale.
 
 
 ## Skewness and Kurtosis
@@ -197,10 +218,10 @@ glimpse(happyf)
 
 ## Summarizing Using `dplyr`
 
-You can add/remove functions as needed. The `na.rm` ignores `NA` (missing) values in the variable, else you get `NA` as output.
+You can add/remove summary functions as needed. The `na.rm` ignores any `NA` (missing) values, else you get `NA` as output.
 
 ```{r, eval = FALSE}
-library(moments) # you only need this for skew and kurt
+library(moments) # you only need this for skewness and kurtosis
 datasetname %>% 
   summarize(n    = n(),
             xbar = mean(variablename, na.rm = TRUE),
@@ -217,9 +238,21 @@ datasetname %>%
 ```
 
 
+## About the `fivenum()` Function
+
+Most summary functions like `mean()` and `sd()` produce only a single value as output. However, `fivenum()` produces a vector of length 5. The [ ] notation accesses the correct location in the output vector, since each step of a `summarize()` function must only output a single value.
+
+```{r}
+fivenum(mileage$mpg) # output in order is min, Q1, med, Q3, max
+fivenum(mileage$mpg)[3] # the output is location 3, the median
+```
+
+Also, `range()` outputs (min, max); we have to take the `diff()`.
+
+
 ## Summarizing `mpg`
 
-I removed `skewness()` and `kurtosis()` here, but added `sum()`.
+I removed `skewness()` and `kurtosis()` here, but added `sum()`. I also know for sure that there are no outliers in this dataset, so I removed the `na.rm = TRUE` statements for simplicity. 
 
 ```{r, eval = FALSE}
 mileage %>% 
@@ -236,7 +269,7 @@ mileage %>%
             total = sum(mpg))
 ```
  
- 
+
 ## The Output is a `tibble`
 
 Both the input and output are datasets, but the components of the output are the summaries computed from the input dataset. Each summary measure is a variable, with a single observation. You can `filter()` and `select()` and otherwise manipulate this `tibble`, especially if you save it as an object.
@@ -257,6 +290,10 @@ mileage %>%
             total = sum(mpg))
 ```
 
+Where is the *center* of this distribution? How *spread* out is it? Keep in mind the units of measure when discussing the data and its summaries in context. 
+
+We need to use visualizations to check for *shape* and *outliers*.
+
 
 ## 
 
@@ -274,7 +311,7 @@ mpg_summaries <- mileage %>%
             rng   = diff(range(mpg)),
             total = sum(mpg))
 mpg_summaries %>% 
-  select(n, xbar, s)
+  select(n, xbar, s) # remember, select chooses columns (variables) 
 ```
 
 
@@ -283,7 +320,6 @@ mpg_summaries %>%
 Use `group_by()` before the `summarize()` function to group the observations into subgroups by one or more other variables of interest. Here I use two, since the original experiment analyzed both together. 
 
 ```{r, eval = FALSE}
-library(moments) # again, I know there are no NA values
 happyf %>% 
   group_by(Sex, Message) %>% 
   summarize(n    = n(),
@@ -302,7 +338,6 @@ happyf %>%
 The output is a tibble with four observations, or one for each group. We could use a `filter()` to choose only certain rows after summarizing.
 
 ```{r echo = FALSE}
-library(moments)
 happyf %>% 
   group_by(Sex, Message) %>% 
   summarize(n    = n(),
@@ -314,6 +349,34 @@ happyf %>%
             Q3   = fivenum(TipPct)[4],
             max  = fivenum(TipPct)[5])
 ```
+
+You will usually see more decimal places in RStudio versus when you `knit()`. You can also format output using `kable()` styling. 
+
+
+## 
+
+```{r echo = FALSE}
+happyfsummaries <- happyf %>% 
+  group_by(Sex, Message) %>% 
+  summarize(n    = n(),
+            xbar = mean(TipPct, na.rm = TRUE),
+            s    = sd(TipPct, na.rm = TRUE),
+            min  = fivenum(TipPct)[1],
+            Q1   = fivenum(TipPct)[2],
+            med  = fivenum(TipPct)[3],                  
+            Q3   = fivenum(TipPct)[4],
+            max  = fivenum(TipPct)[5])
+```
+
+```{r}
+# using summaries output that I saved as the object happyfsummaries
+library(knitr)
+kable(happyfsummaries, digits = 2) # digits = decimal places
+```
+
+<br>
+
+Can you describe the center and spread for the four groups and make comparisons between them?
 
 
 ## The `quantile()` Function
