@@ -1,0 +1,188 @@
+---
+title: "Bernoulli, Binomial, and Geometric Distributions"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+# Bernoulli Trials
+
+## What is a Bernoulli Trial?
+
+A Bernoulli trial is a single random event that has two possible outcomes, often called "success" and "failure". 
+
+Success is not necessarily a good outcome, but it is the outcome of interest for a given problem or scenario.
+
+Classic examples include a coin flip where a head is considered success and a tail is considered failure, or one roll of a standard 6-sided die where 1 is success and any other number is failure.
+
+Bernoulli model parameter
+
+* _p_ = probability of success  
+* _q_ = probability of failure = 1 - _p_  
+* _p_ + _q_ = 1  
+
+
+## Bernoulli as a Building Block
+
+Other probability distributions, such as the binomial distribution and geometric distribution, are used to model the outcomes of sequences of Bernoulli trials (e.g., number of heads obtained in a sequence of 100 coin flips, or how many times we have to roll a 6-sided die to observe our first 1).
+
+A necessary condition for the binomial and geometric random variables is that trials are independent with constant chance of success _p_ from trial to trial.
+
+Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html) (1654-1705), who made important advancements in probability theory, including an early version of the law of large numbers. Many appeared in his posthumously-published book [_Ars Conjectandi_](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (_The Art of Conjecturing_).
+
+
+## Simulate One Coin Flip or Die Roll
+
+```{r}
+coin <- c("head", "tail")
+sample(coin, 1)   # default equal probability
+die <- 1:6
+sample(die, 1)   # default equal probability
+
+# unfair coin, 70% chance of heads
+p <- 0.7
+sample(coin, 1, prob = c(p, 1-p))
+```
+
+
+## Simulate Multiple Flips or Rolls
+
+```{r}
+flips <- sample(coin, 250, replace = TRUE)
+sum(flips == "head")   # number of heads
+mean(flips == "head")   # fraction of heads
+rolls <- sample(die, 250, replace = TRUE)
+mean(rolls == 1)   # fraction of 1's
+```
+
+
+# Binomial Distribution
+
+## Probability Mass Function (pmf)
+
+The binomial distribution is a discrete probability distribution. It models the number of successes in a sequence of independent Bernoulli trials. The probability of a given number of successes x is found using the pmf.
+
+$$X \sim Bin(n,p)$$
+
+    x = number of successes = {0, 1, 2, ..., n}
+    n = number of trials
+    p = probability of success on a single trial
+    1 - p = probability of failure on a single trial
+
+$$f(x)=P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
+
+
+## Cumulative Distribution Function (pmf)
+
+The probability of a given number of successes _or fewer_ is found using the CDF.
+
+$$F(x)=P(X \leq x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
+
+The expected (mean) number of successes and the variance of the number of successes are found as follows.
+
+$$E[X] = np$$
+
+$$Var[X] = np(1-p)$$
+
+
+## R Functions for Binomial Modeling
+
+$P(X = x)$ = $f(x,n,p)$ = `dbinom(x, n, p)` 
+
+$P(X \leq x)$ = $F(x,n,p)$ = `pbinom(x, n, p)`
+
+$P(X > x)$ = $1-F(x,n,p)$ = use `lower.tail = FALSE`
+
+$q^{th}$ percentile (approx) = $F^{-1}(x,n,p)$ = `qbinom(q, n, p)` 
+
+To generate `s` random binomial values, `rbinom (s, n, p)`
+
+There are no default values for n and p in R. These parameters must always be specified.
+
+
+## Zener Card Tests
+
+[Parapsychology](http://www.psychicscience.org/parintro.aspx) is the study of paranormal/psychic phenomena.
+
+<p style="text-align: center;">![](https://stat-jet-asu.github.io/Moodlepics/zenercards.jpg)</p>
+
+Zener cards, shown above, were developed by Karl Zener in the 1930s for parapsychological testing. They were featured in the movie _Ghostbusters_, used by Dr. Peter Venkman (Bill Murray), a PhD in psychology and parapsychology. Take a [Zener card test](https://www.psychic-experiences.com/psychic-tests/zener-cards.php)!
+
+
+## Modeling the Zener Card Test
+
+Assuming we conduct an open deck test as described... 
+
+* What are the parameters of the binomial model?
+* What is the expected number of correct guesses?
+* What is the probability of getting _exactly_ that number?
+* What is the variance / SD in the number of correct guesses?
+* What is the probability of getting 10 or more cards correct?
+* What is the probability of getting more than 10 cards correct?
+* What are the probabilities associated with your test results?
+* What is the chance of exceeding 10 correct on multiple tests?
+* What if our test used a total of 100 trials rather than 25?
+* Can we simulate the outcome of one or more tests?
+
+
+# Geometric Distribution
+
+## Probability Mass Function (pmf)
+
+The geometric distribution is a discrete probability distribution. It models the number of trials required to get the first success in a sequence of independent Bernoulli trials.
+
+$$X \sim Geo(p)$$
+
+    x = number of trials = {1, 2, 3, ... }
+    p = probability of success on a single trial
+    q = 1 - p
+
+$$P(X=x)=p(1-p)^{x-1}=pq^{x-1}$$
+
+There is more than one way to mathematically define Geo(p). We can let X be the number of trials before the first success. This would change the pmf, CDF, etc.
+
+
+## Cumulative Distribution Function (pmf)
+
+The CDF is:
+
+$$P(X \leq x)=1-(1-p)^x$$
+
+The expected value and variance are:
+
+$$E[X] = \frac{1}{p}$$
+
+$$Var[X] = \frac{(1-p)}{p^2} = \frac{q}{p^2}$$
+
+Mathematically, the geometric distribution is an analogue of the (continuous) exponential distribution. It is also the only discrete distribution that has the _memoryless property_.
+
+
+## R Functions for Geometric Modeling
+
+If `x` is the number of trials required to get the first success...
+
+`dgeom(x - 1, p)` = $f(x-1,p)$ = $P(X = x)$
+
+`pgeom(x - 1, p)` = $F(x-1,p)$ =  $P(X \leq x)$
+
+`pgeom(x - 1, p, lower.tail = FALSE)` = $P(X > x)$
+
+`qgeom(q, p)` = $q^{th}$ percentile
+
+`rgeom(s, p)` generates `s` random variates
+
+
+## Modeling the Zener Card Test
+
+Assuming that we conduct an open deck test as described... 
+
+* How many guesses should you expect to need get a success?
+* What is the variance / SD of the number of guesses required? 
+* What is the probability that your very first guess is a success?
+* How long _could_ it take you to get your first success? What are the chances that it takes you two, three, five, or ten guesses?
+* Suppose your first four guesses in a row are incorrect. What is the chance your next guess is correct? 
+* Can we find probabilities using simulation?

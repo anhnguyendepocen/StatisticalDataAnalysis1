@@ -1,0 +1,577 @@
+---
+title: "Normal (Gaussian)<br>Distribution"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
+library(kableExtra)
+```
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* Ch 3 of [*Modern Dive*](https://moderndive.com/)
+* DataCamp [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
+
+Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
+
+
+# Exploration #1:<br>The Normal Model
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iYiOVISWXS4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Notation and Parameters
+
+The normal distribution is a continuous probability distribution. Very few concepts in real life are truly normally distributed, but many are _approximately_ normal. The normal is also the limiting distribution for many common statistics and other distributions when sample size n $\rightarrow \infty$.
+
+$$X \sim N(\mu,\sigma^2)$$
+
+_x_ = {-$\infty$ to +$\infty$} = the sample space
+    
+$\mu$ = the mean (or expected value) of the distribution
+    
+$\sigma^2$ = the variance of the distribution
+
+The standard normal distribution $Z$ has $\mu$ = 0 and $\sigma^2$ = $\sigma$ = 1.
+
+
+## Probability Density Function (pdf)
+
+Unlike the pmfs in discrete distributions, the probability density function (pdf) of a continuous distribution does not compute a probability, because the area under a point is zero. Instead a pdf gives the height of the function (y) at x.
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+
+R has a function to solve the pmf for any given normal model. Inputs may be single values or vectors.
+
+<center>$f(x)$ = `dnorm(x, mean, sd)`</center><br>
+
+Note that the `R` function uses standard deviation as an input, rather than the distribution variance. 
+
+
+##
+
+```{r, fig.height = 2.75, eval = FALSE}
+# Standard Normal
+# Z ~ N(0, 1)
+
+ggplot(NULL) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1), limits = c(-4, 4)) +
+  labs(title = "Standard Normal Distribution", x = "x", y = "f(x)") + 
+  theme_linedraw()
+```
+
+```{r, fig.height = 2.75, echo = FALSE}
+# Standard Normal
+# Z ~ N(0, 1)
+
+ggplot(NULL) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1), limits = c(-4, 4)) +
+  labs(title = "Standard Normal Distribution", x = "x", y = "f(x)") + 
+  theme_linedraw()
+```
+
+
+## 
+
+```{r, fig.height = 2.75, eval = FALSE}
+# mu    <- 69
+# sigma <- 3
+# ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) + 
+#   stat_function(fun = dnorm, args = list(mu, sigma)) +
+#   scale_x_continuous(breaks = seq(mu - (4 * sigma),  
+#                                   mu + (4 * sigma), sigma)) +
+#   labs(title = "US Adult Male Heights", x = "inches", y = "f(x)") + 
+#   theme_linedraw()
+```
+
+```{r, fig.height = 2.75, echo = FALSE}
+# mu    <- 69
+# sigma <- 3
+# ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) + 
+#   stat_function(fun = dnorm, args = list(mu, sigma)) +
+#   scale_x_continuous(breaks = seq(mu - (4 * sigma),  
+#                                   mu + (4 * sigma), sigma)) +
+#   labs(title = "US Adult Male Heights", x = "inches", y = "f(x)") + 
+#   theme_linedraw() +
+#   annotate("label", x = 69, y = 0.05, label = "same area") +
+#   annotate("label", x = 62.0, y = 0.10, label = "different scaling") +
+#   geom_segment(aes(x = c(59.5, 63), 
+#                    xend = c(57, 66), 
+#                    y = c(0.10, 0.0875), 
+#                    yend = c(0.10, 0.001)), 
+#                arrow = arrow(length = unit(0.5, "cm")),
+#                color = "red", size = 1.25)
+```
+
+
+## A Closer Look at the Code
+
+```{r, eval = FALSE}
+# # set the parameters of the normal model
+# mu    <- 100
+# sigma <- 15
+# # plot the curve between mean +/- 4SDs
+# ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) + 
+# # args list is the parameters for dnorm
+#   stat_function(fun = dnorm, args = list(mu, sigma)) +
+# # put labels on 1, 2, 3, and 4 SD marks 
+# # seq() function creates the ticks marks
+#   scale_x_continuous(breaks = seq(mu - (4 * sigma),  
+#                                   mu + (4 * sigma), sigma)) +
+# # usually include an informative title
+# # appropriately label the x and y axes
+#   labs(title = "US Adult Male Heights", x = "inches", y = "f(x)") + 
+# # optional theme for appearance / grid
+#   theme_linedraw()
+```
+
+
+# Integration #1
+
+## 
+
+1) Standard IQ tests, such as the Wechsler Adult Intelligence Scale (WAIS), are typically scaled so that scores are normally distributed with a mean of 100 and a standard deviation of 15. Plot the pdf of WAIS scores.
+
+2) Scores on some older versions of the Stanford-Binet IQ test are normally distributed with a mean of 100 and a standard deviation of 16. Plot the pdf.
+
+3) Cattell Culture Fair Test scores are normally distributed with mean of 100 and a standard deviation of 24. Plot the pdf.
+
+4) Subscales of the current Stanford-Binet have scores that are normally distributed with $\mu$ = 10 and $\sigma$ = 3. Plot the pdf.
+
+5) The heights of US adult women are normally distributed with $\mu$ = 5' 2.5" and $\sigma$ = 3". Plot four pdfs with heights expressed in (a) inches; (b) feet; (c) centimeters; and (d) meters.
+
+
+# Exploration #2:<br>Probabilities
+
+## Cumulative Distribution Function (CDF)
+
+The probability of the variable X having given value x *or less* is found using the CDF, which integrates the area under the curve. This is similar to a discrete distribution. The normal distribution has no closed-form solution for $F(x)$. `R` has a function for the normal CDF (and its inverse, which we will discuss later).
+
+$$F(x)=P(X \leq x) = \int\limits_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
+
+$P(X \leq x)$ = `pnorm(q, mean, sd, lower.tail = TRUE)`
+
+$P(X > x)$ = `pnorm(q, mean, sd, lower.tail = FALSE)`
+
+
+## Expected Value and Variance
+
+The theoretical expected value and variance for any distribution are generally found as follows. We cannot integrate $f(x)$, but it can be demonstrated that expected value and variance simplify to the parameters $\mu$ and $\sigma^2$ for the normal distribution.
+
+$$E[X] = \int\limits_{-\infty}^{+\infty} x f(x) \rightarrow \mu$$
+
+$$Var[X] = \int\limits_{-\infty}^{+\infty} (x - \mu)^2 f(x) \rightarrow \sigma^2$$
+
+
+##
+
+```{r, fig.height = 3.00}
+# Standard Normal
+# Z ~ N(0, 1)
+
+ggplot(NULL) + 
+  stat_function(fun = pnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(x = "x", y = "F(x)") + theme_linedraw()
+```
+
+
+## 
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "red", xlim = c(-4, 0)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "How much area under the curve is to the left of x = 0?", 
+       x = "x", y = "f(x)") + 
+  theme_linedraw()
+```
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = pnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "Question is answered by evaluating the CDF at x = 0.", 
+       x = "x", y = "F(x)") + 
+  geom_segment(aes(x = 0, 
+                   xend =  0, 
+                   y = 0, 
+                   yend = 0.5), 
+               color = "red",
+               size = 1.25) +
+  geom_segment(aes(x = 0, 
+                   xend = -4, 
+                   y = 0.5, 
+                   yend = 0.5), 
+               color = "red", 
+               size = 1.25,
+               arrow = arrow(length = unit(0.5,"cm"))) +
+  theme_linedraw()
+```
+
+
+## 
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "blue", xlim = c(-4, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "How much area under the curve is to the left of x = 1?", 
+       x = "x", y = "f(x)") + 
+  theme_linedraw()
+```
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = pnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "Question is answered by evaluating the CDF at x = 1.", 
+       x = "x", y = "F(x)") + 
+  geom_segment(aes(x = 1, 
+                   xend =  1, 
+                   y = 0, 
+                   yend = pnorm(1)), 
+               color = "blue",
+               size = 1.25) +
+  geom_segment(aes(x = 1, 
+                   xend = -4, 
+                   y = pnorm(1), 
+                   yend = pnorm(1)), 
+               color = "blue", 
+               size = 1.25,
+               arrow = arrow(length = unit(0.5,"cm"))) +
+  theme_linedraw()
+```
+
+
+## 
+
+```{r}
+pnorm(q = 0, mean = 0, sd = 1) #lower.tail = TRUE is the default
+
+pnorm(q = 0, mean = 0, sd = 1, lower.tail = FALSE) #area above 0
+
+pnorm(q = 1, mean = 0, sd = 1) #lower.tail = TRUE is the default
+
+pnorm(q = 1, mean = 0, sd = 1, lower.tail = FALSE) # area above 1
+```
+
+
+## 
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "purple", xlim = c(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "How much area under the curve is between x = 0 and x = 1?", 
+       x = "x", y = "f(x)") + 
+  theme_linedraw()
+```
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = pnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "Evaluate the CDF at both points and subtract the lower area.", 
+       x = "x", y = "F(x)") + 
+  geom_segment(aes(x = 0, 
+                   xend =  0, 
+                   y = 0, 
+                   yend = 0.5), 
+               color = "red",
+               size = 1.25) +
+  geom_segment(aes(x = 0, 
+                   xend = -4, 
+                   y = 0.5, 
+                   yend = 0.5), 
+               color = "red", 
+               size = 1.25,
+               arrow = arrow(length = unit(0.5,"cm"))) +
+  geom_segment(aes(x = 1, 
+                   xend =  1, 
+                   y = 0, 
+                   yend = pnorm(1)), 
+               color = "blue",
+               size = 1.25) +
+  geom_segment(aes(x = 1, 
+                   xend = -4, 
+                   y = pnorm(1), 
+                   yend = pnorm(1)), 
+               color = "blue", 
+               size = 1.25,
+               arrow = arrow(length = unit(0.5,"cm"))) +
+  theme_linedraw()
+```
+
+
+##
+
+$$F(x)=P(X \leq x) = \int\limits_{0}^{1} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
+
+```{r, fig.height = 2.50, echo = FALSE}
+P1 <- ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "gray", xlim = c(-4, 1)) +  
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "area left of 1 minus...",
+       x = "x", y = "f(x)") + 
+  theme_linedraw()
+
+P2 <- ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "lightgray", xlim = c(-4, 0)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "area left of 0 equals...",
+       x = "x", y = "f(x)") + 
+  theme_linedraw()
+
+P3 <- ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "purple", xlim = c(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "area between 0 and 1",
+       x = "x", y = "f(x)") + 
+  theme_linedraw()
+
+gridExtra::grid.arrange(P1, P2, P3, ncol = 3)
+```
+
+```{r}
+pnorm(q = 1, mean = 0, sd = 1) - pnorm(q = 0, mean = 0, sd = 1)
+```
+
+
+## 
+
+```{r, fig.height = 3.00}
+mu    <- 69
+sigma <- 3
+ggplot(NULL, aes((mu - 4 * sigma):(mu + 4 * sigma))) + 
+  stat_function(fun = pnorm, args = list(mu, sigma)) +
+  scale_x_continuous(breaks = seq(mu - (4 * sigma),  
+                                  mu + (4 * sigma), sigma)) +
+  labs(x = "x", y = "F(x)") + theme_linedraw()
+```
+
+
+## The Empirical Rule
+
+The normal distribution is unimodal and perfectly symmetric.
+
+<p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg"></p>
+
+* approximately 68% of the curve area is between $\mu \pm 1\sigma$ 
+* approximately 95% of the curve area is between $\mu \pm 2\sigma$ 
+* approximately 99.7% of the curve area is between $\mu \pm 3\sigma$ 
+
+
+# Integration #2
+
+##
+
+1) Use `pnorm()` and $N(0,1)$ to calculate how much area is to the *left* of the points $\mu - 3\sigma$, $\mu - 2\sigma$, $\mu - 1\sigma$, $\mu$, $\mu + 1\sigma$, $\mu + 2\sigma$, and $\mu + 3\sigma$
+
+2) Use `pnorm()` and $N(0,1)$ to calculate how much area is to the *right* of the points $\mu - 3\sigma$, $\mu - 2\sigma$, $\mu - 1\sigma$, $\mu$, $\mu + 1\sigma$, $\mu + 2\sigma$, and $\mu + 3\sigma$
+
+3) The Empirical Rule tells us the approximate areas under the curve between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$. Use `pnorm()` and $N(0,1)$ to calculate the exact area in these regions.
+
+4) Verify that the areas between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$ are the same for the distribution of WAIS scores as they are for $N(0,1)$ using `qnorm()`.
+
+
+##
+
+What percentage of the population falls into each WAIS class?
+
+```{r, echo = FALSE}
+IQtable = tibble('Score Range' = c("129.5 and above",
+                           "119.5 to 129.5",
+                           "108.5 to 119.5",
+                           "89.5 to 108.5",
+                           "79.5 to 89.5",
+                           "69.5 to 79.5",
+                           "69.5 and below"),
+                 'WAIS Class' = c("Very Superior",
+                           "Superior",
+                           "High Average",
+                           "Average",
+                           "Low Average",
+                           "Borderline",
+                           "Extremely Low"))
+kable(IQtable, format = 'markdown')
+```
+
+
+# Exploration #3:<br>Quantiles
+
+## Inverse CDF
+
+In the discussions above, we found the area to the left of a given point (or *quantile*) on the x-axis. Sometimes we need to solve the reverse kind of problem: given an area or probability, what is the corresponding quantile or quantiles?
+
+$F^{-1}(x)$ = `qnorm(p, mean, sd, lower.tail = TRUE)` 
+
+If the area is to the right of the unknown value x (the upper tail) rather than to the left (the lower tail), specify upper tail.
+
+$F^{-1}(x)$ = `qnorm(p, mean, sd, lower.tail = FALSE)`
+
+If we know $\mu$, $\sigma$, and either the value(s) of x or the area(s)...
+
+`pnorm(q, mean, sd) = p` $\Longleftrightarrow$ `qnorm(p, mean, sd) = q` 
+
+
+## 
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = dnorm, args = list(0, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "blue", xlim = c(-4, 1)) +
+  scale_x_continuous(breaks = 1, labels = "x") +
+  labs(title = "What value of x has the given area to the left of it?", 
+       x = "x", y = "f(x)") + 
+  annotate("label", x = 0, y = 0.1, label = "area = 0.8413447...") +
+  theme_linedraw()
+```
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot(NULL, aes(-4:4)) + 
+  stat_function(fun = pnorm, args = list(0, 1)) +
+  scale_x_continuous(breaks = seq(-4, 4, 1)) +
+  labs(title = "Question is answered by taking the inverse of the CDF.", 
+       x = "x", y = "F(x)") + 
+  geom_segment(aes(x = 1, 
+                   xend =  1, 
+                   y = pnorm(1), 
+                   yend = 0), 
+               color = "blue",
+               size = 1.25,
+               arrow = arrow(length = unit(0.5,"cm"))) +
+  geom_segment(aes(x = -4, 
+                   xend = 1, 
+                   y = pnorm(1), 
+                   yend = pnorm(1)), 
+               color = "blue", 
+               size = 1.25) +
+  theme_linedraw()
+```
+
+# Integration #3
+
+##
+
+1) Use `qnorm()` to find the first quartile (Q~1~), median, and third quartile (Q~3~) of $N(0,1)$.
+
+2) The deciles of a distribution are percentiles that are multiples of 10 (10th percentile, 20th percentile, up to 90th percentile). Find the deciles of adult male and female heights.
+
+3) To be a member of the high-IQ society Mensa, a person must score in the top 2% on a standard test of intelligence. What scores would be required on the WAIS and Catell tests? What is the equivalent score on $Z$? Use `qnorm()` to solve.
+
+4) The Empirical Rule tells us that the areas under the curve between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$ are ~68%, ~95%, and ~99%. Use `qnorm()` and $N(0,1)$ to calculate the more exact boundaries of the middle 68%, 95%, and 99%.
+
+
+# Exploration #4:<br>Standardized Scores
+
+##
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4R8xm19DmPM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+# Exploration #5:<br>Sampling and Simulating
+
+## Sampling from a Normal Distribution
+
+In addition to calculating probabilities, we can simulate random normal values in `R` using `rnorm (n, mean, sd)`.
+
+_n_ = the number of random values (sample size)
+
+_mean_ = the mean of the distribution
+    
+_sd_ = the standard deviation of the distribution
+
+As with the other *norm* functions, the default parameter settings in `rnorm()` are `mean = 0` and `sd = 1`. If we want a sample from the standard normal distribution, we only need to enter a value for sample size, `rnorm(n)`.
+
+## 
+
+```{r}
+rnorm(5)
+rnorm(10)
+rnorm(25)
+```
+
+## 
+
+```{r, include = FALSE}
+set.seed(0)
+```
+
+```{r, fig.height = 3.25}
+random_sample <- rnorm(100)
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(aes(y = ..density..), bins = 30, 
+                 fill = "gray", color = "darkgray") +
+  geom_density() +
+  scale_x_continuous(limits = c(-6, 6)) +
+  theme_linedraw()
+```
+
+
+## 
+
+```{r, include = FALSE}
+set.seed(0)
+```
+
+```{r, fig.height = 3.25}
+random_sample <- rnorm(1000)
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(aes(y = ..density..), bins = 30, 
+                 fill = "gray", color = "darkgray") +
+  geom_density() +
+  scale_x_continuous(limits = c(-6, 6)) +
+  theme_linedraw()
+```
+
+
+## 
+
+```{r, include = FALSE}
+set.seed(0)
+```
+
+```{r, fig.height = 3.25}
+random_sample <- rnorm(10^6)
+ggplot(NULL, aes(x = random_sample)) +
+  geom_histogram(aes(y = ..density..), bins = 30, 
+                 fill = "gray", color = "darkgray") +
+  geom_density() +
+  scale_x_continuous(limits = c(-6, 6)) +
+  theme_linedraw()
+```
+
+
+# Integration #5:<br>Simulating Data
+
+## 
+
+1) Generate samples of different sizes from a standard normal distribution.
+
+2) Generate samples of different sizes from the various IQ tests we discussed.
+
+3) Use your EDA skills to explore and plot the various samples. Do the distributions look bell-shaped? Do they have close to what you would expected for mean and standard deviation? Are there any outliers? 
+
+4) How does sample size impact your results? Where do you see more variability from sample to sample?

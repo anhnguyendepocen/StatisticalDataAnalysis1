@@ -1,0 +1,136 @@
+---
+title: "Comparing Two Means: Battery Life Example"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: html_document
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+library(tidyverse)
+library(combinat)
+```
+
+
+### Load the Dataset
+
+```{r}
+battery <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/batterylife.csv")
+str(battery)
+```
+
+
+### Explore the Data
+
+```{r}
+summaries <- battery %>% group_by(type) %>% summarize(n = n(), xbar = mean(hours), stdv = sd(hours))
+print.data.frame(summaries)
+ggplot(battery, aes(x = type, y = hours)) + geom_boxplot()
+ggplot(battery, aes(sample = hours, color = type)) + stat_qq() + stat_qq_line()
+```
+
+
+### The Traditional T-Test
+
+```{r}
+obsMeanDiff <- -diff(summaries$xbar)
+print(obsMeanDiff)
+batteryTest <- t.test(battery$hours ~ battery$type)
+print(batteryTest)
+```
+
+
+### Complete Permutation Test
+
+How many different combinations are possible?
+
+```{r}
+numCombos <- choose(12, 6)
+print(numCombos)
+```
+
+What are all possible unique combinations?
+
+```{r}
+combinations <- combn(battery$hours, 6)
+combinations[ , 1:10]
+```
+
+Take a closer look at a single combination.
+
+```{r}
+alldata <- data.frame(index = 1:12, hours = battery$hours)
+print.data.frame(alldata, row.names = FALSE)
+
+brand   <- combinations[ ,1]
+index   <- which(battery$hours %in% brand)
+generic <- battery$hours[-index]
+
+permdata <- data.frame(brand_index = index, 
+                       brand_hours = brand, 
+                       gener_index = (1:12)[-index],
+                       gener_hours = generic)
+print.data.frame(permdata, row.names = FALSE)
+```
+
+Find mean differences for all permuted groups.
+
+```{r}
+permMeanDiff <- numeric(numCombos)
+
+for (i in 1:numCombos){
+  brand   <- combinations[1:6,i]
+  index   <- which(battery$hours %in% brand)
+  generic <- battery$hours[-index]
+  permMeanDiff[i] <- mean(brand) - mean(generic)
+}
+
+ggplot(NULL, aes(x = permMeanDiff)) + 
+  geom_histogram(bins = sqrt(numCombos), fill = "lightblue") + 
+  geom_vline(xintercept = obsMeanDiff, color = "red") +
+  geom_vline(xintercept = -obsMeanDiff, color = "red", linetype = "dashed") +
+  labs(title = "Mean Differences for All Possible Combinations of the Data")
+
+perm.pvalue <- 2 * sum(permMeanDiff <= obsMeanDiff) / numCombos
+
+data.frame(test   = c("Traditional", "Permutation"),
+           pvalue = c(batteryTest$p.value, perm.pvalue))
+```
+
+
+### Permutation Resampling Test
+
+```{r}
+N <- 10^5 - 1
+permMeanDiff <- numeric(N)
+
+testdata <- battery$hours
+
+for (i in 1:N){
+   index <- sample(12, 6)
+   brand <- testdata[index]
+   gener <- testdata[-index]
+   permMeanDiff[i] <- mean(brand) - mean(gener)
+}
+
+ggplot(NULL, aes(x = permMeanDiff)) + 
+  geom_histogram(bins = 30, fill = "lightblue") + 
+  geom_vline(xintercept = obsMeanDiff, color = "red") +
+  labs(title = "Mean Differences for 1,000,000 Resamples of the Data")
+
+# lower tail test with Ha: mu_b < mu_g
+
+pvalue.lower <- (sum(permMeanDiff <= obsMeanDiff) + 1) / (N + 1)
+
+# upper tail test with Ha: mu_b > mu_g
+
+pvalue.upper <- (sum(permMeanDiff >= obsMeanDiff) + 1) / (N + 1)
+
+# two-tail test with Ha: mu_b =/= mu_g
+
+pvalue.twotail <- 2 * min(pvalue.lower, pvalue.upper)
+
+data.frame(alternative = c("Lower-Tail", "Upper-Tail", "Two-Tailed"),
+           pvalue      = c(pvalue.lower, pvalue.upper, pvalue.twotail))
+```
+

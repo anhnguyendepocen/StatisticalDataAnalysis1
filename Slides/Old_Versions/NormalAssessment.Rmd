@@ -1,0 +1,225 @@
+---
+title: "Assessing Normality"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
+```
+
+
+## Before We Begin...
+
+These slides assume you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r). It also complements the content of the course [Introduction to Data](https://www.datacamp.com/courses/introduction-to-data).
+
+It also would be be helpful to read Chapter 2 of the textbook *Mathematical Statistics with Resampling and R* and Chapter 2 of the digital text [*Modern Dive*](https://moderndive.com/).
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations.
+
+Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in how to create R Markdown slides.
+
+
+## Are data from a normal distribution?
+
+Many statistical tests require data to be drawn from a normal distribution. Researchers may also interested in determining whether some variable of interest is normally distributed. For example, Belgian scholar [Adolphe Quetelet](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Quetelet.html) (1796-1874) had a hypothesis that the natural distribution of human heights is a bell curve (i.e., normal distribution). 
+
+We can investigate this using height data gathered by another famous statistician. [Francis Galton](http://www-history.mcs.st-andrews.ac.uk/Biographies/Galton.html) (1822-1911) investigated the relationship between the heights of parents and their offspring. Some of his data can be found in [galtonparentheights.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonparentheights.csv).
+
+
+## The Galton Height Data (Parents)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+parent_hts <- read.csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonparentheights.csv")
+```
+
+```{r}
+glimpse(parent_hts)
+```
+
+```{r}
+xbar <- mean(parent_hts$Mother)
+s    <- sd(parent_hts$Mother)
+```
+
+
+## Density Plot
+
+Does the density of the data match a theoretical normal density plot with the same mean and variance?
+
+```{r, eval=FALSE}
+ggplot(parent_hts, aes(x = Mother)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbar, s),   
+                color = "red")
+```
+
+Create a density plot of the data and superimpose a theoretical normal model on the same axes. Does the data deviate too far from the shape of the theoretical model?
+
+Notice we are using `dnorm` because the density plot shows f(x).
+
+
+## Data vs. Theoretical
+
+```{r, echo=FALSE}
+ggplot(parent_hts, aes(x = Mother)) + 
+  geom_density() +
+  stat_function(fun = dnorm, 
+                args = list(xbar, s), 
+                color = "red")
+```
+
+
+## Empirical Cumulative Distribution Plot
+
+Does the ECDF of the data match a theoretical normal CDF plot with the same mean and variance?
+
+```{r, eval=FALSE}
+ggplot(parent_hts, aes(x = Mother)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbar, s), 
+                color = "red")
+```
+
+Create an ECDF plot of the data and superimpose a theoretical normal model on the same axes. Does the data deviate too far from the shape of the theoretical model?
+
+Notice we are using `pnorm` because the ECDF plot shows F(x).
+
+
+## Data vs. Theoretical
+
+```{r, echo=FALSE}
+ggplot(parent_hts, aes(x = Mother)) + 
+  stat_ecdf() +
+  stat_function(fun = pnorm, 
+                args = list(xbar, s), 
+                color = "red")
+```
+
+
+## Reminder: Theoretical Normal Curve
+
+<p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg"></p>
+
+Notice the placement of the percentiles (also called quantiles) on the theoretical normal distribution. If we know $\mu$ and $\sigma$ we can determine the locations of the quantiles.
+
+This will allow us to contruct a normal quantile-quantile plot, also known as a qq plot or  normal probability plot.
+
+
+## Example: Comparing Quantiles
+
+Do the data quantiles match the theoretical normal quantiles?
+
+```{r}
+deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+tibble(data   = quantile(parent_hts$Mother, deciles), 
+       theory = round(qnorm(deciles, xbar, s),2))
+```
+
+
+## Plot of Data vs. Theoretical Deciles
+
+```{r, echo = FALSE}
+plotdata <- tibble(data = quantile(parent_hts$Mother, deciles), 
+                   theory = qnorm(deciles, xbar, s))
+ggplot(plotdata, aes(x = theory, y = data)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0, color = "red")
+```
+
+
+## Quantile-Quantile Plot (QQ Plot)
+
+Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance?
+
+```{r, eval=FALSE}
+ggplot(parent_hts, aes(sample = Mother)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+Notice the difference in syntax in the aesthetics, which uses `sample` rather than `x` to indicate the variable to be plotted. In the final plot, the x axis will be the theoretical quantiles on a standard normal curve, while the y axis is the data quantiles. There is a point representing each data value.
+
+
+## QQ Plot
+
+```{r, echo=FALSE}
+ggplot(parent_hts, aes(sample = Mother)) + 
+  stat_qq() +
+  stat_qq_line(color = "red")
+```
+
+
+## Skewness and Kurtosis
+
+The skewness of a normal distribution is 0 and the kurtosis is 3. Data from a normal distribution should have similar values.
+
+```{r}
+library(moments)
+skewK <- tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+                theory = c(0, 3, 0),
+                data   = round(c(skewness(parent_hts$Mother), 
+                                 kurtosis(parent_hts$Mother), 
+                                 kurtosis(parent_hts$Mother) - 3), 
+                               2))
+print.data.frame(skewK, row.names = FALSE)
+```
+
+
+## Galton Height Data
+
+Assess the other Galton height measurements for normality. For the child data, perform the assessment with and without groups by gender. Was Quetelet right to think human height is normally distributed? How do you know?
+
+* [galtonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonheightdata.csv) (for child data)
+
+Additional human measurements can be found in the following datasets. Do they confirm or contradict Quetelet's hypotheses about height or other measurements? How do you know?
+
+* [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv)
+* [pearsonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/pearsonheightdata.csv)
+
+
+## Exploring Other Distributions
+
+Construct a `tibble` containing samples of size 50 drawn from the following distributions. Assess normality for each sample. Repeat with samples of 1000.
+
+<table>
+<tr>
+<td>
+$X_1 \text{~} Unif(0,1)$<br>
+$X_2 \text{~} Exp(1)$<br>
+$X_3 \text{~} Bin(10, 0.5)$<br>
+$X_4 \text{~} Bin(100, 0.5)$
+</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>
+$X_5 \text{~} Bin(10, 0.2)$<br>
+$X_6 \text{~} Bin(100, 0.2)$<br>
+$X_7 \text{~} Bin(10, 0.8)$<br>
+$X_8 \text{~} Bin(100, 0.8)$
+</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+<td>
+$X_9 \text{~} t(3)$<br>
+$X_{10} \text{~} t(20)$<br>
+$X_{11} \text{~} t(100)$<br>
+$X_{12} \text{~} t(250)$
+</td>
+</tr>
+</table><p>
+
+For each distribution, consider the shape of its pmf or pdf and CDF versus those of the normal distribution. 
+
+Look at the shapes that tend to be produced by skewed data, data that is flatter than a bell curve (e.g., uniform), or discrete data (e.g., binomial), as well as skewness and kurtosis.
+

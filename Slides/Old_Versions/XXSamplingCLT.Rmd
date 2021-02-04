@@ -1,0 +1,112 @@
+---
+title: "Introduction to<br>Sampling and the CLT"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
+```
+
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Ch XXX of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* Ch 7 of [*Modern Dive*](https://moderndive.com/)
+* DataCamp [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r)
+* DataCamp [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
+
+Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
+
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Zbw-YvELsaM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Video Sampling Example in R
+
+Create the population and calculate the population mean $\mu$.
+
+```{r}
+ages <- c(234,241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 
+          231, 243, 238, 276)
+mu <- mean(ages)
+```
+
+Set up a loop to take repeated samples. Calculate the mean of each sample and store it in a vector. Here, `sims` is the number of samples we plan to take.
+
+```{r}
+sims <- 10^5
+samplemeans <- numeric(sims)
+for (i in 1:sims) {
+  samplemeans[i] <- mean(sample(ages, 3))
+}
+```
+
+
+## 
+
+```{r}
+ggplot(NULL, aes(x = samplemeans)) +
+  geom_histogram(bins = 15, fill = "lightblue", color = "gray") +
+  geom_vline(xintercept = mu, color = "red") + theme_linedraw()
+```
+
+
+##
+
+We selected three people from the class (without replacement) for each sample. How many unique samples are possible? This can be determined with combinatorics. Let $N$ be the population size and $n$ be the sample size. 
+
+$$N \text{ choose } n = {N \choose n} = \frac{N!}{n!(N-n)!}$$
+
+$${16 \choose 3} = \frac{16!}{3!(16-3)!} = \frac{16 \times 15 \times 14 }{3 \times 2 \times 1} = \frac{3360}{6} = 560$$
+
+We can calculate this answer using the `choose()` function in `R`.
+
+```{r}
+choose(16, 3)
+```
+
+
+## 
+
+
+##
+
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/q50GpTdFYyI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Pujol1yC1_A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Exponential Simulation Using R
+
+
+
+
+## Video Salary Example Using R
+
+Salaries at a very large corporation have a mean of $62,000 and a standard deviation of $32,000. If a single employee is selected, what is the probability that their salary exceeds $66,000?
+
+```{r}
+pnorm(66000, mean = 62000, sd = 32000, lower.tail = FALSE)
+```
+
+If 100 employees are selected, what is the probability that their salary exceeds $66,000?
+
+```{r}
+pnorm(66000, mean = 62000, sd = 32000/sqrt(100), lower.tail = FALSE)
+```
+

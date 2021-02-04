@@ -1,0 +1,129 @@
+---
+title: "Hypothesis Testing<br>&#9654; Tables of Counts"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+library(dplyr)
+library(ggplot2)
+```
+
+
+## Before You Begin
+
+Complete the following video lessons on AsULearn. They will introduce you to the logical framework of hypothesis testing, followed by asymptotic tests for assessing the distribution of a single categorical variable or independence of two categorical variables using tables of counts.
+
+* Theory and Concepts of Hypothesis Testing
+* Chi-Square Tests for Tables of Counts
+
+Also read the appropriate sections of _Chihara_ Chapter 3. Class time will be used to supplement these materials, introduce the concepts and methods of permutation tests, and help develop connections between the mathematics and programming.  
+
+
+## Comments on Notation
+
+Statistical notation can vary, since many disciplines have made contributions to statistical theory and practice. For proportions, one common notation is to use $\pi$ to represent the population proportion with and $p$ for the sample proportion (Greek versus Roman letters, like $\mu$ and $\bar{x}$). These slides use that convention. However, the lesson videos use another common system where the population proportion is $p$ and the sample proportion is $\widehat{p}$. The textbook seems to use a mix of notations.
+
+In any context, make sure you know whether $p$ is being used as the population parameter or sample statistic.
+
+
+# Independence
+
+## Null and Alternative Hypotheses
+
+The hypotheses for a test of independence are written in terms of the population relationship.
+
+null hypothesis
+
+$$H_0: \text{[Variable 1] and [Variable 2] are indendent}.$$
+
+alternative hypothesis
+
+$$H_a: \text{[Variable 1] and [Variable 2] are not independent}.$$
+
+<br>Replace [Variable 1] and [Variable 2] with actual variable names from the problem. There is only one possible alternative in this test, unlike tests for comparing means and proportions. Always compute the p-value using the upper tail.
+
+
+## Berkeley Bias Data
+
+
+## Observed Counts
+
+
+## Expected Counts
+
+
+## Test Statistic
+
+
+## P-Value using $\chi^2$
+
+
+## Using `chisq.test`
+
+
+## Monte Carlo Simulation
+
+
+# Homogeneity
+
+## Null and Alternative Hypotheses
+
+The hypotheses for a test of independence are written in terms of two or more population distributions.
+
+null hypothesis
+
+$$H_0: \text{The population distributions are the same}.$$
+
+alternative hypothesis
+
+$$H_a: \text{The population distributions differ in some way}.$$
+
+Hypotheses can also be written in terms of certain proportions $\pi_{ij}$, where $i$ is the population and $j$ is the category.
+
+$$H_0: \pi_{11} = \pi_{21}, \pi_{12} = \pi_{22}, \pi_{13} = \pi_{23}, ...$$
+
+
+## Independence vs. Homogeneity?
+
+The "mechanics" (i.e., test statistics, calculations, p-values) for a test of goodness of fit and a test of homogeneity are the same. The difference lies in the question asked and the way in which the data are sampled.
+
+* independence: for a single population, are two variables in which we are interested dependent on one another within that population?
+
+* homogeneity: for two or more selected populations, does a variable in which we are interested have same distribution in all the populations? 
+
+The difference here can be subtle, so you need to pay attention to the context of the problem. 
+
+
+# Goodness of Fit
+
+## Null and Alternative Hypotheses
+
+The hypotheses for a goodness of fit test are written in terms of the population model. Sometimes we specify a model by name, like binomial or normal. Distributions can also be specified by a set of proportions representing all possible categories.
+
+null hypothesis
+
+$$H_0: \text{The data are from [specified distribution].}$$
+
+alternative hypothesis
+
+$$H_a: \text{The data are not from [specified distribution].}$$
+
+## Example Hypotheses
+
+$H_0: \pi_1 = \frac{1}{4}, \pi_2 = \frac{1}{2}, \pi_3 = \frac{1}{4}$<br>
+$H_a: \text{At least one } \pi_i \text{ is not as specified.}$
+
+$H_0: \text{The data come from a Bin(20, 0.25) distribution.}$<br>
+$H_a: \text{The data do not come from a Bin(20, 0.25) distribution.}$
+
+$H_0: \text{The data come from an Exp(3) distribution.}$<br>
+$H_a: \text{The data do not come from an Exp(3) distribution.}$
+
+$H_0: \text{The data come from a normal distribution.}$<br>
+$H_a: \text{The data do not come from a normal distribution.}$
+
+Notice the last example does not specify $\mu$ or $\sigma$. Sometimes we only need to test the population shape. Any needed parameter values are estimated from the data.
+

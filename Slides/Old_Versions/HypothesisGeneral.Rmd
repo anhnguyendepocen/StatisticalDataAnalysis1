@@ -1,0 +1,22 @@
+---
+title: "Introduction to<br>Hypothesis Testing"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+```
+
+# Cover Slide
+
+## Content Slide
+
+# Cover Slide
+
+## Content Slide
+
+# Cover Slide
+
+## Content Slide

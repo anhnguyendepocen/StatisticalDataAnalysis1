@@ -117,13 +117,13 @@ The data units cancel out. A z-score of +2 would be interpreted as "two standard
 
 ## Skewness and Kurtosis
 
-skewness (based on the third moment)
+skewness (third moment)
 
 $$M_3 = \frac{\Sigma(X - \mu)^3}{n}$$
 
 $$skewness = \frac{\Sigma(X - \mu)^3}{\sigma^3}$$
 
-kurtosis (based on the fourth moment)
+kurtosis (fourth moment)
 
 $$M_4 = \frac{\Sigma(X - \mu)^4}{n}$$
 
@@ -140,36 +140,9 @@ $$kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}$$
 
 The `var()` and `sd()` functions calculate sample variance and standard deviation. How could you get population variance if your data were a population?
 
-The `skewness()` and `kurtosis()` functions are found in the `moments` package, so you need to use `library(moments)`.
+The `skewness()` and `kurtosis()` functions are found in the `moments` package, not base `R`.
 
 You should explore the syntax and output of these functions.
-
-
-## Measures Based on Ordered Counts
-
-* five-number-summary
-    * minimum &mdash; smallest data point
-    * first quartile (Q<sub>1</sub>) &mdash; 25% of data is below, 75% is above
-    * median &mdash; 50% of data is below, 50% is above ("center")
-    * third quartile (Q<sub>3</sub>) &mdash; 75% of data is below, 25% is above
-    * maximum &mdash; largest data point
-* interquartile range (IQR) &mdash; Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)
-* range &mdash; maximum - minimum (overall width of the dataset)
-* percentiles / quantiles &mdash; the n*th* percentile or quantile has n% of the data below it (e.g., Q<sub>1</sub> is the 25th percentile of the dataset and the median is the 50th percentile)
-
-
-## Count-Based Summaries in R
-
-* `fivenum()`
-* `min()`
-* `median()`
-* `max()`
-* `IQR()`
-* `range()`
-* `diff(range())`
-* `quantile()`
-
-Again, you should explore the syntax, parameters, and output of each function to understand how it works.
 
 
 ## Some Data to Summarize
@@ -199,45 +172,45 @@ glimpse(wells)
 You should also `glimpse()` the `mileage` dataset, which has only one variable: `mpg`.
 
 
-## Summarizing `mpg` Using `dplyr`
+## Measures Based on Ordered Counts
 
-You can add/remove functions as needed. The `na.rm` ignores `NA` (missing) values in the variable, else you get `NA` as output.
+* five-number-summary
+    * minimum
+    * first quartile (Q<sub>1</sub>)
+    * median
+    * third quartile (Q<sub>3</sub>)
+    * maximum
+* interquartile range (IQR)
+* range
+* percentiles / quantiles
 
-```{r, eval = FALSE}
-library(moments)
-mileage %>% 
-  summarize(n    = n(),
-            xbar = mean(mpg, na.rm = TRUE),
-            s    = sd(mpg, na.rm = TRUE),
-            min  = fivenum(mpg)[1],
-            Q1   = fivenum(mpg)[2],
-            med  = fivenum(mpg)[3],                  
-            Q3   = fivenum(mpg)[4],
-            max  = fivenum(mpg)[5],
-            iqr  = IQR(mpg, na.rm = TRUE),
-            rng  = diff(range(mpg, na.rm = TRUE)),
-            skew = skewness(mpg, na.rm = TRUE),
-            kurt = kurtosis(mpg, na.rm = TRUE))
-```
- 
- 
-##
+
+## Count-Based Summaries in R
+
+* `fivenum()`
+* `min()`
+* `median()`
+* `max()`
+* `IQR()`
+* `range()`
+* `quantile()`
+
+Again, you should explore the syntax, parameters, and output of each function to understand how it works.
+
+
+## Summarizing Using `dplyr`
 
 ```{r}
-library(moments)
-mileage %>% 
-  summarize(n    = n(),
-            xbar = mean(mpg, na.rm = TRUE),
-            s    = sd(mpg, na.rm = TRUE),
-            min  = fivenum(mpg)[1],
-            Q1   = fivenum(mpg)[2],
-            med  = fivenum(mpg)[3],                  
-            Q3   = fivenum(mpg)[4],
-            max  = fivenum(mpg)[5],
-            iqr  = IQR(mpg, na.rm = TRUE),
-            rng  = diff(range(mpg, na.rm = TRUE)),
-            skew = skewness(mpg, na.rm = TRUE),
-            kurt = kurtosis(mpg, na.rm = TRUE))
+mileage %>% summarize(n    = n(),
+                      xbar = mean(mpg, na.rm = TRUE),
+                      s    = sd(mpg, na.rm = TRUE),
+                      min  = fivenum(mpg)[1],
+                      Q1   = fivenum(mpg)[2],
+                      med  = fivenum(mpg)[3],                  
+                      Q3   = fivenum(mpg)[4],
+                      max  = fivenum(mpg)[5],
+                      skew = skewness(mpg, na.rm = TRUE),
+                      kurt = kurtosis(mpg, na.rm = TRUE))
 ```
  
  
@@ -246,10 +219,10 @@ mileage %>%
 ```{r}
 xbar <- mean(mileage$mpg)
 s    <- sd(mileage$mpg)
-mileage <- mileage %>% 
-  mutate(zscores = (mpg - xbar)/s)
+mileage <- mileage %>% mutate(zscores = (mpg - xbar)/s)
 head(mileage)
 ```
+
 
 
 ## Boxplots and Outliers

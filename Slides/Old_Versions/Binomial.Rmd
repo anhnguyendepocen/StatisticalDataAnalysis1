@@ -1,0 +1,203 @@
+---
+title: "Bernoulli and Binomial Distributions"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: ioslides_presentation
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+
+## Before We Begin...
+
+These slides assume you have completed the DataCamp course [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r).
+
+It would be helpful to complete an additional DataCamp course [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r).
+
+These slides are not meant to be standalone information, but rather a guide for hands-on lecture. Be prepared to take notes to flesh out the contents. 
+
+I recommend that you create an R Markdown document where you can include information and code from the slides as well as your own additional notes and explorations.
+
+These slides were produced using R Markdown. See "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/).
+
+
+# Bernoulli Trials
+
+##
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bT1p5tJwn_0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Parameters and Notation
+
+A Bernoulli trial is a single random event that has two possible outcomes, often called "success" and "failure". 
+
+Success is not necessarily a good outcome, but it is the outcome of interest for a given problem or scenario.
+
+Classic examples include a coin flip where a head is considered success and a tail is considered failure, or one roll of a standard 6-sided die where 1 is success and anything else is failure.
+
+The Bernoulli model has a single parameter $p$.
+
+* $p$ = probability of success  
+* $q$ = probability of failure = 1 - $p$  
+* $p$ + $q$ = 1
+
+
+## Bernoulli Trial as Building Block
+
+Other probability distributions (e.g., binomial, geometric) model the outcomes of sequences of Bernoulli trials; for example, the number of heads seen in 100 coin flips, or how many times we have to roll a 6-sided die to observe our first 1.
+
+A necessary condition for binomial and geometric distributions is that all of the trials are independent with constant chance of success _p_ on each trial.
+
+Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html) (1654-1705), who made important advancements in probability theory, including an early version of the law of large numbers. Many appeared in his posthumously-published book [_Ars Conjectandi_](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (_The Art of Conjecturing_).
+
+
+# Binomial Distribution
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qIzC1-9PwQo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Notation and Parameters
+
+The binomial distribution is a discrete probability distribution. It models the number of successes in a sequence of independent Bernoulli trials. 
+
+$$X \sim Bin(n,p)$$
+
+$x$ = number of successes = {0, 1, 2, ..., n}
+    
+$n$ = number of trials
+    
+$p$ = probability of success on a single trial
+    
+1 - $p$ = probability of failure on a single trial (sometimes called $q$)
+
+
+## Probability Mass Function (pmf)
+
+The probability of a given number of successes x in a Bernoulli model is found using the probability mass function (pmf). This differs somewhat from a continuous pdf.
+
+$$P(X = x) = f(x) = {n \choose x}p^x(1-p)^{n-x} = $$
+
+$$\left( \frac{n!}{x!(n-x)!} \right) p^x(1-p)^{n-x}$$
+
+R has a function to solve the pmf for any given binomial model. Inputs may be single values or vectors. 
+
+<center>$P(X = x)$ = $f(x)$ = `dbinom(x, size, prob)`</center>
+
+
+## Cumulative Distribution Function (CDF)
+
+The probability of a given number of successes _or fewer_ is found using the CDF. This differs slightly from a continuous CDF.
+
+$$F(x)=P(X \leq x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
+
+R has a function to solve the pmf for any given binomial model, as well as its inverse. Be careful of the function notation in R!
+
+$P(X \leq x)$ = $F(x)$ = `pbinom(q, size, prob)`
+
+$P(X > x)$ = $1-F(x)$ = use `lower.tail = FALSE` (carefully)
+
+$q^{th}$ percentile (approx) = $F^{-1}(x)$ = `qbinom(p, size, prob)` 
+
+
+## Expected Value and Variance
+
+The expected (mean) number of successes and the variance of number of successes are found as follows. The expressions for expected value and variance reduce to simpler functions of the two binomial parameters $n$ and $p$.
+
+$$E[X] = \sum\limits_{\text{all x}} x f(x) \rightarrow np$$
+
+$$Var[X] = \sum\limits_{\text{all x}} (x - \mu)^2 f(x) \rightarrow np(1-p) $$
+
+$$SD[X] = \sqrt{Var[X]}$$
+
+## Simulating the Binomial Distribution
+
+In addition to calculating probabilities, we can simulate random binomial values in R using `rbinom (n, size, prob)`.
+
+`n` = the number of random values we want to generate
+
+`size` = number of trials (this is the Binomial parameter $n$)
+    
+`prob` = probability of success on a single trial (parameter $p$)
+
+<hr>
+
+Reminder: Take care when using `dbinom`, `pbinom`, `qbinom`, and `rbinom`---the function notation in `R` could be confused with the Binomial parameters!
+
+
+# Plotting the Binomial
+
+## Create the Mass Function
+
+```{r}
+n <- 10
+p <- .5
+bin_pmf <- tibble(x = 0:n, probability = dbinom(x, n, p))
+print.data.frame(bin_pmf, digits = 4, row.names = FALSE)
+```
+
+
+## Plot the Mass Function
+
+```{r, fig.height = 3.75}
+ggplot(bin_pmf, aes(x = x, y = probability)) + 
+  geom_bar(stat = "identity", fill = "darkgray") +
+  scale_x_continuous(breaks = 0:n)
+```
+
+
+## Shading the Mass Function
+
+```{r, fig.height = 3.2}
+bin_pmf <- bin_pmf %>% 
+  mutate(shading = ifelse(x <= 3, "red", "darkgray"))
+ggplot(bin_pmf, aes(x = x, y = probability)) + 
+  geom_bar(stat = "identity", fill = bin_pmf$shading) +
+  scale_x_continuous(breaks = 0:n)
+```
+
+
+# Binomial Example
+
+## Zener Card Tests
+
+[Parapsychology](http://www.psychicscience.org/parintro.aspx) is the study of paranormal/psychic phenomena.
+
+<p style="text-align: center;">![](https://stat-jet-asu.github.io/Moodlepics/zenercards.jpg)</p>
+
+Zener cards, shown above, were developed by Karl Zener in the 1930s for parapsychological testing. They were featured in the movie _Ghostbusters_, used by Dr. Peter Venkman (Bill Murray), a PhD in psychology and parapsychology. Take a [Zener card test](https://www.psychic-experiences.com/psychic-tests/zener-cards.php)!
+
+
+## Modeling the Zener Test: Distribution
+
+* What are the parameters of the appropriate binomial model?
+* Calculate the complete pmf and CDF for X = number correct.
+* Display the pmf and CDF together in a data frame or tibble.
+* What is the expected number of correct guesses?
+* What is the probability of getting _exactly_ the expected value?
+* What is the variance and SD in number of correct guesses?
+
+
+## Modeling the Zener Test: Score Results
+
+* What is the probability of getting 10 or more cards correct?
+* What is the probability of getting more than 10 cards correct?
+* What are the probabilities associated with _your_ test results?
+* Plot the pmf and color the "significant" X values if we use the 10 or more rule.
+* Plot the pmf and color the "significant" X values if we use the more than 10 rule.
+* Plot the pmf and color the area correspoding to your results.
+
+
+## Modeling the Zener Test: Extensions
+
+* What is the chance of 10 or more correct on multiple tests?
+* What is the chance of exceeding 10 correct on multiple tests?
+* What if our test used a total of 100 trials rather than 25?
+* What if there were more symbols in the Zener card deck?
+* How can we simulate the outcome of one or more tests?
+* What if we used a closed deck rather than an open deck?
+

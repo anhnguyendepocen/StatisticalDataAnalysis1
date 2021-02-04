@@ -1,0 +1,134 @@
+---
+title: "Hypothesis Testing<br>Introduction"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
+library(kableExtra)
+```
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations.
+
+**Related Materials**
+
+* Chapter X of *Mathematical Statistics with Resampling and R*
+* Chapter X of [*Modern Dive*](https://moderndive.com/)
+* DataCamp [XXX](XXX)
+
+Refer to "[4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
+
+# Introduction
+
+## Steps in a Hypothesis Test
+
+Determine the appropriate test for your research question (and the available data)
+
+Perform EDA and verify the assumptions of the test; if they are not met, choose a different test
+
+Write the null (Ho) and alternative (Ha) hypotheses for your test
+
+Compute an appropriate test statistic using your sample data
+
+Compute the p-value using the test statistic and an appropriate sampling distribution
+
+Make a statistical decision about whether or not to reject Ho
+
+Interpret your decision in the context of your research question
+
+
+# Exploration #1:<br>XXX
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tTeMYuS87oU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## XXX
+
+Content
+
+
+# Integration #1
+
+## 
+
+1) 
+
+
+# Exploration #2:<br>P-Values
+
+## 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UsU-O2Z1rAs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## XXX
+
+Content
+
+
+# Integration #1
+
+## 
+
+1) 
+
+
+# Exploration #3:<br>Error and Power
+
+##
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7mE-K_w1v90" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## XXX
+
+Content
+
+
+# Integration #3
+
+## 
+
+1) 
+
+
+# Exploration #4:<br>Types of Significance
+
+##
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_k1MQTUCXmU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+##
+
+**Statistical significance** is *probabilistic* --- given a null hypothesis about a parameter or parameters, sampling distribution theory, and evidence found in the sample data, is the result likely to be due to chance alone? If not, the result is statistically significant. Test statistics and p-values are unitless summaries.
+
+* Statistical significance is strongly related to sample size.  
+
+* Statistical significance is related to variability in sample(s).
+
+This is because sample size and variance impact the sampling distributions of the test statistics used in hypothesis tests; for example, as is shown in the Central Limit Theorem.
+
+**Practical significance** is *contextual* --- is the magnitude (taking into account units of measure) of a statistically significant result useful or important in the context of the problem?
+
+
+## Effect Size
+
+
+
+
+# Integration #4
+
+## 
+
+1) 
+
+

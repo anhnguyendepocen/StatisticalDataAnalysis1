@@ -1,0 +1,21 @@
+---
+title: "Introduction to<br>Data and Datasets"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+library(tidyverse)
+```
+
+## Exploratory Data Analysis (EDA)
+
+We use EDA to "examin[e] and describ[e] data to gain insight, discover structure, and detect anomalies and outliers."
+
+<p style="text-align:center"><img src="images/john_tukey.jpg" height = 250></p>
+
+John Tukey (1915--2000), author of _Exploratory Data Analysis_ (1977) referred to EDA as numerical, counting, and graphical detective work. He is credited with introducing the terms 'bit' and 'software' while working on early computers at Bell Labs.
