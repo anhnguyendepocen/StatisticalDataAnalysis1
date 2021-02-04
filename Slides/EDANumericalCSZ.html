@@ -3207,7 +3207,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">February 03, 2021 @ 02:00 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">February 04, 2021 @ 01:30 PM</p>
           </hgroup>
   </slide>
 
@@ -3279,9 +3279,9 @@ slide:not(.current) .plotly.html-widget{
 <li>range</li>
 </ul>
 
-<p>Summarizing the deviations of a set of values from some center point (like a mean) is a common technique in statistics.</p>
+<p>Summarizing the deviations of a set of values from some center point (like the mean) is a common technique in statistics. We will see this in many applications.</p>
 
-</article></slide><slide class=""><hgroup><h2>Measures Based on Moments–Mean</h2></hgroup><article  id="measures-based-on-momentsmean">
+</article></slide><slide class=""><hgroup><h2>Measures Based on Moments—Mean</h2></hgroup><article  id="measures-based-on-momentsmean">
 
 <p>In physics, a <em>moment of force</em> (or <em>torque</em>) is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.</p>
 
@@ -3311,7 +3311,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>The previous slide shows the formula for <em>population</em> variance.</p>
 
-<p>When computing sample variance, we make a small change to the formula so that it is an <em>unbiased</em> estimator of the population variance (i.e., in the long run sample variance will neither over- nor under-estimate population variance).</p>
+<p>When computing sample variance, we make a small change to the formula so that it is an <em>unbiased</em> estimator of the population variance (i.e., in the long run sample variance will neither over-estimate nor under-estimate population variance).</p>
 
 <p>\[\text{sample variance} = s^2 = \frac{\Sigma(x_i - \bar{x})^2}{n-1}\]</p>
 
@@ -3333,7 +3333,7 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>The Mathematics of Z-Scores</h2></hgroup><article  id="the-mathematics-of-z-scores">
 
-<p>Why are z-scores <em>standardized</em> scores? The calculation performs a linear transformation (re-scaling) of the values, similar to when we convert degrees Fahrenheit to Celsius. Data points maintain their relative relationships to each other, we are just using a new number line as a reference point.</p>
+<p>Why are z-scores <em>standardized</em> scores? The calculation performs a linear transformation (re-scaling) of the values, similar to when we convert degrees Fahrenheit to Celsius. Data points maintain their relative relationships to each other, we are just using a new number line scale as a reference point.</p>
 
 <p>\((X - \mu)\) re-centers the data, and the new mean is always zero</p>
 
@@ -3341,19 +3341,42 @@ slide:not(.current) .plotly.html-widget{
 
 <p>The act of dividing also cancels out original measurement units. We then talk about data points in terms of how many standard deviations they are above or below the mean. It helps compare variables that may originally have been on very different scales by using a common or <em>standard</em> scale.</p>
 
+</article></slide><slide class=""><hgroup><h2>Why do We Need Z-Scores?</h2></hgroup><article  id="why-do-we-need-z-scores">
+
+<p>As noted, z-scores help us compare data and distributions that may be measures on different scales, the way we might convert measurements made in inches, feet, and meters to a common set of units to make more direct comparisons.</p>
+
+<p>Our traditional methods of estimation and inference also often rely on using standardized measures so that we can use these same methods in a broad variety of situations. In statistics, our data is an unknown, but the same way scientists calibrate their instruments, we make sure our statistical methods are reliable by validating and &ldquo;calibrating&rdquo; them mathematically.</p>
+
+<p>In the future, one variation you see on z-scores will be <em>t</em>-scores, used for estimation and inference about means.</p>
+
 </article></slide><slide class=""><hgroup><h2>Skewness and Kurtosis</h2></hgroup><article  id="skewness-and-kurtosis">
 
-<p>skewness (based on the third moment)</p>
+<p>skewness (based on the third moment, notice z-score similarity)</p>
 
 <p>\[M_3 = \frac{\Sigma(X - \mu)^3}{n}\]</p>
 
 <p>\[skewness = \frac{\Sigma(X - \mu)^3}{\sigma^3}\]</p>
 
-<p>kurtosis (based on the fourth moment)</p>
+<p>kurtosis (based on the fourth moment, notice z-score similarity)</p>
 
 <p>\[M_4 = \frac{\Sigma(X - \mu)^4}{n}\]</p>
 
 <p>\[kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>More on Skewness, Kurtosis, Moments</h2></hgroup><article  id="more-on-skewness-kurtosis-moments">
+
+<p>Skewness and kurtosis help to judge the <em>shape</em> of a distribution.</p>
+
+<ul>
+<li><p>skewness is the degree of asymmetry in the distribution</p></li>
+<li><p>kurtosis is the flatness or peakedness of the distribution</p></li>
+</ul>
+
+<p>We use these measures often when trying to judge whether or not we can consider a data to be approximately bell-shaped, since many of our traditional methods assume that data come from a population this characteristic shape.</p>
+
+<p>We will talk about these measures in more depth when we get to plotting data, shape, and the normal distribution.</p>
+
+<p>Outliers will affect all measures based on moments, so we need to check for them when we calculate these measures.</p>
 
 </article></slide><slide class=""><hgroup><h2>Moment-Based Summaries in R</h2></hgroup><article  id="moment-based-summaries-in-r">
 
@@ -3412,7 +3435,7 @@ slide:not(.current) .plotly.html-widget{
 <li><p><code>happyf</code>: results for an experiment where some servers drew happy faces on the back of customer’s restaurant checks and others did not, with the tip percentage they received</p></li>
 </ul>
 
-<p>In <code>happyf</code> the sex of the server is recorded as a binary variable <code>male</code> or <code>female</code>, since it is an older dataset (<a href='https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x' title=''>published in 1996</a>).</p>
+<p>In <code>happyf</code> the sex of the server is recorded as a binary variable <code>male</code> or <code>female</code>, since it is an older dataset (<a href='https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x' title=''>published in 1996</a>). Much of the data we encounter in real life is time-sensitive; we need to keep this in mind when we interpret/discuss it.</p>
 
 </article></slide><slide class=""><hgroup><h2>Explore the Datasets</h2></hgroup><article  id="explore-the-datasets">
 
@@ -3468,7 +3491,7 @@ datasetname %&gt;%
 <p>I removed <code>skewness()</code> and <code>kurtosis()</code> here, but added <code>sum()</code>. I also know for sure that there are no outliers in this dataset, so I removed the <code>na.rm = TRUE</code> statements for simplicity.</p>
 
 <pre class = 'prettyprint lang-r'>mileage %&gt;% 
- summarize(n     = n(),
+  summarize(n     = n(),
             xbar  = mean(mpg),
             s     = sd(mpg),
             min   = fivenum(mpg)[1],

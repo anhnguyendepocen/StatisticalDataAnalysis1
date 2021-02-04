@@ -69,10 +69,10 @@ Mean and median are both the "middle" of a given distribution, but the two summa
 * interquartile range (IQR)
 * range
 
-Summarizing the deviations of a set of values from some center point (like a mean) is a common technique in statistics. 
+Summarizing the deviations of a set of values from some center point (like the mean) is a common technique in statistics. We will see this in many applications.
 
 
-## Measures Based on Moments--Mean
+## Measures Based on Moments---Mean
 
 In physics, a *moment of force* (or *torque*) is the turning effect of the force about a central point, as a function of distance from the point. Statistical moments are a similar idea.
 
@@ -102,7 +102,7 @@ While not strictly mathematically true, it is helpful to think of SD as roughly 
 
 The previous slide shows the formula for *population* variance. 
 
-When computing sample variance, we make a small change to the formula so that it is an *unbiased* estimator of the population variance (i.e., in the long run sample variance will neither over- nor under-estimate population variance).
+When computing sample variance, we make a small change to the formula so that it is an *unbiased* estimator of the population variance (i.e., in the long run sample variance will neither over-estimate nor under-estimate population variance).
 
 $$\text{sample variance} = s^2 = \frac{\Sigma(x_i - \bar{x})^2}{n-1}$$ 
 
@@ -126,7 +126,7 @@ The data units cancel out. A z-score of +2 would be interpreted as "two standard
 
 ## The Mathematics of Z-Scores
 
-Why are z-scores *standardized* scores? The calculation performs a linear transformation (re-scaling) of the values, similar to when we convert degrees Fahrenheit to Celsius. Data points maintain their relative relationships to each other, we are just using a new number line as a reference point.
+Why are z-scores *standardized* scores? The calculation performs a linear transformation (re-scaling) of the values, similar to when we convert degrees Fahrenheit to Celsius. Data points maintain their relative relationships to each other, we are just using a new number line scale as a reference point.
 
 $(X - \mu)$ re-centers the data, and the new mean is always zero
 
@@ -135,19 +135,43 @@ dividing by $\sigma$ re-scales the number line, so the SD is always one
 The act of dividing also cancels out original measurement units. We then talk about data points in terms of how many standard deviations they are above or below the mean. It helps compare variables that may originally have been on very different scales by using a common or *standard* scale.
 
 
+## Why do We Need Z-Scores?
+
+As noted, z-scores help us compare data and distributions that may be measures on different scales, the way we might convert measurements made in inches, feet, and meters to a common set of units to make more direct comparisons. 
+
+Our traditional methods of estimation and inference also often rely on using standardized measures so that we can use these same methods in a broad variety of situations. In statistics, our data is an unknown, but the same way scientists calibrate their instruments, we make sure our statistical methods are reliable by validating and "calibrating" them mathematically.
+
+In the future, one variation you see on z-scores will be *t*-scores, used for estimation and inference about means.
+
+
 ## Skewness and Kurtosis
 
-skewness (based on the third moment)
+skewness (based on the third moment, notice z-score similarity)
 
 $$M_3 = \frac{\Sigma(X - \mu)^3}{n}$$
 
 $$skewness = \frac{\Sigma(X - \mu)^3}{\sigma^3}$$
 
-kurtosis (based on the fourth moment)
+kurtosis (based on the fourth moment, notice z-score similarity)
 
 $$M_4 = \frac{\Sigma(X - \mu)^4}{n}$$
 
 $$kurtosis = \frac{\Sigma(X - \mu)^4}{\sigma^4}$$
+
+
+## More on Skewness, Kurtosis, Moments
+
+Skewness and kurtosis help to judge the *shape* of a distribution. 
+
+* skewness is the degree of asymmetry in the distribution
+
+* kurtosis is the flatness or peakedness of the distribution
+
+We use these measures often when trying to judge whether or not we can consider a data to be approximately bell-shaped, since many of our traditional methods assume that data come from a population this characteristic shape.
+
+We will talk about these measures in more depth when we get to plotting data, shape, and the normal distribution.
+
+Outliers will affect all measures based on moments, so we need to check for them when we calculate these measures.
 
 
 ## Moment-Based Summaries in R
@@ -200,7 +224,7 @@ Read datasets [gasmileage.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Da
 
 * `happyf`: results for an experiment where some servers drew happy faces on the back of  customer's restaurant checks and others did not, with the tip percentage they received
 
-In `happyf` the sex of the server is recorded as a binary variable `male` or `female`, since it is an older dataset ([published in 1996](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x)).
+In `happyf` the sex of the server is recorded as a binary variable `male` or `female`, since it is an older dataset ([published in 1996](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x)). Much of the data we encounter in real life is time-sensitive; we need to keep this in mind when we interpret/discuss it.
 
 
 ## Explore the Datasets
@@ -256,7 +280,7 @@ I removed `skewness()` and `kurtosis()` here, but added `sum()`. I also know for
 
 ```{r, eval = FALSE}
 mileage %>% 
- summarize(n     = n(),
+  summarize(n     = n(),
             xbar  = mean(mpg),
             s     = sd(mpg),
             min   = fivenum(mpg)[1],
