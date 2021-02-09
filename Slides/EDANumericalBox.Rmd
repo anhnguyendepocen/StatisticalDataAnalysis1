@@ -89,11 +89,11 @@ The lower and upper fences determine the limits for potential outliers. The fenc
 
 Any point that is more than 1.5 $\times$ IQR from the edges of the box is considered to be an outlier. On a bell curve, the area between fences would enclose the middle 95% of the data. For other data distributions, this percentage will vary.
 
-lower fence = LF = (Q<sub>1</sub>) -- 1.5 $\times$ IQR 
+lower fence = LF = Q<sub>1</sub> -- 1.5 $\times$ IQR 
 
-upper fence = UF = (Q<sub>3</sub>) + 1.5 $\times$ IQR 
+upper fence = UF = Q<sub>3</sub> + 1.5 $\times$ IQR 
 
-Some people designate any point more than 3 $\times$ IQR from the edges of the box as an extreme outlier.
+Some people designate any point more than 3 $\times$ IQR from the edges of the box as an *extreme outlier*.
 
 
 ## Drawing the Whiskers
@@ -150,7 +150,7 @@ Lower and upper fences determine the cutoff boundaries for small and large outli
 ```{r}
 (LF <- fivenum(mileage$mpg)[2] - 1.5 * IQR(mileage$mpg))
 (UF <- fivenum(mileage$mpg)[4] + 1.5 * IQR(mileage$mpg))
-boxplot.stats(sort(mileage$mpg))$out
+sort(boxplot.stats(mileage$mpg)$out)
 ```
 
 
@@ -213,7 +213,7 @@ arsenicfences <- wells %>%
 print.data.frame(arsenicfences) # another option besides kable()
 ```
 
-Arsenic (ppm) can not be negative, but we can have a negative fence because the mathematics do not take shape into account.
+Arsenic (measured in parts per billion) cannot be negative, but we can have a negative fence because the mathematics do not take shape or units into account.
 
 * How many outliers are there in the Arsenic variable?
 * What are the values of the outliers shown in the boxplot?
@@ -247,7 +247,7 @@ Other plots we can use to help determine distribution shape (symmetry versus ske
 However, none of these plots have a related rule for outliers. This is the strength of boxplots, as well as comparisons.
 
 
-## Comparing Groups, Tips by Smileyface
+## Comparing Groups, Tips by Message
 
 Does drawing a smiley face on a restaurant check increase tips?
 
@@ -276,18 +276,6 @@ ggplot(happyf, aes(x = TipPct, y = Message)) +
 ```
 
 
-## Fences for Each Group
-
-As mentioned earlier, we use `group_by()` before `summarize()` to calculate fences for each group. 
-
-```{r}
-happyf %>% 
-  group_by(Sex, Message) %>%  # group by Sex and Message
-  summarize(LF = fivenum(TipPct)[2] - 1.5 * IQR(TipPct),
-            UF = fivenum(TipPct)[4] + 1.5 * IQR(TipPct))
-```
-
-
 ## Faceted Plot with Two Rows
 
 Now we can compare all four of the experimental groups.
@@ -299,6 +287,18 @@ ggplot(happyf, aes(x = TipPct, y = Message)) +
        x = "tip as a percentage of the check",
        y = "drawing on back of check") +
   facet_grid(Sex ~ .)
+```
+
+
+## Fences for Each Group
+
+As mentioned earlier, we use `group_by()` before `summarize()` to calculate fences for each group. 
+
+```{r}
+happyf %>% 
+  group_by(Sex, Message) %>%  # group by Sex and Message
+  summarize(LF = fivenum(TipPct)[2] - 1.5 * IQR(TipPct),
+            UF = fivenum(TipPct)[4] + 1.5 * IQR(TipPct))
 ```
 
 
