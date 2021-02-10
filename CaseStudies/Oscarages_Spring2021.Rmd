@@ -1,0 +1,155 @@
+---
+title: "Case Study: Oscar Winner Ages"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: TRUE
+    toc_depth: 4
+---
+
+<hr>
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### Load the Package(s)
+
+```{r loadpackages}
+# Put your code here.
+```
+
+### Problem Description
+
+In January 2007, Entertainment Weekly magazine featured a [cover story](http://www.simplystreep.com/gallery/displayimage.php?album=345&pid=25019#top_display_media) about three Academy Award nominees for Best Actress (Meryl Streep, Judy Densch, and Helen Mirren), with a cover tagline that proclaimed "The Silver Foxes Rule!" This theme continued inside, with the article focusing in large part on how old these three women were, relative to previous winners, and the perceived Hollywood bias in favor of younger actresses. This discussion persists in one form or another to this day. Note: the terminology for these categories has changed over time. The terms in this dataset have been taken from the time period in which the magazine article was published. (dataset: [oscarages.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv))
+
+Use `tidyverse` methods (e.g., `dplyr` and `ggplot`) as much as possible when answering the questions. 
+
+### Import the Dataset
+
+Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
+
+```{r loaddatasets}
+# Put your code here.
+```
+
+### Exploratory Analysis 1
+
+#### How many awards per decade?
+
+Create a frequency table for the variable `decade`. 
+
+```{r}
+# Put your code here.
+```
+
+#### How many awards per category?
+
+Create a table with frequency and proportions for the variable `category`. 
+
+```{r}
+# Put your code here.
+```
+
+#### Who's won at least three times?
+
+Some people appear in the dataset more than once. Create a frequency table for the variable `name` and display only those people who have won three or more times.
+
+#### What is the overall age distribution?
+
+Compute sample size, mean, standard deviation, five-number summary, IQR, range, and lower and upper fences for `age` for all winners. Also create a boxplot for `age`.
+
+```{r}
+# Put your code here.
+```
+
+```{r}
+# Put your code here.
+```
+
+### Exploratory Analysis 2
+
+#### Dataset of winners prior to 2007
+
+Create a dataset that contains data only for Best Actor and Best Actress winners prior to the 2007 Academy Awards ceremony. Note that the variable `ceremony` refers to the ceremony year. Hint: a `filter` using the `%in%` operator is useful here! 
+
+```{r}
+# Put your code here.
+```
+
+#### Do the age distributions differ? (summaries)
+
+Compute and display sample sizes, means, standard deviations, five-number summaries, IQR, and lower and upper fences for `age` for Best Actor versus Best Actress winners prior to 2007. 
+
+```{r}
+# Put your code here.
+```
+
+#### Do the age distributions differ? (boxplots)
+
+Create boxplots to compare the ages of Best Actor and Best Actress winners prior to 2007. If you can, add an informative title, x and y axis labels, a caption that shows the data source.
+
+```{r}
+# Put your code here.
+```
+
+### Exploratory Analysis 3
+
+#### So who won Best Actress in 2007?
+
+Which person actually won the Best Actress Oscar in 2007? How old was this person? For what movie did this person win? Use the `filter` and `select` functions to display the answer. You'll need to go back to the full dataset for this.
+
+```{r}
+# Put your code here.
+```
+
+#### Was the 2007 winner "unusual"?
+
+Was the 2007 Best Actress winner an outlier compared to previous Best Actress winners? If this person had been nominated as a Best Actor, would they have been an outlier compared to previous Best Actor winners? Determine the answers using code.
+
+```{r}
+# Put your code here.
+```
+
+#### Some other challenge questions!
+
+The 2007 article made several other statements. For example: (1) For the last 10 years, the Academy hasn't awarded a Best Actress Oscar to anyone over 39; (2) For the past nine years, that age limit has hovered even lower, at 35; (3) In fact, if one of our cover subjects wins next month, she'll become the most mature recipient since 1990, when Jessica Tandy took home the gold for *Driving Miss Daisy*; (4) Since then, only one actress over 50 has won the supporting category, and that was Densch herself, for *Shakespeare in Love* in '99. Can you verify these statements using code? What are the corresponding values for Best Actor and Best Supporting Actor categories?
+
+```{r}
+# Put your code here.
+```
+
+Is the age issue (if one exists) a recent phenomena? Has it changed over time? For example, were past decades seemingly more or less concerned about age? 
+
+```{r}
+# Put your code here.
+```
+
+What would happen if we combined the "Best" and "Best Supporting" categories and compared actors to actresses? Would we get a different picture?
+
+```{r}
+# Put your code here.
+```
+
+### Concluding Discussions
+
+#### Data as evidence
+
+How are these data *evidence* of age bias? 
+
+#### Data are not proof
+
+Why are these data not *proof* of age bias? 
+
+#### Representativeness
+
+What makes this sample *not* representative of Hollywood as a whole?
+
+
+```{r}
+sessionInfo()
+```
+
