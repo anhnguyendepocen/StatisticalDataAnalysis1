@@ -57,7 +57,7 @@ Recall that the five-number summary is found by counting the ordered data values
     * third quartile (Q<sub>3</sub>)
     * maximum
     
-* interquartile range (IQR) &mdash; Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)
+* interquartile range (IQR) = Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)
 
 
 ## Count-Based Summaries in R
@@ -121,7 +121,7 @@ Overall, outliers are determined by the variability of the dataset.
 
 * [mileage](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv): results of 100 EPA gas mileage tests for a particular model of car, in miles per gallon (mpg)
 
-* [wells](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv): concentration of three contaminants for a sample of wells in Bangladesh 
+* [wells](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv): concentration of three contaminants for a sample of wells, in ppb or ppm 
 
 In `happyf` the sex of the server is recorded as a binary variable `male` or `female`, since it is an older dataset ([published in 1996](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1559-1816.1996.tb01847.x)).
 
