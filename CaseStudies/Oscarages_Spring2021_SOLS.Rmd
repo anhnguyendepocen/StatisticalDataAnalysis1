@@ -1,0 +1,372 @@
+---
+title: "Case Study: Oscar Winner Ages"
+author: "SOLUTIONS / Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: TRUE
+    toc_depth: 4
+---
+
+<hr>
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### Load the Package(s)
+
+```{r loadpackages}
+library(tidyverse)
+library(knitr)   # needed for kable() function
+```
+
+### Problem Description
+
+In January 2007, Entertainment Weekly magazine featured a [cover story](http://www.simplystreep.com/gallery/displayimage.php?album=345&pid=25019#top_display_media) about three Academy Award nominees for Best Actress (Meryl Streep, Judy Densch, and Helen Mirren), with a cover tagline that proclaimed "The Silver Foxes Rule!" This theme continued inside, with the article focusing in large part on how old these three women were, relative to previous winners, and the perceived Hollywood bias in favor of younger actresses. This discussion persists in one form or another to this day. Note: the terminology for these categories has changed over time. The terms in this dataset have been taken from the time period in which the magazine article was published. (dataset: [oscarages.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv))
+
+Use `tidyverse` methods (e.g., `dplyr` and `ggplot`) as much as possible when answering the questions. 
+
+### Import the Dataset
+
+Use `read_csv` to import the data, then `glimpse` and `head` to display the dataset structure.
+
+**Note:** a good place to look for an example is the [A Quick Introduction to Datasets](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/IntroToDatasets.html#1) slides.
+
+```{r loaddatasets}
+oscar <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oscarages.csv"))
+glimpse(oscar)
+head(oscar)
+```
+
+### Exploratory Analysis 1
+
+#### How many awards per decade?
+
+Create a frequency table for the variable `decade`. 
+
+**Note:** a good place to look for an example is the [EDA for Categorical Data: Tables](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/IntroToDatasets.html#1) slides.
+
+We can make a simple table using the `table()` function.
+
+```{r}
+# base code
+table(oscar$decade)
+```
+
+We can also make a "table" using `count()` in `dplyr`.
+
+```{r}
+# tidyverse
+oscar %>% 
+  count(decade)
+```
+
+#### How many awards per category?
+
+Create a table with frequency and proportions for the variable `category`. 
+
+**Note:** a good place to look for an example is the [EDA for Categorical Data: Tables](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/IntroToDatasets.html#1) slides.
+
+We can make separate tables using base `R` funtions.
+
+```{r}
+# base code
+table(oscar$category)
+prop.table(table(oscar$category))
+```
+
+A more desirable way to do this is with `dplyr`.
+
+```{r}
+# tidyverse
+oscar %>% 
+  count(category) %>% 
+  mutate(prop = prop.table(n))
+```
+
+#### Who's won at least three times?
+
+Some people appear in the dataset more than once. Create a frequency table for the variable `name` and display only those people who have won three or more times.
+
+**Note:** Recall that the output of `count()` is a dataset we can `arrange()` and `filter()` just like the original data.
+
+Every time someone wins they appear as a new observation (a row) in the dataset, so counting the `name` variable will tell us how many times people have won.
+
+```{r}
+oscar %>% 
+  count(name) %>%        # this counts how many times each person won 
+  arrange(desc(n)) %>%   # not strictly necessary, but nice for viewing
+  filter(n >= 3)         # retains only people who have achieved 3+ wins  
+```
+
+#### What is the overall age distribution?
+
+Compute sample size, mean, standard deviation, five-number summary, IQR, range, and lower and upper fences for `age` for all winners. Also create a boxplot for `age`.
+
+**Note:** A good place to look for examples is the [EDA for Numerical Data: Center, Spread, Z-Scores](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/EDANumericalCSZ.html#1) slides and the [EDA for Numerical Data: Boxplots](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/EDANumericalBox.html#1) slides. We want to summarize and plot `age` for the whole datset.
+
+```{r}
+oscar %>% 
+  summarize(n    = n(),
+            xbar = mean(age),
+            s    = sd(age),
+            min  = fivenum(age)[1],
+            Q1   = fivenum(age)[2],
+            med  = fivenum(age)[3],                  
+            Q3   = fivenum(age)[4],
+            max  = fivenum(age)[5],
+            iqr  = IQR(age),
+            rng  = diff(range(age)),
+            LF   = fivenum(age)[2] - 1.5 * IQR(age),
+            UF   = fivenum(age)[4] + 1.5 * IQR(age))
+```
+
+```{r}
+ggplot(oscar, aes(x = age)) + 
+  geom_boxplot() +
+  scale_y_continuous(breaks = NULL) +
+  labs(title = "Ages of Oscar Winners in the Four Acting Categories",
+       x = "age in years at the time they won",
+       y = NULL,
+       caption = "source data: oscarages.csv")
+```
+
+```{r}
+# values of outliers, notice repeats
+# cannot see the repeats on the plot
+sort(boxplot.stats(oscar$age)$out)
+
+# how many outliers are there here?
+length(boxplot.stats(oscar$age)$out)
+```
+
+### Exploratory Analysis 2
+
+#### Dataset of winners prior to 2007
+
+Create a dataset that contains data only for Best Actor and Best Actress winners prior to the 2007 Academy Awards ceremony. Note that the variable `ceremony` refers to the ceremony year. Hint: a `filter` using the `%in%` operator is useful here! 
+
+**Note:** We want rows containing ceremonies before 2007 AND (Best Actor OR Best Actress). The `%in%` operator helps with the OR. Be sure to save the results as a new dataset.
+
+We have two criteria: the ceremony needs to be before 2007 AND the winner needs to be either a Best Actor OR a Best Actress.
+
+logically: (ceremony is before 2007) AND (category is Best Actor OR category is Best Actress)
+
+Make sure to save your filtered dataset to use in future analyses!
+
+We can start off algorithmically, in steps...
+
+```{r}
+oscar2007a <- oscar %>% 
+  filter(ceremony < 2007) %>%
+  filter(category == "Best Actor" | category == "Best Actress")
+```
+
+But two filters in a row can be combined. The comma serves as the `and`.
+
+```{r}
+oscar2007b <- oscar %>% 
+  filter(ceremony < 2007, category == "Best Actor" | category == "Best Actress")
+```
+
+Even better, we can write the `or` using `%in%`, which we can read as "category must be a member of the set defined by the vector `c("Best Actor", "Best Actress")`."
+
+```{r}
+oscar2007 <- oscar %>% 
+  filter(ceremony < 2007, category %in% c("Best Actor", "Best Actress"))
+```
+
+How do we know it worked? We can do some exploratory checks.
+
+```{r}
+# only the two categories we want?
+oscar2007 %>% 
+  count(category)
+
+# are there ceremonies after 2006?
+oscar2007 %>% 
+  summarize(mostrecent = max(ceremony))
+```
+
+#### Do the age distributions differ? (summaries)
+
+Compute and display sample sizes, means, standard deviations, five-number summaries, IQR, and lower and upper fences for `age` for Best Actor versus Best Actress winners prior to 2007. 
+
+This is the same `summarize()` we did before, except we use our filtered data and group by category. Can you make comparisons between the two groups based on the summaries? Does one group typically seem to be older than the other? Do they have similar spreads? How old would be "unusually" old in each group?
+
+```{r}
+oscargroupsummaries <- oscar2007 %>% 
+  group_by(category) %>% 
+  summarize(n    = n(),
+            xbar = mean(age),
+            s    = sd(age),
+            min  = fivenum(age)[1],
+            Q1   = fivenum(age)[2],
+            med  = fivenum(age)[3],                  
+            Q3   = fivenum(age)[4],
+            max  = fivenum(age)[5],
+            iqr  = IQR(age),
+            rng  = diff(range(age)),
+            LF   = fivenum(age)[2] - 1.5 * IQR(age),
+            UF   = fivenum(age)[4] + 1.5 * IQR(age))
+kable(oscargroupsummaries)
+```
+
+#### Do the age distributions differ? (boxplots)
+
+Create boxplots to compare the ages of Best Actor and Best Actress winners prior to 2007. If you can, add an informative title, x and y axis labels, a caption that shows the data source.
+
+Again, this is similar to the previous boxplot, but we group by `category`.
+
+```{r}
+ggplot(oscar2007, aes(x = age, y = category)) + 
+  geom_boxplot() +
+  labs(title = "Ages of Best Actor and Actress Oscar Winners Prior to 2007",
+       x = "age in years at the time they won",
+       y = "winner category",
+       caption = "source data: filtered from oscarages.csv")
+```
+
+### Exploratory Analysis 3
+
+#### So who won Best Actress in 2007?
+
+Which person actually won the Best Actress Oscar in 2007? How old was this person? For what movie did this person win? Use the `filter` and `select` functions to display the answer. You'll need to go back to the full dataset for this.
+
+We need to `filter()` find the row with the person who satisfies Best Actress AND 2007 ceremony. Then we need to `select()` just the variables we need.
+
+```{r}
+winnerBA2007 <- oscar %>% 
+  filter(ceremony == 2007, category == "Best Actress") %>% 
+  select(name, age, title)
+winnerBA2007
+```
+
+#### Was the 2007 winner "unusual"?
+
+Was the 2007 Best Actress winner an outlier compared to previous Best Actress winners? If this person had been nominated as a Best Actor, would they have been an outlier compared to previous Best Actor winners? Determine the answers using code.
+
+Earlier I saved the `tibble` containing the summary statistics for the two winner groups, so I can easily access the fences I stored there using the `$` notation. The output format is one major advantage of using `dplyr` to summarize data. I also stored my 2007 Best Actress winner information and I can access the age the same way. This is better than typing in values by hand, because we can more easily re-use the algorithms and code for new problems.
+
+The `ifelse()` function works as follows: `ifelse(logicaltest, value if true, value if false)`.
+
+```{r}
+# upper fences from the summaries
+oscargroupsummaries$UF
+
+# age of 2007 Best Actress winner
+winnerBA2007$age
+
+# a simple comparison of the two
+# need to remember groups' order
+winnerBA2007$age > oscargroupsummaries$UF
+
+# a fancier comparison of the two
+oscargroupsummaries %>% 
+  mutate(outlier = winnerBA2007$age > UF) %>% 
+  select(category, outlier)
+
+# and an even fancier comparison
+oscargroupsummaries %>% 
+  mutate(outlier = ifelse(winnerBA2007$age > UF, "outlier", "not an outlier")) %>% 
+  select(category, outlier)
+```
+
+#### Some other challenge questions!
+
+The 2007 article made several other statements. For example: (1) For the last 10 years, the Academy hasn't awarded a Best Actress Oscar to anyone over 39; (2) For the past nine years, that age limit has hovered even lower, at 35; (3) In fact, if one of our cover subjects wins next month, she'll become the most mature recipient since 1990, when Jessica Tandy took home the gold for *Driving Miss Daisy*; (4) Since then, only one actress over 50 has won the supporting category, and that was Densch herself, for *Shakespeare in Love* in '99. Can you verify these statements using code? What are the corresponding values for Best Actor and Best Supporting Actor categories?
+
+"For the last 10 years, the Academy hasn't awarded a Best Actress Oscar to anyone over 39." At the time the article was written, the last ten years would be 1997 to 2006. 
+
+```{r}
+oscar %>% 
+  filter(ceremony >= 1997, ceremony <= 2006, category == "Best Actress") %>% 
+  summarize(oldestwinner = max(age))
+```
+
+"For the past nine years, that age limit has hovered even lower, at 35." We need to filter for one fewer year.
+
+```{r}
+oscar %>% 
+  filter(ceremony >= 1998, ceremony <= 2006, category == "Best Actress") %>% 
+  summarize(oldestwinner = max(age))
+```
+
+In fact, if one of our cover subjects wins next month, she'll become the most mature recipient since 1990, when Jessica Tandy took home the gold for *Driving Miss Daisy*. Now filter for years between 1991 and 2006.
+
+```{r}
+nomineeages <- c(57, 72, 61)   # looked up nominees ages on internet for March 2007
+
+oldestsinceJT <- oscar %>% 
+  filter(ceremony >= 1991, ceremony <= 2006, category == "Best Actress") %>% 
+  summarize(oldestwinner = max(age))
+
+# we could eyeball the answer, but using code...
+ifelse(nomineeages > oldestsinceJT$oldestwinner, "most mature", "not most mature")
+```
+
+
+Is the age issue (if one exists) a recent phenomena? Has it changed over time? For example, were past decades seemingly more or less concerned about age? 
+
+There are a few possible answers. Here are a couple, looking by decade. Can you discuss some differences between the decades? In particular, were the 2000s (when the article was written) different than the decades before and after?
+
+```{r}
+oscarBestActresses <- oscar %>% 
+  filter(category == "Best Actress")
+
+kable(oscarBestActresses %>% 
+  group_by(decade) %>% 
+  summarize(n    = n(),
+            xbar = mean(age),
+            s    = sd(age),
+            min  = fivenum(age)[1],
+            Q1   = fivenum(age)[2],
+            med  = fivenum(age)[3],                  
+            Q3   = fivenum(age)[4],
+            max  = fivenum(age)[5],
+            iqr  = IQR(age),
+            rng  = diff(range(age)),
+            LF   = fivenum(age)[2] - 1.5 * IQR(age),
+            UF   = fivenum(age)[4] + 1.5 * IQR(age)))
+
+ggplot(oscarBestActresses, aes(x = age, y = decade)) + 
+  geom_boxplot() +
+  labs(title = "Ages of Best Actress Oscar Winners by Decade",
+       x = "age in years at the time they won",
+       y = "decade",
+       caption = "source data: filtered from oscarages.csv")
+```
+
+What would happen if we combined the "Best" and "Best Supporting" categories and compared actors to actresses? Would we get a different picture?
+
+Create a new variable that contains two categories, one for actors and one for actresses. Then you can use that to group age data in summaries and plots like those we did above. 
+
+```{r}
+oscar <- oscar %>% 
+  mutate(category2 = ifelse(category %in% c("Best Actor", "Best Supporting Actor"), "Actor", "Actress"))
+```
+
+### Concluding Discussions
+
+*I will leave you to think a bit more about these for now...*
+
+#### Data as evidence
+
+How are these data *evidence* of age bias? 
+
+#### Data are not proof
+
+Why are these data not *proof* of age bias? 
+
+#### Representativeness
+
+What makes this sample *not* representative of Hollywood as a whole?
+
+
+```{r}
+sessionInfo()
+```
+
