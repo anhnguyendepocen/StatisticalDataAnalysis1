@@ -167,9 +167,9 @@ Skewness and kurtosis help to judge the *shape* of a distribution.
 
 * kurtosis is the flatness or peakedness of the distribution
 
-We use these measures often when trying to judge whether or not we can consider a data to be approximately bell-shaped, since many of our traditional methods assume that data come from a population this characteristic shape.
+They are *standardized* by dividing the summed deviations by $\sigma$ raised to the same power as the moment, similar to z-scores. 
 
-We will talk about these measures in more depth when we get to plotting data, shape, and the normal distribution.
+We use these measures often when trying to judge whether or not we can consider a data to be approximately bell-shaped, since many of our traditional methods assume that data come from a population this characteristic shape.
 
 Outliers will affect all measures based on moments, so we need to check for them when we calculate these measures.
 
