@@ -84,6 +84,29 @@ We rely heavily on plots to assess the shape of a distribution. A determination 
     * [`geom_qq()`](https://ggplot2.tidyverse.org/reference/geom_qq.html)
 
 
+## Histogram
+
+A histogram is a type of bar plot for displaying the distribution of a numerical variable.
+
+* The number line in the data's range is divided into intervals known as "bins"
+* These bins are of equal width and continuous (i.e., no gaps between them) 
+* The frequencies for the bins are the counts of data points that fall in each bin 
+* Every data point must be included in exactly one bin, with none left out
+
+There are many possible ways to create a histogram for a given dataset, depending on our choice of bins. Usually we have to try more than one possibility.
+
+
+## Density Plot
+
+A frequency polygon connects the midpoints of histogram bins to display a very rough estimate of a continuous distribution.
+
+A density plot is a variation on a histogram that uses a statistical technique called *kernel smoothing* to plot a smoothed estimate of a variable's distribution over some continuous interval of the number line. It "averages" multiple bars, roughly speaking.
+
+Density plots are often better at displaying the shape of a true continuous distribution than a histogram because they're not affected by the number of bins we choose the way histograms can be. However, differences in the algorithm (e.g., "bandwidth" used) can over- or under-smooth the distribution.
+
+The specifics of kernel smoothing are beyond the scope of this class. We will use the default settings in `R` and `ggplot2`.
+
+
 ## Some Data to Plot
 
 Read [gasmileage.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv), [oldfaithful.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oldfaithful.csv), and [Bangladesh.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv) into RStudio. Remember you need `library(tidyverse)` for many of the functions we will use, including `read_csv()`. In coming slides they will be referred to by the following names.
@@ -116,7 +139,36 @@ You should also `glimpse()` the `mileage` dataset, which has only one variable: 
 How many modes? Is the distribution symmetric or skewed?
 
 ```{r, fig.height = 3.7}
-ggplot(mileage, aes(x = mpg)) + geom_histogram()
+ggplot(mileage, aes(x = mpg)) + geom_histogram() # default bins = 30
+```
+
+
+## Basic Polygon
+
+How many modes? Is the distribution symmetric or skewed?
+
+```{r, fig.height = 3.7}
+ggplot(mileage, aes(x = mpg)) + geom_freqpoly() # default bins = 30
+```
+
+
+## Basic Histogram
+
+How many modes? Is the distribution symmetric or skewed?
+
+```{r, fig.height = 3.7}
+ggplot(mileage, aes(x = mpg)) + geom_histogram() # default bins = 30
+```
+
+
+## Polygon Over Histogram
+
+Notice how the two plots correspond with one another.
+
+```{r, fig.height = 3.1}
+ggplot(mileage, aes(x = mpg)) + 
+  geom_histogram(fill = "orange", color = "white") +
+  geom_freqpoly(color = "blue")
 ```
 
 
@@ -124,8 +176,9 @@ ggplot(mileage, aes(x = mpg)) + geom_histogram()
 
 How many modes? Is the distribution symmetric or skewed?
 
-```{r, fig.height = 3.7}
-ggplot(geyser, aes(x = erupt_time)) + geom_histogram()
+```{r, fig.height = 3.4}
+ggplot(geyser, aes(x = erupt_time)) + 
+  geom_histogram(fill = "orange", color = "white")
 ```
 
 
@@ -133,8 +186,9 @@ ggplot(geyser, aes(x = erupt_time)) + geom_histogram()
 
 How many modes? Is the distribution symmetric or skewed?
 
-```{r, fig.height = 3.7}
-ggplot(wells, aes(x = Arsenic)) + geom_histogram()
+```{r, fig.height = 3.4}
+ggplot(wells, aes(x = Arsenic)) + 
+  geom_histogram(fill = "orange", color = "white")
 ```
 
 
@@ -157,8 +211,9 @@ https://ggplot2.tidyverse.org/reference/geom_histogram.html
 
 Mileage with $\sqrt{n}$ bins. How wide is each one?
 
-```{r, fig.height = 3.7}
-ggplot(mileage, aes(x = mpg)) + geom_histogram(bins = 10)
+```{r, fig.height = 3.4}
+ggplot(mileage, aes(x = mpg)) + 
+  geom_histogram(bins = 10,  fill = "orange", color = "white")
 ```
 
 
@@ -166,17 +221,19 @@ ggplot(mileage, aes(x = mpg)) + geom_histogram(bins = 10)
 
 Mileage with 15 bins. How wide is each one?
 
-```{r, fig.height = 3.7}
-ggplot(mileage, aes(x = mpg)) + geom_histogram(bins = 15)
+```{r, fig.height = 3.4}
+ggplot(mileage, aes(x = mpg)) + 
+  geom_histogram(bins = 15,  fill = "orange", color = "white")
 ```
 
 
 ## Mileage Revisited #2
 
-Mileage with bins 2 units wide. How many are there?
+Mileage with bins 1 units wide. How many are there?
 
-```{r, fig.height = 3.7}
-ggplot(mileage, aes(x = mpg)) + geom_histogram(binwidth = 2)
+```{r, fig.height = 3.4}
+ggplot(mileage, aes(x = mpg)) + 
+  geom_histogram(binwidth = 1, fill = "orange", color = "white")
 ```
 
 
@@ -184,8 +241,9 @@ ggplot(mileage, aes(x = mpg)) + geom_histogram(binwidth = 2)
 
 For a continuous variable, we can estimate a smooth function.
 
-```{r, fig.height = 3.7}
-ggplot(mileage, aes(x = mpg)) + geom_density()
+```{r, fig.height = 3.4}
+ggplot(mileage, aes(x = mpg)) + 
+  geom_density()
 ```
 
 
@@ -193,15 +251,17 @@ ggplot(mileage, aes(x = mpg)) + geom_density()
 
 The total area under the estimated density curve is 1.
 
-```{r, fig.height = 3.7}
-ggplot(geyser, aes(x = erupt_time)) + geom_density()
+```{r, fig.height = 3.4}
+ggplot(geyser, aes(x = erupt_time)) + 
+  geom_density()
 ```
 
 
 ## &nbsp;
 
-```{r, fig.height = 4.3}
-ggplot(wells, aes(x = Arsenic)) + geom_density()
+```{r, fig.height = 4.0}
+ggplot(wells, aes(x = Arsenic)) + 
+  geom_density()
 ```
 
 
@@ -209,26 +269,26 @@ ggplot(wells, aes(x = Arsenic)) + geom_density()
 
 ```{r, fig.height = 3.7}
 ggplot(mileage, aes(x = mpg)) + 
-  geom_histogram(aes(y = ..density..)) + # rescales histogram y-axis
+  geom_histogram(aes(y = ..density..)) + # rescales y-axis
   geom_density()
 ```
 
 
-## &nbsp;
+## Density Over Histogram
 
 ```{r, fig.height = 3.7}
 ggplot(geyser, aes(x = erupt_time)) + 
-  geom_histogram(aes(y = ..density..)) + 
-  geom_density()
+  geom_histogram(aes(y = ..density..), fill = "orange") + 
+  geom_density(color = "blue")
 ```
 
 
-## &nbsp;
+## Density Over Histogram
 
 ```{r, fig.height = 3.7}
 ggplot(wells, aes(x = Arsenic)) + 
-  geom_histogram(aes(y = ..density..)) + 
-  geom_density()
+  geom_histogram(aes(y = ..density..), fill = "orange") + 
+  geom_density(color = "blue")
 ```
 
 
@@ -236,7 +296,7 @@ ggplot(wells, aes(x = Arsenic)) +
 
 ```{r, fig.height = 3.4}
 ggplot(mileage, aes(x = mpg)) + 
-  geom_histogram(aes(y = ..density..), bins = 10, color = "black") + 
+  geom_histogram(aes(y = ..density..), bins = 15, color = "white") + 
   geom_density(fill = "lightblue", color = "blue", alpha = 0.50) +
   labs(title = "Distribution of Gas Mileage Test Values, n = 100")
 ```
