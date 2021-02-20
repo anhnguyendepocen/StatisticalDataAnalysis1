@@ -153,6 +153,33 @@ The default number of bins in `geom_histogram()` is 30.
 https://ggplot2.tidyverse.org/reference/geom_histogram.html
 
 
+## Mileage Revisited #1
+
+Mileage with $\sqrt{n}$ bins. How wide is each one?
+
+```{r, fig.height = 3.7}
+ggplot(mileage, aes(x = mpg)) + geom_histogram(bins = 10)
+```
+
+
+## Mileage Revisited #2
+
+Mileage with 15 bins. How wide is each one?
+
+```{r, fig.height = 3.7}
+ggplot(mileage, aes(x = mpg)) + geom_histogram(bins = 15)
+```
+
+
+## Mileage Revisited #2
+
+Mileage with bins 2 units wide. How many are there?
+
+```{r, fig.height = 3.7}
+ggplot(mileage, aes(x = mpg)) + geom_histogram(binwidth = 2)
+```
+
+
 ## Basic Density
 
 For a continuous variable, we can estimate a smooth function.
@@ -245,3 +272,65 @@ Many modeling and statistical inference procedures have as an assumption that on
 We can add labels and other customizations to these plots the same way we did when making barplots. 
 
 Practice your plotting skills on other datasets! For example, try the datasets found in Chapter 1 of MSRR, or the other variables in the datasets we explored here. What shapes do you see in the different kinds of plots? How do they connect?
+
+
+## Multiple Plots with `grid.arrange()`
+
+The `grid.arrange()` function allows us to group multiple plots into a useful or pleasing display of our choice. For several more options, refer to  http://www.sthda.com/english/wiki/wiki.php?id_contents=7930.
+
+We need the following libraries.
+
+```{r}
+library("gridExtra") # to organize the plots
+library(grid)        # to have one top title
+```
+
+The create multiple plots and save them as objects (see next slide). Then we can arrange them in various ways.
+
+
+## Create Five Plot Objects
+
+```{r}
+plotA <- ggplot(mileage, aes(x = mpg)) +
+  geom_histogram(bins = 15)
+
+plotB <- ggplot(mileage, aes(x = mpg)) +
+  geom_density()
+
+plotC <- ggplot(mileage, aes(x = mpg)) +
+  geom_boxplot() +
+  labs(y = "")# helps with spacing here
+
+plotD <- ggplot(mileage, aes(x = mpg)) +
+  stat_ecdf()
+
+plotE <- ggplot(mileage, aes(y = mpg)) +
+  geom_boxplot()
+```
+
+
+## 
+
+```{r}
+grid.arrange(plotA, plotB, plotC, plotD, nrow = 2, ncol = 2,
+             top = textGrob("Graphical Analysis of Miles per Gallon"))
+```
+
+
+## 
+
+```{r}
+grid.arrange(plotA, plotB, plotC, plotD, nrow = 4,
+             top = textGrob("Graphical Analysis of Miles per Gallon"))
+```
+
+
+## 
+
+```{r}
+grid.arrange(plotE, arrangeGrob(plotA, plotB, plotD), ncol = 2,
+             top = textGrob("Graphical Analysis of Miles per Gallon"))
+```
+
+
+
