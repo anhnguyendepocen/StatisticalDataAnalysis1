@@ -409,7 +409,7 @@ summary {
 
 <h1 class="title toc-ignore">Case Study: Anthropometric Data</h1>
 <h4 class="author">PUT YOUR NAME HERE</h4>
-<h4 class="date">Tuesday, February 16, 2021 @ 07:29 PM</h4>
+<h4 class="date">Saturday, February 20, 2021 @ 05:41 PM</h4>
 
 </div>
 
@@ -464,15 +464,21 @@ summary {
 <h4>What genders are present in the data?</h4>
 <p>Create a frequency table and barplot for the variable <code>gender</code>.</p>
 <pre class="r"><code># Put your code here.</code></pre>
+<p>For exploration, we can do a basic barplot. The heights of the bars should match the table. Notice there are very few people (so far) who have self-identified anything besides <code>male</code> or <code>female</code>.</p>
+<pre class="r"><code># Put your code here.</code></pre>
+<p>For presentation, we should give the plot an informative title and axis labels. Adding color is optional, but it can be nice to have. Try to keep colorblind-safe options in mind if you are using colors to convey information.</p>
+<pre class="r"><code># Put your code here.</code></pre>
 </div>
 <div id="what-semesters-are-present-in-the-data" class="section level4">
 <h4>What semesters are present in the data?</h4>
 <p>Create a frequency table and barplot for the variable <code>semester</code>.</p>
+<p>The code is the same as what we used above, just change the variable. Notice that the semesters are in alphabetical order, which is <code>R</code>’s default for character vectors.</p>
 <pre class="r"><code># Put your code here.</code></pre>
 </div>
 <div id="putting-the-semesters-in-correct-order" class="section level4">
 <h4>Putting the semesters in correct order</h4>
 <p>Make <code>semester</code> a <code>factor</code> with the categories in the correct order. Then make frequency table and barplot using this new variable.</p>
+<p>Academic years go spring, summer, fall. Put the years in ascending order.</p>
 <pre class="r"><code># Put your code here.</code></pre>
 </div>
 </div>
@@ -481,6 +487,13 @@ summary {
 <div id="plots-and-summaries-for-height" class="section level4">
 <h4>Plots and summaries for <code>height</code></h4>
 <p>Create a histogram, density plot, and boxplot for the variable <code>height</code>. Also calculate skewness, kurtosis, and the upper and lower fences.</p>
+<p>This shows several <code>bin</code> options for the histogram. You often have to try several options to get a good representation. These data seem to have more than one mode (peak or local maxima)—either two or three, judging by the histogram and density plots.</p>
+<pre class="r"><code># Put your code here.</code></pre>
+<p>We can also add color and labels to histograms.</p>
+<pre class="r"><code># Put your code here.</code></pre>
+<p>The other plots follow the same pattern. The variable the same (same <code>aes</code>), just change the type of plot (different <code>geom</code>).</p>
+<pre class="r"><code># Put your code here.</code></pre>
+<p>We can calculate all four statistics in one <code>summarize</code> statement. Refer to the entries for skewness and kurtosis in the glossary for more information. There is missing data, so we need to use <code>na.rm = TRUE</code> to ignore these <code>NA</code> values.</p>
 <pre class="r"><code># Put your code here.</code></pre>
 </div>
 <div id="plots-and-summaries-for-armspan" class="section level4">
@@ -504,16 +517,20 @@ summary {
 <div id="faceted-histogram" class="section level4">
 <h4>Faceted histogram</h4>
 <p>Create a histogram for <code>height</code> faceted by <code>gender</code>, with the two plots arranged one above the other (so they will share a common x-axis scaling the final plot). Do the same for <code>armspan</code>.</p>
+<p>Since histograms already have two quantitative axes (the variable on <code>x</code> and the count on <code>y</code>), we need to <code>facet</code> if we want to compare groups. Faceting is similar to a <code>group_by()</code> for plots. The <code>facet_grid()</code> lets us specify a matrix or “grid” arrangement for plots using a row variable and a column variable, as <code>facet_grid(rowvar ~ colvar)</code>. Using <code>gender</code> as the row variable means the plots will have the same x-axis and same bins. We only want to facet by one variable, so we replace the other with a <code>.</code></p>
+<p>Here I added some axis scaling so we can see the measurements more clearly. The <code>breaks</code> are the locations of the axis tick marks. Notice what I call the “six foot bump” at about 72&quot; in the male graph. Where do you think that comes from?</p>
 <pre class="r"><code># Put your code here.</code></pre>
 </div>
 <div id="faceted-density-plot" class="section level4">
 <h4>Faceted density plot</h4>
 <p>Create a density plot for <code>ideal</code> faceted by <code>gender</code>, with the two plots arranged one above the other (so they will share a common x-axis scaling in the final plot).</p>
+<p>Notice that the peaks are in different places on the x-axis for female and male distributions. This is why the combined distribution you explored above is bimodal.</p>
 <pre class="r"><code># Put your code here.</code></pre>
 </div>
 <div id="comparative-boxplot" class="section level4">
 <h4>Comparative boxplot</h4>
 <p>Create comparative boxplots for <code>height</code> split by <code>gender</code>. Also calculate the upper and lower fences for each gender. Do the same for <code>ideal</code> height.</p>
+<p>Boxplots only have one quantitative axis, so we can group by specifying a categorical variable for the other axis. Boxplots may be horizontal or vertical. Making them horizontal keeps the x-axis consistent with the other plots.</p>
 <pre class="r"><code># Put your code here.</code></pre>
 </div>
 </div>

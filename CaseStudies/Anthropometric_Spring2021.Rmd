@@ -48,9 +48,23 @@ Create a frequency table and barplot for the variable `gender`.
 # Put your code here.
 ```
 
+For exploration, we can do a basic barplot. The heights of the bars should match the table. Notice there are very few people (so far) who have self-identified anything besides `male` or `female`.
+
+```{r}
+# Put your code here.
+```
+
+For presentation, we should give the plot an informative title and axis labels. Adding color is optional, but it can be nice to have. Try to keep colorblind-safe options in mind if you are using colors to convey information.
+
+```{r}
+# Put your code here.
+```
+
 #### What semesters are present in the data?
 
 Create a frequency table and barplot for the variable `semester`. 
+
+The code is the same as what we used above, just change the variable. Notice that the semesters are in alphabetical order, which is `R`'s default for character vectors.
 
 ```{r}
 # Put your code here.
@@ -59,6 +73,8 @@ Create a frequency table and barplot for the variable `semester`.
 #### Putting the semesters in correct order
 
 Make `semester` a `factor` with the categories in the correct order. Then make frequency table and barplot using this new variable.
+
+Academic years go spring, summer, fall. Put the years in ascending order.
 
 ```{r}
 # Put your code here.
@@ -69,6 +85,26 @@ Make `semester` a `factor` with the categories in the correct order. Then make f
 #### Plots and summaries for `height`
 
 Create a histogram, density plot, and boxplot for the variable `height`. Also calculate skewness, kurtosis, and the upper and lower fences.
+
+This shows several `bin` options for the histogram. You often have to try several options to get a good representation. These data seem to have more than one mode (peak or local maxima)---either two or three, judging by the histogram and density plots.
+
+```{r}
+# Put your code here.
+```
+
+We can also add color and labels to histograms.
+
+```{r}
+# Put your code here.
+```
+
+The other plots follow the same pattern. The variable the same (same `aes`), just change the type of plot (different `geom`).
+
+```{r}
+# Put your code here.
+```
+
+We can calculate all four statistics in one `summarize` statement. Refer to the entries for skewness and kurtosis in the glossary for more information. There is missing data, so we need to use `na.rm = TRUE` to ignore these `NA` values.
 
 ```{r}
 # Put your code here.
@@ -104,6 +140,10 @@ Filter the data so it contains only males and females, since all other categorie
 
 Create a histogram for `height` faceted by `gender`, with the two plots arranged one above the other (so they will share a common x-axis scaling  the final plot). Do the same for `armspan`.
 
+Since histograms already have two quantitative axes (the variable on `x` and the count on `y`), we need to `facet` if we want to compare groups. Faceting is similar to a `group_by()` for plots. The `facet_grid()` lets us specify a matrix or "grid" arrangement for plots using a row variable and a column variable, as `facet_grid(rowvar ~ colvar)`. Using `gender` as the row variable means the plots will have the same x-axis and same bins. We only want to facet by one variable, so we replace the other with a `.`
+
+Here I added some axis scaling so we can see the measurements more clearly. The `breaks` are the locations of the axis tick marks. Notice what I call the "six foot bump" at about 72" in the male graph. Where do you think that comes from?
+
 ```{r}
 # Put your code here.
 ```
@@ -112,6 +152,8 @@ Create a histogram for `height` faceted by `gender`, with the two plots arranged
 
 Create a density plot for `ideal` faceted by `gender`, with the two plots arranged one above the other (so they will share a common x-axis scaling in the final plot).
 
+Notice that the peaks are in different places on the x-axis for female and male distributions. This is why the combined distribution you explored above is bimodal.
+
 ```{r}
 # Put your code here.
 ```
@@ -119,6 +161,8 @@ Create a density plot for `ideal` faceted by `gender`, with the two plots arrang
 #### Comparative boxplot
 
 Create comparative boxplots for `height` split by `gender`. Also calculate the upper and lower fences for each gender. Do the same for `ideal` height.
+
+Boxplots only have one quantitative axis, so we can group by specifying a categorical variable for the other axis. Boxplots may be horizontal or vertical. Making them horizontal keeps the x-axis consistent with the other plots.
 
 ```{r}
 # Put your code here.
