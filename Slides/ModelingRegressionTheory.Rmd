@@ -1,0 +1,194 @@
+---
+title: "Modeling & Regression<br>&#9654; Basic Theory / Math"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE)
+```
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Ch 9 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* Ch 5 of [*Modern Dive*](https://moderndive.com/5-regression.html)
+* Ch 6 of [*Modern Dive*](https://moderndive.com/6-multiple-regression.html)
+* DataCamp [Modeling with Data in the Tidyverse](https://learn.datacamp.com/courses/modeling-with-data-in-the-tidyverse)
+
+
+## The Idea of Modeling
+
+<h3 style="text-align: center;">What is a model?</h3>
+
+<p style="text-align: center;"><img src="images/molecularmodel.jpg"></p>
+
+<h3 style="text-align: center;">What is a *mathematical* model?</h3>
+
+
+## A General Model
+
+General modeling framework: $y$ is a function of one or more $x$ variables, plus some amount of random error.
+
+$$y = f(\overrightarrow{x}) + \epsilon$$
+
+* y is the *outcome*, *response*, or *predicted* variable
+
+* x is an *explanatory* or *predictor* variable ("signal")
+
+* $\epsilon$ is the unsystematic error component ("noise")
+
+The function $f(\overrightarrow{x})$ can assume a variety of forms, depending on the system and relationships we are trying to model. Finding the right model is often an iterative process. We often assume that $\epsilon$ is a normally distributed random variable.
+
+
+## Simple Linear Model
+
+Our theoretical simple linear model has the following form, with $f(x)$ being the familiar equation of a straight line.
+
+$$y = f(x) + \epsilon = \beta_0 + \beta_1 x + \epsilon$$
+
+We use data to estimate the $\beta$ parameters. The observed value of the *ith* data point $y_i$ in the sample can be expressed in terms of the fitted line and a residual (deviation from the line).
+
+$$y_i = b_0 + b_1 x_i + e_i$$
+
+The fitted (predicted) value $\hat{y}_i$ is a point lying on the fitted line, obtained by plugging the value $x_i$ into the fitted line. 
+
+$$\hat{y}_i = b_0 + b_1 x_i \rightarrow y_i = \hat{y}_i + e_i$$
+
+
+## 
+
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("https://miro.medium.com/max/700/1*uoGLR9T-6_1hIlPhu2d_rg.png")
+```
+
+image source: https://towardsdatascience.com/when-your-regression-models-errors-contain-two-peaks-13d835686ca
+
+
+## "Best Fit" (Method of Least Squares)
+
+The residual for each data point is the difference between the observed value of y and the predicted value of y.
+
+$$y_i - \hat{y}_i = (b_0 + b_1 x_i + e_i) - (b_0 + b_1 x_i) = e_i$$
+
+
+In ***least squares*** modeling, the best-fit line has the properties:
+
+* Passes through the point $(\bar{x}, \bar{y})$
+
+* Sum of the residuals $\sum_{i=1}^{n} e_i$ is equal to zero
+
+* Sum of the squared residuals $\sum_{i=1}^{n} {e_i}^2$ is minimized
+
+The sum of squared residuals (SSE) is an important quantity in regression analysis and is used for several purposes.
+
+
+## Finding the Least Squares Slope
+
+The least squares line always passed through the point $(\bar{x}, \bar{y})$. We calculate the slope by finding the product of the deviations of the paired $(x, y)$ values from their respective means, then summing and scaling by the variance of the x variable.
+
+$$b_1 = \frac{\Sigma (y_i - \bar{y})(x_i - \bar{x})}{\Sigma (x_i - \bar{x})^2} = \frac{covariance(x,y)}{variance(x)}$$
+
+This is an algebraic simplification of the [linear algebra](https://online.stat.psu.edu/stat462/node/132/) method, which extends to cases with more that one predictor variable. It is based on the familiar "rise over run" concept from geometry.
+
+Once we have determined the slope, we can use the point-slope formula with the point $(\bar{x}, \bar{y})$ to solve for the intercept. 
+
+
+## Interpreting Slope and Intercept
+
+Mathematically, the y-intercept $\beta_0$ and its estimate $b_0$ represent the value of $\hat{y}$ when $x$ = 0. 
+
+The intercept term may or may not have a useful interpretation in context, depending on whether $x$ = 0 is meaningful. 
+
+The units of measure for the intercept are the same as the units of measure for the $y$ variable.
+
+<hr>
+
+Slope is a rate of change; how many units of measure does the $\hat{y}$ value change when $x$ changes by one unit.
+
+Since slope is a rate ($\Delta y$ / $\Delta x$), the units of measure for slope are ($y$ units of measure / $x$ units of measure).
+
+
+## Strength of Linear Relationship
+
+The strength of the linear relationship between two quantitative variables can be quantified using the Pearson product-moment correlation coefficient, or Pearson correlation. 
+
+The Pearson correlation is a standardized and unitless measure with values between -1 (perfect linear relationship with negative slope) and +1 (perfect linear relationship with positive slope).
+
+$$-1 \le r \le +1 \text{ (never expressed as a percentage!)}$$
+
+$$r = \frac{1}{n-1}\Sigma(\frac{x_i-\bar{x}}{s_x})(\frac{y_i-\bar{y}}{s_y}) = \frac{1}{n-1}\Sigma z_{x_i}z_{y_i} $$
+
+Take the product of the z-scores of each $(x, y)$ pair, sum them, and divide the sum by $n-1$ (since we use the sample SD $s$).
+ 
+ 
+## Visualize Correlations
+
+If there is no linear pattern and the best-fitting line has a slope of zero, the Pearson correlation is also zero. The magnitude of the correlation is the strength, the sign tells us direction (slope positive or negative).
+
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/e12a3fe753cf520e0622652460f22ed187a036e7/62dd4/moderndive_files/figure-html/correlation1-1.png")
+```
+
+image source: https://moderndive.com/5-regression.html
+
+
+## Cautions! Beware Outliers...
+
+You should have noticed by now that everything in least squares regression centers on the point $(\bar{x}, \bar{y})$ and deviations from that point. As we learned in EDA, moment-based summary measures are not robust against the effects of outliers. 
+
+Thus, we need to be cautious about any *univariate* outliers that may be in our data exerting unusual influence.
+
+In addition, since we are trying to minimize the sum of squared errors from the line, bivariate outliers may also be a problem. A point that does not fit the overall $(x,y)$ pattern and lies far from the line may be a *bivariate* outlier.
+
+Not all univariate outliers are bivariate outliers. Conversely, not all bivariate outliers are univariate outliers. 
+
+
+## Assessing the Fit of the Line---R^2^
+
+R^2^ is the proportion of variation in the $y$ variable explained by the model $f(x)$. It is also known as *coefficient of determination*. 
+
+$$R^2 = 1 - \frac{var(residuals)}{var(y)} = \frac{var(y)-var(residuals)}{var(y)}$$
+
+$$0 \le R^2 \le 1 \text{ (proportion) or } 0\% \le R^2 \le 100\% \text{ (percent) }$$
+
+For a deterministic relationship where $x$ is a perfect predictor of $y$, R^2^ = 1 or 100% (all of the variation explained).
+
+If $x$ and $y$ have no relationship with respect to the fitted model, R^2^ = 0 or 0% (none of the variation explained).
+
+
+## R^2^ as a Measure of Model Fit?
+
+R^2^ is often used to assess model fit and to compare potential models for the same data. In general, larger values indicate a better model fit. This measure also can be affected by outliers and non-linearity, so be careful.
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/xkcdRsquared.jpg")
+```
+
+
+## Slope vs. Correlation vs. R^2^
+
+In simple linear regression modeling, these three statistics are closely related. In fact, they are direct functions of one another. 
+
+Algebraically, the slope is the correlation coefficient $r$ scaled by the standard deviations of the x and y variables. The Pearson correlation is a unitless measure. Multiplying by the ratio of the standard deviations assigns the appropriate units to the slope and scales the strength relative to the measurements.
+
+$$b_1 = r \frac{s_y}{s_x}$$
+
+Algebraically, for simple linear regression, R^2^ is the square of the Pearson correlation coefficient. For the curious, here is a [proof](https://economictheoryblog.com/2014/11/05/proof/).
+
+
+## Additional Model Summaries
+
+MSE is the variance of the model residuals using n (rather than n-1) as the denominator and $\Sigma (y_i - \hat{y}_i)^2$ as the numerator. It is the average squared distance of the residuals from the line.
+
+$$MSE = \frac{\Sigma (y_i - \hat{y}_i)^2}{n} = \frac{\Sigma e_i^2}{n}$$
+
+RMSE (square *R*oot of MSE) is the standard deviation of model residuals. We can think of it as the "typical" size of a residual in the model. In general, the smaller the RMSE, the better predictor the model ought to be. However, the quality of prediction must be assessed in the context of the problem.
+
+Sigma is an *estimate* of the standard deviation of the population errors ($\epsilon$), with denominator n - 2 (if there is one predictor).
