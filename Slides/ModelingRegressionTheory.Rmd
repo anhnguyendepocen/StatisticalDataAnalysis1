@@ -91,7 +91,7 @@ The sum of squared residuals (SSE) is an important quantity in regression analys
 
 ## Finding the Least Squares Slope
 
-The least squares line always passed through the point $(\bar{x}, \bar{y})$. We calculate the slope by finding the product of the deviations of the paired $(x, y)$ values from their respective means, then summing and scaling by the variance of the x variable.
+The least squares line always passed through the point $(\bar{x}, \bar{y})$. We calculate slope by finding the product of the deviations of the paired $(x, y)$ values from their respective means, sum the products, then scale the sum by the variance of the $x$ variable.
 
 $$b_1 = \frac{\Sigma (y_i - \bar{y})(x_i - \bar{x})}{\Sigma (x_i - \bar{x})^2} = \frac{covariance(x,y)}{variance(x)}$$
 
@@ -130,7 +130,7 @@ Take the product of the z-scores of each $(x, y)$ pair, sum them, and divide the
  
 ## Visualize Correlations
 
-If there is no linear pattern and the best-fitting line has a slope of zero, the Pearson correlation is also zero. The magnitude of the correlation is the strength, the sign tells us direction (slope positive or negative).
+If there is no linear pattern and the best-fitting line has a slope of zero, the Pearson correlation is also zero. The magnitude of the correlation is the **strength**, the sign tells us **direction** (slope positive or negative).
 
 ```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/e12a3fe753cf520e0622652460f22ed187a036e7/62dd4/moderndive_files/figure-html/correlation1-1.png")

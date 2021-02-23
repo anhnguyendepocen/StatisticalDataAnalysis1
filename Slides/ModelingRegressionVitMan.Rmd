@@ -105,6 +105,22 @@ ggplot(anthro_sample, aes(x = height, y = armspan)) +
 ```
 
 
+## Pearson Correlation 
+
+We can use the `cor()` function inside `summarize()`.
+```{r}
+anthro_sample %>% 
+  summarize(correlation = cor(height, armspan))
+```
+
+The `moderndive` package also has a function using `y ~ x`.
+
+```{r}
+anthro_sample %>% 
+  get_correlation(armspan ~ height)
+```
+
+
 ## Scatterplot with Fitted Line
 
 ```{r, fig.height = 3.4}
@@ -236,7 +252,7 @@ This output is a `tibble`. Why is this potentially useful to us?
 
 ## Formatting with Modern Dive
 
-We can also print the results in a formatted Markdown version. It looks different in reports versus slides.
+We can also print the results in a formatted Markdown version. It looks different in reports versus slides. You can do more with `kable.styling()` from the `kableExtra` package.
 
 ```{r}
 get_regression_table(square_model, digits = 2, print = TRUE)
