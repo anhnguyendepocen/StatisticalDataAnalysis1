@@ -264,7 +264,7 @@ Create a new variable in the dataset named `HeightT` by "transmuting" the `Heigh
 
 **Exploration 1**
 
-Compute summary statistics (n, mean, standard deviation, five-number summary, IQR, and range) for the measured heights of male children and the measured heights of female children so you can compare the two groups.
+Compute summary statistics (n, mean, standard deviation, five-number summary, IQR, and range) for `Height` by `Gender` so you can compare the two groups.
 
 ```{r}
 # code here, add more chunks as needed
@@ -280,7 +280,7 @@ Create a density plot with `color = Gender` in the aesthetics to show overlappin
 
 **Exploration 3**
 
-Compute summary statistics (n, mean, standard deviation, five-number summary, IQR, and range) for the transmuted heights of male children and the transmuted heights of female children so you can compare the two groups.
+Compute summary statistics (n, mean, standard deviation, five-number summary, IQR, and range) for `HeightT` by `Gender` so you can compare the two groups.
 
 ```{r}
 # code here, add more chunks as needed
