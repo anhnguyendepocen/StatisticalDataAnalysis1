@@ -1,0 +1,298 @@
+---
+title: "Bernoulli and Binomial Distributions: `R` Code"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+```
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
+* DataCamp [Foundations of Probability in R](https://learn.datacamp.com/courses/foundations-of-probability-in-r)
+* [Bernoulli and Binomial Distributions: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionTheory.html#1) class slides
+
+Refer to "[
+4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
+
+
+## The Binomial Model
+
+$$X \sim Bin(n,p)$$
+
+    x = number of successes = {0, 1, 2, ..., n}
+    n = number of trials
+    p = probability of success on a single trial
+    1 - p = probability of failure on a single trial
+
+$$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
+
+$$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
+
+$$E[X] = np, Var[X] = np(1-p)$$
+
+## Calculating the pmf f(x)
+
+The `dbinom()` function is used to calculate pmf probabilities for the binomial distribution.
+
+$P(X = x)$ = $f(x,n,p)$ = `dbinom(x, size, prob)` 
+
+Consider a biased coin example where $X \sim Bin(3, 0.7)$.
+
+```{r}
+dbinom(1, 3, 0.7)   # P(X = 1 head)
+dbinom(3, 3, 0.7)   # P(X = 3 heads)
+```
+
+
+## Vectorized Calculations
+
+The `dbinom` function can accept vectors as input. It loops over all values in the input vector and outputs a vector the same length. What are the probabilities for $x = \{0, 1, 2, 3\}$ heads if we have a fair coin? We can compute the entire pdf at once.
+
+Recall that in `R` we can easily make a vector of integers using the `:` operator, without needing to use `c()`.
+
+```{r}
+dbinom(0:3, 3, 0.5)
+```
+
+Notice that when $p = 0.5$, the distribution is symmetric. Refer to $f(x)$ and see if you can figure out why that is true.
+
+
+## Calculating the CDF F(x)
+
+The `pbinom()` function is used to calculate CDF probabilities for the binomial distribution. It also accepts vector inputs.
+
+$P(X \leq x)$ = $F(x,n,p)$ = `pbinom(q, size, prob)`
+
+```{r}
+pbinom(0:3, 3, 0.7)   # biased coin, x = {0, 1, 2, 3} heads
+```
+
+```{r}
+pbinom(0:3, 3, 0.5)   # fair coin, x = {0, 1, 2, 3} heads
+```
+
+The CDF for the fair coin also has a kind of symmetry to it. Why is that the case?
+
+
+## The Upper Tail of the Distribution
+
+```{r}
+pbinom(2, 3, 0.7)    # probability of 0, 1, or 2 heads
+1 - pbinom(2, 3, 0.7)   # probability of > 2 = 3 heads
+pbinom(2, 3, 0.7, lower.tail = FALSE)   # better code
+```
+
+Pay close attention to $<$ vs. $\leq$ and $>$ vs. $\geq$ with `pbinom()`. We are dealing with discrete values in the binomial distribution.
+
+
+## Lower and Upper Tails Relationship
+
+For three tosses of our fair coin...
+
+```{r}
+pbinom(0:3, 3, 0.5) # P(X <= x) for all possible x
+```
+
+```{r}
+pbinom(0:3, 3, 0.5, lower.tail = FALSE) # P(X > x) for all possible x
+```
+
+```{r}
+pbinom(0:3, 3, 0.5) + pbinom(0:3, 3, 0.5, lower.tail = FALSE)
+```
+
+The two halves sum to 1. Voila! Can you picture it on the plot?
+
+
+##
+
+Can you show on the plot the difference between `lower.tail = TRUE` and `lower.tail = FALSE` for a given $x$?
+
+```{r, echo = FALSE}
+distTable <- tibble(x = 0:3, 
+                    pdf = dbinom(0:3, 3, 0.7), 
+                    CDF = pbinom(0:3, 3, 0.7)) 
+ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+  geom_col(fill = "skyblue", color = "black", width = 0.75) +
+  scale_y_continuous(limits = c(0, 1.05),
+                     breaks = seq(0, 1, 0.05),
+                     expand = c(0,0)) +
+  geom_label(vjust = 0, nudge_y = 0.05) +
+  labs(title = "Probability Mass Function of X ~ Bin(3, 0.7)",
+       x = "number of successes",
+       y = "probability") +
+  theme_linedraw()
+```
+
+
+## Calculating the Inverse of the CDF
+
+Until now, we have been finding probabilities associated with given values of $x$. What if we have the probability and need to find $x$? For a given quantile (percentile), the inverse CDF gives the value of $x$ that makes $P(X \leq x) = quantile$ true.
+
+$q^{th}$ percentile = $F^{-1}(x,n,p)$ = `qbinom(p, size, prob)` 
+
+```{r}
+qbinom(0.25, 3, 0.7)   # 25th percentile of X ~ Bin(3, 0.7)
+qbinom(0.75, 3, 0.7)   # 75th percentile of X ~ Bin(3, 0.7)
+```
+
+
+## Generating Random Values
+
+To generate a (*pseudo*)random sample from a given binomial distribution, use `rbinom (n, size, prob)`. The binomial $n$ parameter is called *size* here, since $n$ is standard notation for sample size in statistics. 
+
+Simulate 20 random values from biased coin $X \sim Bin(3, 0.7)$
+
+```{r}
+rbinom(20, 3, 0.7)   
+```
+
+Each output value in this random sample is $x$ = *number of heads* (successes) in a sequence of 3 flips. We have 20 replicates of the coin flipping "experiment".
+
+
+## Summarizing Random Samples
+
+```{r}
+binom_sample <- tibble(x = rbinom(10^5, 3, 0.7))   # 100,000 samples
+
+binom_sample %>% 
+  summarize(mean_x = mean(x),
+            var_x  = var(x))
+```
+
+As the sample size approaches $\infty$, sample mean $\bar{x}$ and sample variance $s^2$ converge to E[X] and Var[X]. Because of this, we can use simulation / random sampling to *estimate* parameters when the underlying distribution is not known. 
+
+
+## Creating a Distribution "Table"
+
+```{r}
+n <- 3     # enter n
+p <- 0.7   # enter p
+distTable <- tibble(x = 0:n, 
+                    pmf = dbinom(0:n, n, p), 
+                    CDF = pbinom(0:n, n, p)) 
+distTable
+```
+
+You can format for digits and appearance with `kable()`.
+
+
+## Creating a Plot of the pmf
+
+The plot uses the distribution table we created.
+
+```{r, eval = FALSE}
+breakby <- 1   # choose spacing for the x-axis tick marks
+
+ggplot(distTable, aes(x = x, y = pmf)) +
+  geom_col(fill = "skyblue", color = "black") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
+  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+       x = "x", 
+       y = "f(x)")
+```
+
+Add additional formatting or themes as desired.
+
+To display more decimal places for $p$ in the plot title, change %1.1f to %1.*decimalplaces*f in the code (e.g., %1.3f for three).
+
+
+## The Output
+
+```{r, echo = FALSE}
+breakby <- 1   # choose spacing for the x-axis tick marks
+
+ggplot(distTable, aes(x = x, y = pmf)) +
+  geom_col(fill = "skyblue", color = "black") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
+  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+       x = "x", 
+       y = "f(x)")
+```
+
+
+## Creating a Plot of the CDF
+
+The plot uses the distribution table we created.
+
+```{r, eval = FALSE}
+breakby <- 1   # choose spacing for the x-axis tick marks
+
+ggplot(distTable, aes(x = x, y = CDF)) +
+  geom_col(fill = "skyblue", color = "black") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
+  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+       x = "x", 
+       y = "F(x)")
+```
+
+Add additional formatting or themes as desired.
+
+To display more decimal places for $p$ in the plot title, change %1.1f to %1.*decimalplaces*f in the code (e.g., %1.3f for three).
+
+
+## The Output
+
+```{r, echo = FALSE}
+breakby <- 1   # choose spacing for the x-axis tick marks
+
+ggplot(distTable, aes(x = x, y = CDF)) +
+  geom_col(fill = "skyblue", color = "black") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
+  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+       x = "x", 
+       y = "F(x)")
+```
+
+
+## Example for 20 Fair Coin Flips
+
+```{r}
+n <- 20    # enter n
+p <- 0.5   # enter p
+distTable <- tibble(x = 0:n, 
+                    pmf = dbinom(0:n, n, p), 
+                    CDF = pbinom(0:n, n, p)) 
+head(distTable, 4)
+```
+
+
+## The pmf Plot
+
+```{r, echo = FALSE}
+breakby <- 2   # choose spacing for the x-axis tick marks
+
+ggplot(distTable, aes(x = x, y = pmf)) +
+  geom_col(fill = "skyblue", color = "black") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
+  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+       x = "x", 
+       y = "f(x)")
+```
+
+
+## The CDF Plot
+
+```{r, echo = FALSE}
+breakby <- 2   # choose spacing for the x-axis tick marks
+
+ggplot(distTable, aes(x = x, y = CDF)) +
+  geom_col(fill = "skyblue", color = "black") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
+  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+       x = "x", 
+       y = "F(x)")
+```

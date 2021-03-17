@@ -1,0 +1,351 @@
+---
+title: "Bernoulli and Binomial Distributions: The Math"
+author: "Author: Jill E. Thomley"
+date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+```
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
+* DataCamp [Foundations of Probability in R](https://learn.datacamp.com/courses/foundations-of-probability-in-r)
+
+Refer to "[
+4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
+
+
+## Sections Index
+
+* Slides 02-03 Materials & Index
+* Slides 05-06 Bernoulli Trials
+* Slides 08-10 Some Simple Simulations
+* Slides 12-25 Binomial Distribution Model
+   + Slides 12-18 Probability Mass Function (pmf)
+   + Slides 19-21 Cumulative Distribution Function (CDF)
+   + Slides 22-25 Tabulated and Graphical Representions
+* Slides 27-28 Expected Value (Mean) and Variance 
+
+
+# Bernoulli Trials
+
+## What is a Bernoulli Trial?
+
+A Bernoulli trial is a single random event that has two possible outcomes, often called "success" and "failure". 
+
+A "success" is not necessarily a good/positive outcome, but it is the outcome of interest for a given problem or scenario.
+
+Classic examples include a coin flip where a head is considered success and a tail is considered failure, or one roll of a standard 6-sided die where 1 is success and any other number is failure.
+
+The Bernoulli model has a single parameter $p$, where...
+
+* $p$ = probability of success  
+* $q$ = probability of failure = $1 - p$  
+
+
+## Bernoulli as a Building Block
+
+Other probability distributions, such as the binomial distribution and geometric distribution, are used to model the outcomes of sequences of Bernoulli trials (e.g., number of heads obtained in a sequence of 100 coin flips, or how many times we have to roll a 6-sided die to observe our first 1).
+
+A necessary condition for the binomial and geometric random variables is that all trials are *independent* with constant chance of success $p$ from trial to trial.
+
+Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html) (1654-1705), who made important advancements in probability theory, including an early version of the law of large numbers. Many appeared in his posthumously-published book [_Ars Conjectandi_](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (_The Art of Conjecturing_).
+
+
+# Some Simple Simulations
+
+## Simulate One Coin Flip or One Die Roll
+
+```{r}
+coin <- c("head", "tail")   # create the coin model
+sample(coin, size = 1)  # default equal probability
+```
+
+```{r}
+die <- 1:6   # create the die model integers 1 to 6
+sample(die, size = 1)   # default equal probability
+```
+
+```{r}
+# an unfair coin with 70% chance of heads
+p <- 0.7
+sample(coin, size = 1, prob = c(p, 1 - p))
+```
+
+
+## Simulate Multiple Trials with `sample()`
+
+```{r}
+flips <- sample(coin, size = 250, replace = TRUE)
+```
+
+```{r}
+sum(flips == "head")   # number of heads in the sample
+mean(flips == "head")   # fraction of heads in the sample
+rolls <- sample(die, size = 250, replace = TRUE)
+mean(rolls == 1)   # fraction of 1's in the sample
+```
+
+
+## The `prob` Package
+
+The `prob` package includes functions for exploring probability. For example, `tosscoin()` produces all possible sequences of H and T for a given number of tosses (< 20).
+
+```{r}
+library(prob)
+tosscoin(times = 3)
+```
+
+
+# Binomial Distribution
+
+## Probability Mass Function (pmf)
+
+The binomial distribution is a discrete probability distribution. It mathematically models the *number of successes* in a sequence of independent Bernoulli trials. The probability for a given number of successes $x$ is found using the *probability mass function* (pmf).
+
+$$X \sim Bin(n,p)$$
+
+    x = number of successes = {0, 1, 2, ..., n}
+    n = number of trials
+    p = probability of success on a single trial
+    1 - p = probability of failure on a single trial
+
+$$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
+
+
+## Arrangements of Objects
+
+The expression ${n \choose x}$ is read as $n$ choose $x$. How many ways are there to choose a subset of $x$ objects from a set of $n$ objects if the specific order of the objects does not matter?
+
+$${n \choose x} = \frac{n!}{x!(n-x)!}$$
+
+Consider the arrangements of coin flips we saw on a prior slide. How many ways are there to get exactly 2 heads in a sequence of 3 flips? We do not care *where* in the sequence they appear.
+
+```{r}
+choose(3, 2)   # syntax: choose(n, k)
+```
+
+
+##
+
+Three of the eight possible sequences have 2 heads and 1 tail. This is true no matter the value of $p$, barring the limiting cases where success is impossible ($p = 0$) or certain ($p = 1$).
+
+```{r, echo = FALSE}
+coinflips <- tosscoin(times = 3)
+
+heads <- ifelse(coinflips$toss1 == "H", 1, 0) + 
+         ifelse(coinflips$toss2 == "H", 1, 0) + 
+         ifelse(coinflips$toss3 == "H", 1, 0)
+tibble(coinflips, heads) %>% 
+    kable(col.names = c("Toss 1", "Toss 2", "Toss 3", "Number of Heads"),
+          align = c("c", "c", "c", "c")) %>% 
+    row_spec(c(2, 3, 5), bold = T, color = "white", background = "lightgray") %>% 
+    kable_styling()
+```
+
+<p></p>
+
+The number of trials determines what is *possible*. The value of $p$ determines what is *probable*.
+
+
+## Binomial Coefficient and "Choose"
+
+Pascal's triangle, named for French mathematician Blaise Pascal (1623-1662), is a representation of the binomial coefficient. Can you connect this to the table on the previous slide?
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("https://stat-jet-asu.github.io/Moodlepics/pascalstriangle.png")
+```
+
+## What about the probability?
+
+The rest of the pmf calculates probability for a single sequence.
+
+$$p^x(1-p)^{n-x}$$
+
+If a coin is fair, then the probability of getting a head or a tail is the same ($p = q = 0.5$), and so the probability of any sequence of 3 flips is $0.5 \times 0.5 \times 0.5 = 0.125$.
+
+Suppose we have an unfair coin with a 70% chance of getting a head ($p = 0.7$). What is the probability of any *one* sequence of 2 heads (and 1 tail) in 3 flips?
+
+$$p \times p \times q = 0.7 \times 0.7 \times (1 - 0.7) = $$
+$$(0.7)^2(1-0.7)^{3-2} = (0.7)^2(0.3)^1 = 0.147$$
+
+
+## Put It All Together
+
+For a given number of successes $x$ in a series of $n$ independent Bernoulli trials with $p$ chance of success for each trial, the pmf finds the probability of a single sequence with $x$ successes and multiplies it by the total possible number of such sequences.
+
+$$f(2) = P(X = 2) = {3 \choose 2}(0.7)^2(1 - 0.7)^{3 - 2} =$$
+
+$$\frac{3!}{2!(3 - 2)!}(0.7)^2(0.3)^1 = 3 \times 0.147 = 0.441$$
+
+For $n = 3$ trials, we can have $x = \{0, 1, 2, 3\}$. As a reminder, $0! = 1$ by definition. Also, notice the pattern in the numerator and denominator factorials and exponents.
+
+
+## For Three Flips of Our Biased Coin
+
+$$P(X = 0) = \frac{3!}{0!(3 - 0)!}(0.7)^0(0.3)^{3-0} = 0.027$$
+
+$$P(X = 1) = \frac{3!}{0!(3 - 1)!}(0.7)^1(0.3)^{3-1} = 0.189$$
+
+$$P(X = 2) = \frac{3!}{2!(3 - 2)!}(0.7)^2(0.3)^{3-2} = 0.441$$
+
+$$P(X = 3) = \frac{3!}{3!(3 - 3)!}(0.7)^3(0.3)^{3-3} = 0.343$$
+
+The most likely outcome is two heads. The second most likely is three heads. No surprise, given the coin's bias.
+
+
+## Cumulative Distribution Function (CDF)
+
+The probability of a given number of successes *or fewer* is found using the distribution's CDF.
+
+$$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
+
+For example, when $x = 2$, we would calculate the following...
+
+$$F(2) = \sum\limits_{i=0}^2 f(x) = f(0) + f(1) + f(2)$$
+
+For a large value of $x$ this can get quite tedious. Unfortunately there is no shortcut, but we have technology!
+
+
+## For Three Flips of Our Biased Coin
+
+Refer back to the calculations we did for the pmf. We use them below to compute the CDF.
+
+$$P(X \leq 0) = \sum\limits_{i=0}^0 f(x) = f(0) =$$
+
+$$0.027$$
+
+$$P(X \leq 1) = \sum\limits_{i=0}^1 f(x) = f(0) + f(1) =$$ 
+
+$$0.027 + 0.189 = 0.216$$
+
+## And the rest... 
+
+$$P(X \leq 2) = \sum\limits_{i=0}^2 f(x) = f(0) + f(1) + f(2) =$$ 
+
+$$ 0.027 + 0.189 + 0.441 = 0.657$$
+
+$$P(X \leq 3) = \sum\limits_{i=0}^3 f(x) = f(0) + f(1) + f(2) + f(3) =$$ 
+
+$$0.027 + 0.189 + 0.441 + 0.343 = 1.000$$
+
+$$ $$
+
+These quantities are also known as *cumulative probabilities*.
+
+
+## Tabulated Form
+
+Discrete probability distributions with a relatively small *sample space* (set of possible values) can be displayed in tabular form. The statistical shorthand gives us all the necessary parameters we need for the probability calculations.
+
+$$X \sim Bin(3, 0.7)$$
+
+```{r, echo = FALSE}
+distTable <- tibble(x = 0:3, 
+                    pdf = dbinom(0:3, 3, 0.7), 
+                    CDF = pbinom(0:3, 3, 0.7)) 
+(distTable %>%
+    kable(format = "html", align = c("c", "c", "c")) %>% 
+    kable_minimal())
+```
+
+
+## Graphical Form of the pdf
+
+```{r, echo = FALSE}
+ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+  geom_col(fill = "skyblue", color = "black", width = 0.75) +
+  scale_y_continuous(limits = c(0, 1.05),
+                     breaks = seq(0, 1, 0.05),
+                     expand = c(0,0)) +
+  geom_label(vjust = 0, nudge_y = 0.05) +
+  labs(title = "Probability Mass Function of X ~ Bin(3, 0.7)",
+       x = "number of successes",
+       y = "probability") +
+  theme_linedraw()
+```
+
+
+## Graphical Form of the CDF
+
+```{r, echo = FALSE}
+ggplot(distTable, aes(x = x, y = CDF)) +
+  geom_col(fill = "orange", color = "black", width = 0.75) +
+  scale_y_continuous(limits = c(0, 1.05),
+                     breaks = seq(0, 1, 0.05),
+                     expand = c(0,0)) +
+  labs(title = "Cumulative Distribution Function of X ~ Bin(3, 0.7)",
+       x = "number of successes",
+       y = "cumulative probability") +
+  theme_linedraw()
+```
+
+##
+
+Graphically, the pmf probabilities "stack up" to make the CDF. Geometrically, probabilities are proportional rectangles---the same width, but different heights.
+
+```{r, echo = FALSE}
+# https://datavizpyr.com/introduction-to-color-palettes-in-r-with-rcolorbrewer/
+
+stacked <- distTable %>% 
+  mutate(layer1 = c(rep(0, 3), 1),
+         layer2 = c(rep(0, 2), rep(CDF[3], 2)),
+         layer3 = c(0, rep(CDF[2], 3)),
+         layer4 = rep(CDF[1], 4))
+
+ggplot(stacked) +
+  geom_col(aes(x = x, y = layer1), fill = "#EBE8F1", color = "black", width = 0.75) +
+  geom_col(aes(x = x, y = layer2), fill = "#AEAED4", color = "black", width = 0.75) +
+  geom_col(aes(x = x, y = layer3), fill = "#6D68AB", color = "black", width = 0.75) +
+  geom_col(aes(x = x, y = layer4), fill = "#41147B", color = "black", width = 0.75) +
+  scale_y_continuous(limits = c(0, 1.05),
+                     breaks = seq(0, 1, 0.05),
+                     expand = c(0,0)) +
+  labs(title = "CDF of X ~ Bin(3, 0.7) Segmented by pdf Values",
+       x = "number of successes",
+       y = "probability") +
+  theme_linedraw()
+```
+
+
+# Mean and Variance
+
+## E[X] and Var[X]
+
+The expected (mean) number of successes and the variance of the number of successes are found as follows. You can see the proof [**HERE**](https://www.probabilisticworld.com/binomial-distribution-mean-variance-formulas-proof/). In general: 
+
+$$E[X] = \mu = \sum\limits_{x} x f(x) = \sum\limits_{x} x {n \choose x}p^x(1-p)^{n-x}$$ 
+
+$$Var[X]=\sigma^2=\sum\limits_{x} (x-\mu)^2f(x)$$
+
+For the binomial distribution, these equations simplify to: 
+
+$$E[X] = np$$
+
+$$Var[X] = np(1-p)$$
+
+## E[X] and Var[X] for Our Coins
+
+The expected value of our biased coin is the *long-run* average number of heads over $\infty$ repetitions of 3 flips. For a binomial variable, E[X] may not an integer, even though $x$ must be.
+
+```{r}
+n <- 3 
+p <- 0.7
+n * p   # expected value
+n * p * (1-p)   # variance, take square root for SD
+```
+
+Can you calculate the E[X] and Var[X] for 3 flips of the fair coin?
+
