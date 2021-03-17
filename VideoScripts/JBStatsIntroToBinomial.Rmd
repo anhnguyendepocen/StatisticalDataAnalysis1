@@ -140,7 +140,7 @@ pmf <- tibble(x = 0:n, probability = dbinom(0:n, n, p))
 
 probdigits <- 20   # specify display digits for the probabilities
 
-pmf %>% 
+pmf %>%
   kable(digits = probdigits) %>% 
   kable_styling(full_width = FALSE, 
                 position = "left", 
@@ -249,15 +249,9 @@ Thus we can use the cumulative distribution function...
 pbinom(17, 20, 0.82, lower.tail = FALSE)
 ```
 
-#### Visualize in a plot
+#### Visualize in a Plot
 
-We can calculate and plot the probabilities for all possible values of X. 
-
-```{r}
-n <- 20
-p <- 0.82
-pmf <- tibble(x = 0:n, probability = dbinom(0:n, n, p))
-```
+Here we use the same pmf we calculated and stored above.
 
 <details>
 ```{r}
