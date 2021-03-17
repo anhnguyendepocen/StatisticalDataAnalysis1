@@ -55,7 +55,7 @@ The random variable $X$ is the number of fives we get when we roll a fair die th
 
 $$X \sim Bin(3,\frac{1}{6})$$
 
-What is the probability that a 5 comes up exactly 2 times in 3 rolls? Solve for $x = 2$.
+What is the probability that a five comes up exactly 2 times in 3 rolls? Solve for $x = 2$.
 
 $$f(2) = P(X = 2) = {3 \choose 2}\left(\frac{1}{6}\right)^2\left(1-\frac{1}{6}\right)^{3-2}$$
 
