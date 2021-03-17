@@ -32,7 +32,7 @@ library(kableExtra)
 ```
 </details>
 
-### **The Binomial Distribution **
+### **The Binomial Distribution**
 
 The binomial distribution is a discrete probability distribution. It mathematically models the *number of successes* in a sequence of independent Bernoulli trials. The probability for a given number of successes $x$ is found using the *probability mass function* (pmf).
 
@@ -60,7 +60,7 @@ What is the probability that a 5 comes up exactly 2 times in 3 rolls? Solve for 
 $$f(2) = P(X = 2) = {3 \choose 2}\left(\frac{1}{6}\right)^2\left(1-\frac{1}{6}\right)^{3-2}$$
 
 ```{r}
-dbinom(2, 3, 1/6)
+dbinom(2, 3, 1/6)   # dbinom(x, n, p)
 ```
 
 #### Using a Tree Diagram 
@@ -122,12 +122,12 @@ What is the probability that exactly 18 out of 20 survive? Solve for $x = 18$.
 $$f(18) = P(X = 18) = {20 \choose 18}(0.82)^18(1-0.82)^{20-18}$$
 
 ```{r}
-dbinom(18, 20, 0.82)
+dbinom(18, 20, 0.82)   # dbinom(x, n, p)
 ```
 
 #### Visualize in a Plot
 
-We can calculate and plot the probabilities for all possible values of X. 
+We can calculate and plot the probabilities for all possible values of X. The code below can be used for any binomial distribution; simply input the correct n and p. 
 
 ```{r}
 n <- 20
@@ -135,11 +135,26 @@ p <- 0.82
 pmf <- tibble(x = 0:n, probability = dbinom(0:n, n, p))
 ```
 
+```{r}
+# probabilities for large digits are shown in scientific notation
+
+probdigits <- 20   # specify display digits for the probabilities
+
+pmf %>% 
+  kable(digits = probdigits) %>% 
+  kable_styling(full_width = FALSE, 
+                position = "left", 
+                font_size = 14,
+                bootstrap_options = c("striped"))
+```
+
 <details>
 ```{r}
+breakby <- 2   # choose spacing for the x-axis tick marks
+
 pmfplot <- ggplot(pmf, aes(x = x, y = probability)) +
   geom_col(width = 1, color = "black", fill = "lightblue") +
-  scale_x_continuous(breaks = seq(from = 0, to = n, by = 2)) +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = "How many 90-year old Canadian men will survive at least another year?",
        subtitle = "number of survivors from a random sample of 20 men = X ~ Bin(20, 0.82)",
        x = "Number That Survive for at Least Another Year", 
@@ -154,10 +169,12 @@ pmfplot
 
 <details>
 ```{r}
+breakby <- 2   # choose spacing of x-axis tick marks
+
 pmfplot <- ggplot(pmf, aes(x = x, y = probability)) +
   geom_col(width = 1, color = "black", 
            fill = c(rep("lightblue", 18), "red", rep("lightblue", 2))) +
-  scale_x_continuous(breaks = seq(from = 0, to = n, by = 2)) +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = "How many 90-year old Canadian men will survive at least another year?",
        subtitle = "X ~ Bin(20, 0.82), with P(X = 18) shaded in red",
        x = "Number That Survive for at Least Another Year", 
@@ -171,10 +188,13 @@ pmfplot
 ```
 
 ```{r}
-# the probabilities are in scientific notation
+# probabilities for large digits are shown in scientific notation
+
+probdigits <- 20   # specify display digits for the probabilities
+
 pmf %>% 
-  kable(digits = 20) %>% 
-  row_spec(19, bold = T, color = "white", background = "red") %>% 
+  kable(digits = probdigits) %>% 
+  row_spec(19, color = "white", background = "red", bold = TRUE) %>% 
   kable_styling(full_width = FALSE, 
                 position = "left", 
                 font_size = 14,
@@ -261,7 +281,7 @@ pmfplot
 # the probabilities are in scientific notation
 pmf %>% 
   kable(digits = 20) %>% 
-  row_spec(19:21, bold = T, color = "white", background = "red") %>% 
+  row_spec(19:21, color = "white", background = "red", bold = TRUE) %>% 
   kable_styling(full_width = FALSE, 
                 position = "left", 
                 font_size = 14,
@@ -272,6 +292,44 @@ pmf %>%
 pmf %>% 
   filter(x >=18) %>% 
   summarize(prob_greq18 = sum(probability))
+```
+
+### **Babies with Jaundice Example**
+
+The babies with jaundice example from [An Introduction to Discrete Random Variables and Discrete Probability Distributions](https://youtu.be/oHcrna8Fk18) can be modeled with the binomial distribution, because it is a series of independent Bernoulli trials with a constant probability.
+
+```{r}
+n <- 2
+p <- 0.6
+pmf <- tibble(x = 0:n, probability = dbinom(0:n, n, p))
+```
+
+```{r}
+probdigits <- 2   # specify display digits for the probabilities
+
+pmf %>% 
+  kable(digits = probdigits) %>% 
+  kable_styling(full_width = FALSE, 
+                position = "left", 
+                font_size = 14,
+                bootstrap_options = c("striped"))
+```
+
+<details>
+```{r}
+breakby <- 1   # choose spacing of x-axis tick marks
+
+pmfplot <- ggplot(pmf, aes(x = x, y = probability)) +
+  geom_col(width = 1, color = "black", fill = "lightblue") +
+  scale_x_continuous(breaks = 0:2) +
+  labs(x = "x", 
+       y = "p(x)") +
+  theme_linedraw()
+```
+</details>
+
+```{r}
+pmfplot
 ```
 
 
