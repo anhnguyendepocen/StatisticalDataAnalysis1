@@ -173,7 +173,7 @@ breakby <- 2   # choose spacing of x-axis tick marks
 
 pmfplot <- ggplot(pmf, aes(x = x, y = probability)) +
   geom_col(width = 1, color = "black", 
-           fill = c(rep("lightblue", 18), "red", rep("lightblue", 2))) +
+           fill = c(rep("lightblue", 18), "red", rep("lightblue", 2))) +  # bar shading
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = "How many 90-year old Canadian men will survive at least another year?",
        subtitle = "X ~ Bin(20, 0.82), with P(X = 18) shaded in red",
@@ -194,7 +194,7 @@ probdigits <- 20   # specify display digits for the probabilities
 
 pmf %>% 
   kable(digits = probdigits) %>% 
-  row_spec(19, color = "white", background = "red", bold = TRUE) %>% 
+  row_spec(row = 19, color = "white", background = "red", bold = TRUE) %>% 
   kable_styling(full_width = FALSE, 
                 position = "left", 
                 font_size = 14,
@@ -202,6 +202,8 @@ pmf %>%
 ```
 
 #### Expected Value and Variance
+
+Here we use the values for $n$ and $p$ that we input above for the pmf.
 
 Expected Value
 
@@ -246,7 +248,7 @@ $$P(X \geq 18) = P(X > 17) = 1 - P(X \leq 17)$$
 Thus we can use the cumulative distribution function...
 
 ```{r}
-pbinom(17, 20, 0.82, lower.tail = FALSE)
+pbinom(17, 20, 0.82, lower.tail = FALSE)   # pbinom(x, n, p, lower.tail = FALSE)
 ```
 
 #### Visualize in a Plot
@@ -275,7 +277,7 @@ pmfplot
 # the probabilities are in scientific notation
 pmf %>% 
   kable(digits = 20) %>% 
-  row_spec(19:21, color = "white", background = "red", bold = TRUE) %>% 
+  row_spec(row = 19:21, color = "white", background = "red", bold = TRUE) %>% 
   kable_styling(full_width = FALSE, 
                 position = "left", 
                 font_size = 14,
