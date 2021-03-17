@@ -91,7 +91,7 @@ treeprobs %>%   # stop here to see the without styling
                 bootstrap_options = c("striped"))
 ```
 
-However, we do not care about the order of selection, just the total number of babies who have jaundice, so we need to combine the outcomes that have the same numbers of J's.
+However, we do not care about the order of selection, just the total number of babies who have jaundice, so we need to find and combine the outcomes that have the same number of J's and add up their probabilities.
 
 ```{r}
 distribution_x <- treeprobs %>% 
