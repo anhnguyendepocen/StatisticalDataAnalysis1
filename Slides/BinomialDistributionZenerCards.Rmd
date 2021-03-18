@@ -1,5 +1,5 @@
 ---
-title: "Binomial Distributions: Zener Card Activity"
+title: "Binomial Distribution: Zener Card Activity"
 author: "Author: Jill E. Thomley"
 date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
 output: 
