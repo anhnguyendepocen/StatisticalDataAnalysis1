@@ -37,7 +37,11 @@ Refer to "[
    + Slides 19-21 Cumulative Distribution Function (CDF)
    + Slides 22-25 Tabulated and Graphical Representions
 * Slides 27-28 Expected Value (Mean) and Variance 
-
+* Slides 30-32 J.B. Statistics Videos
+   + Intro to the Bernoulli Distribution
+   + Intro to the Binomial Distribution
+   + Deriving E[X] and Var[X] of the Binomial
+   
 
 # Bernoulli Trials
 
@@ -125,7 +129,7 @@ $$X \sim Bin(n,p)$$
 $$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
 
 
-## Arrangements of Objects
+## Combinations of Objects
 
 The expression ${n \choose x}$ is read as $n$ choose $x$. How many ways are there to choose a subset of $x$ objects from a set of $n$ objects if the specific order of the objects does not matter?
 
@@ -184,7 +188,7 @@ $$(0.7)^2(1-0.7)^{3-2} = (0.7)^2(0.3)^1 = 0.147$$
 
 ## Put It All Together
 
-For a given number of successes $x$ in a series of $n$ independent Bernoulli trials with $p$ chance of success for each trial, the pmf finds the probability of a single sequence with $x$ successes and multiplies it by the total possible number of such sequences.
+For a given number of successes $x$ in a series of $n$ independent Bernoulli trials with $p$ chance of success for each trial, the pmf finds the probability of a single sequence with $x$ successes and multiplies it by the number of possible sequences.
 
 $$f(2) = P(X = 2) = {3 \choose 2}(0.7)^2(1 - 0.7)^{3 - 2} =$$
 
@@ -203,7 +207,7 @@ $$P(X = 2) = \frac{3!}{2!(3 - 2)!}(0.7)^2(0.3)^{3-2} = 0.441$$
 
 $$P(X = 3) = \frac{3!}{3!(3 - 3)!}(0.7)^3(0.3)^{3-3} = 0.343$$
 
-The most likely outcome is two heads. The second most likely is three heads. No surprise, given the coin's bias.
+The most likely outcome is 2 heads. The second most likely is 3. No surprise, given the coin's bias toward H. Notice the patterns.
 
 
 ## Cumulative Distribution Function (CDF)
@@ -216,7 +220,7 @@ For example, when $x = 2$, we would calculate the following...
 
 $$F(2) = \sum\limits_{i=0}^2 f(x) = f(0) + f(1) + f(2)$$
 
-For a large value of $x$ this can get quite tedious. Unfortunately there is no shortcut, but we have technology!
+For large $x$ this can get quite tedious. Unfortunately there is no shortcut, but we have approximations and technology!
 
 
 ## For Three Flips of Our Biased Coin
@@ -243,7 +247,7 @@ $$0.027 + 0.189 + 0.441 + 0.343 = 1.000$$
 
 $$ $$
 
-These quantities are also known as *cumulative probabilities*.
+These quantities are known as *cumulative probabilities*.
 
 
 ## Tabulated Form
@@ -254,7 +258,7 @@ $$X \sim Bin(3, 0.7)$$
 
 ```{r, echo = FALSE}
 distTable <- tibble(x = 0:3, 
-                    pdf = dbinom(0:3, 3, 0.7), 
+                    pmf = dbinom(0:3, 3, 0.7), 
                     CDF = pbinom(0:3, 3, 0.7)) 
 (distTable %>%
     kable(format = "html", align = c("c", "c", "c")) %>% 
@@ -262,15 +266,15 @@ distTable <- tibble(x = 0:3,
 ```
 
 
-## Graphical Form of the pdf
+## Graphical Form of the pmf
 
 ```{r, echo = FALSE}
-ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+ggplot(distTable, aes(x = x, y = pmf, label = pmf)) +
   geom_col(fill = "skyblue", color = "black", width = 0.75) +
   scale_y_continuous(limits = c(0, 1.05),
                      breaks = seq(0, 1, 0.05),
                      expand = c(0,0)) +
-  geom_label(vjust = 0, nudge_y = 0.05) +
+  geom_label(vjust = 0, nudge_y = 0.02) +
   labs(title = "Probability Mass Function of X ~ Bin(3, 0.7)",
        x = "number of successes",
        y = "probability") +
@@ -281,11 +285,12 @@ ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
 ## Graphical Form of the CDF
 
 ```{r, echo = FALSE}
-ggplot(distTable, aes(x = x, y = CDF)) +
+ggplot(distTable, aes(x = x, y = CDF, label = CDF)) +
   geom_col(fill = "orange", color = "black", width = 0.75) +
   scale_y_continuous(limits = c(0, 1.05),
                      breaks = seq(0, 1, 0.05),
                      expand = c(0,0)) +
+  geom_label(x = 0:3, y = .1, vjust = 0) +
   labs(title = "Cumulative Distribution Function of X ~ Bin(3, 0.7)",
        x = "number of successes",
        y = "cumulative probability") +
@@ -310,10 +315,26 @@ ggplot(stacked) +
   geom_col(aes(x = x, y = layer2), fill = "#AEAED4", color = "black", width = 0.75) +
   geom_col(aes(x = x, y = layer3), fill = "#6D68AB", color = "black", width = 0.75) +
   geom_col(aes(x = x, y = layer4), fill = "#41147B", color = "black", width = 0.75) +
-  scale_y_continuous(limits = c(0, 1.05),
+  geom_label(x = 0:3, 
+             y = distTable$CDF[1] - 0.025, 
+             vjust = 0, 
+             aes(label = rep(distTable$pmf[1], 4))) +
+  geom_label(x = 0:3, 
+             y = distTable$CDF[2] - 0.025, 
+             vjust = 0, 
+             aes(label = c(NA, rep(distTable$pmf[2], 3)))) +
+  geom_label(x = 0:3, 
+             y = distTable$CDF[3] - 0.025, 
+             vjust = 0, 
+             aes(label = c(NA, NA, rep(distTable$pmf[3], 2)))) +
+  geom_label(x = 0:3, 
+             y = distTable$CDF[4] - 0.025, 
+             vjust = 0, 
+             aes(label = c(NA, NA, NA, distTable$pmf[4]))) +
+  scale_y_continuous(limits = c(0, 1.1),
                      breaks = seq(0, 1, 0.05),
                      expand = c(0,0)) +
-  labs(title = "CDF of X ~ Bin(3, 0.7) Segmented by pdf Values",
+  labs(title = "CDF of X ~ Bin(3, 0.7) Segmented by pmf Values",
        x = "number of successes",
        y = "probability") +
   theme_linedraw()
@@ -324,7 +345,7 @@ ggplot(stacked) +
 
 ## E[X] and Var[X]
 
-The expected (mean) number of successes and the variance of the number of successes are found as follows. You can see the proof [**HERE**](https://www.probabilisticworld.com/binomial-distribution-mean-variance-formulas-proof/). In general: 
+The expected (mean) number of successes and the variance of the number of successes are found as follows. You can explore the proof [**HERE**](https://www.probabilisticworld.com/binomial-distribution-mean-variance-formulas-proof/). In general: 
 
 $$E[X] = \mu = \sum\limits_{x} x f(x) = \sum\limits_{x} x {n \choose x}p^x(1-p)^{n-x}$$ 
 
@@ -335,6 +356,7 @@ For the binomial distribution, these equations simplify to:
 $$E[X] = np$$
 
 $$Var[X] = np(1-p)$$
+
 
 ## E[X] and Var[X] for Our Coins
 
@@ -349,3 +371,19 @@ n * p * (1-p)   # variance, take square root for SD
 
 Can you calculate the E[X] and Var[X] for 3 flips of the fair coin?
 
+
+# JB Statistics Videos
+
+## Intro to the Bernoulli Distribution
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bT1p5tJwn_0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Intro to the Binomial Distribution
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qIzC1-9PwQo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Deriving E[X] and Var[X] of Bin
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8fqkQRjcR1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
