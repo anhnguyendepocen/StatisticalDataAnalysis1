@@ -41,7 +41,7 @@ $$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
 
 $$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
 
-$$E[X] = np, Var[X] = np(1-p)$$
+$$E[X] = np \text{ and }Var[X] = np(1-p)$$
 
 ## Calculating the pmf f(x)
 
@@ -49,7 +49,7 @@ The `dbinom()` function is used to calculate pmf probabilities for the binomial 
 
 $P(X = x)$ = $f(x,n,p)$ = `dbinom(x, size, prob)` 
 
-Consider a biased coin example where $X \sim Bin(3, 0.7)$.
+Consider our biased coin example where $X \sim Bin(3, 0.7)$.
 
 ```{r}
 dbinom(1, 3, 0.7)   # P(X = 1 head)
@@ -152,7 +152,7 @@ qbinom(0.75, 3, 0.7)   # 75th percentile of X ~ Bin(3, 0.7)
 
 ## Generating Random Values
 
-To generate a (*pseudo*)random sample from a given binomial distribution, use `rbinom (n, size, prob)`. The binomial $n$ parameter is called *size* here, since $n$ is standard notation for sample size in statistics. 
+To generate a (*pseudo*)random sample from a given binomial distribution, use `rbinom (n, size, prob)`. The binomial $n$ parameter is called *size* in `R`'s functions, because $n$ is standard notation for sample size in statistics. 
 
 Simulate 20 random values from biased coin $X \sim Bin(3, 0.7)$
 
@@ -163,13 +163,33 @@ rbinom(20, 3, 0.7)
 Each output value in this random sample is $x$ = *number of heads* (successes) in a sequence of 3 flips. We have 20 replicates of the coin flipping "experiment".
 
 
-## Summarizing Random Samples
+## Tabulating Random Samples
+
+For a discrete random variable with a small number of possible values, we can tabulate the simulated values. How close are the proportions to the theoretical probabilities?
 
 ```{r}
 binom_sample <- tibble(x = rbinom(10^5, 3, 0.7))   # 100,000 samples
-
 binom_sample %>% 
-  summarize(mean_x = mean(x),
+  count(x) %>% 
+  mutate(proportion = prop.table(n))
+```
+
+## Plotting Random Samples
+
+For a discrete random variable with a small number of values, we can create a bar plot. More often, we will use a histogram to accommodate a larger range of possible x values.
+
+```{r, fig.height = 3}
+ggplot(binom_sample, aes(x = x)) + geom_bar()   # add formatting 
+```
+
+
+
+## Summarizing Random Samples
+
+```{r}
+binom_sample %>% 
+  summarize(samples = n(),
+            mean_x = mean(x),
             var_x  = var(x))
 ```
 
@@ -198,7 +218,7 @@ The plot uses the distribution table we created.
 breakby <- 1   # choose spacing for the x-axis tick marks
 
 ggplot(distTable, aes(x = x, y = pmf)) +
-  geom_col(fill = "skyblue", color = "black") +
+  geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
@@ -216,7 +236,7 @@ To display more decimal places for $p$ in the plot title, change %1.1f to %1.*de
 breakby <- 1   # choose spacing for the x-axis tick marks
 
 ggplot(distTable, aes(x = x, y = pmf)) +
-  geom_col(fill = "skyblue", color = "black") +
+  geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
@@ -232,7 +252,7 @@ The plot uses the distribution table we created.
 breakby <- 1   # choose spacing for the x-axis tick marks
 
 ggplot(distTable, aes(x = x, y = CDF)) +
-  geom_col(fill = "skyblue", color = "black") +
+  geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
@@ -250,7 +270,7 @@ To display more decimal places for $p$ in the plot title, change %1.1f to %1.*de
 breakby <- 1   # choose spacing for the x-axis tick marks
 
 ggplot(distTable, aes(x = x, y = CDF)) +
-  geom_col(fill = "skyblue", color = "black") +
+  geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
@@ -276,7 +296,7 @@ head(distTable, 4)
 breakby <- 2   # choose spacing for the x-axis tick marks
 
 ggplot(distTable, aes(x = x, y = pmf)) +
-  geom_col(fill = "skyblue", color = "black") +
+  geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
@@ -290,7 +310,7 @@ ggplot(distTable, aes(x = x, y = pmf)) +
 breakby <- 2   # choose spacing for the x-axis tick marks
 
 ggplot(distTable, aes(x = x, y = CDF)) +
-  geom_col(fill = "skyblue", color = "black") +
+  geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
