@@ -88,7 +88,7 @@ for (i in 1:sims) {
 }
 ```
 
-```{r}
+```{r plotsimsamples}
 ggplot(NULL, aes(x = sim_means)) +
   geom_histogram(bins = 15, color = "gray", fill = "lightblue") +
   geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
@@ -98,12 +98,12 @@ ggplot(NULL, aes(x = sim_means)) +
   theme_linedraw()
 ```
 
-```{r}
+```{r simstats}
 mean(sim_means)
 sd(sim_means)
 ```
 
-```{r}
+```{r samplefunction}
 # if you are confused about this, run it a few times and see what happens
 # clarify for yourself so that you understand what pop_N is and what n is
 
@@ -120,7 +120,7 @@ choose(pop_N, n)
 
 #### Means of All Possible Samples
 
-The `combn()` function finds all the unique samples of n = 3 from the population and outputs the results as a matrix, one sample in each column. We can then compute all the sample means and plot them. Notice the `NULL` where we would usually put the dataset name in the `ggplot()` function, since the data are in a vector instead of a data frame. 
+The `combn()` function finds all the unique samples of n = 3 from the population and outputs the results as a matrix, one sample in each column. We can then compute all the sample means and plot them. Notice the `NULL` where we would usually put the dataset name in the `ggplot()` function, since the data are in a vector instead of a data frame. We can do this for fairly small populations, but the number of combinations increases nonlinearly when the population size increases, so it quickly becomes intractable.
 
 ```{r allsamples}
 n <- 3
@@ -138,9 +138,54 @@ ggplot(NULL, aes(x = all_means)) +
 
 Notice that the average of all possible sample means is exactly the the same as the population mean.
 
-```{r}
+```{r allsamplesstats}
 mean(all_means)
 mean(all_means) == mu
+```
+
+### Revisit Example Using Tidyverse
+
+We could also do this example using `tidyverse` tools. If you look "under the hood" of these functions, you'd see a process much like the one above.
+
+#### Create the Population
+
+```{r creatpoptibble}
+pop_ages <- tibble(ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276))
+```
+
+#### Select a Many Samples
+
+This code replaces the simulation loop above.
+
+```{r simsamplestidy}
+sim_means <- replicate(n = 1000,
+          expr = {
+            pop_ages %>% 
+              slice_sample(n = 3) %>% 
+              summarize(sample_mean = mean(ages)) %>% 
+              pull(sample_mean)
+          }
+)
+```
+
+Plotting the simulation results is identical.
+
+```{r plotsimsamplestidy}
+ggplot(NULL, aes(x = sim_means)) +
+  geom_histogram(bins = 15, color = "gray", fill = "lightblue") +
+  geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
+  labs(title = "Means of Simulated Samples of n = 3 from the Population of Class Ages",
+       subtitle = "the dashed red line represents the population mean",
+       x = "Mean Age in Months") +
+  theme_linedraw()
+```
+
+We can use `summarize()` if we make our simulation output a `tibble` first.
+
+```{r simstatstidy}
+tibble(sim_means) %>% 
+summarize(mean_sim_means = mean(sim_means),
+          sd_sim_means   = sd(sim_means))
 ```
 
 ***
