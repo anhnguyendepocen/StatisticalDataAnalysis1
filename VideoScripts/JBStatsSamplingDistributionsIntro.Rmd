@@ -129,7 +129,9 @@ all_means   <- colSums(all_samples) / n  # compute the mean of each sample
 
 ggplot(NULL, aes(x = all_means)) +
   geom_dotplot(dotsize = 0.35) +
-  geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
+  geom_vline(xintercept = mu, 
+             color = "red", 
+             linetype = "dashed") +
   scale_y_continuous(NULL, expand = c(0, 0)) +
   labs(title = "Means of All Possible Samples of n = 3 from the Population of Class Ages",
        subtitle = "the dashed red line represents the population mean",
@@ -172,8 +174,12 @@ Plotting the simulation results is identical.
 
 ```{r plotsimsamplestidy}
 ggplot(NULL, aes(x = sim_means)) +
-  geom_histogram(bins = 15, color = "gray", fill = "lightblue") +
-  geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
+  geom_histogram(bins = 15, 
+                 color = "gray", 
+                 fill = "lightblue") +
+  geom_vline(xintercept = mu, 
+             color = "red", 
+             linetype = "dashed") +
   labs(title = "Means of Simulated Samples of n = 3 from the Population of Class Ages",
        subtitle = "the dashed red line represents the population mean",
        x = "Mean Age in Months") +
