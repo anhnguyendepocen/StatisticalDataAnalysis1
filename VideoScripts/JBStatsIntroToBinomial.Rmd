@@ -45,6 +45,8 @@ $$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
 
 $$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
 
+$$E[X] = np \text{ and } Var[X] = np(1-p)$$
+
 ### **Rolling a 6-sided Die Example**
 
 #### Calculating P(X = 2)

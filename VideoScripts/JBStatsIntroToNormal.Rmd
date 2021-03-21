@@ -138,6 +138,8 @@ normalplot_3sigma
 
 #### Two Normal Curves
 
+The area under the normal curve is always equal to one. The height and width of the bell depend on the standard deviation, but it always has the characteristic shape. The two curves below have the same mean but one has twice the standard deviation.
+
 <details>
 ```{r}
 normalplot_2curves <- ggplot(NULL) + 
@@ -158,6 +160,8 @@ normalplot_2curves
 ### **General Curve Plotting**
 
 #### Plotting the pdf for N(μ, σ^2^)
+
+The code below will allow you to plot a wide variety of normal distributions, within the limits of `R`. Just set the mean (mu) and standard deviation (sigma), and adjust the x-axis decimal display to be appropriate to the scale of the parameters.
 
 ```{r}
 # set the model parameters
@@ -185,11 +189,79 @@ ggplot(NULL) +
 
 #### Shading an Area---Between
 
-FINISH THIS PART
+Here we add a layer for the shading. It comes before plotting the curve because `ggplot2` adds each layer on top of the others and the appearance is better if we "shade" first. The two layers do not depend on one another.
+
+```{r}
+# set the model parameters
+mu    <- 0
+sigma <- 1
+
+# limits of the shaded area
+# do not exceed 10 x sigma
+lower <- -0.67
+upper <- 0.67
+
+# color for the shaded area
+shade <- "lightblue"
+
+# set x-axis decimal place
+decimals <- 0.01 
+  
+# scales the x-axis limits
+# don't alter these values
+LB <- mu - 4 * sigma   # lower limit for plotting
+UB <- mu + 4 * sigma   # upper limit for plotting
+
+# create scaled normal pdf
+ggplot(NULL) + 
+  stat_function(fun = dnorm, args = list(mu, sigma), 
+                geom = "area", fill = shade, xlim = c(lower, upper)) +
+  stat_function(fun = dnorm, args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(LB, UB),
+                     breaks = seq(from = LB, to = UB, by = sigma), 
+                     labels = number_format(accuracy = decimals)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(title = sprintf("X ~ N(%g, %g)", mu, sigma^2), x = "x", y = "f(x)") +
+  theme_linedraw()
+```
 
 #### Shading an Area---Outside
 
-FINISH THIS PART
+```{r}
+# set the model parameters
+mu    <- 0
+sigma <- 1
+
+# limits of the shaded area
+# do not exceed 10 x sigma
+lower <- -0.67
+upper <- 0.67
+
+# color for the shaded area
+shade <- "lightblue"
+
+# set x-axis decimal place
+decimals <- 0.01 
+
+# scales the x-axis limits
+# don't alter these values
+LB <- mu - 4 * sigma   # lower limit for plotting
+UB <- mu + 4 * sigma   # upper limit for plotting
+
+# create scaled normal pdf
+ggplot(NULL) + 
+  stat_function(fun = dnorm, args = list(mu, sigma), 
+                geom = "area", fill = shade, xlim = c(-10 * sigma, lower)) +
+  stat_function(fun = dnorm, args = list(mu, sigma), 
+                geom = "area", fill = shade, xlim = c(upper, 10 * sigma)) +
+  stat_function(fun = dnorm, args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(LB, UB),
+                     breaks = seq(from = LB, to = UB, by = sigma), 
+                     labels = number_format(accuracy = decimals)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(title = sprintf("X ~ N(%g, %g)", mu, sigma^2), x = "x", y = "f(x)") +
+  theme_linedraw()
+```
 
 
 ***
