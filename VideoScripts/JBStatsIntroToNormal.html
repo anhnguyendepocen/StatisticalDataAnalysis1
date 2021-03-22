@@ -386,7 +386,7 @@ pre code {
 <h1 class="title toc-ignore">An Introduction to the Normal Distribution</h1>
 <h3 class="subtitle">Companion <code>R</code> Code for JB Statistics Video Lesson</h3>
 <h4 class="author">Created by Jill E. Thomley</h4>
-<h4 class="date">Sunday, March 21, 2021 @ 09:39 PM</h4>
+<h4 class="date">Sunday, March 21, 2021 @ 10:12 PM</h4>
 
 </div>
 
@@ -491,7 +491,8 @@ library(kableExtra)</code></pre>
                 geom = &quot;area&quot;, 
                 xlim = c(-2, 2),
                 fill = &quot;lightblue&quot;) + 
-  stat_function(fun = dnorm, args = list(0, 1)) +
+  stat_function(fun = dnorm, 
+                args = list(0, 1)) +
   geom_label(x = 0, 
              y = 0.2, 
              aes(label = &quot;≈ 95%&quot;), 

@@ -115,7 +115,8 @@ normalplot_2sigma <- ggplot() +
                 geom = "area", 
                 xlim = c(-2, 2),
                 fill = "lightblue") + 
-  stat_function(fun = dnorm, args = list(0, 1)) +
+  stat_function(fun = dnorm, 
+                args = list(0, 1)) +
   geom_label(x = 0, 
              y = 0.2, 
              aes(label = "≈ 95%"), 
