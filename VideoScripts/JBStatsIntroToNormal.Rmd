@@ -62,7 +62,9 @@ normalplot <- ggplot() +
                      breaks = seq(from = -3, to = 3, by = 1), 
                      labels = c("μ - 3σ", "μ - 2σ", "μ - 1σ", "μ", "μ + 1σ", "μ + 2σ", "μ + 3σ")) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
-  labs(title = "The Normal Distribution", x = "x", y = "f(x)") +
+  labs(title = "The Normal Distribution", 
+       x = "x", 
+       y = "f(x)") +
   theme_linedraw()
 ```
 </details>
