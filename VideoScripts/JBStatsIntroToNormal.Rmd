@@ -85,9 +85,9 @@ normalplot_1sigma <- ggplot() +
                 fill = "lightblue") +
   stat_function(fun = dnorm, 
                 args = list(0, 1)) +
-  geom_label(x = 0, 
+  geom_label(aes(label = "≈ 68%"),
+             x = 0, 
              y = 0.2, 
-             aes(label = "≈ 68%"), 
              label.padding = unit(0.5, "lines")) +
   scale_x_continuous(limits = c(-3, 3),
                      breaks = seq(from = -3, to = 3, by = 1), 
@@ -117,9 +117,9 @@ normalplot_2sigma <- ggplot() +
                 fill = "lightblue") + 
   stat_function(fun = dnorm, 
                 args = list(0, 1)) +
-  geom_label(x = 0, 
+  geom_label(aes(label = "≈ 95%"),
+             x = 0, 
              y = 0.2, 
-             aes(label = "≈ 95%"), 
              label.padding = unit(0.5, "lines")) +
   scale_x_continuous(limits = c(-3, 3),
                      breaks = seq(from = -3, to = 3, by = 1), 
@@ -148,9 +148,9 @@ normalplot_3sigma <- ggplot() +
                 xlim = c(-3, 3),
                 fill = "lightblue") + 
   stat_function(fun = dnorm, args = list(0, 1)) +
-  geom_label(x = 0, 
+  geom_label(aes(label = "≈ 95%"), 
+             x = 0, 
              y = 0.2, 
-             aes(label = "≈ 95%"), 
              label.padding = unit(0.5, "lines")) +
   scale_x_continuous(limits = c(-3, 3),
                      breaks = seq(from = -3, to = 3, by = 1), 
@@ -170,7 +170,7 @@ normalplot_3sigma
 
 #### Two Normal Curves
 
-The area under the normal curve is always equal to one. The height and width of the bell depend on the standard deviation, but it always has the characteristic shape. The two curves below have the same mean but one has twice the standard deviation.
+The area under the normal curve is always equal to one. The height and width of the bell depend on the standard deviation, but it always has the characteristic shape. The two curves below have the same mean but one has twice the standard deviation. Notice that the curve with twice the standard deviation has half the height.
 
 <details>
 ```{r}
@@ -184,10 +184,10 @@ normalplot_2curves <- ggplot() +
   scale_x_continuous(limits = c(-6, 6), 
                      breaks = NULL) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  scale_color_manual(values = c("σ1" = "blue", "σ2 = 2σ1" = "orange")) +
   labs(title = "Two Normal Distributions", 
        x = "x", 
        y = "f(x)") +
-  scale_color_manual(values = c("σ1" = "blue", "σ2 = 2σ1" = "orange")) +
   theme_linedraw()
 ```
 </details>
@@ -231,7 +231,7 @@ ggplot() +
 
 #### Shading an Area---Between
 
-Here we add a layer for the shading. It comes before plotting the curve because `ggplot2` adds each layer on top of the others and the appearance is better if we "shade" first. The two layers do not depend on one another.
+Here we add a layer for the shading. It comes before plotting the curve because `ggplot2` adds each layer on top of the others and the appearance is better if we "shade" first. The two layers do not depend on one another. The area μ ± 0.67σ is approximately the middle 50% of the curve (bounded by the quartiles).
 
 ```{r}
 # set the model parameters
@@ -239,7 +239,7 @@ mu    <- 0
 sigma <- 1
 
 # limits of the shaded area
-# do not exceed 10 x sigma
+# do not exceed +/- 4 sigma
 lower <- -0.67
 upper <- 0.67
 
@@ -281,7 +281,7 @@ mu    <- 0
 sigma <- 1
 
 # limits of the shaded area
-# do not exceed 10 x sigma
+# do not exceed +/- 4 sigma
 lower <- -0.67
 upper <- 0.67
 
@@ -301,12 +301,12 @@ ggplot() +
   stat_function(fun = dnorm, 
                 args = list(mu, sigma), 
                 geom = "area", 
-                xlim = c(-10 * sigma, lower),
+                xlim = c(LB, lower),
                 fill = shade) + 
   stat_function(fun = dnorm, 
                 args = list(mu, sigma), 
                 geom = "area", 
-                xlim = c(upper, 10 * sigma),
+                xlim = c(upper, UB),
                 fill = shade) + 
   stat_function(fun = dnorm, 
                 args = list(mu, sigma)) +

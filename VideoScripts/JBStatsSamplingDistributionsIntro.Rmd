@@ -32,15 +32,26 @@ library(combinat)  # required for combn() function
 
 #### Create a Population Vector
 
-The video uses a population of 16 students in a college classroom as an example. The variable of interest is the students' ages in months. We can create this population in `R` as a vector. Each value in the vector has a location or index numbered from 1-16. We can identify a value via its location and access it with `[ ]` index notation.
+The video uses a population of 16 students in a college classroom as an example. The variable of interest is the students' ages in months. We can create this population in `R` as a vector. 
 
 ```{r createpop}
 pop_ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276)
+```
 
-pop_ages[1]   # first value
-pop_ages[10]  # tenth value
+#### Accessing Population Values 
+
+Each value in the vector has a location or index numbered from 1-16. We can identify a value via its location and access it with `[ ]` index notation. We can choose multiple values by using a vector.
+
+```{r}
+pop_ages[1]         # first value
+pop_ages[10]        # tenth value
 pop_ages[c(1, 10)]  # first and tenth values
+pop_ages[1:10]      # first through tenth values
+```
 
+The overall population mean is $\mu$. Recall that placing `()` around the object prints it after assigning using `<-`.
+
+```{r}
 (mu <- mean(pop_ages))
 ```
 
@@ -120,7 +131,7 @@ choose(pop_N, n)
 
 #### Means of All Possible Samples
 
-The `combn()` function finds all the unique samples of n = 3 from the population and outputs the results as a matrix, one sample in each column. We can then compute all the sample means and plot them. Notice the `NULL` where we would usually put the dataset name in the `ggplot()` function, since the data are in a vector instead of a data frame. We can do this for fairly small populations, but the number of combinations increases nonlinearly when the population size increases, so it quickly becomes intractable.
+The `combn()` function finds all the unique samples of n = 3 from the population and outputs the results as a matrix, one sample in each column. We can then compute all the sample means and plot them. Notice the `NULL` where we would usually put the dataset name in the `ggplot()` function, since the data are in a vector instead of a data frame. We can do this for fairly small populations, but the number of combinations increases nonlinearly when the population size increases, so it quickly becomes intractable. You should notice how closely our random resampling results resemble the exact distribution. 
 
 ```{r allsamples}
 n <- 3
@@ -155,9 +166,15 @@ We could also do this example using `tidyverse` tools. If you look "under the ho
 pop_ages <- tibble(ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276))
 ```
 
+```{r}
+mu <- pop_ages %>% 
+  summarize(mu = mean(ages)) %>% 
+  pull(mu)
+```
+
 #### Select a Many Samples
 
-This code replaces the simulation loop above.
+This code replaces the simulation loop above, but it relies on the same fundamental functions. We are taking fewer resamples here (1000 vs. 100,000) because of runtime. The results will have more sampling variability.
 
 ```{r simsamplestidy}
 sim_means <- replicate(n = 1000,
@@ -170,7 +187,7 @@ sim_means <- replicate(n = 1000,
 )
 ```
 
-Plotting the simulation results is identical.
+Plotting the simulation results is identical to the previous simulation.
 
 ```{r plotsimsamplestidy}
 ggplot(NULL, aes(x = sim_means)) +
@@ -190,9 +207,10 @@ We can use `summarize()` if we make our simulation output a `tibble` first.
 
 ```{r simstatstidy}
 tibble(sim_means) %>% 
-summarize(mean_sim_means = mean(sim_means),
-          sd_sim_means   = sd(sim_means))
+summarize(mean_of_sim_means = mean(sim_means),
+          sd_of_sim_means   = sd(sim_means))
 ```
+
 
 ***
 ```{r}
