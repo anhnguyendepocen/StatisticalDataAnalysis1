@@ -194,9 +194,9 @@ knitr::include_graphics("images/joseph-banks-rhine.jpeg")
 
 ## Visualizing Your Result
 
-I got a 7 "hits" (correct guesses) on my test.
+I got a x = 7 "hits" (correct guesses) on my test.
 
-```{r, fig.height = 3.5, echo = FALSE}
+```{r, fig.height = 4.5, echo = FALSE}
 n <- 25
 p <- 0.2
 x <- 7
@@ -208,10 +208,13 @@ distTable <- tibble(x = 0:n,
 ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
   geom_col(fill = c(rep("skyblue", x), "red", rep("skyblue", n - x)), 
            color = "black", width = 1) +
+  geom_hline(yintercept = distTable$pdf[distTable$x == x], 
+             color = "red", 
+             linetype = "dashed") +
   scale_x_continuous(breaks = seq(0, n, 1)) +
   scale_y_continuous(breaks = seq(0, 1, .02)) +
   labs(title = "Binomial Model for 25-Card Zener Test, Assuming Guessing",
-       x = "number of cards correctly identified",
+       x = "x = number of cards correctly identified",
        y = "probability") +
   theme_linedraw()
 ```
@@ -219,7 +222,7 @@ ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
 
 ## Probability of Your Result #1
 
-I scored a 7 on my test. Using the binomial pmf, I get...
+I scored x = 7 on my test. Using the binomial pmf, I get...
 
 $$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
 
@@ -271,18 +274,45 @@ Does this line of reasoning make sense to you? How would you determine this prob
 The total area of the plotted figure is 1 and area corresponds to probability. Calculate the lower area using the CDF and subtract from 1 to find the upper area.
 
 ```{r, fig.height = 3.75, echo = FALSE}
-ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+ggplot(distTable, aes(x = x, y = pdf)) +
   geom_col(fill = c(rep("skyblue", x), rep("red", n + 1 - x)), 
            color = "black", width = 1) +
+  geom_label(x = x, 
+             y = 0.09,
+             hjust = 0,
+             aes(label = "X ≥ x"),
+             size = 4) +
+  geom_label(x = x - 1, 
+             y = 0.09, 
+             hjust = 1,
+             aes(label = "X ≤ x - 1"),
+             size = 4) +
   scale_x_continuous(breaks = seq(0, n, 1)) +
-  scale_y_continuous(breaks = seq(0, 1, .02)) +
-  labs(x = "number of cards correctly identified",
+  scale_y_continuous(breaks = seq(0, 1, 0.02)) +
+  labs(title = "Binomial Model for 25-Card Zener Test, Assuming Guessing",
+       x = "x = number of cards correctly identified",
        y = "probability") +
   theme_linedraw()
 ```
 
 
-## Probability of Your Result *or Greater*
+## Probability of Your Result *or Greater* #1
+
+For my score of x = 7, $P(X \geq 7) = 1 - P(X \leq 6)$.
+
+$$1 - P(X \leq 6) = $$
+
+$$1 - [P(x = 0) + P(X = 1) + P(X = 2) + P(X = 3) + $$ 
+
+$$P(X = 4) + P(X = 5) + P(X = 6)] =$$
+
+$$1 - \Bigg[ {25 \choose 0}(1/5)^0(4/5)^{25} + \ldots + {25 \choose 6}(1/5)^6(4/5)^{19}\Bigg] =$$
+
+$$1 - [0.003778 + 0.023612 + 0.070835 + 0.135768 + $$ 
+
+$$0.186681 + 0.196015 + 0.163346] = 0.219965$$
+
+## Probability of Your Result *or Greater* #2
 
 What is the probability of the test result you got or greater?
 

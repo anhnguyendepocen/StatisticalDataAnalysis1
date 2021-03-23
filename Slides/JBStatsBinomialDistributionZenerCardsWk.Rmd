@@ -112,18 +112,27 @@ x <-
 ```{r}
 # the code is already set up for you
 # can you identify how it all works?
+# plot has n + 1 bars for x = 0 to n
 
+# --------------------
+# "table" of pdf and CDF
+# data used for the plot
 distTable <- tibble(x = 0:n, 
                     pdf = dbinom(0:n, n, p), 
                     CDF = pbinom(0:n, n, p))
 
-ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+# --------------------
+# plot of the pmf f(x)
+ggplot(distTable, aes(x = x, y = pdf)) +
   geom_col(fill = c(rep("skyblue", x), "red", rep("skyblue", n - x)), 
            color = "black", width = 1) +
-  scale_x_continuous(breaks = seq(0, n, 1)) +
-  scale_y_continuous(breaks = seq(0, 1, .02)) +
+  geom_hline(yintercept = distTable$pdf[distTable$x == x], 
+             color = "red", 
+             linetype = "dashed") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = 1)) +
+  scale_y_continuous(breaks = seq(from = 0, to = 1, by = 0.02)) +
   labs(title = "Binomial Model for 25-Card Zener Test, Assuming Guessing",
-       x = "number of cards correctly identified",
+       x = "x = number of cards correctly identified",
        y = "probability") +
   theme_linedraw()
 ```
@@ -143,19 +152,50 @@ What is the probability of exactly the result you got on the test?
 ```{r}
 # the code is already set up for you
 # can you identify how it all works?
+# plot has n + 1 bars for x = 0 to n
 
+# --------------------
+# "table" of pdf and CDF
+# data used for the plot
 distTable <- tibble(x = 0:n, 
                     pdf = dbinom(0:n, n, p), 
                     CDF = pbinom(0:n, n, p))
 
-ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
-  geom_col(fill = c(rep("skyblue", x), "red", rep("skyblue", n - x)), 
+# --------------------
+# plot of the pmf f(x)
+ggplot(distTable, aes(x = x, y = pdf)) +
+  geom_col(fill = c(rep("skyblue", x), rep("red", n + 1 - x)), 
            color = "black", width = 1) +
-  scale_x_continuous(breaks = seq(0, n, 1)) +
-  scale_y_continuous(breaks = seq(0, 1, .02)) +
+  geom_label(x = x, 
+             y = 0.09,
+             hjust = 0,
+             aes(label = "X ≥ x"),
+             size = 4) +
+  geom_label(x = x - 1, 
+             y = 0.09, 
+             hjust = 1,
+             aes(label = "X ≤ x - 1"),
+             size = 4) +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = 1)) +
+  scale_y_continuous(breaks = seq(from = 0, to = 1, by = 0.02)) +
   labs(title = "Binomial Model for 25-Card Zener Test, Assuming Guessing",
-       x = "number of cards correctly identified",
+       x = "x = number of cards correctly identified",
        y = "probability") +
+  theme_linedraw()
+
+# --------------------
+# plot of the CDF F(x)
+ggplot(distTable, aes(x = x, y = CDF)) +
+  geom_col(fill = c(rep("white", x - 1), "skyblue", rep("white", n - (x - 1))), 
+           color = "black", width = 1) +
+  geom_hline(yintercept = distTable$CDF[distTable$x == x - 1], 
+             color = "red", 
+             linetype = "dashed") +
+  scale_x_continuous(breaks = seq(from = 0, to = n, by = 1)) +
+  scale_y_continuous(breaks = seq(from = 0, to = 1, by = 0.1)) +
+  labs(title = "Binomial Model for 25-Card Zener Test, Assuming Guessing",
+       x = "x = number of cards correctly identified",
+       y = "cumulative probability") +
   theme_linedraw()
 ```
 
