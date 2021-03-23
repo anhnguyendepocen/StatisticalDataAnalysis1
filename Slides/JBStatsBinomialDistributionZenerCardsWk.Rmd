@@ -1,0 +1,195 @@
+---
+title: "Binomial Distribution: Zener Card Activity"
+subtitle: "Student Worksheet"
+author: "YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+***
+
+### Packages
+
+```{r loadpackages}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+
+### Binomial Model
+
+$X \sim Bin(n,p)$
+
+* $x$ = number of successes = ${0, 1, 2, ..., n}$
+* $n$ = number of Bernoulli trials
+* $p$ = probability of success on a single trial
+
+$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$
+
+$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$
+
+$E[X] = np$
+
+$Var[X] = np(1-p)$
+
+
+### Zener Cards
+
+Psychologists Karl Zener (1903-64) and J.B. Rhine (1895-1980), who worked at Duke University's Parapsychology Laboratory, designed a deck of cards to use in ESP research.
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("https://stat-jet-asu.github.io/Moodlepics/zenercards.jpg")
+```
+
+The classic Zener card deck has twenty five cards, five of each symbol: a circle, a plus sign, three vertical wavy lines, a square, and a five-pointed star. 
+
+
+### Zener ESP Test
+
+In a test for ESP, the experimenter picks a card from a shuffled deck and asks the person being tested to identify which of the five symbols is on the card---without showing them, of course. Drawing can occur in one of two ways.
+
+* Do not replace drawn cards. Deck size diminishes with each draw and the ratios of symbols change.
+* Replace previously drawn cards. Deck size and ratios remain the same across all of the drawings. 
+
+Which test can be modeled using a binomial distribution. Why? Consider the properties of Bernoulli trials...
+
+**ANSWER:** 
+
+
+### Binomial Model for No ESP (Guessing)
+
+Suppose someone does *not* have ESP and is purely guessing on each of 25 cards drawn *with replacement* from a standard Zener deck. What would be the appropriate model parameters for the variable $X$ = the number of cards correctly identified?
+
+```{r}
+# enter the binomial parameters
+n <- 
+p <- 
+```
+
+
+### Expected Number of Successes
+
+In general, identifying the symbol correctly a "large" number of times would be considered evidence of ESP, but even someone purely guessing will get a few cards right. How many cards would we expect someone to identify correctly if they do not have ESP and are purely guessing? 
+
+What is $E[X]$?
+
+```{r}
+# calculate it here
+```
+
+What is $Var[X]$?
+
+```{r}
+# calculate it here
+```
+
+What is $SD[X]$?
+
+```{r}
+# calculate it here
+```
+
+
+### Take the Test!
+
+Let's get some data to use with our model. We will use an online test rather than physical cards. [Do you have ESP?](https://psychicscience.org/esp3) 
+
+```{r}
+# enter your test result
+x <- 
+```
+
+### Probability of Your Result
+
+What is the probability of exactly the result you got on the test?
+
+```{r}
+# calculate it here
+```
+
+
+### Visualizing Your Result
+
+```{r}
+# the code is already set up for you
+# can you identify how it all works?
+
+distTable <- tibble(x = 0:n, 
+                    pdf = dbinom(0:n, n, p), 
+                    CDF = pbinom(0:n, n, p))
+
+ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+  geom_col(fill = c(rep("skyblue", x), "red", rep("skyblue", n - x)), 
+           color = "black", width = 1) +
+  scale_x_continuous(breaks = seq(0, n, 1)) +
+  scale_y_continuous(breaks = seq(0, 1, .02)) +
+  labs(title = "Binomial Model for 25-Card Zener Test, Assuming Guessing",
+       x = "number of cards correctly identified",
+       y = "probability") +
+  theme_linedraw()
+```
+
+
+### Are You Psi-Hitting?
+
+According to the test, if you get "significantly" more cards correct than the value we would expect from random chance (guessing), this indicates *psi-hitting*. A better way to quantify the evidence provided by your test data is to find the probability of your outcome *and* all outcomes that are even larger than yours.
+
+$$P(X \geq x) = P(X > x - 1) = 1 - P(X \leq x - 1)$$
+
+Does this line of reasoning make sense to you? How would you determine this probability? 
+
+**ANSWER:**
+
+
+### Visualize My Test Result
+
+The total area of the plotted figure is 1 and area corresponds to probability. Calculate the lower area using the CDF and subtract from 1 to find the upper area.
+
+```{r}
+# the code is already set up for you
+# can you identify how it all works?
+
+ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+  geom_col(fill = c(rep("skyblue", x), rep("red", n + 1 - x)), 
+           color = "black", width = 1) +
+  scale_x_continuous(breaks = seq(0, n, 1)) +
+  scale_y_continuous(breaks = seq(0, 1, .02)) +
+  labs(x = "number of cards correctly identified",
+       y = "probability") +
+  theme_linedraw()
+```
+
+
+### Probability of Your Result *or Greater*
+
+What is the probability of the test result you got or greater?
+
+```{r}
+# calculate it here
+```
+
+
+### Some Additional Questions...
+
+What values of $x$ would you consider to be "significant" when it comes to judging possible presence of ESP? Why? Consider both *psi-hitting* and *psi-missing* (very low number of successes).
+
+How high would a person have to score to be in the top 10% of possible outcomes for this model? The top 5%? The top 1%?
+
+How would the binomial model change if someone possessed some degree of ESP---not perfect, but better than chance?
+
+The online test says, "choose at least 50 trials to obtain a reliable indication of your performance" and offers 50, 100, 200, 500, or even 1000 trials! Why would more trials be more "reliable"? How would the binomial model change for these lengthier tests?
+
+How could we simulate both kinds of Zener card tests in `R`?
+
+
+***
+```{r}
+sessionInfo()
+```

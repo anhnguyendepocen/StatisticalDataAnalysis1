@@ -79,9 +79,7 @@ This course will use the RStudio server  (https://mathr.math.appstate.edu/) that
 
 You must have an active internet connection and be registered in the course to access the ASU RStudio server. To access the server, point any web browser to <https://mathr.math.appstate.edu/>. Use your Appstate Username and Password to log in. A screen shot of the RStudio server is shown below. If you have problems with your Appstate Username or Password visit [IT Support Services](http://support.appstate.edu/) or call 262-6266.
 
-```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("../images/RStudioLogIn.jpg", dpi = 128)
-```
+<img src="../images/RStudioLogIn.jpg" width="564" style="display: block; margin: auto;" />
 
 
 **General Expectations**  

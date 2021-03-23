@@ -1,7 +1,7 @@
 ---
 title: "Bernoulli and Binomial Distributions: The Math"
 author: "Author: Jill E. Thomley"
-date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
   ioslides_presentation:
     logo: images/logoASU.jpg

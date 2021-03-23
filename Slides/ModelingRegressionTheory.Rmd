@@ -1,7 +1,7 @@
 ---
 title: "Modeling & Regression<br>&#9654; Basic Theory / Math"
 author: "Author: Jill E. Thomley"
-date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
   ioslides_presentation:
     logo: images/logoASU.jpg
@@ -95,7 +95,7 @@ The least squares line always passed through the point $(\bar{x}, \bar{y})$. We 
 
 $$b_1 = \frac{\Sigma (y_i - \bar{y})(x_i - \bar{x})}{\Sigma (x_i - \bar{x})^2} = \frac{covariance(x,y)}{variance(x)}$$
 
-This is an algebraic simplification of the [linear algebra](https://online.stat.psu.edu/stat462/node/132/) method, which extends to cases with more that one predictor variable. It is based on the familiar "rise over run" concept from geometry.
+This is an algebraic simplification of the [linear algebra](https://online.stat.psu.edu/stat462/node/132/) method, which extends to cases with more that one predictor variable. It is related to the familiar "rise over run" concept from geometry.
 
 Once we have determined the slope, we can use the point-slope formula with the point $(\bar{x}, \bar{y})$ to solve for the intercept. 
 
@@ -125,7 +125,7 @@ $$-1 \le r \le +1 \text{ (never expressed as a percentage!)}$$
 
 $$r = \frac{1}{n-1}\Sigma(\frac{x_i-\bar{x}}{s_x})(\frac{y_i-\bar{y}}{s_y}) = \frac{1}{n-1}\Sigma z_{x_i}z_{y_i} $$
 
-Take the product of the z-scores of each $(x, y)$ pair, sum them, and divide the sum by $n-1$ (since we use the sample SD $s$).
+Take the product of the z-scores of each $(x, y)$ pair, sum them, and divide the sum by $n-1$ (since we use sample $s_x$ and $s_y$).
  
  
 ## Visualize Correlations
@@ -141,7 +141,7 @@ image source: https://moderndive.com/5-regression.html
 
 ## Cautions! Beware Outliers...
 
-You should have noticed by now that everything in least squares regression centers on the point $(\bar{x}, \bar{y})$ and deviations from that point. As we learned in EDA, moment-based summary measures are not robust against the effects of outliers. 
+You may have noticed by now that the mathematics in simple least squares regression centers around the point $(\bar{x}, \bar{y})$ and the deviations from that point. As we learned in EDA, moment-based summary measures are not robust against outliers. 
 
 Thus, we need to be cautious about any *univariate* outliers that may be in our data exerting unusual influence.
 

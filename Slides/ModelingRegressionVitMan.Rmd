@@ -1,7 +1,7 @@
 ---
 title: "Modeling & Regression<br>&#9654; Vitruvian Man Example"
 author: "Author: Jill E. Thomley"
-date: 'Updated: `r format(Sys.time(), "%A, %B %d, %Y @ %X")`'
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
   ioslides_presentation:
     logo: images/logoASU.jpg
@@ -101,7 +101,8 @@ Are there any potential *bivariate* outliers in this sample?
 # using coord_fixed because x and y have the same scale
 ggplot(anthro_sample, aes(x = height, y = armspan)) +
   geom_point() + 
-  coord_fixed(xlim = c(60, 80), ylim = c(60, 80))
+  coord_fixed(xlim = c(60, 80), ylim = c(60, 80)) +
+  theme()
 ```
 
 
