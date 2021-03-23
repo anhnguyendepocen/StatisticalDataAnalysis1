@@ -84,6 +84,15 @@ if (!!window.navigator.userAgent.match("MSIE 8")) {
 !function(a){"use strict";a.matchMedia=a.matchMedia||function(a){var b,c=a.documentElement,d=c.firstElementChild||c.firstChild,e=a.createElement("body"),f=a.createElement("div");return f.id="mq-test-1",f.style.cssText="position:absolute;top:-100em",e.style.background="none",e.appendChild(f),function(a){return f.innerHTML='&shy;<style media="'+a+'"> #mq-test-1 { width: 42px; }</style>',c.insertBefore(e,d),b=42===f.offsetWidth,c.removeChild(e),{matches:b,media:a}}}(a.document)}(this),function(a){"use strict";function b(){u(!0)}var c={};a.respond=c,c.update=function(){};var d=[],e=function(){var b=!1;try{b=new a.XMLHttpRequest}catch(c){b=new a.ActiveXObject("Microsoft.XMLHTTP")}return function(){return b}}(),f=function(a,b){var c=e();c&&(c.open("GET",a,!0),c.onreadystatechange=function(){4!==c.readyState||200!==c.status&&304!==c.status||b(c.responseText)},4!==c.readyState&&c.send(null))};if(c.ajax=f,c.queue=d,c.regex={media:/@media[^\{]+\{([^\{\}]*\{[^\}\{]*\})+/gi,keyframes:/@(?:\-(?:o|moz|webkit)\-)?keyframes[^\{]+\{(?:[^\{\}]*\{[^\}\{]*\})+[^\}]*\}/gi,urls:/(url\()['"]?([^\/\)'"][^:\)'"]+)['"]?(\))/g,findStyles:/@media *([^\{]+)\{([\S\s]+?)$/,only:/(only\s+)?([a-zA-Z]+)\s?/,minw:/\([\s]*min\-width\s*:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/,maxw:/\([\s]*max\-width\s*:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/},c.mediaQueriesSupported=a.matchMedia&&null!==a.matchMedia("only all")&&a.matchMedia("only all").matches,!c.mediaQueriesSupported){var g,h,i,j=a.document,k=j.documentElement,l=[],m=[],n=[],o={},p=30,q=j.getElementsByTagName("head")[0]||k,r=j.getElementsByTagName("base")[0],s=q.getElementsByTagName("link"),t=function(){var a,b=j.createElement("div"),c=j.body,d=k.style.fontSize,e=c&&c.style.fontSize,f=!1;return b.style.cssText="position:absolute;font-size:1em;width:1em",c||(c=f=j.createElement("body"),c.style.background="none"),k.style.fontSize="100%",c.style.fontSize="100%",c.appendChild(b),f&&k.insertBefore(c,k.firstChild),a=b.offsetWidth,f?k.removeChild(c):c.removeChild(b),k.style.fontSize=d,e&&(c.style.fontSize=e),a=i=parseFloat(a)},u=function(b){var c="clientWidth",d=k[c],e="CSS1Compat"===j.compatMode&&d||j.body[c]||d,f={},o=s[s.length-1],r=(new Date).getTime();if(b&&g&&p>r-g)return a.clearTimeout(h),h=a.setTimeout(u,p),void 0;g=r;for(var v in l)if(l.hasOwnProperty(v)){var w=l[v],x=w.minw,y=w.maxw,z=null===x,A=null===y,B="em";x&&(x=parseFloat(x)*(x.indexOf(B)>-1?i||t():1)),y&&(y=parseFloat(y)*(y.indexOf(B)>-1?i||t():1)),w.hasquery&&(z&&A||!(z||e>=x)||!(A||y>=e))||(f[w.media]||(f[w.media]=[]),f[w.media].push(m[w.rules]))}for(var C in n)n.hasOwnProperty(C)&&n[C]&&n[C].parentNode===q&&q.removeChild(n[C]);n.length=0;for(var D in f)if(f.hasOwnProperty(D)){var E=j.createElement("style"),F=f[D].join("\n");E.type="text/css",E.media=D,q.insertBefore(E,o.nextSibling),E.styleSheet?E.styleSheet.cssText=F:E.appendChild(j.createTextNode(F)),n.push(E)}},v=function(a,b,d){var e=a.replace(c.regex.keyframes,"").match(c.regex.media),f=e&&e.length||0;b=b.substring(0,b.lastIndexOf("/"));var g=function(a){return a.replace(c.regex.urls,"$1"+b+"$2$3")},h=!f&&d;b.length&&(b+="/"),h&&(f=1);for(var i=0;f>i;i++){var j,k,n,o;h?(j=d,m.push(g(a))):(j=e[i].match(c.regex.findStyles)&&RegExp.$1,m.push(RegExp.$2&&g(RegExp.$2))),n=j.split(","),o=n.length;for(var p=0;o>p;p++)k=n[p],l.push({media:k.split("(")[0].match(c.regex.only)&&RegExp.$2||"all",rules:m.length-1,hasquery:k.indexOf("(")>-1,minw:k.match(c.regex.minw)&&parseFloat(RegExp.$1)+(RegExp.$2||""),maxw:k.match(c.regex.maxw)&&parseFloat(RegExp.$1)+(RegExp.$2||"")})}u()},w=function(){if(d.length){var b=d.shift();f(b.href,function(c){v(c,b.href,b.media),o[b.href]=!0,a.setTimeout(function(){w()},0)})}},x=function(){for(var b=0;b<s.length;b++){var c=s[b],e=c.href,f=c.media,g=c.rel&&"stylesheet"===c.rel.toLowerCase();e&&g&&!o[e]&&(c.styleSheet&&c.styleSheet.rawCssText?(v(c.styleSheet.rawCssText,e,f),o[e]=!0):(!/^([a-zA-Z:]*\/\/)/.test(e)&&!r||e.replace(RegExp.$1,"").split("/")[0]===a.location.host)&&("//"===e.substring(0,2)&&(e=a.location.protocol+e),d.push({href:e,media:f})))}w()};x(),c.update=x,c.getEmValue=t,a.addEventListener?a.addEventListener("resize",b,!1):a.attachEvent&&a.attachEvent("onresize",b)}}(this);
 };
 </script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script>
 
 /**
@@ -254,11 +263,6 @@ color: rgb(3, 106, 7);
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -271,32 +275,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -307,10 +285,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -327,6 +301,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -339,7 +316,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -403,13 +379,13 @@ summary {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Case Study: Anthropometric Data</h1>
 <h4 class="author">PUT YOUR NAME HERE</h4>
-<h4 class="date">Saturday, February 20, 2021 @ 05:38 PM</h4>
+<h4 class="date">Wednesday, March 10, 2021 @ 07:17 PM</h4>
 
 </div>
 
@@ -448,7 +424,7 @@ summary {
 <h3>Load the Package(s)</h3>
 <pre class="r"><code>library(tidyverse)
 library(moments) # for skewness and kurtosis
-library(&quot;gridExtra&quot;) # for bonus end content
+library(gridExtra)   # for bonus end content
 library(grid)        # for bonus end content</code></pre>
 </div>
 <div id="problem-description" class="section level3">
@@ -464,15 +440,15 @@ library(grid)        # for bonus end content</code></pre>
 glimpse(anthro)</code></pre>
 <pre><code>Rows: 547
 Columns: 9
-$ gender   &lt;chr&gt; &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, …
-$ ideal    &lt;dbl&gt; 64, 64, 65, 63, 68, 64, NA, 65, 66, 63, 62, 60, 65, 68, 64, …
-$ height   &lt;dbl&gt; 59.75, 59.75, 60.00, 60.00, 60.00, 60.00, 60.50, 60.50, 61.0…
-$ armspan  &lt;dbl&gt; 58.5, 58.5, 61.0, 58.0, 62.0, 60.0, 60.0, 61.5, 63.0, 59.0, …
-$ forearm  &lt;dbl&gt; 15.00, 15.00, 16.00, 15.00, 15.00, 15.00, 15.50, 15.00, 16.5…
-$ hand     &lt;dbl&gt; 6.50, 6.50, 7.00, 6.25, 6.00, 6.00, 5.50, 7.00, 7.00, 6.00, …
-$ leg      &lt;dbl&gt; 16.00, 16.00, 16.00, 16.25, 18.00, 16.00, 17.75, 16.50, 19.0…
-$ foot     &lt;dbl&gt; 8.50, 8.50, 8.50, 9.50, 9.00, 8.00, 8.50, 8.50, 9.50, 8.75, …
-$ semester &lt;chr&gt; &quot;F15&quot;, &quot;F15&quot;, &quot;F13&quot;, &quot;F15&quot;, &quot;S13&quot;, &quot;Sum13&quot;, &quot;S14&quot;, &quot;Sum14&quot;, …</code></pre>
+$ gender   &lt;chr&gt; &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;…
+$ ideal    &lt;dbl&gt; 64, 64, 65, 63, 68, 64, NA, 65, 66, 63, 62, 60, 65, 68, 64, 6…
+$ height   &lt;dbl&gt; 59.75, 59.75, 60.00, 60.00, 60.00, 60.00, 60.50, 60.50, 61.00…
+$ armspan  &lt;dbl&gt; 58.5, 58.5, 61.0, 58.0, 62.0, 60.0, 60.0, 61.5, 63.0, 59.0, 6…
+$ forearm  &lt;dbl&gt; 15.00, 15.00, 16.00, 15.00, 15.00, 15.00, 15.50, 15.00, 16.50…
+$ hand     &lt;dbl&gt; 6.50, 6.50, 7.00, 6.25, 6.00, 6.00, 5.50, 7.00, 7.00, 6.00, 6…
+$ leg      &lt;dbl&gt; 16.00, 16.00, 16.00, 16.25, 18.00, 16.00, 17.75, 16.50, 19.00…
+$ foot     &lt;dbl&gt; 8.50, 8.50, 8.50, 9.50, 9.00, 8.00, 8.50, 8.50, 9.50, 8.75, 8…
+$ semester &lt;chr&gt; &quot;F15&quot;, &quot;F15&quot;, &quot;F13&quot;, &quot;F15&quot;, &quot;S13&quot;, &quot;Sum13&quot;, &quot;S14&quot;, &quot;Sum14&quot;, &quot;…</code></pre>
 <pre class="r"><code>head(anthro)</code></pre>
 <pre><code># A tibble: 6 x 9
   gender ideal height armspan forearm  hand   leg  foot semester
@@ -493,7 +469,7 @@ $ semester &lt;chr&gt; &quot;F15&quot;, &quot;F15&quot;, &quot;F13&quot;, &quot;
   count(gender)</code></pre>
 <pre><code># A tibble: 4 x 2
   gender     n
-* &lt;chr&gt;  &lt;int&gt;
+  &lt;chr&gt;  &lt;int&gt;
 1 both       1
 2 female   271
 3 male     273
@@ -519,7 +495,7 @@ $ semester &lt;chr&gt; &quot;F15&quot;, &quot;F15&quot;, &quot;F13&quot;, &quot;
   count(semester)</code></pre>
 <pre><code># A tibble: 11 x 2
    semester     n
- * &lt;chr&gt;    &lt;int&gt;
+   &lt;chr&gt;    &lt;int&gt;
  1 F13         62
  2 F15         64
  3 S13         72
@@ -549,7 +525,7 @@ anthro %&gt;%
   count(semester)</code></pre>
 <pre><code># A tibble: 11 x 2
    semester     n
- * &lt;fct&gt;    &lt;int&gt;
+   &lt;fct&gt;    &lt;int&gt;
  1 S13         72
  2 Sum13       26
  3 F13         62
@@ -822,23 +798,24 @@ attached base packages:
 
 other attached packages:
  [1] gridExtra_2.3   moments_0.14    forcats_0.5.1   stringr_1.4.0  
- [5] dplyr_1.0.4     purrr_0.3.4     readr_1.4.0     tidyr_1.1.2    
- [9] tibble_3.0.6    ggplot2_3.3.3   tidyverse_1.3.0
+ [5] dplyr_1.0.5     purrr_0.3.4     readr_1.4.0     tidyr_1.1.3    
+ [9] tibble_3.1.0    ggplot2_3.3.3   tidyverse_1.3.0
 
 loaded via a namespace (and not attached):
- [1] tidyselect_1.1.0  xfun_0.21         haven_2.3.1       colorspace_2.0-0 
- [5] vctrs_0.3.6       generics_0.1.0    htmltools_0.5.1.1 yaml_2.2.1       
- [9] utf8_1.1.4        rlang_0.4.10      pillar_1.4.7      glue_1.4.2       
-[13] withr_2.4.1       DBI_1.1.1         dbplyr_2.1.0      modelr_0.1.8     
-[17] readxl_1.3.1      lifecycle_0.2.0   munsell_0.5.0     gtable_0.3.0     
-[21] cellranger_1.1.0  rvest_0.3.6       evaluate_0.14     labeling_0.4.2   
-[25] knitr_1.31        fansi_0.4.2       highr_0.8         broom_0.7.4      
-[29] Rcpp_1.0.6        scales_1.1.1      backports_1.2.1   jsonlite_1.7.2   
-[33] farver_2.0.3      fs_1.5.0          hms_1.0.0         digest_0.6.27    
-[37] stringi_1.5.3     cli_2.3.0         tools_3.6.0       magrittr_2.0.1   
-[41] crayon_1.4.1      pkgconfig_2.0.3   ellipsis_0.3.1    xml2_1.3.2       
-[45] reprex_1.0.0      lubridate_1.7.9.2 assertthat_0.2.1  rmarkdown_2.6    
-[49] httr_1.4.2        rstudioapi_0.13   R6_2.5.0          compiler_3.6.0   </code></pre>
+ [1] tidyselect_1.1.0  xfun_0.21         bslib_0.2.4       haven_2.3.1      
+ [5] colorspace_2.0-0  vctrs_0.3.6       generics_0.1.0    htmltools_0.5.1.1
+ [9] yaml_2.2.1        utf8_1.1.4        rlang_0.4.10      jquerylib_0.1.3  
+[13] pillar_1.5.1      withr_2.4.1       glue_1.4.2        DBI_1.1.1        
+[17] dbplyr_2.1.0      modelr_0.1.8      readxl_1.3.1      lifecycle_1.0.0  
+[21] munsell_0.5.0     gtable_0.3.0      cellranger_1.1.0  rvest_0.3.6      
+[25] evaluate_0.14     labeling_0.4.2    knitr_1.31        fansi_0.4.2      
+[29] highr_0.8         broom_0.7.5       Rcpp_1.0.6        backports_1.2.1  
+[33] scales_1.1.1      debugme_1.1.0     jsonlite_1.7.2    farver_2.1.0     
+[37] fs_1.5.0          hms_1.0.0         digest_0.6.27     stringi_1.5.3    
+[41] cli_2.3.1         tools_3.6.0       magrittr_2.0.1    sass_0.3.1       
+[45] crayon_1.4.1      pkgconfig_2.0.3   ellipsis_0.3.1    xml2_1.3.2       
+[49] reprex_1.0.0      lubridate_1.7.10  assertthat_0.2.1  rmarkdown_2.7    
+[53] httr_1.4.2        rstudioapi_0.13   R6_2.5.0          compiler_3.6.0   </code></pre>
 </div>
 
 
@@ -868,7 +845,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

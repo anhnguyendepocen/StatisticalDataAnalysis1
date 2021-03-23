@@ -58,6 +58,10 @@ Create a table with frequency and proportions for the variable `category`.
 
 Some people appear in the dataset more than once. Create a frequency table for the variable `name` and display only those people who have won three or more times.
 
+```{r}
+
+```
+
 #### What is the overall age distribution?
 
 Compute sample size, mean, standard deviation, five-number summary, IQR, range, and lower and upper fences for `age` for all winners. Also create a boxplot for `age`.

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 ```{r loadpackages}
 library(tidyverse)
 library(moments) # for skewness and kurtosis
-library("gridExtra") # for bonus end content
+library(gridExtra)   # for bonus end content
 library(grid)        # for bonus end content
 ```
 
