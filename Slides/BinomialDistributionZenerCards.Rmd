@@ -192,28 +192,9 @@ knitr::include_graphics("images/joseph-banks-rhine.jpeg")
 <hr>
 
 
-## Probability of Your Result
-
-What is the probability of exactly the result you got on the test?
-
-```{r, eval = FALSE}
-x <- # your number of correct cards
-n <- 25
-p <- 1/5
-dbinom(x, n, p)
-```
-
-Calculating P(X = 7) for the results of my own Zener card test...
-
-```{r}
-x <- 7
-n <- 25
-p <- 1/5
-dbinom(x, n, p)
-```
-
-
 ## Visualizing Your Result
+
+I got a 7 "hits" (correct guesses) on my test.
 
 ```{r, fig.height = 3.5, echo = FALSE}
 n <- 25
@@ -233,6 +214,40 @@ ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
        x = "number of cards correctly identified",
        y = "probability") +
   theme_linedraw()
+```
+
+
+## Probability of Your Result #1
+
+I scored a 7 on my test. Using the binomial pmf, I get...
+
+$$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
+
+$$f(7) = P(X = 7) = {25 \choose 7}(1/5)^7(1 - 1/5)^{25 - 7} =$$
+
+$$\frac{25!}{7!(25 - 7)!}(1/5)^7(1/5)^{18} =$$
+
+$$480,000 \times 0.0000002305843 = 0.1108419$$
+
+
+## Probability of Your Result #2
+
+What is the probability of exactly the result you got on the test?
+
+```{r, eval = FALSE}
+x <- # your number of correct cards
+n <- 25
+p <- 1/5
+dbinom(x, n, p)
+```
+
+Calculating P(X = 7) for the results of my own Zener card test...
+
+```{r}
+x <- 7
+n <- 25
+p <- 1/5
+dbinom(x, n, p)
 ```
 
 
