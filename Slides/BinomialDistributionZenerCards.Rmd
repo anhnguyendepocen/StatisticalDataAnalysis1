@@ -277,6 +277,9 @@ The total area of the plotted figure is 1 and area corresponds to probability. C
 ggplot(distTable, aes(x = x, y = pdf)) +
   geom_col(fill = c(rep("skyblue", x), rep("red", n + 1 - x)), 
            color = "black", width = 1) +
+  geom_vline(xintercept = x - 0.5,
+             color = "black",
+             size = 2) +
   geom_label(x = x, 
              y = 0.09,
              hjust = 0,

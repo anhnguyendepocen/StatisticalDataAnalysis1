@@ -166,6 +166,9 @@ distTable <- tibble(x = 0:n,
 ggplot(distTable, aes(x = x, y = pdf)) +
   geom_col(fill = c(rep("skyblue", x), rep("red", n + 1 - x)), 
            color = "black", width = 1) +
+  geom_vline(xintercept = x - 0.5,
+             color = "black",
+             size = 2) +
   geom_label(x = x, 
              y = 0.09,
              hjust = 0,
@@ -209,25 +212,6 @@ $$P(X \geq x) = P(X > x - 1) = 1 - P(X \leq x - 1)$$
 Does this line of reasoning make sense to you? How would you determine this probability? 
 
 **ANSWER:**
-
-
-### Visualize My Test Result
-
-The total area of the plotted figure is 1 and area corresponds to probability. Calculate the lower area using the CDF and subtract from 1 to find the upper area.
-
-```{r}
-# the code is already set up for you
-# can you identify how it all works?
-
-ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
-  geom_col(fill = c(rep("skyblue", x), rep("red", n + 1 - x)), 
-           color = "black", width = 1) +
-  scale_x_continuous(breaks = seq(0, n, 1)) +
-  scale_y_continuous(breaks = seq(0, 1, .02)) +
-  labs(x = "number of cards correctly identified",
-       y = "probability") +
-  theme_linedraw()
-```
 
 
 ### Probability of Your Result *or Greater*
