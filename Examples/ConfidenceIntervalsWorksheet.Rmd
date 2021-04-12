@@ -1,0 +1,170 @@
+---
+title: "Confidence Intervals Class Worksheet"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: TRUE
+    toc_depth: 5
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### Packages Used
+
+```{r loadpackages}
+library(HistData)
+library(resampledata)
+library(tidyverse)
+library(moments)
+library(infer)
+```
+
+
+### Michelson's Light Speed Data
+
+Albert Michelson (1852–1931) was an American physicist known for his work on measuring the speed of light. He was the first American to win the Nobel Prize for science (1907). The `Michelson` dataset from the `HistData` package contains Michelson's measurements of the velocity of light in air, made which he made from June 5 to July 2, 1879 and reported in Michelson (1882). The data values + 299,000 are Michelson's measurements in km/sec. The currently accepted value of the speed of light in air is 299,702.547 km/sec.
+
+Michelson, A. A. (1882). "Experimental determination of the velocity of light made at the United States Naval Academy, Anapolis". *Astronomical Papers*, 1,109-145, U. S. Nautical Almanac Office.
+
+```{r}
+glimpse(Michelson)
+```
+
+#### Estimate Speed of Light
+
+Estimate the speed of light in air using the mean of the measurements.
+
+```{r}
+# bootstrap percentile interval
+
+```
+
+```{r}
+# bootstrap standard error interval (if appropriate)
+
+```
+
+```{r}
+# traditional confidence interval (if appropriate)
+
+```
+
+
+### Bangladesh Well Data
+
+Bangladesh has suffered the largest population-level poisoning in history. Millions of people were exposed to naturally-occurring arsenic from tube-wells. Ironically, the wells had been installed to provide cleaner water than surface sources in order to reduce gastrointestinal diseases. Studies in other countries with long-term exposure to arsenic in groundwater found that 1 in 10 people who consume water containing 500 micrograms of arsenic per liter (mcg/l) may ultimately die from cancers caused by arsenic. The `Bangladesh` dataset from the textbook *Mathematical Statistics with Resampling and R* (found in the `resampledata` package) contains a sample of tested wells.
+
+```{r}
+glimpse(Bangladesh)
+```
+
+#### Exploratory Data Analysis
+
+##### Mean, SD, Sample Size
+
+```{r}
+# summary stats
+
+```
+
+##### Histogram and Boxplot
+
+```{r}
+# histogram
+
+```
+
+```{r}
+# boxplot
+
+```
+
+##### Normal QQ Plot & Stats
+
+```{r}
+# normal QQ plot
+
+```
+
+```{r}
+# skewness and kurtosis
+
+```
+
+#### Estimate Mean Arsenic
+
+Estimate the mean level of arsenic in Bangladesh tube wells.
+
+```{r}
+# bootstrap percentile interval
+
+```
+
+```{r}
+# bootstrap standard error interval (if appropriate)
+
+```
+
+```{r}
+# traditional confidence interval (if appropriate)
+
+```
+
+#### Estimate Proportion #2
+
+Estimate the true proportion of wells that exceed 500 mcg/l.
+
+```{r}
+# bootstrap percentile interval
+
+```
+
+```{r}
+# bootstrap standard error interval (if appropriate)
+
+```
+
+#### Estimate Proportion #2
+
+The maximum level of arsenic permitted in wells in Bangladesh is 50 mcg/l. Estimate the true proportion of wells that exceed this legal limit.
+
+```{r}
+# bootstrap percentile interval
+
+```
+
+```{r}
+# bootstrap standard error interval (if appropriate)
+
+```
+
+#### Estimate Proportion #3
+
+World Health Organization (WHO) recommends that wells contain no more than 10 mcg/l of arsenic. Estimate the true proportion of wells that exceed this limit.
+
+```{r}
+# bootstrap percentile interval
+
+```
+
+```{r}
+# bootstrap standard error interval (if appropriate)
+
+```
+
+#### Question / Discussion
+
+There are about 5 million tube wells in Bangladesh (serving many millions of people). How many wells are potentially impacted by high levels of arsenic?
+
+**ANSWER:**
+
+
+***
+```{r}
+sessionInfo()
+```
