@@ -35,6 +35,39 @@ Michelson, A. A. (1882). "Experimental determination of the velocity of light ma
 glimpse(Michelson)
 ```
 
+#### Exploratory Data Analysis
+
+##### Mean, SD, Sample Size
+
+```{r}
+# summary stats
+
+```
+
+##### Histogram and Boxplot
+
+```{r}
+# histogram
+
+```
+
+```{r}
+# boxplot
+
+```
+
+##### Normal QQ Plot & Stats
+
+```{r}
+# normal QQ plot
+
+```
+
+```{r}
+# skewness and kurtosis
+
+```
+
 #### Estimate Speed of Light
 
 Estimate the speed of light in air using the mean of the measurements.
