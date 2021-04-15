@@ -1,0 +1,50 @@
+---
+title: "Project 2: READ ME"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: cosmo
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### READ.ME
+
+#### General Overview
+
+**There are three parts to this project. For each part, you have a choice between two similar types of problems.** Do one problem from each pair. Complete each of this project using the provided templates. Submit both the `.Rmd` and `.html` files as directed on AsULearn. You do not have to wait to submit all three problems at once. You can upload each one as you finish. The problems will be scored with a rubric similar to the one used for Project 1. The the problems are equally weighted in terms of points, but they may not all be of equal difficulty for any given student. Spelling and grammar count, as does `R` programming quality.
+
+#### General Plot Format
+
+All plots must have an informative title and descriptive axis labels. For example, do not use the default variable names that appear, as these are often ambiguous. Include units of measure in axis labels. Colors, themes, and other embellishments are optional and welcome, but if you choose to use them they should not detract from the clarity and usefulness of the plot.
+
+#### Support for Answers
+
+In all cases, support your discussion answers using specific values and information from summaries, models, and/or plots. Do not refer vaguely to "the numbers" in your discussions. Use appropriate statistical vocabulary, concepts, and quantities so that a reader who cannot see your models, summaries, or plots could still reasonably understand your explanations.
+
+#### Clean it All Up!
+
+While you are working on the various data analyses and visualizations, you may try methods or code that in the end are not correct or not needed for the problem. Before turning in your project, remove extraneous content. It makes your work difficult to interpret and grade otherwise. Also, if the code is genuinely irrelevant or (even worse) produces a wrong answer, you will be marked down.
+
+#### Claim Your Work!
+
+Do not forget to put your name in the `YAML` header. Even though you are submitting on AsULearn, I will be opening the `.html` files in a browser or the `.Rmd` files in RStudio, so it is helpful to have your name on these documents so student submissions do not get mixed up.
+
+#### Test the Knitting!
+
+Do not wait until the last minute to try knitting your document. Even if everything seems to work as you are completing problems, knitting can reveal previously undiscovered mistakes and missing packages, code, etc. Knit early, knit often! Knitting can also make your results easier to see at times. Some output and formatting looks different in RStudio than when knitted.
+
+#### Peer Collaboration
+
+You are welcome and encouraged to work on the project with your classmates in either of Dr. Thomley's sections, in terms of discussing problems, concepts, and code, or comparing answers to see if you have obtained similar results. You may **NOT** split the project into parts with someone else and put it all together at the end so that you have not engaged fully with all the problems, since this project is intended to assess **your** knowledge. If I suspect this has occurred and find proof of that fact, you will receive a zero on the project and be barred from future collaboration.
+
+**IF YOU ARE UNSURE ABOUT WHETHER SOMETHING IS ALLOWED OR HAVE ANY OTHER QUESTIONS, PLEASE ASK!**
+
+<hr>
+```{r}
+sessionInfo()
+```
+

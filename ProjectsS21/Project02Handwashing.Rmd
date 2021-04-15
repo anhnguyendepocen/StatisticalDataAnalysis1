@@ -1,0 +1,93 @@
+---
+title: "Project 2: Handwashing Hypothesis Test"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globalopts, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### **Packages/Data**
+
+Load the packages and dataset here. Use `glimpse` to visualize the structure of the dataset.
+
+Packages Used
+
+```{r}
+
+```
+
+Handwashing Data
+
+```{r}
+
+```
+
+***
+### **Problem**
+
+Postpartum infections, known puerperal fever or “childbed fever,” are caused by bacteria invading the female reproductive tract. Historically this has been a major cause of maternal mortality; some estimates suggest that the long-term rate has been about one maternal death for every 100 births. Hungarian physician Dr. Ignaz Semmelweis (1818–1965) developed a theory that the cause of the often-high mortality rates he observed in the hospital’s maternity clinics was contaminated hands among doctors who were delivering the babies. Louis Pasteur’s formal experiments on the relationship between germs and disease would not be carried out until the early 1860s, so the idea of contamination being the culprit was still a novel idea.
+
+Vienna General Hospital served a large volume of pregnant women in the early 1800s, so they added a second maternity clinic in 1833. By May 1841, the original Clinic 1 was served by doctors and medical students, while midwives and their students served at Clinic 2. Midwives only tended to birthing women, but medical students also spent time in the autopsy rooms examining cadavers. No one thought to wash their hands when going from the morgue to the delivery room, or between patients. Yikes! Semmelweis thought medical students were transferring some kind of “morbid poison” from cadavers to the maternity patients. The two clinics used the same techniques and Semmelweis had already gone through a meticulous process of eliminating most of the other possible clinic differences that could contribute to the problem. He introduced a handwashing protocol using chlorinated lime, which is now known to be a disinfectant, in June 1847. Data can be found in [`semmelweismonthly.csv`](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/semmelweismonthly.csv).
+
+#### **Part A**
+
+Each row in the dataset represents one month in Clinic 1. There are different numbers of cases in each month, which makes the raw counts difficult to compare, so we need to create a new variable called `mortalityrate` by dividing `deaths` by `births`. Also create a new variable called `handwashing` using the code `ifelse(date < as.Date("1847-06-01"), "dirty", "washed")` so we know which months used the handwashing protocol and which did not.
+
+```{r}
+
+```
+
+#### **Part B**
+
+Compute n, mean, and standard deviation for mortality rate for the `dirty` and `washed` groups. Also create a boxplot to compare the distributions of the two groups.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+#### **Part C**
+
+Conduct a permutation resampling test to determine whether the handwashing protocol *reduced* the maternal mortality rate, on average. Use $\alpha$ = 0.05. Be sure to specify your hypotheses.
+
+Ho:
+
+Ha:
+
+```{r}
+
+```
+
+Do you reject Ho? 
+
+ANSWER: 
+
+#### **Questions**
+
+Based on your decision about Ho in Part C, which type of error could you have made, Type I or Type II? Explain.
+
+**ANSWER:** 
+
+Unfortunately for Semmelweiss, his observations conflicted with the established scientific and medical opinions of the time, and he also failed to publish any firsthand accounts of his work. Even if he had, most of the statistical techniques you used to analyze his data had not yet been developed. Discuss the results of Semmelweiss's handwashing experiment using your exploratory data analysis and hypothesis test. Was handwashing effective? Explain.
+
+**ANSWER:** 
+
+
+***
+### Session Info
+
+**Names of Collaborators**:
+
+```{r}
+sessionInfo()
+```
+
