@@ -1,0 +1,371 @@
+---
+title: "Hypothesis Testing Class Worksheet"
+author: "Created by Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: TRUE
+    toc_depth: 5
+    code_folding: hide
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### Packages Used
+
+```{r loadpackages}
+library(resampledata) # Spruce dataset
+library(tidyverse)
+library(moments)
+library(infer)
+library(skimr)
+```
+
+### Spruce Dataset
+
+Black Spruce is a species of a slow-growing coniferous tree that grows across the northern part of North America. It is commonly found on wet organic soils. In a study conducted in the 1990s, a biologist interested in factors affecting the growth of the black Spruce planted seedlings on sites located in boreal peatlands in northern Manitoba, Canada. The data set `Spruce` contains a part of the data from the study. Seventy-two black Spruce seedlings were planted in four plots under varying conditions and their heights and diameters were measured over the course of 5 years. The researcher wanted to see whether the addition of fertilizer or the removal of competing from other plants (by weeding) affected the growth of these seedlings.
+
+Normally we would analyze these data using analysis of variance (ANOVA) in order to compare the four groupings formed by all combination of the two treatments (CC/FF, CC/NF, NC/FF, NC/NF). However, here we will be considering each treatment separately as an exercise in comparing two means. 
+
+* `Tree` = Tree number
+* `Competition` = C (competition) or CR (competition removed)
+* `Fertilizer` = F (fertilized) or NF (not fertilized)
+* `Height0` = Height (cm) of seedling at planting
+* `Height5` = Height (cm) of seedling at year 5
+* `Diameter0` = Diameter (cm) of seedling at planting
+* `Diameter5` = Diameter (cm) of seedling at year 5
+* `Ht.change` = Change (cm) in height
+* `Di.change` = Change (cm) in diameter
+
+```{r}
+spruce <- Spruce %>% 
+  mutate(Fertilizer = ifelse(Fertilizer == "F", "FF", "NF"), # since F = FALSE in R
+         Competition = ifelse(Competition == "C", "CC", "NC"))
+```
+
+<hr>
+
+### Addition of Fertilizer
+
+#### EDA
+
+##### Summaries
+
+```{r}
+spruce %>% 
+  group_by(Fertilizer) %>% 
+  skim_without_charts(Ht.change, Di.change)
+
+spruce %>% count(Fertilizer)
+```
+
+##### Boxplots
+
+```{r}
+ggplot(spruce, aes(x = Ht.change, color = Fertilizer)) +
+  geom_boxplot() +
+  labs(title = "height growth of black spruce trees over five years",
+       x = "change in height (cm)") +
+  theme_linedraw()
+```
+
+```{r}
+ggplot(spruce, aes(x = Di.change, color = Fertilizer)) +
+  geom_boxplot() +
+  labs(title = "diameter growth of black spruce trees over five years",
+       x = "change in diameter (cm)") +
+  theme_linedraw()
+```
+
+##### Histograms
+
+```{r}
+ggplot(spruce, aes(x = Ht.change)) +
+  geom_density() +
+  facet_wrap(~ Fertilizer) +
+  labs(title = "height growth of black spruce trees over five years",
+       x = "change in height (cm)") +
+  theme_linedraw()
+```
+
+```{r}
+ggplot(spruce, aes(x = Di.change)) +
+  geom_density() +
+  facet_wrap(~ Fertilizer) +
+  labs(title = "diameter growth of black spruce trees over five years",
+       x = "change in diameter (cm)") +
+  theme_linedraw()
+```
+
+##### Normality
+
+```{r}
+ggplot(spruce, aes(sample = Ht.change)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs(title = "change in height") +
+  facet_wrap(~ Fertilizer) +
+  theme_linedraw()
+
+spruce %>% 
+  group_by(Fertilizer) %>% 
+  summarize(skew = skewness(Ht.change),
+            kurt = kurtosis(Ht.change))
+```
+
+```{r}
+ggplot(spruce, aes(sample = Di.change)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs(title = "change in diameter") +
+  facet_wrap(~ Fertilizer) +
+  theme_linedraw()
+
+spruce %>% 
+  group_by(Fertilizer) %>% 
+  summarize(skew = skewness(Di.change),
+            kurt = kurtosis(Di.change))
+```
+
+<hr>
+
+#### Research Question #1
+
+Is the overall change in height different between the fertilized and unfertilized groups?
+
+##### Hypotheses
+
+Ho:
+
+Ha:
+
+##### Test Statistic
+
+```{r}
+
+```
+
+##### Null Distribution
+
+```{r}
+
+```
+
+##### Calculate P-Value
+
+```{r}
+
+```
+
+##### Decision & Answer
+
+Do you reject Ho?
+
+What is the answer to the question?
+
+
+<hr>
+
+#### Research Question #2
+
+Is the overall change in diameter different between the fertilized and unfertilized groups?
+
+##### Hypotheses
+
+Ho:
+
+Ha:
+
+##### Test Statistic
+
+```{r}
+
+```
+
+##### Null Distribution
+
+```{r}
+
+```
+
+##### Calculate P-Value
+
+```{r}
+
+```
+
+##### Decision & Answer
+
+Do you reject Ho?
+
+What is the answer to the question?
+
+
+<hr>
+
+### Competition Reduction
+
+#### EDA
+
+##### Summaries
+
+```{r}
+spruce %>% 
+  group_by(Competition) %>% 
+  skim_without_charts(Ht.change, Di.change)
+
+spruce %>% count(Competition)
+```
+
+##### Boxplots
+
+```{r}
+ggplot(spruce, aes(x = Ht.change, color = Competition)) +
+  geom_boxplot() +
+  labs(title = "height growth of black spruce trees over five years",
+       x = "change in height (cm)") +
+  theme_linedraw()
+```
+
+```{r}
+ggplot(spruce, aes(x = Di.change, color = Competition)) +
+  geom_boxplot() +
+  labs(title = "diameter growth of black spruce trees over five years",
+       x = "change in diameter (cm)") +
+  theme_linedraw()
+```
+
+##### Histograms
+
+```{r}
+ggplot(spruce, aes(x = Ht.change)) +
+  geom_density() +
+  facet_wrap(~ Competition) +
+  labs(title = "height growth of black spruce trees over five years",
+       x = "change in height (cm)") +
+  theme_linedraw()
+```
+
+```{r}
+ggplot(spruce, aes(x = Di.change)) +
+  geom_density() +
+  facet_wrap(~ Competition) +
+  labs(title = "diameter growth of black spruce trees over five years",
+       x = "change in diameter (cm)") +
+  theme_linedraw()
+```
+
+##### Normality
+
+```{r}
+ggplot(spruce, aes(sample = Ht.change)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~ Competition) +
+  labs(title = "change in height") +
+  theme_linedraw()
+
+spruce %>% 
+  group_by(Competition) %>% 
+  summarize(skew = skewness(Ht.change),
+            kurt = kurtosis(Ht.change))
+```
+
+```{r}
+ggplot(spruce, aes(sample = Di.change)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs(title = "change in diameter") +
+  facet_wrap(~ Competition) +
+  theme_linedraw()
+
+spruce %>% 
+  group_by(Competition) %>% 
+  summarize(skew = skewness(Di.change),
+            kurt = kurtosis(Di.change))
+```
+
+<hr>
+
+#### Question #3
+
+Did eliminating competition produce a greater change in height than the control condition? 
+
+##### Hypotheses
+
+Ho:
+
+Ha:
+
+##### Test Statistic
+
+```{r}
+
+```
+
+##### Null Distribution
+
+```{r}
+
+```
+
+##### Calculate P-Value
+
+```{r}
+
+```
+
+##### Decision & Answer
+
+Do you reject Ho?
+
+What is the answer to the question?
+
+
+<hr>
+
+#### Question #4
+
+Did eliminating competition produce a greater change in diameter than the control condition?  
+
+##### Hypotheses
+
+Ho:
+
+Ha:
+
+##### Test Statistic
+
+```{r}
+
+```
+
+##### Null Distribution
+
+```{r}
+
+```
+
+##### Calculate P-Value
+
+```{r}
+
+```
+
+##### Decision & Answer
+
+Do you reject Ho?
+
+What is the answer to the question?
+
+
+<hr>
+
+```{r}
+sessionInfo()
+```
+
