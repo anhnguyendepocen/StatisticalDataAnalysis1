@@ -56,6 +56,7 @@ spruce <- Spruce %>%
 ##### Summaries
 
 ```{r}
+# skimr has the function skim_without_charts()
 spruce %>% 
   group_by(Fertilizer) %>% 
   skim_without_charts(Ht.change, Di.change)
@@ -85,7 +86,7 @@ ggplot(spruce, aes(x = Di.change, color = Fertilizer)) +
 
 ```{r}
 ggplot(spruce, aes(x = Ht.change)) +
-  geom_density() +
+  geom_histogram(bins = 10) +
   facet_wrap(~ Fertilizer) +
   labs(title = "height growth of black spruce trees over five years",
        x = "change in height (cm)") +
@@ -94,7 +95,7 @@ ggplot(spruce, aes(x = Ht.change)) +
 
 ```{r}
 ggplot(spruce, aes(x = Di.change)) +
-  geom_density() +
+  geom_histogram(bins = 10) +
   facet_wrap(~ Fertilizer) +
   labs(title = "diameter growth of black spruce trees over five years",
        x = "change in diameter (cm)") +
@@ -243,7 +244,7 @@ ggplot(spruce, aes(x = Di.change, color = Competition)) +
 
 ```{r}
 ggplot(spruce, aes(x = Ht.change)) +
-  geom_density() +
+  geom_histogram(bins = 10) +
   facet_wrap(~ Competition) +
   labs(title = "height growth of black spruce trees over five years",
        x = "change in height (cm)") +
@@ -252,7 +253,7 @@ ggplot(spruce, aes(x = Ht.change)) +
 
 ```{r}
 ggplot(spruce, aes(x = Di.change)) +
-  geom_density() +
+  geom_histogram(bins = 10) +
   facet_wrap(~ Competition) +
   labs(title = "diameter growth of black spruce trees over five years",
        x = "change in diameter (cm)") +
