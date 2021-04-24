@@ -1,0 +1,89 @@
+---
+title: "Project 2: Normal Problem"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+```{r globalopts, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```
+
+### **Packages**
+
+Load the packages here.
+
+```{r}
+
+```
+
+***
+### **Problem**
+
+Most IQ tests, Like the widely used Wechsler Adult Intelligence Scale (WAIS), have scores are standardized to be approximately normally distributed with a mean of 100 and a standard deviation of 15. Scores are often classified into descriptive ranges. For example, suggested categories for the WAIS are:
+
+* 130+ = upper extreme
+* 120-129 = well above average
+* 110-119 = high average
+* 90-109 = average
+* 80-89 = low average
+* 70-79 = well below average
+* 69 and below = lower extreme
+
+Since the normal distribution is continuous and IQ scores are generally expressed as discrete (rounded) values, we need to think of the boundaries between categories extending to the halfway point between categories (e.g., 119.5-129.5 = well above average) in order to appropriately calculate probabilities. This kind of adjustment is known as a *continuity correction*.
+
+#### **Part A**
+
+Plot the probability distribution function (pdf) of the normal curve representing the WAIS distribution, with tick marks at μ, μ ± 1σ, μ ± 2σ, μ ± 3σ, and μ ± 4σ, like the example plot in our class normal distribution slides.
+
+```{r}
+
+```
+
+#### **Part B**
+
+If the WAIS distribution fairly represents the population of US adults, what percentage would fall into the "average" IQ category? 
+
+```{r}
+
+```
+
+#### **Part C**
+
+To enlist in the US Army, an applicant must score 31 or higher on the Armed Forces Qualification Test (AFQT). Studies have shown that scores on this test is have a strong correlation with IQ, and a 31 roughly translates to an IQ of 92. If the WAIS distribution fairly represents the population of US adults, what percentage would not be able to achieve a 31 on the AFQT? 
+
+```{r}
+
+```
+
+#### **Part D**
+
+A person has to get a score of 132 or greater on the WAIS in order to join the high IQ society Mensa. If the WAIS distribution fairly represents the population of US adults, what percentage would qualify? (Apply the continuity correction.)
+
+```{r}
+
+``` 
+
+#### **Questions**
+
+Cattell's Culture Fair Intelligence Test (CFIT) has a mean of 100 like the WAIS, but is scaled to a standard deviation of 24. Logically, would the CFIT score required to get into Mensa be lower, higher, or the same as the WAIS? Explain your reasoning.
+
+**ANSWER:** 
+
+Technically, the tails of the normal distribution extend to ± infinity. However, IQ scores cannot be negative. In fact, most IQ tests are only validated for scores between 40 and 160. If that is true, how can we use a normal model for IQ scores? Discuss.
+
+**ANSWER:** 
+
+
+***
+### Session Info
+
+**Names of Collaborators**:
+
+```{r}
+sessionInfo()
+```
+
