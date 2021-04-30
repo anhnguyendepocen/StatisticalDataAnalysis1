@@ -29,7 +29,7 @@ library(kableExtra)
 
 Albert Michelson (1852–1931) was an American physicist known for his work on measuring the speed of light. He was the first American to win the Nobel Prize for science (1907). The `Michelson` dataset from the `HistData` package contains Michelson's measurements of the velocity of light in air, made which he made from June 5 to July 2, 1879 and reported in Michelson (1882). The data values + 299,000 are Michelson's measurements in km/sec. The currently accepted value of the speed of light in air is 299,702.547 km/sec.
 
-Michelson, A. A. (1882). "Experimental determination of the velocity of light made at the United States Naval Academy, Anapolis". *Astronomical Papers*, 1,109-145, U. S. Nautical Almanac Office.
+Michelson, A. A. (1882). "Experimental determination of the velocity of light made at the United States Naval Academy, Annapolis". *Astronomical Papers*, 1,109-145, U. S. Nautical Almanac Office.
 
 ```{r}
 glimpse(Michelson)
@@ -121,9 +121,9 @@ ggplot(bootstrap_distribution, aes(sample = stat)) +
 
 The shape of the sampling distribution of $\bar{x}$ seems approximately normal, based on both of the plots above. This should not be surprising, since the original sample seems to be approximately normal and we have a relative large sample size, so the Central Limit Theorem applies.
 
-#### **95% Percentile Interval for $\bar{x}$**
+#### **95% Percentile Interval for $\mu$**
 
-Find the middle 95% of the bootstrap distribution to create an interval estimate.
+Find the middle 95% of the bootstrap distribution to create an interval estimate for the trye mean $\mu$.
 
 ```{r}
 percentile_ci <- bootstrap_distribution %>% 
