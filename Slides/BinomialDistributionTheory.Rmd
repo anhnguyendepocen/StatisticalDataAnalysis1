@@ -31,14 +31,14 @@ Refer to "[
 ##
 
 * Slides 02-03 &mdash; Materials & Index
-* Slides 05-06 &mdash;  Bernoulli Trials
-* Slides 08-10 &mdash;  Some Simple Simulations
-* Slides 12-25 &mdash;  Binomial Distribution Model
+* Slides 04-06 &mdash;  Bernoulli Trials
+* Slides 07-10 &mdash;  Some Simple Simulations
+* Slides 11-25 &mdash;  Binomial Distribution Model
    + Slides 12-18 &mdash;  Probability Mass Function (pmf)
    + Slides 19-21  &mdash; Cumulative Distribution Function (CDF)
    + Slides 22-25  &mdash; Tabulated and Graphical Representions
-* Slides 27-28  &mdash; Expected Value (Mean) and Variance 
-* Slides 30-32  &mdash; J.B. Statistics Videos
+* Slides 26-28  &mdash; Expected Value (Mean) and Variance 
+* Slides 39-32  &mdash; J.B. Statistics Videos
    + Intro to the Bernoulli Distribution
    + Intro to the Binomial Distribution
    + Deriving E[X] and Var[X] of the Binomial

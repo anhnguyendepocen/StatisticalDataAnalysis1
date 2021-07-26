@@ -28,6 +28,22 @@ Refer to "[
 4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
 
 
+##
+
+* Slides 02-03 &mdash; Materials & Index
+* Slides 04-13 &mdash; Calculating PMF and CDF
+   + Slides 05-07 &mdash; General Model and PMF
+   + Slides 08-13 &mdash; CDF and Inverse CDF
+* Slides 14-19 &mdash; Simulating a Binomial
+   + Slides 15-17 &mdash; Generating and Tabulating
+   + Slides 18-19 &mdash; Plotting and Summarizing
+* Slides 20-28 &mdash; Creating a Distribution “Table” and Plots
+   + Slides 21-25 &mdash; General Algorithm and `R` Code
+   + Slides 26-28 &mdash; Example for 20 Fair Coin Flips
+
+
+# Calculating PMF and CDF
+
 ## The Binomial Model
 
 $$X \sim Bin(n,p)$$
@@ -181,6 +197,8 @@ qbinom(0.75, 3, 0.7)   # 75th percentile of X ~ Bin(3, 0.7)
 ```
 
 
+# Simulating a Binomial
+
 ## Generating Random Values
 
 To generate a (*pseudo*)random sample from a given binomial distribution, use `rbinom(n, size, prob)`. The binomial $n$ parameter is called *size* in `R`'s functions, because $n$ is standard notation for sample size in statistics. 
@@ -208,7 +226,7 @@ binom_sample %>%
 
 ## Empirical vs Theoretical
 
-Values obtained from experimentation, including simulation, are **empirical** values. Empirical proportions can be used to estimate unknown probabilities.
+Values obtained from experimentation, including simulation, are *empirical* values. Empirical proportions can be used to estimate unknown probabilities.
 
 ```{r}
 binom_sample %>% 
@@ -229,6 +247,8 @@ ggplot(binom_sample, aes(x = x)) + geom_bar()   # add formatting
 
 ## Summarizing Random Samples
 
+How close are these values to the theoretical E[X] and Var[X]?
+
 ```{r}
 binom_sample %>% 
   summarize(samples = n(),
@@ -238,6 +258,8 @@ binom_sample %>%
 
 As the sample size approaches $\infty$, sample mean $\bar{x}$ and sample variance $s^2$ converge to E[X] and Var[X]. Because of this, we can use simulation / random sampling to *estimate* parameters when the underlying distribution is not known. 
 
+
+# Distribution “Table” and Plots of the PMF and CDF
 
 ## Creating a Distribution "Table"
 
@@ -253,7 +275,7 @@ distTable
 You can format for digits and appearance with [`kable()`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html).
 
 
-## Creating a Plot of the pmf
+## Creating a Plot of the PMF
 
 The plot uses the $n$ and $p$ we input and `distTable` object.
 
@@ -291,7 +313,7 @@ ggplot(distTable, aes(x = x, y = pmf)) +
 
 ## Creating a Plot of the CDF
 
-The plot uses the distribution table we created.
+The plot uses the $n$ and $p$ we input and `distTable` object.
 
 ```{r, eval = FALSE}
 breakby <- 1   # choose spacing for the x-axis tick marks

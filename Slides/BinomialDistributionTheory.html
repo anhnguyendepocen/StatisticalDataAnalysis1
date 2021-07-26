@@ -190,7 +190,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Monday, July 26, 2021 @ 12:20 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Monday, July 26, 2021 @ 02:01 PM</p>
           </hgroup>
   </slide>
 
@@ -212,17 +212,17 @@ slide:not(.current) .plotly.html-widget{
 
 <ul>
 <li>Slides 02-03 — Materials &amp; Index</li>
-<li>Slides 05-06 — Bernoulli Trials</li>
-<li>Slides 08-10 — Some Simple Simulations</li>
-<li>Slides 12-25 — Binomial Distribution Model
+<li>Slides 04-06 — Bernoulli Trials</li>
+<li>Slides 07-10 — Some Simple Simulations</li>
+<li>Slides 11-25 — Binomial Distribution Model
 
 <ul>
 <li>Slides 12-18 — Probability Mass Function (pmf)</li>
 <li>Slides 19-21 — Cumulative Distribution Function (CDF)</li>
 <li>Slides 22-25 — Tabulated and Graphical Representions</li>
 </ul></li>
-<li>Slides 27-28 — Expected Value (Mean) and Variance</li>
-<li>Slides 30-32 — J.B. Statistics Videos
+<li>Slides 26-28 — Expected Value (Mean) and Variance</li>
+<li>Slides 39-32 — J.B. Statistics Videos
 
 <ul>
 <li>Intro to the Bernoulli Distribution</li>
@@ -263,12 +263,12 @@ slide:not(.current) .plotly.html-widget{
 <pre class = 'prettyprint lang-r'>coin &lt;- c(&quot;head&quot;, &quot;tail&quot;)   # create the coin model
 sample(coin, size = 1)  # default equal probability</pre>
 
-<pre >[1] &quot;head&quot;</pre>
+<pre >[1] &quot;tail&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>die &lt;- 1:6   # create the die model integers 1 to 6
 sample(die, size = 1)   # default equal probability</pre>
 
-<pre >[1] 1</pre>
+<pre >[1] 6</pre>
 
 <pre class = 'prettyprint lang-r'># an unfair coin with a 70% chance of heads
 sample(coin, size = 1, prob = c(0.7, 1 - 0.7))</pre>
@@ -281,16 +281,16 @@ sample(coin, size = 1, prob = c(0.7, 1 - 0.7))</pre>
 
 <pre class = 'prettyprint lang-r'>sum(flips == &quot;head&quot;)   # number of heads in the sample</pre>
 
-<pre >[1] 120</pre>
+<pre >[1] 116</pre>
 
 <pre class = 'prettyprint lang-r'>mean(flips == &quot;head&quot;)   # fraction of heads in the sample</pre>
 
-<pre >[1] 0.48</pre>
+<pre >[1] 0.464</pre>
 
 <pre class = 'prettyprint lang-r'>rolls &lt;- sample(die, size = 250, replace = TRUE)
 mean(rolls == 1)   # fraction of 1&#39;s in the sample</pre>
 
-<pre >[1] 0.16</pre>
+<pre >[1] 0.184</pre>
 
 </article></slide><slide class=""><hgroup><h2>The <code>prob</code> Package</h2></hgroup><article  id="the-prob-package">
 
