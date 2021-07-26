@@ -22,22 +22,23 @@ These slides are not meant to be standalone information. You should take notes t
 
 * Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
 * DataCamp [Foundations of Probability in R](https://learn.datacamp.com/courses/foundations-of-probability-in-r)
+* [Bernoulli and Binomial Distributions: `R` Code](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionRCode.html) class slides
 
 Refer to "[
 4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
 
 
-## Sections Index
+##
 
-* Slides 02-03 Materials & Index
-* Slides 05-06 Bernoulli Trials
-* Slides 08-10 Some Simple Simulations
-* Slides 12-25 Binomial Distribution Model
-   + Slides 12-18 Probability Mass Function (pmf)
-   + Slides 19-21 Cumulative Distribution Function (CDF)
-   + Slides 22-25 Tabulated and Graphical Representions
-* Slides 27-28 Expected Value (Mean) and Variance 
-* Slides 30-32 J.B. Statistics Videos
+* Slides 02-03 &mdash; Materials & Index
+* Slides 05-06 &mdash;  Bernoulli Trials
+* Slides 08-10 &mdash;  Some Simple Simulations
+* Slides 12-25 &mdash;  Binomial Distribution Model
+   + Slides 12-18 &mdash;  Probability Mass Function (pmf)
+   + Slides 19-21  &mdash; Cumulative Distribution Function (CDF)
+   + Slides 22-25  &mdash; Tabulated and Graphical Representions
+* Slides 27-28  &mdash; Expected Value (Mean) and Variance 
+* Slides 30-32  &mdash; J.B. Statistics Videos
    + Intro to the Bernoulli Distribution
    + Intro to the Binomial Distribution
    + Deriving E[X] and Var[X] of the Binomial
@@ -49,7 +50,7 @@ Refer to "[
 
 A Bernoulli trial is a single random event that has two possible outcomes, often called "success" and "failure". 
 
-A "success" is not necessarily a good/positive outcome, but it is the outcome of interest for a given problem or scenario.
+A "success" is not necessarily a good/positive outcome, but it is the outcome of interest for a given problem.
 
 Classic examples include a coin flip where a head is considered success and a tail is considered failure, or one roll of a standard 6-sided die where 1 is success and any other number is failure.
 
@@ -65,7 +66,7 @@ Other probability distributions, such as the binomial distribution and geometric
 
 A necessary condition for the binomial and geometric random variables is that all trials are *independent* with constant chance of success $p$ from trial to trial.
 
-Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html) (1654-1705), who made important advancements in probability theory, including an early version of the law of large numbers. Many appeared in his posthumously-published book [_Ars Conjectandi_](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (_The Art of Conjecturing_).
+Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html) (1654-1705), who made important advancements in probability theory, including an early version of the **law of large numbers**. Many appeared in his posthumously-published book [_Ars Conjectandi_](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (_The Art of Conjecturing_).
 
 
 # Some Simple Simulations
@@ -83,9 +84,8 @@ sample(die, size = 1)   # default equal probability
 ```
 
 ```{r}
-# an unfair coin with 70% chance of heads
-p <- 0.7
-sample(coin, size = 1, prob = c(p, 1 - p))
+# an unfair coin with a 70% chance of heads
+sample(coin, size = 1, prob = c(0.7, 1 - 0.7))
 ```
 
 
@@ -161,7 +161,7 @@ tibble(coinflips, heads) %>%
 
 <p></p>
 
-The number of trials determines what is *possible*. The value of $p$ determines what is *probable*.
+The number of trials determines what is *possible*. The value of $p$ determines what is *probable*, or how often things occur.
 
 
 ## Binomial Coefficient and "Choose"
@@ -178,9 +178,9 @@ The rest of the pmf calculates probability for a single sequence.
 
 $$p^x(1-p)^{n-x}$$
 
-If a coin is fair, then the probability of getting a head or a tail is the same ($p = q = 0.5$), and so the probability of any sequence of 3 flips is $0.5 \times 0.5 \times 0.5 = 0.125$.
+If a coin is fair, then the probability of flipping a head or a tail is the same ($p = q = 0.5$), and so the probability of any sequence of 3 flips is $0.5 \times 0.5 \times 0.5 = 0.125$.
 
-Suppose we have an unfair coin with a 70% chance of getting a head ($p = 0.7$). What is the probability of any *one* sequence of 2 heads (and 1 tail) in 3 flips?
+Suppose we have an unfair coin with a 70% chance of flipping a head ($p = 0.7$). What is the probability of any *one* sequence of 2 heads (and 1 tail) in 3 flips?
 
 $$p \times p \times q = 0.7 \times 0.7 \times (1 - 0.7) = $$
 $$(0.7)^2(1-0.7)^{3-2} = (0.7)^2(0.3)^1 = 0.147$$
@@ -214,11 +214,11 @@ The most likely outcome is 2 heads. The second most likely is 3. No surprise, gi
 
 The probability of a given number of successes *or fewer* is found using the distribution's CDF.
 
-$$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
+$$F(x) = P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i}p^i(1-p)^{n-i}$$
 
 For example, when $x = 2$, we would calculate the following...
 
-$$F(2) = \sum\limits_{i=0}^2 f(x) = f(0) + f(1) + f(2)$$
+$$F(2) = P(X \leq x) = \sum\limits_{i=0}^2 f(x) = f(0) + f(1) + f(2)$$
 
 For large $x$ this can get quite tedious. Unfortunately there is no shortcut, but we have approximations and technology!
 
@@ -366,7 +366,7 @@ The expected value of our biased coin is the *long-run* average number of heads 
 n <- 3 
 p <- 0.7
 n * p   # expected value
-n * p * (1-p)   # variance, take square root for SD
+n * p * (1 - p)   # variance, take square root for SD
 ```
 
 Can you calculate the E[X] and Var[X] for 3 flips of the fair coin?
@@ -374,16 +374,17 @@ Can you calculate the E[X] and Var[X] for 3 flips of the fair coin?
 
 # JB Statistics Videos
 
-## Intro to the Bernoulli Distribution
+##
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bT1p5tJwn_0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bT1p5tJwn_0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 
-## Intro to the Binomial Distribution
+##
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qIzC1-9PwQo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-## Deriving E[X] and Var[X] of Bin
+##
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8fqkQRjcR1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+

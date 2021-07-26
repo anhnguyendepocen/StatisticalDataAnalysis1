@@ -70,7 +70,7 @@ dbinom(0:3, 3, 0.5)   # compute all probabilities at the same time
 Notice that when $p = 0.5$, the distribution is symmetric. Refer to $f(x)$ and see if you can figure out why that is true.
 
 
-## Calculating the CDF F(x)
+## Calculating the CDF or F(x)
 
 The `pbinom()` function is used to calculate CDF probabilities for the binomial distribution. It also accepts vector inputs.
 
@@ -149,7 +149,7 @@ plotA <- ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
                      breaks = seq(0, 1, 0.1),
                      expand = c(0,0)) +
   geom_label(vjust = 0, nudge_y = 0.05) +
-  labs(title = sprintf("pbinom(2, 3, 0.7) = %1.3f", pbinom(2, 3, 0.7)),
+  labs(title = sprintf("P(X ≤ 2) = pbinom(2, 3, 0.7) = %1.3f", pbinom(2, 3, 0.7)),
        x = "x = number of successes",
        y = "dbinom(x, n, p) = probability") +
   theme_linedraw()
@@ -160,7 +160,7 @@ plotB <- ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
                      breaks = seq(0, 1, 0.1),
                      expand = c(0,0)) +
   geom_label(vjust = 0, nudge_y = 0.05) +
-  labs(title = sprintf("pbinom(2, 3, 0.7, lower.tail = FALSE) = %1.3f", pbinom(2, 3, 0.7, F)),
+  labs(title = sprintf("P(X > 2) = pbinom(2, 3, 0.7, lower.tail = FALSE) = %1.3f", pbinom(2, 3, 0.7, F)),
        x = "x = number of successes",
        y = "dbinom(x, n, p) = probability") +
   theme_linedraw()
@@ -263,7 +263,7 @@ breakby <- 1   # choose spacing for the x-axis tick marks
 ggplot(distTable, aes(x = x, y = pmf)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
-  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+  labs(title = sprintf("PMF of X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
        y = "f(x)") +
   theme_linedraw()
@@ -282,7 +282,7 @@ breakby <- 1   # choose spacing for the x-axis tick marks
 ggplot(distTable, aes(x = x, y = pmf)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
-  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+  labs(title = sprintf("PMF of X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
        y = "f(x)") +
   theme_linedraw()
@@ -299,7 +299,7 @@ breakby <- 1   # choose spacing for the x-axis tick marks
 ggplot(distTable, aes(x = x, y = CDF)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
-  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+  labs(title = sprintf("CFD of X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
        y = "F(x)") +
   theme_linedraw()
@@ -318,7 +318,7 @@ breakby <- 1   # choose spacing for the x-axis tick marks
 ggplot(distTable, aes(x = x, y = CDF)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
-  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+  labs(title = sprintf("CDF of X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
        y = "F(x)") +
   theme_linedraw()
@@ -345,7 +345,7 @@ breakby <- 2
 ggplot(distTable, aes(x = x, y = pmf)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
-  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+  labs(title = sprintf("PMF of X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
        y = "f(x)") +
   theme_linedraw()
@@ -362,7 +362,7 @@ breakby <- 2
 ggplot(distTable, aes(x = x, y = CDF)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
-  labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
+  labs(title = sprintf("CDF of X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
        y = "F(x)") +
   theme_linedraw()

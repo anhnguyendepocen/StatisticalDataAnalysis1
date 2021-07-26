@@ -31,33 +31,33 @@ Refer to "[
 
 Statistical methods help us transform raw data into information that provides knowledge and helps us make decisions.
 
-* We use **descriptive statistics** to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have. 
+* We use *descriptive statistics* to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have. 
 
-* In **inferential statistics**, we use sample data to generalize or make predictions about the larger population from which the sample was selected.
+* In *inferential statistics*, we use sample data to generalize or make predictions about the larger population from which the sample was selected.
 
 * Data visualization is important for exploration, verification, and presentation of statistical results.
 
-The **distribution** of a population/variable describes its possible values and how often those values occur.
+The *distribution* of a population/variable describes its possible values and how often those values occur.
 
 
 ##
 
 <p style="text-align:center;"><img src="images/analysispyramid.jpg" width = 650></p>
 
-We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the **appropriate context**.
+We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the *appropriate context*.
 
 
 ## Population vs. Sample
 
 A sample is a subset selected from some larger population of interest. The  population is defined by the research question(s) being investigated. It is the complete set of people, objects, or entities in which we are interested.
 
-* A summary measure for a **population** is called a **parameter**.
+* A summary measure for a *population* is called a *parameter*.
 
-* A summary measure for a **sample** is called a **statistic**.
+* A summary measure for a *sample* is called a *statistic*.
 
-Sample statistics are used to **estimate** population parameters.
+Sample statistics are used to *estimate* population parameters.
 
-If we collect data from a whole population, it is called a **census**.
+If we collect data from a whole population, it is called a *census*.
 
 The defining characteristics of theoretical probability models are also parameters. For example, the mean $\mu$ and variance $\sigma^2$ in a Normal model or $n$ and $p$ in a Binomial.
 
@@ -76,23 +76,23 @@ general parameter |$\theta$  |$\widehat{\theta}$
 
 ## Dataset Structure
 
-* A **variable** is some characteristic of interest that can differ between individuals in a population.
+* A *variable* is some characteristic of interest that can differ between individuals in a population.
 
-* An observational unit (or **observation**) is a single individual, object, or entity about which collect data, regarding one or more of its characteristics (variables).
+* An observational unit (or *observation*) is a single individual, object, or entity about which collect data, regarding one or more of its characteristics (variables).
 
 * An observation may be called a case, subject, or participant.
 
 * Ideally, each observational unit has a value for each variable.
 
-A **dataset** is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call `tidy` data. 
+A *dataset* is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call *tidy* data. 
 
 
-## `tidy` Data
+## Tidy Data
 
 <p style="text-align:center"><img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" width = 775><br>
 Tidy data graphic from [R for Data Science: Tidy Data](http://r4ds.had.co.nz/tidy-data.html)</p>
 
-<p>Most of the data we will work with in STT3850 is already in `tidy` format, though there may be missing data and other issues we have to address before conducting analyses.</p>
+<p>Most of the data we will work with in STT3850 is already in tidy format, though there may be missing data and other issues we have to address before conducting analyses.</p>
 
 <p>Real life data is usually far messier and can require a great deal of tidying, but is beyond the scope of this class.</p>
 
@@ -116,7 +116,7 @@ How might these correspond to different classes of vectors in `R`?
 
 ## Vectors in `R`
 
-Atomic vectors can contain only one type of data, while lists can contain more than one type. A data frame or `tibble` (dataset) in `R` is a special types of list. NULL is the absence of a vector.
+Atomic vectors can contain only one type of data, while lists can contain more than one type. A *data frame* or *tibble* (dataset) in `R` is a special types of list. NULL is the absence of a vector.
 
 <p style="text-align:center;"><img src="https://d33wubrfki0l68.cloudfront.net/1d1b4e1cf0dc5f6e80f621b0225354b0addb9578/6ee1c/diagrams/data-structures-overview.png" width = 350><br>
 Vector graphic from [R for Data Science: Vectors](http://r4ds.had.co.nz/tidy-data.html)</p>
@@ -124,31 +124,31 @@ Vector graphic from [R for Data Science: Vectors](http://r4ds.had.co.nz/tidy-dat
 
 ## Exploring Your Dataset
 
-Before doing any kind of data modeling or inference, you need to examine your dataset and become familiar with its structure and contents---this is **exploratory data analysis (EDA)**.
+Before doing any kind of data modeling or inference, you need to examine your dataset and become familiar with its structure and contents---this is *exploratory data analysis (EDA)*.
 
 John Tukey (1915–2000), author of the seminal book *Exploratory Data Analysis* (1977), referred to EDA as numerical, counting, and graphical detective work. He is also credited with introducing the now-familiar terms "bit" and "software" while working with early computers at Bell Labs.
 
-We will be using the `dplyr` and `ggplot2` packages for our EDA. These tools, `readr`, and more are part of the `tidyverse`.
+We will be using the *dplyr* and *ggplot2* packages for EDA. These tools, *readr*, and more are part of the *tidyverse*.
 
 Many different types of data files can be read into `R`. We will be using primarily CSV files read from `R` packages or the web using their URL. Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains many datasets.
 
 
 ## Reading Data into `R`
 
-A data frame or `tibble` is a two dimensional structure or array in `R`. It is a special case of a list where each component (column) has equal length and can contain a different variable type.
+A data frame or tibble is a two dimensional structure or array in `R`. It is a special case of a list where each component (column) has equal length and can contain a different variable type.
 
 The base `R` function `read.csv()` function can read a CSV file into `R` using a URL and convert it to a data frame. 
 
-The `readr` package or `tidyverse` package contains a function `read_csv()`. It converts the input CSV into a `tibble`.
+The readr package or tidyverse package contains a function `read_csv()`. It converts the input CSV into a tibble.
 
-A `tibble` is a somewhat tweaked version of a data frame found in the `tidyverse`. For more, see [R for Data Science: Tibbles](http://r4ds.had.co.nz/tibbles.html).
+A tibble is a somewhat tweaked version of a data frame found in the tidyverse. For more, see [R for Data Science: Tibbles](http://r4ds.had.co.nz/tibbles.html).
 
 We will use `read_csv()` because it does not impose structure we might not want on vectors; e.g., character variables do not automatically get turned into factors.
 
 
 ## Example Dataset
 
-Consider the `Spruce` dataset from Chapter 1 of Chihara, L. and Hesterberg, T. (2018). *Mathematical Statistics with Resampling and R, Second Ed.* We can find it in the `resampledata` package, which contains all the textbook datasets.
+Consider the `Spruce` dataset from Chapter 1 of Chihara, L. and Hesterberg, T. (2018). *Mathematical Statistics with Resampling and R, Second Ed.* We can find it in the **resampledata** package, which contains all the textbook datasets.
 
 ```{r}
 library(resampledata)
@@ -158,7 +158,7 @@ head(Spruce, 3) # view the first two observations
 
 ## Structure vs. Glimpse
 
-The `str()` function is part of base `R` code, while the `glimpse()` function comes from the `tidyverse` package `dplyr`.
+The `str()` function is part of base `R` code, while the `glimpse()` function comes from the tidyverse package dplyr.
 
 ```{r}
 str(Spruce)
@@ -177,7 +177,7 @@ glimpse(Spruce)
 
 ## Other Useful Functions
 
-Other functions for exploring dataset structure are given below. Use them on the `Spruce` dataset. What information does each one give you?
+Other functions for exploring dataset structure are given below. Use them `Spruce`. What information does each one give you?
 
 * `attributes()`
 * `dim()`
@@ -209,10 +209,10 @@ draftdata <- read.csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU
 
 Try exploring some of the datasets presented and discussed in Chapter 1 of your  *Mathematical Statistics with Resampling and `R`, Second Edition* textbook. 
 
-You can find instructor-created data files on our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page. The packages `datasets`, `HistData`, `mosaicData`, `MASS`, and others contain additional datasets. You can check for data in any package using `data(package="packagename")`. Results will pop up in a tab in RStudio's Source pane.
+You can find instructor-created data files on our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page. `R` packages such as *datasets*, *HistData*, *mosaicData*, *MASS*, and others have datasets. You can check for data in any package using `data(package="packagename")`. A listing will pop up in a tab in RStudio's Source pane.
 
 ```{r, eval = FALSE}
-data(package="resampledata")
+data(package = "resampledata")
 ```
 
 Practice so that you become proficient in loading a dataset and determining its structure so you can start the important work of transforming raw data into useful information and knowledge.

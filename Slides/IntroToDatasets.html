@@ -188,7 +188,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">July 23, 2021 @ 01:13 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">July 26, 2021 @ 12:35 PM</p>
           </hgroup>
   </slide>
 
@@ -211,12 +211,12 @@ slide:not(.current) .plotly.html-widget{
 <p>Statistical methods help us transform raw data into information that provides knowledge and helps us make decisions.</p>
 
 <ul>
-<li><p>We use <strong>descriptive statistics</strong> to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have.</p></li>
-<li><p>In <strong>inferential statistics</strong>, we use sample data to generalize or make predictions about the larger population from which the sample was selected.</p></li>
+<li><p>We use <em>descriptive statistics</em> to summarize datasets or make comparisons between datasets, but we do not go beyond the data we actually have.</p></li>
+<li><p>In <em>inferential statistics</em>, we use sample data to generalize or make predictions about the larger population from which the sample was selected.</p></li>
 <li><p>Data visualization is important for exploration, verification, and presentation of statistical results.</p></li>
 </ul>
 
-<p>The <strong>distribution</strong> of a population/variable describes its possible values and how often those values occur.</p>
+<p>The <em>distribution</em> of a population/variable describes its possible values and how often those values occur.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
 
@@ -226,20 +226,20 @@ slide:not(.current) .plotly.html-widget{
 
 </p>
 
-<p>We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the <strong>appropriate context</strong>.</p>
+<p>We process raw data with statistical methods to extract usable information. But that is only part of the story! To give statistical results meaning and learn from them, we must interpet them in the <em>appropriate context</em>.</p>
 
 </article></slide><slide class=""><hgroup><h2>Population vs. Sample</h2></hgroup><article  id="population-vs.-sample">
 
 <p>A sample is a subset selected from some larger population of interest. The population is defined by the research question(s) being investigated. It is the complete set of people, objects, or entities in which we are interested.</p>
 
 <ul>
-<li><p>A summary measure for a <strong>population</strong> is called a <strong>parameter</strong>.</p></li>
-<li><p>A summary measure for a <strong>sample</strong> is called a <strong>statistic</strong>.</p></li>
+<li><p>A summary measure for a <em>population</em> is called a <em>parameter</em>.</p></li>
+<li><p>A summary measure for a <em>sample</em> is called a <em>statistic</em>.</p></li>
 </ul>
 
-<p>Sample statistics are used to <strong>estimate</strong> population parameters.</p>
+<p>Sample statistics are used to <em>estimate</em> population parameters.</p>
 
-<p>If we collect data from a whole population, it is called a <strong>census</strong>.</p>
+<p>If we collect data from a whole population, it is called a <em>census</em>.</p>
 
 <p>The defining characteristics of theoretical probability models are also parameters. For example, the mean \(\mu\) and variance \(\sigma^2\) in a Normal model or \(n\) and \(p\) in a Binomial.</p>
 
@@ -278,15 +278,15 @@ slide:not(.current) .plotly.html-widget{
 </article></slide><slide class=""><hgroup><h2>Dataset Structure</h2></hgroup><article  id="dataset-structure">
 
 <ul>
-<li><p>A <strong>variable</strong> is some characteristic of interest that can differ between individuals in a population.</p></li>
-<li><p>An observational unit (or <strong>observation</strong>) is a single individual, object, or entity about which collect data, regarding one or more of its characteristics (variables).</p></li>
+<li><p>A <em>variable</em> is some characteristic of interest that can differ between individuals in a population.</p></li>
+<li><p>An observational unit (or <em>observation</em>) is a single individual, object, or entity about which collect data, regarding one or more of its characteristics (variables).</p></li>
 <li><p>An observation may be called a case, subject, or participant.</p></li>
 <li><p>Ideally, each observational unit has a value for each variable.</p></li>
 </ul>
 
-<p>A <strong>dataset</strong> is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call <code>tidy</code> data.</p>
+<p>A <em>dataset</em> is a collection of data values for the observations and variables in a study (e.g., survey or experiment). A common way to arrange data is to put variables in columns and observations in rows. This is what we call <em>tidy</em> data.</p>
 
-</article></slide><slide class=""><hgroup><h2><code>tidy</code> Data</h2></hgroup><article  id="tidy-data">
+</article></slide><slide class=""><hgroup><h2>Tidy Data</h2></hgroup><article  id="tidy-data">
 
 <p style="text-align:center">
 
@@ -296,7 +296,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>
 
-Most of the data we will work with in STT3850 is already in <code>tidy</code> format, though there may be missing data and other issues we have to address before conducting analyses.
+Most of the data we will work with in STT3850 is already in tidy format, though there may be missing data and other issues we have to address before conducting analyses.
 
 </p>
 
@@ -328,7 +328,7 @@ Real life data is usually far messier and can require a great deal of tidying, b
 
 </article></slide><slide class=""><hgroup><h2>Vectors in <code>R</code></h2></hgroup><article  id="vectors-in-r">
 
-<p>Atomic vectors can contain only one type of data, while lists can contain more than one type. A data frame or <code>tibble</code> (dataset) in <code>R</code> is a special types of list. NULL is the absence of a vector.</p>
+<p>Atomic vectors can contain only one type of data, while lists can contain more than one type. A <em>data frame</em> or <em>tibble</em> (dataset) in <code>R</code> is a special types of list. NULL is the absence of a vector.</p>
 
 <p style="text-align:center;">
 
@@ -338,29 +338,29 @@ Real life data is usually far messier and can require a great deal of tidying, b
 
 </article></slide><slide class=""><hgroup><h2>Exploring Your Dataset</h2></hgroup><article  id="exploring-your-dataset">
 
-<p>Before doing any kind of data modeling or inference, you need to examine your dataset and become familiar with its structure and contents—this is <strong>exploratory data analysis (EDA)</strong>.</p>
+<p>Before doing any kind of data modeling or inference, you need to examine your dataset and become familiar with its structure and contents—this is <em>exploratory data analysis (EDA)</em>.</p>
 
 <p>John Tukey (1915–2000), author of the seminal book <em>Exploratory Data Analysis</em> (1977), referred to EDA as numerical, counting, and graphical detective work. He is also credited with introducing the now-familiar terms &ldquo;bit&rdquo; and &ldquo;software&rdquo; while working with early computers at Bell Labs.</p>
 
-<p>We will be using the <code>dplyr</code> and <code>ggplot2</code> packages for our EDA. These tools, <code>readr</code>, and more are part of the <code>tidyverse</code>.</p>
+<p>We will be using the <em>dplyr</em> and <em>ggplot2</em> packages for EDA. These tools, <em>readr</em>, and more are part of the <em>tidyverse</em>.</p>
 
 <p>Many different types of data files can be read into <code>R</code>. We will be using primarily CSV files read from <code>R</code> packages or the web using their URL. Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>class data files</a> page contains many datasets.</p>
 
 </article></slide><slide class=""><hgroup><h2>Reading Data into <code>R</code></h2></hgroup><article  id="reading-data-into-r">
 
-<p>A data frame or <code>tibble</code> is a two dimensional structure or array in <code>R</code>. It is a special case of a list where each component (column) has equal length and can contain a different variable type.</p>
+<p>A data frame or tibble is a two dimensional structure or array in <code>R</code>. It is a special case of a list where each component (column) has equal length and can contain a different variable type.</p>
 
 <p>The base <code>R</code> function <code>read.csv()</code> function can read a CSV file into <code>R</code> using a URL and convert it to a data frame.</p>
 
-<p>The <code>readr</code> package or <code>tidyverse</code> package contains a function <code>read_csv()</code>. It converts the input CSV into a <code>tibble</code>.</p>
+<p>The readr package or tidyverse package contains a function <code>read_csv()</code>. It converts the input CSV into a tibble.</p>
 
-<p>A <code>tibble</code> is a somewhat tweaked version of a data frame found in the <code>tidyverse</code>. For more, see <a href='http://r4ds.had.co.nz/tibbles.html' title=''>R for Data Science: Tibbles</a>.</p>
+<p>A tibble is a somewhat tweaked version of a data frame found in the tidyverse. For more, see <a href='http://r4ds.had.co.nz/tibbles.html' title=''>R for Data Science: Tibbles</a>.</p>
 
 <p>We will use <code>read_csv()</code> because it does not impose structure we might not want on vectors; e.g., character variables do not automatically get turned into factors.</p>
 
 </article></slide><slide class=""><hgroup><h2>Example Dataset</h2></hgroup><article  id="example-dataset">
 
-<p>Consider the <code>Spruce</code> dataset from Chapter 1 of Chihara, L. and Hesterberg, T. (2018). <em>Mathematical Statistics with Resampling and R, Second Ed.</em> We can find it in the <code>resampledata</code> package, which contains all the textbook datasets.</p>
+<p>Consider the <code>Spruce</code> dataset from Chapter 1 of Chihara, L. and Hesterberg, T. (2018). <em>Mathematical Statistics with Resampling and R, Second Ed.</em> We can find it in the <strong>resampledata</strong> package, which contains all the textbook datasets.</p>
 
 <pre class = 'prettyprint lang-r'>library(resampledata)
 head(Spruce, 3) # view the first two observations</pre>
@@ -376,7 +376,7 @@ head(Spruce, 3) # view the first two observations</pre>
 
 </article></slide><slide class=""><hgroup><h2>Structure vs. Glimpse</h2></hgroup><article  id="structure-vs.-glimpse">
 
-<p>The <code>str()</code> function is part of base <code>R</code> code, while the <code>glimpse()</code> function comes from the <code>tidyverse</code> package <code>dplyr</code>.</p>
+<p>The <code>str()</code> function is part of base <code>R</code> code, while the <code>glimpse()</code> function comes from the tidyverse package dplyr.</p>
 
 <pre class = 'prettyprint lang-r'>str(Spruce)</pre>
 
@@ -412,7 +412,7 @@ $ Di.change   &lt;dbl&gt; 5.415625, 4.009375, 3.914062, 4.812500, 4.612500, 5.81
 
 </article></slide><slide class=""><hgroup><h2>Other Useful Functions</h2></hgroup><article  id="other-useful-functions">
 
-<p>Other functions for exploring dataset structure are given below. Use them on the <code>Spruce</code> dataset. What information does each one give you?</p>
+<p>Other functions for exploring dataset structure are given below. Use them <code>Spruce</code>. What information does each one give you?</p>
 
 <ul>
 <li><code>attributes()</code></li>
@@ -440,9 +440,9 @@ $ Di.change   &lt;dbl&gt; 5.415625, 4.009375, 3.914062, 4.812500, 4.612500, 5.81
 
 <p>Try exploring some of the datasets presented and discussed in Chapter 1 of your <em>Mathematical Statistics with Resampling and <code>R</code>, Second Edition</em> textbook.</p>
 
-<p>You can find instructor-created data files on our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>class data files</a> page. The packages <code>datasets</code>, <code>HistData</code>, <code>mosaicData</code>, <code>MASS</code>, and others contain additional datasets. You can check for data in any package using <code>data(package=&quot;packagename&quot;)</code>. Results will pop up in a tab in RStudio’s Source pane.</p>
+<p>You can find instructor-created data files on our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>class data files</a> page. <code>R</code> packages such as <em>datasets</em>, <em>HistData</em>, <em>mosaicData</em>, <em>MASS</em>, and others have datasets. You can check for data in any package using <code>data(package=&quot;packagename&quot;)</code>. A listing will pop up in a tab in RStudio’s Source pane.</p>
 
-<pre class = 'prettyprint lang-r'>data(package=&quot;resampledata&quot;)</pre>
+<pre class = 'prettyprint lang-r'>data(package = &quot;resampledata&quot;)</pre>
 
 <p>Practice so that you become proficient in loading a dataset and determining its structure so you can start the important work of transforming raw data into useful information and knowledge.</p></article></slide>
 
