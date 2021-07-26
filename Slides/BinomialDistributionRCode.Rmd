@@ -22,7 +22,7 @@ These slides are not meant to be standalone information. You should take notes t
 
 * Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
 * DataCamp [Foundations of Probability in R](https://learn.datacamp.com/courses/foundations-of-probability-in-r)
-* [Bernoulli and Binomial Distributions: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionTheory.html#1) class slides
+* [Bernoulli and Binomial Distributions: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionTheory.html) class slides
 
 Refer to "[
 4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
@@ -43,11 +43,11 @@ $$F(x)=P(X \leq x) = \sum\limits_{i=0}^x f(x) = \sum\limits_{i=0}^x {n \choose i
 
 $$E[X] = np \text{ and }Var[X] = np(1-p)$$
 
-## Calculating the pmf f(x)
+## Calculating the pmf or f(x)
 
 The `dbinom()` function is used to calculate pmf probabilities for the binomial distribution.
 
-$P(X = x)$ = $f(x,n,p)$ = `dbinom(x, size, prob)` 
+$P(X = x)$ = $f(x,n,p) \rightarrow$ `dbinom(x, size, prob)` in `R`
 
 Consider our biased coin example where $X \sim Bin(3, 0.7)$.
 
@@ -64,7 +64,7 @@ The `dbinom` function can accept vectors as input. It loops over all values in t
 Recall that in `R` we can easily make a vector of integers using the `:` operator, without needing to use `c()`.
 
 ```{r}
-dbinom(0:3, 3, 0.5)
+dbinom(0:3, 3, 0.5)   # compute all probabilities at the same time
 ```
 
 Notice that when $p = 0.5$, the distribution is symmetric. Refer to $f(x)$ and see if you can figure out why that is true.
@@ -74,7 +74,7 @@ Notice that when $p = 0.5$, the distribution is symmetric. Refer to $f(x)$ and s
 
 The `pbinom()` function is used to calculate CDF probabilities for the binomial distribution. It also accepts vector inputs.
 
-$P(X \leq x)$ = $F(x,n,p)$ = `pbinom(q, size, prob)`
+$P(X \leq x)$ = $F(x,n,p) \rightarrow$ `pbinom(q, size, prob)` in `R`
 
 ```{r}
 pbinom(0:3, 3, 0.7)   # biased coin, x = {0, 1, 2, 3} heads
@@ -91,35 +91,35 @@ The CDF for the fair coin also has a kind of symmetry to it. Why is that the cas
 
 ```{r}
 pbinom(2, 3, 0.7)    # probability of 0, 1, or 2 heads
-1 - pbinom(2, 3, 0.7)   # probability of > 2 = 3 heads
+1 - pbinom(2, 3, 0.7)   # probability of more than 2 heads
 pbinom(2, 3, 0.7, lower.tail = FALSE)   # better code
 ```
 
-Pay close attention to $<$ vs. $\leq$ and $>$ vs. $\geq$ with `pbinom()`. We are dealing with discrete values in the binomial distribution.
+Pay close attention to $<$ vs $\leq$ and $>$ vs $\geq$ with `pbinom()`. We are dealing with discrete sample spaces here.
 
 
-## Lower and Upper Tails Relationship
+##
 
 For three tosses of our fair coin...
 
 ```{r}
-pbinom(0:3, 3, 0.5) # P(X <= x) for all possible x
+pbinom(0:3, 3, 0.5)   # P(X <= x) for all possible x
 ```
 
 ```{r}
-pbinom(0:3, 3, 0.5, lower.tail = FALSE) # P(X > x) for all possible x
+pbinom(0:3, 3, 0.5, lower.tail = FALSE)   # P(X > x)
 ```
 
 ```{r}
 pbinom(0:3, 3, 0.5) + pbinom(0:3, 3, 0.5, lower.tail = FALSE)
 ```
 
-The two halves sum to 1. Voila! Can you picture it on the plot?
+The two halves sum to 1. Voila! Can you picture it on a graph?
 
 
 ##
 
-Can you show on the plot the difference between `lower.tail = TRUE` and `lower.tail = FALSE` for a given $x$?
+Can you show on the pmf graph below the difference between `lower.tail = TRUE` and `lower.tail = FALSE` for a given $x$?
 
 ```{r, echo = FALSE}
 distTable <- tibble(x = 0:3, 
@@ -132,17 +132,48 @@ ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
                      expand = c(0,0)) +
   geom_label(vjust = 0, nudge_y = 0.05) +
   labs(title = "Probability Mass Function of X ~ Bin(3, 0.7)",
-       x = "number of successes",
-       y = "probability") +
+       x = "x = number of successes",
+       y = "dbinom(x, n, p) = probability") +
   theme_linedraw()
+```
+
+
+## 
+
+The areas included in the calculation are shaded in solid black.
+
+```{r, echo = FALSE, fig.height = 5}
+plotA <- ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+  geom_col(fill = c("black", "black", "black", "skyblue"), color = "black", width = 0.75) +
+  scale_y_continuous(limits = c(0, 1.05),
+                     breaks = seq(0, 1, 0.1),
+                     expand = c(0,0)) +
+  geom_label(vjust = 0, nudge_y = 0.05) +
+  labs(title = sprintf("pbinom(2, 3, 0.7) = %1.3f", pbinom(2, 3, 0.7)),
+       x = "x = number of successes",
+       y = "dbinom(x, n, p) = probability") +
+  theme_linedraw()
+
+plotB <- ggplot(distTable, aes(x = x, y = pdf, label = pdf)) +
+  geom_col(fill = c("skyblue", "skyblue", "skyblue", "black"), color = "black", width = 0.75) +
+  scale_y_continuous(limits = c(0, 1.05),
+                     breaks = seq(0, 1, 0.1),
+                     expand = c(0,0)) +
+  geom_label(vjust = 0, nudge_y = 0.05) +
+  labs(title = sprintf("pbinom(2, 3, 0.7, lower.tail = FALSE) = %1.3f", pbinom(2, 3, 0.7, F)),
+       x = "x = number of successes",
+       y = "dbinom(x, n, p) = probability") +
+  theme_linedraw()
+
+gridExtra::grid.arrange(plotA, plotB)
 ```
 
 
 ## Calculating the Inverse of the CDF
 
-Until now, we have been finding probabilities associated with given values of $x$. What if we have the probability and need to find $x$? For a given quantile (percentile), the inverse CDF gives the value of $x$ that makes $P(X \leq x) = quantile$ true.
+Until now, we have been finding probabilities associated with given values of $x$. What if we have the probability and need $x$? For a given quantile (percentile), the inverse CDF gives us the $x$ that makes $P(X \leq x) = quantile$ (approximately) true.
 
-$q^{th}$ percentile = $F^{-1}(x,n,p)$ = `qbinom(p, size, prob)` 
+$q^{th}$ percentile = $F^{-1}(x,n,p) \rightarrow$ `qbinom(p, size, prob)` in `R`
 
 ```{r}
 qbinom(0.25, 3, 0.7)   # 25th percentile of X ~ Bin(3, 0.7)
@@ -152,7 +183,7 @@ qbinom(0.75, 3, 0.7)   # 75th percentile of X ~ Bin(3, 0.7)
 
 ## Generating Random Values
 
-To generate a (*pseudo*)random sample from a given binomial distribution, use `rbinom (n, size, prob)`. The binomial $n$ parameter is called *size* in `R`'s functions, because $n$ is standard notation for sample size in statistics. 
+To generate a (*pseudo*)random sample from a given binomial distribution, use `rbinom(n, size, prob)`. The binomial $n$ parameter is called *size* in `R`'s functions, because $n$ is standard notation for sample size in statistics. 
 
 Simulate 20 random values from biased coin $X \sim Bin(3, 0.7)$
 
@@ -160,12 +191,12 @@ Simulate 20 random values from biased coin $X \sim Bin(3, 0.7)$
 rbinom(20, 3, 0.7)   
 ```
 
-Each output value in this random sample is $x$ = *number of heads* (successes) in a sequence of 3 flips. We have 20 replicates of the coin flipping "experiment".
+Each output value in this random sample is $x$ = *number of heads* (successes) in a sequence of 3 flips. We have 20 replicates of the "experiment" of flipping 3 coins.
 
 
 ## Tabulating Random Samples
 
-For a discrete random variable with a small number of possible values, we can tabulate the simulated values. How close are the proportions to the theoretical probabilities?
+For a discrete random variable with a small number of possible values, we can tabulate the simulated values. How close are the simulated proportions to the theoretical probabilities?
 
 ```{r}
 binom_sample <- tibble(x = rbinom(10^5, 3, 0.7))   # 100,000 samples
@@ -173,6 +204,19 @@ binom_sample %>%
   count(x) %>% 
   mutate(proportion = prop.table(n))
 ```
+
+
+## Empirical vs Theoretical
+
+Values obtained from experimentation, including simulation, are **empirical** values. Empirical proportions can be used to estimate unknown probabilities.
+
+```{r}
+binom_sample %>% 
+  count(x) %>% 
+  mutate(empirical   = prop.table(n),
+         theoretical = dbinom(0:3, 3, 0.7))
+```
+
 
 ## Plotting Random Samples
 
@@ -183,14 +227,13 @@ ggplot(binom_sample, aes(x = x)) + geom_bar()   # add formatting
 ```
 
 
-
 ## Summarizing Random Samples
 
 ```{r}
 binom_sample %>% 
   summarize(samples = n(),
-            mean_x = mean(x),
-            var_x  = var(x))
+            mean_x  = mean(x),
+            var_x   = var(x))
 ```
 
 As the sample size approaches $\infty$, sample mean $\bar{x}$ and sample variance $s^2$ converge to E[X] and Var[X]. Because of this, we can use simulation / random sampling to *estimate* parameters when the underlying distribution is not known. 
@@ -201,18 +244,18 @@ As the sample size approaches $\infty$, sample mean $\bar{x}$ and sample varianc
 ```{r}
 n <- 3     # enter n
 p <- 0.7   # enter p
-distTable <- tibble(x = 0:n, 
-                    pmf = dbinom(0:n, n, p), 
-                    CDF = pbinom(0:n, n, p)) 
+distTable <- tibble(x   = 0:n,               # x = {0, 1, ... , n}
+                    pmf = dbinom(x, n, p),   # calculate for all x
+                    CDF = pbinom(x, n, p))   # calculate for all x
 distTable
 ```
 
-You can format for digits and appearance with `kable()`.
+You can format for digits and appearance with [`kable()`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html).
 
 
 ## Creating a Plot of the pmf
 
-The plot uses the distribution table we created.
+The plot uses the $n$ and $p$ we input and `distTable` object.
 
 ```{r, eval = FALSE}
 breakby <- 1   # choose spacing for the x-axis tick marks
@@ -222,10 +265,11 @@ ggplot(distTable, aes(x = x, y = pmf)) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
-       y = "f(x)")
+       y = "f(x)") +
+  theme_linedraw()
 ```
 
-Add additional formatting or themes as desired.
+You can add other formatting or change themes as desired.
 
 To display more decimal places for $p$ in the plot title, change %1.1f to %1.*decimalplaces*f in the code (e.g., %1.3f for three).
 
@@ -240,7 +284,8 @@ ggplot(distTable, aes(x = x, y = pmf)) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
-       y = "f(x)")
+       y = "f(x)") +
+  theme_linedraw()
 ```
 
 
@@ -256,7 +301,8 @@ ggplot(distTable, aes(x = x, y = CDF)) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
-       y = "F(x)")
+       y = "F(x)") +
+  theme_linedraw()
 ```
 
 Add additional formatting or themes as desired.
@@ -274,45 +320,52 @@ ggplot(distTable, aes(x = x, y = CDF)) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
-       y = "F(x)")
+       y = "F(x)") +
+  theme_linedraw()
 ```
 
 
 ## Example for 20 Fair Coin Flips
 
 ```{r}
-n <- 20    # enter n
-p <- 0.5   # enter p
-distTable <- tibble(x = 0:n, 
-                    pmf = dbinom(0:n, n, p), 
-                    CDF = pbinom(0:n, n, p)) 
-head(distTable, 4)
+n <- 20
+p <- 0.5
+distTable <- tibble(x   = 0:n,
+                    pmf = dbinom(x, n, p),
+                    CDF = pbinom(x, n, p))
+head(distTable, 6)   # the full table is too large for the slide
 ```
 
 
 ## The pmf Plot
 
 ```{r, echo = FALSE}
-breakby <- 2   # choose spacing for the x-axis tick marks
+breakby <- 2
 
 ggplot(distTable, aes(x = x, y = pmf)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
-       y = "f(x)")
+       y = "f(x)") +
+  theme_linedraw()
 ```
+
+For the future: What shape does this (approximately) look like?
 
 
 ## The CDF Plot
 
 ```{r, echo = FALSE}
-breakby <- 2   # choose spacing for the x-axis tick marks
+breakby <- 2
 
 ggplot(distTable, aes(x = x, y = CDF)) +
   geom_col(fill = "skyblue", color = "black", width = 1) +
   scale_x_continuous(breaks = seq(from = 0, to = n, by = breakby)) +
   labs(title = sprintf("X ~ Bin(%1.0f, %1.1f)", n, p),
        x = "x", 
-       y = "F(x)")
+       y = "F(x)") +
+  theme_linedraw()
 ```
+
+For the future: Notice the symmetric logistic (S-curve) shape.
