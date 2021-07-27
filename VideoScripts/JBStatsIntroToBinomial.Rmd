@@ -3,12 +3,13 @@ title: "An Introduction to the Binomial Distribution"
 subtitle: "Companion `R` Code for JB Statistics Video Lesson"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
-output: 
-  html_document: 
+output:
+  html_document:
     theme: yeti
     highlight: textmate
-    toc: TRUE
+    toc: true
     toc_depth: 4
+    self_contained: false
 ---
 
 ```{r globaloptions, include = FALSE}
@@ -16,7 +17,17 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 ```
 
 ***
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qIzC1-9PwQo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```{r, echo = FALSE}
+vembedr::embed_youtube(
+id = "qIzC1-9PwQo",
+width = NULL,
+height = 400,
+ratio = c("16by9", "4by3"),
+frameborder = 0,
+allowfullscreen = TRUE,
+query = NULL
+)
+```
 ***
 
 ### **Packages Used**
@@ -328,6 +339,19 @@ pmfplot <- ggplot(pmf, aes(x = x, y = probability)) +
 pmfplot
 ```
 
+### **Simulating Bernoulli Trials**
+
+Previously you saw that you can simulate Bernoulli trials using the function `rbernoulli(n, p)` (purrr package). The parameter `n` in this case is the number of times you want to repeat the Bernoulli process. In other words, it is the number of flips. For example, if we want fifty flips of a fair coin, we could use the following code. The output is a logical vector with `TRUE` for a success.
+
+```{r}
+rbernoulli(50, 0.5)
+```
+
+We can also perform this simulation with the `rbinom(n, size, prob)` function. In this case, the `size` parameter is set to 1, for one trial. In this sense, the Bernoulli is a special case of Binomial with `n = 1`. The output is an integer vector with `1` for a success.
+
+```{r}
+rbinom(50, 1, 0.5)
+```
 
 ***
 ```{r}
