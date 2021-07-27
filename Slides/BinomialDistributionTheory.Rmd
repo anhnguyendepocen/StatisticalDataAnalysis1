@@ -28,7 +28,7 @@ Refer to "[
 4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
 
 
-##
+## Index
 
 * Slides 02-03 &mdash; Materials & Index
 * Slides 04-06 &mdash;  Bernoulli Trials
@@ -38,11 +38,7 @@ Refer to "[
    + Slides 19-21  &mdash; Cumulative Distribution Function (CDF)
    + Slides 22-25  &mdash; Tabulated and Graphical Representions
 * Slides 26-28  &mdash; Expected Value (Mean) and Variance 
-* Slides 39-32  &mdash; J.B. Statistics Videos
-   + Intro to the Bernoulli Distribution
-   + Intro to the Binomial Distribution
-   + Deriving E[X] and Var[X] of the Binomial
-   
+
 
 # Bernoulli Trials
 
@@ -370,21 +366,3 @@ n * p * (1 - p)   # variance, take square root for SD
 ```
 
 Can you calculate the E[X] and Var[X] for 3 flips of the fair coin?
-
-
-# JB Statistics Videos
-
-##
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bT1p5tJwn_0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
-
-
-##
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qIzC1-9PwQo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-##
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8fqkQRjcR1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-

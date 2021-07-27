@@ -28,7 +28,7 @@ Refer to "[
 4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
 
 
-##
+## Index
 
 * Slides 02-03 &mdash; Materials & Index
 * Slides 04-13 &mdash; Calculating PMF and CDF
