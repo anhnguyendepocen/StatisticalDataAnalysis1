@@ -24,9 +24,6 @@ These slides are not meant to be standalone information. You should take notes t
 * DataCamp [Foundations of Probability in R](https://learn.datacamp.com/courses/foundations-of-probability-in-r)
 * [Bernoulli and Binomial Distributions: `R` Code](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionRCode.html) class slides
 
-Refer to "[
-4.1 ioslides presentation](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)" in [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/) if you are interested in creating R Markdown slides.
-
 
 ## Index
 

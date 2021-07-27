@@ -190,7 +190,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Monday, July 26, 2021 @ 11:14 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Tuesday, July 27, 2021 @ 03:41 PM</p>
           </hgroup>
   </slide>
 
@@ -205,8 +205,6 @@ slide:not(.current) .plotly.html-widget{
 <li>DataCamp <a href='https://learn.datacamp.com/courses/foundations-of-probability-in-r' title=''>Foundations of Probability in R</a></li>
 <li><a href='https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionRCode.html' title=''>Bernoulli and Binomial Distributions: <code>R</code> Code</a> class slides</li>
 </ul>
-
-<p>Refer to &ldquo;<a href='https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html' title=''>4.1 ioslides presentation</a>&rdquo; in <a href='https://bookdown.org/yihui/rmarkdown/' title=''><em>R Markdown: The Definitive Guide</em></a> if you are interested in creating R Markdown slides.</p>
 
 </article></slide><slide class=""><hgroup><h2>Index</h2></hgroup><article  id="index">
 
@@ -261,7 +259,7 @@ sample(coin, size = 1)  # default equal probability</pre>
 <pre class = 'prettyprint lang-r'>die &lt;- 1:6   # create the die model integers 1 to 6
 sample(die, size = 1)   # default equal probability</pre>
 
-<pre >[1] 3</pre>
+<pre >[1] 6</pre>
 
 <pre class = 'prettyprint lang-r'># an unfair coin with a 70% chance of heads
 sample(coin, size = 1, prob = c(0.7, 1 - 0.7))</pre>
@@ -274,16 +272,16 @@ sample(coin, size = 1, prob = c(0.7, 1 - 0.7))</pre>
 
 <pre class = 'prettyprint lang-r'>sum(flips == &quot;head&quot;)   # number of heads in the sample</pre>
 
-<pre >[1] 138</pre>
+<pre >[1] 143</pre>
 
 <pre class = 'prettyprint lang-r'>mean(flips == &quot;head&quot;)   # fraction of heads in the sample</pre>
 
-<pre >[1] 0.552</pre>
+<pre >[1] 0.572</pre>
 
 <pre class = 'prettyprint lang-r'>rolls &lt;- sample(die, size = 250, replace = TRUE)
 mean(rolls == 1)   # fraction of 1&#39;s in the sample</pre>
 
-<pre >[1] 0.124</pre>
+<pre >[1] 0.188</pre>
 
 </article></slide><slide class=""><hgroup><h2>The <code>prob</code> Package</h2></hgroup><article  id="the-prob-package">
 
