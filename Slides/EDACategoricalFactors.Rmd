@@ -1,5 +1,5 @@
 ---
-title: "EDA &#9654; Categorical Data<br>Factors"
+title: "EDA &#9654; Categorical Data<br>Introducing Factors"
 author: "Author: Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
