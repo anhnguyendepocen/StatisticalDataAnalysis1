@@ -1,5 +1,5 @@
 ---
-title: "EDA &#9654; Categorical Data<br>Barplots"
+title: "EDA &#9654; Categorical Data<br>Basics of Barplots"
 author: "Author: Jill E. Thomley"
 date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
 output: 
@@ -28,7 +28,9 @@ These slides are not meant to be standalone information. You should take notes t
 
 ## 
 
-<p style="text-align: center;">![](http://www-history.mcs.st-andrews.ac.uk/BigPictures/Fisher.jpeg)</p>
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("images/Fisher.jpeg", dpi = 100)
+```
 
 <p>"...the object of statistical methods is the reduction of data. A quantity of data, which usually by its mere bulk is incapable of entering the mind, is to be replaced by relatively few quantities which shall adequately represent the whole, or...shall contain as much as possible, ideally the whole, of the relevant information contained in the original data." ~ R.A. Fisher, 1921</p>
 
@@ -74,7 +76,7 @@ The Berkeley dataset is an example of a statistical phenomena called [Simpson's 
 
 Load the dataset into `R` from its URL:
 
-`library(readr)` or `library(tidyverse)`
+`library(tidyverse)`
 
 `berkdata <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv"))`
 
@@ -93,7 +95,7 @@ head(berkdata, n = 3)
 
 ## The Variables
 
-There are three categorical variables in the Berkeley dataset:
+There are three categorical variables in the Berkeley dataset.
 
 * `sex`
 
@@ -116,16 +118,16 @@ Each *observation* in the dataset represents one applicant, with a total of `r n
 
 * R's `ggplot2` is a system for creating graphics, based on the concepts introduced in the book [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl?ie=UTF8&qid=1477928463&sr=8-1&keywords=the+grammar+of+graphics&linkCode=sl1&tag=ggplot2-20&linkId=f0130e557161b83fbe97ba0e9175c431) (2005) --- metastructure and connected visualizations
 
-* `aesthetics` (like x, y, color, size, fill) code data or variables from a dataset onto the plot (*what* you want to plot)
+* *aesthetics* (like x, y, color, size, fill) code data or variables from a dataset onto the plot (*what* you want to plot)
 
-* graphical elements displayed in a plot (like points, lines, or bars) are `geometries` (*how* you want to plot)
+* graphical elements displayed in a plot (like points, lines, or bars) are *geometries* (*how* you want to plot)
 
-* you can include multiple geometries on your plot, using the same or different `aesthetics` for each
+* you can include multiple geometries on your plot, using the same or different aesthetics for each
 
 * facets allow us to visualize the same graphical elements for important groups or subsets of data 
 
 
-## Barplots using `ggplot2`
+## Barplots using ggplot2
 
 ```{r fig.height=3.4}
 library(ggplot2) # even better, use library(tidyerse)
@@ -203,10 +205,11 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 
 We can still make a barplot if we have summarized vs. raw data.
 
-```{r fig.height=3}
+```{r fig.height=2.75}
 dept_tab <- count(berkdata, department)
 ggplot(dept_tab, aes(x = department, y = n)) + 
-  geom_bar(stat = "identity") + labs(y = "count")
+  geom_col() +   # use geom_col() since we are specifying y values
+  labs(y = "count")
 ```
 
 
