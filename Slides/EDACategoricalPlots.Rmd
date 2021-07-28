@@ -124,7 +124,7 @@ Each *observation* in the dataset represents one applicant, with a total of `r n
 
 * you can include multiple geometries on your plot, using the same or different aesthetics for each
 
-* facets allow us to visualize the same graphical elements for important groups or subsets of data 
+* *facets* allow us to visualize the same graphical elements for important groups or subsets of data 
 
 
 ## Barplots using ggplot2
@@ -139,11 +139,37 @@ ggplot(berkdata, aes(x = sex)) +  # the data we want to plot
 
 ##
 
-Add some formatting to get a more useful and pleasing plot.
+Add some formatting to get a more useful and pleasing plot. First, a title and more informative x-axis label. We could also change the y-axis label with `y =`.
+
+```{r fig.height=2.8}
+ggplot(berkdata, aes(x = sex)) + 
+  geom_bar() +
+  labs(title = "Berkeley Grad School Applicants F73", 
+       x = "applicant sex (as per 1970s definitions)")
+```
+
+
+##
+
+Options `subtitle` and `caption` let us add more information.
 
 ```{r fig.height=2.9}
 ggplot(berkdata, aes(x = sex)) + 
-  geom_bar(fill = "skyblue", color = "gray") +   # color is outline
+  geom_bar() +
+  labs(title = "Berkeley Grad School Applicants F73", 
+       subtitle = "applicants to the largest six departments only",
+       x = "applicant sex (as per 1970s definitions)",
+       caption = "source: berkeley.csv dataset")
+```
+
+
+##
+
+Now some color! Try to choose colorblind-friendly options.
+
+```{r fig.height=2.9}
+ggplot(berkdata, aes(x = sex)) + 
+  geom_bar(fill = "skyblue", color = "gray") +
   labs(title = "Berkeley Grad School Applicants F73", 
        subtitle = "applicants to the largest six departments only",
        x = "applicant sex (as per 1970s definitions)",
@@ -168,7 +194,7 @@ ggplot(berkdata, aes(x = sex, fill = sex)) + # add fill for 2 colors
 
 ## Proportions Instead of Counts
 
-If we want proportions, we have to calculate in the plot.
+If we want proportions, we have to calculate them in the plot.
 
 ```{r fig.height=3.1}
 ggplot(berkdata, aes(x = sex)) + 
@@ -179,7 +205,9 @@ ggplot(berkdata, aes(x = sex)) +
 
 ## Barplots for Two Variables
 
-```{r fig.height=4}
+One variable is the bars (`x`), while the other variable is how the bars are split (`fill`).
+
+```{r fig.height=3.1}
 ggplot(berkdata, aes(x = sex, fill = status)) + 
   geom_bar()
 ```
@@ -218,7 +246,7 @@ ggplot(dept_tab, aes(x = department, y = n)) +
 _Cookbook for R_ shows some [color options](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/) and built-in palettes. You can use colors by name (use `colors()` function to see `R`'s list), hex code, or rgb (e.g., [HTML Color Codes](https://htmlcolorcodes.com/color-names/) or [ColorHexa](https://www.colorhexa.com/)). Consider [colorblind safe](https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40) color options when making plots for papers, presentations, or generally sharing with others.
 
 * _color_ typically refers to points, lines, outlines
-* _fill_ typically refers to some internal shading
+* _fill_ typically refers to shapes' internal shading
 
 ```{r plotcolor1, eval=FALSE}
 ggplot(berkdata, aes(x = sex, fill = status)) +
@@ -226,21 +254,23 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
   scale_fill_manual(values = c("#FFC20A", "#0C7BDC")) +
   labs(title = "Berkeley Grad Applicants, Fall 1973",
        subtitle = "six departments with largest applicant pools",
-       caption = "source: berkeley.csv dataset",
-       x = "sex of applicant", y = "number of applicants")
+       x = "sex of applicant", y = "number of applicants",
+       caption = "source: berkeley.csv dataset")
 ```
 
 
 ## Voila! New Colors
 
-```{r plotcolor1a, ref.label='plotcolor1', echo=FALSE}
+This is a generally colorblind-safe pair of colors, as is the default cyan (#00BFC4) and salmon-ish (#F8766D) combination seen in the earlier two-variable plots.
+
+```{r plotcolor1a, ref.label='plotcolor1', echo=FALSE, fig.height=3.7}
 
 ```
 
 
 ## Three Variables? Use Faceting
 
-Faceting creates multiple "panes" in a plot according to some chosen grouping variable. Each pane displays the same kind of plot for a given subgroup. Use `facet_grid()` or `facet_wrap()` to achieve different configurations.
+Faceting creates multiple "panes" in a plot according to some chosen grouping variable. Each pane displays the same kind of plot for a given subgroup. Use `facet_wrap()` or `facet_grid()` (more structured) to achieve different configurations.
 
 ```{r plotcolor2, eval=FALSE}
 ggplot(berkdata, aes(x = sex, fill = status)) +
@@ -257,10 +287,27 @@ ggplot(berkdata, aes(x = sex, fill = status)) +
 
 ##
 
-Six plots configured into a 1 x 6 faceted grid show `status` for men and women, with one plot for each department. What would happen if you use `facet_grid(department ~ .)` instead of the current `facet_grid(. ~ department)`?
+Six plots configured into a 1 x 6 faceted grid show `status` for men and women, with one plot for each department. What would happen if you coded `facet_grid(department ~ .)` instead of the current `facet_grid(. ~ department)`?
 
 ```{r plotcolor2a, ref.label='plotcolor2', echo=FALSE, fig.height=4}
 
+```
+
+
+##
+
+The plot with `facet_grid(department ~ .)` --- we've switched to each plot being its own row versus column in the faceted grid. What are the pros versus cons of this plot versus the previous?
+
+```{r plotcolor2b, echo=FALSE, fig.height = 4.4}
+ggplot(berkdata, aes(x = sex, fill = status)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#FFC20A", "#0C7BDC")) +
+  labs(title = "Berkeley Grad Applicants, Fall 1973",
+       subtitle = "six departments with largest applicant pools",
+       caption = "source: berkeley.csv dataset",
+       x = "sex of applicant",
+       y = "number of applicants") +
+  facet_grid(department ~ .)
 ```
 
 
