@@ -68,6 +68,29 @@ knitr::include_graphics("images/Fisher.jpeg", dpi = 100)
 (Some people attribute this quote to John Tukey. That cannot be verified, but it is generally a true statement.)
 
 
+## Frequency Table
+
+*Frequency* is the total *count* of the how many observational units are found in each category of a categorical variable. A table that summarizes categories and their counts is a *frequency table*.
+
+*Relative frequency* is the *fraction* of observations in each category of a particular categorical variable. Relative frequencies may be expressed as fractions, decimals, or percents. For example, 1/4 = 0.25 = 25%. We can tabulate categories and relative frequencies, with or without the categories' frequencies.
+
+The *probability* of an an event is often determined by observing relative frequency for that event.
+
+*Cumulative frequency* is the frequency of a given category plus all categories that came before it in a given order. It is the "running total" of frequencies (or relative frequencies).
+
+
+## Contingency Table
+
+A contingency table is a type of frequency table that summarizes the relationship between two (or more) categorical variables in a matrix-type format. Sometimes they are referred to as two-way table or crosstabs. The rows of the table represent categories of one variable and the columns represent categories of the other variable. Other arrangements are also possible.
+
+This kind of table may be used for several different types of data summaries, such as: 
+
+* observed counts
+* row percentages
+* column percentages
+* overall percentages
+
+
 ## Berkeley Data
 
 In the early 1970s, UC Berkeley was concerned about possible sex discrimination in grad school admissions. The [berkeley.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/berkeley.csv) dataset contains fall 1973 data for the six largest departments. Click the link to get the URL for the dataset.
@@ -120,7 +143,7 @@ Base `R` contains two functions to make quick summary tables. Recall that the `$
 
 ```{r}
 table(berkdata$status) # counts 
-prop.table(table(berkdata$status)) # proportions add to 1 or 100%
+prop.table(table(berkdata$status))   # proportions add to 1 or 100%
 ```
 
 What class of object do `table()` and `prop.table()` produce?
@@ -133,7 +156,7 @@ We can store the results of `table()` as an object.
 ```{r}
 statusTab <- table(berkdata$status)
 prop.table(statusTab)
-round(prop.table(statusTab), 4) # note the nested functions
+round(prop.table(statusTab), 4)   # note the nested functions
 ```
 
 The table class of object in `R` is essentially an array where the locations have been named.
@@ -144,7 +167,7 @@ The table class of object in `R` is essentially an array where the locations hav
 The `table()` function produces a structured vector or matrix. The method using the dplyr package produces a tibble.
 
 ```{r}
-library(dplyr) # or library(tidyverse)
+library(tidyverse)   # or library(dplyr)
 berkdata %>% count(status)
 ```
 
@@ -311,6 +334,7 @@ students <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/
 * CodedMajor = Dr. Thomley's recoded list of majors
 * Semester = the semester when the student took STT3850
 * AY = academic year (e.g., 2018-2019)
+
 
 ## Which Academic Years?
 

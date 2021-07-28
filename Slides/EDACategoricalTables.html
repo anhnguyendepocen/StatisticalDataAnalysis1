@@ -188,7 +188,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">July 27, 2021 @ 07:08 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">July 27, 2021 @ 08:28 PM</p>
           </hgroup>
   </slide>
 
@@ -248,6 +248,29 @@ slide:not(.current) .plotly.html-widget{
 <p>&ldquo;There is no data that can be displayed in a pie chart that cannot be displayed better in some other type of chart.&rdquo;</p>
 
 <p>(Some people attribute this quote to John Tukey. That cannot be verified, but it is generally a true statement.)</p>
+
+</article></slide><slide class=""><hgroup><h2>Frequency Table</h2></hgroup><article  id="frequency-table">
+
+<p><em>Frequency</em> is the total <em>count</em> of the how many observational units are found in each category of a categorical variable. A table that summarizes categories and their counts is a <em>frequency table</em>.</p>
+
+<p><em>Relative frequency</em> is the <em>fraction</em> of observations in each category of a particular categorical variable. Relative frequencies may be expressed as fractions, decimals, or percents. For example, 1/4 = 0.25 = 25%. We can tabulate categories and relative frequencies, with or without the categories’ frequencies.</p>
+
+<p>The <em>probability</em> of an an event is often determined by observing relative frequency for that event.</p>
+
+<p><em>Cumulative frequency</em> is the frequency of a given category plus all categories that came before it in a given order. It is the &ldquo;running total&rdquo; of frequencies (or relative frequencies).</p>
+
+</article></slide><slide class=""><hgroup><h2>Contingency Table</h2></hgroup><article  id="contingency-table">
+
+<p>A contingency table is a type of frequency table that summarizes the relationship between two (or more) categorical variables in a matrix-type format. Sometimes they are referred to as two-way table or crosstabs. The rows of the table represent categories of one variable and the columns represent categories of the other variable. Other arrangements are also possible.</p>
+
+<p>This kind of table may be used for several different types of data summaries, such as:</p>
+
+<ul>
+<li>observed counts</li>
+<li>row percentages</li>
+<li>column percentages</li>
+<li>overall percentages</li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>Berkeley Data</h2></hgroup><article  id="berkeley-data">
 
@@ -316,7 +339,7 @@ $ status     &lt;chr&gt; &quot;accepted&quot;, &quot;accepted&quot;, &quot;accep
 accepted rejected 
     1755     2771 </pre>
 
-<pre class = 'prettyprint lang-r'>prop.table(table(berkdata$status)) # proportions add to 1 or 100%</pre>
+<pre class = 'prettyprint lang-r'>prop.table(table(berkdata$status))   # proportions add to 1 or 100%</pre>
 
 <pre >
  accepted  rejected 
@@ -335,7 +358,7 @@ prop.table(statusTab)</pre>
  accepted  rejected 
 0.3877596 0.6122404 </pre>
 
-<pre class = 'prettyprint lang-r'>round(prop.table(statusTab), 4) # note the nested functions</pre>
+<pre class = 'prettyprint lang-r'>round(prop.table(statusTab), 4)   # note the nested functions</pre>
 
 <pre >
 accepted rejected 
@@ -347,7 +370,7 @@ accepted rejected
 
 <p>The <code>table()</code> function produces a structured vector or matrix. The method using the dplyr package produces a tibble.</p>
 
-<pre class = 'prettyprint lang-r'>library(dplyr) # or library(tidyverse)
+<pre class = 'prettyprint lang-r'>library(tidyverse)   # or library(dplyr)
 berkdata %&gt;% count(status)</pre>
 
 <pre ># A tibble: 2 × 2
