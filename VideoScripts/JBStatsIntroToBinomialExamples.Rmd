@@ -34,11 +34,11 @@ query = NULL
 
 <details>
 ```{r loadpackages}
-library(tidyverse)
+# no packages are required
 ```
 </details>
 
-### **The Binomial Distribution**
+### **The Binomial PMF**
 
 The binomial distribution is a discrete probability distribution. It mathematically models the *number of successes* in a sequence of independent Bernoulli trials. The probability for a given number of successes $x$ is found using the *probability mass function* (pmf).
 
@@ -66,7 +66,7 @@ $$X \sim Bin(25,0.01)$$
 
 Solve for $x = 2$.
 
-$$f(2) = P(X = 2) = {25 \choose 2}(0.01)^2(1-0.01)^{25-2}$$
+$$f(2) = P(X = 2) = {25 \choose 2}(0.01)^2(1-0.01)^{25-2} = \frac{25!}{2!\times 23!}(0.01)^2(0.99)^{23}$$
 
 ```{r}
 dbinom(2, 25, 0.01)
@@ -85,7 +85,7 @@ $$X \sim Bin(16, 2/6)$$
 
 Solve for $x = 5$.
 
-$$f(5) = P(X = 5) = {16 \choose 5}\left(\frac{2}{6}\right)^5\left(1-\frac{2}{6}\right)^{16-5}$$
+$$f(5) = P(X = 5) = {16 \choose 5}\left(\frac{2}{6}\right)^5\left(1-\frac{2}{6}\right)^{16-5}=\frac{16!}{5!\times 11!}\left(\frac{2}{6}\right)^5\left(\frac{4}{6}\right)^{11}$$
 ```{r}
 dbinom(5, 16, 1/3)
 ```
