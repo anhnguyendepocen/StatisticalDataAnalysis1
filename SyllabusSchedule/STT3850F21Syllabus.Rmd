@@ -61,6 +61,18 @@ STT3850 Statistical Data Analysis 1 provides an overview of modern statistical d
 
 * STATISTICS—THE BIG PICTURE: Demonstrate understanding of why statistical analysis and visualization is important to you, to people in your field of study, to people in other disciplines, and the larger world.
 
+##### ***Course Modules***
+
+The course will be divided into four "Modules" of related content that build on one another to satisfy the course learning objectives.
+
+* Module 1: Introduction and Exploratory Data Analysis (~4 weeks)
+
+* Module 2: Probability and Sampling (~4 weeks)
+
+* Module 3: Estimation and Inference (~4 weeks)
+
+* Module 4: Regression Modeling (~2 weeks)
+
 #### **Communication & Coursework**
 
 ##### ***AsULearn Forums***  
