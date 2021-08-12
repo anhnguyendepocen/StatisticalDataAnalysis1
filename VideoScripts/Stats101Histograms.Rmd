@@ -1,5 +1,5 @@
 ---
-title: "Describing a Categorical Variable"
+title: "Histograms"
 subtitle: "Companion `R` Code for Stats 101 Video Lesson"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
