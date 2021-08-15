@@ -95,7 +95,7 @@ The [CBMS](https://www.cbmsweb.org/) statement “Active Learning in Post-Second
 
 * Projects --- The purpose of the projects is to tie together concepts and have you demonstrate your statistics and R programming knowledge by working on somewhat more open-ended problems than you encountered in DataCamp and quizzes. You will communicate your results in an R Markdown writeup. I will assess your projects with a rubric that I will provide to you in the assignment. 
 
-**Final Grade** = 30% DataCamp + 10% Datacamp Depth + 20% Quizzes + 20% Project 1 + 20% Project 2
+**Final Grade** = 30% DataCamp + 10% DataCamp Depth + 20% Quizzes + 10% Project 1 + 10% Project 2 + 20% Project 3
 
 ##### ***Course Grading Scale***
 
@@ -158,4 +158,4 @@ As per [AppalachianState University](https://diversity.appstate.edu/) and the [D
 
 <hr>
 
-Updated Thursday, August 12, 2021 @ 06:42 PM
+Updated Sunday, August 15, 2021 @ 02:18 PM
