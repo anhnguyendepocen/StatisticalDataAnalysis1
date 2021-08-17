@@ -134,7 +134,7 @@ knitr::include_graphics("images/github-logo.jpg", dpi = 150)
 knitr::include_graphics("images/moderndivetitle.PNG", dpi = 125)
 ```
 
-<p>The [Modern Dive](https://r4ds.had.co.nz/) digital textbook "assumes no prerequisites: no algebra, no calculus, and no prior programming/coding experience. This is intended to be a gentle introduction to the practice of analyzing data and answering questions using data the way data scientists, statisticians, data journalists, and other researchers would."</p>
+<p>The [Modern Dive](https://moderndive.com/) digital textbook "assumes no prerequisites: no algebra, no calculus, and no prior programming/coding experience. This is intended to be a gentle introduction to the practice of analyzing data and answering questions using data the way data scientists, statisticians, data journalists, and other researchers would."</p>
 
 
 ## Syllabus and Schedule
