@@ -1,0 +1,116 @@
+---
+title: "Introduction to Markdown"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+
+The YAML header controls much of the overall appearance of the R Markdown document. There are a number of [useful options](https://zsmith27.github.io/rmarkdown_crash-course/lesson-4-yaml-headers.html), including [themes](https://www.datadreaming.org/post/r-markdown-theme-gallery/) and [syntax highlighting styles](https://eranraviv.com/syntax-highlighting-style-in-rmarkdown/). Inline R code has been used to insert a dynamic date into the header.
+
+***
+
+### Global Formatting Code Chunk
+
+It is common to include a global formatting code chunk to control the default behavior of all the code chunks in the R Markdown document. Defaults can be overridden in individual code chunks. These settings come from the knitr package, which handles the rendering of the document. Typically we set `include = FALSE` so the chunk is invisible in the rendered document.
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+Here we will include it as an example. The code chunk's label is `globaloptionsexample`. Two chunks cannot have the same label. Using `eval = FALSE` means the code in an R chunk will not run---it's just an example for show. You can control some individual chunk options using the gear icon inside the R code chunk.
+
+```{r globaloptionsexample, eval = FALSE}
+# {r globaloptionsexample, eval = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+Question: Can you identify what each option setting does? 
+
+message
+
+warning
+
+comment
+
+### Packages Used Code Chunk
+
+It is also common to load all packages used in the document at the beginning so that we do not have to call them repeatedly later. We will see these packages in the `sessionInfo()`. In this class we will use tidyverse tools for almost everything we do. The package loads several [core packages](https://www.tidyverse.org/packages/) with a single `library()` call.
+
+```{r packages_used}
+library(tidyverse)
+```
+
+The order in which you load packages matters. If two packages share a function name, the package loaded *last* will be the one that is accessed when the function is called. The `::` can be used to override the default.
+
+### Getting Data into RStudio
+
+#### Loading data from a package
+
+Dr. Thomley's Quick Introduction to Datasets slides discuss [reading data](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/IntroToDatasets.html#13) from the resampledata package. [Modern Dive 1.4](https://moderndive.com/1-getting-started.html#nycflights13) shows an example from the ncflights13 package. Add these two packages to the `packages_used` code chunk above. We will explore these data using the following functions.
+
+* `str()`
+* `glimpse()`
+* `head()`
+* `tail()`
+* `attributes()`
+* `dim()`
+* `names()`
+* `nrow()`
+* `ncol()`
+* `sum(complete.cases())` this is two nested functions
+* `sum(!complete.cases())` what does the ! do here?
+
+##### Explore `Spruce` dataset
+
+```{r}
+# give this code chunk a label and erase this comment
+
+```
+
+Question: Does the dataset appear in your Environment pane? Why or why not?
+
+As we did with the YAML header above, we can also embed inline R code into the text portion of our Markdown document. This improves reproducibility and flexibility in reporting. For example, the number of rows in the `Spruce` dataset is __________ , where the number is not typed in by hand, but rather produced by the inline code `` `r "\u0060r expression\u0060"` ``. 
+
+##### Explore `flights`
+
+**(erase this text and insert a code chunk to explore the data)**
+
+#### Loading data from the web
+
+Dr. Thomley's slides also discuss [reading data from a CSV file](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/IntroToDatasets.html#17). You can find a description of the `vietnamdraft` dataset [HERE](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/vietnamdraft.html).
+
+**(erase this text and insert a code chunk to load and explore the `vietnamdraft` data)**
+
+### Additional Notes
+
+You can add you own notes here, or anywhere else in this document you find helpful. For example, you could add information and code from Modern Dive or other readings. It is yours to modify and use.
+
+### R Markdown References
+
+* [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+* [R Markdown from RStudio](https://rmarkdown.rstudio.com/index.html)
+* [R Markdown: the Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+* [Dynamic Documents with R and knitr: Chunk Options](https://yihui.org/knitr/options/#chunk-options)
+
+***
+
+R is an evolving language. The base language and packages are often updated, and the specifics of some functions might change. However, it is possible to use prior versions in order to reproduce others' work. Including `sessionInfo()` gives information about the platform, packages, etc., that were used to produce the document and results.
+
+You can find an explanation of "loaded via a namespace (and not attached)" on StackOverflow [HERE](https://stackoverflow.com/questions/14988722/in-r-what-does-loaded-via-a-namespace-and-not-attached-mean). The short explanation is that R makes a distinction between packages loaded via `library(packagename)` and accessed via other means such as `knitr::` like we did in the `globaloptions` code chunk.
+
+```{r}
+sessionInfo()
+```
