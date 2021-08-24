@@ -1,0 +1,69 @@
+---
+title: "Categorical EDA"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 4
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+```
+
+### Datasets Used
+
+```{r}
+coasters <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/coasters2015.csv")
+executions <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/executions.csv")
+```
+
+### Roller Coasters Analysis
+
+The [Roller Coaster Database](https://rcdb.com/) contains information about every roller coaster in the world, past or present. The `coasters2015` dataset is a sample of "recently" opened rollercoasters, circa 2015. ([source](https://dasl.datadescription.com/datafile/coasters-2015/))
+
+#### Dataset Structure
+
+```{r}
+
+```
+
+#### (analysis to be added here)
+
+
+
+### Capital Punishment Analysis
+
+The `executions` dataset contains information about which states had the death penalty as of 2018, the numbers of executions they had carried out, and numbers of prisoners on death row, plus other variables. ([source](https://deathpenaltyinfo.org/))
+
+#### Dataset Structure
+
+```{r}
+
+```
+
+#### (analysis to be added here)
+
+
+
+***
+```{r}
+sessionInfo()
+```
