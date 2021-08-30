@@ -49,8 +49,8 @@ These slides are not meant to be standalone information. You should take notes t
 
 * mean
     * arithmetic mean ("average", _expected value_)
-    * weighted mean
-    * trimmed mean
+    * weighted mean (some points have more "weight")
+    * trimmed mean (some endpoints are trimmed off)
     * geometric mean (n^th^ root of the product)
 * median (50^th^ percentile/quantile)
 * mode (we use this more with reference to shape)
@@ -176,7 +176,7 @@ Outliers will affect all measures based on moments, so we need to check for them
 
 ## Moment-Based Summaries in R
 
-* `mean()`
+* `mean()` --- also computes trimmed mean
 * `var()`
 * `sd()`
 * `skewness()`
@@ -184,7 +184,7 @@ Outliers will affect all measures based on moments, so we need to check for them
 
 The `var()` and `sd()` functions calculate sample variance and standard deviation. How could you get population variance if your data were a population?
 
-The `skewness()` and `kurtosis()` functions are found in the `moments` package, so you need to use `library(moments)`.
+The `skewness()` and `kurtosis()` functions are found in the moments package, so you need to use `library(moments)`.
 
 You should explore the syntax and output of these functions.
 
@@ -197,8 +197,8 @@ You should explore the syntax and output of these functions.
     * median &mdash; 50% of data is below, 50% is above ("center")
     * third quartile (Q<sub>3</sub>) &mdash; 75% of data is below, 25% is above
     * maximum &mdash; largest data point
-* interquartile range (IQR) &mdash; Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)
-* range &mdash; maximum - minimum (overall width of the dataset)
+* interquartile range (IQR) = Q<sub>3</sub> - Q<sub>1</sub> (range of middle 50%)
+* range = maximum - minimum (overall width of the dataset)
 * percentiles / quantiles &mdash; the n*th* percentile or quantile has n% of the data below it (e.g., Q<sub>1</sub> is the 25th percentile of the dataset and the median is the 50th percentile)
 
 
@@ -210,15 +210,48 @@ You should explore the syntax and output of these functions.
 * `max()`
 * `IQR()`
 * `range()`
-* `diff(range())`
-* `quantile()`
+* `diff(range())` --- using just `range()` gives the min and max
+* `quantile()` -- quantiles can also be referred to as percentiles
 
 Again, you should explore the syntax, parameters, and output of each function to understand how it works.
 
 
+## Summarizing Using dplyr
+
+You can add/remove summary functions as needed. The `na.rm` ignores any `NA` (missing) values, else you get `NA` as output.
+
+```{r, eval = FALSE}
+datasetname %>% 
+  summarize(n     = n(),
+            xbar  = mean(variablename, na.rm = TRUE),
+            s     = sd(variablename, na.rm = TRUE),
+            xmin  = fivenum(variablename)[1],
+            Q1    = fivenum(variablename)[2],
+            xmed  = fivenum(variablename)[3],                  
+            Q3    = fivenum(variablename)[4],
+            xmax  = fivenum(variablename)[5],
+            iqr   = IQR(variablename, na.rm = TRUE),
+            rng   = diff(range(variablename, na.rm = TRUE)),
+            total = sum(variablename, na.rm = TRUE),
+            skew  = skewness(variablename, na.rm = TRUE),
+            kurt  = kurtosis(variablename, na.rm = TRUE))
+```
+
+
+## About the `fivenum()` Function
+
+Most summary functions like `mean()` and `sd()` produce only a single value as output. However, `fivenum()` produces a vector of length 5. The [ ] notation accesses the correct location in the output vector, since each step of a `summarize()` function must only output a single value.
+
+```{r}
+library(resampledata)
+fivenum(FlightDelays$FlightLength) # output is min, Q1, med, Q3, max
+fivenum(FlightDelays$FlightLength)[3] # output is location 3, median
+```
+
+
 ## Some Data to Summarize
 
-Read datasets [gasmileage.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv) and [happyface.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/happyface.csv) into RStudio. Remember you need `library(tidyverse)` for many of the functions we will use, including `read_csv()`. In coming slides they will be referred to by the following names.
+Read datasets [gasmileage.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv) and [happyface.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/happyface.csv) into RStudio. Remember you need `library(tidyverse)` for many functions we will use, and `library(moments)` for skewness and kurtosis. In coming slides they will be referred to by the following names.
 
 * `mileage`: results of 100 EPA gas mileage tests for a particular model of car, in miles per gallon (mpg)
 
@@ -239,44 +272,9 @@ glimpse(mileage)
 glimpse(happyf)
 ```
 
-
-## Summarizing Using `dplyr`
-
-You can add/remove summary functions as needed. The `na.rm` ignores any `NA` (missing) values, else you get `NA` as output.
-
-```{r, eval = FALSE}
-library(moments) # you only need this for skewness and kurtosis
-datasetname %>% 
-  summarize(n    = n(),
-            xbar = mean(variablename, na.rm = TRUE),
-            s    = sd(variablename, na.rm = TRUE),
-            min  = fivenum(variablename)[1],
-            Q1   = fivenum(variablename)[2],
-            med  = fivenum(variablename)[3],                  
-            Q3   = fivenum(variablename)[4],
-            max  = fivenum(variablename)[5],
-            iqr  = IQR(variablename, na.rm = TRUE),
-            rng  = diff(range(variablename, na.rm = TRUE)),
-            skew = skewness(variablename, na.rm = TRUE),
-            kurt = kurtosis(variablename, na.rm = TRUE))
-```
-
-
-## About the `fivenum()` Function
-
-Most summary functions like `mean()` and `sd()` produce only a single value as output. However, `fivenum()` produces a vector of length 5. The [ ] notation accesses the correct location in the output vector, since each step of a `summarize()` function must only output a single value.
-
-```{r}
-fivenum(mileage$mpg) # output in order is min, Q1, med, Q3, max
-fivenum(mileage$mpg)[3] # the output is location 3, the median
-```
-
-Also, `range()` outputs (min, max); we have to take the `diff()`.
-
-
 ## Summarizing `mpg`
 
-I removed `skewness()` and `kurtosis()` here, but added `sum()`. I also know for sure that there are no outliers in this dataset, so I removed the `na.rm = TRUE` statements for simplicity. 
+I removed `skewness()` and `kurtosis()` here. I also know for sure that there are no outliers in this dataset, so I removed the `na.rm = TRUE` statements for simplicity. 
 
 ```{r, eval = FALSE}
 mileage %>% 
@@ -339,9 +337,9 @@ mpg_summaries %>%
 ```
 
 
-## Summarizing by Groups Using `dplyr`
+## Summarizing by Groups Using dplyr
 
-Use `group_by()` before the `summarize()` function to group the observations into subgroups by one or more other variables of interest. Here I use two, since the original experiment analyzed both together. 
+Use `group_by()` before the `summarize()` function to group the observations into subgroups by one or more other variables of interest. Here I use two grouping variables, since the original experiment analyzed both together. 
 
 ```{r, eval = FALSE}
 happyf %>% 
@@ -414,7 +412,7 @@ quantile(mileage$mpg, probs = seq(from = 0.1, to = 0.9, by = 0.1))
 ```
 
 
-## Z-Scores with `dplyr`
+## Z-Scores with dplyr
 
 Recall from earlier the formula for z-scores. Here we create a new variable that contains the z-score for every `mpg` value.
 

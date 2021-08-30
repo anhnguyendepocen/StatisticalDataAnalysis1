@@ -154,7 +154,7 @@ sort(boxplot.stats(mileage$mpg)$out)
 ```
 
 
-## Calculating the Fences in `dplyr`
+## Calculating the Fences in dplyr
 
 ```{r}
 mileage %>% 

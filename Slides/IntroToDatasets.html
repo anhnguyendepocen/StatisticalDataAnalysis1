@@ -188,7 +188,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">July 26, 2021 @ 01:47 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">August 28, 2021 @ 02:49 PM</p>
           </hgroup>
   </slide>
 
@@ -393,7 +393,7 @@ head(Spruce, 3) # view the first two observations</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
 
-<p>The two functions are similar, but how does the output differ? Look at the vector types and the way information about type of vector, number of variables, and observations is displayed.</p>
+<p>The two functions are similar, but how does the output differ? Look at the display of information about vector types, number of variables, and observations, as well as rounding and page fit.</p>
 
 <pre class = 'prettyprint lang-r'>library(tidyverse)
 glimpse(Spruce)</pre>
@@ -412,7 +412,7 @@ $ Di.change   &lt;dbl&gt; 5.415625, 4.009375, 3.914062, 4.812500, 4.612500, 5.81
 
 </article></slide><slide class=""><hgroup><h2>Other Useful Functions</h2></hgroup><article  id="other-useful-functions">
 
-<p>Other functions for exploring dataset structure are given below. Use them <code>Spruce</code>. What information does each one give you?</p>
+<p>A few functions for exploring dataset structure are given below. Use them on <code>Spruce</code>. What information does each give you?</p>
 
 <ul>
 <li><code>attributes()</code></li>
@@ -428,11 +428,11 @@ $ Di.change   &lt;dbl&gt; 5.415625, 4.009375, 3.914062, 4.812500, 4.612500, 5.81
 
 </article></slide><slide class=""><hgroup><h2>Loading Data from a URL</h2></hgroup><article  id="loading-data-from-a-url">
 
-<p>Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>class data files</a> page contains many datasets stored in CSV format. We can read them in using their URL.</p>
+<p>Our <a href='https://stat-jet-asu.github.io/Datasets/DatasetList.html' title=''>class data files</a> page contains many datasets stored in CSV (comma separated value) format with variable names in the first row. We can read them in using their URL.</p>
 
 <p><code>library(tidyverse)</code><br/><code>draftdata &lt;- read_csv(file = url(&quot;https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv&quot;))</code></p>
 
-<p>We can shortcut this code a bit. Check the documentation for <code>read_csv()</code> by typing <code>?read_csv</code> in the console.</p>
+<p>We can shortcut this code a little. Check the documentation for <code>read_csv()</code> by typing <code>?read_csv</code> in the console.</p>
 
 <p><code>draftdata &lt;- read_csv(&quot;https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv&quot;)</code></p>
 
@@ -444,7 +444,7 @@ $ Di.change   &lt;dbl&gt; 5.415625, 4.009375, 3.914062, 4.812500, 4.612500, 5.81
 
 <pre class = 'prettyprint lang-r'>data(package = &quot;resampledata&quot;)</pre>
 
-<p>Practice so that you become proficient in loading a dataset and determining its structure so you can start the important work of transforming raw data into useful information and knowledge.</p></article></slide>
+<p>Practice to become proficient in loading data and investigating structure so you can start the important work of transforming raw data into useful information and knowledge.</p></article></slide>
 
 
   <slide class="backdrop"></slide>

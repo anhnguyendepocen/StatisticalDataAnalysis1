@@ -104,7 +104,7 @@ A density plot is a variation on a histogram that uses a statistical technique c
 
 Density plots are often better at displaying the shape of a true continuous distribution than a histogram because they're not affected by the number of bins we choose the way histograms can be. However, differences in the algorithm (e.g., "bandwidth" used) can over- or under-smooth the distribution.
 
-The specifics of kernel smoothing are beyond the scope of this class. We will use the default settings in `R` and `ggplot2`.
+The specifics of kernel smoothing are beyond the scope of this class. We will use the default settings in `R` and ggplot2.
 
 
 ## Some Data to Plot

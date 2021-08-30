@@ -167,7 +167,7 @@ str(Spruce)
 
 ##
 
-The two functions are similar, but how does the output differ? Look at the vector types and the way information about type of vector, number of variables, and observations is displayed. 
+The two functions are similar, but how does the output differ? Look at the display of information about vector types, number of variables, and observations, as well as rounding and page fit. 
 
 ```{r}
 library(tidyverse)
@@ -177,7 +177,7 @@ glimpse(Spruce)
 
 ## Other Useful Functions
 
-Other functions for exploring dataset structure are given below. Use them `Spruce`. What information does each one give you?
+A few functions for exploring dataset structure are given below. Use them on `Spruce`. What information does each give you?
 
 * `attributes()`
 * `dim()`
@@ -192,12 +192,12 @@ Other functions for exploring dataset structure are given below. Use them `Spruc
 
 ## Loading Data from a URL
 
-Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains many datasets stored in CSV format. We can read them in using their URL.
+Our [class data files](https://stat-jet-asu.github.io/Datasets/DatasetList.html) page contains many datasets stored in CSV (comma separated value) format with variable names in the first row. We can read them in using their URL.
 
 `library(tidyverse)`  
 `draftdata <- read_csv(file = url("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv"))`
 
-We can shortcut this code a bit. Check the documentation for `read_csv()` by typing `?read_csv` in the console.
+We can shortcut this code a little. Check the documentation for `read_csv()` by typing `?read_csv` in the console.
 
 `draftdata <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft.csv")`
 
@@ -215,5 +215,5 @@ You can find instructor-created data files on our [class data files](https://sta
 data(package = "resampledata")
 ```
 
-Practice so that you become proficient in loading a dataset and determining its structure so you can start the important work of transforming raw data into useful information and knowledge.
+Practice to become proficient in loading data and investigating structure so you can start the important work of transforming raw data into useful information and knowledge.
 
