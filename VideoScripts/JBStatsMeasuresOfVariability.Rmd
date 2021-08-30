@@ -42,7 +42,7 @@ gp <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/J
 glimpse(gp)
 ```
 
-#### Example Dataset with 4 Observations
+#### Example with 4 Observations
 
 Doing the math the long way
 
@@ -72,6 +72,38 @@ sample4 %>%
             rng  = diff(range(data)),
             MAD  = sum(abs(data - mean(data))) / n)
 ```
+
+#### Example with Guinea Pig Data
+
+Overall dataset
+
+```{r}
+gp %>% 
+  summarize(n = n(),
+            xbar = mean(survivaldays),
+            s    = sd(survivaldays),
+            rng  = diff(range(survivaldays))) %>% 
+  kable(digits = 2) %>% 
+  kable_styling(full_width = FALSE,
+             position  = "left",
+             font_size = 14)
+```
+
+Data by groups
+
+```{r}
+gp %>%
+  group_by(group) %>% 
+  summarize(n = n(),
+            xbar = mean(survivaldays),
+            s    = sd(survivaldays),
+            rng  = diff(range(survivaldays))) %>% 
+  kable(digits = 2) %>% 
+  kable_styling(full_width = FALSE,
+             position  = "left",
+             font_size = 14)
+```
+
 
 ***
 ```{r}
