@@ -33,6 +33,8 @@
 <script src="JBStatsMeasuresOfCentralTendency_files/navigation-1.1/tabsets.js"></script>
 <link href="JBStatsMeasuresOfCentralTendency_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="JBStatsMeasuresOfCentralTendency_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="JBStatsMeasuresOfCentralTendency_files/kePrint-0.0.1/kePrint.js"></script>
+<link href="JBStatsMeasuresOfCentralTendency_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -167,7 +169,7 @@ pre code {
 <h1 class="title toc-ignore">Measures of Central Tendency</h1>
 <h3 class="subtitle">Companion <code>R</code> Code for JB Statistics Video Lesson</h3>
 <h4 class="author">Created by Jill E. Thomley</h4>
-<h4 class="date">Saturday, August 28, 2021 @ 08:29 PM</h4>
+<h4 class="date">Monday, August 30, 2021 @ 04:33 PM</h4>
 
 </div>
 
@@ -175,8 +177,8 @@ pre code {
 <ul>
 <li><a href="#packages-used">Packages Used</a></li>
 <li><a href="#datasets-used">Datasets Used</a></li>
-<li><a href="#example-dataset-with-6-observations">Example Dataset with 6 Observations</a></li>
-<li><a href="#guinea-pig-survival-time-histogram">Guinea Pig Survival Time Histogram</a></li>
+<li><a href="#example-with-6-observations">Example with 6 Observations</a></li>
+<li><a href="#guinea-pig-survival-times">Guinea Pig Survival Times</a></li>
 </ul>
 </div>
 
@@ -186,7 +188,9 @@ pre code {
 <hr />
 <div id="packages-used" class="section level4">
 <h4>Packages Used</h4>
-<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(knitr)
+library(kableExtra)</code></pre>
 </div>
 <div id="datasets-used" class="section level4">
 <h4>Datasets Used</h4>
@@ -202,8 +206,16 @@ Columns: 2
 $ group        &lt;chr&gt; &quot;control&quot;, &quot;control&quot;, &quot;control&quot;, &quot;control&quot;, &quot;control&quot;, &quot;c…
 $ survivaldays &lt;dbl&gt; 18, 36, 50, 52, 86, 87, 89, 91, 102, 108, 114, 114, 115, …</code></pre>
 </div>
-<div id="example-dataset-with-6-observations" class="section level4">
-<h4>Example Dataset with 6 Observations</h4>
+<div id="example-with-6-observations" class="section level4">
+<h4>Example with 6 Observations</h4>
+<pre class="r"><code>(xbar_manual &lt;- sum(sample6) / length(sample6))</code></pre>
+<pre><code>[1] 6.5</code></pre>
+<pre class="r"><code>(xbar &lt;- mean(sample6))</code></pre>
+<pre><code>[1] 6.5</code></pre>
+<pre class="r"><code>(x_sorted &lt;- sort(sample6))</code></pre>
+<pre><code>[1]  1.4  3.9  5.0  6.2  8.4 14.1</code></pre>
+<pre class="r"><code>(xmed &lt;- median(sample6))</code></pre>
+<pre><code>[1] 5.6</code></pre>
 <details>
 <pre class="r"><code># https://ggplot2.tidyverse.org/reference/geom_dotplot.html
 # https://ggplot2.tidyverse.org/reference/scale_continuous.html
@@ -211,9 +223,6 @@ $ survivaldays &lt;dbl&gt; 18, 36, 50, 52, 86, 87, 89, 91, 102, 108, 114, 114, 1
 # https://ggplot2.tidyverse.org/reference/geom_text.html
 # https://ggplot2.tidyverse.org/reference/theme.html
 # https://personal.sron.nl/~pault/#sec:qualitative
-
-xbar &lt;- mean(sample6)
-xmed &lt;- median(sample6)
 
 dot1 &lt;- ggplot(NULL, aes(x = sample6)) +
   geom_hline(yintercept = 0) +
@@ -249,10 +258,14 @@ dot1 &lt;- ggplot(NULL, aes(x = sample6)) +
   theme(panel.grid.minor = element_blank())</code></pre>
 </details>
 <pre class="r"><code>dot1</code></pre>
-<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>sample6mod &lt;- c(sample6[1:5], 26.1)
 glimpse(sample6mod)</code></pre>
 <pre><code> num [1:6] 1.4 3.9 5 6.2 8.4 26.1</code></pre>
+<pre class="r"><code>(xbar_mod &lt;- mean(sample6mod))</code></pre>
+<pre><code>[1] 8.5</code></pre>
+<pre class="r"><code>(xmed_mod &lt;- median(sample6mod))</code></pre>
+<pre><code>[1] 5.6</code></pre>
 <details>
 <pre class="r"><code>dot2 &lt;- ggplot(NULL, aes(x = sample6mod)) +
   geom_dotplot(binwidth = 1, 
@@ -271,14 +284,11 @@ glimpse(sample6mod)</code></pre>
         panel.grid.minor = element_blank())</code></pre>
 </details>
 <pre class="r"><code>dot2</code></pre>
-<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="guinea-pig-survival-time-histogram" class="section level4">
-<h4>Guinea Pig Survival Time Histogram</h4>
-<pre class="r"><code>gptrt &lt;- gp %&gt;% 
-  filter(group == &quot;treatment&quot;)
-
-ggplot(gptrt, aes(x = survivaldays)) +
+<div id="guinea-pig-survival-times" class="section level4">
+<h4>Guinea Pig Survival Times</h4>
+<pre class="r"><code>ggplot(filter(gp, group == &quot;treatment&quot;), aes(x = survivaldays)) +
   geom_histogram(breaks = seq(from = 0, to = 600, by = 50), 
                  color = &quot;darkgray&quot;, 
                  fill = &quot;lightblue&quot;) +
@@ -286,7 +296,7 @@ ggplot(gptrt, aes(x = survivaldays)) +
        x = &quot;Lifetime (days)&quot;,
        y = &quot;Frequency&quot;) +
   theme_bw()</code></pre>
-<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(gp, aes(x = survivaldays)) +
   geom_histogram(breaks = seq(from = 0, to = 800, by = 50), 
                  color = &quot;darkgray&quot;, 
@@ -297,7 +307,60 @@ ggplot(gptrt, aes(x = survivaldays)) +
        y = &quot;Frequency&quot;) +
   facet_grid(group ~ .) +
   theme_bw()</code></pre>
-<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="JBStatsMeasuresOfCentralTendency_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>gpstats &lt;- gp %&gt;% 
+  group_by(group) %&gt;% 
+  summarize(xbar = mean(survivaldays),
+            xmed = median(survivaldays))
+
+print.data.frame(gpstats, digits = 4) # 4 sig figs</code></pre>
+<pre><code>      group  xbar  xmed
+1   control 349.7 341.0
+2 treatment 241.2 214.5</code></pre>
+<pre class="r"><code>gpstats %&gt;% 
+  kable(digits = 1) %&gt;%   # 1 decimal place 
+  kable_styling(full_width = FALSE, 
+                position = &quot;left&quot;,
+                font_size = 14)</code></pre>
+<table class="table" style="font-size: 14px; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:right;">
+xbar
+</th>
+<th style="text-align:right;">
+xmed
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+control
+</td>
+<td style="text-align:right;">
+349.7
+</td>
+<td style="text-align:right;">
+341.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treatment
+</td>
+<td style="text-align:right;">
+241.2
+</td>
+<td style="text-align:right;">
+214.5
+</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 3.6.0 (2019-04-26)
@@ -319,27 +382,28 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] forcats_0.5.1   stringr_1.4.0   dplyr_1.0.7     purrr_0.3.4    
-[5] readr_2.0.1     tidyr_1.1.3     tibble_3.1.3    ggplot2_3.3.5  
-[9] tidyverse_1.3.1
+ [1] kableExtra_1.3.4 knitr_1.33       forcats_0.5.1    stringr_1.4.0   
+ [5] dplyr_1.0.7      purrr_0.3.4      readr_2.0.1      tidyr_1.1.3     
+ [9] tibble_3.1.4     ggplot2_3.3.5    tidyverse_1.3.1 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.7        lubridate_1.7.10  assertthat_0.2.1  digest_0.6.27    
- [5] utf8_1.2.2        R6_2.5.1          cellranger_1.1.0  backports_1.2.1  
- [9] reprex_2.0.1      evaluate_0.14     httr_1.4.2        highr_0.9        
-[13] pillar_1.6.2      rlang_0.4.11      curl_4.3.2        readxl_1.3.1     
-[17] rstudioapi_0.13   jquerylib_0.1.4   rmarkdown_2.10    labeling_0.4.2   
-[21] bit_4.0.4         munsell_0.5.0     broom_0.7.9       compiler_3.6.0   
-[25] modelr_0.1.8      xfun_0.25         pkgconfig_2.0.3   htmltools_0.5.1.1
-[29] tidyselect_1.1.1  fansi_0.5.0       crayon_1.4.1      tzdb_0.1.2       
-[33] dbplyr_2.1.1      withr_2.4.2       grid_3.6.0        jsonlite_1.7.2   
-[37] gtable_0.3.0      lifecycle_1.0.0   DBI_1.1.1         magrittr_2.0.1   
-[41] scales_1.1.1      cli_3.0.1         stringi_1.7.3     vroom_1.5.4      
-[45] farver_2.1.0      fs_1.5.0          xml2_1.3.2        bslib_0.2.5.1    
-[49] ellipsis_0.3.2    generics_0.1.0    vctrs_0.3.8       tools_3.6.0      
-[53] bit64_4.0.5       glue_1.4.2        hms_1.1.0         parallel_3.6.0   
-[57] yaml_2.2.1        colorspace_2.0-2  rvest_1.0.1       knitr_1.33       
-[61] haven_2.4.3       sass_0.4.0       </code></pre>
+ [1] Rcpp_1.0.7        svglite_2.0.0     lubridate_1.7.10  assertthat_0.2.1 
+ [5] digest_0.6.27     utf8_1.2.2        R6_2.5.1          cellranger_1.1.0 
+ [9] backports_1.2.1   reprex_2.0.1      evaluate_0.14     highr_0.9        
+[13] httr_1.4.2        pillar_1.6.2      rlang_0.4.11      curl_4.3.2       
+[17] readxl_1.3.1      rstudioapi_0.13   jquerylib_0.1.4   rmarkdown_2.10   
+[21] labeling_0.4.2    webshot_0.5.2     bit_4.0.4         munsell_0.5.0    
+[25] broom_0.7.9       compiler_3.6.0    modelr_0.1.8      xfun_0.25        
+[29] pkgconfig_2.0.3   systemfonts_1.0.2 htmltools_0.5.2   tidyselect_1.1.1 
+[33] fansi_0.5.0       viridisLite_0.4.0 crayon_1.4.1      tzdb_0.1.2       
+[37] dbplyr_2.1.1      withr_2.4.2       grid_3.6.0        jsonlite_1.7.2   
+[41] gtable_0.3.0      lifecycle_1.0.0   DBI_1.1.1         magrittr_2.0.1   
+[45] scales_1.1.1      cli_3.0.1         stringi_1.7.4     vroom_1.5.4      
+[49] farver_2.1.0      fs_1.5.0          xml2_1.3.2        bslib_0.2.5.1    
+[53] ellipsis_0.3.2    generics_0.1.0    vctrs_0.3.8       tools_3.6.0      
+[57] bit64_4.0.5       glue_1.4.2        hms_1.1.0         parallel_3.6.0   
+[61] fastmap_1.1.0     yaml_2.2.1        colorspace_2.0-2  rvest_1.0.1      
+[65] haven_2.4.3       sass_0.4.0       </code></pre>
 </div>
 
 

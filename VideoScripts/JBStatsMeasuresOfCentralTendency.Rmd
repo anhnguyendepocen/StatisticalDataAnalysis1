@@ -26,6 +26,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 
 ```{r loadpackages}
 library(tidyverse)
+library(knitr)
+library(kableExtra)
 ```
 
 #### Datasets Used
@@ -40,7 +42,15 @@ gp <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/J
 glimpse(gp)
 ```
 
-#### Example Dataset with 6 Observations
+#### Example with 6 Observations
+
+```{r}
+(xbar_manual <- sum(sample6) / length(sample6))
+(xbar <- mean(sample6))
+
+(x_sorted <- sort(sample6))
+(xmed <- median(sample6))
+```
 
 <details>
 ```{r}
@@ -50,9 +60,6 @@ glimpse(gp)
 # https://ggplot2.tidyverse.org/reference/geom_text.html
 # https://ggplot2.tidyverse.org/reference/theme.html
 # https://personal.sron.nl/~pault/#sec:qualitative
-
-xbar <- mean(sample6)
-xmed <- median(sample6)
 
 dot1 <- ggplot(NULL, aes(x = sample6)) +
   geom_hline(yintercept = 0) +
@@ -98,6 +105,11 @@ sample6mod <- c(sample6[1:5], 26.1)
 glimpse(sample6mod)
 ```
 
+```{r}
+(xbar_mod <- mean(sample6mod))
+(xmed_mod <- median(sample6mod))
+```
+
 <details>
 ```{r}
 dot2 <- ggplot(NULL, aes(x = sample6mod)) +
@@ -122,13 +134,10 @@ dot2 <- ggplot(NULL, aes(x = sample6mod)) +
 dot2
 ```
 
-#### Guinea Pig Survival Time Histogram
+#### Guinea Pig Survival Times
 
 ```{r}
-gptrt <- gp %>% 
-  filter(group == "treatment")
-
-ggplot(gptrt, aes(x = survivaldays)) +
+ggplot(filter(gp, group == "treatment"), aes(x = survivaldays)) +
   geom_histogram(breaks = seq(from = 0, to = 600, by = 50), 
                  color = "darkgray", 
                  fill = "lightblue") +
@@ -149,6 +158,21 @@ ggplot(gp, aes(x = survivaldays)) +
        y = "Frequency") +
   facet_grid(group ~ .) +
   theme_bw()
+```
+
+```{r}
+gpstats <- gp %>% 
+  group_by(group) %>% 
+  summarize(xbar = mean(survivaldays),
+            xmed = median(survivaldays))
+
+print.data.frame(gpstats, digits = 4) # 4 sig figs
+
+gpstats %>% 
+  kable(digits = 1) %>%   # 1 decimal place 
+  kable_styling(full_width = FALSE, 
+                position = "left",
+                font_size = 14)
 ```
 
 ***

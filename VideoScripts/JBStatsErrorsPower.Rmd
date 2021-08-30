@@ -32,8 +32,22 @@ true_mu   <- 1
 sigma     <- 5
 n         <- 20
 alphas    <- seq(0, .2, .05)
-threshold <- qt(alphas, null_mu, sigma, lower.tail = FALSE) 
-betas     <- pnorm(threshold, true_mu, sigma)
+threshold <- qnorm(alphas, null_mu, sigma/sqrt(n), lower.tail = FALSE) 
+betas     <- pnorm(threshold, true_mu, sigma/sqrt(n))
+
+errors_plot_data <- tibble(n, alphas, betas)
+
+ggplot(errors_plot_data, aes(x = alphas, y = betas)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1))
+
+ggplot(errors_plot_data, aes(x = alphas, y = betas)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1))
+
+ggplot(errors_plot_data, aes(x = alphas, y = betas)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1))
 ```
 
 ***
