@@ -1,0 +1,121 @@
+---
+title: "Quantitative EDA"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 5
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moments)
+```
+
+### Datasets Used
+
+#### Bangladesh Wells Dataset
+```{r}
+wells <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Chihara/Bangladesh.csv")
+glimpse(wells)
+head(wells)
+```
+
+#### Happy Face Dataset
+```{r}
+happyf <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/happyface.csv")
+glimpse(happyf)
+head(happyf)
+```
+
+#### Gas Mileage Dataset
+```{r}
+mileage <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv")
+glimpse(mileage)
+head(mileage)
+```
+
+#### Old Faithful Dataset
+```{r}
+geysers <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oldfaithful.csv")
+glimpse(geysers)
+head(geysers)
+```
+
+### Data Analyses
+
+#### Bangladesh Wells Dataset
+
+##### Plots
+```{r}
+
+```
+
+##### Summaries
+```{r}
+
+```
+
+#### Happy Face Dataset
+
+##### Plots
+```{r}
+
+```
+
+##### Summaries
+```{r}
+
+```
+
+#### Gas Mileage Dataset
+
+##### Plots
+```{r}
+
+```
+
+##### Summaries
+```{r}
+
+```
+
+#### Old Faithful Dataset
+
+##### Plots
+```{r}
+
+```
+
+##### Summaries
+```{r}
+
+```
+
+Related Slides:
+
+* [EDA Numerical Data: Distribution Shape](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/EDANumericalShape.html#1)
+* [EDA Numerical Data: Center, Spread, Z-Scores](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/EDANumericalCSZ.html#1)
+* [EDA Numerical Data: Boxplots](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/EDANumericalBox.html#1)
+
+***
+```{r}
+sessionInfo()
+```
