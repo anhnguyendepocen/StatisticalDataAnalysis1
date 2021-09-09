@@ -274,7 +274,7 @@ glimpse(happyf)
 
 ## Summarizing `mpg`
 
-I removed `skewness()` and `kurtosis()` here. I also know for sure that there are no outliers in this dataset, so I removed the `na.rm = TRUE` statements for simplicity. 
+I removed `skewness()` and `kurtosis()` here. I also know for sure that there are no missing values in this dataset, so I took out the `na.rm = TRUE` statements for simplicity. 
 
 ```{r, eval = FALSE}
 mileage %>% 
