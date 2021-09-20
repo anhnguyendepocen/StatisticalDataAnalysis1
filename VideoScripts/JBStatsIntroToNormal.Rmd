@@ -149,7 +149,7 @@ normalplot_3sigma <- ggplot() +
                 xlim = c(-3, 3),
                 fill = "lightblue") + 
   stat_function(fun = dnorm, args = list(0, 1)) +
-  geom_label(aes(label = "≈ 95%"), 
+  geom_label(aes(label = "≈ 99.7%"), 
              x = 0, 
              y = 0.2, 
              label.padding = unit(0.5, "lines")) +
