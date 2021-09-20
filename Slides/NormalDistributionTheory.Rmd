@@ -24,7 +24,7 @@ These slides are not meant to be standalone information. You should take notes t
 * Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
 * Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
 * DataCamp [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
-* Normal (Gaussian) Distribution: `R` Code (TBA) class slides
+* [Normal (Gaussian) Distribution: `R` Code ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) class slides
 
 
 ## Index
@@ -33,8 +33,8 @@ These slides are not meant to be standalone information. You should take notes t
 * Slides 04-07 &mdash; Distribution Fundamentals 
    + Slides 04-05 &mdash; Notation and pdf
    + Slides 06-08 &mdash; Visualizations and Empirical Rule
-* Slides 09-25 &mdash;Cumulative Distribution
-   + Slides 09 &mdash; Notation and CDF
+* Slides 09-25 &mdash; Cumulative Distribution
+   + Slide 09 &mdash; Notation and CDF
    + Slides 10-12 &mdash; Visualizations
    + Slides 13-16 &mdash; Area and Probability
    + Slides 17-18 &mdash; Distribution Quantiles
@@ -49,7 +49,9 @@ The normal distribution is a continuous probability distribution. Very few conce
 $$X \sim N(\mu,\sigma^2)$$
 
 $x$ = {-$\infty$ to +$\infty$} = *sample space*  
+
 $\mu$ = the mean (or expected value) of the distribution  
+
 $\sigma^2$ = the variance of the distribution  
 
 The **standard normal** distribution $Z$ has $\mu$ = 0 and $\sigma^2$ = $\sigma$ = 1.
@@ -384,12 +386,20 @@ gridExtra::grid.arrange(P1, P2, P3, ncol = 3)
 
 ```{r, fig.height = 2.25, echo = FALSE}
 ggplot() + 
-  stat_function(fun = dnorm, args = list(0, 1), geom = "area", fill = "#FE6100", xlim = c(-4, 1)) + 
+  stat_function(fun = dnorm, args = list(0, 1), 
+                geom = "area", 
+                fill = "#FE6100", 
+                xlim = c(-4, 1)) + 
   stat_function(fun = dnorm, args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), breaks = seq(from = -4, to = 4, by = 1)) +
+  scale_x_continuous(limits = c(-4, 4), 
+                     breaks = seq(from = -4, to = 4, by = 1)) +
  labs(title = "What value of x has the given area to the left of it?", 
-      x = "x", y = "f(x)") + 
- annotate("label", x = 0, y = 0.1, label = "area = 0.8413447...") +
+      x = "x", 
+      y = "f(x)") + 
+ annotate("label", 
+          x = 0, 
+          y = 0.1, 
+          label = "area = 0.8413447...") +
  theme_linedraw()
 ```
 

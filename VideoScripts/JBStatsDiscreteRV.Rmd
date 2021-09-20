@@ -79,6 +79,7 @@ plot(babies)
 
 If our two choices are random and independent, then we can find the probability of each of the four outcomes via multiplication. We can build a `tibble` in `R` using `dplyr` functions to perform the calculations.
 
+<details>
 ```{r}
 p <- 0.6   # try other values of p and see what happens!
 
@@ -90,6 +91,7 @@ treeprobs <- tibble(Baby1 = c("J", "J", "N", "N"),
   unite("Outcome", Baby1, Baby2, sep = " ", remove = FALSE) %>% 
   select(Baby1, Prob1, Baby2, Prob2, Outcome, Probability)
 ```
+</details>
 
 ```{r}
 treeprobs %>%   # stop here to see the without styling  
@@ -102,12 +104,14 @@ treeprobs %>%   # stop here to see the without styling
 
 However, we do not care about the order of selection, just the total number of babies who have jaundice, so we need to find and combine the outcomes that have the same number of J's and add up their probabilities.
 
+<details>
 ```{r}
 distribution_x <- treeprobs %>% 
   mutate(x = ifelse(Baby1 == "J", 1, 0) + ifelse(Baby2 == "J", 1, 0)) %>% 
   group_by(x) %>% 
   summarize(probability = sum(Probability))
 ```
+</details>
 
 ```{r}
 distribution_x %>% 
