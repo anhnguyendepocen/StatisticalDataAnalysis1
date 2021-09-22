@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(comment="", message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 library(tidyverse)
 library(kableExtra)
 library(knitr)
@@ -28,13 +28,13 @@ These slides are not meant to be standalone information. You should take notes t
 ## Index
 
 * Slides 02-03 &mdash; Materials & Index
-* Slides 04-06 &mdash;  Bernoulli Trials
-* Slides 07-10 &mdash;  Some Simple Simulations
-* Slides 11-25 &mdash;  Binomial Distribution Model
-   + Slides 12-18 &mdash;  Probability Mass Function (pmf)
-   + Slides 19-21  &mdash; Cumulative Distribution Function (CDF)
-   + Slides 22-25  &mdash; Tabulated and Graphical Representions
-* Slides 26-28  &mdash; Expected Value (Mean) and Variance 
+* Slides 04-06 &mdash; Bernoulli Trials
+* Slides 07-10 &mdash; Some Simple Simulations
+* Slides 11-25 &mdash; Binomial Distribution Model
+   + Slides 12-18 &mdash; Probability Mass Function (pmf)
+   + Slides 19-21 &mdash; Cumulative Distribution Function (CDF)
+   + Slides 22-25 &mdash; Tabulated and Graphical Representions
+* Slides 26-28 &mdash; Expected Value (Mean) and Variance 
 
 
 # Bernoulli Trials
@@ -114,10 +114,10 @@ The binomial distribution is a discrete probability distribution. It mathematica
 
 $$X \sim Bin(n,p)$$
 
-    x = number of successes = {0, 1, 2, ..., n}
-    n = number of trials
-    p = probability of success on a single trial
-    1 - p = probability of failure on a single trial
+$x$ = number of successes = {0, 1, 2, ..., $n$} = *sample space*  
+$n$ = number of trials  
+$p$ = probability of success on a single trial  
+$1 - p$ = probability of failure on a single trial  
 
 $$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
 
