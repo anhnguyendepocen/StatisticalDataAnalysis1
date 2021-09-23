@@ -13,7 +13,6 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-## Before We Begin...
 
 ## Before We Begin...
 
