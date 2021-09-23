@@ -1,0 +1,155 @@
+---
+title: "Normal Distribution Practice"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 5
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(kableExtra)
+```
+
+### The Normal Model
+
+$$X \sim N(\mu,\sigma^2)$$
+
+$x$ = {-$\infty$ to +$\infty$} 
+
+$\mu$ = the mean of the distribution  
+
+$\sigma^2$ = the variance of the distribution  
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+
+$$F(x) = \text{no closed-form solution}$$
+
+$$E[X] = \mu \text{ and }Var[X] = \sigma^2$$
+
+
+### The Empirical Rule
+
+The normal distribution is unimodal and perfectly symmetric.
+
+<p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg" width = 425></p>
+
+* approximately 68% of the curve's area is between $\mu \pm 1\sigma$ 
+* approximately 95% of the curve's area is between $\mu \pm 2\sigma$ 
+* approximately 99.7% of the curve's area is between $\mu \pm 3\sigma$ 
+
+The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically possible*.
+
+
+### Visualizing the Curve
+
+Plot the pdf and the CDF for each curve.
+
+* Standard IQ tests, such as the Wechsler Adult Intelligence Scale (WAIS), are typically scaled so that scores are normally distributed with $\mu = 100$ and $\sigma = 15$.
+
+* Scores on some older versions of the Stanford-Binet IQ test are normally distributed with a mean of $100$ and a standard deviation of $16$.
+
+* Cattell Culture Fair Test scores are normally distributed with mean of $100$ and a standard deviation of $24$.
+
+* Subscales of the current Stanford-Binet have scores that are normally distributed with $\mu$ = 10 and $\sigma$ = 3.
+
+* The distribution of shoe sizes for people who wear "men's" U.S. shoes is approximately normal with a mean of $11$ and a standard deviation of $1.5$ (note that shoes typically come in whole and half sizes).
+
+* Retirement ages for NFL players are approximately normally distributed with with $\mu = 33$ years and $\sigma = 2$ years. 
+
+* ACT scores for U.S. high school students ~ approx $N(21, 25)$.
+
+* A 2002 study found that the birth weights of full-term babies in the UK were approximately normal with $\mu = 3.4$ kg and $\sigma = 0.6$ kg. Plot four pdfs with the weights expressed in (a) kilograms; (b) grams; (c) pounds; and (d) ounces.
+
+* Plot the WAIS, Stanford-Binet, and Cattell curves on the same set of axes to compare.
+
+
+### Calculating Probability 
+
+* Use `pnorm()` and $N(0,1)$ to calculate how much area is to the *left* of the points $\mu - 3\sigma$, $\mu - 2\sigma$, $\mu - 1\sigma$, $\mu$, $\mu + 1\sigma$, $\mu + 2\sigma$, and $\mu + 3\sigma$
+
+ * Use `pnorm()` and $N(0,1)$ to calculate how much area is to the *right* of the points $\mu - 3\sigma$, $\mu - 2\sigma$, $\mu - 1\sigma$, $\mu$, $\mu + 1\sigma$, $\mu + 2\sigma$, and $\mu + 3\sigma$
+
+* The Empirical Rule tells us the approximate areas under the curve between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$. Use `pnorm()` and $N(0,1)$ to calculate the exact area in these regions.
+
+For the next problems, remember to use the *continuity correction* (i.e., the half-step between measures, to account for rounding).
+
+* Most major men’s shoe manufacturers make shoes down to US size 7 or 8. What percentage of wearers would be smaller than these sizes?
+
+* What proportion of football players retire after the age of 35?
+
+* The middle 50% of ASU students score between 22-28 on the ACT. Nationally, what percentage of students scores between 22 and 28?
+
+* If a full-term baby weighs less than 2.5 kg at birth, they are considered to have a low birth weight. Babies weighing less than 1.5 kg are considered very low birth weight. Babies who weigh less than 1.0 kg are extremely low birth weight. What percentage of babies falls into each category?
+
+What percentage of the population falls into each WAIS class?
+
+```{r, echo = FALSE}
+IQtable = tibble('Score Range' = c("130 and above",
+                                   "120 to 129",
+                                   "110 to 119",
+                                   "90 to 109",
+                                   "80 to 89",
+                                   "70 to 79",
+                                   "69 and below"),
+                 'WAIS Class' = c("Very Superior",
+                                  "Superior",
+                                  "High Average",
+                                  "Average",
+                                  "Low Average",
+                                  "Borderline",
+                                  "Extremely Low"))
+kable(IQtable, format = 'markdown')
+```
+
+
+### Finding Percentiles
+
+1) Use `qnorm()` to find the first quartile (Q~1~), median, and third quartile (Q~3~) of $N(0,1)$.
+
+2) The deciles of a distribution are percentiles that are multiples of 10 (10th percentile, 20th percentile, up to 90th percentile). Find the deciles for ACT scores and birth weights.
+
+3) To be a member of the high-IQ society Mensa, a person must score in the top 2% on a standard test of intelligence. What scores would be required on the WAIS and Catell tests? What is the equivalent score on $Z$? Use `qnorm()` to solve.
+
+4) The Empirical Rule tells us that the areas under the curve between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$ are ~68%, ~95%, and ~99%. Use `qnorm()` and $N(0,1)$ to calculate the more exact boundaries of the middle 68%, 95%, and 99%.
+
+
+### Random Sampling
+
+1) Generate samples of different sizes from a standard normal distribution.
+
+2) Generate samples of different sizes from other distributions we discussed.
+
+3) Use your EDA skills to explore and plot the various samples. Do the distributions look bell-shaped? Do they have close to what you would expected for mean and standard deviation? Are there any outliers? 
+
+4) How does sample size impact your results? Where do you see more variability from sample to sample?
+
+
+### Related Slides
+
+* [Normal (Gaussian) Distribution: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html#1)
+* [Normal (Gaussian) Distribution: `R` Code](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html#1)
+* [Normal (Gaussian) Distribution: Practice](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionPractice.html#1)
+
+***
+```{r}
+sessionInfo()
+```
