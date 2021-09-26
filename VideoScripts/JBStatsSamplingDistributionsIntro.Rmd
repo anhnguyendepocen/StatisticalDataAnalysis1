@@ -7,8 +7,9 @@ output:
   html_document: 
     theme: yeti
     highlight: textmate
-    toc: TRUE
+    toc: true
     toc_depth: 4
+    self_contained: false
 ---
 
 ```{r globaloptions, include = FALSE}
@@ -24,7 +25,9 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 <details>
 ```{r loadpackages}
 library(tidyverse)
-library(combinat)  # required for combn() function
+library(knitr)
+library(kableExtra)
+library(combinat) # required for combn() function
 ```
 </details>
 
@@ -35,7 +38,7 @@ library(combinat)  # required for combn() function
 The video uses a population of 16 students in a college classroom as an example. The variable of interest is the students' ages in months. We can create this population in `R` as a vector. 
 
 ```{r createpop}
-pop_ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276)
+pop_ages <- c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 243, 238, 276)
 ```
 
 #### Accessing Population Values 
@@ -43,10 +46,10 @@ pop_ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 230, 246, 231, 24
 Each value in the vector has a location or index numbered from 1-16. We can identify a value via its location and access it with `[ ]` index notation. We can choose multiple values by using a vector.
 
 ```{r}
-pop_ages[1]         # first value
-pop_ages[10]        # tenth value
-pop_ages[c(1, 10)]  # first and tenth values
-pop_ages[1:10]      # first through tenth values
+pop_ages[1] # first value
+pop_ages[10] # tenth value
+pop_ages[c(1, 10)] # first and tenth values
+pop_ages[1:10] # first through tenth values
 ```
 
 The overall population mean is $\mu$. Recall that placing `()` around the object prints it after assigning using `<-`.
@@ -82,30 +85,42 @@ sample_ages <- pop_ages[sampleIDs]
 We will take advantage of being able to choose values using `[ ]` to take a large number of random samples from the population. While it is possible to accomplish what we want by using the `sample()` function directly on the vector here, we are laying down a methodological foundation for resampling-based hypothesis tests by doing it this way.
 
 ```{r simsamples}
-sims  <- 10^6              # number of samples
-pop_N <- length(pop_ages)  # population size
-n     <- 3                 # sample size
+sims <- 10^6 # number of samples
+pop_N <- length(pop_ages) # population size
+n <- 3 # sample size
 
 sim_means <- numeric(sims) # vector to store the means of the random samples
-                           # there is one location for each simulated sample
-                           # initially this vector contains zeroes, try it!
+# there is one location for each simulated sample
+# initially this vector contains zeroes, try it!
 
 # our for loop starts at 1 because vectors in R are indexed starting at one
+# in mathematics, locations in vectors and/or matrices are numbered from 1
 # the counter serves not only to count, but also to index results using [i]
 
 for (i in 1:sims) {
-  sampleIDs    <- sample(pop_N, n)           # randomly choose n sample IDs
-  sim_means[i] <- mean(pop_ages[sampleIDs])  # compute/store the sample mean
+  sampleIDs <- sample(pop_N, n) # randomly choose n sample IDs
+  sim_means[i] <- mean(pop_ages[sampleIDs]) # compute/store the sample mean
 }
 ```
 
 ```{r plotsimsamples}
 ggplot(NULL, aes(x = sim_means)) +
-  geom_histogram(bins = 15, color = "gray", fill = "lightblue") +
-  geom_vline(xintercept = mu, color = "red", linetype = "dashed") +
-  labs(title = "Means of Simulated Samples of n = 3 from the Population of Class Ages",
-       subtitle = "the dashed red line represents the population mean",
-       x = "Mean Age in Months") +
+  geom_histogram(
+    bins = 15,
+    color = "white",
+    fill = "lightblue"
+  ) +
+  geom_vline(
+    xintercept = mu,
+    color = "orange",
+    linetype = "dashed",
+    size = 1
+  ) +
+  labs(
+    title = "Means of Simulated Samples of n = 3 from the Population of Class Ages",
+    subtitle = "the dashed orange line represents the population mean",
+    x = "Mean Age in Months"
+  ) +
   theme_linedraw()
 ```
 
@@ -135,18 +150,28 @@ The `combn()` function finds all the unique samples of n = 3 from the population
 
 ```{r allsamples}
 n <- 3
-all_samples <- combn(pop_ages, n)        # each matrix column is one sample
-all_means   <- colSums(all_samples) / n  # compute the mean of each sample
+all_samples <- combn(pop_ages, n) # each matrix column is one sample
+all_means <- colSums(all_samples) / n # compute the mean of each sample
 
 ggplot(NULL, aes(x = all_means)) +
-  geom_dotplot(dotsize = 0.35) +
-  geom_vline(xintercept = mu, 
-             color = "red", 
-             linetype = "dashed") +
+  geom_dotplot(
+    dotsize = 0.35,
+    color = "white",
+    fill = "skyblue"
+  ) +
+  geom_vline(
+    xintercept = mu,
+    color = "orange",
+    linetype = "dashed",
+    size = 1
+  ) +
   scale_y_continuous(NULL, expand = c(0, 0)) +
-  labs(title = "Means of All Possible Samples of n = 3 from the Population of Class Ages",
-       subtitle = "the dashed red line represents the population mean",
-       x = "Mean Age in Months")
+  labs(
+    title = "Means of All Possible Samples of n = 3 from the Population of Class Ages",
+    subtitle = "the dashed orange line represents the population mean",
+    x = "Mean Age in Months"
+  ) +
+  theme_linedraw()
 ```
 
 Notice that the average of all possible sample means is exactly the the same as the population mean.
@@ -167,8 +192,8 @@ pop_ages <- tibble(ages = c(234, 241, 233, 227, 251, 227, 242, 239, 241, 238, 23
 ```
 
 ```{r}
-mu <- pop_ages %>% 
-  summarize(mu = mean(ages)) %>% 
+mu <- pop_ages %>%
+  summarize(mu = mean(ages)) %>%
   pull(mu)
 ```
 
@@ -177,13 +202,14 @@ mu <- pop_ages %>%
 This code replaces the simulation loop above, but it relies on the same fundamental functions. We are taking fewer resamples here (1000 vs. 100,000) because of runtime. The results will have more sampling variability.
 
 ```{r simsamplestidy}
-sim_means <- replicate(n = 1000,
-          expr = {
-            pop_ages %>% 
-              slice_sample(n = 3) %>% 
-              summarize(sample_mean = mean(ages)) %>% 
-              pull(sample_mean)
-          }
+sim_means <- replicate(
+  n = 1000, # this n is the number of replications
+  expr = {
+    pop_ages %>%
+      slice_sample(n = 3) %>% # this n is the sample size
+      summarize(sample_mean = mean(ages)) %>%
+      pull(sample_mean)
+  }
 )
 ```
 
@@ -191,26 +217,40 @@ Plotting the simulation results is identical to the previous simulation.
 
 ```{r plotsimsamplestidy}
 ggplot(NULL, aes(x = sim_means)) +
-  geom_histogram(bins = 15, 
-                 color = "gray", 
-                 fill = "lightblue") +
-  geom_vline(xintercept = mu, 
-             color = "red", 
-             linetype = "dashed") +
-  labs(title = "Means of Simulated Samples of n = 3 from the Population of Class Ages",
-       subtitle = "the dashed red line represents the population mean",
-       x = "Mean Age in Months") +
+  geom_histogram(
+    bins = 15,
+    color = "white",
+    fill = "lightblue"
+  ) +
+  geom_vline(
+    xintercept = mu,
+    color = "orange",
+    linetype = "dashed",
+    size = 1
+  ) +
+  labs(
+    title = "Means of Simulated Samples of n = 3 from the Population of Class Ages",
+    subtitle = "the dashed orange line represents the population mean",
+    x = "Mean Age in Months"
+  ) +
   theme_linedraw()
 ```
 
 We can use `summarize()` if we make our simulation output a `tibble` first.
 
 ```{r simstatstidy}
-tibble(sim_means) %>% 
-summarize(mean_of_sim_means = mean(sim_means),
-          sd_of_sim_means   = sd(sim_means))
+tibble(sim_means) %>%
+  summarize(
+    mean_of_sim_means = mean(sim_means),
+    sd_of_sim_means = sd(sim_means)
+  ) %>%
+  kable(digits = 2) %>%
+  kable_styling(
+    full_width = FALSE,
+    position = "left",
+    font_size = 14
+  )
 ```
-
 
 ***
 ```{r}

@@ -9,6 +9,7 @@ output:
     highlight: textmate
     toc: TRUE
     toc_depth: 4
+    self_contained: false
 ---
 
 ```{r globaloptions, include = FALSE}
@@ -50,7 +51,7 @@ Find the nine values that split the standard normal distribution into 10 equal a
 # function qnorm(p, mean, SD)
 
 # long way for illustration
-(deciles <- qnorm(c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ,0.9), 0, 1))
+(deciles <- qnorm(c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), 0, 1))
 
 # this is a better coding strategy
 # it scales up for larger problems
@@ -62,11 +63,17 @@ As a Tibble
 When using `ggplot2` it is often better to create a dataset versus stand-alone vectors.
 
 ```{r}
-plotdata1 <- tibble(sample = c(3.89, 4.75, 4.75, 5.20, 5.78, 5.80, 6.33, 7.21, 7.90),
-                    deciles = qnorm(seq(from = 0.1, to = 0.9, by = 0.1), 0, 1))
-plotdata1 %>% 
-  kable(digits = 2) %>% 
-  kable_styling(full_width = FALSE, position = "left")
+plotdata1 <- tibble(
+  sample = c(3.89, 4.75, 4.75, 5.20, 5.78, 5.80, 6.33, 7.21, 7.90),
+  deciles = qnorm(seq(from = 0.1, to = 0.9, by = 0.1), 0, 1)
+)
+plotdata1 %>%
+  kable(digits = 2) %>%
+  kable_styling(
+    full_width = FALSE,
+    position = "left",
+    font_size = 14
+  )
 ```
 
 #### Create a Plot of Sample vs. Quantiles
@@ -76,8 +83,10 @@ If the data come from a normal distribution, then the theoretical and sample qua
 ```{r}
 ggplot(plotdata1, aes(x = deciles, y = sample)) +
   geom_point() +
-  labs(x = "Theretical Quantiles",
-       y = "Sample Quantiles") +
+  labs(
+    x = "Theretical Quantiles",
+    y = "Sample Quantiles"
+  ) +
   theme_linedraw()
 ```
 
@@ -87,9 +96,11 @@ In general, the *i*th ordered value (or *order statistic*) is plotted against th
 
 ```{r}
 n <- 9
-plotdata1 %>% 
-  mutate(point_number = 1:n,
-         order_statistic = point_number / (n + 1))
+plotdata1 %>%
+  mutate(
+    point_number = 1:n,
+    order_statistic = point_number / (n + 1)
+  )
 ```
 
 #### A General Tidyverse Algorithm 
@@ -97,10 +108,12 @@ plotdata1 %>%
 We can combine all our steps above to program a general algorith using `tidyverse` tools. If you have an existing dataset, you use that in place of creating a `tibble`. Make sure to `filter()` to eliminate any rows that have missing values in the variable you plan to plot, otherwise your $n$ will be incorrect.
 
 ```{r}
-plotdata2 <- tibble(sample = c(3.89, 4.75, 4.75, 5.20, 5.78, 5.80, 6.33, 7.21, 7.90)) %>% 
-  mutate(point_number = row_number(),
-         order_statistic = point_number / (n() + 1),
-         quantile_value = qnorm(order_statistic, 0, 1))
+plotdata2 <- tibble(sample = c(3.89, 4.75, 4.75, 5.20, 5.78, 5.80, 6.33, 7.21, 7.90)) %>%
+  mutate(
+    point_number = row_number(),
+    order_statistic = point_number / (n() + 1),
+    quantile_value = qnorm(order_statistic, 0, 1)
+  )
 plotdata2
 ```
 
@@ -118,7 +131,7 @@ ggplot(normal_sample, aes(sample = x)) +
 
 #### Sample from a Uniform Population
 
-The continuous uniform distribution has a flatter peak and thinner tails than the normal distribution.
+The continuous uniform distribution is *platykurtic*, which means it has a flatter peak and thinner tails than the normal distribution.
 
 ```{r}
 # X ~ Unif(-3, +3) covers about the same range
@@ -135,8 +148,16 @@ ggplot(uniform_sample, aes(sample = x)) +
 
 ```{r}
 ggplot() +
-  stat_function(fun = dunif, args = list(-3, 3), color = "blue") +
-  stat_function(fun = dnorm, args = list(0, 1), color = "orange") +
+  stat_function(
+    fun = dunif,
+    args = list(-3, 3),
+    color = "blue"
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    color = "orange"
+  ) +
   scale_x_continuous(limits = c(-3, +3)) +
   theme_linedraw()
 ```
@@ -152,7 +173,10 @@ exponential_sample <- tibble(x = rexp(50, 1))
 
 # plot of the population
 ggplot() +
-  stat_function(fun = dexp, args = list(1)) +
+  stat_function(
+    fun = dexp,
+    args = list(1)
+  ) +
   scale_x_continuous(limits = c(0, 6)) +
   theme_linedraw()
 
@@ -164,7 +188,7 @@ ggplot(exponential_sample, aes(sample = x)) +
 
 #### Sample from an Student's t Population
 
-The Student's *t* distribution has thicker tails than the normal distribution when the parameter is small. However, the *t* converges to the standard normal distribution as the parameter approaches $\infty$.
+The Student's *t* distribution is *leptokurtic*, which means it has a taller peak and thicker tails than the normal distribution when the parameter is small. However, the *t* converges to the standard normal distribution as the parameter approaches $\infty$. Notice the data curves in the opposite direction from the uniform distribution on a QQ plot.
 
 ```{r}
 # X ~ t(2)
@@ -173,7 +197,10 @@ t_sample <- tibble(x = rt(50, 2))
 
 # plot of the population
 ggplot() +
-  stat_function(fun = dt, args = list(2)) +
+  stat_function(
+    fun = dt,
+    args = list(2)
+  ) +
   scale_x_continuous(limits = c(-6, 6)) +
   theme_linedraw()
 
@@ -190,10 +217,13 @@ Try several samples of the same size to observe how the plot can vary from sampl
 
 ```{r}
 # choose your sample size
-n <- 10 
+n <- 10
 
 # sample generation is nested in the plot code
-ggplot(tibble(x = rnorm(n, 0, 1)), aes(sample = x)) +
+ggplot(
+  tibble(x = rnorm(n, 0, 1)),
+  aes(sample = x)
+) +
   geom_qq() +
   geom_qq_line() +
   theme_classic()
@@ -205,8 +235,10 @@ ggplot(tibble(x = rnorm(n, 0, 1)), aes(sample = x)) +
 # choose your sample size
 n <- 10
 
-norm_samples <- tibble(sample_values = rnorm(9 * n, 0, 1),
-                       sample_number = rep(1:9, each = n))
+norm_samples <- tibble(
+  sample_values = rnorm(9 * n, 0, 1),
+  sample_number = rep(1:9, each = n)
+)
 
 ggplot(norm_samples, aes(sample = sample_values)) +
   geom_qq() +
