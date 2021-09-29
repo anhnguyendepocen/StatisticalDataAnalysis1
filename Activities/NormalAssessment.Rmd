@@ -93,6 +93,12 @@ print.data.frame(skewK, row.names = FALSE)
 
 ### Father's Height
 
+#### Mean and SD
+
+```{r}
+
+```
+
 #### Density Plot
 
 ```{r}
