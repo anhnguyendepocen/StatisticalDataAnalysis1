@@ -4,10 +4,10 @@ subtitle: "Companion `R` Code for JB Statistics Video Lesson"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
-  html_document: 
+  html_document:
     theme: yeti
     highlight: textmate
-    toc: TRUE
+    toc: true
     toc_depth: 4
     self_contained: false
 ---

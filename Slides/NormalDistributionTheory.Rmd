@@ -8,7 +8,9 @@ output:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = NA)
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      comment = NA)
 library(tidyverse)
 library(kableExtra)
 library(gridExtra)
@@ -22,10 +24,10 @@ These slides are not meant to be standalone information. You should take notes t
 **Related Materials**
 
 * Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
-* Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
+* [Appendix A](https://moderndive.com/A-appendixA.html) of *Modern Dive*
 * DataCamp [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
-* [Normal (Gaussian) Distribution: `R` Code ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) class slides
-
+* [Normal (Gaussian) Distribution: `R` Code ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) (slides)
+* [Normal (Gaussian) Distribution: Assessing](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalAssessment.html) (slides)
 
 ## Index
 
@@ -71,10 +73,20 @@ The area beneath a normal curve is always 1.
 ## Visualizing the Standard Normal
 
 ```{r, fig.height = 4.25, echo = FALSE}
-sn_pdf <- ggplot() + 
-  stat_function(fun = dnorm, args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "Standard Normal Distribution N(0, 1)", x = "x", y = "f(x)") + 
+sn_pdf <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Standard Normal Distribution N(0, 1)",
+    x = "x",
+    y = "f(x)"
+  ) +
   theme_linedraw()
 sn_pdf
 ```
@@ -85,31 +97,42 @@ Notice that there is very little area under the curve outside ± $3$.
 ## Another Normal Distribution
 
 ```{r, fig.height = 4.25, echo = FALSE}
-mu    <- 69
+mu <- 69
 sigma <- 3
-ggplot() + 
-  stat_function(fun = dnorm, 
-                args = list(mu, sigma)) +
-  scale_x_continuous(limits = c(mu - (4 * sigma), mu + (4 * sigma)),
-                     breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)) +
-  labs(title = "US Adult Male Heights ~ N(69, 9)", 
-       x = "inches", 
-       y = "f(x)") + 
+ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(mu, sigma)
+  ) +
+  scale_x_continuous(
+    limits = c(mu - (4 * sigma), mu + (4 * sigma)),
+    breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)
+  ) +
+  labs(
+    title = "US Adult Male Heights ~ N(69, 9)",
+    x = "inches",
+    y = "f(x)"
+  ) +
   theme_linedraw() +
-  annotate("label", 
-           x = 69, 
-           y = 0.05, 
-           label = "same area") +
-  annotate("label", 
-           x = 62.0, 
-           y = 0.10, 
-           label = "different scaling") +
-  geom_segment(aes(x = c(59.5, 63), 
-                   xend = c(57, 66), 
-                   y = c(0.10, 0.0925), 
-                   yend = c(0.10, 0.001)), 
-               arrow = arrow(length = unit(0.5, "cm")),
-               color = "#FE6100", size = 1.25)
+  annotate("label",
+    x = 69,
+    y = 0.05,
+    label = "same area"
+  ) +
+  annotate("label",
+    x = 62.0,
+    y = 0.10,
+    label = "different scaling"
+  ) +
+  geom_segment(aes(
+    x = c(59.5, 63),
+    xend = c(57, 66),
+    y = c(0.10, 0.0925),
+    yend = c(0.10, 0.001)
+  ),
+  arrow = arrow(length = unit(0.5, "cm")),
+  color = "#FE6100", size = 1.25
+  )
 ```
 
 Notice that there is very little area under the curve outside ± $3\sigma$.
@@ -125,7 +148,7 @@ The normal distribution is unimodal and perfectly symmetric.
 * approximately 95% of the curve's area is between $\mu \pm 2\sigma$ 
 * approximately 99.7% of the curve's area is between $\mu \pm 3\sigma$ 
 
-The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically possible*.
+The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically* possible.
 
 
 ## Cumulative Distribution Function (CDF)
@@ -140,14 +163,20 @@ The normal distribution has no closed-form solution for $F(x)$. `R` has a functi
 ## Visualizing the Standard Normal
 
 ```{r, fig.height = 4.25, echo = FALSE}
-sn_cdf <- ggplot() + 
-  stat_function(fun = pnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "Standard Normal Distribution N(0, 1)", 
-       x = "x", 
-       y = "F(x)") + 
+sn_cdf <- ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Standard Normal Distribution N(0, 1)",
+    x = "x",
+    y = "F(x)"
+  ) +
   theme_linedraw()
 sn_cdf
 ```
@@ -158,16 +187,22 @@ Notice the logistic (S) shape with the inflection point at $\mu = 0$.
 ## Another Normal Distribution
 
 ```{r, fig.height = 4.25, echo = FALSE}
-mu    <- 69
+mu <- 69
 sigma <- 3
-ggplot() + 
-  stat_function(fun = pnorm, 
-                args = list(mu, sigma)) +
-  scale_x_continuous(limits = c(mu - (4 * sigma), mu + (4 * sigma)),
-     breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)) +
-  labs(title = "US Adult Male Heights ~ N(69, 9)", 
-       x = "inches", 
-       y = "F(x)") + 
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(mu, sigma)
+  ) +
+  scale_x_continuous(
+    limits = c(mu - (4 * sigma), mu + (4 * sigma)),
+    breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)
+  ) +
+  labs(
+    title = "US Adult Male Heights ~ N(69, 9)",
+    x = "inches",
+    y = "F(x)"
+  ) +
   theme_linedraw()
 ```
 
@@ -185,86 +220,62 @@ Notice how the two normal distribution plots correspond. Recall that $F(x)$---th
 ## 
 
 ```{r, fig.height = 2.50, echo = FALSE}
-ggplot() + 
-  stat_function(fun = dnorm, args = list(0, 1), 
-                geom = "area", 
-                fill = "#FE6100", 
-                xlim = c(-4, 0)) + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "How much area under the curve is to the left of x = 0?", 
-       x = "x", 
-       y = "f(x)") + 
+ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 0)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "How much area under the curve is to the left of x = 0?",
+    x = "x",
+    y = "f(x)"
+  ) +
   theme_linedraw()
 ```
 
 ```{r, fig.height = 2.50, echo = FALSE}
-ggplot() + 
-  stat_function(fun = pnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "Question is answered by evaluating the CDF at x = 0.", 
-       x = "x", y = "F(x)") + 
-  geom_segment(aes(x = 0, 
-                   xend =  0, 
-                   y = 0, 
-                   yend = 0.5), 
-               color = "#FE6100",
-               size = 1.25) +
-  geom_segment(aes(x = 0, 
-                   xend = -4, 
-                   y = 0.5, 
-                   yend = 0.5), 
-               color = "#FE6100", 
-               size = 1.25,
-               arrow = arrow(length = unit(0.5,"cm"))) +
-  theme_linedraw()
-```
-
-
-## 
-
-```{r, fig.height = 2.50, echo = FALSE}
-ggplot() + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1), 
-                geom = "area", 
-                fill = "#648FFF", 
-                xlim = c(-4, 1)) + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "How much area under the curve is to the left of x = 1?", 
-       x = "x", 
-       y = "f(x)") + 
-  theme_linedraw()
-```
-
-```{r, fig.height = 2.50, echo = FALSE}
-ggplot() + 
-  stat_function(fun = pnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "Question is answered by evaluating the CDF at x = 1.", 
-       x = "x", y = "F(x)") + 
-  geom_segment(aes(x = 1, 
-                   xend =  1, 
-                   y = 0, 
-                   yend = pnorm(1)), 
-               color = "#648FFF",
-               size = 1.25) +
-  geom_segment(aes(x = 1, 
-                   xend = -4, 
-                   y = pnorm(1), 
-                   yend = pnorm(1)), 
-               color = "#648FFF", 
-               size = 1.25,
-               arrow = arrow(length = unit(0.5,"cm"))) +
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Question is answered by evaluating the CDF at x = 0.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = 0,
+    y = 0,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = -4,
+    y = 0.5,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
   theme_linedraw()
 ```
 
@@ -272,55 +283,145 @@ ggplot() +
 ## 
 
 ```{r, fig.height = 2.50, echo = FALSE}
-ggplot() + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1), 
-                geom = "area", 
-                fill = "#DC267F", 
-                xlim = c(0, 1)) + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "How much area under the curve is between x = 0 and x = 1?", 
-       x = "x", y = "f(x)") + 
+ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#648FFF",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "How much area under the curve is to the left of x = 1?",
+    x = "x",
+    y = "f(x)"
+  ) +
   theme_linedraw()
 ```
 
 ```{r, fig.height = 2.50, echo = FALSE}
-ggplot() + 
-  stat_function(fun = pnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "Evaluate the CDF at both points and subtract the lower area.", 
-       x = "x", y = "F(x)") + 
-  geom_segment(aes(x = 0, 
-                   xend =  0, 
-                   y = 0, 
-                   yend = 0.5), 
-               color = "#FE6100",
-               size = 1.25) +
-  geom_segment(aes(x = 0, 
-                   xend = -4, 
-                   y = 0.5, 
-                   yend = 0.5), 
-               color = "#FE6100", 
-               size = 1.25,
-               arrow = arrow(length = unit(0.5,"cm"))) +
-  geom_segment(aes(x = 1, 
-                   xend =  1, 
-                   y = 0, 
-                   yend = pnorm(1)), 
-               color = "#648FFF",
-               size = 1.25) +
-  geom_segment(aes(x = 1, 
-                   xend = -4, 
-                   y = pnorm(1), 
-                   yend = pnorm(1)), 
-               color = "#648FFF", 
-               size = 1.25,
-               arrow = arrow(length = unit(0.5,"cm"))) +
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Question is answered by evaluating the CDF at x = 1.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = 1,
+    y = 0,
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = -4,
+    y = pnorm(1),
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  theme_linedraw()
+```
+
+
+## 
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#DC267F",
+    xlim = c(0, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "How much area under the curve is between x = 0 and x = 1?",
+    x = "x", y = "f(x)"
+  ) +
+  theme_linedraw()
+```
+
+```{r, fig.height = 2.50, echo = FALSE}
+ggplot() +
+  stat_function(
+    fun = pnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "Evaluate the CDF at both points and subtract the lower area.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = 0,
+    y = 0,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 0,
+    xend = -4,
+    y = 0.5,
+    yend = 0.5
+  ),
+  color = "#FE6100",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = 1,
+    y = 0,
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = -4,
+    y = pnorm(1),
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
   theme_linedraw()
 ```
 
@@ -334,48 +435,72 @@ $$\int\limits_{0}^{1} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
 $$0.8413477 - 0.5 = 0.3413477$$
 
 ```{r, fig.height = 2.50, echo = FALSE}
-P1 <- ggplot() + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1), 
-                geom = "area", 
-                fill = "#648FFF", 
-                xlim = c(-4, 1)) + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "area left of 1 minus...", 
-       x = "x", 
-       y = "f(x)") + 
+P1 <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#648FFF",
+    xlim = c(-4, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area left of 1 minus...",
+    x = "x",
+    y = "f(x)"
+  ) +
   theme_linedraw()
 
-P2 <- ggplot() + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1), 
-                geom = "area", 
-                fill = "#FE6100", 
-                xlim = c(-4, 0)) + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "area left of 0 equals...", 
-       x = "x", 
-       y = "f(x)") + 
+P2 <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 0)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area left of 0 equals...",
+    x = "x",
+    y = "f(x)"
+  ) +
   theme_linedraw()
 
-P3 <- ggplot() + 
-  stat_function(fun = dnorm, args = list(0, 1), 
-                geom = "area", 
-                fill = "#DC267F", 
-                xlim = c(0, 1)) + 
-  stat_function(fun = dnorm, 
-                args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "area between 0 and 1", 
-       x = "x", 
-       y = "f(x)") + 
+P3 <- ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#DC267F",
+    xlim = c(0, 1)
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(0, 1)
+  ) +
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "area between 0 and 1",
+    x = "x",
+    y = "f(x)"
+  ) +
   theme_linedraw()
 
 gridExtra::grid.arrange(P1, P2, P3, ncol = 3)
@@ -385,43 +510,58 @@ gridExtra::grid.arrange(P1, P2, P3, ncol = 3)
 ## Finding the Quantiles
 
 ```{r, fig.height = 2.25, echo = FALSE}
-ggplot() + 
-  stat_function(fun = dnorm, args = list(0, 1), 
-                geom = "area", 
-                fill = "#FE6100", 
-                xlim = c(-4, 1)) + 
+ggplot() +
+  stat_function(
+    fun = dnorm, args = list(0, 1),
+    geom = "area",
+    fill = "#FE6100",
+    xlim = c(-4, 1)
+  ) +
   stat_function(fun = dnorm, args = list(0, 1)) +
-  scale_x_continuous(limits = c(-4, 4), 
-                     breaks = seq(from = -4, to = 4, by = 1)) +
- labs(title = "What value of x has the given area to the left of it?", 
-      x = "x", 
-      y = "f(x)") + 
- annotate("label", 
-          x = 0, 
-          y = 0.1, 
-          label = "area = 0.8413447...") +
- theme_linedraw()
+  scale_x_continuous(
+    limits = c(-4, 4),
+    breaks = seq(from = -4, to = 4, by = 1)
+  ) +
+  labs(
+    title = "What value of x has the given area to the left of it?",
+    x = "x",
+    y = "f(x)"
+  ) +
+  annotate("label",
+    x = 0,
+    y = 0.1,
+    label = "area = 0.8413447..."
+  ) +
+  theme_linedraw()
 ```
 
 ```{r, fig.height = 2.25, echo = FALSE}
 ggplot() +
   stat_function(fun = pnorm, args = list(0, 1)) +
   scale_x_continuous(limits = c(-4, 4), breaks = seq(from = -4, to = 4, by = 1)) +
-  labs(title = "Question is answered by taking the inverse of the CDF.",
-       x = "x", y = "F(x)") +
-  geom_segment(aes(x = 1,
-                   xend =  1,
-                   y = pnorm(1),
-                   yend = 0),
-               color = "#648FFF",
-               size = 1.25,
-               arrow = arrow(length = unit(0.5,"cm"))) +
-  geom_segment(aes(x = -4,
-                   xend = 1,
-                   y = pnorm(1),
-                   yend = pnorm(1)),
-               color = "#648FFF",
-               size = 1.25) +
+  labs(
+    title = "Question is answered by taking the inverse of the CDF.",
+    x = "x", y = "F(x)"
+  ) +
+  geom_segment(aes(
+    x = 1,
+    xend = 1,
+    y = pnorm(1),
+    yend = 0
+  ),
+  color = "#648FFF",
+  size = 1.25,
+  arrow = arrow(length = unit(0.5, "cm"))
+  ) +
+  geom_segment(aes(
+    x = -4,
+    xend = 1,
+    y = pnorm(1),
+    yend = pnorm(1)
+  ),
+  color = "#648FFF",
+  size = 1.25
+  ) +
   theme_linedraw()
 ```
 

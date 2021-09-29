@@ -8,7 +8,9 @@ output:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = NA)
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      comment = NA)
 library(tidyverse)
 library(kableExtra)
 library(gridExtra)
@@ -21,9 +23,10 @@ These slides are not meant to be standalone information. You should take notes t
 **Related Materials**
 
 * Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
-* Appendix A of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.* (Review of Probability)
+* [Appendix A](https://moderndive.com/A-appendixA.html) of *Modern Dive*
 * DataCamp [Foundations of Probability in R](https://www.datacamp.com/courses/foundations-of-probability-in-r)
 * [Normal (Gaussian) Distribution: The Math ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) class slides
+* [Normal (Gaussian) Distribution: Assessing](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalAssessment.html) (slides)
 
 
 ## Index
@@ -127,7 +130,7 @@ ggplot() +
                                   to   = mu + (4 * sigma), 
                                   by   = sigma)) +
   labs(title = "informative title here", 
-       x = "description or units of x", 
+       x = "description and units of x", 
        y = "f(x)") + 
   theme_linedraw()
 ```
@@ -188,7 +191,7 @@ ggplot() +
                                   to   = mu + (4 * sigma), 
                                   by   = sigma)) +
   labs(title = "informative title here", 
-       x = "description or units of x", 
+       x = "description and units of x", 
        y = "F(x)") + 
   theme_linedraw()
 ```
