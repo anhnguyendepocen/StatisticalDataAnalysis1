@@ -1,0 +1,137 @@
+---
+title: "Normal Distribution Assessment"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 5
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moments)
+```
+
+### Datasets Used
+
+The dataset description can be found [HERE](https://stat-jet-asu.github.io/Datasets/InstructorDescriptions/galtonheightdata.html)
+
+```{r}
+parent_hts <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonparentheights.csv")
+head(parent_hts)
+```
+
+### Mother's Height
+
+#### Mean and SD
+
+```{r}
+xbar <- mean(parent_hts$Mother)
+s <- sd(parent_hts$Mother)
+```
+
+#### Density Plot
+
+```{r}
+ggplot(parent_hts, aes(x = Mother)) +
+  geom_density() +
+  stat_function(fun = dnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
+```
+
+#### Cumulative Distribution Plot
+
+```{r}
+ggplot(parent_hts, aes(x = Mother)) +
+  stat_ecdf() +
+  stat_function(
+    fun = pnorm,
+    args = list(xbar, s),
+    color = "orange",
+    size = 1)
+```
+
+#### Normal QQ Plot
+
+```{r}
+ggplot(parent_hts, aes(sample = Mother)) +
+  stat_qq() +
+  stat_qq_line(color = "orange",
+               size = 1)
+```
+
+#### Skewness and Kurtosis
+
+```{r}
+skewK <- tibble(
+  statistic = c("Skewness", "Kurtosis", "Excess K"),
+  theory = c(0, 3, 0),
+  data = round(c(skewness(parent_hts$Mother),
+                 kurtosis(parent_hts$Mother),
+                 kurtosis(parent_hts$Mother) - 3), 2))
+print.data.frame(skewK, row.names = FALSE)
+```
+
+### Father's Height
+
+#### Density Plot
+
+```{r}
+
+```
+
+#### Cumulative Distribution Plot
+
+```{r}
+
+```
+
+#### Normal QQ Plot
+
+```{r}
+
+```
+
+#### Skewness and Kurtosis
+
+```{r}
+
+```
+
+### Simulations
+
+#### TBA!
+
+```{r}
+
+```
+
+### Related Slides
+
+* [Normal (Gaussian) Distribution: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html#1)
+* [Normal (Gaussian) Distribution: `R` Code](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html#1)
+* [Normal (Gaussian) Distribution: Assessment](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalAssessment.html#1)
+
+***
+```{r}
+sessionInfo()
+```
