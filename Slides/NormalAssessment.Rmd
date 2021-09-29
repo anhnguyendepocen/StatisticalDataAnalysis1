@@ -86,6 +86,19 @@ ggplot(parent_hts, aes(x = Mother)) +
 ```
 
 
+## Questions
+
+* Is the data distribution unimodal like the theoretical normal distribution?
+
+* Is the data distribution skewed (left or right) or approximately symmetric?
+
+* How well does the distribution of data match the theoretical curve in the tails? Where does it it deviate? 
+
+* Is there a pattern to any data deviations from the theoretical normal curve, or do they appear to be random?
+
+* In general, we are most concerned about moderate or strong skew in the data, outliers, and distinct bi- or multi-modality.
+
+
 ## Empirical Cumulative Distribution Plot
 
 Does the ECDF of the data match a theoretical normal CDF plot with the same mean and variance?
@@ -123,30 +136,39 @@ ggplot(parent_hts, aes(x = Mother)) +
 
 <p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg"></p>
 
-Notice the placement of the percentiles (also called quantiles) on the theoretical normal distribution. If we know $\mu$ and $\sigma$ we can determine the locations of the quantiles.
+Notice the placement of the percentiles (also called quantiles) on the theoretical normal distribution. If we know $\mu$ and $\sigma$ we can determine the locations of the quantiles. For example, look at the *deciles*, which are the 10th, 20th, 30th, etc. percentiles.
 
-This will allow us to contruct a normal quantile-quantile plot, also known as a qq plot or  normal probability plot.
+This will allow us to contruct a normal quantile-quantile plot, also known as a QQ plot or  normal probability plot.
 
 
 ##
 
-Do the data quantiles match the theoretical normal quantiles?
+Do the data deciles match the theoretical normal deciles?
 
 ```{r}
 deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
-tibble(data   = quantile(parent_hts$Mother, deciles),
-       theory = round(qnorm(deciles, xbar, s), 2))
+tibble(percentile = deciles * 100,
+       data       = quantile(parent_hts$Mother, deciles),
+       theory     = qnorm(deciles, xbar, s))
 ```
 
 
 ## Plot of Data vs. Theoretical Deciles
 
 ```{r, echo = FALSE}
-plotdata <- tibble(data   = quantile(parent_hts$Mother, deciles),
-                   theory = qnorm(deciles, xbar, s))
-ggplot(plotdata, aes(x = theory, y = data)) +
+deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+plotdata <- tibble(percentile = deciles * 100,
+                   data       = quantile(parent_hts$Mother, deciles),
+                   theory     = qnorm(deciles, xbar, s))
+ggplot(plotdata, aes(x = theory, y = data, label = percentile)) +
+  geom_abline(slope = 1, 
+              intercept = 0, 
+              color = "orange",
+              size = 1) +
   geom_point() +
-  geom_abline(slope = 1, intercept = 0, color = "red")
+  geom_label(size = 4,
+             nudge_y = 0.5) +
+  labs(caption = "points are labeled with their corresponding percentile values")
 ```
 
 
