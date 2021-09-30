@@ -27,6 +27,8 @@ knitr::opts_chunk$set(
 ```{r packages_used}
 library(tidyverse)
 library(moments)
+library(knitr)
+library(kableExtra)
 ```
 
 ### Datasets Used
@@ -37,6 +39,24 @@ The dataset description can be found [HERE](https://stat-jet-asu.github.io/Datas
 parent_hts <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonparentheights.csv")
 head(parent_hts)
 ```
+
+```{r}
+mileage <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/gasmileage.csv")
+head(mileage)
+```
+
+```{r}
+geyser <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/oldfaithful.csv")
+head(mileage)
+```
+
+```{r}
+library(resampledata)
+wells <- Bangladesh
+head(wells)
+```
+
+## Galton Parents Dataset
 
 ### Mother's Height
 
@@ -63,11 +83,10 @@ ggplot(parent_hts, aes(x = Mother)) +
 ```{r}
 ggplot(parent_hts, aes(x = Mother)) +
   stat_ecdf() +
-  stat_function(
-    fun = pnorm,
-    args = list(xbar, s),
-    color = "orange",
-    size = 1)
+  stat_function(fun = pnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
 ```
 
 #### Normal QQ Plot
@@ -82,13 +101,11 @@ ggplot(parent_hts, aes(sample = Mother)) +
 #### Skewness and Kurtosis
 
 ```{r}
-skewK <- tibble(
-  statistic = c("Skewness", "Kurtosis", "Excess K"),
-  theory = c(0, 3, 0),
-  data = round(c(skewness(parent_hts$Mother),
-                 kurtosis(parent_hts$Mother),
-                 kurtosis(parent_hts$Mother) - 3), 2))
-print.data.frame(skewK, row.names = FALSE)
+tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+       theory    = c(0, 3, 0),
+       data      = c(skewness(parent_hts$Mother),
+                     kurtosis(parent_hts$Mother),
+                     kurtosis(parent_hts$Mother) - 3))
 ```
 
 ### Father's Height
@@ -123,9 +140,119 @@ print.data.frame(skewK, row.names = FALSE)
 
 ```
 
-### Simulations
+## Other Distributions
 
-#### TBA!
+### Gas Mileage Dataset
+
+#### Mean and SD
+
+```{r}
+
+```
+
+#### Density Plot
+
+```{r}
+
+```
+
+#### Cumulative Distribution Plot
+
+```{r}
+
+```
+
+#### Normal QQ Plot
+
+```{r}
+
+```
+
+#### Skewness and Kurtosis
+
+```{r}
+
+```
+
+### Old Faithful Dataset
+
+#### Mean and SD
+
+```{r}
+
+```
+
+#### Density Plot
+
+```{r}
+
+```
+
+#### Cumulative Distribution Plot
+
+```{r}
+
+```
+
+#### Normal QQ Plot
+
+```{r}
+
+```
+
+#### Skewness and Kurtosis
+
+```{r}
+
+```
+
+### Bangladesh Wells Dataset
+
+#### Mean and SD
+
+```{r}
+
+```
+
+#### Density Plot
+
+```{r}
+
+```
+
+#### Cumulative Distribution Plot
+
+```{r}
+
+```
+
+#### Normal QQ Plot
+
+```{r}
+
+```
+
+#### Skewness and Kurtosis
+
+```{r}
+
+```
+
+## Simulations
+
+### TBA!
+
+```{r}
+
+```
+
+### TBA!
+
+```{r}
+
+```
+
+### TBA!
 
 ```{r}
 
