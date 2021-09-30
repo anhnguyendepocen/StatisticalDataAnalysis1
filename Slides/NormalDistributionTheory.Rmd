@@ -10,7 +10,8 @@ output:
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE,
                       message = FALSE,
-                      comment = NA)
+                      comment = NA,
+                      echo = FALSE)
 library(tidyverse)
 library(kableExtra)
 library(gridExtra)
@@ -46,13 +47,13 @@ These slides are not meant to be standalone information. You should take notes t
 
 ## Notation and Parameters
 
-The normal distribution is a continuous probability distribution. Very few concepts in real life are truly normally distributed, but many are _approximately_ normal. The normal is also the limiting distribution for many common statistics and other distributions when sample size n $\rightarrow \infty$.
+The normal distribution is a continuous probability distribution. Very few concepts in real life are truly normally distributed, but many are _approximately_ normal. The normal is also the limiting distribution for many common statistics and other distributions like the binomial when $n \rightarrow \infty$.
 
 $$X \sim N(\mu,\sigma^2)$$
 
-$x$ = {-$\infty$ to +$\infty$} = *sample space*  
+$x$ = {-$\infty$ to +$\infty$} = *the sample space*  
 
-$\mu$ = the mean (or expected value) of the distribution  
+$\mu$ = the mean (expected value) of the distribution  
 
 $\sigma^2$ = the variance of the distribution  
 
@@ -67,12 +68,12 @@ $$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
 
 The shape will always be a bell. The critical parameters $\mu$ and $\sigma$ determine the location and the height/width of the curve. The mean can be any real number and the standard deviation can be any positive real number.
 
-The area beneath a normal curve is always 1.
+The area beneath a normal distribution curve is always 1.
 
 
 ## Visualizing the Standard Normal
 
-```{r, fig.height = 4.25, echo = FALSE}
+```{r, fig.height = 4.25}
 sn_pdf <- ggplot() +
   stat_function(
     fun = dnorm,
@@ -96,7 +97,7 @@ Notice that there is very little area under the curve outside ± $3$.
 
 ## Another Normal Distribution
 
-```{r, fig.height = 4.25, echo = FALSE}
+```{r, fig.height = 4.25}
 mu <- 69
 sigma <- 3
 ggplot() +
@@ -162,7 +163,7 @@ The normal distribution has no closed-form solution for $F(x)$. `R` has a functi
 
 ## Visualizing the Standard Normal
 
-```{r, fig.height = 4.25, echo = FALSE}
+```{r, fig.height = 4.25}
 sn_cdf <- ggplot() +
   stat_function(
     fun = pnorm,
@@ -186,7 +187,7 @@ Notice the logistic (S) shape with the inflection point at $\mu = 0$.
 
 ## Another Normal Distribution
 
-```{r, fig.height = 4.25, echo = FALSE}
+```{r, fig.height = 4.25}
 mu <- 69
 sigma <- 3
 ggplot() +
@@ -210,7 +211,7 @@ Notice the logistic (S) shape with the inflection point at $\mu = 69$.
 
 ## 
 
-```{r, fig.height = 4.50, echo = FALSE}
+```{r, fig.height = 4.50}
 grid.arrange(sn_pdf, sn_cdf)
 ```
 
@@ -219,7 +220,7 @@ Notice how the two normal distribution plots correspond. Recall that $F(x)$---th
 
 ## 
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 ggplot() +
   stat_function(
     fun = dnorm, args = list(0, 1),
@@ -243,7 +244,7 @@ ggplot() +
   theme_linedraw()
 ```
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 ggplot() +
   stat_function(
     fun = pnorm,
@@ -282,7 +283,7 @@ ggplot() +
 
 ## 
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 ggplot() +
   stat_function(
     fun = dnorm,
@@ -307,7 +308,7 @@ ggplot() +
   theme_linedraw()
 ```
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 ggplot() +
   stat_function(
     fun = pnorm,
@@ -346,7 +347,7 @@ ggplot() +
 
 ## 
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 ggplot() +
   stat_function(
     fun = dnorm,
@@ -370,7 +371,7 @@ ggplot() +
   theme_linedraw()
 ```
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 ggplot() +
   stat_function(
     fun = pnorm,
@@ -434,7 +435,7 @@ $$\int\limits_{0}^{1} \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}dx$$
 
 $$0.8413477 - 0.5 = 0.3413477$$
 
-```{r, fig.height = 2.50, echo = FALSE}
+```{r, fig.height = 2.50}
 P1 <- ggplot() +
   stat_function(
     fun = dnorm,
@@ -509,7 +510,7 @@ gridExtra::grid.arrange(P1, P2, P3, ncol = 3)
 
 ## Finding the Quantiles
 
-```{r, fig.height = 2.25, echo = FALSE}
+```{r, fig.height = 2.25}
 ggplot() +
   stat_function(
     fun = dnorm, args = list(0, 1),
@@ -535,7 +536,7 @@ ggplot() +
   theme_linedraw()
 ```
 
-```{r, fig.height = 2.25, echo = FALSE}
+```{r, fig.height = 2.25}
 ggplot() +
   stat_function(fun = pnorm, args = list(0, 1)) +
   scale_x_continuous(limits = c(-4, 4), breaks = seq(from = -4, to = 4, by = 1)) +

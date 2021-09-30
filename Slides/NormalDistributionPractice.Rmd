@@ -7,10 +7,11 @@ output:
     logo: images/logoASU.jpg
 ---
 
-```{r global_options, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = "")
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      comment = NA)
 library(tidyverse)
-library(kableExtra)
 ```
 
 
@@ -105,7 +106,7 @@ For the next pages, remember to use the *continuity correction* (i.e., the half-
 
 ##
 
-What percentage of the population falls into each WAIS class?
+What percentage of the population falls into each WAIS class? Use continuity correction to avoid gaps in the ranges.
 
 ```{r, echo = FALSE}
 IQtable = tibble('Score Range' = c("130 and above",
@@ -122,7 +123,7 @@ IQtable = tibble('Score Range' = c("130 and above",
                                   "Low Average",
                                   "Borderline",
                                   "Extremely Low"))
-kable(IQtable, format = 'markdown')
+knitr::kable(IQtable, format = "markdown")
 ```
 
 

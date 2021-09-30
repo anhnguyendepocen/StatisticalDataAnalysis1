@@ -96,21 +96,20 @@ ggplot(parent_hts, aes(x = Mother)) +
 
 * Is there a pattern to any data deviations from the theoretical normal curve, or do they appear to be random?
 
-* In general, we are most concerned about moderate or strong skew in the data, outliers, and distinct bi- or multi-modality.
+* In general, we are most concerned about moderate or strong skew, large outliers (particularly if they are on one side only), and distinct bi- or multi-modality.
 
 
-## Empirical Cumulative Distribution Plot
+## Cumulative Distribution Plot
 
-Does the ECDF of the data match a theoretical normal CDF plot with the same mean and variance?
+Does the empirical cumulative distribution function (ECDF) of the data match a theoretical normal CDF with the same mean and variance?
 
 ```{r, eval = FALSE}
 ggplot(parent_hts, aes(x = Mother)) +
   stat_ecdf() +
-  stat_function(
-    fun = pnorm,
-    args = list(xbar, s),
-    color = "orange",
-    size = 1)
+  stat_function(fun = pnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
 ```
 
 Create an ECDF plot of the data and superimpose a theoretical normal model on the same axes. Does the data deviate too far from the shape of the theoretical model?
@@ -132,13 +131,24 @@ ggplot(parent_hts, aes(x = Mother)) +
 ```
 
 
-## Reminder: Theoretical Normal Curve
+## Questions
+
+* How well does the distribution of data match the theoretical curve? Where does it it deviate? 
+
+* Is there a pattern to any data deviations from the theoretical normal curve, or do they appear to be random?
+
+* Can you connect deviations in this plot to any you may have observed in the density plot?
+
+* Significant skewness or large outliers should be detectable in and consistent across both plots.
+
+
+## Theoretical Normal Quantiles
 
 <p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg"></p>
 
 Notice the placement of the percentiles (also called quantiles) on the theoretical normal distribution. If we know $\mu$ and $\sigma$ we can determine the locations of the quantiles. For example, look at the *deciles*, which are the 10th, 20th, 30th, etc. percentiles.
 
-This will allow us to contruct a normal quantile-quantile plot, also known as a QQ plot or  normal probability plot.
+This will allow us to construct a normal quantile-quantile plot, also known as a QQ plot or  normal probability plot.
 
 
 ##
@@ -160,7 +170,9 @@ deciles <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
 plotdata <- tibble(percentile = deciles * 100,
                    data       = quantile(parent_hts$Mother, deciles),
                    theory     = qnorm(deciles, xbar, s))
-ggplot(plotdata, aes(x = theory, y = data, label = percentile)) +
+ggplot(plotdata, aes(x = theory, 
+                     y = data, 
+                     label = paste(percentile, "th", sep = ""))) +
   geom_abline(slope = 1, 
               intercept = 0, 
               color = "orange",
@@ -176,41 +188,112 @@ ggplot(plotdata, aes(x = theory, y = data, label = percentile)) +
 
 Do the quantiles of the data match the theoretical quantiles of a normal distribution with the same mean and variance?
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 ggplot(parent_hts, aes(sample = Mother)) +
   stat_qq() +
   stat_qq_line(color = "orange",
                size = 1)
 ```
 
-Notice in aesthetics syntax, we use `sample =` rather than `x =` to indicate the variable to be plotted. 
+Notice in the aesthetics syntax, we use `sample =` rather than `x =` to indicate the variable to be plotted. 
 
 In the final plot, the x axis will be the theoretical quantiles on a standard normal curve, while the y axis is the quantiles from the data. There is a point representing each data value.
 
 
-## QQ Plot
+## Data vs. Theoretical
 
-```{r, echo=FALSE}
+```{r, echo = FALSE, fig.height = 4}
 ggplot(parent_hts, aes(sample = Mother)) +
   stat_qq() +
   stat_qq_line(color = "orange",
                size = 1)
 ```
 
+The theoretical axis (x-axis) is scaled to the standard normal distribution. The y-axis is scaled to the data.
 
-## Skewness and Kurtosis
+
+## Questions
+
+* How well does the data distribution match the straight line? Where does it it deviate? 
+
+* Is there a pattern to any data deviations from the theoretical normal curve, or do they appear to be random?
+
+    + A U-shaped pattern usually indicates *skewness*
+    
+    + An S-shaped pattern suggests excess *kurtosis*
+
+* Can you connect deviations in this plot to any you may have observed in the density plot?
+
+* Significant skewness or large outliers should be detectable in and consistent across plots.
+
+
+## Theoretical Skewness
+
+Skewness quantifies the degree of asymmetry in a distribution. In general, for *unimodal* data:
+
+* Skewness $= 0$ &#10132; the distribution is perfectly symmetric.
+
+* Skewness $< 0$ &#10132; the distribution is left (negatively); the left tail is longer than the right tail. 
+
+* Skewness $> 0$ &#10132; the distribution is right (positively) skewed; the right tail is longer than the left tail. 
+
+The larger the deviation from zero, the stronger the skew.
+
+We are unlikely to observe exactly zero skewness in real-world samples because of natural (random) variability in the sampling process, discretizing or rounding of the data values, etc.
+
+
+## Sample Skewness Statistic
+
+Some guidelines for interpreting skewness in samples.
+
+```{r, echo = FALSE}
+tibble(Value = c("less than -1",
+                 "-1 to -1/2",
+                 "between ± 1/2",
+                 "+1/2 to +1",
+                 "greater than +1"),
+       Interpretation = c("the sample distribution is strongly left (negatively) skewed",
+                          "the sample distribution is moderately left skewed",
+                          "the sample distribution is approximately symmetric",
+                          "the sample distribution is moderately right skewed",
+                          "the sample distribution is strongly right (positively) skewed")) %>% 
+  knitr::kable(format = "markdown")
+```
+
+
+## Theoretical Kurtosis
+
+Kurtosis quantifies how peaked and heavy-tailed a distribution is, compared to a normal distribution (kurtosis = 3).
+
+We often use a measure called *excess* kurtosis, which subtracts 3 from the kurtosis measure. Excess kurtosis for the normal curve is 0 and ± values have a more intuitive interpretation.
+
+ In general, for *unimodal* data:
+
+* Excess kurtosis $= 0$ &#10132; distribution has the kind of peak and tails we would expect in a bell shape (mesokurtic).
+* Excess kurtosis $< 0$ &#10132; distribution is less peaked (flatter) and has shorter/thinner tails than a bell curve (platykurtic).
+* Excess kurtosis $> 0$ &#10132; distribution is more peaked (sharper) and has fatter/thicker tails than a bell curve (leptokurtic).
+
+
+## Sample Kurtosis Statistic
+
+The [image](https://commons.wikimedia.org/wiki/File:Standard_symmetric_pdfs.svg) shows pdfs for a few distributions that have $\mu = 0$ and $\sigma = 1$ like the standard normal (middle curve, black). This gives you a sense of the differences in excess kurtosis among unimodal, symmetric distributions.
+
+```{r, fig.align = "center", echo = FALSE, }
+knitr::include_graphics("images/kurtosisexamples.png", dpi = 275)
+```
+
+
+## Theory vs. Data
 
 The skewness of a normal distribution is 0 and the kurtosis is 3. Data from a normal distribution should have similar values.
 
 ```{r}
 library(moments)
-skewK <- tibble(
-  statistic = c("Skewness", "Kurtosis", "Excess K"),
-  theory = c(0, 3, 0),
-  data = round(c(skewness(parent_hts$Mother),
-                 kurtosis(parent_hts$Mother),
-                 kurtosis(parent_hts$Mother) - 3), 2))
-print.data.frame(skewK, row.names = FALSE)
+tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
+       theory    = c(0, 3, 0),
+       data      = c(skewness(parent_hts$Mother),
+                     kurtosis(parent_hts$Mother),
+                     kurtosis(parent_hts$Mother) - 3))
 ```
 
 
@@ -222,13 +305,24 @@ Assess the other Galton height measurements for normality. For the child data, p
 
 Additional human measurements can be found in the following datasets. Do they confirm or contradict Quetelet's hypotheses about height or other measurements? How do you know?
 
-* [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv)
-* [pearsonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/pearsonheightdata.csv)
+* [anthropometric.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/anthropometric.csv) (measurements from Dr. Thomley's past students, including height, armspan, and others)
+* [pearsonheightdata.csv](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/pearsonheightdata.csv) (measurements collected by Galton's collaborator, Karl Pearson)
 
 
-## Exploring Other Distributions
+## Other Data
 
-Construct a `tibble` containing samples of size 50 drawn from the following distributions. Assess normality for each sample. Repeat with samples of 1000.
+Revisit some of the datasets you explored earlier during our [EDA explorations of shape](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/EDANumericalShape.html#1). Are any of the variables in these datasets approximately normal? How do you know?
+
+* `mileage`: results of 100 EPA gas mileage tests for a particular model of car, in miles per gallon (mpg)
+
+* `geyser`: eruption data for Old Faithful geyser in Yellowstone National Park, including duration in minutes and number of minutes until the next eruption.
+
+* `wells`: concentration of three contaminants for a sample of wells in Bangladesh, in ppb or ppm 
+
+
+## Exploring Known Distributions
+
+Construct a `tibble` containing samples of size 10 drawn from the following distributions. Assess normality for each sample. Repeat with increasingly large samples.
 
 <table>
 <tr>
