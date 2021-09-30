@@ -238,26 +238,6 @@ tibble(statistic = c("Skewness", "Kurtosis", "Excess K"),
 
 ```
 
-## Simulations
-
-### TBA!
-
-```{r}
-
-```
-
-### TBA!
-
-```{r}
-
-```
-
-### TBA!
-
-```{r}
-
-```
-
 ### Related Slides
 
 * [Normal (Gaussian) Distribution: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html#1)
