@@ -65,40 +65,334 @@ Plot the pdf and the CDF for each curve.
 
 * Standard IQ tests, such as the Wechsler Adult Intelligence Scale (WAIS), are typically scaled so that scores are normally distributed with $\mu = 100$ and $\sigma = 15$.
 
+```{r}
+# set the parameters of the normal model
+mu    <- 100
+sigma <- 15
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of WAIS IQ Scores", 
+       x = "IQ Score", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+
 * Scores on some older versions of the Stanford-Binet IQ test are normally distributed with a mean of $100$ and a standard deviation of $16$.
+
+```{r}
+# set the parameters of the normal model
+mu    <- 100
+sigma <- 16
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of Older Stanford-Binet IQ Test Scores", 
+       x = "IQ Score", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
 
 * Cattell Culture Fair Test scores are normally distributed with mean of $100$ and a standard deviation of $24$.
 
+```{r}
+# set the parameters of the normal model
+mu    <- 100
+sigma <- 24
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of Cattell Culture Fair IQ Test Scores", 
+       x = "IQ Score", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+All three of these plots have the same MEAN, but different standard deviations.
+
 * Subscales of the current Stanford-Binet have scores that are normally distributed with $\mu$ = 10 and $\sigma$ = 3.
+
+```{r}
+
+```
 
 * The distribution of shoe sizes for people who wear "men's" U.S. shoes is approximately normal with a mean of $11$ and a standard deviation of $1.5$ (note that shoes typically come in whole and half sizes).
 
+```{r}
+# set the parameters of the normal model
+mu    <- 11
+sigma <- 1.5
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of U.S. Men's Shoe Sizes", 
+       x = "Shoe Size in US Units", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+
 * Retirement ages for NFL players are approximately normally distributed with with $\mu = 33$ years and $\sigma = 2$ years. 
+
+```{r}
+# set the parameters of the normal model
+mu    <- 33
+sigma <- 2
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of NFL Retirement Ages", 
+       x = "Age in Years", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
 
 * ACT scores for U.S. high school students ~ approx $N(21, 25)$.
 
+What 25? Remember, in standard notation, this is VARIANCE. We take the square root to get SD.
+
+```{r}
+# set the parameters of the normal model
+mu    <- 21
+sigma <- 5
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of ACT Scores", 
+       x = "Score", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+
 * A 2002 study found that the birth weights of full-term babies in the UK were approximately normal with $\mu = 3.4$ kg and $\sigma = 0.6$ kg. Plot four pdfs with the weights expressed in (a) kilograms; (b) grams; (c) pounds; and (d) ounces.
 
+If the conversion is linear (+, -, *, /) then we can directly convert mu and sigma because it is a linear transformation.
+
+kg to g I would multiply by 1000
+
+
+```{r}
+# set the parameters of the normal model
+mu    <- 3.4
+sigma <- 0.6
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of Weights of Full-Term Babies", 
+       x = "Weight in kg", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+
 * Plot the WAIS, Stanford-Binet, and Cattell curves on the same set of axes to compare.
+
+```{r}
+
+```
 
 
 ### Calculating Probability 
 
 * Use `pnorm()` and $N(0,1)$ to calculate how much area is to the *left* of the points $\mu - 3\sigma$, $\mu - 2\sigma$, $\mu - 1\sigma$, $\mu$, $\mu + 1\sigma$, $\mu + 2\sigma$, and $\mu + 3\sigma$
 
+```{r}
+pnorm(q = -3, mean = 0, sd = 1)
+
+pnorm(-3, 0, 1)
+pnorm(-2, 0, 1)
+pnorm(-1, 0, 1)
+pnorm( 0, 0, 1)
+pnorm( 1, 0, 1)
+pnorm( 2, 0, 1)
+pnorm( 3, 0, 1)
+
+-3:3 # makes the sequence -1, -2, ..., 2, 3
+
+pnorm(q = -3:3, mean = 0, sd = 1)
+```
+
  * Use `pnorm()` and $N(0,1)$ to calculate how much area is to the *right* of the points $\mu - 3\sigma$, $\mu - 2\sigma$, $\mu - 1\sigma$, $\mu$, $\mu + 1\sigma$, $\mu + 2\sigma$, and $\mu + 3\sigma$
+
+```{r}
+pnorm(-3, 0, 1, lower.tail = FALSE)
+pnorm(-2, 0, 1, lower.tail = FALSE)
+pnorm(-1, 0, 1, lower.tail = FALSE)
+pnorm( 0, 0, 1, lower.tail = FALSE)
+pnorm( 1, 0, 1, lower.tail = FALSE)
+pnorm( 2, 0, 1, lower.tail = FALSE)
+pnorm( 3, 0, 1, lower.tail = FALSE)
+
+pnorm(-3:3, 0, 1, lower.tail = FALSE)
+```
 
 * The Empirical Rule tells us the approximate areas under the curve between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$. Use `pnorm()` and $N(0,1)$ to calculate the exact area in these regions.
 
+```{r}
+# area between -1 and +1 SD (~68% in Empirical Rule)
+pnorm(1, 0, 1) - pnorm(-1, 0, 1)
+
+# area between -2 and +2 SD (~95% in Empirical Rule)
+pnorm(2, 0, 1) - pnorm(-2, 0, 1)
+
+# area between -3 and +3 SD (~99.7% in Empirical Rule)
+pnorm(3, 0, 1) - pnorm(-3, 0, 1)
+
+```
+
 For the next problems, remember to use the *continuity correction* (i.e., the half-step between measures, to account for rounding).
+
+```{r}
+mu    <- 11
+sigma <- 1.5
+ggplot() + 
+  stat_function(fun = dnorm, args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), mu + (4 * sigma)),
+                     breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)) +
+  labs(title = "Distribution of U.S. Men's Shoe Sizes", x = "Shoe Size", y = "f(x)") + 
+  theme_linedraw()
+```
 
 * Most major men’s shoe manufacturers make shoes down to US size 7 or 8. What percentage of wearers would be smaller than these sizes?
 
+```{r}
+# What percentage is below an 8?
+# P(X < 8)
+
+pnorm(q = 8, mean = 11, sd = 1.5)
+
+# Shoe sizes go 7.5, 8, 8.5, 9, 9.5...
+# What is between 7.5 and 8?
+# so we really need to think < 7.55
+
+
+
+```
+
 * What proportion of football players retire after the age of 35?
+
+```{r}
+mu    <- 33
+sigma <- 2
+ggplot() + 
+  stat_function(fun = dnorm, args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), mu + (4 * sigma)),
+                     breaks = seq(mu - (4 * sigma), mu + (4 * sigma), sigma)) +
+  labs(title = "Distribution of NFL Retirement Ages", x = "Age in Years", y = "f(x)") + 
+  theme_linedraw()
+```
+
+Since 35 is right on the 1 SD mark, so we can get a good estimate even before calculating.
+
+```{r}
+# Let's start out using exactly 35
+# P(X > 35)
+
+pnorm(35, 33, 2, lower.tail = FALSE)
+
+1 - pnorm(35, 33, 2)
+
+# What if we add the continuity correction?
+
+# If we consider older than 35 to be 36, since that's how we usually do ages...
+
+pnorm(36, 33, 2, lower.tail = FALSE)
+```
+
 
 * The middle 50% of ASU students score between 22-28 on the ACT. Nationally, what percentage of students scores between 22 and 28?
 
 * If a full-term baby weighs less than 2.5 kg at birth, they are considered to have a low birth weight. Babies weighing less than 1.5 kg are considered very low birth weight. Babies who weigh less than 1.0 kg are extremely low birth weight. What percentage of babies falls into each category?
+
+```{r}
+# set the parameters of the normal model
+mu    <- 3.4
+sigma <- 0.6
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of Weights of Full-Term Babies", 
+       x = "Weight in kg", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+
+
+```{r}
+# how many babies are < 1kg at birth?
+# P(X < 1kg)
+
+pnorm(q = 1.0, mean = 3.4, sd = .6)
+
+.00003167 * 1000000
+
+pnorm(q = 1.5, mean = 3.4, sd = .6) - pnorm(q = 1, mean = 3.4, sd = .6)
+
+```
+
+
+
 
 What percentage of the population falls into each WAIS class?
 
@@ -127,7 +421,38 @@ kable(IQtable, format = 'markdown')
 
 2) The deciles of a distribution are percentiles that are multiples of 10 (10th percentile, 20th percentile, up to 90th percentile). Find the deciles for ACT scores and birth weights.
 
+```{r}
+mu    <- 3.4
+sigma <- 0.6
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "Distribution of Weights of Full-Term Babies", 
+       x = "Weight in kg", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+```{r}
+# where is the 10th percentile? That's 0.10.
+
+qnorm(p = 0.10, 3.4, 0.6)
+qnorm(p = 0.20, 3.4, 0.6)
+qnorm(p = 0.50, 3.4, 0.6)
+
+```
+
+
 3) To be a member of the high-IQ society Mensa, a person must score in the top 2% on a standard test of intelligence. What scores would be required on the WAIS and Catell tests? What is the equivalent score on $Z$? Use `qnorm()` to solve.
+
+```{r}
+
+```
 
 4) The Empirical Rule tells us that the areas under the curve between $\mu \pm 1\sigma$, $\mu \pm 2\sigma$, and $\mu \pm 3\sigma$ are ~68%, ~95%, and ~99%. Use `qnorm()` and $N(0,1)$ to calculate the more exact boundaries of the middle 68%, 95%, and 99%.
 

@@ -1,0 +1,310 @@
+---
+title: "Introduction to Sampling"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 5
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moments)
+```
+
+### Uniform Distribution
+
+#### Set Parameters & Visualize
+
+```{r}
+a <- 0
+b <- 1
+```
+
+```{r}
+ggplot() + 
+  stat_function(fun = dunif, 
+                args = list(a, b))
+```
+
+#### Sample from the Population
+
+##### Set the Sample Size
+
+```{r}
+n1 <- 10   # sample size
+```
+
+##### Simulate Data
+
+```{r}
+data <- tibble(sample = runif(n1, a, b))
+
+ggplot(data, aes(x = sample)) +
+  geom_histogram(bins = 20)
+```
+
+##### Assess Normality
+
+```{r}
+stats <- data %>% 
+  summarize(xbar  = mean(sample),
+            s     = sd(sample),
+            skew  = skewness(sample),
+            ekurt = kurtosis(sample) - 3)
+stats
+
+xbar <- stats %>% pull(xbar)
+s    <- stats %>% pull(s)
+
+ggplot(data, aes(x = sample)) +
+  geom_density() +
+  stat_function(fun = dnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(x = sample)) +
+  stat_ecdf() +
+  stat_function(fun = pnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(sample = sample)) +
+  stat_qq() +
+  stat_qq_line(color = "orange",
+               size = 1)
+```
+
+QUESTION: What happens to the distribution of the sample as sample size (n) increases?
+
+ANSWER:
+
+#### Distribution of the Sample Mean
+
+##### Set Sample Size
+
+```{r}
+n2 <- 1   # sample size
+```
+
+##### Simulate Sample Means
+
+```{r}
+N <- 10^5   # choose number of simulations
+
+simresults <- numeric(N)   # initialize storage vector
+
+for (i in 1:N) {
+  simresults[i] <- mean(runif(n2, a, b))
+}
+
+data <- tibble(sample = simresults)
+
+ggplot(data, aes(x = sample)) +
+  geom_histogram(bins = 20)
+```
+
+##### Assess Normality
+
+```{r}
+stats <- data %>% 
+  summarize(xbar_means  = mean(sample),
+            s_means     = sd(sample),
+            skew_means  = skewness(sample),
+            ekurt_means = kurtosis(sample) - 3)
+stats
+
+xbar_means <- stats %>% pull(xbar_means)
+s_means    <- stats %>% pull(s_means)
+
+ggplot(data, aes(x = sample)) +
+  geom_density() +
+  stat_function(fun = dnorm,
+                args = list(xbar_means, s_means),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(x = sample)) +
+  stat_ecdf() +
+  stat_function(fun = pnorm,
+                args = list(xbar_means, s_means),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(sample = sample)) +
+  stat_qq() +
+  stat_qq_line(color = "orange",
+               size = 1)
+```
+
+QUESTION: What happens to the distribution of the sample *mean* as sample size (n) increases?
+
+ANSWER:
+
+QUESTION: How large does the sample size have to be before the distribution of the means looks approximately normal?
+
+ANSWER:
+
+### Exponential Distribution
+
+#### Set Parameters & Visualize
+
+```{r}
+lambda <- 1
+```
+
+```{r}
+ggplot() + 
+  stat_function(fun = dexp, 
+                args = list(lambda))
+```
+
+#### Sample from the Population
+
+##### Set the Sample Size
+
+```{r}
+n1 <- 10   # sample size
+```
+
+##### Simulate Data
+
+```{r}
+data <- tibble(sample = rexp(n1, lambda))
+
+ggplot(data, aes(x = sample)) +
+  geom_histogram(bins = 20)
+```
+
+##### Assess Normality
+
+```{r}
+stats <- data %>% 
+  summarize(xbar  = mean(sample),
+            s     = sd(sample),
+            skew  = skewness(sample),
+            ekurt = kurtosis(sample) - 3)
+stats
+
+xbar <- stats %>% pull(xbar)
+s    <- stats %>% pull(s)
+
+ggplot(data, aes(x = sample)) +
+  geom_density() +
+  stat_function(fun = dnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(x = sample)) +
+  stat_ecdf() +
+  stat_function(fun = pnorm,
+                args = list(xbar, s),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(sample = sample)) +
+  stat_qq() +
+  stat_qq_line(color = "orange",
+               size = 1)
+```
+
+QUESTION: What happens to the distribution of the sample as sample size (n) increases?
+
+ANSWER:
+
+#### Distribution of the Sample Mean
+
+##### Set Sample Size
+
+```{r}
+n2 <- 1   # sample size
+```
+
+##### Simulate Sample Means
+
+```{r}
+N <- 10^5   # choose number of simulations
+
+simresults <- numeric(N)   # initialize storage vector
+
+for (i in 1:N) {
+  simresults[i] <- mean(rexp(n2, lambda))
+}
+
+data <- tibble(sample = simresults)
+
+ggplot(data, aes(x = sample)) +
+  geom_histogram(bins = 20)
+```
+
+##### Assess Normality
+
+```{r}
+stats <- data %>% 
+  summarize(xbar_means  = mean(sample),
+            s_means     = sd(sample),
+            skew_means  = skewness(sample),
+            ekurt_means = kurtosis(sample) - 3)
+stats
+
+xbar_means <- stats %>% pull(xbar_means)
+s_means    <- stats %>% pull(s_means)
+
+ggplot(data, aes(x = sample)) +
+  geom_density() +
+  stat_function(fun = dnorm,
+                args = list(xbar_means, s_means),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(x = sample)) +
+  stat_ecdf() +
+  stat_function(fun = pnorm,
+                args = list(xbar_means, s_means),
+                color = "orange",
+                size = 1)
+
+ggplot(data, aes(sample = sample)) +
+  stat_qq() +
+  stat_qq_line(color = "orange",
+               size = 1)
+```
+
+QUESTION: What happens to the distribution of the sample *mean* as sample size (n) increases?
+
+ANSWER:
+
+QUESTION: How large does the sample size have to be before the distribution of the means looks approximately normal?
+
+ANSWER:
+
+### Related Slides
+
+* [Normal (Gaussian) Distribution: The Math](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html#1)
+* [Normal (Gaussian) Distribution: `R` Code](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html#1)
+* [Normal (Gaussian) Distribution: Assessment](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalAssessment.html#1)
+
+***
+```{r}
+sessionInfo()
+```

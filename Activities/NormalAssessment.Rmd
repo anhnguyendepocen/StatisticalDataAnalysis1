@@ -27,8 +27,6 @@ knitr::opts_chunk$set(
 ```{r packages_used}
 library(tidyverse)
 library(moments)
-library(knitr)
-library(kableExtra)
 ```
 
 ### Datasets Used
