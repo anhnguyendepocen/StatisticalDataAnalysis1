@@ -125,7 +125,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">October 13, 2021 @ 10:54 AM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">October 13, 2021 @ 12:58 PM</p>
           </hgroup>
   </slide>
 
@@ -160,13 +160,13 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>Sampling and Central Limit Theorem</h2></hgroup><article  id="sampling-and-central-limit-theorem">
 
-<p>Suppose we select a reasonably large sample of \(i.i.d.\) random variables \(X_1, X_2, ..., X_n\) (i.e., a sample from the population of the random variable \(X\)).</p>
+<p>Suppose we select a reasonably large sample of \(i.i.d.\) random variables \(X_1, X_2, ..., X_n\) (i.e., sample from the population \(X\)).</p>
 
-<p>Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution.</p>
+<p>Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution. (<a href='https://towardsdatascience.com/central-limit-theorem-proofs-actually-working-through-the-math-a994cd582b33' title=''>proof</a>)</p>
 
 <p>This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We can algebraically re-express the CLT in terms of these commonly used cases.</p>
 
-<p><strong>Note:</strong> \(i.i.d.\) = independent and identically distributed</p>
+<p><strong>Note:</strong> \(i.i.d.\) = <a href='https://towardsdatascience.com/independent-and-identically-distributed-ce250ad1bfa8' title=''>independent and identically distributed</a> (each random variable has the same probability distribution and all are mutually independent)</p>
 
 </article></slide><slide class=""><hgroup><h2>Why Central Limit Theorem?</h2></hgroup><article  id="why-central-limit-theorem">
 
@@ -174,8 +174,8 @@ slide:not(.current) .plotly.html-widget{
 <li><p>The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician George Pólya (1887-1985).</p></li>
 <li><p>He used the term &ldquo;zentral&rdquo; (central) to indicate the theorem’s central importance to statistical theory.</p></li>
 <li><p>Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.</p></li>
-<li><p>The law of large numbers says that, as the number of \(i.i.d.\) randomly generated variables increases, their sample mean approaches their theoretical mean.</p></li>
-<li><p>The law of large numbers was first proved in 1713 by Swiss mathematician Jacob Bernoulli (1654-1705).</p></li>
+<li><p>The law of large numbers says that, as the number of \(i.i.d.\) randomly generated variables increases, their sample mean approaches their theoretical mean. (<a href='https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-1-the-weak-law-daf412178d3a' title=''>proof</a>) (<a href='https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-2-the-strong-law-356aa608ca5d' title=''>proof</a>)</p></li>
+<li><p>The first known proof of the law of large numbers appears in the 1713 book <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> by Swiss mathematician Jacob Bernoulli (1654-1705), posthumously published.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Mean \(\bar{x}\)</h2></hgroup><article  id="sampling-distribution-mean-barx">
@@ -188,20 +188,32 @@ slide:not(.current) .plotly.html-widget{
 <li><p>approximately normal</p></li>
 <li><p>has a mean \(\mu_{\bar{x}}\) = \(\mu\)</p></li>
 <li><p>has a variance \(\sigma^2_{\bar{x}}\) = \(\frac{\sigma^2}{n}\)</p></li>
-<li><p>has a standard error \(\sigma_{\bar{x}}\) = \(\frac{\sigma}{\sqrt{n}}\)</p></li>
+<li><p>has a standard error \(\sigma_{\bar{x}}\) = \(\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}\)</p></li>
 </ul>
+
+</article></slide><slide class=""><hgroup><h2>From Mean to Sum</h2></hgroup><article  id="from-mean-to-sum">
+
+<p>When we calculate a sample mean, we first take the sum of all sample values and then divide by the sample size.</p>
+
+<p>\[\bar{x} = \frac{\sum_1^n{x_i}}{n}\]</p>
+
+<p>Conversely, if we know the sample mean, we can find the sum (or total) by multiplying \(\bar{x}\) by \(n\).</p>
+
+<p>\[n\bar{x} = \sum_1^n{x_i}\]</p>
+
+<p>Since \(n\) is a constant, these are simple linear transformations. If \(\bar{x}\) is approximately normal, the sum will be as well, just rescaled.</p>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Sum \(\sum_1^n{x_i}\)</h2></hgroup><article  id="sampling-distribution-sum-sum_1nx_i">
 
 <p>Let \(X\) be a population with finite mean \(\mu\) and variance \(\sigma^2\) (and standard deviation \(\sigma\)).</p>
 
-<p>For a sufficiently large sample size \(n\), the sampling distribution of the sample sum \(\sum_1^n{x_i}\) is:</p>
+<p>For a sufficiently large sample size \(n\), the sampling distribution of the sample sum \(\sum_1^n{x_i} = n\bar{x}\) is:</p>
 
 <ul>
 <li><p>approximately normal</p></li>
 <li><p>has a mean \(\mu_{sum}\) = \(n\mu\)</p></li>
 <li><p>has a variance \(\sigma^2_{sum}\) = \(n\sigma^2\)</p></li>
-<li><p>has a standard error \(\sigma_{sum}\) = \(\sqrt{n}\sigma\)</p></li>
+<li><p>has a standard error \(\sigma_{sum}\) = \(\sqrt{n\sigma^2} = \sqrt{n}\sigma\)</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>What is sufficiently large?</h2></hgroup><article  id="what-is-sufficiently-large">
@@ -217,22 +229,48 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Success Count</h2></hgroup><article  id="sampling-distribution-success-count">
 
-<p>TBA! Let’s go to the Probably &amp; Distributions glossary for now.</p>
+<p>Under certain circumstances, we can approximate the binomial distribution using the normal distribution. In that case, \(\mu = np\) (binomial mean) and \(\sigma^2 = np(1-p)\) (binomial variance). If we have a sufficiently large sample size \(n\), the sampling distribution of the number of successes \(x\) is:</p>
+
+<ul>
+<li><p>approximately normal</p></li>
+<li><p>has a mean \(\mu_x\) = \(np\)</p></li>
+<li><p>has a variance \(\sigma^2_x\) = \(np(1-p)\)</p></li>
+<li><p>has a standard error \(\sigma_x\) = \(\sqrt{np(1-p)}\)</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>From Count to Proportion</h2></hgroup><article  id="from-count-to-proportion">
+
+<p>When we calculate a sample proportion of successes, we take the count of successes \(x\) and divide by \(n\) (number of trials).</p>
+
+<p>\[\hat{p} = \frac{x}{n}\]</p>
+
+<p>Just like with the sample mean and sum, since \(n\) is a constant, this is a simple linear transformation. If count of successes is approximately normal, the proportion will be too, just rescaled. In this case, \(\mu = p\) and \(\sigma^2 = \frac{p(1-p)}{n}\).</p>
+
+<p>We can also think of this as a kind of mean. Suppose successes are represented by \(1\)s and failures are represented by \(0\)s in the sample. Algebraically, calculating the proportion \(\hat{p}\) is the same as finding the mean of the sample of \(0\)s and \(1\)s.</p>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Proportion \(\hat{p}\)</h2></hgroup><article  id="sampling-distribution-proportion-hatp">
 
-<p>TBA! Let’s go to the Probably &amp; Distributions glossary for now.</p>
+<p>Let X be a binomial population with parameters \(n\) and \(p\). This is a particular case of the CLT, which works for <em>any</em> population.</p>
+
+<p>If we have a sufficiently large sample size \(n\), the sampling distribution of the proportion of successes \(\hat{p}\) is:</p>
+
+<ul>
+<li><p>approximately normal</p></li>
+<li><p>has a mean \(\mu_\hat{p}\) = \(p\)</p></li>
+<li><p>has a variance \(\sigma^2_\hat{p}\) = \(\frac{p(1-p)}{n}\)</p></li>
+<li><p>has a standard error \(\sigma_\hat{p}\) = \(\sqrt{\frac{p(1-p)}{n}}\)</p></li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>What is sufficiently large?</h2></hgroup><article  id="what-is-sufficiently-large-1">
 
 <p>For proportion data from a binomial process with probability \(p\), a commonly used rule of thumb is that &ldquo;sufficiently large&rdquo; is a sample where \(np \ge 10\) <em>and</em> \(n(1 – p) \ge 10\) (i.e., more than 10 successes and failures in the sample). However…</p>
 
 <ul>
-<li><p>some sources say \(n \ge 5\) is sufficient; others say \(n ≥ 15\).</p></li>
-<li><p>in general, the farther \(p\) is from 0.5, the more skewed the underlying binomial distribution will be; thus, larger sample sizes are required for the approximation to be valid when p is closer to 0 or 1 than when it is 0.5.</p></li>
+<li><p>some sources say \(np \ge 5\) and \(n(1 – p) \ge 5\) is sufficient for approximate normality, while others say \(\ge 15\). As we have seen, approximate normality is a judgment.</p></li>
+<li><p>in general, the farther \(p\) is from \(0.5\), the more skewed the binomial distribution will be; thus, larger sample sizes are required when \(p\) is closer to \(0\) or \(1\) than when it is \(0.5\).</p></li>
 </ul>
 
-<p><strong>Note:</strong> We have to extimate \(p\) from the sample, so we use \(\hat{p}\).</p></article></slide>
+<p><strong>Note:</strong> We have to estimate \(p\) from the sample, so we use \(\hat{p}\).</p></article></slide>
 
 
   <slide class="backdrop"></slide>

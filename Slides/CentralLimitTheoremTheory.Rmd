@@ -48,13 +48,13 @@ $$E[X] = \mu \text{ and }Var[X] = \sigma^2$$
 
 ## Sampling and Central Limit Theorem
 
-Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., a sample from the population of the random variable $X$).
+Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., sample from the population $X$).
 
-Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution. 
+Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution. ([proof](https://towardsdatascience.com/central-limit-theorem-proofs-actually-working-through-the-math-a994cd582b33))
 
 This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We can algebraically re-express the CLT in terms of these commonly used cases.
 
-**Note:** $i.i.d.$ = independent and identically distributed
+**Note:** $i.i.d.$ = [independent and identically distributed](https://towardsdatascience.com/independent-and-identically-distributed-ce250ad1bfa8) (each random variable has the same probability distribution and all are mutually independent)
 
 
 ## Why Central Limit Theorem?
@@ -65,9 +65,9 @@ This rule also applies to the sums of sample values, as well as to the count or 
 
 * Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.
 
-* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean.
+* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean. ([proof](https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-1-the-weak-law-daf412178d3a)) ([proof](https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-2-the-strong-law-356aa608ca5d))
 
-* The law of large numbers was first proved in 1713 by Swiss mathematician Jacob Bernoulli (1654-1705). 
+* The first known proof of the law of large numbers appears in the 1713 book [*Ars Conjectandi*](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) by Swiss mathematician Jacob Bernoulli (1654-1705), posthumously published.
 
 
 ## Sampling Distribution --- Mean $\bar{x}$
@@ -82,14 +82,27 @@ For a sufficiently large sample size $n$, the sampling distribution of the sampl
 
 * has a variance $\sigma^2_{\bar{x}}$ = $\frac{\sigma^2}{n}$
 
-* has a standard error $\sigma_{\bar{x}}$ = $\frac{\sigma}{\sqrt{n}}$
+* has a standard error $\sigma_{\bar{x}}$ = $\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}$
+
+
+## From Mean to Sum
+
+When we calculate a sample mean, we first take the sum of all sample values and then divide by the sample size.
+
+$$\bar{x} = \frac{\sum_1^n{x_i}}{n}$$
+
+Conversely, if we know the sample mean, we can find the sum (or total) by multiplying $\bar{x}$ by $n$.
+
+$$n\bar{x} = \sum_1^n{x_i}$$
+
+Since $n$ is a constant, these are simple linear transformations. If $\bar{x}$ is approximately normal, the sum will be as well, just rescaled.
 
 
 ## Sampling Distribution --- Sum $\sum_1^n{x_i}$
 
 Let $X$ be a population with finite mean $\mu$ and variance $\sigma^2$ (and standard deviation $\sigma$). 
 
-For a sufficiently large sample size $n$, the sampling distribution of the sample sum $\sum_1^n{x_i}$ is:
+For a sufficiently large sample size $n$, the sampling distribution of the sample sum $\sum_1^n{x_i} = n\bar{x}$ is:
 
 * approximately normal
 
@@ -97,7 +110,7 @@ For a sufficiently large sample size $n$, the sampling distribution of the sampl
 
 * has a variance $\sigma^2_{sum}$ = $n\sigma^2$
 
-* has a standard error $\sigma_{sum}$ = $\sqrt{n}\sigma$
+* has a standard error $\sigma_{sum}$ = $\sqrt{n\sigma^2} = \sqrt{n}\sigma$
 
 
 ## What is sufficiently large?
@@ -115,20 +128,49 @@ A commonly used rule of thumb is that "sufficiently large" is a sample with $n \
 
 ## Sampling Distribution --- Success Count
 
-TBA! Let's go to the Probably & Distributions glossary for now.
+Under certain circumstances, we can approximate the binomial distribution using the normal distribution. In that case, $\mu = np$ (binomial mean) and $\sigma^2 = np(1-p)$ (binomial variance). If we have a sufficiently large sample size $n$, the sampling distribution of the number of successes $x$ is:
+
+* approximately normal
+
+* has a mean $\mu_x$ = $np$
+
+* has a variance $\sigma^2_x$ = $np(1-p)$
+
+* has a standard error $\sigma_x$ = $\sqrt{np(1-p)}$
+
+
+## From Count to Proportion
+
+When we calculate a sample proportion of successes, we take the count of successes $x$ and divide by $n$ (number of trials).
+
+$$\hat{p} = \frac{x}{n}$$
+
+Just like with the sample mean and sum, since $n$ is a constant, this is a simple linear transformation. If count of successes is approximately normal, the proportion will be too, just rescaled. In this case, $\mu = p$ and $\sigma^2 = \frac{p(1-p)}{n}$.
+
+We can also think of this as a kind of mean. Suppose successes are represented by $1$s and failures are represented by $0$s in the sample. Algebraically, calculating the proportion $\hat{p}$ is the same as finding the mean of the sample of $0$s and $1$s. 
 
 
 ## Sampling Distribution --- Proportion $\hat{p}$
 
-TBA! Let's go to the Probably & Distributions glossary for now.
+Let X be a binomial population with parameters $n$ and $p$. This is a particular case of the CLT, which works for *any* population.
+
+If we have a sufficiently large sample size $n$, the sampling distribution of the proportion of successes $\hat{p}$ is:
+
+* approximately normal
+
+* has a mean $\mu_\hat{p}$ = $p$
+
+* has a variance $\sigma^2_\hat{p}$ = $\frac{p(1-p)}{n}$
+
+* has a standard error $\sigma_\hat{p}$ = $\sqrt{\frac{p(1-p)}{n}}$
 
 
 ## What is sufficiently large?
 
 For proportion data from a binomial process with probability $p$, a commonly used rule of thumb is that "sufficiently large" is a sample where $np \ge 10$ *and* $n(1 – p) \ge 10$ (i.e., more than 10 successes and failures in the sample). However...
 
-* some sources say $n \ge 5$ is sufficient; others say $n ≥ 15$. 
+* some sources say $np \ge 5$ and $n(1 – p) \ge 5$ is sufficient for approximate normality, while others say $\ge 15$. As we have seen, approximate normality is a judgment.
 
-* in general, the farther $p$ is from 0.5, the more skewed the underlying binomial distribution will be; thus, larger sample sizes are required for the approximation to be valid when p is closer to 0 or 1 than when it is 0.5.
+* in general, the farther $p$ is from $0.5$, the more skewed the binomial distribution will be; thus, larger sample sizes are required when $p$ is closer to $0$ or $1$ than when it is $0.5$.
 
-**Note:** We have to extimate $p$ from the sample, so we use $\hat{p}$.
+**Note:** We have to estimate $p$ from the sample, so we use $\hat{p}$.
