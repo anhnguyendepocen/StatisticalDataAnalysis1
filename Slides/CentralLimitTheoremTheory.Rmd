@@ -1,0 +1,134 @@
+---
+title: "Central Limit Theorem: The Math"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  comment = NA
+)
+library(tidyverse)
+```
+
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* [Chapter 7](https://moderndive.com/7-sampling.html) of *Modern Dive*
+* [Normal (Gaussian) Distribution: The Math ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) class slides
+* [Normal (Gaussian) Distribution: `R` Code ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html) class slides
+
+
+## The Normal Model
+
+$$X \sim N(\mu,\sigma^2)$$
+
+$x$ = {-$\infty$ to +$\infty$} 
+
+$\mu$ = the mean of the distribution  
+
+$\sigma^2$ = the variance of the distribution  
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+
+$$F(x) = \text{no closed-form solution}$$
+
+$$E[X] = \mu \text{ and }Var[X] = \sigma^2$$
+
+
+## Sampling and Central Limit Theorem
+
+Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., a sample from the population of the random variable $X$).
+
+Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution. 
+
+This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We can algebraically re-express the CLT in terms of these commonly used cases.
+
+**Note:** $i.i.d.$ = independent and identically distributed
+
+
+## Why Central Limit Theorem?
+
+* The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician George Pólya (1887-1985). 
+
+* He used the term "zentral" (central) to indicate the theorem's central importance to statistical theory. 
+
+* Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.
+
+* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean.
+
+* The law of large numbers was first proved in 1713 by Swiss mathematician Jacob Bernoulli (1654-1705). 
+
+
+## Sampling Distribution --- Mean $\bar{x}$
+
+Let $X$ be a population with finite mean $\mu$ and variance $\sigma^2$ (and standard deviation $\sigma$). 
+
+For a sufficiently large sample size $n$, the sampling distribution of the sample mean $\bar{x}$ is:
+
+* approximately normal
+
+* has a mean $\mu_{\bar{x}}$ = $\mu$
+
+* has a variance $\sigma^2_{\bar{x}}$ = $\frac{\sigma^2}{n}$
+
+* has a standard error $\sigma_{\bar{x}}$ = $\frac{\sigma}{\sqrt{n}}$
+
+
+## Sampling Distribution --- Sum $\sum_1^n{x_i}$
+
+Let $X$ be a population with finite mean $\mu$ and variance $\sigma^2$ (and standard deviation $\sigma$). 
+
+For a sufficiently large sample size $n$, the sampling distribution of the sample sum $\sum_1^n{x_i}$ is:
+
+* approximately normal
+
+* has a mean $\mu_{sum}$ = $n\mu$
+
+* has a variance $\sigma^2_{sum}$ = $n\sigma^2$
+
+* has a standard error $\sigma_{sum}$ = $\sqrt{n}\sigma$
+
+
+## What is sufficiently large?
+
+A commonly used rule of thumb is that "sufficiently large" is a sample with $n \ge 30$. However, in practice...
+
+* when $X$ has a normal distribution, the sampling distribution of the mean is exactly normal for all $n$.
+
+* if the underlying distribution is symmetric and unimodal with no outliers (e.g., uniform), then $n < 30$ is often sufficient.
+
+* if the underlying distribution is moderately (or more) skewed or has outliers (e.g., exponential), $n >> 30$ may be required.
+
+* If the sample size is not large enough, then expected value and variance are as shown in the CLT, but the shape will be indeterminate (dependent on the population shape).
+
+
+## Sampling Distribution --- Success Count
+
+TBA! Let's go to the Probably & Distributions glossary for now.
+
+
+## Sampling Distribution --- Proportion $\hat{p}$
+
+TBA! Let's go to the Probably & Distributions glossary for now.
+
+
+## What is sufficiently large?
+
+For proportion data from a binomial process with probability $p$, a commonly used rule of thumb is that "sufficiently large" is a sample where $np \ge 10$ *and* $n(1 – p) \ge 10$ (i.e., more than 10 successes and failures in the sample). However...
+
+* some sources say $n \ge 5$ is sufficient; others say $n ≥ 15$. 
+
+* in general, the farther $p$ is from 0.5, the more skewed the underlying binomial distribution will be; thus, larger sample sizes are required for the approximation to be valid when p is closer to 0 or 1 than when it is 0.5.
+
+**Note:** We have to extimate $p$ from the sample, so we use $\hat{p}$.
