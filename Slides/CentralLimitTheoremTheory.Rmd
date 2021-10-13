@@ -1,5 +1,5 @@
 ---
-title: "Central Limit Theorem: The Math"
+title: "Central Limit Theorem:<br>The Math"
 author: "Author: Jill E. Thomley"
 date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
 output: 
