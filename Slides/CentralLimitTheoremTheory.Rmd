@@ -23,56 +23,85 @@ These slides are not meant to be standalone information. You should take notes t
 
 **Related Materials**
 
-* Ch 2 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* Ch 4 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
 * [Chapter 7](https://moderndive.com/7-sampling.html) of *Modern Dive*
+* [Bernoulli and Binomial Distributions: The Math ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionTheory.html) class slides
 * [Normal (Gaussian) Distribution: The Math ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) class slides
 * [Normal (Gaussian) Distribution: `R` Code ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html) class slides
 
 
-## The Normal Model
+## Recap: The Binomial Model
+
+$$X \sim Bin(n,p)$$
+
+$x$ = number of successes = {$0, 1, 2, ..., n$}
+
+$n$ = number of trials = any positive integer
+
+$p$ = probability of success on a single trial
+
+$$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
+
+$$E[X] = np$$
+
+$$Var[X] = np(1-p)$$
+
+
+## Recap: The Normal Model
 
 $$X \sim N(\mu,\sigma^2)$$
 
 $x$ = {-$\infty$ to +$\infty$} 
 
-$\mu$ = the mean of the distribution  
+$\mu$ = the mean of the distribution = any real number
 
-$\sigma^2$ = the variance of the distribution  
+$\sigma^2$ = the variance of the distribution = any positive real number
 
 $$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
 
-$$F(x) = \text{no closed-form solution}$$
+$$E[X] = \mu$$
 
-$$E[X] = \mu \text{ and }Var[X] = \sigma^2$$
+$$Var[X] = \sigma^2$$
 
 
 ## Sampling and Central Limit Theorem
 
-Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., sample from the population $X$).
+Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., a sample from population $X$).
 
-Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution. ([proof](https://towardsdatascience.com/central-limit-theorem-proofs-actually-working-through-the-math-a994cd582b33))
+The central limit theorem (CLT) tells us that for such an $i.i.d.$ sample, the sampling distribution of the sample mean $\bar{x}$ will be approximately normal, regardless of the underlying population distribution---given a couple additional conditions.
 
-This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We can algebraically re-express the CLT in terms of these commonly used cases.
+This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We just algebraically re-express the CLT.
 
-**Note:** $i.i.d.$ = [independent and identically distributed](https://towardsdatascience.com/independent-and-identically-distributed-ce250ad1bfa8) (each random variable has the same probability distribution and all are mutually independent)
+**Note:** The $i.i.d.$ means *independent and identically distributed*.  Each random variable has the same probability distribution and all are mutually independent of one another.
 
 
-## Why Central Limit Theorem?
+##
 
-* The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician George Pólya (1887-1985). 
+* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean.
 
-* He used the term "zentral" (central) to indicate the theorem's central importance to statistical theory. 
+* The first known proof of the law of large numbers appears in [*Ars Conjectandi*](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (1713) by [Jacob Bernoulli](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/) (1654-1705).
+
+* The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician [George Pólya](https://mathshistory.st-andrews.ac.uk/Biographies/Polya/) (1887-1985), but a source for the idea traces to French mathematician [Abraham de Moivre](https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/) (1667-1754) in a 1738 paper.
+
+* Pólya used the term "zentral" (central) to express his belief about the theorem's central importance to statistical theory (in German, it's the *zentraler Grenzwertsatz*). 
 
 * Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.
 
-* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean. ([proof](https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-1-the-weak-law-daf412178d3a)) ([proof](https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-2-the-strong-law-356aa608ca5d))
 
-* The first known proof of the law of large numbers appears in the 1713 book [*Ars Conjectandi*](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) by Swiss mathematician Jacob Bernoulli (1654-1705), posthumously published.
+## Recap: Standard Error
+
+Standard deviation (SD) measures the variability (i.e., spread) of individual data values around their mean. We can think of SD as roughly the average distance of all values from the mean.
+
+Standard error (SE) of a statistic measures the spread of sample values of that statistic ($\hat{\theta}$) around the population parameter ($\theta$). We can think of SE as roughly the average error of estimation---the typical amount we are "off" due to sampling variability.
+
+For example, the standard error of the mean $\sigma_\bar{x}$ helps quantify how far a sample estimate $\bar{x}$ is likely to be from the population mean $\mu$. This quantity will depend on the sample size $n$.
+
+SE *is* a SD, but involving statistics rather than individual values.
 
 
 ## Sampling Distribution --- Mean $\bar{x}$
 
-Let $X$ be a population with finite mean $\mu$ and variance $\sigma^2$ (and standard deviation $\sigma$). 
+Let $X$ be a population with finite mean $\mu$ and [finite variance](https://en.wikipedia.org/wiki/Category:Probability_distributions_with_non-finite_variance) $\sigma^2$ (standard deviation $\sigma$). 
 
 For a sufficiently large sample size $n$, the sampling distribution of the sample mean $\bar{x}$ is:
 
@@ -119,11 +148,11 @@ A commonly used rule of thumb is that "sufficiently large" is a sample with $n \
 
 * when $X$ has a normal distribution, the sampling distribution of the mean is exactly normal for all $n$.
 
-* if the underlying distribution is symmetric and unimodal with no outliers (e.g., uniform), then $n < 30$ is often sufficient.
+* if the underlying distribution is symmetric and unimodal with no outliers, then $n < 30$ is often sufficient.
 
-* if the underlying distribution is moderately (or more) skewed or has outliers (e.g., exponential), $n >> 30$ may be required.
+* if the underlying distribution is moderately (or more) skewed or has outliers, $n >> 30$ may be required.
 
-* If the sample size is not large enough, then expected value and variance are as shown in the CLT, but the shape will be indeterminate (dependent on the population shape).
+If the sample size is not large enough, then the expected value and variance are still as shown in the CLT, but the shape will be indeterminate (dependent on the population shape).
 
 
 ## Sampling Distribution --- Success Count
@@ -147,14 +176,14 @@ $$\hat{p} = \frac{x}{n}$$
 
 Just like with the sample mean and sum, since $n$ is a constant, this is a simple linear transformation. If count of successes is approximately normal, the proportion will be too, just rescaled. In this case, $\mu = p$ and $\sigma^2 = \frac{p(1-p)}{n}$.
 
-We can also think of this as a kind of mean. Suppose successes are represented by $1$s and failures are represented by $0$s in the sample. Algebraically, calculating the proportion $\hat{p}$ is the same as finding the mean of the sample of $0$s and $1$s. 
+We can also think of this as a type of mean. Suppose successes are represented by $1$s and failures are represented by $0$s in the sample. Algebraically, calculating the proportion $\hat{p}$ is the same as finding the mean of the sample of $0$s and $1$s. 
 
 
 ## Sampling Distribution --- Proportion $\hat{p}$
 
 Let X be a binomial population with parameters $n$ and $p$. This is a particular case of the CLT, which works for *any* population.
 
-If we have a sufficiently large sample size $n$, the sampling distribution of the proportion of successes $\hat{p}$ is:
+For a sufficiently large sample size $n$, the sampling distribution of the sample proportion of successes $\hat{p}$ is:
 
 * approximately normal
 
@@ -169,8 +198,8 @@ If we have a sufficiently large sample size $n$, the sampling distribution of th
 
 For proportion data from a binomial process with probability $p$, a commonly used rule of thumb is that "sufficiently large" is a sample where $np \ge 10$ *and* $n(1 – p) \ge 10$ (i.e., more than 10 successes and failures in the sample). However...
 
-* some sources say $np \ge 5$ and $n(1 – p) \ge 5$ is sufficient for approximate normality, while others say $\ge 15$. As we have seen, approximate normality is a judgment.
+* some sources say $np \ge 5$ and $n(1 – p) \ge 5$ is sufficient for approximate normality, while others say $\ge 15$. As we have seen, "approximately normal" is a judgment.
 
-* in general, the farther $p$ is from $0.5$, the more skewed the binomial distribution will be; thus, larger sample sizes are required when $p$ is closer to $0$ or $1$ than when it is $0.5$.
+* the farther the chance of success $p$ is from $0.5$, the greater the skew in a binomial distribution; larger sample sizes are needed when $p$ is closer to $0$ or $1$ than $0.5$.
 
 **Note:** We have to estimate $p$ from the sample, so we use $\hat{p}$.

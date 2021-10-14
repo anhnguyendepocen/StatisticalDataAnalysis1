@@ -7,8 +7,12 @@ output:
     logo: images/logoASU.jpg
 ---
 
-```{r global_options, include=FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
 library(tidyverse)
 library(kableExtra)
 library(knitr)
@@ -33,7 +37,7 @@ These slides are not meant to be standalone information. You should take notes t
 * Slides 11-25 &mdash; Binomial Distribution Model
    + Slides 12-18 &mdash; Probability Mass Function (pmf)
    + Slides 19-21 &mdash; Cumulative Distribution Function (CDF)
-   + Slides 22-25 &mdash; Tabulated and Graphical Representions
+   + Slides 22-25 &mdash; Tabulated and Graphical Representations
 * Slides 26-28 &mdash; Expected Value (Mean) and Variance 
 
 
@@ -59,7 +63,7 @@ Other probability distributions, such as the binomial distribution and geometric
 
 A necessary condition for the binomial and geometric random variables is that all trials are *independent* with constant chance of success $p$ from trial to trial.
 
-Bernoulli trials are named for the Swiss mathematician [Jacob Bernoulli](http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html) (1654-1705), who made important advancements in probability theory, including an early version of the **law of large numbers**. Many appeared in his posthumously-published book [_Ars Conjectandi_](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (_The Art of Conjecturing_).
+"Bernoulli trial" is named for noted Swiss mathematician [Jacob Bernoulli](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/) (1654-1705), who made important advancements in probability theory, including an early version of the law of large numbers. Many appeared in his posthumously-published book [*Ars Conjectandi*](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (*The Art of Conjecturing*, 1713).
 
 
 # Some Simple Simulations

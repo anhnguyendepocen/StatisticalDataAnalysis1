@@ -190,7 +190,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">Sunday, September 19, 2021 @ 08:37 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">Wednesday, October 13, 2021 @ 05:14 PM</p>
           </hgroup>
   </slide>
 
@@ -217,7 +217,7 @@ slide:not(.current) .plotly.html-widget{
 <ul>
 <li>Slides 12-18 — Probability Mass Function (pmf)</li>
 <li>Slides 19-21 — Cumulative Distribution Function (CDF)</li>
-<li>Slides 22-25 — Tabulated and Graphical Representions</li>
+<li>Slides 22-25 — Tabulated and Graphical Representations</li>
 </ul></li>
 <li>Slides 26-28 — Expected Value (Mean) and Variance</li>
 </ul>
@@ -245,7 +245,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>A necessary condition for the binomial and geometric random variables is that all trials are <em>independent</em> with constant chance of success \(p\) from trial to trial.</p>
 
-<p>Bernoulli trials are named for the Swiss mathematician <a href='http://www-groups.dcs.st-and.ac.uk/history/Biographies/Bernoulli_Jacob.html' title=''>Jacob Bernoulli</a> (1654-1705), who made important advancements in probability theory, including an early version of the <strong>law of large numbers</strong>. Many appeared in his posthumously-published book <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> (<em>The Art of Conjecturing</em>).</p>
+<p>&ldquo;Bernoulli trial&rdquo; is named for noted Swiss mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/' title=''>Jacob Bernoulli</a> (1654-1705), who made important advancements in probability theory, including an early version of the law of large numbers. Many appeared in his posthumously-published book <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> (<em>The Art of Conjecturing</em>, 1713).</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Some Simple Simulations</h2></hgroup><article  id="some-simple-simulations">
 
@@ -259,12 +259,12 @@ sample(coin, size = 1)  # default equal probability</pre>
 <pre class = 'prettyprint lang-r'>die &lt;- 1:6   # create the die model integers 1 to 6
 sample(die, size = 1)   # default equal probability</pre>
 
-<pre >[1] 6</pre>
+<pre >[1] 5</pre>
 
 <pre class = 'prettyprint lang-r'># an unfair coin with a 70% chance of heads
 sample(coin, size = 1, prob = c(0.7, 1 - 0.7))</pre>
 
-<pre >[1] &quot;head&quot;</pre>
+<pre >[1] &quot;tail&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Simulate Multiple Trials with <code>sample()</code></h2></hgroup><article  id="simulate-multiple-trials-with-sample">
 
@@ -272,16 +272,16 @@ sample(coin, size = 1, prob = c(0.7, 1 - 0.7))</pre>
 
 <pre class = 'prettyprint lang-r'>sum(flips == &quot;head&quot;)   # number of heads in the sample</pre>
 
-<pre >[1] 132</pre>
+<pre >[1] 130</pre>
 
 <pre class = 'prettyprint lang-r'>mean(flips == &quot;head&quot;)   # fraction of heads in the sample</pre>
 
-<pre >[1] 0.528</pre>
+<pre >[1] 0.52</pre>
 
 <pre class = 'prettyprint lang-r'>rolls &lt;- sample(die, size = 250, replace = TRUE)
 mean(rolls == 1)   # fraction of 1&#39;s in the sample</pre>
 
-<pre >[1] 0.2</pre>
+<pre >[1] 0.188</pre>
 
 </article></slide><slide class=""><hgroup><h2>The <code>prob</code> Package</h2></hgroup><article  id="the-prob-package">
 

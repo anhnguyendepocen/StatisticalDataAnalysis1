@@ -125,7 +125,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">October 13, 2021 @ 12:58 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">October 13, 2021 @ 11:56 PM</p>
           </hgroup>
   </slide>
 
@@ -136,51 +136,78 @@ slide:not(.current) .plotly.html-widget{
 <p><strong>Related Materials</strong></p>
 
 <ul>
-<li>Ch 2 of <em>Mathematical Statistics with Resampling and R, 2<sup>nd</sup> Ed.</em></li>
+<li>Ch 4 of <em>Mathematical Statistics with Resampling and R, 2<sup>nd</sup> Ed.</em></li>
 <li><a href='https://moderndive.com/7-sampling.html' title=''>Chapter 7</a> of <em>Modern Dive</em></li>
+<li><a href='https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/BinomialDistributionTheory.html' title=''>Bernoulli and Binomial Distributions: The Math</a> class slides</li>
 <li><a href='https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html' title=''>Normal (Gaussian) Distribution: The Math</a> class slides</li>
 <li><a href='https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html' title=''>Normal (Gaussian) Distribution: <code>R</code> Code</a> class slides</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>The Normal Model</h2></hgroup><article  id="the-normal-model">
+</article></slide><slide class=""><hgroup><h2>Recap: The Binomial Model</h2></hgroup><article  id="recap-the-binomial-model">
+
+<p>\[X \sim Bin(n,p)\]</p>
+
+<p>\(x\) = number of successes = {\(0, 1, 2, ..., n\)}</p>
+
+<p>\(n\) = number of trials = any positive integer</p>
+
+<p>\(p\) = probability of success on a single trial</p>
+
+<p>\[f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}\]</p>
+
+<p>\[E[X] = np\]</p>
+
+<p>\[Var[X] = np(1-p)\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Recap: The Normal Model</h2></hgroup><article  id="recap-the-normal-model">
 
 <p>\[X \sim N(\mu,\sigma^2)\]</p>
 
 <p>\(x\) = {-\(\infty\) to +\(\infty\)}</p>
 
-<p>\(\mu\) = the mean of the distribution</p>
+<p>\(\mu\) = the mean of the distribution = any real number</p>
 
-<p>\(\sigma^2\) = the variance of the distribution</p>
+<p>\(\sigma^2\) = the variance of the distribution = any positive real number</p>
 
 <p>\[f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}\]</p>
 
-<p>\[F(x) = \text{no closed-form solution}\]</p>
+<p>\[E[X] = \mu\]</p>
 
-<p>\[E[X] = \mu \text{ and }Var[X] = \sigma^2\]</p>
+<p>\[Var[X] = \sigma^2\]</p>
 
 </article></slide><slide class=""><hgroup><h2>Sampling and Central Limit Theorem</h2></hgroup><article  id="sampling-and-central-limit-theorem">
 
-<p>Suppose we select a reasonably large sample of \(i.i.d.\) random variables \(X_1, X_2, ..., X_n\) (i.e., sample from the population \(X\)).</p>
+<p>Suppose we select a reasonably large sample of \(i.i.d.\) random variables \(X_1, X_2, ..., X_n\) (i.e., a sample from population \(X\)).</p>
 
-<p>Then, according to the central limit theorem (CLT), the sampling distribution of the sample mean will be approximately normal, regardless of the underlying population distribution. (<a href='https://towardsdatascience.com/central-limit-theorem-proofs-actually-working-through-the-math-a994cd582b33' title=''>proof</a>)</p>
+<p>The central limit theorem (CLT) tells us that for such an \(i.i.d.\) sample, the sampling distribution of the sample mean \(\bar{x}\) will be approximately normal, regardless of the underlying population distribution—given a couple additional conditions.</p>
 
-<p>This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We can algebraically re-express the CLT in terms of these commonly used cases.</p>
+<p>This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We just algebraically re-express the CLT.</p>
 
-<p><strong>Note:</strong> \(i.i.d.\) = <a href='https://towardsdatascience.com/independent-and-identically-distributed-ce250ad1bfa8' title=''>independent and identically distributed</a> (each random variable has the same probability distribution and all are mutually independent)</p>
+<p><strong>Note:</strong> The \(i.i.d.\) means <em>independent and identically distributed</em>. Each random variable has the same probability distribution and all are mutually independent of one another.</p>
 
-</article></slide><slide class=""><hgroup><h2>Why Central Limit Theorem?</h2></hgroup><article  id="why-central-limit-theorem">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
 
 <ul>
-<li><p>The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician George Pólya (1887-1985).</p></li>
-<li><p>He used the term &ldquo;zentral&rdquo; (central) to indicate the theorem’s central importance to statistical theory.</p></li>
+<li><p>The law of large numbers says that, as the number of \(i.i.d.\) randomly generated variables increases, their sample mean approaches their theoretical mean.</p></li>
+<li><p>The first known proof of the law of large numbers appears in <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> (1713) by <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/' title=''>Jacob Bernoulli</a> (1654-1705).</p></li>
+<li><p>The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Polya/' title=''>George Pólya</a> (1887-1985), but a source for the idea traces to French mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/' title=''>Abraham de Moivre</a> (1667-1754) in a 1738 paper.</p></li>
+<li><p>Pólya used the term &ldquo;zentral&rdquo; (central) to express his belief about the theorem’s central importance to statistical theory (in German, it’s the <em>zentraler Grenzwertsatz</em>).</p></li>
 <li><p>Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.</p></li>
-<li><p>The law of large numbers says that, as the number of \(i.i.d.\) randomly generated variables increases, their sample mean approaches their theoretical mean. (<a href='https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-1-the-weak-law-daf412178d3a' title=''>proof</a>) (<a href='https://towardsdatascience.com/proof-of-the-law-of-large-numbers-part-2-the-strong-law-356aa608ca5d' title=''>proof</a>)</p></li>
-<li><p>The first known proof of the law of large numbers appears in the 1713 book <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> by Swiss mathematician Jacob Bernoulli (1654-1705), posthumously published.</p></li>
 </ul>
+
+</article></slide><slide class=""><hgroup><h2>Recap: Standard Error</h2></hgroup><article  id="recap-standard-error">
+
+<p>Standard deviation (SD) measures the variability (i.e., spread) of individual data values around their mean. We can think of SD as roughly the average distance of all values from the mean.</p>
+
+<p>Standard error (SE) of a statistic measures the spread of sample values of that statistic (\(\hat{\theta}\)) around the population parameter (\(\theta\)). We can think of SE as roughly the average error of estimation—the typical amount we are &ldquo;off&rdquo; due to sampling variability.</p>
+
+<p>For example, the standard error of the mean \(\sigma_\bar{x}\) helps quantify how far a sample estimate \(\bar{x}\) is likely to be from the population mean \(\mu\). This quantity will depend on the sample size \(n\).</p>
+
+<p>SE <em>is</em> a SD, but involving statistics rather than individual values.</p>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Mean \(\bar{x}\)</h2></hgroup><article  id="sampling-distribution-mean-barx">
 
-<p>Let \(X\) be a population with finite mean \(\mu\) and variance \(\sigma^2\) (and standard deviation \(\sigma\)).</p>
+<p>Let \(X\) be a population with finite mean \(\mu\) and <a href='https://en.wikipedia.org/wiki/Category:Probability_distributions_with_non-finite_variance' title=''>finite variance</a> \(\sigma^2\) (standard deviation \(\sigma\)).</p>
 
 <p>For a sufficiently large sample size \(n\), the sampling distribution of the sample mean \(\bar{x}\) is:</p>
 
@@ -222,10 +249,11 @@ slide:not(.current) .plotly.html-widget{
 
 <ul>
 <li><p>when \(X\) has a normal distribution, the sampling distribution of the mean is exactly normal for all \(n\).</p></li>
-<li><p>if the underlying distribution is symmetric and unimodal with no outliers (e.g., uniform), then \(n &lt; 30\) is often sufficient.</p></li>
-<li><p>if the underlying distribution is moderately (or more) skewed or has outliers (e.g., exponential), \(n &gt;&gt; 30\) may be required.</p></li>
-<li><p>If the sample size is not large enough, then expected value and variance are as shown in the CLT, but the shape will be indeterminate (dependent on the population shape).</p></li>
+<li><p>if the underlying distribution is symmetric and unimodal with no outliers, then \(n &lt; 30\) is often sufficient.</p></li>
+<li><p>if the underlying distribution is moderately (or more) skewed or has outliers, \(n &gt;&gt; 30\) may be required.</p></li>
 </ul>
+
+<p>If the sample size is not large enough, then the expected value and variance are still as shown in the CLT, but the shape will be indeterminate (dependent on the population shape).</p>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Success Count</h2></hgroup><article  id="sampling-distribution-success-count">
 
@@ -246,13 +274,13 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Just like with the sample mean and sum, since \(n\) is a constant, this is a simple linear transformation. If count of successes is approximately normal, the proportion will be too, just rescaled. In this case, \(\mu = p\) and \(\sigma^2 = \frac{p(1-p)}{n}\).</p>
 
-<p>We can also think of this as a kind of mean. Suppose successes are represented by \(1\)s and failures are represented by \(0\)s in the sample. Algebraically, calculating the proportion \(\hat{p}\) is the same as finding the mean of the sample of \(0\)s and \(1\)s.</p>
+<p>We can also think of this as a type of mean. Suppose successes are represented by \(1\)s and failures are represented by \(0\)s in the sample. Algebraically, calculating the proportion \(\hat{p}\) is the same as finding the mean of the sample of \(0\)s and \(1\)s.</p>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Proportion \(\hat{p}\)</h2></hgroup><article  id="sampling-distribution-proportion-hatp">
 
 <p>Let X be a binomial population with parameters \(n\) and \(p\). This is a particular case of the CLT, which works for <em>any</em> population.</p>
 
-<p>If we have a sufficiently large sample size \(n\), the sampling distribution of the proportion of successes \(\hat{p}\) is:</p>
+<p>For a sufficiently large sample size \(n\), the sampling distribution of the sample proportion of successes \(\hat{p}\) is:</p>
 
 <ul>
 <li><p>approximately normal</p></li>
@@ -266,8 +294,8 @@ slide:not(.current) .plotly.html-widget{
 <p>For proportion data from a binomial process with probability \(p\), a commonly used rule of thumb is that &ldquo;sufficiently large&rdquo; is a sample where \(np \ge 10\) <em>and</em> \(n(1 – p) \ge 10\) (i.e., more than 10 successes and failures in the sample). However…</p>
 
 <ul>
-<li><p>some sources say \(np \ge 5\) and \(n(1 – p) \ge 5\) is sufficient for approximate normality, while others say \(\ge 15\). As we have seen, approximate normality is a judgment.</p></li>
-<li><p>in general, the farther \(p\) is from \(0.5\), the more skewed the binomial distribution will be; thus, larger sample sizes are required when \(p\) is closer to \(0\) or \(1\) than when it is \(0.5\).</p></li>
+<li><p>some sources say \(np \ge 5\) and \(n(1 – p) \ge 5\) is sufficient for approximate normality, while others say \(\ge 15\). As we have seen, &ldquo;approximately normal&rdquo; is a judgment.</p></li>
+<li><p>the farther the chance of success \(p\) is from \(0.5\), the greater the skew in a binomial distribution; larger sample sizes are needed when \(p\) is closer to \(0\) or \(1\) than \(0.5\).</p></li>
 </ul>
 
 <p><strong>Note:</strong> We have to estimate \(p\) from the sample, so we use \(\hat{p}\).</p></article></slide>
