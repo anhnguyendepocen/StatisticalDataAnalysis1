@@ -1,0 +1,124 @@
+---
+title: "CLT: Practice"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      comment = NA)
+library(tidyverse)
+```
+
+
+## Before We Begin...
+
+These slides are not meant to be standalone information. You should take notes to flesh out the contents. I recommend that you create an R Markdown document where you can combine information and code from the slides and your own additional notes and explorations to make connections.
+
+**Related Materials**
+
+* Ch 4 of *Mathematical Statistics with Resampling and R, 2^nd^ Ed.*
+* [Chapter 7](https://moderndive.com/7-sampling.html) of *Modern Dive*
+* [Normal (Gaussian) Distribution: The Math ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionTheory.html) class slides
+* [Normal (Gaussian) Distribution: `R` Code ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/NormalDistributionRCode.html) class slides
+* [Central Limit Theorem: The Math ](https://stat-jet-asu.github.io/StatisticalDataAnalysis1/Slides/CLTPractice.html) class slides
+
+
+## Recap: The Normal Model
+
+$$X \sim N(\mu,\sigma^2)$$
+
+$x$ = {-$\infty$ to +$\infty$} 
+
+$\mu$ = the mean of the distribution = any real number
+
+$\sigma^2$ = the variance of the distribution = any positive real number
+
+$$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
+
+$$E[X] = \mu$$
+
+$$Var[X] = \sigma^2$$
+
+
+## Recap: The Empirical Rule
+
+The normal distribution is unimodal and perfectly symmetric.
+
+<p style="text-align: center;"><img src="https://stat-jet-asu.github.io/Moodlepics/normaldist.jpg" width = 425></p>
+
+* approximately 68% of the curve's area is between $\mu \pm 1\sigma$ 
+* approximately 95% of the curve's area is between $\mu \pm 2\sigma$ 
+* approximately 99.7% of the curve's area is between $\mu \pm 3\sigma$ 
+
+The tails extend to $\pm \infty$ ; any value of $x$ is *theoretically possible*.
+
+
+## Recap: Normal Functions in `R`
+
+Recall that `R` has several functions for computing probabilities, finding quantiles, and generating samples of random values from the normal distribution.
+
+* `dnorm` = computes the height of the pdf at $x$
+
+* `pnorm` = computes $P(X \leq x)$
+
+* `pnorm` = computes $P(X > x)$
+
+* `qnorm` = computes the $q^{th}$ percentile
+
+* `rnorm` = generates a sample of random values
+
+Use `?dnorm` in the console to review syntax for each function.
+
+
+## Recap: General Plotting Code
+
+```{r, eval = FALSE}
+# set the parameters of the normal model
+mu    <- 0
+sigma <- 1
+
+# adapt the labels for the given problem
+ggplot() + 
+  stat_function(fun = dnorm, 
+                args = list(mu, sigma)) +
+  scale_x_continuous(limits = c(mu - (4 * sigma), 
+                                mu + (4 * sigma)),
+                     breaks = seq(from = mu - (4 * sigma), 
+                                  to   = mu + (4 * sigma), 
+                                  by   = sigma)) +
+  labs(title = "informative title here", 
+       x = "description and units of x", 
+       y = "f(x)") + 
+  theme_linedraw()
+```
+
+
+## Birth Weights
+
+* A 2002 study found that the birth weights of full-term babies in the UK were approximately normal with $\mu = 3.4$ kg and $\sigma = 0.6$ kg. The range for normal birth weight is 2.5 to 4.0 kg. 
+
+A. What is the probability that a full-term newborn is above normal birth weight?
+
+B. In a particular hospital, nine full-term babies were born in a given week. What is the probability that the average birth weight of these babies was above normal birth weight?
+
+C. For a sample of 100 full-term babies, there is a 95% chance that their average birth weight is between what two values (if the region of interest is centered on the mean)?
+
+D. Plot the normal distributions used in (A) through (C).
+
+
+## Digital Signals
+
+* A digital comm channel has a signal degradation problem, so there is a 0.1% chance that any bit sent on it will be received in error. Bits are independent and the error rate is constant. You send a test message that is 12,000 bits long. Let X be the total number of errors in the test message.
+
+A. Using the exact binomial, what is the probability of getting 6 or fewer errors?
+
+B. Using a normal approximation for X, what is the probability of getting 6 or fewer errors?
+
+C. Using the normal approximation for $\hat{p}$, what is the probability of getting 6/12000 or fewer errors?
+
+D. Plot the normal distributions used in (B) and (C).
