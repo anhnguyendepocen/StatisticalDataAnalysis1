@@ -66,7 +66,7 @@ Recall that `R` has several functions for computing probabilities, finding quant
 
 * `pnorm` = computes $P(X \leq x)$
 
-* `pnorm` = computes $P(X > x)$
+* `pnorm` = computes $P(X > x)$ with `lower.tail = FALSE`
 
 * `qnorm` = computes the $q^{th}$ percentile
 
