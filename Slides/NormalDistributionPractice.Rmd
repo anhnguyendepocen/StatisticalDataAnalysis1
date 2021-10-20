@@ -8,9 +8,11 @@ output:
 ---
 
 ```{r global_options, include = FALSE}
-knitr::opts_chunk$set(warning = FALSE, 
-                      message = FALSE, 
-                      comment = NA)
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  comment = NA
+)
 library(tidyverse)
 ```
 

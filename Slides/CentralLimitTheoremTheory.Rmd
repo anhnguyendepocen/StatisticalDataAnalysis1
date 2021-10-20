@@ -36,15 +36,15 @@ $$X \sim Bin(n,p)$$
 
 $x$ = number of successes = {$0, 1, 2, ..., n$}
 
-$n$ = number of trials = any positive integer
+$n$ = number of trials (any positive integer)
 
-$p$ = probability of success on a single trial
+$p$ = probability of success on a single trial $(0 \le p \le 1)$
 
-$$f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}$$
+$$f(x) = {n \choose x}p^x(1-p)^{n-x}$$
 
-$$E[X] = np$$
+$$E[X] = \mu = np$$
 
-$$Var[X] = np(1-p)$$
+$$Var[X] = \sigma^2 = np(1-p)$$
 
 
 ## Recap: The Normal Model
@@ -53,39 +53,15 @@ $$X \sim N(\mu,\sigma^2)$$
 
 $x$ = {-$\infty$ to +$\infty$} 
 
-$\mu$ = the mean of the distribution = any real number
+$\mu$ = the mean of the distribution (any real number)
 
-$\sigma^2$ = the variance of the distribution = any positive real number
+$\sigma^2$ = the variance of the distribution (any positive real number)
 
 $$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}$$
 
 $$E[X] = \mu$$
 
 $$Var[X] = \sigma^2$$
-
-
-## Sampling and Central Limit Theorem
-
-Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., a sample from population $X$).
-
-The central limit theorem (CLT) tells us that for such an $i.i.d.$ sample, the sampling distribution of the sample mean $\bar{x}$ will be approximately normal, regardless of the underlying population distribution---given a couple additional conditions.
-
-This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We just algebraically re-express the CLT.
-
-**Note:** The $i.i.d.$ means *independent and identically distributed*.  Each random variable has the same probability distribution and all are mutually independent of one another.
-
-
-##
-
-* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean.
-
-* The first known proof of the law of large numbers appears in [*Ars Conjectandi*](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (1713) by [Jacob Bernoulli](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/) (1654-1705).
-
-* The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician [George Pólya](https://mathshistory.st-andrews.ac.uk/Biographies/Polya/) (1887-1985), but a source for the idea traces to French mathematician [Abraham de Moivre](https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/) (1667-1754) in a 1738 paper.
-
-* Pólya used the term "zentral" (central) to express his belief about the theorem's central importance to statistical theory (in German, it's the *zentraler Grenzwertsatz*). 
-
-* Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.
 
 
 ## Recap: Standard Error
@@ -97,6 +73,30 @@ Standard error (SE) of a statistic measures the spread of sample values of that 
 For example, the standard error of the mean $\sigma_\bar{x}$ helps quantify how far a sample estimate $\bar{x}$ is likely to be from the population mean $\mu$. This quantity will depend on the sample size $n$.
 
 SE *is* a SD, but involving statistics rather than individual values.
+
+
+## Sampling and Central Limit Theorem
+
+Suppose we select a reasonably large sample of $i.i.d.$ random variables $X_1, X_2, ..., X_n$ (i.e., a sample from population $X$).
+
+The central limit theorem (CLT) tells us that for such an $i.i.d.$ sample, the sampling distribution of the sample mean $\bar{x}$ will be approximately normal, regardless of the underlying population distribution---given a couple additional conditions.
+
+This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We algebraically re-express $\mu$ and $\sigma^2$.
+
+**Note:** The $i.i.d.$ means *independent and identically distributed*.  Each random variable has the same probability distribution and all are mutually independent of one another.
+
+
+##
+
+* The law of large numbers says that, as the number of $i.i.d.$ randomly generated variables increases, their sample mean approaches their theoretical mean ($\bar{x} \rightarrow \mu$ as $n \rightarrow \infty)$.
+
+* The first known proof of the law of large numbers appears in [*Ars Conjectandi*](https://books.google.com/books?id=XPOf7STJ3y4C&pg=PP5#v=onepage&q&f=false) (1713) by [Jacob Bernoulli](https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/) (1654-1705).
+
+* The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician [George Pólya](https://mathshistory.st-andrews.ac.uk/Biographies/Polya/) (1887-1985), but a source for the idea traces to French mathematician [Abraham de Moivre](https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/) (1667-1754) in a 1738 paper.
+
+* Pólya used the term "zentral" (central) to express his belief about the theorem's central importance to statistical theory (in German, it's the *zentraler Grenzwertsatz*). 
+
+* Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.
 
 
 ## Sampling Distribution --- Mean $\bar{x}$
@@ -146,7 +146,7 @@ For a sufficiently large sample size $n$, the sampling distribution of the sampl
 
 A commonly used rule of thumb is that "sufficiently large" is a sample with $n \ge 30$. However, in practice...
 
-* when $X$ has a normal distribution, the sampling distribution of the mean is exactly normal for all $n$.
+* when $X$ has a normal distribution, the sampling distribution of the mean $\bar{x}$ is exactly normal for all $n$.
 
 * if the underlying distribution is symmetric and unimodal with no outliers, then $n < 30$ is often sufficient.
 
@@ -181,7 +181,7 @@ We can also think of this as a type of mean. Suppose successes are represented b
 
 ## Sampling Distribution --- Proportion $\hat{p}$
 
-Let X be a binomial population with parameters $n$ and $p$. This is a particular case of the CLT, which works for *any* population.
+Let $X$ be a binomial population with parameters $n$ and $p$. This is a particular case of the CLT, which works for *any* population.
 
 For a sufficiently large sample size $n$, the sampling distribution of the sample proportion of successes $\hat{p}$ is:
 
@@ -196,7 +196,7 @@ For a sufficiently large sample size $n$, the sampling distribution of the sampl
 
 ## What is sufficiently large?
 
-For proportion data from a binomial process with probability $p$, a commonly used rule of thumb is that "sufficiently large" is a sample where $np \ge 10$ *and* $n(1 – p) \ge 10$ (i.e., more than 10 successes and failures in the sample). However...
+For proportion data from a binomial process with probability $p$, a commonly used rule of thumb is that "sufficiently large" is a sample in which $np \ge 10$ *and* $n(1 – p) \ge 10$ (i.e., at least 10 successes and 10 failures in the sample). However...
 
 * some sources say $np \ge 5$ and $n(1 – p) \ge 5$ is sufficient for approximate normality, while others say $\ge 15$. As we have seen, "approximately normal" is a judgment.
 

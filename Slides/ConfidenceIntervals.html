@@ -125,7 +125,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">October 20, 2021 @ 10:49 AM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">October 20, 2021 @ 12:47 PM</p>
           </hgroup>
   </slide>
 
@@ -136,7 +136,7 @@ slide:not(.current) .plotly.html-widget{
 <ul>
 <li><p>approximately normal</p></li>
 <li><p>has a mean \(\mu_\hat{p}\) = \(p\)</p></li>
-<li><p>has a standard error (SE) \(\sigma_\hat{p}\) = \(\sqrt{\frac{p(1-p)}{n}}\)</p></li>
+<li><p>has a standard error (SE) \(\sigma_\hat{p}\) = \(\sqrt{\sigma^2_\hat{p}}\) = \(\sqrt{\frac{p(1-p)}{n}}\)</p></li>
 </ul>
 
 <p>The traditional methods for confidence intervals and hypothesis tests for \(\hat{p}\) are based on this approximation.</p>
@@ -183,11 +183,11 @@ slide:not(.current) .plotly.html-widget{
 
 <p>\[\hat{p} \sim N\left(p,\frac{p(1-p)}{n}\right)\]</p>
 
-<p>By the Empirical Rule, about 95% of possible sample means are between \(\mu \pm 2\sigma\). For more precision, we would use the closer-to-exact value 1.96 standard deviations rather than 2.</p>
+<p>By the Empirical Rule, about 95% of possible sample means \(\hat{p}\) are between \(\mu_{\hat{p}} \pm 2\sigma_{\hat{p}}\). For more precision, we would use the closer-to-exact value 1.96 standard errors rather than 2.</p>
 
 <p>\[p \pm 1.96 \sqrt{\frac{p(1-p)}{n}}\]</p>
 
-<p>If we wanted something other than the middle 95%, we would substitute the appropriate number of SDs for 1.96.</p>
+<p>If we wanted something other than the middle 95%, we would substitute the appropriate number of SEs for the 1.96.</p>
 
 </article></slide><slide class=""><hgroup><h2>Confidence Interval for a Proportion</h2></hgroup><article  id="confidence-interval-for-a-proportion">
 
@@ -195,9 +195,51 @@ slide:not(.current) .plotly.html-widget{
 
 <p>\[\hat{p} \pm 1.96 \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]</p>
 
-<p>If \(\hat{p}\) is among the middle 95% of possible sample \(\hat{p}\) values, then an interval estimate based on that \(\hat{p}\) will include the population \(p\), with a 95% level of confidence. We can change the confidence level by changing the number of SEs (\(z^*\)).</p>
+<p>If \(\hat{p}\) is among the middle 95% of possible sample \(\hat{p}\) values, then an interval estimate based on that \(\hat{p}\) will include the population \(p\), with a 95% level of confidence. We can change the confidence level by changing the number of SEs (the \(z^*\)).</p>
 
 <p>\[\hat{p} \pm z^* \sqrt\frac{\hat{p}(1-\hat{p})}{n}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Alternative Levels of Confidence</h2></hgroup><article  id="alternative-levels-of-confidence">
+
+<p>The \(z^*\) value is found using the standard normal curve \(N(0, 1)\).</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="center">Middle % of Distribution</th>
+<th align="center">Value of z*</th>
+<th align="center">The Empirical Rule</th>
+</tr>
+<tr class="odd">
+<td align="center">68.0</td>
+<td align="center">0.99</td>
+<td align="center">about 1 SD (or SE)</td>
+</tr>
+<tr class="even">
+<td align="center">80.0</td>
+<td align="center">1.28</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">90.0</td>
+<td align="center">1.64</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">95.0</td>
+<td align="center">1.96</td>
+<td align="center">about 2 SD (or SE)</td>
+</tr>
+<tr class="odd">
+<td align="center">99.0</td>
+<td align="center">2.58</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">99.7</td>
+<td align="center">2.97</td>
+<td align="center">about 3 SD (or SE)</td>
+</tr>
+</table>
 
 </article></slide><slide class=""><hgroup><h2>Estimating for a Mean</h2></hgroup><article  id="estimating-for-a-mean">
 
@@ -217,9 +259,9 @@ slide:not(.current) .plotly.html-widget{
 
 <p>\[\bar{x} \pm 1.96 \frac{\sigma}{\sqrt{n}}\]</p>
 
-<p>But, we rarely know \(\sigma\) if we do not know \(\mu\). We can estimate it using sample \(s\), but then we have two sources of variability or uncertainty. We can on longer use a normal distribution, but rather must account for the added estimation error from \(s\) by using Student’s \(t\) distribution.</p>
+<p>But, we rarely know \(\sigma\) if we do not know \(\mu\). We can estimate it using sample \(s\), but then we have two sources of variability or uncertainty. We can no longer use a normal distribution, but rather must account for the added estimation error from \(s\) by using area under the Student’s \(t\) distribution.</p>
 
-<p>\[\bar{x} \pm t^* \frac{s}{\sqrt{n}}\]</p></article></slide>
+<p>\[\bar{x} \pm t^* \frac{s}{\sqrt{n}}, \text{ where } t^* \text{ depends on number of SEs and } n\]</p></article></slide>
 
 
   <slide class="backdrop"></slide>

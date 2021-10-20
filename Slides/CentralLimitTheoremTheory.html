@@ -125,7 +125,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">October 13, 2021 @ 11:56 PM</p>
+            <p style="margin-top: 6px; margin-left: -2px;">October 20, 2021 @ 12:06 PM</p>
           </hgroup>
   </slide>
 
@@ -149,15 +149,15 @@ slide:not(.current) .plotly.html-widget{
 
 <p>\(x\) = number of successes = {\(0, 1, 2, ..., n\)}</p>
 
-<p>\(n\) = number of trials = any positive integer</p>
+<p>\(n\) = number of trials (any positive integer)</p>
 
-<p>\(p\) = probability of success on a single trial</p>
+<p>\(p\) = probability of success on a single trial \((0 \le p \le 1)\)</p>
 
-<p>\[f(x) = P(X = x) = {n \choose x}p^x(1-p)^{n-x}\]</p>
+<p>\[f(x) = {n \choose x}p^x(1-p)^{n-x}\]</p>
 
-<p>\[E[X] = np\]</p>
+<p>\[E[X] = \mu = np\]</p>
 
-<p>\[Var[X] = np(1-p)\]</p>
+<p>\[Var[X] = \sigma^2 = np(1-p)\]</p>
 
 </article></slide><slide class=""><hgroup><h2>Recap: The Normal Model</h2></hgroup><article  id="recap-the-normal-model">
 
@@ -165,35 +165,15 @@ slide:not(.current) .plotly.html-widget{
 
 <p>\(x\) = {-\(\infty\) to +\(\infty\)}</p>
 
-<p>\(\mu\) = the mean of the distribution = any real number</p>
+<p>\(\mu\) = the mean of the distribution (any real number)</p>
 
-<p>\(\sigma^2\) = the variance of the distribution = any positive real number</p>
+<p>\(\sigma^2\) = the variance of the distribution (any positive real number)</p>
 
 <p>\[f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}\]</p>
 
 <p>\[E[X] = \mu\]</p>
 
 <p>\[Var[X] = \sigma^2\]</p>
-
-</article></slide><slide class=""><hgroup><h2>Sampling and Central Limit Theorem</h2></hgroup><article  id="sampling-and-central-limit-theorem">
-
-<p>Suppose we select a reasonably large sample of \(i.i.d.\) random variables \(X_1, X_2, ..., X_n\) (i.e., a sample from population \(X\)).</p>
-
-<p>The central limit theorem (CLT) tells us that for such an \(i.i.d.\) sample, the sampling distribution of the sample mean \(\bar{x}\) will be approximately normal, regardless of the underlying population distribution—given a couple additional conditions.</p>
-
-<p>This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We just algebraically re-express the CLT.</p>
-
-<p><strong>Note:</strong> The \(i.i.d.\) means <em>independent and identically distributed</em>. Each random variable has the same probability distribution and all are mutually independent of one another.</p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
-
-<ul>
-<li><p>The law of large numbers says that, as the number of \(i.i.d.\) randomly generated variables increases, their sample mean approaches their theoretical mean.</p></li>
-<li><p>The first known proof of the law of large numbers appears in <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> (1713) by <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/' title=''>Jacob Bernoulli</a> (1654-1705).</p></li>
-<li><p>The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Polya/' title=''>George Pólya</a> (1887-1985), but a source for the idea traces to French mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/' title=''>Abraham de Moivre</a> (1667-1754) in a 1738 paper.</p></li>
-<li><p>Pólya used the term &ldquo;zentral&rdquo; (central) to express his belief about the theorem’s central importance to statistical theory (in German, it’s the <em>zentraler Grenzwertsatz</em>).</p></li>
-<li><p>Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.</p></li>
-</ul>
 
 </article></slide><slide class=""><hgroup><h2>Recap: Standard Error</h2></hgroup><article  id="recap-standard-error">
 
@@ -204,6 +184,26 @@ slide:not(.current) .plotly.html-widget{
 <p>For example, the standard error of the mean \(\sigma_\bar{x}\) helps quantify how far a sample estimate \(\bar{x}\) is likely to be from the population mean \(\mu\). This quantity will depend on the sample size \(n\).</p>
 
 <p>SE <em>is</em> a SD, but involving statistics rather than individual values.</p>
+
+</article></slide><slide class=""><hgroup><h2>Sampling and Central Limit Theorem</h2></hgroup><article  id="sampling-and-central-limit-theorem">
+
+<p>Suppose we select a reasonably large sample of \(i.i.d.\) random variables \(X_1, X_2, ..., X_n\) (i.e., a sample from population \(X\)).</p>
+
+<p>The central limit theorem (CLT) tells us that for such an \(i.i.d.\) sample, the sampling distribution of the sample mean \(\bar{x}\) will be approximately normal, regardless of the underlying population distribution—given a couple additional conditions.</p>
+
+<p>This rule also applies to the sums of sample values, as well as to the count or proportion of successes in sample from a binomial population. We algebraically re-express \(\mu\) and \(\sigma^2\).</p>
+
+<p><strong>Note:</strong> The \(i.i.d.\) means <em>independent and identically distributed</em>. Each random variable has the same probability distribution and all are mutually independent of one another.</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
+
+<ul>
+<li><p>The law of large numbers says that, as the number of \(i.i.d.\) randomly generated variables increases, their sample mean approaches their theoretical mean (\(\bar{x} \rightarrow \mu\) as \(n \rightarrow \infty)\).</p></li>
+<li><p>The first known proof of the law of large numbers appears in <a href='https://books.google.com/books?id=XPOf7STJ3y4C&amp;pg=PP5#v=onepage&amp;q&amp;f=false' title=''><em>Ars Conjectandi</em></a> (1713) by <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/' title=''>Jacob Bernoulli</a> (1654-1705).</p></li>
+<li><p>The term central limit theorem first appeared in a 1920 paper by Hungarian mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/Polya/' title=''>George Pólya</a> (1887-1985), but a source for the idea traces to French mathematician <a href='https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/' title=''>Abraham de Moivre</a> (1667-1754) in a 1738 paper.</p></li>
+<li><p>Pólya used the term &ldquo;zentral&rdquo; (central) to express his belief about the theorem’s central importance to statistical theory (in German, it’s the <em>zentraler Grenzwertsatz</em>).</p></li>
+<li><p>Many consider the CLT and the law of large numbers to be the two foundational theorems in probability and statistics.</p></li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Mean \(\bar{x}\)</h2></hgroup><article  id="sampling-distribution-mean-barx">
 
@@ -248,7 +248,7 @@ slide:not(.current) .plotly.html-widget{
 <p>A commonly used rule of thumb is that &ldquo;sufficiently large&rdquo; is a sample with \(n \ge 30\). However, in practice…</p>
 
 <ul>
-<li><p>when \(X\) has a normal distribution, the sampling distribution of the mean is exactly normal for all \(n\).</p></li>
+<li><p>when \(X\) has a normal distribution, the sampling distribution of the mean \(\bar{x}\) is exactly normal for all \(n\).</p></li>
 <li><p>if the underlying distribution is symmetric and unimodal with no outliers, then \(n &lt; 30\) is often sufficient.</p></li>
 <li><p>if the underlying distribution is moderately (or more) skewed or has outliers, \(n &gt;&gt; 30\) may be required.</p></li>
 </ul>
@@ -278,7 +278,7 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>Sampling Distribution — Proportion \(\hat{p}\)</h2></hgroup><article  id="sampling-distribution-proportion-hatp">
 
-<p>Let X be a binomial population with parameters \(n\) and \(p\). This is a particular case of the CLT, which works for <em>any</em> population.</p>
+<p>Let \(X\) be a binomial population with parameters \(n\) and \(p\). This is a particular case of the CLT, which works for <em>any</em> population.</p>
 
 <p>For a sufficiently large sample size \(n\), the sampling distribution of the sample proportion of successes \(\hat{p}\) is:</p>
 
@@ -291,7 +291,7 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>What is sufficiently large?</h2></hgroup><article  id="what-is-sufficiently-large-1">
 
-<p>For proportion data from a binomial process with probability \(p\), a commonly used rule of thumb is that &ldquo;sufficiently large&rdquo; is a sample where \(np \ge 10\) <em>and</em> \(n(1 – p) \ge 10\) (i.e., more than 10 successes and failures in the sample). However…</p>
+<p>For proportion data from a binomial process with probability \(p\), a commonly used rule of thumb is that &ldquo;sufficiently large&rdquo; is a sample in which \(np \ge 10\) <em>and</em> \(n(1 – p) \ge 10\) (i.e., at least 10 successes and 10 failures in the sample). However…</p>
 
 <ul>
 <li><p>some sources say \(np \ge 5\) and \(n(1 – p) \ge 5\) is sufficient for approximate normality, while others say \(\ge 15\). As we have seen, &ldquo;approximately normal&rdquo; is a judgment.</p></li>
