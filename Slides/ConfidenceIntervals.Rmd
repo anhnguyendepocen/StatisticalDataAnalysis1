@@ -1,0 +1,116 @@
+---
+title: "Confidence Intervals for Means and Proportions"
+author: "Author: Jill E. Thomley"
+date: '`r format(Sys.time(), "%B %d, %Y @ %I:%M %p")`'
+output: 
+  ioslides_presentation:
+    logo: images/logoASU.jpg
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      comment = NA,
+                      echo = FALSE)
+library(tidyverse)
+```
+
+## Recap: CLT for $\hat{p}$
+
+Let $X$ be a binomial population with parameters $n$ and $p$. When $np \ge 10$ *and* $n(1 – p) \ge 10$ (i.e., at least 10 successes and 10 failures in the sample), the sampling distribution of the sample proportion of successes $\hat{p}$ is:
+
+* approximately normal
+
+* has a mean $\mu_\hat{p}$ = $p$
+
+* has a standard error (SE) $\sigma_\hat{p}$ = $\sqrt{\frac{p(1-p)}{n}}$
+
+The traditional methods for confidence intervals and hypothesis tests for $\hat{p}$ are based on this approximation.
+
+
+## Recap: CLT for $\bar{x}$
+
+Let $X$ be a population with finite mean $\mu$ and [finite variance](https://en.wikipedia.org/wiki/Category:Probability_distributions_with_non-finite_variance) $\sigma^2$ (standard deviation $\sigma$). In general, for a sample size $n \ge 30$, the sampling distribution of the sample mean $\bar{x}$ is:
+
+* approximately normal
+
+* has a mean $\mu_{\bar{x}}$ = $\mu$
+
+* has a standard error (SE) $\sigma_{\bar{x}}$ = $\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}$
+
+The traditional methods for confidence intervals and hypothesis tests for $\bar{x}$ are based on this approximation.
+
+
+## Point Estimation
+
+Let $\theta$ be a population parameter we are interested in estimating. For example, mean $\mu$, standard deviation $\sigma$, or proportion $p$. We can estimate these using an appropriate statistic from a sample. 
+
+Commonly, in statistics...
+
+* $\bar{x}$ is used to estimate $\mu$
+
+* $s$ is used to estimate $\sigma$
+
+* $\hat{p}$ is used to estimate $p$
+
+When we use a single sample statistic in this way to estimate a population parameter, it is called a *point estimate*.
+
+
+## Interval Estimation
+
+The statistics on the previous slide are *unbiased estimators*. They do not consistently over- or under-estimate their corresponding population parameters; the means of the sampling distributions are equal to the parameters. 
+
+But, a single point estimate does not give us information about how close an estimate $\hat{\theta}$ may be to the population value $\theta$.
+
+An *interval estimate* attaches a margin of error to the given point estimate, which is frequently derived from the standard error of the statistic's sampling distribution $\sigma_{\hat{\theta}}$. 
+
+Expressions for interval estimates often have the general form *point estimate* $\pm$ *margin of error*.
+
+
+## Estimating for a Proportion
+
+According to the CLT, for $np \ge 10$ *and* $n(1 – p) \ge 10$ :
+
+$$\hat{p} \sim N\left(p,\frac{p(1-p)}{n}\right)$$
+
+By the Empirical Rule, about 95% of possible sample means are between $\mu \pm 2\sigma$. For more precision, we would use the closer-to-exact value 1.96 standard deviations rather than 2.
+
+$$p \pm 1.96 \sqrt{\frac{p(1-p)}{n}}$$
+
+If we wanted something other than the middle 95%, we would substitute the appropriate number of SDs for 1.96. 
+
+
+## Confidence Interval for a Proportion
+
+On average (since it is an unbiased estimator), $\hat{p}$ is equal to $p$, so we should be able to "reverse engineer" our knowledge about its sampling distribution create an interval estimate. 
+
+
+$$\hat{p} \pm 1.96 \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+If $\hat{p}$ is among the middle 95% of possible sample $\hat{p}$ values, then an interval estimate based on that $\hat{p}$ will include the population $p$, with a 95% level of confidence. We can change the confidence level by changing the number of SEs ($z^*$).
+
+$$\hat{p} \pm z^* \sqrt\frac{\hat{p}(1-\hat{p})}{n}$$
+
+
+## Estimating for a Mean
+
+According to the CLT, for $n \ge 30$ :
+
+$$\bar{x} \sim N\left(\mu,\frac{\sigma^2}{n}\right)$$
+
+By the Empirical Rule, about 95% of possible sample means are between $\mu \pm 2\sigma$. For more precision, we would use the closer-to-exact value 1.96 standard deviations rather than 2.
+
+$$\mu \pm 1.96 \frac{\sigma}{\sqrt{n}}$$
+
+If we wanted something other than the middle 95%, we would substitute the appropriate number of SDs for 1.96. 
+
+
+## CI for a Mean
+
+Similar to a proportion, we can "reverse" engineer the sampling distribution to make a confidence interval.
+
+$$\bar{x} \pm 1.96 \frac{\sigma}{\sqrt{n}}$$
+
+But, we rarely know $\sigma$ if we do not know $\mu$. We can estimate it using sample $s$, but then we have two sources of variability or uncertainty. We can on longer use a normal distribution, but rather must account for the added estimation error from $s$ by using Student's $t$ distribution.
+
+$$\bar{x} \pm t^* \frac{s}{\sqrt{n}}$$
