@@ -1,0 +1,488 @@
+---
+title: "Binomial Quiz Questions"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 3
+---
+***
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages
+
+```{r packages_used}
+
+```
+
+### Instructions
+
+* Round to **4 decimal places** unless otherwise instructed.
+* Answers with fewer than 4 decimals can be entered as-is.
+* Entering zero before a decimal point is optional (e.g., 0.1).
+* Do not use commas/spaces when entering large numbers.
+
+### Question 1
+
+Consider the random variable X ~ Bin(10, 0.5).
+
+* E(X) = ?
+* Var(X) = ?
+* SD(X) = ?
+
+```{r}
+
+```
+
+Find the complete pmf and CDF for the distribution
+
+```{r}
+
+```
+
+### Question 2
+
+Consider the random variable X ~ Bin(10, 0.25).
+
+* E(X) = ?
+* Var(X) = ?
+* SD(X) = ?
+
+```{r}
+
+```
+
+Find the complete pmf and CDF for the distribution
+
+```{r}
+
+```
+
+### Question 3
+
+Consider the random variable X ~ Bin(10, 0.75).
+
+* E(X) = ?
+* Var(X) = ?
+* SD(X) = ?
+
+```{r}
+
+```
+
+Find the complete pmf and CDF for the distribution
+
+```{r}
+
+```
+
+### Question 4
+
+What is the shape of the pdf for each of the following Binomial distributions? (You may want to plot them to visualize skew.) The choices are:
+
+* strongly left skewed
+* somewhat left skewed
+* approximately symmetric
+* perfectly symmetric
+* somewhat right skewed
+* strongly right skewed
+* dependent on the value of x
+* impossible to determine from the information provided
+
+The shape of X ~ Bin(10, 0.5) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(100, 0.5) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(10, 0.25) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(100, 0.25) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(10, 0.75) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(100, 0.75) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(10, 0.05) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(100, 0.05) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(1000, 0.05) is ?
+
+```{r}
+
+```
+
+The shape of X ~ Bin(127, 0.71) is ?
+
+### Question 5
+
+What generalizations can you make about the shape of Binomial distributions?
+
+In general, a binomial distribution will be unimodal for ?
+
+* all possible values of n and p
+* all possible values of n and p = 0.5
+* all possible values of n and p ≠ 0.5
+* only small n and small p
+* only small n and large p
+* only large n and small p
+* only large n and large p
+* no values of n and p (i.e., never)
+
+In general, a binomial distribution will be bimodal for ?
+
+* all possible values of n and p
+* all possible values of n and p = 0.5
+* all possible values of n and p ≠ 0.5
+* only small n and small p
+* only small n and large p
+* only large n and small p
+* only large n and large p
+* no values of n and p (i.e., never)
+
+In general, when p = 0.5, the shape of X ~ Bin(n, p) tends to be ?
+
+* left skewed
+* approximately symmetric
+* perfectly symmetric
+* right skewed
+* dependent on the value of x
+* impossible to determine from the information provided
+
+In general, when p < 0.5 and n is relatively small, the shape of X ~ Bin(n, p) tends to be ?
+
+* left skewed
+* approximately symmetric
+* perfectly symmetric
+* right skewed
+* dependent on the value of x
+* impossible to determine from the information provided
+
+In general, when p < 0.5, the shape of X ~ Bin(n, p) tends to be ?
+
+* left skewed
+* approximately symmetric
+* perfectly symmetric
+* right skewed
+* dependent on the value of x
+* impossible to determine from the information provided
+In general, when p > 0.5 and n is relatively small, the shape of X ~ Bin(n, p) tends to be ?
+
+In general, when p > 0.5, the shape of X ~ Bin(n, p) tends to be ?
+
+* left skewed
+* approximately symmetric
+* perfectly symmetric
+* right skewed
+* dependent on the value of x
+* impossible to determine from the information provided
+
+In general, as n becomes larger for p ≠ 0.5, the shape of X ~ Bin(n, p) tends to be ?
+
+* left skewed
+* approximately symmetric
+* perfectly symmetric
+* right skewed
+* dependent on the value of x
+* impossible to determine from the information provided
+
+If we hold n constant, the variance of the distribution will be largest when ?
+
+* p = 0.5
+* p is very near 0
+* p is very near 1
+* n × p is largest
+* n × p is smallest
+* the answer cannot be determined without more information
+
+If we hold p constant, the variance of the distribution will get larger when ?
+
+* p = 0.5
+* p is very near 0
+* p is very near 1
+* n × p is largest
+* n × p is smallest
+* the answer cannot be determined without more information
+
+### Question 6
+
+A digital communication channel has developed a signal degradation problem, which results in a 0.1% chance that any bit transmitted will be received in error (e.g., it is sent as a 1 but is received as a 0 instead of a 1). Each bit is independent of the others and the error rate is constant. You send a test message that is 1280 bits long (the maximum size of an SMS text message before it must be segmented into parts to send). Let X be the total number of errors in the received message.
+
+What is E(X)? 
+
+```{r}
+
+```
+
+What is P(X = 1)?
+
+```{r}
+
+```
+
+What is P(X ≤ 1)? 
+
+```{r}
+
+```
+
+What is P(X > 1)? 
+
+```{r}
+
+```
+
+If P(X ≤ c) = 99%, what is the value of c?
+
+```{r}
+
+```
+
+### Question 7
+
+Your professor gives a true/false quiz with 10 questions. The minimum score required to pass is 60% correct. You were too busy to study for the quiz, so you just randomly guess on each question. Let X be the number of questions you guess correctly.
+
+Theoretically, how many questions should you expect to get correct? 
+
+```{r}
+
+```
+
+Theoretically, what is the standard deviation of the number correct?
+
+```{r}
+
+```
+
+What is the probability you get exactly the minimum passing score? 
+
+```{r}
+
+```
+
+What is the probability you get any passing score? 
+
+```{r}
+
+```
+
+Seventy-five percent of the time, a student who is just guessing will get what score (or below) out of 10?
+
+```{r}
+
+```
+
+### Question 8
+
+Your professor gives a multiple choice quiz with 10 questions. Each question has four answer choices. The minimum score required to pass is 60% correct. You were too busy to study for the quiz, so you just randomly guess on each question. Let X be the number of questions you guess correctly.
+
+Theoretically, how many questions should you expect to get correct? 
+
+```{r}
+
+```
+
+Theoretically, what is the standard deviation of the number correct?
+
+```{r}
+
+```
+
+What is the probability you get exactly the minimum passing score? 
+
+```{r}
+
+```
+
+What is the probability you get any passing score? 
+
+```{r}
+
+```
+
+Seventy-five percent of the time, a student who is just guessing will get what score (or below) out of 10?
+
+```{r}
+
+```
+
+### Question 9
+
+The germination rate for bush bean seeds from a particular company is 92% (i.e., 92% of seeds planted and tended according to the directions will sprout). Seeds are sold in varying smaller-sized size packets as well as in bulk. Assume that the selection of seeds for packets is random and all seeds are independent of one another. Let X be the number of seeds that sprout.
+
+Theoretically, how many questions should you expect to get correct? 
+
+```{r}
+
+```
+
+Theoretically, what is the standard deviation of the number correct?
+
+```{r}
+
+```
+
+What is the probability you get exactly the minimum passing score? 
+
+```{r}
+
+```
+
+What is the probability you get any passing score? 
+
+```{r}
+
+```
+
+Seventy-five percent of the time, a student who is just guessing will get what score (or below) out of 10?
+
+```{r}
+
+```
+
+### Question 10
+
+The germination rate for bush bean seeds from a particular company is 92% (i.e., 92% of seeds planted and tended according to the directions will sprout). Seeds are sold in varying smaller-sized size packets as well as in bulk. Assume that the selection of seeds for packets is random and all seeds are independent of one another. Let X be the number of seeds that sprout.
+
+A nursery buys bush bean seeds in bulk. If they plant exactly 1000 seeds, how many should they expect to sprout?
+
+```{r}
+
+```
+
+If you consider all bulk lots of 1000 seeds, what is the standard deviation of the number of seeds that will sprout?
+
+```{r}
+
+```
+
+If they plant exactly 1000 seeds, what is the probability that they get between 950 and a 1000 sprouts (inclusive)?
+
+```{r}
+
+```
+
+If they plant exactly 1000 seeds, what is the probability that between 90% and 95% (not inclusive) of seeds sprout?
+
+```{r}
+
+```
+
+How many seeds should they plant if they want to have a 5% chance of getting less than or equal to 1000 sprouts?
+
+```{r}
+
+```
+
+### Question 11
+
+Samples of 25 parts from a metal punching process (i.e., a process that creates parts by cutting shapes from sheet metal) are selected every hour for quality inspection. Typically, 12 in 1000 parts require additional work to smooth rough edges, though this amount can increase if the punch gets too dull. Let X be the total number of parts in a sample of 25 that require additional work. A dull punch is suspected if X exceeds a pre-set cutoff value of mean plus three standard deviations (based on the typical rate), rounded up to the nearest integer. If this cutoff value is met, the machine is stopped and the punch is swapped out.
+
+What is SD(X)? 
+
+```{r}
+
+```
+
+What is the smallest integer that is greater than the mean of X plus three standard deviations (i.e., what is the cutoff value used for inspections)?
+
+```{r}
+
+```
+
+When the punch is sufficiently sharp (i.e., 12 in 1000 parts need reworking), what is the probability that X exceeds the pre-set cutoff value? 
+
+```{r}
+
+```
+
+If the punch is dull and the "needs additional work" fraction increases to 5 in 100 parts, what is the probability that X exceeds the cutoff?
+
+```{r}
+
+```
+
+If the punch is dull and the fraction increases to 5 in 100, what is the probability that this goes undetected during an 8-hour shift?
+
+```{r}
+
+```
+
+### Question 12
+
+Enter the correct `rbinom()` code to generate the samples described below. Use appropriate* *spacing** in your code and put a zero in front of decimals less than 1 (e.g., 0.33 versus .33).
+
+The random variable X ~ Bin(10, 0.75). Simulate 100,000 samples from this distribution.
+
+```{r}
+
+```
+
+A digital communication channel has developed a signal degradation problem, which results in a 0.1% chance that any bit transmitted will be received in error (e.g., as a 0 instead of a 1). Each bit is independent of the others and the error rate is constant. You send a test message that is 1280 bits long (the maximum size of an SMS text message before it must be segmented into parts to send). Let X be the total number of errors in the received message. Simulate the number of errors per message for a sample of one million text messages.
+
+```{r}
+
+```
+
+Your professor gives a multiple choice quiz with 10 questions. Each question has four answer choices. The minimum score required to pass is 60% correct. You were too busy to study for the quiz, so you just randomly guess on each question. Let X be the number of questions you guess correctly. Simulate the quiz scores for a class of 30 students, all of whom are just guessing.
+
+```{r}
+
+```
+
+The germination rate for bush bean seeds from a particular company is 92% (i.e., 92% of seeds planted and tended according to the directions will sprout). Seeds are sold in varying smaller-sized size packets as well as in bulk. Assume that the selection of seeds for packets is random and all seeds are independent of one another. Let X be the number of seeds that sprout. A farmer plants five fields, each with 10,000 seeds. Simulate the number of sprouts he gets in each of his fields.
+
+```{r}
+
+```
+
+Samples of 25 parts from a metal punching process (i.e., a process that creates parts by cutting shapes from sheet metal) are selected every hour for quality inspection. Typically, 12 in 1000 parts require additional work to smooth rough edges, though this amount can increase if the punch gets too dull. Let X be the total number of parts in a sample of 25 that require additional work. If the machine runs 24 hours a day and the current month has 30 days, simulate the results of this month's inspections, assuming the rate of parts that require additional work remains constant.
+
+```{r}
+
+```
+
+***
+```{r}
+sessionInfo()
+```
