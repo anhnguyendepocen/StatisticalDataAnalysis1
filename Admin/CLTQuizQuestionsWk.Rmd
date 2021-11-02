@@ -1,0 +1,280 @@
+---
+title: "Sampling & CLT Quiz Questions"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 3
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+***
+
+### Instructions
+
+WHEN ENTERING ANSWERS:
+
+* Round to **4 decimal places** unless otherwise instructed.
+* Answers with fewer than 4 decimals can be entered as-is.
+* Entering zero before a decimal point is optional (e.g., 0.1).
+* Do not use commas/spaces when entering large numbers.
+
+### Question 1
+
+Body mass for young adults who identify as Caucasian and male is approximately normally distributed with $\mu = 190$ pounds and $\sigma = 24$ pounds. Let $X$ be the weight of an individual person.
+
+(a) For randomly selected samples of size 16, the sampling distribution of the sample mean will have parameters $\mu_{\bar{x}}$ = _____ and $\sigma_{\bar{x}}$ = _____ .
+
+```{r}
+
+```
+
+(b) For randomly selected samples of size 100, the sampling distribution of the sample mean will have parameters $\mu_{\bar{x}}$ = _____ and $\sigma_{\bar{x}}$ = _____ .
+
+```{r}
+
+```
+
+(c) The minimum sample size required to make the standard error of the sampling distribution of the sample mean less than 2.4 is n = _____ .
+
+```{r}
+
+```
+
+(d) If I randomly select one person, the probability that the person's body mass is 195 pounds or more is _____ .
+
+```{r}
+
+```
+
+(e) If I randomly select 100 people, the probability that the group's average body mass is 195 pounds or more is _____ .
+
+```{r}
+
+```
+
+### Question 2
+
+A regional airline runs a popular commuter flight that holds forty passengers. Typically, weights of individual passengers plus their baggage are approximately normally distributed with a mean of with $\mu = 210$ pounds and $\sigma = 25$ pounds. Let $X$ be the weight of an individual passenger plus their baggage.
+
+(a) If we only consider full flights, the sampling distribution of the mean weight will have parameters $\mu_{\bar{x}}$ = _____
+ and $\sigma_{\bar{x}}$ = _____ .
+
+```{r}
+
+```
+
+(b) If we only consider full flights, the sampling distribution of the total weight will have parameters $\mu_{sum}$ = _____
+ and $\sigma_{sum}$ = _____ .
+ 
+```{r}
+
+```
+
+(c) According to air safety regulations, the total weight of passengers and baggage should not exceed 8800 pounds. The probability that this will happen on a full flight is _____ . 
+
+```{r}
+
+```
+
+(d) Consider (c) in terms of average rather than total weight. For the same degree of safety, the average weight of individual passengers plus their baggage should not exceed _____ pounds (*round to a whole number*).
+
+```{r}
+
+```
+
+### Question 3
+
+A statistical consultant for a rental car company discovers that the distribution of miles per day that customers drive its rental cars is somewhat right skewed with an occasional large outlier. His data shows that the daily mileage distribution has a mean of 98 miles and a standard deviation of 51 miles. Assume that the number of miles driven each day is independent of any other day (though that is probably not strictly true in real life, if you consider people's driving habits and why they rent cars). Let $X$ be the number of miles per day a car is driven.
+
+(a) A randomly selected car was rented for 289 days last year. The probability that its average daily mileage exceeded 100 miles is _____ .
+
+```{r}
+
+```
+
+(b) A typical U.S. driver puts approximately 13,500 miles on their personal vehicle each year. If we consider a car that was rented for 289 days last year, the probability that the total mileage (i.e., sum of daily mileages) exceeded twice that typical amount is _____ .
+
+```{r}
+
+```
+
+(c) If cars are typically rented for 289 days out of the year and we consider the company's entire fleet, then 15% of vehicles were driven fewer than _____ miles per day last year, on average. (*round to a whole number*)
+
+```{r}
+
+```
+
+(d) Suppose someone misunderstood the CLT and mistakenly tried to model the population distribution of miles per day using a normal curve instead of the right-skewed curve described above. On that normal curve, about _____ % of the modeled mileage values would be negative—which is of course impossible in the real world. (*round to a whole number*)
+
+```{r}
+
+```
+
+### Question 4
+
+An electrical appliance uses four 1.5v batteries. They are connected in series so that the total voltage is the sum of the voltages in the four batteries. The population of batteries has a mean voltage of 1.5v with a standard deviation of 0.02v. Let Y be the total voltage.
+
+```{r}
+
+```
+
+(a) E(Y) = _____ and Var(Y) = _____ .
+
+```{r}
+
+```
+
+(b) According to the Empirical Rule, almost all of the possible totals will be between _____ volts and _____ volts.
+
+```{r}
+
+```
+
+### Question 5
+
+One of the larger species of tarantulas is the Grammostola mollicoma, whose common name is the Brazilian giant tawny red. Tarantulas have two body parts. The anterior part is covered by a shell or carapace. Let $X$ be the length of the carapaces of adult male *G. mollicoma*. Researchers have determined that $X$ is approximately normal with $\mu = 18.14$ mm and $\sigma = 1.75$ mm. Suppose an arachnologist collects a random sample of 25 adult male *G. mollicoma*.
+
+```{r}
+ 
+```
+
+(a) If the data are re-expressed as centimeters rather than millimeters, the sampling distribution of the sample mean will have parameters $\mu_{\bar{x}}$ = _____ and $\sigma_{\bar{x}}$ = _____ .
+
+```{r}
+
+```
+
+(b) The probability that the 25 sampled tarantulas have a mean carapace length of more than 1.86 cm is _____ .
+
+```{r}
+
+```
+
+(c) The middle 95% of possible sample means would be found between _____ and _____ .
+
+```{r}
+
+```
+
+### Question 6
+
+Recent research suggests that 22.9% of college students between the ages of 18 and 24 are clinically addicted to alcohol and/or drugs. A psychologist selects a nationwide random sample of 1000 college students for an in-depth survey on drinking and drug use. Let $X$ be the number of students in the sample who are clinically addicted and $\hat{p}$ be the proportion of students in the sample who are clinically addicted.
+
+(a) Even though the researcher would be sampling without replacement, we can use a binomial distribution as a model for X because the sample is such a tiny fraction of the whole population. The parameters for the binomial distribution would be n = _____ and p = _____ .
+
+```{r}
+
+```
+
+(b) If we choose to model $X$ using a normal approximation to the binomial, the parameters for the normal distribution would be $\mu_{X}$ = _____ and $\sigma_{X}$ = _____ .
+
+```{r}
+
+```
+
+(c) If we choose to model $\hat{p}$ using a normal approximation to the binomial, the parameters for the normal distribution would be $\mu_{\hat{p}}$ = _____ and $\sigma_{\hat{p}}$ = _____ .
+
+```{r}
+
+```
+
+(d) Using an exact binomial calculation, the probability that the researcher gets at least 250 students who are addicted to alcohol and/or drugs in her sample is _____ .
+
+```{r}
+
+```
+
+(e) Using the normal approximation for count of successes, the probability that the sample contains at least 250 students who are addicted to alcohol and/or is _____ . (*use 249.5 rather than 250 as a continuity correction*)
+
+```{r}
+
+```
+
+(f) Using the normal approximation for proportion of successes, the probability that the sample contains at least 250 students who are addicted to alcohol and/or is _____ . (*i.e., at least 249.5/1000 using a continuity correction*) 
+
+```{r}
+
+```
+
+### Question 7
+
+The town council of a rural community is planning a survey about the possibility of placing new restrictions on land development. Suppose that in the population, a small majority of voters (~56%) are indeed in favor of new restrictions. Let $\hat{p}$ be the proportion of voters in a random sample who say they are in favor. Though the town council would be sampling without replacement, we can use a binomial distribution as a model for X because the sample group is likely to be less than 10% of the population (the standard rule of thumb). For the purposes of this problem, a "majority" is one more than half the sample size (e.g., 50/2 + 1 = 26).
+
+```{r}
+
+```
+
+For a survey of 100 voters...
+
+(a) $\mu_{\hat{p}}$ = ____ and $\sigma_{\hat{p}}$ = _____
+
+```{r}
+
+```
+
+(b) Using an exact binomial calculation, the probability that less than a majority of the sample is in favor is _____ .
+
+```{r}
+
+```
+
+(c) Using the normal approximation, the probability that less than a majority of the sample is in favor is _____ .
+
+```{r}
+
+```
+
+For a survey of 400 voters...
+
+(d) $\mu_{\hat{p}}$ = _____ and $\sigma_{\hat{p}}$ = _____ 
+
+```{r}
+
+```
+
+(e) Using an exact binomial calculation, the probability that less than a majority of the sample is in favor is _____ .
+
+```{r}
+
+```
+
+(f) Using the normal approximation, the probability that less than a majority of the sample is in favor is _____ .
+
+```{r}
+
+```
+
+For a survey of 1600 voters...
+
+(g) $\mu_{\hat{p}}$ = _____ and $\sigma_{\hat{p}}$ = _____
+
+```{r}
+
+```
+
+(h) Using an exact binomial calculation, the probability that less than a majority of the sample is in favor is _____ .
+
+```{r}
+
+```
+
+(i) Using the normal approximation, the probability that less than a majority of the sample is in favor is _____ .
+
+```{r}
+
+```
+
+***
+```{r}
+sessionInfo()
+```
+

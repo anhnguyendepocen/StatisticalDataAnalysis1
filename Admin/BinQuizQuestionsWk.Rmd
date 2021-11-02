@@ -486,3 +486,4 @@ Samples of 25 parts from a metal punching process (i.e., a process that creates 
 ```{r}
 sessionInfo()
 ```
+
