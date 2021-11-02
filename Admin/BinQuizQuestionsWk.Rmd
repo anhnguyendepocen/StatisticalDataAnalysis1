@@ -350,31 +350,31 @@ Seventy-five percent of the time, a student who is just guessing will get what s
 
 The germination rate for bush bean seeds from a particular company is 92% (i.e., 92% of seeds planted and tended according to the directions will sprout). Seeds are sold in varying smaller-sized size packets as well as in bulk. Assume that the selection of seeds for packets is random and all seeds are independent of one another. Let X be the number of seeds that sprout.
 
-Theoretically, how many questions should you expect to get correct? 
+If I buy a packet of 50 seeds, how many should I expect to sprout?
 
 ```{r}
 
 ```
 
-Theoretically, what is the standard deviation of the number correct?
+If I consider all packets of 50 seeds, what is the standard deviation of the number of seeds that will sprout?
 
 ```{r}
 
 ```
 
-What is the probability you get exactly the minimum passing score? 
+If I plant 10 randomly chosen seeds from my packet of fifty, what is the probability that exactly 8 sprout?
 
 ```{r}
 
 ```
 
-What is the probability you get any passing score? 
+If I plant 10 randomly chosen seeds from my packet of fifty, what is the probability that at least 8 sprout?
 
 ```{r}
 
 ```
 
-Seventy-five percent of the time, a student who is just guessing will get what score (or below) out of 10?
+If I plant 10 seeds from my packet of fifty, what is the probability that between 5 and 8 (inclusive) sprout?
 
 ```{r}
 
