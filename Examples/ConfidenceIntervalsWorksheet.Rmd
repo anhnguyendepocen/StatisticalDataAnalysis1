@@ -7,7 +7,7 @@ output:
     theme: yeti
     highlight: textmate
     toc: TRUE
-    toc_depth: 5
+    toc_depth: 4
 ---
 
 ```{r globaloptions, include = FALSE}
@@ -35,32 +35,44 @@ Michelson, A. A. (1882). "Experimental determination of the velocity of light ma
 glimpse(Michelson)
 ```
 
-#### Estimate Speed of Light
-
-Estimate the speed of light in air using the mean of the measurements.
+#### Conduct EDA and estimate the speed of light
 
 ```{r}
-# create the bootstrap distribution
 
 ```
 
+#### Create the bootstrap distribution
+
 ```{r}
-# bootstrap percentile interval
 
 ```
 
+#### Assess the boostrap distribution for normality
+
 ```{r}
-# bootstrap standard error interval (if appropriate)
 
 ```
 
+#### Compute the 95% bootstrap percentile interval
+
 ```{r}
-# traditional confidence interval (if appropriate)
+
+```
+
+#### Compute the 95% bootstrap standard error interval (if appropriate)
+
+```{r}
+
+```
+
+#### Compute the traditional 95% confidence interval (if appropriate)
+
+```{r}
 
 ```
 
 
-### Bangladesh Well Data
+### Bangladesh Well Data -- Mean
 
 Bangladesh has suffered the largest population-level poisoning in history. Millions of people were exposed to naturally-occurring arsenic from tube-wells. Ironically, the wells had been installed to provide cleaner water than surface sources in order to reduce gastrointestinal diseases. Studies in other countries with long-term exposure to arsenic in groundwater found that 1 in 10 people who consume water containing 500 micrograms of arsenic per liter (mcg/l) may ultimately die from cancers caused by arsenic. The `Bangladesh` dataset from the textbook *Mathematical Statistics with Resampling and R* (found in the `resampledata` package) contains a sample of tested wells.
 
@@ -68,121 +80,131 @@ Bangladesh has suffered the largest population-level poisoning in history. Milli
 glimpse(Bangladesh)
 ```
 
-#### Exploratory Data Analysis
-
-##### Mean, SD, Sample Size
+#### Conduct EDA and estimate the arsenic concentration
 
 ```{r}
-# summary stats
 
 ```
 
-##### Histogram and Boxplot
+#### Create the bootstrap distribution
 
 ```{r}
-# histogram
 
 ```
 
+#### Assess the boostrap distribution for normality
+
 ```{r}
-# boxplot
 
 ```
 
-##### Normal QQ Plot & Stats
+#### Compute the 95% bootstrap percentile interval
 
 ```{r}
-# normal QQ plot
 
 ```
 
+#### Compute the 95% bootstrap standard error interval (if appropriate)
+
 ```{r}
-# skewness and kurtosis
 
 ```
 
-#### Estimate Mean Arsenic
-
-Estimate the mean level of arsenic in Bangladesh tube wells.
+#### Compute the traditional 95% confidence interval (if appropriate)
 
 ```{r}
-# create the bootstrap distribution
 
 ```
 
-```{r}
-# bootstrap percentile interval
 
-```
-
-```{r}
-# bootstrap standard error interval (if appropriate)
-
-```
-
-```{r}
-# traditional confidence interval (if appropriate)
-
-```
-
-#### Estimate Proportion #2
-
-Estimate the true proportion of wells that exceed 500 mcg/l.
-
-```{r}
-# create the bootstrap distribution
-
-```
-
-```{r}
-# bootstrap percentile interval
-
-```
-
-```{r}
-# bootstrap standard error interval (if appropriate)
-
-```
-
-#### Estimate Proportion #2
+### Bangladesh Well Data -- Proportion #1
 
 The maximum level of arsenic permitted in wells in Bangladesh is 50 mcg/l. Estimate the true proportion of wells that exceed this legal limit.
 
+#### Conduct EDA and estimate the proportion > 50 mcg/l
+
 ```{r}
-# create the bootstrap distribution
 
 ```
 
+#### Create the bootstrap distribution
+
 ```{r}
-# bootstrap percentile interval
 
 ```
 
+#### Assess the boostrap distribution for normality
+
 ```{r}
-# bootstrap standard error interval (if appropriate)
 
 ```
 
-#### Estimate Proportion #3
+#### Compute the 95% bootstrap percentile interval
+
+```{r}
+
+```
+
+#### Compute the 95% bootstrap standard error interval (if appropriate)
+
+```{r}
+
+```
+
+#### Compute the traditional 95% confidence interval (if appropriate)
+
+```{r}
+
+```
+
+
+### Bangladesh Well Data -- Proportion #2
 
 World Health Organization (WHO) recommends that wells contain no more than 10 mcg/l of arsenic. Estimate the true proportion of wells that exceed this limit.
 
+#### Conduct EDA and estimate the proportion > 10 mcg/l
+
 ```{r}
-# create the bootstrap distribution
 
 ```
 
+#### Create the bootstrap distribution
+
 ```{r}
-# bootstrap percentile interval
 
 ```
 
+#### Assess the boostrap distribution for normality
+
 ```{r}
-# bootstrap standard error interval (if appropriate)
 
 ```
 
-#### Question / Discussion
+#### Compute the 95% bootstrap percentile interval
+
+```{r}
+
+```
+
+#### Compute the 95% bootstrap standard error interval (if appropriate)
+
+```{r}
+
+```
+
+#### Compute the traditional 95% confidence interval (if appropriate)
+
+```{r}
+
+```
+
+
+### Questions / Discussion
+
+Does the interval created using Michelson's data contain the currently accepted value of the speed of light in air? If not, what might be the explanation?
+
+**ANSWER:**
+
 
 There are about 5 million tube wells in Bangladesh (serving many millions of people). How many wells are potentially impacted by high levels of arsenic?
 
