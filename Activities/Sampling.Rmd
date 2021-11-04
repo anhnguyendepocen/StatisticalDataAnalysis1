@@ -49,7 +49,7 @@ ggplot() +
 ##### Set the Sample Size
 
 ```{r}
-n1 <- 10   # sample size
+n1 <- 100000  # sample size -- how many individual values am I choosing from the pop?
 ```
 
 ##### Simulate Data
@@ -96,20 +96,20 @@ ggplot(data, aes(sample = sample)) +
 
 QUESTION: What happens to the distribution of the sample as sample size (n) increases?
 
-ANSWER:
+ANSWER: As the sample size increases, the sample looks more and more like the parent uniform distribution.
 
 #### Distribution of the Sample Mean
 
 ##### Set Sample Size
 
 ```{r}
-n2 <- 1   # sample size
+n2 <- 10   # sample size -- how many data points are in each sample?
 ```
 
 ##### Simulate Sample Means
 
 ```{r}
-N <- 10^5   # choose number of simulations
+N <- 10^5   # choose number of simulations -- how many times are we going to sample?
 
 simresults <- numeric(N)   # initialize storage vector
 
@@ -120,7 +120,8 @@ for (i in 1:N) {
 data <- tibble(sample = simresults)
 
 ggplot(data, aes(x = sample)) +
-  geom_histogram(bins = 20)
+  geom_histogram(bins = 20) +
+  labs(x = "sample means") # my "sample" is 10^5 sample means
 ```
 
 ##### Assess Normality
@@ -158,11 +159,11 @@ ggplot(data, aes(sample = sample)) +
 
 QUESTION: What happens to the distribution of the sample *mean* as sample size (n) increases?
 
-ANSWER:
+ANSWER: As the sample size increases, the sampling distribution of the sample mean becomes bell-shaped (not population shaped).
 
-QUESTION: How large does the sample size have to be before the distribution of the means looks approximately normal?
+QUESTION: How large does the sample size have to be before the distribution of the means looks approximately normal? For the uniform distribution, the sampling distribution of the sample mean approaches approximate normality at about n = 10.
 
-ANSWER:
+ANSWER: 
 
 ### Exponential Distribution
 
@@ -183,7 +184,7 @@ ggplot() +
 ##### Set the Sample Size
 
 ```{r}
-n1 <- 10   # sample size
+n1 <- 10000   # sample size
 ```
 
 ##### Simulate Data
@@ -230,14 +231,14 @@ ggplot(data, aes(sample = sample)) +
 
 QUESTION: What happens to the distribution of the sample as sample size (n) increases?
 
-ANSWER:
+ANSWER: In the same way the uniform samples converged to the uniform population shape, this exponential samples converge to the exponential shape. In general, samples of values from a population will tend to look more and more like the population as the sample size approaches the population size. They converge to the population.
 
 #### Distribution of the Sample Mean
 
 ##### Set Sample Size
 
 ```{r}
-n2 <- 1   # sample size
+n2 <- 10000  # sample size
 ```
 
 ##### Simulate Sample Means
@@ -294,7 +295,7 @@ QUESTION: What happens to the distribution of the sample *mean* as sample size (
 
 ANSWER:
 
-QUESTION: How large does the sample size have to be before the distribution of the means looks approximately normal?
+QUESTION: If it approaches normality, how large does n have to be to make it approximately normal?
 
 ANSWER:
 

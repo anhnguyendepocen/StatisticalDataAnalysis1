@@ -170,7 +170,7 @@ visualize(null_distribution, bins = 10) +
 
 Consider the alternative hypothesis.
 
-$$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+$$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$
 
 ```{r}
 visualize(null_distribution, bins = 10) + 
