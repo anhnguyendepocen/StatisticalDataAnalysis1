@@ -1,5 +1,5 @@
 ---
-title: "Estimation Example: Speed of Light"
+title: "Estimation Example: Speed of Light (Mean)"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
@@ -27,7 +27,7 @@ library(kableExtra)
 
 ### **Problem & DataSet**
 
-Albert Michelson (1852–1931) was an American physicist known for his work on measuring the speed of light. He was the first American to win the Nobel Prize for science (1907). The `Michelson` dataset from the `HistData` package contains Michelson's measurements of the velocity of light in air, made which he made from June 5 to July 2, 1879 and reported in Michelson (1882). The data values + 299,000 are Michelson's measurements in km/sec. The currently accepted value of the speed of light in air is 299,702.547 km/sec.
+Albert Michelson (1852–1931) was an American physicist known for his work on measuring the speed of light. He was the first American to win the Nobel Prize for science (1907). The `Michelson` dataset from the `HistData` package contains Michelson's measurements of the velocity of light in air, made which he made from June 5 to July 2, 1879 and reported in [Michelson (1882)](https://www.gutenberg.org/files/11753/11753-h/11753-h.htm). The data values + 299,000 are Michelson's measurements in km/sec. The currently accepted value of the speed of light in air is 299,702.547 km/sec.
 
 Michelson, A. A. (1882). "Experimental determination of the velocity of light made at the United States Naval Academy, Annapolis". *Astronomical Papers*, 1,109-145, U. S. Nautical Almanac Office.
 
@@ -163,8 +163,9 @@ comparison <- rbind(percentile_ci,
       standard_error_ci,
       tibble(lower_ci = t.test(Michelson$velocity)$conf.int[1],
              upper_ci = t.test(Michelson$velocity)$conf.int[2])) %>% 
-  mutate(type = c("Percentile", "SE Method", "Traditional")) %>% 
-  select(type, lower_ci, upper_ci) %>% 
+  mutate(type = c("Percentile", "SE Method", "Traditional"),
+         width = upper_ci - lower_ci) %>% 
+  relocate(type, .before = lower_ci) %>% 
   kable(digits = 2, align = "lcc") %>% 
   kable_styling(full_width = FALSE, position = "left", font_size = 14)
 ```
@@ -176,7 +177,7 @@ comparison
 
 Since the sampling distribution is approximately normal, the three methods produce roughly the same interval estimates. If the sampling distribution was not normal, only the percentile method would be appropriate to use.
 
-Notice that the currently accepted value of 299,702.547 km/sec -- 299,000 = 702.547 (on the scale of Michelson's data) is not in the interval estimates. Michelson's data overestimates the value of the speed of light, though his estimate seems relatively close. (This is likely due to the limitations of his measurement tools and human reaction time.)
+Notice that the currently accepted value of 299,702.547 km/sec -- 299,000 = 702.547 (on the scale of Michelson's data) is not in the interval estimates. Michelson's data somewhat overestimates the value of the speed of light in air.
 
 <hr>
 ```{r}

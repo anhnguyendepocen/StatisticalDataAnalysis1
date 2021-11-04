@@ -1,5 +1,5 @@
 ---
-title: "Estimation Example: Bangladesh Wells #1 (mean)"
+title: "Estimation Example: Bangladesh Wells (Mean)"
 author: "Created by Jill E. Thomley"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
@@ -95,7 +95,7 @@ ggplot(Bangladesh, aes(sample = Arsenic)) +
   theme_linedraw()
 ```
 
-The curved pattern of divergence from the straight line is typical of strongly right-skewed data.
+The concave-up pattern of divergence from the straight line is typical of strongly right-skewed data.
 
 ### **Confidence Interval Estimation**
 
@@ -170,9 +170,10 @@ comparison <- rbind(percentile_ci,
       standard_error_ci,
       tibble(lower_ci = t.test(Bangladesh$Arsenic)$conf.int[1],
              upper_ci = t.test(Bangladesh$Arsenic)$conf.int[2])) %>% 
-  mutate(type = c("Percentile", "SE Method", "Traditional")) %>% 
-  select(type, lower_ci, upper_ci) %>% 
-  kable(digits = 2, align = "lcc") %>% 
+  mutate(type = c("Percentile", "SE Method", "Traditional"),
+         width = upper_ci - lower_ci) %>% 
+  relocate(type, .before = lower_ci) %>% 
+  kable(digits = 2, align = "lccc") %>% 
   kable_styling(full_width = FALSE, position = "left", font_size = 14)
 
 comparison_plot <- visualize(bootstrap_distribution) +
@@ -187,7 +188,7 @@ comparison
 comparison_plot
 ```
 
-The slight right skew in the sampling distribution means that the boundaries of the 95% percentile interval are slightly larger (to take the longer right tail into account) than the boundaries of the other two intervals, which assume a normal distribution.
+The slight right skew in the sampling distribution means that the boundaries of the 95% percentile interval are slightly larger (to appropriately take the longer right tail of the sampling distribution into account) than the boundaries of the other two intervals, which assume an approximately normal distribution. However, they are not too dissimilar, given the overall width.
 
 <hr>
 ```{r}
