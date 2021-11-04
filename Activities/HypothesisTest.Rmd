@@ -1,0 +1,151 @@
+---
+title: "Hypothesis Test"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 5
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moderndive) 
+library(infer)
+```
+
+Say you are working at a bank in the 1970s and you are submitting your résumé to apply for a promotion. Will your gender affect your chances of getting promoted? To answer this question, we’ll focus on data from a study published in the Journal of Applied Psychology in 1974. This data is also used in the OpenIntro series of statistics textbooks.
+
+To begin the study, 48 bank supervisors were asked to assume the role of a hypothetical director of a bank with multiple branches. Every one of the bank supervisors was given a résumé and asked whether or not the candidate on the résumé was fit to be promoted to a new position in one of their branches.
+
+However, each of these 48 résumés were identical in all respects except one: the name of the applicant at the top of the résumé. Of the supervisors, 24 were randomly given résumés with stereotypically “male” names, while 24 of the supervisors were randomly given résumés with stereotypically “female” names. Since only (binary) gender varied from résumé to résumé, researchers could isolate the effect of this variable in promotion rates.
+
+While many people today (including us, the authors) disagree with such binary views of gender, it is important to remember that this study was conducted at a time where more nuanced views of gender were not as prevalent. Despite this imperfection, we decided to still use this example as we feel it presents ideas still relevant today about how we could study discrimination in the workplace.
+
+The `moderndive` package contains the data on the 48 applicants in the `promotions` data frame. 
+
+### Promotions Dataset
+
+```{r}
+str(promotions)
+```
+
+```{r}
+promotions %>% 
+  group_by(gender, decision) %>% 
+  tally()
+```
+
+```{r}
+ggplot(promotions, 
+       aes(x = gender, fill = decision)) +
+  geom_bar() + 
+  labs(x = "Gender of Résumé Name")
+```
+
+### Shuffled Promotions Dataset
+
+```{r}
+str(promotions_shuffled)
+```
+
+```{r}
+promotions_shuffled %>% 
+  group_by(gender, decision) %>% 
+  tally()
+```
+
+```{r}
+ggplot(promotions_shuffled, 
+       aes(x = gender, fill = decision)) +
+  geom_bar() + 
+  labs(x = "Gender of Résumé Name")
+```
+
+### Another Shuffled Promotions Dataset 
+
+```{r}
+promotions_shuffled_new <- promotions %>% 
+  mutate(gender = sample(gender)) # shuffles the gender column
+
+promotions_shuffled_new %>% 
+  group_by(gender, decision) %>% 
+  tally()
+
+ggplot(promotions_shuffled_new, 
+       aes(x = gender, fill = decision)) +
+  geom_bar() + 
+  labs(x = "Gender of Résumé Name")
+```
+
+### Hypothesis Testing
+
+#### Hypotheses
+
+$$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+
+$$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$ 
+
+#### Test Statistic
+
+We will estimate the difference using: 
+
+$$\text{observed difference} = \hat{p}_{male} - \hat{p}_{female}$$
+
+```{r}
+obs_diff_prop <- promotions %>% 
+  specify(decision ~ gender, success = "promoted") %>% 
+  calculate(stat = "diff in props", order = c("male", "female"))
+obs_diff_prop
+```
+
+#### Generate the Null Distribution
+
+```{r}
+null_distribution <- promotions %>% 
+  specify(formula = decision ~ gender, success = "promoted") %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in props", order = c("male", "female"))
+```
+
+```{r}
+visualize(null_distribution, bins = 10) +
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       x = "p_hat_male - p_hat_female") +
+  geom_vline(xintercept = 0, size = 1)
+```
+
+#### Assess the Significance
+
+```{r}
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff_prop, direction = "right") +
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       subtitle = "the thick red line is the observed difference in the sample (test statistic)",
+       x = "p_hat_male - p_hat_female") +
+  geom_vline(xintercept = 0, size = 1)
+```
+
+
+***
+```{r}
+sessionInfo()
+```
+
