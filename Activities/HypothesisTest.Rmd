@@ -30,7 +30,9 @@ library(moderndive)
 library(infer)
 ```
 
-Say you are working at a bank in the 1970s and you are submitting your résumé to apply for a promotion. Will your gender affect your chances of getting promoted? To answer this question, we’ll focus on data from a study published in the Journal of Applied Psychology in 1974. This data is also used in the OpenIntro series of statistics textbooks.
+From *Modern Dive*, [Chapter 9](https://moderndive.com/9-hypothesis-testing.html)
+
+Say you are working at a bank in the 1970s and you are submitting your résumé to apply for a promotion. Will your gender affect your chances of getting promoted? To answer this question, we’ll focus on data from a study published in the *Journal of Applied Psychology* in 1974. This data is also used in the OpenIntro series of statistics textbooks.
 
 To begin the study, 48 bank supervisors were asked to assume the role of a hypothetical director of a bank with multiple branches. Every one of the bank supervisors was given a résumé and asked whether or not the candidate on the résumé was fit to be promoted to a new position in one of their branches.
 
@@ -44,6 +46,7 @@ The `moderndive` package contains the data on the 48 applicants in the `promotio
 
 ```{r}
 str(promotions)
+head(promotions, 48)
 ```
 
 ```{r}
@@ -61,8 +64,21 @@ ggplot(promotions,
 
 ### Shuffled Promotions Dataset
 
+IF randomness is the only thing driving the difference ... then what we're seeing in the data is a random permutation of the system. So, what would other random permutations of the system look like?
+
+First, how many people were promoted versus not promoted, regardless of gender?
+
+```{r}
+promotions %>% 
+  count(decision)
+```
+
+Overall, 35 people were promoted, so we'll keep that number. However, we're going to randomly assign genders to the "promoted" and "not promoted" people. If gender does not matter and promotion is based solely on qualifications, then gender assignment is arbitrary anyway.
+
 ```{r}
 str(promotions_shuffled)
+head(promotions, 48)
+head(promotions_shuffled, 48)
 ```
 
 ```{r}
@@ -80,6 +96,8 @@ ggplot(promotions_shuffled,
 
 ### Another Shuffled Promotions Dataset 
 
+We really need to look at more than one random shuffle, because we know by now that randomness can produce a variety of results, some of them rather extreme.
+
 ```{r}
 promotions_shuffled_new <- promotions %>% 
   mutate(gender = sample(gender)) # shuffles the gender column
@@ -94,53 +112,80 @@ ggplot(promotions_shuffled_new,
   labs(x = "Gender of Résumé Name")
 ```
 
+If we look at a bunch of random shufflings, we can see some cases where the proportions are similar, and some where they are quite different (like our data). How does our data fit into this big picture?
+
 ### Hypothesis Testing
 
-#### Hypotheses
+#### Null and Alternative Hypotheses
+
+In words: men and women are equally likely to be promoted. We measure that by looking at the proportions of men and women who were promoted. Those proportions are likelihoods or probabilities.
+
+$p_{male}$ = population promotion of males who are promoted
+
+$P_{female}$ = population proportion of females who are promoted
 
 $$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+
+OR...are men more likely to be promoted (promoted at a greater rate)?
 
 $$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$ 
 
 #### Test Statistic
 
-We will estimate the difference using: 
+We will estimate the difference in the hypotheses using our sample data. 
 
 $$\text{observed difference} = \hat{p}_{male} - \hat{p}_{female}$$
 
+The *observed difference* is the difference in the data. It's a point estimate of the difference in the population. We also call this the *test statistic*.
+
 ```{r}
 obs_diff_prop <- promotions %>% 
-  specify(decision ~ gender, success = "promoted") %>% 
+  specify(decision ~ gender, success = "promoted") %>%          # variable of interest ~ grouping variable
   calculate(stat = "diff in props", order = c("male", "female"))
 obs_diff_prop
 ```
 
 #### Generate the Null Distribution
 
+We will generate a bunch of random shuffles and compare our data to them.
+
 ```{r}
 null_distribution <- promotions %>% 
   specify(formula = decision ~ gender, success = "promoted") %>% 
-  hypothesize(null = "independence") %>% 
-  generate(reps = 1000, type = "permute") %>% 
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%  
   calculate(stat = "diff in props", order = c("male", "female"))
 ```
+
+What is the distribution of the statistic we're looking at when Ho is true?
 
 ```{r}
 visualize(null_distribution, bins = 10) +
   labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
        x = "p_hat_male - p_hat_female") +
-  geom_vline(xintercept = 0, size = 1)
+  geom_vline(xintercept = 0, size = 1)  # this represents the difference expected under Ho
 ```
 
 #### Assess the Significance
 
+Consider the alternative hypothesis.
+
+$$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+
 ```{r}
 visualize(null_distribution, bins = 10) + 
-  shade_p_value(obs_stat = obs_diff_prop, direction = "right") +
+  shade_p_value(obs_stat = obs_diff_prop, direction = "right") +                    # we calculated obs_diff_prop above
   labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
        subtitle = "the thick red line is the observed difference in the sample (test statistic)",
        x = "p_hat_male - p_hat_female") +
   geom_vline(xintercept = 0, size = 1)
+```
+
+So what is the probability of getting an observed statistic as large as the one we saw, or even larger?
+
+```{r}
+null_distribution %>% 
+  get_p_value(obs_stat = obs_diff_prop, direction = "right")
 ```
 
 

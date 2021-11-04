@@ -49,12 +49,16 @@ summaries <- Bangladesh %>%
             xbar = mean(Arsenic),
             s    = sd(Arsenic),
             skew = skewness(Arsenic),
-            kurt = kurtosis(Arsenic),
-            kurt_adj = kurt - 3)
+            kurt_adj = kurtosis(Arsenic) - 3)
 
 summaries %>% 
   kable(digits = 2, align = "ccc") %>% 
   kable_styling(full_width = FALSE, position = "left", font_size = 14)
+
+# for use in the the SE interval
+x_bar <- Bangladesh %>% 
+  specify(response = Arsenic) %>% 
+  calculate(stat = "mean")
 ```
 
 The skewness measure is well over 1, indicating strong right skew. The very large kurtosis indicates that the distribution is much thicker-tailed than a normal distribution (typical of strongly skewed data).
@@ -122,11 +126,10 @@ ggplot(bootstrap_distribution, aes(sample = stat)) +
 
 bootstrap_distribution %>% 
   summarize(skew = skewness(stat),
-            kurt = kurtosis(stat),
-            kurt_adj = kurt - 3)
+            kurt_adj = kurtosis(stat) - 3)
 ```
 
-The shape of the sampling distribution of $\bar{x}$ looks mildly right-skewed on the plots, but the skewness (which is less than 0.5) and the kurtosis (approximately 3) suggest that it is not far from approximately normal.
+The shape of the sampling distribution of $\bar{x}$ looks mildly right-skewed on the plots, but the skewness (which is less than 0.5) and the excess kurtosis (close to 0) suggest that it is not far from approximately normal---certainly more so than the population.
 
 #### **95% Percentile Interval for $\mu$**
 
@@ -147,7 +150,7 @@ Use the "plug in" method $\bar{x} \pm 1.96 \times SE$ to create an interval esti
 
 ```{r}
 standard_error_ci <- bootstrap_distribution %>% 
-  get_confidence_interval(level = 0.95, type = "se", point_estimate = summaries$xbar)
+  get_confidence_interval(level = 0.95, type = "se", point_estimate = x_bar)
 
 standard_error_ci %>% 
   kable(digits = 2, align = "ccc") %>% 

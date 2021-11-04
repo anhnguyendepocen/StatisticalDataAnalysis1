@@ -95,11 +95,10 @@ ggplot(bootstrap_distribution, aes(sample = stat)) +
 
 bootstrap_distribution %>% 
   summarize(skew = skewness(stat),
-            kurt = kurtosis(stat),
-            kurt_adj = kurt - 3)
+            kurt_adj = kurtosis(stat) - 3)
 ```
 
-The shape of the sampling distribution of $\hat{p}$ may look mildly right-skewed on the plots, but the skewness (which is less than 0.5) and the kurtosis (approximately 3) suggest that it can be considered approximately normal, despite the fact that binomials with $p$ near zero tend to be right-skewed.
+The shape of the sampling distribution of $\hat{p}$ may look mildly right-skewed on the plots, but the skewness (which is less than 0.5) and the adjusted kurtosis (approximately 0) suggest that it possibly could be considered approximately normal, despite the fact that binomial distributions with $p$ near zero tend to be right-skewed.
 
 #### **95% Percentile Interval for $p$**
 
@@ -234,8 +233,7 @@ ggplot(bootstrap_distribution, aes(sample = stat)) +
 
 bootstrap_distribution %>% 
   summarize(skew = skewness(stat),
-            kurt = kurtosis(stat),
-            kurt_adj = kurt - 3)
+            kurt_adj = kurtosis(stat) - 3)
 ```
 
 The shape of the sampling distribution of $\hat{p}$ looks close enough to approximately normal.

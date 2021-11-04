@@ -47,15 +47,19 @@ summaries <- Michelson %>%
             xbar = mean(velocity),
             s    = sd(velocity),
             skew = skewness(velocity),
-            kurt = kurtosis(velocity),
-            kurt_adj = kurt - 3)
+            kurt_adj = kurtosis(velocity) - 3)
 
 summaries %>% 
   kable(digits = 2, align = "ccc") %>% 
   kable_styling(full_width = FALSE, position = "left", font_size = 14)
+
+# for use in the the SE interval
+x_bar <- Michelson %>% 
+  specify(response = velocity) %>% 
+  calculate(stat = "mean")
 ```
 
-The skewness measure is near zero and indicates a general lack of skew. The kurtosis is a little larger than 3 (kurtosis of a normal distribution), indicating that the distribution may be a little thicker-tailed than a bell curve.
+The skewness measure is near zero and indicates a general lack of skew. The adjusted kurtosis is a little larger than 0 (the adjusted kurtosis of a normal distribution), indicating that the distribution may be a little thicker-tailed than a bell curve.
 
 #### **Histogram**
 
@@ -68,7 +72,7 @@ ggplot(Michelson, aes(x = velocity)) +
   theme_linedraw()
 ```
 
-The distribution is unimodal and roughly symmetric. The left tail looks a *little* bit longer than the right, which is probably why the skewness claculation is very slightly negative.
+The distribution is unimodal and roughly symmetric. The left tail looks a *little* bit longer and heavier than the right tail, which is probably why the skewness calculation is very slightly negative and the kurtosis suggests slightly thicker tails.
 
 #### **Boxplot**
 
@@ -140,7 +144,7 @@ Use the "plug in" method $\bar{x} \pm 1.96 \times SE$ to create an interval esti
 
 ```{r}
 standard_error_ci <- bootstrap_distribution %>% 
-  get_confidence_interval(level = 0.95, type = "se", point_estimate = summaries$xbar)
+  get_confidence_interval(level = 0.95, type = "se", point_estimate = x_bar)
 
 standard_error_ci %>% 
   kable(digits = 2, align = "ccc") %>% 
