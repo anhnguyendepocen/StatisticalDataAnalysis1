@@ -1,0 +1,248 @@
+---
+title: "Normal Distribution Quiz Questions"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 3
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+***
+
+### Instructions
+
+WHEN ENTERING percentile = z value of _____S:
+
+* Round to **4 decimal places** unless otherwise instructed.
+* percentile = z value of _____s with fewer than 4 decimals can be entered as-is.
+* Entering zero before a decimal point is optional (e.g., 0.1).
+* Do not use commas/spaces when entering large numbers.
+
+### Question 1
+
+The standard normal distribution is Z ~ N( _____ , _____ ).
+
+$\mu$ = 
+
+$\sigma^2$ = 
+
+According to the Empirical Rule, the middle ~68% of the area under a standard normal curve lies between the values ± _____ .
+
+According to the Empirical Rule, the middle ~95% of the area under a standard normal curve lies between the values ± _____ .
+
+According to the Empirical Rule, the middle ~99.7% of the area under a standard normal curve lies between the values ± _____ .
+
+### Question 2
+
+For the standard normal distribution...
+
+Q1 = _____
+
+```{r}
+
+```
+
+median = _____
+
+Q3 = _____
+
+```{r}
+
+```
+
+skewness = _____
+
+kurtosis = _____
+
+### Question 3
+
+For the standard normal distribution...
+
+P(X ≤ 0) = _____
+
+```{r}
+
+```
+
+P(X < 1.5) = _____
+ 
+```{r}
+
+```
+
+P(X > 1.5) = _____
+
+```{r}
+
+```
+
+P(-2.0 < X < 1.5) = _____
+ 
+```{r}
+
+```
+
+P(X ≤ -1.75 or X > 1.75) = _____
+
+```{r}
+
+```
+
+### Question 4
+
+For the standard normal distribution...
+
+01st percentile = z value of _____
+05th	percentile = z value of _____
+10th percentile = z value of _____
+20th percentile = z value of _____
+25th percentile = z value of _____
+30th percentile = z value of _____
+40th percentile = z value of _____
+50th percentile = z value of _____
+60th percentile = z value of _____
+70th percentile = z value of _____
+75th percentile = z value of _____
+80th percentile = z value of _____
+90th percentile = z value of _____
+95th percentile = z value of _____
+99th percentile = z value of _____
+
+```{r}
+
+```
+
+#### Question 5
+
+Retirement ages for NFL players are approximately normally distributed with with $\mu = 33$ years and $\sigma = 2$ years. (*round all answers to whole numbers*)
+
+The median retirement age is _____ years.
+
+Almost all players (~99.7%) retire between the ages of _____ and _____ .
+
+```{r}
+
+```
+
+About _____ % of players retire at less than 31 years of age (i.e., P(X < 31).
+
+```{r}
+
+```
+
+About 95% of players retire before the age of _____ .
+
+```{r}
+
+```
+
+#### Question 6
+
+A 2002 study found that the birth weights of full-term babies in the UK were approximately normal with $\mu = 3.4$ kg and $\sigma = 0.6$ kg. 
+
+Babies who weigh less than 2.5 kg were considered to have low birth weight. The proportion of babies that fell into this category was _____ .
+
+```{r}
+
+```
+
+Babies who weigh between 2.5 kg and 4.5 kg were considered to be "normal" or "average". The proportion of babies that fell into this category was _____ .
+
+```{r}
+
+```
+
+The middle 50% of full-term babies were between about _____ kg and _____ kg. (*round to one decimal place*)
+
+```{r}
+
+```
+
+Babies who weighed less than 1.0 kg were considered extremely low birth weight. This value is _____ standard deviations below the mean. 
+
+```{r}
+
+```
+
+#### Question 7
+
+In Hottsylvania, the mean June midday temperature is 36 °C with a standard deviation of 3 °C. Assume that midday temperatures can be modeled with an approximately normal distribution. (*round to one decimal place*)
+
+The midday temperature of the coolest 20% of days should be less than or equal to _____ °C.
+
+```{r}
+
+```
+
+The midday temperature of the hottest 30% of days should be greater than or equal _____ °C.
+
+```{r}
+
+```
+
+There should be about _____ June days with a midday temperature between 39 °C and 42 °C?
+
+```{r}
+
+```
+
+If we converted this model to °F, the mean would be _____ and the standard deviation would be _____ .
+
+```{r}
+
+```
+
+#### Question 8
+
+The total July rainfall for a given area can be modeled by a normal distribution. The middle ~95% of historical rainfall amounts are between 7 mm and 13 mm.
+
+The average rainfall is _____ mm.
+
+```{r}
+
+```
+
+The standard deviation of rainfall is _____ mm.
+
+```{r}
+
+```
+
+#### Question 9
+
+Superfresh Loose Tea Company sells both loose tea and several varieties of tea in bags. The bags are advertised as weighing 250 grams each. However, due to manufacturing variability, the actual weight of the tea bags follows an approximately normal distribution with a mean of 254 grams and a standard deviation of 2.5 grams.
+
+Because of manufacturing variability, some tea bags weigh less than 250 grams. The proportion less than 250 g is _____ .
+
+```{r}
+
+```
+
+You will need to logically experiment with different values for the mean or standard deviation to solve the following problems. (*round to one decimal place*)
+
+(1) One way to decrease the number of underweight bags would be to increase the amount of tea that is put in each bag. If we want fewer than 1% of the bags to be underweight, and given a fixed standard deviation of 2.5 grams, the new mean would have to be _____ g. 
+
+```{r}
+
+```
+
+(2) Adding more tea to each bag to decrease the percentage of underweight bags is potentially expensive in the long run, so another solution to decrease the variability in the manufacturing process. If we want fewer than 1% of the bags to be underweight, and given a fixed mean of 254 g, the new standard deviation have to be _____ g.
+
+```{r}
+
+```
+
+***
+```{r}
+sessionInfo()
+```
+
