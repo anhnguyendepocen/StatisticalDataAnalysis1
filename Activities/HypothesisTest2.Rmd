@@ -1,0 +1,320 @@
+---
+title: "Hypothesis Test and CI #2"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+    toc: true
+    toc_depth: 5
+    toc_float: false
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moderndive) 
+library(infer)
+library(DT)
+```
+
+From *Modern Dive*, [Chapter 9](https://moderndive.com/9-hypothesis-testing.html)
+
+Say you are working at a bank in the 1970s and you are submitting your résumé to apply for a promotion. Will your gender affect your chances of getting promoted? To answer this question, we’ll focus on data from a study published in the *Journal of Applied Psychology* in 1974. This data is also used in the OpenIntro series of statistics textbooks.
+
+To begin the study, 48 bank supervisors were asked to assume the role of a hypothetical director of a bank with multiple branches. Every one of the bank supervisors was given a résumé and asked whether or not the candidate on the résumé was fit to be promoted to a new position in one of their branches.
+
+However, each of these 48 résumés were identical in all respects except one: the name of the applicant at the top of the résumé. Of the supervisors, 24 were randomly given résumés with stereotypically “male” names, while 24 of the supervisors were randomly given résumés with stereotypically “female” names. Since only (binary) gender varied from résumé to résumé, researchers could isolate the effect of this variable in promotion rates.
+
+While many people today (including us, the authors) disagree with such binary views of gender, it is important to remember that this study was conducted at a time where more nuanced views of gender were not as prevalent. Despite this imperfection, we decided to still use this example as we feel it presents ideas still relevant today about how we could study discrimination in the workplace.
+
+The `moderndive` package contains the data on the 48 applicants in the `promotions` data frame. 
+
+### Promotions Dataset
+
+#### Dataset Structure
+
+```{r}
+str(promotions)
+datatable(promotions, 
+          rownames = FALSE,
+          caption = "Table 1: Promotions Dataset")
+```
+
+#### Descriptive Analysis
+
+```{r}
+promotions %>% 
+  group_by(gender, decision) %>% 
+  tally() %>% 
+  mutate(proportion = prop.table(n))
+```
+
+```{r}
+ggplot(promotions, 
+       aes(x = gender, fill = decision)) +
+  geom_bar() + 
+  labs(x = "Gender of Résumé Name")
+```
+
+### Shuffled Promotions Dataset
+
+#### Dataset Structure
+
+If randomness is the only thing driving the difference, then what we're seeing in the data is a random permutation of the system. So, what would other random permutations of the system look like?
+
+First, how many people were promoted versus not promoted, regardless of gender?
+
+```{r}
+promotions %>% 
+  count(decision)
+```
+
+Overall, 35 people were promoted and 12 were not. We also have 24 men and 24 women. Those overall counts will stay the same. However, we are going to randomly re-assign genders to the "promoted" and "not promoted" people. If applicant gender does not matter and promotion is based solely on qualifications, then gender assignment is arbitrary anyway.
+
+```{r}
+str(promotions_shuffled)
+datatable(promotions_shuffled, 
+          rownames = FALSE,
+          caption = "Table 2: Shuffled Promotions Dataset")
+```
+
+#### Descriptive Analysis
+
+```{r}
+promotions_shuffled %>% 
+  group_by(gender, decision) %>% 
+  tally() %>% 
+  mutate(proportion = prop.table(n))
+```
+
+```{r}
+ggplot(promotions_shuffled, 
+       aes(x = gender, fill = decision)) +
+  geom_bar() + 
+  labs(x = "Gender of Résumé Name")
+```
+
+For this shuffle, the proportion of promoted applicants is much more similar between the two groups.
+
+### Re-Shuffling the Promotions Dataset
+
+We really need to examine more than one random shuffle of the data, because we know by now that randomness can produce a variety of results, some of them rather extreme or unusual-seeming.
+
+#### Shuffling the Dataset
+
+```{r}
+promotions_shuffled_new <- promotions %>% 
+  mutate(gender = sample(gender)) # shuffles the gender column
+```
+
+#### Descriptive Analyses
+
+```{r}
+promotions_shuffled_new %>% 
+  group_by(gender, decision) %>% 
+  tally() %>% 
+  mutate(proportion = prop.table(n))
+```
+
+```{r}
+ggplot(promotions_shuffled_new, 
+       aes(x = gender, fill = decision)) +
+  geom_bar() + 
+  labs(x = "Gender of Résumé Name")
+```
+
+If we look at a number of random shufflings, we can see some cases where the proportions are similar, and some where they are quite different (like our data). How does our data fit into this big picture?
+
+### Permutation Hypothesis Testing
+
+#### Null and Alternative Hypotheses
+
+In words, our initial assumption would be that, overall in the population, men and women are equally likely to be promoted. The alternative is that men are more likely to be promoted. We assess the initial assumptiopn by looking at evidence provided by the proportions of promoted men and women in the sample. Those proportions are likelihoods or probabilities.
+
+$p_{male}$ = population promotion of males who are promoted
+
+$P_{female}$ = population proportion of females who are promoted
+
+Are men and women equally likely to be promoted (i.e., the same chance)?
+
+$$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+
+OR ... are men more likely to be promoted (promoted at a greater rate)?
+
+$$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$ 
+
+#### Test Statistic
+
+We will estimate the difference in the hypotheses using our sample data. 
+
+$$\text{observed difference} = \hat{p}_{male} - \hat{p}_{female}$$
+
+The *observed difference* is the difference seen in the data. It's a point estimate of the difference in the population. We also call this the *test statistic* because it is the statistical evidence used in the test.
+
+```{r}
+obs_diff_prop <- promotions %>% 
+  specify(decision ~ gender, success = "promoted") %>%  # variable of interest ~ grouping variable
+  calculate(stat = "diff in props", order = c("male", "female"))
+obs_diff_prop
+```
+
+#### Generate the Null Distribution
+
+Remember, at this point we are assuming that Ho is true and that promotion is unrelated to gender. To formally assess the null, we will first generate a large number of random shuffles to compare our data to. 
+
+```{r}
+null_distribution <- promotions %>% 
+  specify(formula = decision ~ gender, success = "promoted") %>% 
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%  
+  calculate(stat = "diff in props", order = c("male", "female"))
+```
+
+What is the distribution of the statistic we're looking at when Ho is true?
+
+```{r}
+visualize(null_distribution, bins = 10) +
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       x = "p_hat_male - p_hat_female") +
+  geom_vline(xintercept = 0, size = 2) # this represents the difference expected under Ho
+```
+
+#### Assess the Significance
+
+Now we must consider the alternative hypothesis. If Ho is false and Ha is true, we would expect to observe a positive difference in the data. Therefore, we will consider the positive side of the distribution only.
+
+$$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$
+
+```{r}
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff_prop, direction = "right") + # we calculated obs_diff_prop above
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       subtitle = "the thick red line is the observed difference in the sample (test statistic)",
+       x = "p_hat_male - p_hat_female") +
+  geom_vline(xintercept = 0, size = 2)
+```
+
+So what is the probability of getting an observed statistic as large as the one we saw, or even larger?
+
+```{r}
+pvalue <- null_distribution %>% 
+  get_p_value(obs_stat = obs_diff_prop, direction = "right")
+pvalue
+```
+
+#### Make a Statistical Determination
+
+```{r}
+alpha <- 0.95
+
+ifelse(pvalue < alpha, "Reject Ho", "Fail to Reject Ho")
+```
+
+#### Discuss the Result in Context
+
+What does your statistical decision mean with respect to the original research question?
+
+**ANSWER:** 
+
+### Traditional Hypothesis Testing
+
+#### Null and Alternative Hypotheses
+
+$$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+
+$$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$ 
+
+#### Conducting the Test
+
+```{r}
+promotions %>% 
+  group_by(gender, decision) %>% 
+  tally() %>% 
+  mutate(proportion = prop.table(n))
+```
+
+```{r}
+testresults <- prop.test(table(promotions$gender, promotions$decision), correct = FALSE)
+testresults
+```
+
+```{r}
+alpha <- 0.95
+
+ifelse(testresults$p.value < alpha, "Reject Ho", "Fail to Reject Ho")
+```
+
+What does your statistical decision mean with respect to the original research question?
+
+**ANSWER:** 
+
+### Interval Estimation
+
+If the difference is statistically significant, we may wish to estimate the magnitude of the difference using a confidence interval. 
+
+#### Bootstrap Percentile and SE Intervals
+
+
+#### Traditional Confidence Interval for Difference
+
+Like confidence intervals for one proportion, intervals for the difference between two proportions are based on the CLT.
+
+```{r}
+p_hat_male <- promotions %>%
+  filter(gender == "male") %>% 
+  specify(response = decision, success = "promoted") %>%
+  calculate(stat = "prop") %>% 
+  pull()
+
+n_male <- promotions %>% 
+  filter(gender == "male",
+         !is.na(decision)) %>%  
+  summarize(length(decision)) %>%
+  pull()
+
+var_male <- p_hat_male * (1 - p_hat_male) / n_male
+```
+
+```{r}
+p_hat_female <- promotions %>%
+  filter(gender == "female") %>% 
+  specify(response = decision, success = "promoted") %>%
+  calculate(stat = "prop") %>% 
+  pull()
+
+n_female <- promotions %>% 
+  filter(gender == "female",
+         !is.na(decision)) %>%  
+  summarize(length(decision)) %>%
+  pull()
+
+var_female <- p_hat_female * (1 - p_hat_female) / n_female
+```
+
+```{r}
+z <- 1.96
+
+(p_hat_male - p_hat_female) + c(-1, 1) * z * sqrt(var_male + var_female)
+```
+
+HOWEVER, we do not have at least 10 successes and 10 failures in each group, so this interval may not be appropriate.
+
+***
+```{r}
+sessionInfo()
+```
+

@@ -159,7 +159,7 @@ visualize(bootstrap_distribution) +
                             color = "skyblue",
                             fill = "lightskyblue",
                             alpha = 0.5) + # transparency (0 to 1)
-    geom_vline(xintercept = pull(p_hat), size = 2)
+  geom_vline(xintercept = pull(p_hat), size = 2)
 ```
 
 #### Traditional Confidence Interval
