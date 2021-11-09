@@ -214,21 +214,43 @@ So what is the probability of getting an observed statistic as large as the one 
 pvalue <- null_distribution %>% 
   get_p_value(obs_stat = obs_diff_prop, direction = "right")
 pvalue
+
+pvalue <- null_distribution %>% 
+  get_p_value(obs_stat = obs_diff_prop, direction = "greater")
+pvalue
 ```
+
+Our decision:
+
+(1) The null is true and I just got a randomly extreme result.
+
+(2) It's not random, gender matters. The null is false and the alternative is true:
+
+$$p_{male} > p_{female}$$
+
+The p-value tells me that getting a randomly extreme result (or more extreme) like this is about 2%.
 
 #### Make a Statistical Determination
 
-```{r}
-alpha <- 0.95
+If we reject Ho because we got a rare but *possible* outcome, we could be making a mistake. That chance is a Type I error, labeled alpha. Our typical threshold of "reasonable doubt" is:
 
-ifelse(pvalue < alpha, "Reject Ho", "Fail to Reject Ho")
+$$\alpha = 0.05$$
+
+If our p-value is less than the threshold of reasonable doubt alpha, we reject Ho. This is because we got a value that is very unlikely to occur by chance alone. It's logically more consistent with Ha being true. NOT PROOF.
+
+```{r}
+alpha <- 0.05  # this is a 5% chance, or 1 in 20
+
+ifelse(pull(pvalue) < alpha, "Reject Ho", "Fail to Reject Ho")
 ```
 
 #### Discuss the Result in Context
 
+Original question: Will your gender affect your chances of getting promoted? We translated this into, "Are you more likely to be promoted if you are male?"
+
 What does your statistical decision mean with respect to the original research question?
 
-**ANSWER:** 
+**ANSWER:** We rejected Ho, which said the promotion rates were equal. The alternative says that men are promoted at a greater rate than women. We concluded that an inequality exists, but now *how* unequal they are. Our data provide a point estimate of that inequality. We could do an interval estimate to get a better idea.
 
 ### Traditional Hypothesis Testing
 
@@ -247,6 +269,12 @@ promotions %>%
   mutate(proportion = prop.table(n))
 ```
 
+We need to make a contingency table of the data as input to the test. The first variable is the grouping variable. The second variable is the variable of interest.
+
+```{r}
+table(promotions$gender, promotions$decision)
+```
+
 ```{r}
 testresults <- prop.test(table(promotions$gender, promotions$decision), correct = FALSE)
 testresults
@@ -258,20 +286,40 @@ alpha <- 0.95
 ifelse(testresults$p.value < alpha, "Reject Ho", "Fail to Reject Ho")
 ```
 
+We need to meet the requirements of the CLT to use this test. One of the requirements of the CLT for proportion is having more than 10 success and 10 failures (in this case, in each group). This is not met for men, who only have 3 who were not promoted.
+
 What does your statistical decision mean with respect to the original research question?
 
 **ANSWER:** 
 
 ### Interval Estimation
 
-If the difference is statistically significant, we may wish to estimate the magnitude of the difference using a confidence interval. 
+If the difference is statistically significant, we may wish to estimate the magnitude of the difference using a confidence interval. All Ha says is that the proportion of men is greater than the proportion of women promoted, but how much bigger?
 
 #### Bootstrap Percentile and SE Intervals
 
+Recall the [workflow](https://moderndive.com/8-confidence-intervals.html#infer-workflow) from *Modern Dive*.
+
+```{r}
+# Compare to the hypothesis testing procedure
+# null_distribution <- promotions %>% 
+#   specify(formula = decision ~ gender, success = "promoted") %>% 
+#   hypothesize(null = "independence") %>%
+#   generate(reps = 1000, type = "permute") %>%  
+#   calculate(stat = "diff in props", order = c("male", "female"))
+```
 
 #### Traditional Confidence Interval for Difference
 
 Like confidence intervals for one proportion, intervals for the difference between two proportions are based on the CLT.
+
+For one proportion:
+
+$$\hat{p} \pm z* \sqrt{\frac{p(1-p)}{n}}$$
+
+For two proportions:
+
+$$(\hat{p}_1 - \hat{p}_2) \pm z* \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}$$
 
 ```{r}
 p_hat_male <- promotions %>%
@@ -311,7 +359,7 @@ z <- 1.96
 (p_hat_male - p_hat_female) + c(-1, 1) * z * sqrt(var_male + var_female)
 ```
 
-HOWEVER, we do not have at least 10 successes and 10 failures in each group, so this interval may not be appropriate.
+HOWEVER, we do not have at least 10 successes and 10 failures in each group, so this interval may not be appropriate or trustworthy.
 
 ***
 ```{r}
