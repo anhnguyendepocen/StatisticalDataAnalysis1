@@ -175,7 +175,7 @@ p <- pull(p_hat)
 n <- 50
 
 n * p >= 10
-n * p * (1-p) >= 10
+n * p * (1 - p) >= 10
 ```
 
 We also visually assessed approximate normality above. We also have an independent random sample. And we have less than 10% of the population.

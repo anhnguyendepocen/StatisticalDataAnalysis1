@@ -1,5 +1,5 @@
 ---
-title: "Hypothesis Test and CI #2"
+title: "Hypothesis Test and CI #3"
 subtitle: "In-Class Activity"
 author: "PUT YOUR NAME HERE"
 date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
@@ -39,6 +39,8 @@ However, each of these 48 résumés were identical in all respects except one: t
 
 While many people today (including us, the authors) disagree with such binary views of gender, it is important to remember that this study was conducted at a time where more nuanced views of gender were not as prevalent. Despite this imperfection, we decided to still use this example as we feel it presents ideas still relevant today about how we could study discrimination in the workplace.
 
+(There should be an exploratory data analysis step in here so we understand our data an dknow whether CLT-based theoretical methods might be valid.)
+
 #### Null and Alternative Hypotheses
 
 $$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
@@ -49,7 +51,7 @@ $$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$
 
 ```{r}
 obs_diff_prop <- promotions %>% 
-  specify(decision ~ gender, success = "promoted") %>%  # variable of interest ~ grouping variable
+  specify(decision ~ gender, success = "promoted") %>% 
   calculate(stat = "diff in props", order = c("male", "female"))
 obs_diff_prop
 ```
@@ -82,14 +84,26 @@ pvalue
 ```
 
 ```{r}
-alpha <- 0.05  # this is a 5% chance, or 1 in 20
+alpha <- 0.01
 
 ifelse(pull(pvalue) < alpha, "Reject Ho", "Fail to Reject Ho")
 ```
 
+When $\alpha = 0.05$ I reject Ho. So I'm either correct, or I made a Type I error (chance is 5%).
+
+When $\alpha = 0.01$ I fail to reject Ho. So I'm either correct, or I made a Type II error.
+
+Usually we don't do two different tests, we pick alpha ahead of time, before we know what the data look like. Also, since 0.05 is the usual value, people will usually justify another choice, like 0.01 or 0.10.
+
 #### Discuss the Result in Context
 
+When alpha = 0.05...
+
 The p-value of `r round(pvalue, 3)` was less than alpha, so we rejected Ho, which said the promotion rates were equal. The alternative says that men are promoted at a greater rate than women. Thus we conclude that promotion was biased toward men.
+
+When alpha = 0.01...
+
+The p-value of `r round(pvalue, 3)` was not less than alpha, so we fail to rejected Ho, which said the promotion rates were equal. Thus we cannot conclude that promotion was biased toward men.
 
 ### Permutation Test for Smallpox Experiment
 
@@ -109,7 +123,29 @@ Did the children who received a pretreatment have fewer pox than children who di
 poxdata <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/smallpox.csv") %>%
   filter(experiment == 1) %>%
   mutate(pretreatment = ifelse(pretreatment == "none", "control", "experimental"))
+str(poxdata)
+head(poxdata)
 ```
+
+```{r}
+poxdata %>% 
+  group_by(pretreatment) %>% 
+  summarize(n    = n(),
+            xbar = mean(pocks),
+            s    = sd(pocks))
+```
+
+```{r}
+ggplot(poxdata, aes(x = pocks, y = pretreatment)) +
+  geom_boxplot()
+
+ggplot(poxdata, aes(sample = pocks)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~ pretreatment) # like a group_by in a plot
+```
+
+We have small sample sizes and non-normal data. A traditional test based on the CLT probably would not be valid here.
 
 #### Null and Alternative Hypotheses
 
@@ -119,21 +155,23 @@ $$H_0: \mu_{exp} < \mu_{ctrl} \rightarrow \mu_{exp} - \mu_{ctrl} < 0$$
 
 #### Compute the Test Statistic
 
+We're hypothesizing a difference in population means, so our test statistic would be the difference in sample means.
+
 ```{r}
-obs_diff_mean <- DATASET %>%
-  specify( ) %>%  # variable of interest ~ grouping variable
-  calculate( )
+obs_diff_mean <- poxdata %>%
+  specify(formula = pocks ~ pretreatment) %>%  # variable of interest ~ grouping variable
+  calculate(stat = "diff in means", order = c("experimental", "control"))
 obs_diff_mean
 ```
 
 #### Generate the Null Distribution
 
 ```{r}
-null_distribution <- DATASET %>%
-  specify( ) %>%
+null_distribution <- poxdata %>%
+  specify(formula = pocks ~ pretreatment) %>%
   hypothesize(null = "independence") %>%
   generate(reps = 1000, type = "permute") %>%
-  calculate( )
+  calculate(stat = "diff in means", order = c("experimental", "control"))
 ```
 
 #### Assess the Significance

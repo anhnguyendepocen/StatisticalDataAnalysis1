@@ -172,6 +172,8 @@ obs_diff_prop <- promotions %>%
 obs_diff_prop
 ```
 
+Is this a large difference (far enough away from the hypothesized zero), taking into account sample size and random variability? We need something to measure this value against.
+
 #### Generate the Null Distribution
 
 Remember, at this point we are assuming that Ho is true and that promotion is unrelated to gender. To formally assess the null, we will first generate a large number of random shuffles to compare our data to. 
@@ -208,6 +210,8 @@ visualize(null_distribution, bins = 10) +
   geom_vline(xintercept = 0, size = 2)
 ```
 
+It is *possible* to get our sample data just from randomness, but is it *probable* when Ho is true?
+
 So what is the probability of getting an observed statistic as large as the one we saw, or even larger?
 
 ```{r}
@@ -228,7 +232,7 @@ Our decision:
 
 $$p_{male} > p_{female}$$
 
-The p-value tells me that getting a randomly extreme result (or more extreme) like this is about 2%.
+The p-value tells me that getting a randomly extreme result (or more extreme) like this is about 3%.
 
 #### Make a Statistical Determination
 
@@ -260,6 +264,7 @@ $$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
 
 $$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$ 
 
+
 #### Conducting the Test
 
 ```{r}
@@ -274,6 +279,8 @@ We need to make a contingency table of the data as input to the test. The first 
 ```{r}
 table(promotions$gender, promotions$decision)
 ```
+
+Unlike `specify()` in out permutation method, we don't get to specify success. R uses the alphabetically first category as "success".
 
 ```{r}
 testresults <- prop.test(table(promotions$gender, promotions$decision), correct = FALSE)
@@ -307,6 +314,15 @@ Recall the [workflow](https://moderndive.com/8-confidence-intervals.html#infer-w
 #   hypothesize(null = "independence") %>%
 #   generate(reps = 1000, type = "permute") %>%  
 #   calculate(stat = "diff in props", order = c("male", "female"))
+#   pvalue <- null_distribution %>% 
+#     get_p_value(obs_stat = obs_diff_prop, direction = "greater")
+
+bootstrap_distribution <- promotions %>%
+  specify(formula = decision ~ gender, success = "promoted") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "diff in props", order = c("male", "female"))
+
+get_confidence_interval(bootstrap_distribution, level = 0.95, type = "percentile")
 ```
 
 #### Traditional Confidence Interval for Difference
@@ -315,7 +331,7 @@ Like confidence intervals for one proportion, intervals for the difference betwe
 
 For one proportion:
 
-$$\hat{p} \pm z* \sqrt{\frac{p(1-p)}{n}}$$
+$$\hat{p} \pm z* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
 
 For two proportions:
 
@@ -354,12 +370,15 @@ var_female <- p_hat_female * (1 - p_hat_female) / n_female
 ```
 
 ```{r}
-z <- 1.96
+z <- 1.96 # for a 95% CI
 
 (p_hat_male - p_hat_female) + c(-1, 1) * z * sqrt(var_male + var_female)
 ```
 
 HOWEVER, we do not have at least 10 successes and 10 failures in each group, so this interval may not be appropriate or trustworthy.
+
+If we thought it was reliable, we could say, "I am 95% confident that the population difference is between 0.054 and 0.529 (5.4% and 52.9%)." This is a very wide interval! Not very precise at all. Our sample size is relatively small, it's tougher to get a precise estimate with a small amount of data.
+
 
 ***
 ```{r}

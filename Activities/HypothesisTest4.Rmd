@@ -1,0 +1,127 @@
+---
+title: "Hypothesis Test and CI #4"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moderndive) 
+library(infer)
+```
+
+Femoral nerve blocks (FNBs) and periarticular injections (PAIs) are often used to control post-operative pain following bone and joint surgery. A retrospective study examined potential differences in outcomes between these two methods when used after total knee replacement (TKR) surgery. Outcomes include length of hospital stay (LOS), additional pain relief administered in morphine equivalents (EDI), subjective perception of post-operative pain, and the patient age. 
+
+Henson, Kevin S., Thomley, Jill E., Lowrie, Lynn J., and Walker, Deborah. (2019). “Comparison of Selected Outcomes Associated with Two Post-Operative Analgesia Approaches in the Total Knee Arthroplasty Patient,” *AANA Journal*, 87(1), 51-57.
+
+### Permutation Test for Difference in EDI
+
+```{r}
+kneedata <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/KneeData2014.csv")
+str(kneedata)
+head(kneedata)
+```
+
+```{r}
+kneedata %>% 
+  group_by(TRT) %>% 
+  summarize(n    = sum(!is.na(EDI)),
+            xbar = mean(EDI, na.rm = TRUE),
+            s    = sd(EDI, na.rm = TRUE))
+```
+
+```{r}
+ggplot(kneedata, aes(x = EDI, y = TRT)) +
+  geom_boxplot()
+
+ggplot(kneedata, aes(sample = EDI)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~ TRT) # like a group_by in a plot
+```
+
+We have small sample sizes and non-normal data. A traditional test based on the CLT probably would not be valid here.
+
+#### Null and Alternative Hypotheses
+
+$$H_0: \mu_{exp} = \mu_{nb} \rightarrow \mu_{exp} - \mu_{nb} = 0$$
+
+$$H_0: \mu_{exp} \neq \mu_{nb} \rightarrow \mu_{exp} - \mu_{nb} \neq 0$$
+
+#### Compute the Test Statistic
+
+We're hypothesizing a difference in population means, so our test statistic would be the difference in sample means.
+
+```{r}
+obs_diff_mean <- DATASET %>%
+  specify(formula = FORMULA) %>%
+  calculate(stat = STAT, order = c("FIRST", "SECOND"))
+obs_diff_mean
+```
+
+#### Generate the Null Distribution
+
+```{r}
+null_distribution <- poxdata %>%
+  specify(formula = ) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = , order = )
+```
+
+#### Assess the Significance
+
+```{r}
+visualize(null_distribution, bins = 10) +
+  shade_p_value( ) +
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       subtitle = "the thick red line is the observed difference in the sample (test statistic)",
+       x = "xbar_exp - xbar_NB") +
+  geom_vline(xintercept = 0, size = 2)
+```
+
+```{r}
+pvalue <- null_distribution %>%
+  get_p_value( )
+pvalue
+```
+
+```{r}
+alpha <- 0.05  # this is a 5% chance, or 1 in 20
+
+ifelse(pull(pvalue) < alpha, "Reject Ho", "Fail to Reject Ho")
+```
+
+#### Discuss the Result in Context
+
+
+
+### Traditional Test for Difference in EDI
+
+```{r}
+
+```
+
+
+***
+```{r}
+sessionInfo()
+```
+
