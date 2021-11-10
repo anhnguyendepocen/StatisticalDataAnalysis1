@@ -1,0 +1,171 @@
+---
+title: "Hypothesis Test and CI #2"
+subtitle: "In-Class Activity"
+author: "PUT YOUR NAME HERE"
+date: 'Last rendered on `r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: yeti
+    highlight: textmate
+---
+***
+
+```{r globaloptions, include = FALSE}
+# this sets the options but is not shown in the render
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+### Packages Used
+
+```{r packages_used}
+library(tidyverse)
+library(moderndive) 
+library(infer)
+```
+
+### Permutation Test for Promotion Experiment
+
+From *Modern Dive*, [Chapter 9](https://moderndive.com/9-hypothesis-testing.html)
+
+Say you are working at a bank in the 1970s and you are submitting your résumé to apply for a promotion. Will your gender affect your chances of getting promoted? To answer this question, we’ll focus on data from a study published in the *Journal of Applied Psychology* in 1974. This data is also used in the OpenIntro series of statistics textbooks.
+
+To begin the study, 48 bank supervisors were asked to assume the role of a hypothetical director of a bank with multiple branches. Every one of the bank supervisors was given a résumé and asked whether or not the candidate on the résumé was fit to be promoted to a new position in one of their branches.
+
+However, each of these 48 résumés were identical in all respects except one: the name of the applicant at the top of the résumé. Of the supervisors, 24 were randomly given résumés with stereotypically “male” names, while 24 of the supervisors were randomly given résumés with stereotypically “female” names. Since only (binary) gender varied from résumé to résumé, researchers could isolate the effect of this variable in promotion rates.
+
+While many people today (including us, the authors) disagree with such binary views of gender, it is important to remember that this study was conducted at a time where more nuanced views of gender were not as prevalent. Despite this imperfection, we decided to still use this example as we feel it presents ideas still relevant today about how we could study discrimination in the workplace.
+
+#### Null and Alternative Hypotheses
+
+$$H_0: p_{male} = p_{female} \rightarrow p_{male} - p_{female} = 0$$
+
+$$H_a: p_{male} > p_{female} \rightarrow p_{male} - p_{female} > 0$$ 
+
+#### Compute the Test Statistic
+
+```{r}
+obs_diff_prop <- promotions %>% 
+  specify(decision ~ gender, success = "promoted") %>%  # variable of interest ~ grouping variable
+  calculate(stat = "diff in props", order = c("male", "female"))
+obs_diff_prop
+```
+
+#### Generate the Null Distribution
+
+```{r}
+null_distribution <- promotions %>% 
+  specify(formula = decision ~ gender, success = "promoted") %>% 
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%  
+  calculate(stat = "diff in props", order = c("male", "female"))
+```
+
+#### Assess the Significance
+
+```{r}
+visualize(null_distribution, bins = 10) + 
+  shade_p_value(obs_stat = obs_diff_prop, direction = "right") + # we calculated obs_diff_prop above
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       subtitle = "the thick red line is the observed difference in the sample (test statistic)",
+       x = "p_hat_male - p_hat_female") +
+  geom_vline(xintercept = 0, size = 2)
+```
+
+```{r}
+pvalue <- null_distribution %>% 
+  get_p_value(obs_stat = obs_diff_prop, direction = "greater")
+pvalue
+```
+
+```{r}
+alpha <- 0.05  # this is a 5% chance, or 1 in 20
+
+ifelse(pull(pvalue) < alpha, "Reject Ho", "Fail to Reject Ho")
+```
+
+#### Discuss the Result in Context
+
+The p-value of `r round(pvalue, 3)` was less than alpha, so we rejected Ho, which said the promotion rates were equal. The alternative says that men are promoted at a greater rate than women. Thus we conclude that promotion was biased toward men.
+
+### Permutation Test for Smallpox Experiment
+
+In the late 1700s, smallpox killed about one in four children born in London. Scientists knew that inoculations (i.e., vaccines) were effective in reducing mortality, but no one was sure how they worked. Doctors often prescribed tonics to prepare patients before vaccination. Dr. William Watson became the physician for a large London orphanage 1762. Administrators were concerned about rapid spread of disease in crowded conditions and ordered vaccinations for all of the children who lived there. Watson used this chance to investigate the effectiveness of vaccine pre-treatments. This is considered to be one of the first historical examples of the kind of research we now call a clinical trial. 
+
+In his first experiment, Watson divided thirty-one children into three groups. 
+
+* pre-vaccination treatment of mercury and jalap (a strong laxative/purgative)
+* pre-vaccination treatment of senna and syrup of roses (a mild laxative)
+* no pre-vaccination treatment (control group)
+
+Watson observed and counted the number of smallpox lesions that appeared on each child. In general, more pocks is a sign of a more severe infection and greater chance of mortality. (Note: While it was perfectly acceptable to conduct experiments like this throughout much of human history, in the present day it would be considered highly unethical, especially with children.)
+
+Did the children who received a pretreatment have fewer pox than children who did not?
+
+```{r}
+poxdata <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/smallpox.csv") %>%
+  filter(experiment == 1) %>%
+  mutate(pretreatment = ifelse(pretreatment == "none", "control", "experimental"))
+```
+
+#### Null and Alternative Hypotheses
+
+$$H_0: \mu_{exp} = \mu_{ctrl} \rightarrow \mu_{exp} - \mu_{ctrl} = 0$$
+
+$$H_0: \mu_{exp} < \mu_{ctrl} \rightarrow \mu_{exp} - \mu_{ctrl} < 0$$ 
+
+#### Compute the Test Statistic
+
+```{r}
+obs_diff_mean <- DATASET %>%
+  specify( ) %>%  # variable of interest ~ grouping variable
+  calculate( )
+obs_diff_mean
+```
+
+#### Generate the Null Distribution
+
+```{r}
+null_distribution <- DATASET %>%
+  specify( ) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate( )
+```
+
+#### Assess the Significance
+
+```{r}
+visualize(null_distribution, bins = 10) +
+  shade_p_value( ) +
+  labs(title = "Distribution of Differences if Ho is True (Null Distribution)",
+       subtitle = "the thick red line is the observed difference in the sample (test statistic)",
+       x = "xbar_exp - xbar_ctrl") +
+  geom_vline(xintercept = 0, size = 2)
+```
+
+```{r}
+pvalue <- null_distribution %>%
+  get_p_value( )
+pvalue
+```
+
+```{r}
+alpha <- 0.05  # this is a 5% chance, or 1 in 20
+
+ifelse(pull(pvalue) < alpha, "Reject Ho", "Fail to Reject Ho")
+```
+
+#### Discuss the Result in Context
+
+
+
+
+***
+```{r}
+sessionInfo()
+```
+
