@@ -115,6 +115,10 @@ ifelse(pull(pvalue) < alpha, "Reject Ho", "Fail to Reject Ho")
 
 ### Traditional Test for Difference in EDI
 
+$$H_0: \mu_{exp} = \mu_{nb} \rightarrow \mu_{exp} - \mu_{nb} = 0$$
+
+$$H_0: \mu_{exp} \neq \mu_{nb} \rightarrow \mu_{exp} - \mu_{nb} \neq 0$$
+
 ```{r}
 
 ```
