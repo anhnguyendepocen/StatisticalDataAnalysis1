@@ -10,8 +10,6 @@ output:
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, comment = NA)
 library(tidyverse)
-library(kableExtra)
-library(knitr)
 ```
 
 ## Before We Begin...
