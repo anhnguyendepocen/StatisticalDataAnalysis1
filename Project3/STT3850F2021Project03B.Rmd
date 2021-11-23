@@ -1,0 +1,176 @@
+---
+title: "Project 3B: Vietnam Draft Lottery"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: cosmo
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+<hr>
+
+## Setup
+
+### Packages Used
+
+Load all packages used in this problem.
+
+```{r loadpackages}
+
+```
+
+### Names of Collaborators
+
+List the names of anyone you worked with on this project. If there was no one, put NONE.
+
+ERASE THIS AND ENTER COLLABORATOR NAMES OR NONE 
+
+<hr>
+
+## Vietnam Draft Lottery
+
+### The Context
+
+In December 1969, the U.S. Selective Service System conducted a lottery to a determine draft order for eligible men in the upcoming year. The 366 days of the year (including February 29) were written on small pieces of paper. Each was placed in a plastic capsule, then the capsules were hand-mixed in a shoebox and dumped in a glass jar. Capsules were pulled out one at a time. The first birthday chosen was September 14. Anyone born on that day in 1944 through 1950 was assigned draft lottery number 1 and they would be the first group of men called up. Overall, draft numbers 1 through 195 were called up to serve in 1970, in the order they were drawn. You can watch a bit of the CBS News coverage of the process [HERE](https://youtu.be/aS3-HdthMVo) and some additional commentary on the process [HERE](https://youtu.be/OkJH6sapQMA).
+
+### Was the Lottery Fair?
+
+Some people asserted that the draft numbers were not randomly distributed through the year, in particular when you compared the first half and second half of the year. While any ordering of the 366 numbers is *possible* in a random process, we can test whether the process that produced the draft numbers appears to be fair or biased using permutation resampling to replicate a random process. The dataset [vietnamdraft1969](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/vietnamdraft1969.csv) contains the draft number assignments from the 1969 drawing. 
+
+### Create the Analysis Dataset
+
+* Use `read_cvs()` to import the `vietnamdraft1969` dataset.
+* Use `select()` to choose the variables `halfyear`, `draftnumber`, and `calledup`.
+* Use `glimpse()` to visualize the structure of the dataset.
+
+```{r}
+
+```
+
+### Perform Exploratory Data Analysis
+
+#### Quantitative Data
+
+Compute the sample means and make boxplots for the `draftnumber` variable, both grouped by the variable `halfyear`.
+
+```{r}
+
+```
+
+#### Categorical Data
+
+Compute the sample proportion of `yes` cases in the `calledup` variable grouped by `halfyear`. Also  make a barplot for `halfyear` with the bars split/colored by the `calledup` variable.
+
+```{r}
+
+```
+
+### Conduct Hypothesis Tests
+
+#### Permutation Hypothesis Test for Mean Difference
+
+Conduct a permutation resampling hypothesis test to determine whether the birthdays in the first half of the year were, on average, assigned higher (larger) draft numbers than the birthdays in the second half of the year. 
+
+##### Null and Alternative Hypotheses
+
+ERASE THIS AND WRITE YOUR HYPOTHESES HERE
+
+##### Compute the Observed Difference
+
+```{r}
+
+```
+
+##### Generate the Null Distribution
+
+```{r}
+
+```
+
+##### Calculate/Visualize the P-Value
+
+```{r}
+
+```
+
+##### Determine Whether to Reject Ho
+
+```{r}
+
+```
+
+#### Traditiona Hypothesis Test for Mean Difference
+
+Conduct a traditional *t*-test to determine whether the birthdays in the first half of the year were, on average, assigned higher draft numbers than the birthdays in the second half of the year. 
+
+##### Conduct the Hypothesis Test
+
+```{r}
+
+```
+
+##### Determine Whether to Reject Ho
+
+```{r}
+
+```
+
+#### Permutation Hypothesis Test for Proportion Difference
+
+Conduct a permutation resampling hypothesis test to determine whether the birthdays in the first half of the year had a statistically significantly lower probability of being drafted (i.e., a lower proportion called up) than the birthdays in the second half of the year.  
+
+##### Null and Alternative Hypotheses
+
+ERASE THIS AND WRITE YOUR HYPOTHESES HERE
+
+##### Compute the Observed Difference
+
+```{r}
+
+```
+
+##### Generate the Null Distribution
+
+```{r}
+
+```
+
+##### Calculate/Visualize the P-Value
+
+```{r}
+
+```
+
+##### Determine Whether to Reject Ho
+
+```{r}
+
+```
+
+### Discussion
+
+Question 1: Based on the results of your permutation test for the difference in means, was the 1969 draft lottery process fair? Discuss. 
+
+**ANSWER**
+
+Question 2: Based on the results of your permutation test for the difference in proportions, was the 1969 draft lottery process fair? Discuss.
+
+**ANSWER**
+
+Question 3: Would it be appropriate to use the traditional *t*-test for means in this problem (i.e., are all the assumptions met)? Discuss.
+
+**ANSWER**
+
+<hr>
+```{r}
+sessionInfo()
+```
+

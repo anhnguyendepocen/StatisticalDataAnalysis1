@@ -1,0 +1,100 @@
+---
+title: "Project 3: Rubric"
+author: "Jill E. Thomley"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: cosmo
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  echo = FALSE,
+  comment = NA
+)
+```
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+***
+
+**Project Grade**
+
+Problem A: Estimation (60 points, 40% of total)
+
+* Setup/Name = 2 points
+* Data Preparation = 3 points
+* Exploratory (EDA) = 10 points
+* Mean Estimation =  10 points
+* Prop Estimation = 10
+* Assess Normality = 10
+* Questions = 15 (5 points each)
+
+Problem B: Inference (90 points, 60% of total)
+
+* Setup/Name = 2 points
+* Data Preparation = 3 points
+* Exploratory (EDA) = 10 points
+* Mean Test 1 = 20 points
+* Mean Test 2 = 20 points
+* Prop Test = 20 points
+* Question = 15 (5 points each)
+
+Total = 150 points / your grade is the % earned
+
+**Scoring Rubric**
+
+```{r}
+
+Categories <- c("Statistical Knowledge and Clarity (Questions)", "Statistical Graphics (Analysis)", "Coding and Results (Analysis)")
+Master <- c(
+  "Answers to posed questions demonstrate clear statistical understanding, including appropriate use of statistical concepts and vocabulary. Writing has few errors of grammar and usage. Language style and word choice are highly effective and appropriate.",
+  "Graphs are created using ggplot2, are of the appropriate type, and have labeled axes and titles. Multivariate graphs use appropriate legends and labels. Default variable names are replaced with more descriptive variable names in plot labels, including units of measure. Optional formatting does not detract from the presentation and meaning.",
+  "Code produces correct answers and uses dplyr (or other tidyverse tools) for data manipulation, summarizing, and inference. Code follows accepted style guidelines (e.g., like those found in https://style.tidyverse.org/). Organization follows a consistent standard. There is no extraneous code in the document. (Minor issues are acceptable.)"
+)
+Apprentice <- c(
+  "Answers to questions demonstrate fair statistical understanding, including mostly-appropriate use of terms and concepts. Writing has errors of grammar and usage that do not interfere with meaning. Style and word choice are mostly effective and appropriate.",
+  "Graphs are created using ggplot2 and are of the appropriate type, but deviate in one or more ways from standards listed in the “Master” category.",
+  "Code produces correct answers, but deviates significantly in one or more ways from standards listed in the “Master” category."
+)
+Novice <- c(
+  "Answers show poor understanding or are written a way that obscures meaning.",
+  "Plots do not use ggplot or are inappropriate, and/or deviate significantly from standards listed in the “Master” category.",
+  "Code produces wrong answers and/or deviates significantly from standards listed in the “Master” category."
+)
+Missing <- c(
+  "Answers are all or mostly missing, or lack significant explanation/justification.",
+  "Plots are all or mostly missing (more than 50% absent).",
+  "Code is all or mostly missing (more than 50% absent)."
+)
+
+html_table_width <- function(kable_output, width){
+  width_html <- paste0(paste0('<col width="', width, '">'), collapse = "\n")
+  sub('<table>', paste0('<table class="table">\n', width_html), kable_output)
+}
+
+tibble(Categories, Master, Apprentice, Novice, Missing) %>%
+  kable(
+    format = "html",
+    col.names = c(
+      "Category",
+      "Master = 5 (EDA)<br>Master = 5 (estimation)<br>Master = 10 (inference)",
+      "Apprentice = 4 (EDA)<br>Apprentice = 4 (estimation)<br>Apprentice = 8 (inference)",
+      "Novice = 2 (EDA)<br>Novice = 2 (estimation)<br>Novice = 4 (inference)",
+      "Missing = 0"
+    ),
+    escape = FALSE
+  ) %>%
+  html_table_width(c(100, 200, 200, 200, 200)) %>% 
+  kable_styling(bootstrap_options = "striped")
+```
+
+<hr>
+

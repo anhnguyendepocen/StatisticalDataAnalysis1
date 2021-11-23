@@ -1,0 +1,130 @@
+---
+title: "Project 3A: Saturated Fat in Fast Food"
+author: "PUT YOUR NAME HERE"
+date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
+output: 
+  html_document: 
+    theme: cosmo
+    highlight: textmate
+---
+
+```{r globaloptions, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+<hr>
+
+## Setup
+
+### Packages Used
+
+Load all packages used in this problem.
+
+```{r loadpackages}
+
+```
+
+### Names of Collaborators
+
+List the names of anyone you worked with on this project. If there was no one, put NONE.
+
+ERASE THIS AND ENTER COLLABORATOR NAMES OR NONE 
+
+<hr>
+
+## Fast Food Estimation
+
+### The Context
+
+Nutritionists recommend against eating fast food because it is high in sodium, saturated fat, trans fat, and cholesterol. Eating too much of it over a long period of time has been shown to contribute to health problems such as high blood pressure, heart disease, and obesity. Many fast-food meals contain more than an entire day's worth of recommended calories! According to the [Cleveland Clinic](https://my.clevelandclinic.org/health/articles/11208-fat-what-you-need-to-know), a person who is eating a 2000 calorie per day diet should have at most 22g of saturated fat per day. 
+
+### The Fast Food Fat Problem
+
+How much saturated fat is typically found in fast food burgers? What proportion of burgers would exceed the daily recommendation all on their own? You will use the sample data in the [`fastfood2017`](https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/fastfood2017.csv) dataset to estimate the true mean amount of saturated fat in fast food burgers and the true proportion of fast food burgers with more than 22g of saturated fat. 
+
+### Create the Analysis Dataset
+
+* Use `read_cvs()` to import the `fastfood2017` dataset.
+* Filter the dataset so that the only `type` of item you have is `Burger`.
+* Create a new variable to show whether or not each burger has > 22g of saturated fat.
+* HINT: Use `ifelse()` inside the `mutate()` function to create your new binary variable.
+* Use `glimpse()` to visualize the structure of the dataset.
+
+```{r}
+
+```
+
+### Perform Exploratory Data Analysis
+
+#### Quantitative Data
+
+Compute the sample mean (observed mean) and make a boxplot for the `saturatedfat` variable.
+
+```{r}
+
+```
+
+#### Categorical Data
+
+Compute the sample proportion (observed proportion) and make a barplot for the new variable you created.
+
+```{r}
+
+```
+
+### Estimate the Population Parameters
+
+#### 95% Percentile Interval for $\mu$
+
+Create a 95% bootstrap percentile interval to estimate the true mean of saturated fat in fast food burgers.
+
+```{r}
+
+```
+
+#### 95% Percentile Interval for $p$
+
+Create a 95% bootstrap percentile interval to estimate the true proportion of burgers with > 22g of saturated fat.
+
+```{r}
+
+```
+
+### Assess the Sampling Distributions
+
+Assess each of your bootstrap distributions for normality using a QQ plot, skewness calculation, and kurtosis calculation. 
+
+#### Sampling Distribution of $\bar{x}$
+
+```{r}
+
+```
+
+#### Sampling Distribution of $\hat{p}$
+
+```{r}
+
+```
+
+### Discussion
+
+Question 1: How much saturated fat is typically (i.e., on average) found in fast food burgers? Interpret your confidence interval to answer this question.
+
+**ANSWER**
+
+Question 2: What proportion of burgers would exceed the daily recommendation all on their own? Do a majority of burgers fall into this category? Interpret your confidence interval to answer these questions.
+
+**ANSWER**
+
+Question 3: Consider the sample sizes, the presence of any outliers, and the normality of the sampling distributions. Would it be appropriate to do a traditional CLT-based confidence interval for the mean? What about the proportion? Discuss.
+
+**ANSWER**
+
+<hr>
+```{r}
+sessionInfo()
+```
+
