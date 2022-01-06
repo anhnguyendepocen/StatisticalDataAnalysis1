@@ -1,4 +1,4 @@
-# STT3850 Course Repository (Archived Spring 2022)
+# STT3850 Course Repository
 
 STT3850 Statistical Data Analysis 1
 
